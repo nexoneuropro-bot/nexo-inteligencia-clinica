@@ -1,0 +1,16 @@
+---
+import {knowledgeNodes} from '../data/knowledge';
+const first=knowledgeNodes[0];
+---
+<aside class="knowledge-panel" id="knowledge-panel" aria-labelledby="knowledge-title" hidden>
+  <button type="button" class="knowledge-close" aria-label="Fechar conexão">×</button>
+  <span class="ex-eyebrow" id="knowledge-era">{first.era}</span>
+  <h3 id="knowledge-title" tabindex="-1">{first.name}</h3>
+  <span class="knowledge-discipline" id="knowledge-discipline">{first.discipline} · {first.yearLabel}</span>
+  <p id="knowledge-summary">{first.summary}</p>
+  <blockquote id="knowledge-quote" hidden><p id="knowledge-quote-text"></p><cite><span id="knowledge-quote-attribution"></span><br/><a id="knowledge-quote-source" href={first.sourceUrl} target="_blank" rel="noopener noreferrer">Fonte da citação</a></cite></blockquote>
+  <p class="knowledge-question" id="knowledge-connection">{first.connection}</p>
+  <a id="knowledge-source" href={first.sourceUrl} target="_blank" rel="noopener noreferrer">Fonte: <span>{first.sourceTitle}</span> ↗</a>
+  <span class="knowledge-caption">As linhas são aproximações visuais para explorar ideias. Não representam relações causais ou uma evolução única do pensamento.</span>
+</aside>
+<script type="application/json" id="knowledge-data" set:html={JSON.stringify(knowledgeNodes)}/>

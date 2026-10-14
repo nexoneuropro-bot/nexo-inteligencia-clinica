@@ -1,0 +1,10 @@
+---
+interface Props {entry?:'personal'|'business'}
+const {entry}=Astro.props;
+---
+<div class:list={['experience-stage',{'journey-stage':entry}]} id="experience-stage" data-entry={entry} aria-hidden="true">
+  <canvas id="experience-canvas"></canvas>
+  <svg class="experience-fallback" viewBox="0 0 1440 1000" preserveAspectRatio="xMidYMid slice"><defs><radialGradient id="static-aura"><stop stop-color="#b77950" stop-opacity=".24"/><stop offset="1" stop-color="#b77950" stop-opacity="0"/></radialGradient><linearGradient id="static-filament"><stop stop-color="#a06d4c"/><stop offset=".5" stop-color="#f1dac2"/><stop offset="1" stop-color="#976d51"/></linearGradient><filter id="static-glow"><feGaussianBlur stdDeviation="8"/></filter></defs><ellipse cx="820" cy="430" rx="520" ry="390" fill="url(#static-aura)"/><g fill="none" stroke="url(#static-filament)"><path d="M450 80C535 160 560 255 710 400S955 635 1110 690M450 710C565 630 590 510 750 390S965 190 1105 70" stroke-width="20" opacity=".25" filter="url(#static-glow)"/>{Array.from({length:23},(_,i)=><path d={`M${365+i*4} ${40+i*6} C${450+i*10} ${140+i*4} ${550+i*5} ${325-i*2} 760 390 S${1000+i*5} ${580+i*3} ${1160-i*3} ${750-i*4} M${355+i*5} ${770-i*4} C${490+i*3} 630 ${620+i*2} 465 760 390 S${1040-i*5} ${190+i*2} ${1160-i*3} ${45+i*5}`} stroke-width={i%4===0?1.1:.45} opacity={i%4===0?.68:.22}/>)}<ellipse cx="760" cy="390" rx="540" ry="235" transform="rotate(-20 760 390)" opacity=".15"/><ellipse cx="760" cy="390" rx="590" ry="270" transform="rotate(24 760 390)" opacity=".1"/></g><g fill="#efd5bc">{Array.from({length:105},(_,i)=><circle cx={200+(i*137)%1080} cy={40+(i*173)%810} r={i%11===0?2.3:.7} opacity={.2+(i%6)*.1}/>)}</g></svg>
+  <div class="ex-vignette"></div><div class="ex-grain"></div>
+</div>
+<script>import '../scripts/experience-scene';</script>

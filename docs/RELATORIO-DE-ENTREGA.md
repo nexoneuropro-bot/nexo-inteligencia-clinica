@@ -1,5 +1,7 @@
 # NEXO — primeira versão navegável
 
+> **Documento histórico da primeira versão.** A experiência principal foi reconstruída e recebeu testes reais no navegador. O estado atual, as capturas e as limitações estão no [relatório da revisão imersiva](RELATORIO-REVISAO-IMERSIVA.md). As pendências técnicas descritas abaixo refletem a entrega original e não devem ser interpretadas como o estado atual.
+
 Data: 14/10/2026. Entrega para avaliação, sem implantação definitiva.
 
 ## Checklist e evidências
