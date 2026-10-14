@@ -1,0 +1,68 @@
+---
+import ExperienceStage from './ExperienceStage.astro';
+import {approachEras} from '../data/approach-history';
+import '../styles/experience.css';
+import '../styles/approach.css';
+interface Props {title:string;intro:string}
+const {title,intro}=Astro.props;
+---
+<div class="ap-experience">
+  <ExperienceStage entry="approach"/>
+  <nav class="ap-era-nav" aria-label="Percorrer a história das perguntas">
+    {approachEras.map((era,index)=><a href={`#approach-era-${era.id}`} data-era-link={index} aria-label={`${index+1}. ${era.discipline}`}><span>{String(index+1).padStart(2,'0')}</span><i>{era.discipline}</i></a>)}
+    <a href="#conteudo-da-jornada" class="ap-read-link" aria-label="Ir à abordagem clínica"><span>↓</span><i>O cuidado hoje</i></a>
+  </nav>
+  <section class="ap-intro" aria-labelledby="approach-title">
+    <div class="ap-intro-copy">
+      <a href="/" class="ap-back">← Voltar às conexões</a>
+      <span class="ex-eyebrow">NOSSA ABORDAGEM / UMA HISTÓRIA ABERTA</span>
+      <h1 id="approach-title">{title}</h1>
+      <p>Filosofia, psiquiatria, psicologia. Diferentes perguntas mudaram a maneira de compreender a experiência humana.</p>
+      <a href={`#approach-era-${approachEras[0].id}`} class="ap-traverse">Atravesse estas ideias <span aria-hidden="true">↓</span></a>
+    </div>
+    <span class="ap-opening-coordinate" aria-hidden="true">PERGUNTA ↔ HISTÓRIA ↔ CONTEXTO</span>
+    <p class="ap-editorial-note">Um percurso entre ideias, tensões e descobertas.<br/>Não há uma única linha de evolução.</p>
+  </section>
+  <div class="ap-history" aria-label="Sete perspectivas sobre a experiência humana">
+    {approachEras.map((era,index)=><section class="ap-era" id={`approach-era-${era.id}`} data-approach-era={era.id} data-era-index={index} aria-labelledby={`era-title-${era.id}`}>
+      <div class="ap-era-frame">
+        <span class="ap-era-coordinate" aria-hidden="true">{String(index+1).padStart(2,'0')} / 07</span>
+        <div class="ap-era-copy">
+          <span class="ap-year">{era.yearLabel}</span>
+          <span class="ex-eyebrow">{era.discipline}</span>
+          <h2 id={`era-title-${era.id}`}>{era.title}</h2>
+          <p>{era.summary.match(/^.*?[.!?](?:\s|$)/)?.[0]||era.summary}</p>
+          <button class="ap-context-trigger" data-open-era={index} aria-expanded="false" aria-controls="approach-context">Abrir contexto e fontes <span aria-hidden="true">↗</span></button>
+        </div>
+        <button class="ap-spatial-marker" data-open-era={index} aria-expanded="false" aria-controls="approach-context" aria-label={`Explorar ${era.discipline}: ${era.yearLabel}`}>
+          <span class="ap-marker-orbit" aria-hidden="true"><i></i></span>
+          <span class="ap-marker-label">{era.yearLabel}<small>Uma ideia, muitas conexões</small></span>
+        </button>
+        <div class="ap-thought">
+          <span class="ex-eyebrow">PARA PENSAR</span>
+          <p>{era.question}</p>
+          <small>Pergunta autoral da NEXO</small>
+        </div>
+        {era.quote&&<blockquote class="ap-era-quote"><p>“{era.quote.text}”</p><cite>{era.quote.attribution}{era.quote.translationLabel&&` · ${era.quote.translationLabel}`}</cite><a href={era.quote.sourceUrl} target="_blank" rel="noopener noreferrer">Consultar a fonte ↗</a></blockquote>}
+        <a class="ap-next-era" href={index<approachEras.length-1?`#approach-era-${approachEras[index+1].id}`:'#approach-human'} aria-label={index<approachEras.length-1?'Seguir para a próxima perspectiva':'Conhecer as pessoas por trás da NEXO'}>Continue a conexão <span aria-hidden="true">↓</span></a>
+      </div>
+    </section>)}
+  </div>
+  <section class="ap-human" id="approach-human" aria-labelledby="ap-human-title">
+    <div class="ap-human-copy"><span class="ex-eyebrow">HISTÓRIAS SÃO VIVIDAS POR PESSOAS</span><h2 id="ap-human-title">Da história das ideias<br/>à sua história.</h2><p>{intro}</p><p>A compreensão ganha sentido no encontro: na escuta, na investigação responsável e no cuidado com cada contexto.</p><a href="/profissionais/">Conheça os profissionais ↗</a></div>
+    <div class="ap-portraits"><figure><img src="/images/gabriel.webp" alt="Gabriel Alves Batista, em fotografia fornecida para o projeto" width="700" height="727" loading="lazy"/><figcaption>Gabriel Alves Batista<span>Psicologia · CRP-SP 06/176184</span></figcaption></figure><figure><img src="/images/ivo.webp" alt="Ivo Peixoto Barbosa Júnior, em fotografia fornecida para o projeto" width="700" height="754" loading="lazy"/><figcaption>Ivo Peixoto Barbosa Júnior<span>Medicina · CRM-SP 193133</span></figcaption></figure></div>
+  </section>
+  <div class="ap-controls"><span id="approach-location" aria-live="off">Uma história aberta</span><button id="experience-pause" aria-pressed="false">Pausar movimento</button></div>
+  <dialog class="ap-context" id="approach-context" aria-labelledby="approach-context-title">
+    <button class="ap-context-close" aria-label="Fechar contexto">Fechar <span aria-hidden="true">×</span></button>
+    <span class="ex-eyebrow" id="approach-context-year"></span><h2 id="approach-context-title" tabindex="-1"></h2>
+    <span class="ap-context-discipline" id="approach-context-discipline"></span><p id="approach-context-summary"></p>
+    <blockquote id="approach-context-quote" hidden><p id="approach-context-quote-text"></p><cite id="approach-context-quote-author"></cite><a id="approach-context-quote-source" target="_blank" rel="noopener noreferrer"></a></blockquote>
+    <p class="ap-context-question" id="approach-context-question"></p>
+    <a class="ap-source" id="approach-context-source" target="_blank" rel="noopener noreferrer"></a>
+    <small>Este recorte aproxima perguntas e contextos. As formas no espaço são metáforas visuais, sem representar uma genealogia entre autores ou uma explicação clínica.</small>
+  </dialog>
+  <noscript><section class="ap-static-sources"><h2>Contextos e fontes deste percurso</h2>{approachEras.map(era=><article><h3>{era.title}</h3><p>{era.summary}</p><p><a href={era.sourceUrl} target="_blank" rel="noopener noreferrer">{era.discipline} — {era.sourceTitle} ↗</a></p></article>)}</section></noscript>
+</div>
+<script type="application/json" id="approach-history-data" set:html={JSON.stringify(approachEras).replace(/</g,'\\u003c')}/>
+<script>import '../scripts/approach-ui';</script>

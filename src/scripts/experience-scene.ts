@@ -3,7 +3,7 @@
  * All content, controls, navigation and the static SVG exist in HTML first.
  * Three is imported only for visitors who have not requested a quiet page.
  */
-type SceneChapter = 'intro' | 'bio' | 'ideas' | 'paths';
+type SceneChapter = 'intro' | 'bio' | 'ideas' | 'paths' | 'approach';
 type DataConnection = { saveData?: boolean };
 type IdleWindow = Window & {
   requestIdleCallback?: (callback: () => void, options?: { timeout: number }) => number;
@@ -24,14 +24,20 @@ function startExperience(): (() => void) | undefined {
   if (!(stageElement instanceof HTMLElement) || !(canvasElement instanceof HTMLCanvasElement)) return;
   const stage: HTMLElement = stageElement;
   const canvas: HTMLCanvasElement = canvasElement;
-  const entry = stage.dataset.entry === 'personal' ? 1 : stage.dataset.entry === 'business' ? 2 : 0;
+  const entry = stage.dataset.entry === 'personal' ? 1 : stage.dataset.entry === 'business' ? 2 : stage.dataset.entry === 'approach' ? 3 : 0;
   const skip = document.getElementById('experience-skip-intro');
   const pause = document.getElementById('experience-pause');
   const quiet = window.matchMedia('(prefers-reduced-motion: reduce)');
   const connection = (navigator as Navigator & { connection?: DataConnection }).connection;
   const idleWindow = window as IdleWindow;
   const chapters = CHAPTERS.map((id) => document.getElementById(`experience-${id}`));
+  const eras = Array.from(document.querySelectorAll<HTMLElement>('[data-approach-era][data-era-index]'))
+    .sort((a, b) => Number(a.dataset.eraIndex) - Number(b.dataset.eraIndex));
+  const approachRegion = document.querySelector<HTMLElement>('[data-approach-experience]');
   let chapterStarts: number[] = [];
+  let eraStarts: number[] = [];
+  let eraValue = 0;
+  let highlightedEra = 0;
   let chapterValue = entry === 1 ? 1 : entry === 2 ? 2 : 0;
   let lastAnnounced = '';
   let introComplete = entry !== 0;
@@ -52,7 +58,7 @@ function startExperience(): (() => void) | undefined {
 
   stage.dataset.mode = 'static';
   stage.dataset.phase = introComplete ? 'formed' : 'fragments';
-  stage.dataset.scene = entry === 1 ? 'bio' : entry === 2 ? 'ideas' : 'intro';
+  stage.dataset.scene = entry === 1 ? 'bio' : entry === 2 ? 'ideas' : entry === 3 ? 'approach' : 'intro';
   stage.dataset.paused = 'false';
   document.body.classList.remove('experience-ready');
   try { introComplete ||= sessionStorage.getItem(INTRO_KEY) === 'formed'; } catch { /* Presentation only. */ }
@@ -97,6 +103,7 @@ function startExperience(): (() => void) | undefined {
 
   function measureChapters() {
     chapterStarts = chapters.map((element) => element ? element.getBoundingClientRect().top + window.scrollY : Infinity);
+    eraStarts = eras.map((element) => element.getBoundingClientRect().top + window.scrollY);
     updateChapter();
   }
 
@@ -112,19 +119,40 @@ function startExperience(): (() => void) | undefined {
       }
       chapterValue = clamp(nextValue, 0, 3);
     }
+    if (entry === 3) {
+      eraValue = 0;
+      // Camera position follows actual article spacing, including wrapped text
+      // on small screens. There is no artificial wheel interception or delay.
+      for (let index = 1; index < eraStarts.length; index += 1) {
+        const start = eraStarts[index - 1];
+        const end = eraStarts[index];
+        eraValue += clamp((window.scrollY - start) / Math.max(1, end - start));
+      }
+      eraValue = clamp(eraValue, 0, 6);
+      stage.dataset.era = String(Math.round(eraValue));
+      stage.dataset.depth = (eraValue * 9).toFixed(2);
+      stage.style.setProperty('--approach-progress', String(eraValue / 6));
+    }
     const stageIndex = Math.min(3, Math.round(chapterValue));
-    const chapter = CHAPTERS[stageIndex];
+    const chapter: SceneChapter = entry === 3 ? 'approach' : CHAPTERS[stageIndex];
     stage.dataset.scene = chapter;
     stage.style.setProperty('--scene-bio', String(entry ? 0 : smooth(1 - Math.abs(chapterValue - 1))));
-    const announcement = `${chapter}:${Math.round(chapterValue * 100)}`;
+    const announcement = `${chapter}:${Math.round((entry === 3 ? eraValue : chapterValue) * 100)}`;
     if (announcement !== lastAnnounced) {
       lastAnnounced = announcement;
-      window.dispatchEvent(new CustomEvent('nexo:scene', { detail: { stage: chapter, progress: chapterValue / 3 } }));
+      window.dispatchEvent(new CustomEvent('nexo:scene', { detail: { stage: chapter, progress: entry === 3 ? eraValue / 6 : chapterValue / 3 } }));
     }
     if (!entry) {
       const first = chapters[0];
       const last = chapters[chapters.length - 1];
       const nextVisibility = !first || !last || (first.getBoundingClientRect().top < window.innerHeight && last.getBoundingClientRect().bottom > 0);
+      if (nextVisibility !== regionVisible) {
+        regionVisible = nextVisibility;
+        refreshWebgl?.();
+      }
+    } else if (entry === 3 && approachRegion) {
+      const regionBounds = approachRegion.getBoundingClientRect();
+      const nextVisibility = regionBounds.top < window.innerHeight && regionBounds.bottom > 0;
       if (nextVisibility !== regionVisible) {
         regionVisible = nextVisibility;
         refreshWebgl?.();
@@ -158,6 +186,14 @@ function startExperience(): (() => void) | undefined {
   function onPath(event: Event) {
     const id = (event as CustomEvent<{ id?: string | null }>).detail?.id;
     selectedPath = id === 'personal' ? -1 : id === 'business' ? 1 : 0;
+    interactionPulse = 1;
+    if (paused) drawStationary?.();
+  }
+
+  function onEra(event: Event) {
+    const index = (event as CustomEvent<{ index?: number }>).detail?.index;
+    if (typeof index !== 'number' || !Number.isFinite(index)) return;
+    highlightedEra = Math.round(clamp(index, 0, 6));
     interactionPulse = 1;
     if (paused) drawStationary?.();
   }
@@ -208,13 +244,14 @@ function startExperience(): (() => void) | undefined {
 
       // Every vertex has its own position in every chapter. The GPU interpolates
       // the same network, preserving literal visual continuity while scrolling.
-      const attributeNames = ['position', 'aOrigin', 'aBio', 'aIdeas', 'aPaths', 'aBusiness', 'color'] as const;
+      const attributeNames = ['position', 'aOrigin', 'aBio', 'aIdeas', 'aPaths', 'aBusiness', 'aApproach', 'color'] as const;
       type VectorAttribute = typeof attributeNames[number];
       const vectors = Object.fromEntries(attributeNames.map((name) => [name, new Float32Array(count * 3)])) as Record<VectorAttribute, Float32Array>;
       const sizes = new Float32Array(count);
       const seeds = new Float32Array(count);
       const domains = new Float32Array(count);
       const sides = new Float32Array(count);
+      const eraIndices = new Float32Array(count);
       const copper = new THREE.Color('#d6a17d');
       const ivory = new THREE.Color('#fff0d6');
       const quietCopper = new THREE.Color('#8a6456');
@@ -307,6 +344,83 @@ function startExperience(): (() => void) | undefined {
         sides[i] = side;
       }
 
+      const perEra = Math.floor(count / 7);
+      if (entry === 3) {
+        // Seven abstract landmarks inhabit one long space. They are visual
+        // metaphors, never diagrams claiming a historical or clinical relation.
+        // A separate seed keeps every existing home/journey formation unchanged.
+        let approachSeed = 4613;
+        const approachRandom = () => {
+          approachSeed = (approachSeed * 16807) % 2147483647;
+          return (approachSeed - 1) / 2147483646;
+        };
+        for (let i = 0; i < count; i += 1) {
+          const era = Math.min(6, Math.floor(i / perEra));
+          const local = i - era * perEra;
+          const eraCount = era === 6 ? count - era * perEra : perEra;
+          const rows = Math.ceil(eraCount / columns);
+          const u = (local % columns) / (columns - 1);
+          const v = Math.floor(local / columns) / Math.max(1, rows - 1);
+          const theta = u * Math.PI * 2;
+          const phi = v * Math.PI * 2;
+          const noise = (approachRandom() - 0.5) * 0.075;
+          let x = 0;
+          let y = 0;
+          let z = 0;
+
+          if (era === 0) {
+            // Inquiry: one open spatial orbit, woven from several fine layers.
+            x = Math.cos(theta) * (1.65 + Math.cos(phi) * 0.3);
+            y = Math.sin(theta) * (1.85 + Math.cos(phi) * 0.3);
+            z = Math.sin(phi) * 0.62 + Math.sin(theta) * 0.3;
+          } else if (era === 1) {
+            // Method: two braids continuously bridge one side to the other.
+            const side = local % 2 ? 1 : -1;
+            x = Math.cos(theta) * 1.9;
+            y = Math.sin(theta * 2) * 0.82 + Math.cos(phi) * 0.17;
+            z = Math.sin(theta) * 0.95 * side + Math.sin(phi) * 0.18;
+          } else if (era === 2) {
+            // Psychiatry: a plural, irregular field around an open center.
+            const radius = 1.45 + Math.sin(theta * 3 + phi) * 0.34;
+            x = Math.cos(theta) * Math.sin(phi * 0.5) * radius;
+            y = Math.cos(phi * 0.5) * radius * 1.15;
+            z = Math.sin(theta) * Math.sin(phi * 0.5) * radius + Math.sin(theta * 2) * 0.2;
+          } else if (era === 3) {
+            // Psychology: a suspended wave surface, with a visible far side.
+            x = (u - 0.5) * 4.0;
+            y = Math.sin(u * Math.PI * 3) * 0.8 + (v - 0.5) * 1.6;
+            z = (v - 0.5) * 2.4 + Math.cos(u * Math.PI * 2) * 0.55;
+          } else if (era === 4) {
+            // Context: distinct networks remain connected across open space.
+            const cluster = local % 3;
+            const center = [[-1.1, 0.7, 0.15], [1.15, 0.55, -0.35], [0.05, -0.85, 0.1]][cluster];
+            x = center[0] + Math.cos(theta) * Math.sin(phi * 0.5) * 0.86;
+            y = center[1] + Math.cos(phi * 0.5) * 0.86;
+            z = center[2] + Math.sin(theta) * Math.sin(phi * 0.5) * 0.86;
+          } else if (era === 5) {
+            // Integration: three intersecting spherical network fields.
+            const sphere = local % 3;
+            const center = [[-0.75, 0.5, 0.0], [0.8, 0.35, -0.35], [0.0, -0.7, 0.3]][sphere];
+            x = center[0] + Math.sin(phi * 0.5) * Math.cos(theta) * 1.22;
+            y = center[1] + Math.cos(phi * 0.5) * 1.22;
+            z = center[2] + Math.sin(phi * 0.5) * Math.sin(theta) * 1.22;
+          } else {
+            // NEXO: the same braided X reappears inside the travelled field.
+            const branch = local % 2 ? 1 : -1;
+            const t = u * 2 - 1;
+            const coil = Math.cos(t * Math.PI * 3 + phi) * 0.27;
+            x = t * 1.65 - branch * coil;
+            y = t * branch * 1.8 + coil;
+            z = Math.sin(t * Math.PI * 3 + phi) * 0.48;
+          }
+          const offset = i * 3;
+          vectors.aApproach[offset] = x + 3.0 + Math.sin(era * 1.7) * 0.3 + noise;
+          vectors.aApproach[offset + 1] = y + 0.15 + noise;
+          vectors.aApproach[offset + 2] = z - era * 9.0;
+          eraIndices[i] = era;
+        }
+      }
+
       const uniforms = {
         uTime: { value: 0 },
         uChapter: { value: chapterValue },
@@ -318,6 +432,9 @@ function startExperience(): (() => void) | undefined {
         uPath: { value: selectedPath },
         uPulse: { value: 0 },
         uEntry: { value: entry },
+        uEra: { value: eraValue },
+        uEraHighlight: { value: highlightedEra },
+        uTravel: { value: 0 },
       };
 
       const vertexPrelude = `
@@ -326,9 +443,11 @@ function startExperience(): (() => void) | undefined {
         attribute vec3 aIdeas;
         attribute vec3 aPaths;
         attribute vec3 aBusiness;
+        attribute vec3 aApproach;
         attribute float aSeed;
         attribute float aDomain;
         attribute float aSide;
+        attribute float aEra;
         uniform float uTime;
         uniform float uChapter;
         uniform float uFormation;
@@ -338,6 +457,8 @@ function startExperience(): (() => void) | undefined {
         uniform float uPath;
         uniform float uPulse;
         uniform float uEntry;
+        uniform float uEra;
+        uniform float uEraHighlight;
         varying vec3 vColor;
         varying float vOpacity;
         varying float vDepth;
@@ -363,6 +484,12 @@ function startExperience(): (() => void) | undefined {
           p = mix(p, ideas, smoothstep(1.0, 2.0, uChapter));
           p = mix(p, paths, smoothstep(2.0, 3.0, uChapter));
           if (uEntry > 0.5) p = uEntry < 1.5 ? bio : business;
+          if (uEntry > 2.5) {
+            p = aApproach;
+            p.x = (p.x - uPortrait * 3.0) * mix(1.0, 0.8, uPortrait);
+            p.y = p.y * mix(1.0, 0.9, uPortrait) - uPortrait * 1.45;
+            p.z += sin(p.x * 1.5 + uTime * 0.3 + aEra) * 0.075;
+          }
           vec3 origin = aOrigin;
           origin.x *= mix(1.0, 0.65, uPortrait);
           p = mix(origin, p, uFormation);
@@ -382,6 +509,14 @@ function startExperience(): (() => void) | undefined {
           vColor = mix(litColor, inkColor, lightField);
           vOpacity = mix(1.0, mix(0.4, 1.35, selected), bioWeight);
           vOpacity *= mix(1.0, mix(0.42, 1.35, chosenSide), pathWeight);
+          if (uEntry > 2.5) {
+            float distanceAhead = max(0.0, aEra - uEra);
+            float distanceBehind = max(0.0, uEra - aEra);
+            float proximity = exp(-distanceAhead * 0.85 - distanceBehind * 2.4);
+            float highlighted = exp(-abs(aEra - uEraHighlight) * 3.0);
+            vOpacity = proximity * (0.75 + highlighted * uPulse * 0.45);
+            vColor = mix(vColor, vec3(0.58, 0.82, 0.88), clamp(distanceAhead * 0.2, 0.0, 0.55));
+          }
           return p;
         }
       `;
@@ -428,6 +563,7 @@ function startExperience(): (() => void) | undefined {
       particleGeometry.setAttribute('aSeed', new THREE.BufferAttribute(seeds, 1));
       particleGeometry.setAttribute('aDomain', new THREE.BufferAttribute(domains, 1));
       particleGeometry.setAttribute('aSide', new THREE.BufferAttribute(sides, 1));
+      particleGeometry.setAttribute('aEra', new THREE.BufferAttribute(eraIndices, 1));
       const particles = new THREE.Points(particleGeometry, particleMaterial);
       particles.frustumCulled = false;
       sculpture.add(particles);
@@ -435,7 +571,16 @@ function startExperience(): (() => void) | undefined {
       // Each edge follows the same morph as its two particle endpoints. Indexed
       // local links reveal the braids first, then the three spherical meshes.
       const links: number[] = [];
-      for (let lane = 0; lane < 6; lane += 1) {
+      if (entry === 3) {
+        for (let i = 0; i < count; i += mobile ? 2 : 1) {
+          const era = eraIndices[i];
+          const next = era === 6 ? 2 : 1;
+          if (i + next < count && eraIndices[i + next] === era && (i % perEra) % columns < columns - next) links.push(i, i + next);
+          if (i + columns < count && eraIndices[i + columns] === era && i % 2 === 0) links.push(i, i + columns);
+          // Widely spaced filaments connect the depth planes themselves.
+          if (i % (columns * 3) === 0 && i + perEra < count) links.push(i, i + perEra);
+        }
+      } else for (let lane = 0; lane < 6; lane += 1) {
         for (let k = 0; k < perStrand; k += mobile ? 2 : 1) {
           const i = lane * perStrand + k;
           if (k + 1 < perStrand && k % columns < columns - 1) links.push(i, i + 1);
@@ -452,7 +597,7 @@ function startExperience(): (() => void) | undefined {
         links.forEach((index, vertex) => array.set(vectors[name].subarray(index * 3, index * 3 + 3), vertex * 3));
         edgeGeometry.setAttribute(name, new THREE.BufferAttribute(array, 3));
       }
-      for (const [name, source] of [['aSeed', seeds], ['aDomain', domains], ['aSide', sides]] as const) {
+      for (const [name, source] of [['aSeed', seeds], ['aDomain', domains], ['aSide', sides], ['aEra', eraIndices]] as const) {
         edgeGeometry.setAttribute(name, new THREE.Float32BufferAttribute(links.map((index) => source[index]), 1));
       }
       const edgeMaterial = new THREE.ShaderMaterial({
@@ -474,8 +619,10 @@ function startExperience(): (() => void) | undefined {
           varying float vDepth;
           uniform float uFormation;
           uniform float uChapter;
+          uniform float uEntry;
           void main() {
             float opacity = mix(0.012, mix(0.025, 0.14, smoothstep(0.2, 0.85, uChapter)), uFormation);
+            if (uEntry > 2.5) opacity = 0.16;
             opacity *= mix(1.0, 0.67, smoothstep(1.2, 2.0, uChapter));
             float depth = clamp(1.3 - vDepth * 0.035, 0.35, 1.0);
             gl_FragColor = vec4(vColor, opacity * vOpacity * depth);
@@ -488,12 +635,12 @@ function startExperience(): (() => void) | undefined {
       sculpture.add(edges);
 
       // A second, sparse depth field gives scale without competing with text.
-      const starCount = mobile ? 100 : 210;
+      const starCount = entry === 3 ? (mobile ? 200 : 500) : (mobile ? 100 : 210);
       const starPositions = new Float32Array(starCount * 3);
       for (let i = 0; i < starCount; i += 1) {
-        starPositions[i * 3] = (random() - 0.5) * 18;
-        starPositions[i * 3 + 1] = (random() - 0.5) * 13;
-        starPositions[i * 3 + 2] = -1.5 - random() * 6;
+        starPositions[i * 3] = (random() - 0.5) * (entry === 3 ? 42 : 18);
+        starPositions[i * 3 + 1] = (random() - 0.5) * (entry === 3 ? 22 : 13);
+        starPositions[i * 3 + 2] = entry === 3 ? 8 - random() * 130 : -1.5 - random() * 6;
       }
       const starGeometry = new THREE.BufferGeometry();
       starGeometry.setAttribute('position', new THREE.BufferAttribute(starPositions, 3));
@@ -504,15 +651,15 @@ function startExperience(): (() => void) | undefined {
       // A real perspective surface surrounds the sculpture. Its far rows
       // converge on a horizon; waves and depth attenuation run on the GPU.
       // It remains the same environment in both journeys and all dark chapters.
-      const fieldColumns = mobile ? 72 : 128;
-      const fieldRows = mobile ? 90 : 112;
+      const fieldColumns = entry === 3 ? (mobile ? 80 : 144) : (mobile ? 72 : 128);
+      const fieldRows = entry === 3 ? (mobile ? 112 : 160) : (mobile ? 90 : 112);
       const fieldPositions = new Float32Array(fieldColumns * fieldRows * 3);
       const fieldSeeds = new Float32Array(fieldColumns * fieldRows);
       for (let row = 0; row < fieldRows; row += 1) {
         for (let column = 0; column < fieldColumns; column += 1) {
           const index = row * fieldColumns + column;
-          const z = 9 - row / (fieldRows - 1) * 89;
-          fieldPositions[index * 3] = (column / (fieldColumns - 1) - 0.5) * 91;
+          const z = 9 - row / (fieldRows - 1) * (entry === 3 ? 139 : 89);
+          fieldPositions[index * 3] = (column / (fieldColumns - 1) - 0.5) * (entry === 3 ? 130 : 91);
           fieldPositions[index * 3 + 1] = -3.45 - z * 0.19;
           fieldPositions[index * 3 + 2] = z;
           fieldSeeds[index] = random();
@@ -530,16 +677,18 @@ function startExperience(): (() => void) | undefined {
           uniform float uChapter;
           uniform float uEntry;
           uniform float uPulse;
+          uniform float uTravel;
           attribute float aSeed;
           varying float vDepth;
           varying float vLight;
           varying float vVisible;
           void main() {
             vec3 p = position;
+            if (uEntry > 2.5) p.y = -3.5;
             float wave = sin(p.x * 0.19 + p.z * 0.10 + uTime * 0.17)
                        + cos(p.z * 0.23 - p.x * 0.12 - uTime * 0.13) * 0.65;
             p.y += wave * 1.65;
-            float radius = length(p.xz - vec2(0.0, -9.0));
+            float radius = length(p.xz - vec2(0.0, -9.0 - uTravel));
             p.y += sin(radius * 0.65 - uTime * 1.7) * exp(-radius * 0.045) * uPulse * 0.7;
             vec4 view = modelViewMatrix * vec4(p, 1.0);
             vDepth = -view.z;
@@ -571,7 +720,7 @@ function startExperience(): (() => void) | undefined {
       // Sparse mathematical marks are spatial objects. Historical information
       // belongs to the keyboard-accessible, attributed HTML interaction nodes.
       const glyphs: { sprite: InstanceType<typeof THREE.Sprite>; texture: InstanceType<typeof THREE.CanvasTexture>; material: InstanceType<typeof THREE.SpriteMaterial>; origin: number[]; phase: number }[] = [];
-      if (!mobile) {
+      if (!mobile && entry !== 3) {
         for (const [index, symbol] of ['x', '∞', 'ψ', 'Δ', '?'].entries()) {
           const labelCanvas = document.createElement('canvas');
           labelCanvas.width = 128;
@@ -618,22 +767,37 @@ function startExperience(): (() => void) | undefined {
         uniforms.uDimension.value = dimension;
         uniforms.uConcept.value = concept;
         uniforms.uPath.value = selectedPath;
+        uniforms.uEra.value = eraValue;
+        uniforms.uEraHighlight.value = highlightedEra;
+        uniforms.uTravel.value = entry === 3 ? eraValue * 9 : 0;
         interactionPulse = Math.max(0, interactionPulse - delta / 1900);
         uniforms.uPulse.value = interactionPulse;
         currentPointerX += (pointerX - currentPointerX) * (delta ? 0.055 : 1);
         currentPointerY += (pointerY - currentPointerY) * (delta ? 0.055 : 1);
-        sculpture.rotation.y = currentPointerX * 0.19 + Math.sin(activeTime / 16000) * 0.035;
-        sculpture.rotation.x = -currentPointerY * 0.085;
-        camera.position.x = currentPointerX * 0.42;
-        camera.position.y = -currentPointerY * 0.26;
-        camera.lookAt(0, 0.04, 0);
-        stars.rotation.y = currentPointerX * 0.017 + activeTime / 450000;
+        if (entry === 3) {
+          // Translation through the actual world is perceptible in the passing
+          // foreground, changing parallax and the vanishing point of the field.
+          // The camera never orbits the entire historical corridor as a logo.
+          sculpture.rotation.set(0, 0, 0);
+          const travel = eraValue * 9;
+          const drift = Math.sin(eraValue * 0.9) * 0.27;
+          camera.position.set(currentPointerX * 0.35 + drift, -currentPointerY * 0.18 + Math.sin(eraValue * 1.4) * 0.12, 12.4 + portrait - travel);
+          camera.lookAt(drift * 0.7, 0.02, -travel);
+          stars.rotation.y = currentPointerX * 0.003;
+        } else {
+          sculpture.rotation.y = currentPointerX * 0.19 + Math.sin(activeTime / 16000) * 0.035;
+          sculpture.rotation.x = -currentPointerY * 0.085;
+          camera.position.x = currentPointerX * 0.42;
+          camera.position.y = -currentPointerY * 0.26;
+          camera.lookAt(0, 0.04, 0);
+          stars.rotation.y = currentPointerX * 0.017 + activeTime / 450000;
+        }
         for (const { sprite, material, origin, phase } of glyphs) {
           sprite.position.y = origin[1] + Math.sin(activeTime / 6500 + phase) * 0.14;
           material.opacity = (0.14 + Math.sin(activeTime / 8000 + phase) * 0.035) * (1 - portrait) * (entry ? 0.7 : 1);
         }
         renderer.render(scene, camera);
-        stage.dataset.camera = camera.position.x.toFixed(3) + ',' + camera.position.y.toFixed(3);
+        stage.dataset.camera = camera.position.x.toFixed(3) + ',' + camera.position.y.toFixed(3) + (entry === 3 ? ',' + camera.position.z.toFixed(3) : '');
         if (shaderFailed) { useStatic(); return; }
         if (firstFrame) {
           firstFrame = false;
@@ -754,6 +918,7 @@ function startExperience(): (() => void) | undefined {
   window.addEventListener('nexo:dimension', onDimension);
   window.addEventListener('nexo:concept', onConcept);
   window.addEventListener('nexo:path', onPath);
+  window.addEventListener('nexo:era', onEra);
   quiet.addEventListener('change', onMotionChange);
   measureChapters();
   updatePause();
@@ -773,6 +938,7 @@ function startExperience(): (() => void) | undefined {
     window.removeEventListener('nexo:dimension', onDimension);
     window.removeEventListener('nexo:concept', onConcept);
     window.removeEventListener('nexo:path', onPath);
+    window.removeEventListener('nexo:era', onEra);
     quiet.removeEventListener('change', onMotionChange);
     skip?.removeEventListener('click', onSkip);
     pause?.removeEventListener('click', onPause);
