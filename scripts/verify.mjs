@@ -17,6 +17,12 @@ for(const file of htmlFiles){
  check(/<main\s[^>]*id="conteudo"/.test(html),`${name}: conteúdo principal`);
  check(html.includes(`name="robots" content="${production?'index,follow':'noindex,follow'}"`),`${name}: indexação`);
  check(production?html.includes('rel="canonical"'):!html.includes('rel="canonical"'),`${name}: canonical da prévia/produção`);
+ // Cloudflare enforces script-src 'self'. JSON data is inert; executable
+ // inline code would silently disable controls that work on a local preview.
+ for(const [,attrs,code] of html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)){
+  const inert=/\btype=["']application\/(?:ld\+)?json["']/i.test(attrs);
+  check(inert||/\bsrc=["'][^"']+["']/i.test(attrs)||!code.trim(),`${name}: script executável inline incompatível com CSP`);
+ }
  for(const match of html.matchAll(/(?:href|src)="([^"\s]+)"/g)){
   const link=match[1];if(/^(https?:|tel:|mailto:|data:)/.test(link))continue;
   if(link==='#'){failures.push(`${name}: link vazio`);continue;}

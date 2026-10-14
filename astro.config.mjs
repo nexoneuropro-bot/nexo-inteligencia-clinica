@@ -41,7 +41,9 @@ export default defineConfig({
         }
       },
     }],
-    build: { target: 'es2022' },
+    // Keep executable scripts external so the deployed script-src 'self' CSP
+    // also permits small Astro bundles (navigation and historical contexts).
+    build: { target: 'es2022', assetsInlineLimit: 0 },
   },
   integrations:[{name:'nexo-static-headers',hooks:{'astro:build:done':async({dir})=>{
     const noindex=process.env.PUBLIC_INDEXABLE==='true'?'':'  X-Robots-Tag: noindex, follow\n';

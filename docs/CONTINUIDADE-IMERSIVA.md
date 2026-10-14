@@ -1,6 +1,6 @@
 # Continuidade da experiência imersiva
 
-14/10/2026. Implementação e validação local concluídas. O SHA remoto e a implantação desta continuidade ainda não estão confirmados neste registro.
+14/10/2026. Implementação validada localmente e publicada inicialmente em `f09342f`. A conferência externa identificou uma incompatibilidade entre scripts pequenos embutidos pelo Astro e a política CSP. Este commit corrige o build; sua implantação e a conferência externa final são registradas na entrega que acompanha o projeto.
 
 ## Resultado
 
@@ -24,22 +24,26 @@ A sequência é uma seleção editorial, não uma história universal, uma filia
 
 | Verificação | Resultado |
 | --- | --- |
-| `pnpm check` | 29 arquivos; zero erros, avisos ou sugestões |
-| Build final | Concluído às 16:29:21; 13 HTMLs para 12 rotas e 404 |
-| `pnpm verify` | Zero falhas |
+| Rotina `check` | 29 arquivos; zero erros, avisos ou sugestões na revisão visual |
+| Build da revisão visual | 13 HTMLs para 12 rotas e 404 |
+| Rotina `verify` | Zero falhas na revisão visual; ampliada neste commit para validar scripts e CSP |
 | Desktop 1440 × 900 | As 12 rotas com WebGL, um H1, sem transbordamento horizontal e com `noindex` |
 | Mobile 390 × 844 | As 12 rotas com os mesmos critérios; home examinada separadamente das 11 internas |
 | Contextos | Fontes de psiquiatria e Engel abertas; Escape e retorno de foco confirmados |
 | Menu mobile | Para Você acessível, com fechamento do menu |
 | Pausa | Estado pausado e rótulo Retomar confirmados |
 
-As últimas correções após o check foram somente de CSS. Lighthouse, Core Web Vitals e aparelho físico não foram medidos. As capturas reais e os relatórios de entrega ficam fora do repositório, em `outputs/capturas-continuidade` e nos documentos de entrega que acompanham o projeto.
+As rotinas locais do package.json foram chamadas diretamente por Node. Lighthouse, Core Web Vitals e aparelho físico não foram medidos. As capturas reais e os relatórios de entrega ficam fora do repositório, em `outputs/capturas-continuidade` e nos documentos de entrega que acompanham o projeto.
+
+## Compatibilidade com a política de segurança
+
+A hospedagem aplica `script-src 'self'`. O Astro embutia no HTML os scripts menores de navegação e contexto, que funcionavam localmente mas eram bloqueados na Cloudflare. `vite.build.assetsInlineLimit: 0` faz o build emitir arquivos externos também para esses scripts, sem permitir execução inline na política. `scripts/verify.mjs` agora rejeita scripts executáveis embutidos e continua permitindo os blocos inertes de dados JSON. A verificação reproduziu a falha no build anterior; o pipeline do novo commit exige sua ausência antes da publicação.
 
 ## Publicação temporária e acesso
 
-O projeto Pages é `nexo-previa-20261014`, com URL [nexo-previa-20261014.pages.dev](https://nexo-previa-20261014.pages.dev/). O hostname principal respondeu HTTP 200 sem autenticação, com meta robots `noindex,follow` e cabeçalho `X-Robots-Tag: noindex, follow`. Esse resultado refere-se à publicação disponível; não confirma a implantação desta continuidade.
+O projeto Pages é `nexo-previa-20261014`, com URL [nexo-previa-20261014.pages.dev](https://nexo-previa-20261014.pages.dev/). As 12 rotas da primeira implantação desta continuidade responderam HTTP 200 sem autenticação, com meta robots `noindex,follow` e cabeçalho `X-Robots-Tag: noindex, follow`. O sitemap estava vazio e a rota inexistente respondeu 404. Esse resultado não substitui a conferência das interações após a correção de CSP.
 
-O último commit remoto registrado antes desta revisão é `903d003a37cb43608f6ef5dc17854d0074c3f95f`, na branch `feat/experiencia-imersiva`. O [PR rascunho #1](https://github.com/nexoneuropro-bot/nexo-inteligencia-clinica/pull/1) permanece sem merge. Conferir e registrar o novo SHA no build remoto antes de anunciar a revisão como implantada.
+A revisão visual foi publicada em `f09342fbd974580b6aea484d0f0eb2619253cc80`, na branch `feat/experiencia-imersiva`. O build remoto confirmou 13 páginas, zero falhas no verificador e implantação concluída. O [PR rascunho #1](https://github.com/nexoneuropro-bot/nexo-inteligencia-clinica/pull/1) permanece sem merge. O SHA posterior da correção de CSP e sua validação final devem ser conferidos na entrega.
 
 `Restrict previews` está habilitada para `*.nexo-previa-20261014.pages.dev` e não protege o hostname principal, que continua público. `noindex` não restringe acesso humano.
 
