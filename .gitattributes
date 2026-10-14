@@ -1,0 +1,8 @@
+* text=auto eol=lf
+# Keep the supplied reference kit byte-identical, including its text manifests.
+references/kit/** -text
+*.png binary
+*.jpg binary
+*.webp binary
+*.woff2 binary
+*.ico binary

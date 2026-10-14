@@ -1,0 +1,27 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Arrow from '../components/Arrow.astro';
+import {pages,type ContentPage} from '../data/pages';
+import {whatsapp} from '../data/reflections';
+export function getStaticPaths(){return pages.map(page=>({params:{slug:page.slug},props:{page}}));}
+const {page}=Astro.props as {page:ContentPage};
+const clinical=['para-voce','psicoterapia','avaliacao-neuropsicologica','integracao-psiquiatrica'].includes(page.slug);
+const related=clinical?pages.filter(p=>['psicoterapia','avaliacao-neuropsicologica','integracao-psiquiatrica'].includes(p.slug)&&p.slug!==page.slug):pages.filter(p=>['para-voce','para-sua-empresa','nossa-abordagem'].includes(p.slug)&&p.slug!==page.slug);
+const personal=whatsapp('personal');const business=whatsapp('business');
+const sectionId=(index:number)=>page.slug==='psicologia-em-pauta'&&index===0?'temas':`secao-${index+1}`;
+---
+<Layout title={page.title.replace(/\.$/,'')} description={page.description}>
+  <section class="page-hero"><div class="content-width"><nav class="breadcrumbs" aria-label="Caminho da página"><a href="/">Início</a><span aria-hidden="true">/</span><span>{page.eyebrow}</span></nav><span class="overline">{page.eyebrow}</span><h1>{page.title}</h1><p class="page-intro">{page.intro}</p><span class="page-hero-x" aria-hidden="true">x</span></div></section>
+  <div class="content-width page-body page-columns"><aside class="page-toc" aria-label="Nesta página"><span class="overline">NESTA PÁGINA</span>{page.sections.map((s,i)=><a href={`#${sectionId(i)}`}>{s.title}</a>)}<a href="#conversa">Converse com a NEXO ↗</a></aside>
+    <article class="page-article">
+      {['profissionais','politica-de-privacidade','psicologia-em-pauta'].includes(page.slug)&&<p class="review-banner">Prévia para revisão. {page.slug==='profissionais'?'Registros, títulos e RQE ainda precisam de conferência nos conselhos profissionais.':page.slug==='politica-de-privacidade'?'A política precisa de identificação do controlador e aprovação antes da publicação.':'Artigos aguardam desenvolvimento e revisão profissional; ainda não há publicações aprovadas.'}</p>}
+      {page.slug==='profissionais'&&<div class="team-page-grid"><figure><img src="/images/gabriel.webp" width="700" height="727" alt="Gabriel Alves Batista, em retrato fornecido para o projeto"/><figcaption>Gabriel Alves Batista · CRP-SP 06/176184</figcaption></figure><figure><img src="/images/ivo.webp" width="700" height="754" alt="Ivo Peixoto Barbosa Júnior, em retrato fornecido para o projeto"/><figcaption>Ivo Peixoto Barbosa Júnior · CRM-SP 193133</figcaption></figure></div>}
+      {page.slug==='contato'&&<div class="contact-choices"><a href={personal} class="button button-dark" target="_blank" rel="noopener noreferrer">Informações sobre atendimento <Arrow diagonal/></a><a href={business} class="button button-dark" target="_blank" rel="noopener noreferrer">Conversar sobre minha empresa <Arrow diagonal/></a><a href="tel:+551154444366" class="button">Ligar: +55 (11) 5444-4366</a></div>}
+      {page.sections.map((section,i)=><section id={sectionId(i)}><h2>{section.title}</h2>{section.body.map(p=><p>{p}</p>)}{section.items&&<ul>{section.items.map(item=><li>{item}</li>)}</ul>}</section>)}
+      {page.slug==='riscos-psicossociais-nr1'&&<div><a class="resource-link" href="https://www.gov.br/trabalho-e-emprego/pt-br/acesso-a-informacao/participacao-social/conselhos-e-orgaos-colegiados/comissao-tripartite-partitaria-permanente/normas-regulamentadora/normas-regulamentadoras-vigentes/nr-1" target="_blank" rel="noopener noreferrer">Consulte a NR-1 no Ministério do Trabalho e Emprego ↗</a></div>}
+      <nav class="related-links" aria-label="Explore também">{related.map(p=><a href={`/${p.slug}/`}>{p.eyebrow} ↗</a>)}</nav>
+      <div class="page-contact-card" id="conversa"><span class="overline">UM ESPAÇO PARA SUA PERGUNTA.</span><h3>Toda conversa é um começo.</h3><p>Fale sobre seu interesse em atendimento ou consultoria. Evite enviar dados clínicos sensíveis no primeiro contato.</p><a href={whatsapp(page.ctaType)} class="button button-copper" target="_blank" rel="noopener noreferrer">{page.ctaLabel} <Arrow diagonal/></a></div>
+    </article>
+  </div>
+</Layout>
+

@@ -1,0 +1,25 @@
+{
+  "name": "NEXO Inteligência Clínica",
+  "short_name": "NEXO",
+  "description": "Ciência, escuta e compreensão da experiência humana.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0B2635",
+  "theme_color": "#0B2635",
+  "lang": "pt-BR",
+  "icons": [
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
