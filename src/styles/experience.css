@@ -2,7 +2,7 @@
 html:has(body.is-experience) { scroll-padding-top:0; }
 .is-experience { background:#041822; color:#f6f2ea; --focus:#e7bd99; }
 .is-experience #conteudo { position:relative; }
-.ex-header { position:fixed; inset:0 0 auto; z-index:55; height:92px; padding:0 5.2vw; display:flex; align-items:center; justify-content:space-between; gap:24px; background:linear-gradient(#03141de8,#03141d77,transparent); }
+.ex-header { position:fixed; inset:0 0 auto; z-index:55; height:92px; padding:0 5.2vw; display:flex; align-items:center; justify-content:space-between; gap:24px; background:linear-gradient(#03141df5,#03141df2 85%,#03141de6); }
 .ex-header .logo-image { width:175px; height:48px; }
 .ex-header nav { display:flex; align-items:center; gap:38px; }
 .ex-header nav a { color:#e7dfd3; font-size:10px; letter-spacing:.1em; padding:12px 0; }
@@ -37,7 +37,7 @@ html:has(body.is-experience) { scroll-padding-top:0; }
 .ex-controls button:hover { color:#f6e5d1; }
 body[data-ex-stage="bio"] .ex-controls button,body[data-ex-stage="bio"] .ex-chapter-nav a { color:#36535a; }
 body[data-ex-stage="bio"] .ex-header { background:linear-gradient(#071e2dfa,#071e2dd9,transparent); }
-body[data-ex-stage="human"] .ex-controls,body[data-ex-stage="human"] .ex-chapter-nav { opacity:0; pointer-events:none; visibility:hidden; }
+body[data-ex-stage="human"] .ex-chapter-nav { opacity:0; pointer-events:none; visibility:hidden; }
 .ex-intro-note { position:absolute; top:19%; left:8.7vw; }
 .ex-intro-note .ex-eyebrow { font-size:8px; max-width:165px; letter-spacing:.18em; }
 .ex-intro-note>p { font:italic 23px/1.2 var(--serif); color:#c9c7ba; margin-top:19px; }
@@ -142,11 +142,11 @@ body[data-ex-stage="human"] .ex-controls,body[data-ex-stage="human"] .ex-chapter
 .ex-human-portraits img { width:100%; height:100%; object-fit:contain; object-position:center bottom; }
 .ex-human-portraits figcaption { font:20px/1.1 var(--serif); margin-top:17px; }
 .ex-human-portraits figcaption span { display:block; font:9px var(--sans); color:#506068; margin-top:9px; }
-.ex-footer { position:relative; z-index:3; padding:40px 8vw 26px; background:#061b25; display:grid; grid-template-columns:1fr 1fr; align-items:center; gap:30px; }
+.ex-footer { position:relative; z-index:3; padding:40px 8vw 26px; background:linear-gradient(#061b2577,#061b25d9); display:grid; grid-template-columns:1fr 1fr; align-items:center; gap:30px; }
 .ex-footer>div { display:flex; gap:25px; align-items:center; }
 .ex-footer-brand { font:29px var(--serif); letter-spacing:.19em; }
 .ex-footer>div>span { font:italic 17px var(--serif); color:#b8c1b9; }
-.ex-footer nav { display:flex; justify-content:flex-end; gap:25px; font-size:10px; color:#bdc8c5; }
+.ex-footer nav { display:flex; justify-content:flex-end; flex-wrap:wrap; gap:15px 25px; font-size:10px; color:#bdc8c5; }
 .ex-footer>p { grid-column:1/-1; font-size:9px; color:#91a6ab; border-top:1px solid #ffffff1a; padding-top:20px; }
 .knowledge-panel { position:fixed; z-index:70; right:6vw; top:50%; transform:translateY(-50%); width:390px; max-height:74svh; overflow:auto; background:linear-gradient(135deg,#0b2833f7,#061a25fa); border:1px solid #bba17d55; padding:36px; box-shadow:0 35px 100px #0009; color:#f6f2ea; backdrop-filter:blur(18px); }
 .knowledge-panel[hidden] { display:none; }
@@ -208,3 +208,7 @@ body[data-ex-stage="human"] .ex-controls,body[data-ex-stage="human"] .ex-chapter
 }
 @media(max-width:380px) { .ex-intro-title h1 { font-size:54px; }.ex-frame { min-height:760px; }.ex-human-portraits figure>div { height:220px; }.ex-bio h2 { font-size:45px; }.ex-bio-select { gap:16px; }.ex-header .logo-image { width:125px; }.ex-knowledge-node>span:not(.node-spark) { font-size:18px; } }
 @media(prefers-reduced-motion:reduce) { .ex-intro,.ex-bio,.ex-ideas { height:auto; min-height:0; }.ex-frame { position:relative; }.ex-controls { display:none; }.ex-knowledge-node { transform:translate(-50%,-50%); } }
+
+.ex-entry-human-strip { background:linear-gradient(90deg,#08222dd9,#15354280,transparent); color:#e9e1d2; border-block:1px solid #c8ad8540; }
+.ex-entry-human-strip .ex-eyebrow { color:#d9af87; }
+.ex-entry-human-strip a { color:#e2c09b; }

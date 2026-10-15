@@ -1,0 +1,130 @@
+---
+import '../styles/care-pathways.css';
+
+interface Props {id?:string;compact?:boolean;title?:string;intro?:string}
+const {
+  id='care-pathways',
+  compact=false,
+  title='Uma pergunta pode abrir caminhos.',
+  intro='O cuidado começa por compreender o que você procura. Explore as possibilidades e como cada uma pode participar da sua história.',
+}=Astro.props;
+const pathways=[
+  {
+    id:'psychotherapy',label:'Psicoterapia',hint:'Experiências e padrões',professionIndex:2,professionId:'dialogue',
+    eyebrow:'Um processo construído com você',title:'Dar espaço ao que você vive.',
+    paragraphs:[
+      'A psicoterapia oferece um espaço de escuta para compreender experiências, emoções e padrões que aparecem no cotidiano e nas relações.',
+      'Os objetivos são construídos com você e revistos ao longo do processo, considerando sua história, seu contexto e o que deseja transformar.',
+    ],
+    question:'O que você gostaria de compreender melhor?',
+    link:{label:'Conhecer a proposta de psicoterapia',href:'/psicoterapia/'},
+    sourceTitle:'CFP · Código de Ética Profissional do Psicólogo',
+    sourceUrl:'https://site.cfp.org.br/wp-content/uploads/2022/05/WEB_29535_Codigo_de_etica_da_profissao_14.04.pdf',
+  },
+  {
+    id:'brief-therapy',label:'Terapia breve',hint:'Foco e contexto',professionIndex:2,professionId:'dialogue',
+    eyebrow:'Psicoterapia breve em Análise do Comportamento',title:'Um foco combinado para o cuidado.',
+    paragraphs:[
+      'A terapia breve é uma forma de psicoterapia com foco delimitado, construído em conjunto. Na proposta da NEXO, a Análise do Comportamento relaciona ações, situações e consequências para compreender padrões em contexto.',
+      'O planejamento acompanha a demanda individual. A duração é conversada e revista conforme o processo, sem sequência ou pacote obrigatório.',
+    ],
+    question:'Qual questão pede atenção neste momento?',
+    link:{label:'Entender a psicoterapia breve',href:'/psicoterapia/#secao-3'},
+    sourceTitle:'ABPMC · Psicoterapia breve em Análise do Comportamento, p. 66',
+    sourceUrl:'https://cdn.abpmc.org.br/uploads/2021/08/xi-encontro-abpmc-2002.pdf',
+  },
+  {
+    id:'neuropsychological-assessment',label:'Avaliação neuropsicológica',hint:'Investigar e integrar',professionIndex:0,professionId:'neuropsychology',
+    eyebrow:'Investigar com método e contexto',title:'Compreender além de um resultado.',
+    paragraphs:[
+      'A avaliação neuropsicológica investiga relações entre cognição, emoções e comportamento, considerando a história da pessoa e a pergunta que orienta a busca.',
+      'Entrevistas, observações e procedimentos pertinentes são integrados. A devolutiva ajuda a compreender os achados e as orientações; um laudo psicológico é elaborado quando cabível.',
+    ],
+    question:'O que precisa ser investigado na sua história?',
+    link:{label:'Conhecer o percurso de avaliação',href:'/avaliacao-neuropsicologica/'},
+    sourceTitle:'CFP · Neuropsicologia: Ciência e Profissão',
+    sourceUrl:'https://site.cfp.org.br/wp-content/uploads/2023/09/Neuropsicologia_manual-4.pdf',
+  },
+  {
+    id:'psychiatry-interface',label:'Interface com Psiquiatria',hint:'Outro olhar, quando indicado',professionIndex:1,professionId:'psychiatry',
+    eyebrow:'Acrescentar um olhar médico',title:'Olhares que podem se complementar.',
+    paragraphs:[
+      'A interface com Psiquiatria pode acrescentar uma avaliação médica quando a demanda indicar essa necessidade. A integração é discutida com a pessoa atendida e respeita consentimento, sigilo e as responsabilidades de cada profissional.',
+      'Ela não é uma etapa obrigatória dos outros caminhos. Prescrição e outras condutas dependem da avaliação individual; não são presumidas.',
+    ],
+    question:'Quando outro olhar pode ampliar a compreensão?',
+    link:{label:'Entender a interface com Psiquiatria',href:'/integracao-psiquiatrica/'},
+    sourceTitle:'ABP · Competências e formação em Psiquiatria',
+    sourceUrl:'https://www.abp.org.br/programas-de-formacao',
+  },
+  {
+    id:'self-knowledge-social-care',label:'Autoconhecimento e acolhimento social',hint:'Reconhecer e buscar apoio',professionIndex:2,professionId:'dialogue',
+    eyebrow:'Um ponto de partida para a sua pergunta',title:'Reconhecer o que pede cuidado.',
+    paragraphs:[
+      'O autoconhecimento e o acolhimento social abrem espaço para refletir sobre emoções, padrões e relações e conversar sobre a busca por apoio.',
+      'Quando indicados e acompanhados por um profissional, rastreios ajudam a reconhecer sinais e orientar próximos passos. Seus resultados não estabelecem diagnóstico nem substituem uma avaliação mais ampla.',
+    ],
+    question:'Por onde sua conversa pode começar?',
+    link:{label:'Conversar sobre acolhimento',href:'/para-voce/#conversa'},
+    sourceTitle:'Ministério da Saúde · Rastreamento e diagnóstico',
+    sourceUrl:'https://linhasdecuidado.saude.gov.br/portal/ansiedade/unidade-de-atencao-primaria/rastreamento-diagnostico/',
+  },
+];
+---
+<section
+  id={id}
+  class:list={['care-pathways',{'cp-compact':compact}]}
+  data-care-pathways
+  data-spatial-encounter
+  data-pathway-index="0"
+  data-profession-index={pathways[0].professionIndex}
+  data-profession-id={pathways[0].professionId}
+  aria-labelledby={`${id}-title`}
+>
+  <div class="cp-atmosphere" aria-hidden="true"></div>
+  <div class="cp-layout">
+    <header class="cp-introduction">
+      <span class="cp-eyebrow">CAMINHOS PARA VOCÊ</span>
+      <h2 id={`${id}-title`}>{title}</h2>
+      <p>{intro}</p>
+    </header>
+    <div class="cp-constellation" id={`${id}-map`} aria-label="Escolha um caminho para conhecer">
+      <span class="cp-map-coordinate" aria-hidden="true">SUA HISTÓRIA ↔ POSSIBILIDADES DE CUIDADO</span>
+      <svg class="cp-connections" viewBox="0 0 600 720" preserveAspectRatio="none" aria-hidden="true"><path d="M105 190L425 95L390 345L105 555L480 590M105 190L390 345L480 590M105 555L105 190"/></svg>
+      {pathways.map((pathway,index)=><button
+        type="button"
+        class={`cp-node cp-node-${index}`}
+        id={`${id}-node-${pathway.id}`}
+        data-care-node={pathway.id}
+        data-care-index={index}
+        data-care-profession-index={pathway.professionIndex}
+        data-care-profession-id={pathway.professionId}
+        aria-pressed={index===0?'true':'false'}
+        aria-controls={`${id}-content-${pathway.id}`}
+      >
+        <span class="cp-node-orbit" aria-hidden="true"><i></i></span>
+        <span class="cp-node-copy"><span class="cp-node-number" aria-hidden="true">{String(index+1).padStart(2,'0')}</span><span class="cp-node-label">{pathway.label}</span><span class="cp-node-hint">{pathway.hint}</span></span>
+      </button>)}
+      <span class="cp-map-invitation" aria-hidden="true">Toque em um ponto.<br/>Conheça uma possibilidade.</span>
+    </div>
+    <div class="cp-reading">
+      {pathways.map((pathway,index)=><article
+        id={`${id}-content-${pathway.id}`}
+        class="cp-context"
+        data-care-content={pathway.id}
+        aria-labelledby={`${id}-heading-${pathway.id}`}
+        hidden={index!==0}
+      >
+        <span class="cp-eyebrow">{pathway.eyebrow}</span>
+        <h3 id={`${id}-heading-${pathway.id}`} tabindex="-1">{pathway.title}</h3>
+        {pathway.paragraphs.map(paragraph=><p>{paragraph}</p>)}
+        <p class="cp-question">{pathway.question}</p>
+        <a class="cp-service-link" href={pathway.link.href}>{pathway.link.label}<span aria-hidden="true">↗</span></a>
+        <a class="cp-return" href={`#${id}-map`}>Explorar outro caminho <span aria-hidden="true">↑</span></a>
+        <a class="cp-source" href={pathway.sourceUrl} target="_blank" rel="noopener noreferrer"><span>Referência de leitura</span>{pathway.sourceTitle}<span aria-hidden="true"> ↗</span></a>
+      </article>)}
+    </div>
+  </div>
+</section>
+<noscript><style>.care-pathways .cp-constellation{display:none}.care-pathways .cp-context[hidden]{display:block!important}.care-pathways .cp-context+.cp-context{margin-top:45px;padding-top:35px;border-top:1px solid #bca78033}</style></noscript>
+<script>import '../scripts/care-pathways';</script>

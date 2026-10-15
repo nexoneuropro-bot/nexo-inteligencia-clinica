@@ -1,10 +1,11 @@
 ---
 import ExperienceStage from './ExperienceStage.astro';
+import ProfessionalEncounter from './ProfessionalEncounter.astro';
 import {approachEras} from '../data/approach-history';
 import '../styles/experience.css';
 import '../styles/approach.css';
 interface Props {title:string;intro:string}
-const {title,intro}=Astro.props;
+const {title}=Astro.props;
 ---
 <div class="ap-experience">
   <ExperienceStage entry="approach"/>
@@ -48,10 +49,7 @@ const {title,intro}=Astro.props;
       </div>
     </section>)}
   </div>
-  <section class="ap-human" id="approach-human" aria-labelledby="ap-human-title">
-    <div class="ap-human-copy"><span class="ex-eyebrow">HISTÓRIAS SÃO VIVIDAS POR PESSOAS</span><h2 id="ap-human-title">Da história das ideias<br/>à sua história.</h2><p>{intro}</p><p>A compreensão ganha sentido no encontro: na escuta, na investigação responsável e no cuidado com cada contexto.</p><a href="/profissionais/">Conheça os profissionais ↗</a></div>
-    <div class="ap-portraits"><figure><img src="/images/gabriel.webp" alt="Gabriel Alves Batista, em fotografia fornecida para o projeto" width="700" height="727" loading="lazy"/><figcaption>Gabriel Alves Batista<span>Psicologia · CRP-SP 06/176184</span></figcaption></figure><figure><img src="/images/ivo.webp" alt="Ivo Peixoto Barbosa Júnior, em fotografia fornecida para o projeto" width="700" height="754" loading="lazy"/><figcaption>Ivo Peixoto Barbosa Júnior<span>Medicina · CRM-SP 193133</span></figcaption></figure></div>
-  </section>
+  <ProfessionalEncounter id="approach-human" title="Da história das ideias à sua história." intro="O conhecimento ganha sentido no encontro. Explore como diferentes perspectivas investigam, escutam e podem dialogar no cuidado."/>
   <div class="ap-controls"><span id="approach-location" aria-live="off">Uma história aberta</span><button id="experience-pause" aria-pressed="false">Pausar movimento</button></div>
   <dialog class="ap-context" id="approach-context" aria-labelledby="approach-context-title">
     <button class="ap-context-close" aria-label="Fechar contexto">Fechar <span aria-hidden="true">×</span></button>

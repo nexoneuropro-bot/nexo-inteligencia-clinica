@@ -1,6 +1,6 @@
 ---
 import Logo from './Logo.astro';
-const links=[['Explorar','/#experience-ideas'],['Nossa abordagem','/nossa-abordagem/'],['Para você','/para-voce/'],['Empresas','/para-sua-empresa/'],['Conversar','/contato/']];
+const links=[['Explorar','/#experience-ideas'],['Nossa abordagem','/nossa-abordagem/'],['Para você','/para-voce/'],['Empresas','/para-sua-empresa/'],['Psicoterapia breve','/psicoterapia/'],['Conversar','/contato/']];
 ---
 <header class="ex-header"><Logo/><nav class="ex-desktop-navigation" aria-label="Navegação da experiência">{links.map(([label,url])=><a href={url} aria-current={Astro.url.pathname===url?'page':undefined}>{label}<span aria-hidden="true">↗</span></a>)}</nav><details class="ex-mobile-menu"><summary>Caminhos <span aria-hidden="true">+</span></summary><nav class="ex-mobile-navigation" aria-label="Caminhos da NEXO">{links.map(([label,url])=><a href={url} aria-current={Astro.url.pathname===url?'page':undefined}>{label}<span aria-hidden="true">↗</span></a>)}</nav></details></header>
 <script>
@@ -13,7 +13,7 @@ const links=[['Explorar','/#experience-ideas'],['Nossa abordagem','/nossa-aborda
  .ex-header .ex-desktop-navigation {gap:24px;}
  .ex-header nav a[aria-current="page"] {color:#f0c59f;text-decoration:underline;text-underline-offset:6px;}
  .ex-mobile-menu {display:none;}
- @media(max-width:850px){
+ @media(max-width:1050px){
   .ex-header .ex-desktop-navigation {display:none;}
   .ex-mobile-menu {display:block;}
   .ex-mobile-menu summary {list-style:none;border:1px solid #bc9c7777;border-radius:30px;padding:10px 16px;font-size:11px;color:#efe4d4;cursor:pointer;min-height:44px;}
@@ -25,5 +25,5 @@ const links=[['Explorar','/#experience-ideas'],['Nossa abordagem','/nossa-aborda
   .ex-header details .ex-mobile-navigation a span {font:13px var(--sans);}
   .ex-mobile-menu summary:focus-visible {outline:2px solid #f0c59f;outline-offset:5px;}
  }
- @media(min-width:851px) and (max-width:1100px){.ex-header .ex-desktop-navigation {gap:16px;}.ex-header .ex-desktop-navigation a {letter-spacing:0;font-size:9px;}.ex-header nav a span {margin-left:5px;}}
+ @media(min-width:1051px) and (max-width:1100px){.ex-header .ex-desktop-navigation {gap:16px;}.ex-header .ex-desktop-navigation a {letter-spacing:0;font-size:9px;}.ex-header nav a span {margin-left:5px;}}
 </style>

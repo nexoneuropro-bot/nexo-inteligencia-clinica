@@ -24,8 +24,11 @@ if(root){
     let closest=0;
     const axis=innerHeight*.45;
     chapters.forEach((chapter,index)=>{if(chapter.getBoundingClientRect().top<=axis)closest=index;});
-    const narrativeEnd=document.getElementById('approach-human')?.getBoundingClientRect().top??Infinity;
+    const peopleStart=document.getElementById('approach-human')?.getBoundingClientRect().top??Infinity;
+    const narrativeEnd=document.getElementById('conteudo-da-jornada')?.getBoundingClientRect().top??Infinity;
     root!.classList.toggle('ap-reading',narrativeEnd<innerHeight*.6);
+    root!.classList.toggle('ap-people',peopleStart<innerHeight*.6&&narrativeEnd>innerHeight*.6);
+    if(peopleStart<innerHeight*.6&&narrativeEnd>innerHeight*.6)setText('approach-location','Pessoas · perspectivas · cuidado');
     if(closest===current)return;
     current=closest;
     links.forEach((link,index)=>{if(index===current)link.setAttribute('aria-current','step');else link.removeAttribute('aria-current');});

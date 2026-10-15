@@ -85,7 +85,7 @@
 .spatial-page .ex-entry-copy h1 { font-size:clamp(51px,5vw,75px); max-width:12ch; text-wrap:balance; }
 .spatial-page .entry-reading { min-height:max(670px,85svh); }
 .spatial-page .entry-reading .ex-entry-copy { padding-top:17svh; }
-.spatial-content { position:relative; z-index:3; color:#e6e4d9; background:linear-gradient(90deg,#061d29f5,#061d29ea 57%,#061d29a8); border-top:1px solid #c5b89530; --focus:#ecc49f; }
+.spatial-content { position:relative; z-index:3; color:#e6e4d9; background:linear-gradient(90deg,#061d29d9,#061d29ad 57%,#061d2929); border-top:1px solid #c5b89530; --focus:#ecc49f; }
 .spatial-content .page-columns { grid-template-columns:215px minmax(0,760px); column-gap:6vw; max-width:1200px; }
 .spatial-content .page-body { padding-top:95px; padding-bottom:95px; }
 .spatial-content .page-toc { color:#b7ccc9; top:115px; }
@@ -129,4 +129,20 @@
 @media(max-width:380px) { .ap-era-copy h2 { font-size:39px; }.ap-intro h1 { font-size:51px; }.ap-era-nav { gap:4px; }.ap-portraits img { height:205px; }.ap-thought p { font-size:22px; } }
 @media(prefers-reduced-motion:reduce) {
  .ap-era { height:auto; min-height:0; }.ap-era-frame { position:relative; min-height:920px; }.ap-spatial-marker,.ap-era-quote { transform:translate(-50%,-50%); }.ap-era-quote { transform:none; }.ap-controls { display:none; }.ap-marker-orbit,.ap-era-nav a>span { transition:none; }.ap-experience { --ap-pointer-x:0px!important; --ap-pointer-y:0px!important; }
+}
+
+/* Reading is part of the spatial journey; the right horizon remains open. */
+.ap-experience.ap-people .ap-era-nav { opacity:0; visibility:hidden; pointer-events:none; }
+.ap-experience.ap-people .ap-controls>span,.ap-experience.ap-people .ap-next-era { visibility:hidden; }
+.spatial-page[data-compact-page] .entry-reading { min-height:620px; }
+.spatial-page[data-compact-page] .entry-reading .ex-entry-copy { padding-bottom:60px; }
+.spatial-content .page-contact-card { background:linear-gradient(125deg,#c69c70d9,#b88d6199); backdrop-filter:blur(8px); }
+@media(max-width:760px) {
+ .spatial-content { background:linear-gradient(90deg,#061d29d9,#061d29b3 70%,#061d2970); }
+ .spatial-content .page-toc { position:relative; top:auto; display:flex; align-items:center; flex-wrap:wrap; gap:7px 16px; padding:0 0 26px; margin-bottom:28px; border-bottom:1px solid #a6b9b733; }
+ .spatial-content .page-toc .overline { flex-basis:100%; }
+ .spatial-content .page-toc a { font-size:10px; line-height:1.6; border:0; padding:5px 0; }
+ .ap-clinical .page-toc { display:none; }
+ .spatial-page[data-compact-page] .entry-reading { min-height:650px; }
+ .spatial-page[data-compact-page] .entry-reading .ex-entry-copy h1 { font-size:44px; }
 }

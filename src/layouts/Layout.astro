@@ -5,29 +5,68 @@ import Arrow from '../components/Arrow.astro';
 import { whatsapp } from '../data/reflections';
 import ExperienceNav from '../components/ExperienceNav.astro';
 import ExperienceFooter from '../components/ExperienceFooter.astro';
+import { pages } from '../data/pages';
 interface Props { title:string; description:string; home?:boolean; experience?:boolean; }
 const {title,description,home=false,experience=false}=Astro.props;
 const indexable=import.meta.env.PUBLIC_INDEXABLE === 'true';
 const site=import.meta.env.PUBLIC_SITE_URL || 'https://nexoneuro.com';
 const canonical = new URL(Astro.url.pathname,site).href;
+const siteRoot = new URL('/',site).href;
+const contentPage=pages.find(page=>Astro.url.pathname===`/${page.slug}/`);
+// Search and sharing labels describe the actual subject; visible headings keep
+// the editorial language supplied by each page.
+const searchTitles:Record<string,string>={
+  'para-voce':'Psicoterapia, autoconhecimento e avaliação',
+  'psicoterapia':'Psicoterapia breve em Análise do Comportamento',
+  'avaliacao-neuropsicologica':'Avaliação neuropsicológica',
+  'integracao-psiquiatrica':'Interface com Psiquiatria quando indicada',
+  'para-sua-empresa':'Consultoria em pessoas e relações nas empresas',
+  'riscos-psicossociais-nr1':'Riscos psicossociais no trabalho e NR-1',
+  'nossa-abordagem':'Abordagem biopsicossocial',
+  'profissionais':'Profissionais de Psicologia e Medicina',
+  'psicologia-em-pauta':'Psicologia em Pauta',
+  'contato':'Contato',
+  'politica-de-privacidade':'Política de privacidade',
+};
+const metaTitle=home?'NEXO Inteligência Clínica | Psicoterapia e Neuropsicologia':`${(contentPage&&searchTitles[contentPage.slug])||title} | NEXO`;
+// Unknown routes, including the static 404, must not inherit production indexing.
+const pageIndexable=indexable&&(home||Boolean(contentPage));
 const nav=[['Para você','/para-voce/'],['Para sua empresa','/para-sua-empresa/'],['Nossa perspectiva','/nossa-abordagem/'],['Em pauta','/psicologia-em-pauta/']];
-const schema={ '@context':'https://schema.org','@type':'Organization',name:'NEXO Inteligência Clínica',url:site,telephone:'+55-11-5444-4366'};
+const organizationId=`${siteRoot}#organization`;
+const websiteId=`${siteRoot}#website`;
+const breadcrumb=contentPage?{
+  '@type':'BreadcrumbList',
+  '@id':`${canonical}#breadcrumb`,
+  itemListElement:[
+    {'@type':'ListItem',position:1,name:'NEXO',item:siteRoot},
+    {'@type':'ListItem',position:2,name:contentPage.eyebrow,item:canonical},
+  ],
+}:undefined;
+const schema={
+  '@context':'https://schema.org',
+  '@graph':[
+    {'@type':'Organization','@id':organizationId,name:'NEXO Inteligência Clínica',alternateName:'NEXO',url:siteRoot,telephone:'+55-11-5444-4366'},
+    {'@type':'WebSite','@id':websiteId,name:'NEXO Inteligência Clínica',alternateName:'NEXO',url:siteRoot,inLanguage:'pt-BR',publisher:{'@id':organizationId}},
+    {'@type':'WebPage','@id':`${canonical}#webpage`,url:canonical,name:title,description,inLanguage:'pt-BR',isPartOf:{'@id':websiteId},about:{'@id':organizationId},...(breadcrumb?{breadcrumb:{'@id':breadcrumb['@id']}}:{})},
+    ...(breadcrumb?[breadcrumb]:[]),
+  ],
+};
 ---
 <!doctype html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>{title} | NEXO Inteligência Clínica</title><meta name="description" content={description}/>
-  <meta name="theme-color" content="#0B2635"/><meta name="robots" content={indexable?'index,follow':'noindex,follow'}/>
-  {indexable && <link rel="canonical" href={canonical}/>}
-  <meta property="og:type" content="website"/><meta property="og:title" content={`${title} | NEXO`}/><meta property="og:description" content={description}/><meta property="og:locale" content="pt_BR"/><meta property="og:site_name" content="NEXO Inteligência Clínica"/>
-  {indexable && <meta property="og:url" content={canonical}/>}
+  <title>{metaTitle}</title><meta name="description" content={description}/>
+  <meta name="theme-color" content="#0B2635"/><meta name="robots" content={pageIndexable?'index,follow':'noindex,follow'}/>
+  {pageIndexable && <link rel="canonical" href={canonical}/>}
+  <meta property="og:type" content="website"/><meta property="og:title" content={metaTitle}/><meta property="og:description" content={description}/><meta property="og:locale" content="pt_BR"/><meta property="og:site_name" content="NEXO Inteligência Clínica"/>
+  {pageIndexable && <meta property="og:url" content={canonical}/>}
   <meta property="og:image" content={new URL('/og-image.png',site).href}/><meta property="og:image:alt" content="NEXO — Existe um X em cada história."/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/>
-  <meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content={`${title} | NEXO`}/><meta name="twitter:description" content={description}/><meta name="twitter:image" content={new URL('/twitter-card.png',site).href}/>
+  <meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content={metaTitle}/><meta name="twitter:description" content={description}/><meta name="twitter:image" content={new URL('/twitter-card.png',site).href}/>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg"/><link rel="icon" href="/favicon.ico" sizes="any"/><link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16"/><link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32"/><link rel="icon" type="image/png" href="/favicon-48x48.png" sizes="48x48"/><link rel="apple-touch-icon" href="/apple-touch-icon.png"/><link rel="manifest" href="/site.webmanifest"/>
   <link rel="preload" href="/fonts/editorial-latin.woff2" as="font" type="font/woff2" crossorigin/>
   <link rel="preload" href="/fonts/interface-latin.woff2" as="font" type="font/woff2" crossorigin/>
-  {indexable && <script type="application/ld+json" set:html={JSON.stringify(schema)}/>}
+  {pageIndexable && <script type="application/ld+json" set:html={JSON.stringify(schema).replace(/</g,'\\u003c')}/>}
 </head>
 <body class:list={[{home,'is-experience':experience}]}>
   <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>

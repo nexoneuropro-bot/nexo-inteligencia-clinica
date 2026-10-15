@@ -33,9 +33,11 @@ export const pages: ContentPage[] = [
       },
       {
         title: 'Caminhos de cuidado.',
-        body: ['O acompanhamento é definido a partir da necessidade individual. A combinação de serviços não é uma etapa obrigatória.'],
+        body: ['O autoconhecimento pode ser o ponto de partida. No acolhimento, conversamos sobre o que você deseja compreender; conforme a demanda, podem ser indicados rastreios, uma avaliação mais ampla ou acompanhamento. Esses caminhos não formam uma sequência obrigatória.'],
         items: [
-          'Psicoterapia: espaço de escuta qualificada e intervenções orientadas por objetivos construídos no acompanhamento.',
+          'Autoconhecimento: reconhecer padrões, emoções e relações que atravessam a vida cotidiana.',
+          'Rastreios, quando indicados: reconhecer sinais e orientar a busca por apoio; não substituem uma avaliação completa nem estabelecem diagnóstico por si só.',
+          'Psicoterapia breve em Análise do Comportamento: compreender padrões em contexto e trabalhar objetivos combinados no acompanhamento.',
           'Avaliação neuropsicológica: investigação planejada da demanda, integração dos resultados e devolutiva.',
           'Interface com Psiquiatria: avaliação médica quando houver indicação e concordância sobre a integração do cuidado.',
         ],
@@ -53,22 +55,30 @@ export const pages: ContentPage[] = [
   },
   {
     slug: 'psicoterapia',
-    title: 'Dar espaço ao que precisa de escuta.',
-    description: 'Conheça a proposta de psicoterapia da NEXO: escuta qualificada, objetivos de cuidado e duração definida pela avaliação individual.',
-    eyebrow: 'Psicoterapia',
-    intro: 'Um espaço para compreender experiências, reconhecer perguntas e construir possibilidades de mudança com acompanhamento psicológico.',
+    title: 'Psicoterapia breve, com foco na sua vida.',
+    description: 'Conheça a proposta de psicoterapia breve em Análise do Comportamento da NEXO, do autoconhecimento aos rastreios e à avaliação quando indicados.',
+    eyebrow: 'Psicoterapia breve',
+    intro: 'A proposta da NEXO parte da Análise do Comportamento: compreender sua história, reconhecer padrões no cotidiano e construir objetivos de cuidado com você.',
     sections: [
       {
-        title: 'Compreender antes de concluir.',
+        title: 'Compreender o que acontece em contexto.',
         body: [
-          'O atendimento psicológico parte da escuta da sua história e do que motivou a busca por acompanhamento. Pensamentos, emoções, comportamento e relações são considerados em seu contexto.',
-          'Os objetivos do trabalho são conversados e podem ser revistos ao longo do processo. O cuidado respeita a individualidade e o ritmo de cada pessoa.',
+          'A Análise do Comportamento busca compreender relações entre o que você faz, as situações em que isso acontece e suas consequências. Pensamentos, emoções e história de aprendizagem também fazem parte dessa compreensão.',
+          'O acompanhamento pode explorar padrões nas relações, nas escolhas e na forma de lidar com dificuldades. Os objetivos são combinados com você e revistos ao longo do processo, conforme suas necessidades.',
         ],
       },
       {
-        title: 'O tempo de cada processo.',
+        title: 'Do autoconhecimento à investigação da demanda.',
         body: [
-          'Em situações compatíveis com a avaliação individual, pode ser proposta uma intervenção breve, com ciclos aproximados de 10 a 20 sessões.',
+          'Você pode chegar com vontade de se conhecer melhor, com uma dificuldade específica ou com perguntas sobre seu funcionamento. O acolhimento ajuda a definir o que precisa ser compreendido e qual caminho faz sentido.',
+          'Quando indicados no acompanhamento, rastreios ajudam a identificar sinais e orientar a busca por apoio. A leitura dos resultados é discutida com o profissional; eles não estabelecem diagnóstico por si só nem substituem uma avaliação psicológica ou neuropsicológica completa.',
+          'A escolha dos instrumentos considera a finalidade, o contexto e as condições de uso aplicáveis. A devolutiva pode orientar o acompanhamento, uma avaliação mais ampla ou encaminhamentos, conforme a demanda.',
+        ],
+      },
+      {
+        title: 'Um foco combinado. Um tempo a acompanhar.',
+        body: [
+          'Na psicoterapia breve, o trabalho se organiza em torno de objetivos delimitados e de um planejamento conversado. Em situações compatíveis com a avaliação individual, podem ser propostos ciclos aproximados de 10 a 20 sessões.',
           'Esse intervalo é uma referência de planejamento. A duração depende da demanda, da avaliação e da evolução do acompanhamento; não representa promessa de resultado nem pacote obrigatório.',
         ],
       },

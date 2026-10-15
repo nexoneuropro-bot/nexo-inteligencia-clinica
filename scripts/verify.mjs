@@ -10,13 +10,14 @@ const titles=new Set();
 const production=process.env.PUBLIC_INDEXABLE==='true';
 for(const file of htmlFiles){
  const html=fs.readFileSync(file,'utf8'),name=path.relative(root,file);
+ const shouldIndex=production&&name!=='404.html';
  check(/<html[^>]*lang="pt-BR"/.test(html),`${name}: idioma`);
  const title=html.match(/<title>(.*?)<\/title>/)?.[1];check(title&&!titles.has(title),`${name}: título ausente/repetido`);titles.add(title);
  check(/name="description" content="[^"]+"/.test(html),`${name}: descrição`);
  check((html.match(/<h1[ >]/g)||[]).length===1,`${name}: exige um H1`);
  check(/<main\s[^>]*id="conteudo"/.test(html),`${name}: conteúdo principal`);
- check(html.includes(`name="robots" content="${production?'index,follow':'noindex,follow'}"`),`${name}: indexação`);
- check(production?html.includes('rel="canonical"'):!html.includes('rel="canonical"'),`${name}: canonical da prévia/produção`);
+ check(html.includes(`name="robots" content="${shouldIndex?'index,follow':'noindex,follow'}"`),`${name}: indexação`);
+ check(shouldIndex?html.includes('rel="canonical"'):!html.includes('rel="canonical"'),`${name}: canonical da prévia/produção`);
  // Cloudflare enforces script-src 'self'. JSON data is inert; executable
  // inline code would silently disable controls that work on a local preview.
  for(const [,attrs,code] of html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)){
@@ -35,10 +36,28 @@ for(const file of htmlFiles){
 }
 const routes=['','para-voce','psicoterapia','avaliacao-neuropsicologica','integracao-psiquiatrica','para-sua-empresa','riscos-psicossociais-nr1','nossa-abordagem','profissionais','psicologia-em-pauta','contato','politica-de-privacidade'];
 routes.forEach(route=>check(fs.existsSync(path.join(root,route,'index.html')),`Rota ausente: /${route}/`));
+// A page can build correctly yet remain undiscoverable. Follow the actual HTML
+// links from the home page to check that every institutional route is reachable.
+const routePaths=new Set(routes.map(route=>route?`/${route}/`:'/'));
+const reached=new Set(['/']),pending=['/'];
+while(pending.length){
+ const current=pending.shift();
+ const html=fs.readFileSync(path.join(root,current.slice(1),'index.html'),'utf8');
+ for(const [,href] of html.matchAll(/<a\b[^>]*href="([^"]+)"/g)){
+  const target=new URL(href,`https://preview.invalid${current}`);
+  if(target.origin==='https://preview.invalid'&&routePaths.has(target.pathname)&&!reached.has(target.pathname)){reached.add(target.pathname);pending.push(target.pathname);}
+ }
+}
+for(const route of routePaths)check(reached.has(route),`Rota sem caminho navegável desde a home: ${route}`);
+for(const route of ['', 'para-voce']){
+ const html=fs.readFileSync(path.join(root,route,'index.html'),'utf8');
+ check(html.includes('data-care-pathways'),`${route||'home'}: apresentação dos caminhos de cuidado`);
+ for(const topic of ['psychotherapy','brief-therapy','neuropsychological-assessment','psychiatry-interface','self-knowledge-social-care'])check(html.includes(`data-care-node="${topic}"`),`${route||'home'}: caminho ${topic}`);
+}
 const sitemap=fs.readFileSync(path.join(root,'sitemap.xml'),'utf8');
 check((sitemap.match(/<loc>/g)||[]).length===(production?12:0),'Sitemap incompatível com indexação');
 check(fs.readFileSync(path.join(root,'robots.txt'),'utf8').includes('Allow: /'),'Robots deve permitir ler noindex');
 const headers=fs.readFileSync(path.join(root,'_headers'),'utf8');check(production?!headers.includes('noindex'):headers.includes('noindex'),'X-Robots-Tag');
 const assets=files.filter(f=>/\.(js|css)$/.test(f)).map(f=>({file:path.relative(root,f),bytes:fs.statSync(f).size,gzip:gzipSync(fs.readFileSync(f)).length}));
-console.log(JSON.stringify({pages:htmlFiles.length,requestedRoutes:routes.length,linksAndAssets:'checked',mode:production?'production':'preview',assets,failures},null,2));
+console.log(JSON.stringify({pages:htmlFiles.length,requestedRoutes:routes.length,reachableRoutes:reached.size,linksAndAssets:'checked',mode:production?'production':'preview',assets,failures},null,2));
 if(failures.length)process.exitCode=1;
