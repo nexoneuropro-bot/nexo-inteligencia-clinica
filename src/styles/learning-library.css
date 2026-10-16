@@ -1,0 +1,38 @@
+.learning-library{--ll-ink:#14333d;--ll-copper:#9b603d;position:relative;color:inherit;margin:0 0 64px;padding-top:10px;scroll-margin-top:116px}
+.ll-introduction{max-width:650px;margin-bottom:38px}
+.ll-eyebrow{display:block;font-family:var(--sans);font-size:12px;line-height:1.7;letter-spacing:.1em;text-transform:uppercase;color:#dcb493}
+.ll-introduction h2{font-family:var(--serif);font-weight:400;font-size:clamp(42px,5vw,64px);line-height:1.03;letter-spacing:-.025em;margin:15px 0 22px}
+.ll-introduction p,.ll-summary{max-width:64ch;font-size:17px;line-height:1.8}
+.ll-guides{display:grid;gap:27px}
+.ll-guide{display:grid;grid-template-columns:145px minmax(0,1fr);gap:29px;padding:28px 0;border-top:1px solid #9b744754}
+.ll-cover{position:relative;isolation:isolate;height:207px;overflow:hidden;color:#eee8dc;background:radial-gradient(ellipse at 25% 40%,#37566077,transparent 70%),#0b2635;border:1px solid #566b6f55;box-shadow:7px 10px 20px #00101733;transform:rotate(-3deg);border-radius:2px}
+.ll-cover-number{position:absolute;top:18px;left:15px;font-family:var(--serif);font-size:44px;line-height:1;color:#e5c7a7}
+.ll-cover-label{position:absolute;left:15px;right:8px;bottom:17px;font-family:var(--sans);font-size:8px;line-height:1.7;letter-spacing:.12em}
+.ll-cover-line{position:absolute;left:25px;top:72px;height:72px;width:96px;border:1px solid #a67f5888;border-radius:50%;transform:rotate(-35deg)}
+.ll-cover i{position:absolute;top:83px;left:28px;width:7px;height:7px;background:#d6a676;border-radius:50%;box-shadow:0 0 18px #d6a67655}
+.ll-cover i:nth-of-type(2){top:122px;left:70px;background:#adc5c0}
+.ll-cover i:nth-of-type(3){top:91px;left:116px;background:#e9decb}
+.ll-guide h3{font-family:var(--serif);font-size:36px;line-height:1.1;font-weight:400;letter-spacing:-.02em;margin:11px 0 16px}
+.ll-guide p{margin:0 0 17px}
+.ll-guide .ll-meta{font-size:13px;line-height:1.7;opacity:.85}
+.ll-actions{display:flex;gap:15px;align-items:center;margin:24px 0}
+.ll-download{display:inline-grid;grid-template-columns:1fr auto;gap:2px 18px;align-items:center;padding:13px 20px;border:1px solid #ae805b88;border-radius:4px;text-decoration:none;font-family:var(--sans);font-size:15px;line-height:1.5;transition:background .2s,color .2s}
+.ll-download:hover{background:#9b603d1c}
+.ll-download small{grid-column:1/-1;font-size:12px;opacity:.85}
+.ll-reading{border-top:1px solid #9b744744}
+.ll-reading summary{display:flex;gap:15px;align-items:center;justify-content:space-between;list-style:none;padding:16px 0;cursor:pointer;font-size:15px;line-height:1.6}
+.ll-reading summary::-webkit-details-marker{display:none}
+.ll-reading summary>span{font-size:23px;line-height:1;font-weight:300;transition:transform .2s}
+.ll-reading[open] summary>span{transform:rotate(45deg)}
+.ll-reading-body{padding:11px 0 3px;max-width:68ch}
+.ll-reading-body section{margin:0 0 28px}
+.ll-reading h4{font-family:var(--sans);font-size:17px;font-weight:500;line-height:1.6;margin:0 0 12px}
+.ll-reading-body p{font-size:16px!important;line-height:1.85!important}
+.ll-sources{padding-top:22px;border-top:1px solid #9b744744}
+.ll-sources ul{padding-left:19px;display:grid;gap:12px;margin:0 0 20px}
+.ll-sources li,.ll-sources a{font-size:14px!important;line-height:1.8!important;overflow-wrap:anywhere}
+.ll-sources a{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:4px}
+.learning-library .ll-note{font-size:14px!important;line-height:1.8!important;max-width:74ch;opacity:.88;margin-top:25px;padding-top:24px;border-top:1px solid #9b744744}
+.learning-library :is(a,summary):focus-visible{outline:2px solid #b67d4f;outline-offset:5px}
+@media(max-width:760px){.ll-guide{grid-template-columns:1fr;gap:24px}.ll-cover{height:145px;width:105px;margin:0 0 0 4px;transform:rotate(-3deg)}.ll-cover-number{font-size:35px;top:13px;left:12px}.ll-cover-label{left:12px;bottom:10px;font-size:6px}.ll-cover-line{left:14px;top:48px;height:47px;width:74px}.ll-cover i{top:55px;left:16px;width:5px;height:5px}.ll-cover i:nth-of-type(2){top:85px;left:50px}.ll-cover i:nth-of-type(3){top:64px;left:84px}.ll-guide h3{font-size:34px}.ll-introduction h2{font-size:46px}.ll-actions{margin:22px 0}.ll-download{min-height:64px}.ll-reading summary{font-size:16px;min-height:58px}}
+@media(prefers-reduced-motion:reduce){.learning-library *{transition:none!important}}

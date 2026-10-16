@@ -62,6 +62,16 @@ body.is-experience .ap-context>small{font-size:13px;line-height:1.7}
 body.is-experience .ap-source{font-size:14px}
 body.is-experience .ex-footer p,body.is-experience .ex-footer nav a{font-size:14px}
 body.is-experience .ex-footer-note{font-size:12px}
+body.is-experience .knowledge-panel{width:min(470px,calc(100vw - 40px));padding:42px 30px 30px}
+body.is-experience .knowledge-panel>p:not(.knowledge-question){font-size:17px;line-height:1.8}
+body.is-experience .knowledge-discipline,body.is-experience .knowledge-caption,body.is-experience .knowledge-panel blockquote cite{font-size:13px;line-height:1.75;color:#b9ccca}
+body.is-experience .knowledge-panel>a{font-size:14px;line-height:1.75}
+body.is-experience .knowledge-panel>.ex-eyebrow{font-size:11px;padding-right:38px}
+body.is-experience .knowledge-close{width:44px;height:44px;top:5px;right:8px}
+body.is-experience .ap-era-quote cite,body.is-experience .ap-context cite,body.is-experience .ap-context-discipline{font-size:13px;line-height:1.75;color:#bfd0cc}
+body.is-experience .ap-era-quote>a,body.is-experience .ap-context a{font-size:14px;line-height:1.75}
+body.is-experience .ap-context-close{font-size:14px;min-height:44px}
+body.is-experience .ap-context .ex-eyebrow{font-size:11px}
 @media(max-width:1100px){body.is-experience .ex-header nav{gap:16px}body.is-experience .ex-header nav a{font-size:12px}}
 @media(max-width:760px){
  body.is-experience .ex-header nav a{font-size:16px}

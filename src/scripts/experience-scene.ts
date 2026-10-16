@@ -3,7 +3,7 @@
  * All content, controls, navigation and the static SVG exist in HTML first.
  * Three is imported only for visitors who have not requested a quiet page.
  */
-type SceneChapter = 'intro' | 'bio' | 'ideas' | 'paths' | 'approach' | 'profession';
+type SceneChapter = 'intro' | 'bio' | 'ideas' | 'paths' | 'approach' | 'profession' | 'reading';
 type DataConnection = { saveData?: boolean };
 type IdleWindow = Window & {
   requestIdleCallback?: (callback: () => void, options?: { timeout: number }) => number;
@@ -37,6 +37,10 @@ function startExperience(): (() => void) | undefined {
   const narrativeRegion = document.querySelector<HTMLElement>('.ex-narrative');
   const encounters = Array.from(document.querySelectorAll<HTMLElement>('[data-professional-encounter],[data-spatial-encounter]'));
   const readingRegion = document.querySelector<HTMLElement>('.spatial-content');
+  const readingScenes = ['ideas', 'people', 'contact', 'privacy'];
+  const readingSceneName = document.querySelector<HTMLElement>('[data-reading-scene]')?.dataset.readingScene || '';
+  const readingScene = entry === 1 ? readingScenes.indexOf(readingSceneName) + 1 : 0;
+  const quietReading = readingScene >= 3;
   const professionIds = ['neuropsychology', 'psychiatry', 'dialogue'];
   const routeProfession = professionIds.indexOf(document.querySelector<HTMLElement>('[data-profession-scene]')?.dataset.professionScene || '');
   let professionIndex = Math.max(0, routeProfession);
@@ -71,6 +75,11 @@ function startExperience(): (() => void) | undefined {
   stage.dataset.phase = introComplete ? 'formed' : 'fragments';
   stage.dataset.scene = entry === 1 ? 'bio' : entry === 2 ? 'ideas' : entry === 3 ? 'approach' : 'intro';
   stage.dataset.paused = 'false';
+  if (readingScene) {
+    stage.dataset.readingScene = readingSceneName;
+    stage.dataset.readingMorph = '0.00';
+    stage.dataset.readingDepth = '0.00';
+  }
   if (entry === 2) {
     stage.dataset.workFactor = '0';
     stage.dataset.workStep = '0';
@@ -169,13 +178,14 @@ function startExperience(): (() => void) | undefined {
       stage.style.setProperty('--approach-progress', String(eraValue / 6));
     }
     const stageIndex = Math.min(3, Math.round(chapterValue));
-    const chapter: SceneChapter = professionWeight > .5 ? 'profession' : entry === 3 ? 'approach' : CHAPTERS[stageIndex];
+    const chapter: SceneChapter = professionWeight > .5 ? 'profession' : entry === 3 ? 'approach' : readingScene ? 'reading' : CHAPTERS[stageIndex];
     stage.dataset.scene = chapter;
     stage.style.setProperty('--scene-bio', String(entry ? 0 : smooth(1 - Math.abs(chapterValue - 1)) * (1 - professionWeight)));
-    const announcement = `${chapter}:${Math.round((entry === 3 ? eraValue : chapterValue) * 100)}`;
+    const sceneProgress = entry === 3 ? eraValue / 6 : readingScene ? readingProgress : chapterValue / 3;
+    const announcement = `${chapter}:${Math.round(sceneProgress * 100)}`;
     if (announcement !== lastAnnounced) {
       lastAnnounced = announcement;
-      window.dispatchEvent(new CustomEvent('nexo:scene', { detail: { stage: chapter, progress: entry === 3 ? eraValue / 6 : chapterValue / 3 } }));
+      window.dispatchEvent(new CustomEvent('nexo:scene', { detail: { stage: chapter, progress: sceneProgress } }));
     }
     if (!entry) {
       const bounds = narrativeRegion?.getBoundingClientRect();
@@ -293,7 +303,7 @@ function startExperience(): (() => void) | undefined {
       if (disposed || quiet.matches || connection?.saveData) { loading = false; return; }
 
       const mobile = window.matchMedia('(max-width: 760px)').matches;
-      const perStrand = mobile ? 480 : 960;
+      const perStrand = quietReading ? (mobile ? 320 : 640) : (mobile ? 480 : 960);
       const count = perStrand * 6;
       const columns = mobile ? 32 : 48;
       const pixelRatio = Math.min(window.devicePixelRatio || 1, mobile ? 1.35 : 1.7);
@@ -517,6 +527,8 @@ function startExperience(): (() => void) | undefined {
         uProfessionWeight: { value: professionWeight },
         uWorkFactor: { value: workFactor },
         uWorkStep: { value: workStep },
+        uReadingMode: { value: readingScene },
+        uReadingProgress: { value: readingProgress },
       };
 
       const vertexPrelude = `
@@ -546,6 +558,8 @@ function startExperience(): (() => void) | undefined {
         uniform float uProfessionWeight;
         uniform float uWorkFactor;
         uniform float uWorkStep;
+        uniform float uReadingMode;
+        uniform float uReadingProgress;
         varying vec3 vColor;
         varying float vOpacity;
         varying float vDepth;
@@ -609,6 +623,26 @@ function startExperience(): (() => void) | undefined {
           dialogue.z *= .85;
           vec3 profession = mix(neuro, medicine, smoothstep(0.0, 1.0, uProfession));
           profession = mix(profession, dialogue, smoothstep(1.0, 2.0, uProfession));
+          if (uReadingMode > .5 && uEntry > .5 && uEntry < 1.5) {
+            // The editorial pages retain the same spatial material, with forms
+            // derived from existing coordinates instead of a new scene/asset.
+            // These are visual metaphors; all meaning remains in the HTML.
+            vec3 reading = dialogue;
+            if (uReadingMode < 1.5) {
+              vec3 orbits = medicine;
+              orbits.y -= .45;
+              vec3 connections = vec3(3.0 + aIdeas.x * .52, .65 + aIdeas.y * .68, aIdeas.z + aSide * .45);
+              reading = mix(orbits, connections, smoothstep(0.0, .85, uReadingProgress));
+            } else if (uReadingMode > 2.5 && uReadingMode < 3.5) {
+              reading = vec3(3.0 + aSide * .58 + localField.x * .45, .65 + localField.y * .6, localField.z * .35);
+            } else if (uReadingMode > 3.5) {
+              reading = vec3(3.0 + (aBusiness.x - 1.85) * .68, .65 + aBusiness.y * .78, aBusiness.z * .65);
+            }
+            reading.x = (reading.x - uPortrait * 2.25) * mix(1.0, .72, uPortrait);
+            reading.y = reading.y * mix(1.0, .75, uPortrait) - uPortrait * .65;
+            reading.z -= uTravel;
+            p = reading;
+          }
           profession.x = (profession.x - uPortrait * 2.25) * mix(1.0, .72, uPortrait);
           profession.y = profession.y * mix(1.0, .75, uPortrait) - uPortrait * .65;
           profession.z -= uTravel;
@@ -617,8 +651,9 @@ function startExperience(): (() => void) | undefined {
           origin.x *= mix(1.0, 0.65, uPortrait);
           p = mix(origin, p, uFormation);
           float breath = sin(uTime * 0.46 + aSeed * 6.283);
-          p.z += breath * 0.055;
-          p.y += sin(uTime * 0.31 + p.x * 0.7) * 0.026;
+          float readingRestraint = 1.0 - step(2.5, uReadingMode) * .85;
+          p.z += breath * 0.055 * readingRestraint;
+          p.y += sin(uTime * 0.31 + p.x * 0.7) * 0.026 * readingRestraint;
 
           float bioWeight = (1.0 - min(1.0, abs(uChapter - 1.0))) * step(0.0, uDimension);
           float selected = 1.0 - step(0.1, abs(aDomain - uDimension));
@@ -645,6 +680,7 @@ function startExperience(): (() => void) | undefined {
             vColor = mix(vColor, vec3(.5, .79, .79), .14 + uWorkStep * .025);
             vOpacity *= .8 + uPulse * .2;
           }
+          if (uReadingMode > 2.5) vOpacity *= .52;
           return p;
         }
       `;
@@ -749,10 +785,12 @@ function startExperience(): (() => void) | undefined {
           uniform float uChapter;
           uniform float uEntry;
           uniform float uProfessionWeight;
+          uniform float uReadingMode;
           void main() {
             float opacity = mix(0.012, mix(0.025, 0.14, smoothstep(0.2, 0.85, uChapter)), uFormation);
             if (uEntry > 2.5) opacity = 0.16;
             opacity = mix(opacity, .16, uProfessionWeight);
+            if (uReadingMode > 2.5) opacity *= .5;
             opacity *= mix(1.0, 0.67, smoothstep(1.2, 2.0, uChapter));
             float depth = clamp(1.3 - vDepth * 0.035, 0.35, 1.0);
             gl_FragColor = vec4(vColor, opacity * vOpacity * depth);
@@ -809,6 +847,7 @@ function startExperience(): (() => void) | undefined {
           uniform float uPulse;
           uniform float uTravel;
           uniform float uProfessionWeight;
+          uniform float uReadingMode;
           attribute float aSeed;
           varying float vDepth;
           varying float vLight;
@@ -816,8 +855,9 @@ function startExperience(): (() => void) | undefined {
           void main() {
             vec3 p = position;
             if (uEntry > 2.5) p.y = -3.5;
-            float wave = sin(p.x * 0.19 + p.z * 0.10 + uTime * 0.17)
-                       + cos(p.z * 0.23 - p.x * 0.12 - uTime * 0.13) * 0.65;
+            float sceneTime = uTime * (1.0 - step(2.5, uReadingMode) * .85);
+            float wave = sin(p.x * 0.19 + p.z * 0.10 + sceneTime * 0.17)
+                       + cos(p.z * 0.23 - p.x * 0.12 - sceneTime * 0.13) * 0.65;
             p.y += wave * 1.65;
             float radius = length(p.xz - vec2(0.0, -9.0 - uTravel));
             p.y += sin(radius * 0.65 - uTime * 1.7) * exp(-radius * 0.045) * uPulse * 0.7;
@@ -826,6 +866,7 @@ function startExperience(): (() => void) | undefined {
             vLight = 0.5 + wave * 0.18 + aSeed * 0.42;
             float bio = 1.0 - min(1.0, abs(uChapter - 1.0));
             vVisible = mix(uEntry > 0.5 ? 0.75 : 1.0 - bio, .85, uProfessionWeight);
+            if (uReadingMode > 2.5) vVisible *= .42;
             gl_PointSize = clamp((1.2 + aSeed * 1.6) * uPixelRatio * 29.0 / max(6.0, -view.z), 1.05, 5.0);
             gl_Position = projectionMatrix * view;
           }
@@ -851,7 +892,7 @@ function startExperience(): (() => void) | undefined {
       // Sparse mathematical marks are spatial objects. Historical information
       // belongs to the keyboard-accessible, attributed HTML interaction nodes.
       const glyphs: { sprite: InstanceType<typeof THREE.Sprite>; texture: InstanceType<typeof THREE.CanvasTexture>; material: InstanceType<typeof THREE.SpriteMaterial>; origin: number[]; phase: number }[] = [];
-      if (!mobile && entry !== 3) {
+      if (!mobile && entry !== 3 && !readingScene) {
         for (const [index, symbol] of ['x', '∞', 'ψ', 'Δ', '?'].entries()) {
           const labelCanvas = document.createElement('canvas');
           labelCanvas.width = 128;
@@ -885,7 +926,7 @@ function startExperience(): (() => void) | undefined {
       let currentPointerX = 0;
       let currentPointerY = 0;
       let portrait = 0;
-      const interval = 1000 / (mobile ? 24 : 30);
+      const interval = 1000 / (quietReading ? (mobile ? 16 : 20) : (mobile ? 24 : 30));
 
       function renderFrame(delta = 0) {
         if (sceneDisposed || document.hidden || !visible || !regionVisible) return;
@@ -902,8 +943,10 @@ function startExperience(): (() => void) | undefined {
         uniforms.uEraHighlight.value = highlightedEra;
         uniforms.uWorkFactor.value += (workFactor - uniforms.uWorkFactor.value) * (delta ? .085 : 1);
         uniforms.uWorkStep.value += (workStep - uniforms.uWorkStep.value) * (delta ? .06 : 1);
+        uniforms.uReadingProgress.value = readingProgress;
         const workDepth = uniforms.uWorkStep.value * 1.8;
-        uniforms.uTravel.value = entry === 3 ? eraValue * 9 : entry === 2 ? workDepth : 0;
+        const readingDepth = readingProgress * (readingScene === 1 ? 4.8 : readingScene === 2 ? 3.2 : readingScene === 3 ? .7 : .5);
+        uniforms.uTravel.value = entry === 3 ? eraValue * 9 : entry === 2 ? workDepth : readingScene ? readingDepth : 0;
         uniforms.uProfession.value += (professionIndex - uniforms.uProfession.value) * (delta ? .09 : 1);
         uniforms.uProfessionWeight.value = professionWeight;
         interactionPulse = Math.max(0, interactionPulse - delta / 1900);
@@ -929,6 +972,12 @@ function startExperience(): (() => void) | undefined {
           camera.position.set(currentPointerX * .3 + drift, -currentPointerY * .16, 12.4 + portrait - workDepth - uniforms.uWorkStep.value * .24);
           camera.lookAt(drift * .7, .04, -workDepth);
           stars.rotation.y = currentPointerX * .012 + activeTime / 550000;
+        } else if (readingScene) {
+          sculpture.rotation.y = currentPointerX * (quietReading ? .035 : .11);
+          sculpture.rotation.x = -currentPointerY * (quietReading ? .015 : .04);
+          camera.position.set(currentPointerX * (quietReading ? .08 : .25), -currentPointerY * (quietReading ? .04 : .13), 12.4 + portrait - readingDepth - readingProgress * (quietReading ? .3 : 1.0));
+          camera.lookAt(0, .04, -readingDepth);
+          stars.rotation.y = currentPointerX * (quietReading ? .003 : .012);
         } else {
           sculpture.rotation.y = currentPointerX * 0.19 + Math.sin(activeTime / 16000) * 0.035 + readingProgress * .16;
           sculpture.rotation.x = -currentPointerY * 0.085;
@@ -948,6 +997,10 @@ function startExperience(): (() => void) | undefined {
         if (entry === 2) {
           stage.dataset.workMorph = uniforms.uWorkFactor.value.toFixed(2);
           stage.dataset.workDepth = workDepth.toFixed(2);
+        }
+        if (readingScene) {
+          stage.dataset.readingMorph = readingProgress.toFixed(2);
+          stage.dataset.readingDepth = readingDepth.toFixed(2);
         }
         if (shaderFailed) { useStatic(); return; }
         if (firstFrame) {

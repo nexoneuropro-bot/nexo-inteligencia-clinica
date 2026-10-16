@@ -16,7 +16,7 @@ As páginas `para-sua-empresa` e `riscos-psicossociais-nr1` distinguem a apresen
    <https://www.gov.br/trabalho-e-emprego/pt-br/assuntos/inspecao-do-trabalho/manuais-e-publicacoes/2026/perguntas-e-respostas-gro-pgr-maio-2026/@@download/file>
 
 4. **NR-17 — Ergonomia.** Itens 17.3.1–17.3.6: registro da Avaliação Ergonômica Preliminar (AEP), métodos pertinentes, hipóteses de Análise Ergonômica do Trabalho (AET), integração ao inventário e ao plano de ação; observar as condições e disposições específicas aplicáveis.
-   <https://www.gov.br/trabalho-e-emprego/pt-br/acesso-a-informacao/participacao-social/conselhos-e-orgaos-colegiados/comissao-tripartite-partitaria-permanente/arquivos/normas-regulamentadoras/nr-17-atualizada-2021.pdf>
+   <https://www.gov.br/trabalho-e-emprego/pt-br/acesso-a-informacao/participacao-social/conselhos-e-orgaos-colegiados/comissao-tripartite-partitaria-permanente/normas-regulamentadora/normas-regulamentadoras-vigentes/nr-17-atualizada-2023.pdf>
 
 5. **MTE — Guia de informações sobre fatores de riscos psicossociais relacionados ao trabalho, 2025.** Apoia a explicação contextual das condições de trabalho. Exemplos de fatores não são lista taxativa, nem permitem atribuir risco automaticamente a uma organização.
    <https://www.gov.br/trabalho-e-emprego/pt-br/acesso-a-informacao/participacao-social/conselhos-e-orgaos-colegiados/comissao-tripartite-partitaria-permanente/normas-regulamentadora/normas-regulamentadoras-vigentes/guia-nr-01-revisado.pdf/view>

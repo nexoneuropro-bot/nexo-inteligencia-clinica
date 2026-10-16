@@ -372,35 +372,31 @@ export const pages: ContentPage[] = [
   {
     slug: 'psicologia-em-pauta',
     title: 'Conhecimento que abre perguntas.',
-    description: 'Conheça a proposta editorial Psicologia em Pauta, da NEXO. Artigos e materiais científicos serão publicados após revisão e aprovação.',
+    description: 'Leia e baixe guias educativos da NEXO sobre Análise do Comportamento, caminhos de cuidado e riscos psicossociais no trabalho e NR-1.',
     eyebrow: 'Psicologia em Pauta',
     intro: 'Uma área para aproximar ciência, vida cotidiana e pensamento crítico, com linguagem clara e fontes identificáveis.',
     sections: [
       {
-        title: 'Uma biblioteca em preparação.',
+        title: 'Leituras para compreender e continuar.',
         body: [
-          'Os primeiros artigos ainda não foram fornecidos, revisados e aprovados. Esta prévia apresenta a proposta editorial, sem atribuir autoria ou revisão profissional a textos não validados.',
-          'A publicação será organizada para que cada conteúdo tenha uma pergunta clara, explicações compreensíveis, referências e caminhos para continuar a leitura.',
+          'Os guias desta biblioteca aproximam conceitos do cotidiano com perguntas, exemplos e referências. Você pode abrir a leitura nesta página ou baixar cada material para consultar depois.',
+          'Comece pelo tema mais próximo da sua pergunta: observar relações no cotidiano, conhecer os caminhos de cuidado ou compreender condições do trabalho e prevenção.',
         ],
       },
       {
-        title: 'Temas que queremos colocar em pauta.',
-        body: ['As linhas editoriais previstas conectam experiência individual e contexto social.'],
+        title: 'O que você pode aprender em cada guia?',
+        body: ['Cada leitura tem um recorte para ajudar a organizar perguntas e buscar informações com mais clareza.'],
         items: [
-          'Neurodivergência, funções cognitivas e Neuropsicologia.',
-          'Comunicação assertiva, relacionamentos e desenvolvimento humano.',
-          'Saúde mental, comportamento e autoconhecimento.',
-          'Psicologia, sociedade, direitos e cidadania.',
-          'Saúde mental no trabalho e relações nas organizações.',
-          'Avaliação neuropsicológica e seus processos.',
+          'Observar relações no cotidiano: descrever situações, respostas e consequências e procurar diferenças entre contextos.',
+          'Caminhos de cuidado: compreender psicoterapia, organização breve, avaliação neuropsicológica e contribuição médica quando indicada.',
+          'Condições de trabalho e NR-1: relacionar investigação das condições reais, avaliação de riscos e medidas de prevenção.',
         ],
       },
       {
-        title: 'O compromisso de cada publicação.',
+        title: 'Informação com contexto e fontes.',
         body: [
-          'Cada artigo deverá apresentar título e endereço próprios, data de publicação, revisão quando aplicável, autoria e qualificação comprováveis, referências e metadados de busca.',
-          'Materiais científicos e dossiês deverão seguir o rigor de citação adequado. Conteúdos de saúde só serão apresentados como aprovados depois da revisão efetiva.',
-          'As perguntas exploratórias do site convidam à reflexão e não substituem avaliação individual ou orientação profissional.',
+          'Cada guia identifica sua edição e as fontes que apoiam as explicações. Os materiais desenvolvem os conteúdos educativos da NEXO, com exemplos fictícios e links para continuar a leitura.',
+          'Perguntas e exemplos ajudam a compreender possibilidades, sem atribuir pontuação, diagnóstico ou resultado individual. Uma demanda pessoal ou organizacional deve ser investigada em seu próprio contexto.',
         ],
       },
     ],
@@ -424,7 +420,7 @@ export const pages: ContentPage[] = [
       {
         title: 'Para sua organização.',
         body: [
-          'Apresente a demanda da sua empresa e inicie uma conversa sobre consultoria, desenvolvimento humano e relações de trabalho. O escopo será construído a partir das necessidades e dos requisitos de cada projeto.',
+          'Converse sobre NR-1, avaliação de fatores de risco psicossociais e condições da organização do trabalho. A proposta considera as atividades, as necessidades e a articulação com os responsáveis por Segurança e Saúde no Trabalho.',
           'Na área Para Sua Empresa, o contato já começa com uma mensagem voltada à sua organização.',
         ],
       },
@@ -433,7 +429,7 @@ export const pages: ContentPage[] = [
         body: [
           'Telefone e WhatsApp: +55 (11) 5444-4366.',
           'Use o primeiro contato para informações gerais. Evite enviar diagnósticos, receitas, exames, documentos de pacientes ou outros dados sensíveis antes de combinar o canal e as condições de acolhimento.',
-          'Não há formulário de envio nesta prévia. E-mail, endereço físico, horários e modalidades de atendimento ainda aguardam confirmação e não são apresentados como canais operacionais.',
+          'Para iniciar a conversa, basta dizer se procura informações sobre atendimento ou deseja apresentar uma demanda da sua organização. Disponibilidade, modalidades e próximos passos serão esclarecidos nesse contato.',
         ],
       },
     ],
@@ -443,39 +439,47 @@ export const pages: ContentPage[] = [
   {
     slug: 'politica-de-privacidade',
     title: 'Privacidade também é cuidado.',
-    description: 'Saiba como a prévia do site NEXO trata navegação, experiências interativas e links de contato. Política em preparação para validação antes da publicação.',
-    eyebrow: 'Privacidade · versão preliminar',
-    intro: 'Este aviso descreve a prévia institucional. A política definitiva depende da confirmação da operação, dos responsáveis e dos serviços de hospedagem utilizados.',
+    description: 'Entenda a navegação no site NEXO, as interações educativas, o ambiente sonoro, a hospedagem e os cuidados ao entrar em contato pelo WhatsApp.',
+    eyebrow: 'Privacidade',
+    intro: 'Aqui você encontra informações sobre a navegação, as experiências educativas e os canais de contato da NEXO, para escolher como interagir e o que deseja compartilhar.',
     sections: [
       {
         title: 'Navegação e experiências exploratórias.',
         body: [
-          'A prévia não inclui formulário comercial nem ferramenta de analytics. As interações não pedem diagnósticos, medicações ou documentos de pacientes e não são utilizadas para produzir perfis de saúde.',
-          'As escolhas na experiência servem para explorar conteúdos e reflexões. Elas não constituem testes psicológicos, avaliação clínica ou diagnóstico.',
-          'O navegador guarda temporariamente, em sessionStorage, apenas se a introdução já foi vista ou pulada nesta sessão. Esse registro evita repetir a abertura e não contém respostas, dados clínicos ou identificadores pessoais.',
-          'As reflexões variam por seleção aleatória, sem guardar suas escolhas. Qualquer futura ferramenta de análise ou coleta deverá ser avaliada antes de sua ativação.',
+          'As experiências permitem explorar conteúdos e refletir sobre situações do cotidiano. O site não solicita respostas pessoais, sintomas ou documentos de saúde, nem oferece cadastro ou formulário de avaliação clínica.',
+          'A navegação entre perguntas e conexões acontece no seu navegador. As escolhas dessas experiências não são enviadas para produzir avaliação, perfil de saúde, pontuação ou diagnóstico.',
+          'Para evitar repetir a abertura, o site guarda apenas um indicador de apresentação no armazenamento de sessão do navegador (sessionStorage). Ele permanece vinculado à sessão da aba, pode ser removido pelos controles do navegador e não contém respostas, dados clínicos ou identificadores pessoais.',
         ],
       },
       {
-        title: 'WhatsApp e telefone.',
+        title: 'Ambiente sonoro opcional.',
+        body: [
+          'O som começa desligado em cada página e só é ativado por sua escolha. Você pode ajustar o volume ou desligá-lo; ao sair da aba, a reprodução é pausada.',
+          'A trilha é produzida localmente pelo navegador. Esse recurso não utiliza microfone ou câmera, não grava sua voz e não envia suas escolhas de áudio para a NEXO. A referência de afinação é uma escolha estética, sem finalidade terapêutica.',
+        ],
+      },
+      {
+        title: 'Contato e links externos.',
         body: [
           'Os links de contato são acionados pelo visitante. Ao escolher o WhatsApp, você acessa um serviço externo, sujeito aos seus próprios termos e práticas de privacidade. A mensagem inicial pode ser editada e só é enviada por sua ação.',
+          'Ao enviar uma mensagem, você compartilha informações no canal escolhido, incluindo o conteúdo da conversa e os dados que o serviço disponibiliza ao destinatário. Para pedir informações, basta indicar sua dúvida ou o serviço que procura.',
           'Para preservar sua privacidade, use o primeiro contato para informações gerais. O compartilhamento de informações de saúde deve ocorrer em condições de acolhimento e sigilo adequadamente combinadas.',
+          'As referências de leitura também podem levar a sites de outras organizações. Ao seguir esses links, consulte as informações de privacidade do respectivo serviço.',
         ],
       },
       {
         title: 'Hospedagem e registros técnicos.',
         body: [
-          'O serviço de hospedagem, quando configurado, poderá tratar registros técnicos necessários à entrega e à segurança do site. A identificação do fornecedor, as categorias de dados, os prazos e as responsabilidades precisam ser confirmados na implantação.',
-          'Não são publicados dados de pacientes, registros clínicos ou instrumentos psicológicos restritos nesta experiência.',
+          'O site é entregue pela infraestrutura Cloudflare Pages. Para disponibilizar as páginas e proteger o serviço, a hospedagem pode processar registros técnicos, como endereço IP, informações da conexão e solicitações de acesso.',
+          'As informações técnicas são processadas no âmbito do serviço de hospedagem e de suas práticas de segurança. As experiências educativas permanecem sem coleta de respostas pessoais.',
+          'O conteúdo público do site não inclui dados de pacientes, registros clínicos ou itens de instrumentos psicológicos restritos.',
         ],
       },
       {
-        title: 'Antes da publicação definitiva.',
+        title: 'Dúvidas e solicitações sobre privacidade.',
         body: [
-          'Ainda precisam ser definidos e revisados: a identificação do controlador, o canal de privacidade, as finalidades e bases legais aplicáveis, os prazos de retenção, os eventuais operadores e os procedimentos para atendimento aos direitos dos titulares.',
-          'Para esclarecer dúvidas sobre esta prévia, o contato institucional informado é +55 (11) 5444-4366. Esse número não é apresentado como canal formal de encarregado de dados.',
-          'Este texto é um rascunho operacional para revisão. Não substitui a validação jurídica e técnica da política que acompanhará a operação definitiva.',
+          'Para esclarecer como o site funciona ou encaminhar uma solicitação relacionada às suas informações, entre em contato com a NEXO pelo telefone ou WhatsApp +55 (11) 5444-4366. Comece pela descrição do pedido, sem anexar documentos de saúde.',
+          'Esta página descreve a navegação e os contatos do site. Em um atendimento ou projeto organizacional, converse com o profissional sobre a finalidade, o acesso e as condições de sigilo antes de compartilhar dados sensíveis.',
         ],
       },
     ],

@@ -19,6 +19,8 @@ for(const file of htmlFiles){
  check(html.includes(`name="robots" content="${shouldIndex?'index,follow':'noindex,follow'}"`),`${name}: indexação`);
  check(shouldIndex?html.includes('rel="canonical"'):!html.includes('rel="canonical"'),`${name}: canonical da prévia/produção`);
  check(html.includes('data-ambient-sound')&&html.includes('data-sound-toggle aria-pressed="false"'),`${name}: ambiente sonoro opcional desligado inicialmente`);
+ check(html.includes('id="experience-stage"'),`${name}: continuidade espacial e alternativa estática`);
+ check(!/prévia para revisão|biblioteca em preparação|rascunho operacional|apresentado no briefing|registro informado|artigos aguardam|ainda aguardam confirmação|versão preliminar/i.test(html),`${name}: conteúdo público sem notas editoriais internas`);
  // Cloudflare enforces script-src 'self'. JSON data is inert; executable
  // inline code would silently disable controls that work on a local preview.
  for(const [,attrs,code] of html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)){
@@ -68,6 +70,22 @@ for(const route of ['para-sua-empresa','riscos-psicossociais-nr1']){
 const professionalHtml=fs.readFileSync(path.join(root,'profissionais','index.html'),'utf8');
 check(professionalHtml.includes('CRP-SP 06/176184')&&professionalHtml.includes('CRM-SP 193133'),'Profissionais: registros presentes');
 check(!/Registro informado|Apresentado no briefing|Registros, títulos e RQE|registros informados|aguardam conferência/.test(professionalHtml),'Profissionais: apresentação pública sem notas internas');
+for(const [route,scene] of Object.entries({'psicologia-em-pauta':'ideas',profissionais:'people',contato:'contact','politica-de-privacidade':'privacy'})){
+ const html=fs.readFileSync(path.join(root,route,'index.html'),'utf8');
+ check(html.includes(`data-reading-scene="${scene}"`),`${route}: composição espacial correspondente à leitura`);
+}
+const libraryHtml=fs.readFileSync(path.join(root,'psicologia-em-pauta','index.html'),'utf8');
+const guides=JSON.parse(fs.readFileSync(new URL('../src/data/learning-guides.json',import.meta.url),'utf8'));
+check(libraryHtml.includes('data-learning-library'),'Psicologia em Pauta: biblioteca acessível em HTML');
+check(guides.length===3,'Psicologia em Pauta: três guias educativos');
+for(const guide of guides){
+ check(libraryHtml.includes(`data-learning-guide="${guide.slug}"`),`Guia ${guide.slug}: conteúdo na página`);
+ check([...libraryHtml.matchAll(/<a\b([^>]*)>/g)].some(([,attrs])=>attrs.includes(`href="${guide.download}"`) && /\sdownload(?:\s|=|$)/.test(attrs)),`Guia ${guide.slug}: download disponível`);
+ const pdfPath=path.join(root,guide.download.replace(/^\//,''));
+ check(fs.existsSync(pdfPath),`Guia ${guide.slug}: arquivo disponível`);
+ if(fs.existsSync(pdfPath))check(fs.readFileSync(pdfPath).subarray(0,5).toString()==='%PDF-',`Guia ${guide.slug}: formato PDF`);
+ for(const section of guide.sections)check(libraryHtml.includes(section.title),`Guia ${guide.slug}: leitura integral em HTML`);
+}
 const sitemap=fs.readFileSync(path.join(root,'sitemap.xml'),'utf8');
 check((sitemap.match(/<loc>/g)||[]).length===(production?12:0),'Sitemap incompatível com indexação');
 check(fs.readFileSync(path.join(root,'robots.txt'),'utf8').includes('Allow: /'),'Robots deve permitir ler noindex');
