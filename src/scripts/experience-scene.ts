@@ -41,6 +41,8 @@ function startExperience(): (() => void) | undefined {
   const routeProfession = professionIds.indexOf(document.querySelector<HTMLElement>('[data-profession-scene]')?.dataset.professionScene || '');
   let professionIndex = Math.max(0, routeProfession);
   let professionWeight = routeProfession >= 0 && !encounters.length ? 1 : 0;
+  let workFactor = 0;
+  let workStep = 0;
   let readingProgress = 0;
   let chapterStarts: number[] = [];
   let eraStarts: number[] = [];
@@ -55,6 +57,7 @@ function startExperience(): (() => void) | undefined {
   let idleHandle = 0;
   let loadTimer = 0;
   let scrollFrame = 0;
+  let measureFrame = 0;
   let disposeWebgl: (() => void) | undefined;
   let refreshWebgl: (() => void) | undefined;
   let drawStationary: (() => void) | undefined;
@@ -68,6 +71,12 @@ function startExperience(): (() => void) | undefined {
   stage.dataset.phase = introComplete ? 'formed' : 'fragments';
   stage.dataset.scene = entry === 1 ? 'bio' : entry === 2 ? 'ideas' : entry === 3 ? 'approach' : 'intro';
   stage.dataset.paused = 'false';
+  if (entry === 2) {
+    stage.dataset.workFactor = '0';
+    stage.dataset.workStep = '0';
+    stage.dataset.workMorph = '0.00';
+    stage.dataset.workDepth = '0.00';
+  }
   document.body.classList.remove('experience-ready');
   try { introComplete ||= sessionStorage.getItem(INTRO_KEY) === 'formed'; } catch { /* Presentation only. */ }
 
@@ -192,6 +201,14 @@ function startExperience(): (() => void) | undefined {
     if (!scrollFrame) scrollFrame = window.requestAnimationFrame(updateChapter);
   }
 
+  function scheduleMeasurements() {
+    if (disposed || measureFrame) return;
+    measureFrame = window.requestAnimationFrame(() => {
+      measureFrame = 0;
+      if (!disposed) measureChapters();
+    });
+  }
+
   function onDimension(event: Event) {
     const id = (event as CustomEvent<{ id?: string }>).detail?.id;
     dimension = ['biologica', 'psicologica', 'social'].indexOf(id || '');
@@ -230,6 +247,29 @@ function startExperience(): (() => void) | undefined {
     stage.dataset.profession = professionIds[professionIndex];
     interactionPulse = 1;
     measureChapters();
+    if (paused) drawStationary?.();
+  }
+
+  function onWorkFactor(event: Event) {
+    if (entry !== 2) return;
+    const index = (event as CustomEvent<{ index?: number }>).detail?.index;
+    if (typeof index !== 'number' || !Number.isFinite(index)) return;
+    workFactor = Math.round(clamp(index, 0, 3));
+    stage.dataset.workFactor = String(workFactor);
+    // The accessible HTML/SVG remains the complete experience in quiet mode.
+    if (stage.dataset.mode === 'static') stage.dataset.workMorph = workFactor.toFixed(2);
+    interactionPulse = .6;
+    if (paused) drawStationary?.();
+  }
+
+  function onWorkStep(event: Event) {
+    if (entry !== 2) return;
+    const index = (event as CustomEvent<{ index?: number }>).detail?.index;
+    if (typeof index !== 'number' || !Number.isFinite(index)) return;
+    workStep = Math.round(clamp(index, 0, 4));
+    stage.dataset.workStep = String(workStep);
+    if (stage.dataset.mode === 'static') stage.dataset.workDepth = (workStep * 1.8).toFixed(2);
+    interactionPulse = .45;
     if (paused) drawStationary?.();
   }
 
@@ -475,6 +515,8 @@ function startExperience(): (() => void) | undefined {
         uTravel: { value: 0 },
         uProfession: { value: professionIndex },
         uProfessionWeight: { value: professionWeight },
+        uWorkFactor: { value: workFactor },
+        uWorkStep: { value: workStep },
       };
 
       const vertexPrelude = `
@@ -502,6 +544,8 @@ function startExperience(): (() => void) | undefined {
         uniform float uTravel;
         uniform float uProfession;
         uniform float uProfessionWeight;
+        uniform float uWorkFactor;
+        uniform float uWorkStep;
         varying vec3 vColor;
         varying float vOpacity;
         varying float vDepth;
@@ -521,7 +565,26 @@ function startExperience(): (() => void) | undefined {
           vec3 paths = aPaths;
           paths.x *= mix(1.0, 0.56, uPortrait);
           vec3 business = aBusiness;
+          if (uEntry > 1.5 && uEntry < 2.5) {
+            // Four spatial readings of the same work network. Existing sphere,
+            // grid and strand coordinates supply every point and edge: there
+            // are no additional vertex attributes or clinical classifications.
+            vec3 workCenter = aDomain < .5 ? vec3(1.0,.55,.1) : aDomain < 1.5 ? vec3(3.15,.15,-.6) : vec3(2.05,-1.25,.3);
+            vec3 localWork = aBio - workCenter;
+            vec3 demands = vec3(2.75 + localWork.x * .9, .25 + (aDomain - 1.0) * .95 + localWork.y * .18, localWork.z * .68 + aSide * .35);
+            float orbit = aDomain * 1.0472;
+            vec3 autonomy = vec3(2.75 + localWork.x * cos(orbit) - localWork.z * .22 * sin(orbit), .25 + localWork.y * .88, localWork.x * sin(orbit) + localWork.z * .22 * cos(orbit));
+            vec3 support = vec3(2.75 + (aBio.x - 2.0) * .92, .25 + aBio.y * .85, aBio.z * 1.1);
+            vec3 roles = vec3(2.75 + aSide * .85 + localWork.x * .65, .25 + (aDomain - 1.0) * .65 + localWork.y * .45, localWork.z * .7 + aSide * .3);
+            business = mix(demands, autonomy, smoothstep(0.0, 1.0, uWorkFactor));
+            business = mix(business, support, smoothstep(1.0, 2.0, uWorkFactor));
+            business = mix(business, roles, smoothstep(2.0, 3.0, uWorkFactor));
+            // The network accompanies the visitor while the surrounding field
+            // passes in perspective through the five assessment/action steps.
+            business.z -= uWorkStep * 1.8;
+          }
           business.x = (business.x - uPortrait * 1.9) * mix(1.0, 0.85, uPortrait);
+          if (uEntry > 1.5 && uEntry < 2.5) business.y -= uPortrait * .6;
 
           vec3 p = mix(emblem, bio, smoothstep(0.0, 1.0, uChapter));
           p = mix(p, ideas, smoothstep(1.0, 2.0, uChapter));
@@ -578,6 +641,10 @@ function startExperience(): (() => void) | undefined {
             vColor = mix(vColor, vec3(0.58, 0.82, 0.88), clamp(distanceAhead * 0.2, 0.0, 0.55));
           }
           vOpacity = mix(vOpacity, 1.0, uProfessionWeight);
+          if (uEntry > 1.5 && uEntry < 2.5) {
+            vColor = mix(vColor, vec3(.5, .79, .79), .14 + uWorkStep * .025);
+            vOpacity *= .8 + uPulse * .2;
+          }
           return p;
         }
       `;
@@ -833,7 +900,10 @@ function startExperience(): (() => void) | undefined {
         uniforms.uPath.value = selectedPath;
         uniforms.uEra.value = eraValue;
         uniforms.uEraHighlight.value = highlightedEra;
-        uniforms.uTravel.value = entry === 3 ? eraValue * 9 : 0;
+        uniforms.uWorkFactor.value += (workFactor - uniforms.uWorkFactor.value) * (delta ? .085 : 1);
+        uniforms.uWorkStep.value += (workStep - uniforms.uWorkStep.value) * (delta ? .06 : 1);
+        const workDepth = uniforms.uWorkStep.value * 1.8;
+        uniforms.uTravel.value = entry === 3 ? eraValue * 9 : entry === 2 ? workDepth : 0;
         uniforms.uProfession.value += (professionIndex - uniforms.uProfession.value) * (delta ? .09 : 1);
         uniforms.uProfessionWeight.value = professionWeight;
         interactionPulse = Math.max(0, interactionPulse - delta / 1900);
@@ -850,6 +920,15 @@ function startExperience(): (() => void) | undefined {
           camera.position.set(currentPointerX * 0.35 + drift, -currentPointerY * 0.18 + Math.sin(eraValue * 1.4) * 0.12, 12.4 + portrait - travel - readingProgress * 1.6);
           camera.lookAt(drift * 0.7, 0.02, -travel);
           stars.rotation.y = currentPointerX * 0.003;
+        } else if (entry === 2) {
+          // A slow translation, rather than a camera cut, preserves the shared
+          // environment when changing from a work factor to the care process.
+          const drift = Math.sin(uniforms.uWorkStep.value * .55) * .25;
+          sculpture.rotation.y = currentPointerX * .13;
+          sculpture.rotation.x = -currentPointerY * .055;
+          camera.position.set(currentPointerX * .3 + drift, -currentPointerY * .16, 12.4 + portrait - workDepth - uniforms.uWorkStep.value * .24);
+          camera.lookAt(drift * .7, .04, -workDepth);
+          stars.rotation.y = currentPointerX * .012 + activeTime / 550000;
         } else {
           sculpture.rotation.y = currentPointerX * 0.19 + Math.sin(activeTime / 16000) * 0.035 + readingProgress * .16;
           sculpture.rotation.x = -currentPointerY * 0.085;
@@ -866,6 +945,10 @@ function startExperience(): (() => void) | undefined {
         renderer.render(scene, camera);
         stage.dataset.camera = camera.position.x.toFixed(3) + ',' + camera.position.y.toFixed(3) + ',' + camera.position.z.toFixed(3);
         stage.dataset.professionMorph = uniforms.uProfession.value.toFixed(2);
+        if (entry === 2) {
+          stage.dataset.workMorph = uniforms.uWorkFactor.value.toFixed(2);
+          stage.dataset.workDepth = workDepth.toFixed(2);
+        }
         if (shaderFailed) { useStatic(); return; }
         if (firstFrame) {
           firstFrame = false;
@@ -988,6 +1071,13 @@ function startExperience(): (() => void) | undefined {
   window.addEventListener('nexo:path', onPath);
   window.addEventListener('nexo:era', onEra);
   window.addEventListener('nexo:profession', onProfession);
+  window.addEventListener('nexo:work-factor', onWorkFactor);
+  window.addEventListener('nexo:work-step', onWorkStep);
+  // Educational panels can change height without resizing the fixed canvas or
+  // the window. Re-measure later chapter boundaries after that layout settles.
+  // The observer reads the narrative; stage updates do not size this region.
+  const narrativeResize = narrativeRegion ? new ResizeObserver(scheduleMeasurements) : undefined;
+  if (narrativeRegion) narrativeResize?.observe(narrativeRegion);
   quiet.addEventListener('change', onMotionChange);
   measureChapters();
   updatePause();
@@ -1001,6 +1091,8 @@ function startExperience(): (() => void) | undefined {
     window.clearTimeout(loadTimer);
     if (idleHandle) idleWindow.cancelIdleCallback?.(idleHandle);
     if (scrollFrame) window.cancelAnimationFrame(scrollFrame);
+    if (measureFrame) window.cancelAnimationFrame(measureFrame);
+    narrativeResize?.disconnect();
     window.removeEventListener('load', scheduleWebgl);
     window.removeEventListener('scroll', onScroll);
     window.removeEventListener('resize', measureChapters);
@@ -1009,6 +1101,8 @@ function startExperience(): (() => void) | undefined {
     window.removeEventListener('nexo:path', onPath);
     window.removeEventListener('nexo:era', onEra);
     window.removeEventListener('nexo:profession', onProfession);
+    window.removeEventListener('nexo:work-factor', onWorkFactor);
+    window.removeEventListener('nexo:work-step', onWorkStep);
     quiet.removeEventListener('change', onMotionChange);
     skip?.removeEventListener('click', onSkip);
     pause?.removeEventListener('click', onPause);

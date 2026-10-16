@@ -6,6 +6,7 @@ import {whatsapp} from '../data/reflections';
 import JourneyEntry from '../components/JourneyEntry.astro';
 import ApproachExperience from '../components/ApproachExperience.astro';
 import ProfessionalEncounter from '../components/ProfessionalEncounter.astro';
+import BusinessExperience from '../components/BusinessExperience.astro';
 import '../styles/approach.css';
 export function getStaticPaths(){return pages.map(page=>({params:{slug:page.slug},props:{page}}));}
 const {page}=Astro.props as {page:ContentPage};
@@ -19,8 +20,8 @@ const isApproach=page.slug==='nossa-abordagem';
 const isBusiness=page.slug==='para-sua-empresa'||page.slug==='riscos-psicossociais-nr1';
 ---
 <Layout title={page.title.replace(/\.$/,'')} description={page.description} experience={true}>
-  <div class:list={['spatial-page',{'ap-page':isApproach}]} data-approach-experience={isApproach?true:undefined} data-profession-scene={page.slug==='avaliacao-neuropsicologica'?'neuropsychology':page.slug==='integracao-psiquiatrica'?'psychiatry':page.slug==='psicoterapia'?'dialogue':undefined} data-compact-page={['contato','politica-de-privacidade'].includes(page.slug)?true:undefined}>
-  {isApproach ? <ApproachExperience title={page.title} intro={page.intro}/> : <JourneyEntry type={isBusiness?'business':'personal'} title={page.title} intro={page.intro} eyebrow={page.eyebrow} reading={!isJourney} human={isJourney}/>}
+  <div class:list={['spatial-page',{'ap-page':isApproach,'business-page':isBusiness}]} data-approach-experience={isApproach?true:undefined} data-profession-scene={page.slug==='avaliacao-neuropsicologica'?'neuropsychology':page.slug==='integracao-psiquiatrica'?'psychiatry':page.slug==='psicoterapia'?'dialogue':undefined} data-compact-page={['contato','politica-de-privacidade'].includes(page.slug)?true:undefined}>
+  {isBusiness ? <BusinessExperience title={page.title} intro={page.intro} detailed={page.slug==='riscos-psicossociais-nr1'}/> : isApproach ? <ApproachExperience title={page.title} intro={page.intro}/> : <JourneyEntry type="personal" title={page.title} intro={page.intro} eyebrow={page.eyebrow} reading={!isJourney} human={isJourney}/>}
   {page.slug==='profissionais'&&<ProfessionalEncounter id="people-perspectives" title="Pessoas, saberes e perspectivas."/>}
   <div class:list={['institutional-shell','spatial-content',{'ap-clinical':isApproach}]} id="conteudo-da-jornada">
   <div class="content-width page-body page-columns"><aside class="page-toc" aria-label="Nesta página"><span class="overline">NESTA PÁGINA</span>{page.sections.map((s,i)=><a href={`#${sectionId(i)}`}>{s.title}</a>)}<a href="#conversa">Converse com a NEXO ↗</a></aside>
@@ -30,7 +31,7 @@ const isBusiness=page.slug==='para-sua-empresa'||page.slug==='riscos-psicossocia
       {page.sections.map((section,i)=><section id={sectionId(i)}><h2>{section.title}</h2>{section.body.map(p=><p>{p}</p>)}{section.items&&<ul>{section.items.map(item=><li>{item}</li>)}</ul>}</section>)}
       {page.slug==='riscos-psicossociais-nr1'&&<div><a class="resource-link" href="https://www.gov.br/trabalho-e-emprego/pt-br/acesso-a-informacao/participacao-social/conselhos-e-orgaos-colegiados/comissao-tripartite-partitaria-permanente/normas-regulamentadora/normas-regulamentadoras-vigentes/nr-1" target="_blank" rel="noopener noreferrer">Consulte a NR-1 no Ministério do Trabalho e Emprego ↗</a></div>}
       <nav class="related-links" aria-label="Explore também">{related.map(p=><a href={`/${p.slug}/`}>{p.eyebrow} ↗</a>)}</nav>
-      <div class="page-contact-card" id="conversa"><span class="overline">UM ESPAÇO PARA SUA PERGUNTA.</span><h3>Toda conversa é um começo.</h3><p>Fale sobre seu interesse em atendimento ou consultoria. Evite enviar dados clínicos sensíveis no primeiro contato.</p><a href={whatsapp(page.ctaType)} class="button button-copper" target="_blank" rel="noopener noreferrer">{page.ctaLabel} <Arrow diagonal/></a></div>
+      <div class="page-contact-card" id="conversa"><span class="overline">{isBusiness?'CONHECER O CONTEXTO. DEFINIR O ESCOPO.':'UM ESPAÇO PARA SUA PERGUNTA.'}</span><h3>{isBusiness?'Qual questão pede atenção na sua organização?':'Toda conversa é um começo.'}</h3><p>{isBusiness?'Apresente o interesse da organização para conversar sobre possibilidades, responsabilidades e escopo de atuação. Preserve informações pessoais dos trabalhadores neste primeiro contato.':'Fale sobre seu interesse em atendimento ou consultoria. Evite enviar dados clínicos sensíveis no primeiro contato.'}</p><a href={whatsapp(page.ctaType)} class="button button-copper" target="_blank" rel="noopener noreferrer">{page.ctaLabel} <Arrow diagonal/></a></div>
     </article>
   </div>
   </div>

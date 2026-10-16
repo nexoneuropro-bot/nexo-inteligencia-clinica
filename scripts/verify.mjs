@@ -18,6 +18,7 @@ for(const file of htmlFiles){
  check(/<main\s[^>]*id="conteudo"/.test(html),`${name}: conteúdo principal`);
  check(html.includes(`name="robots" content="${shouldIndex?'index,follow':'noindex,follow'}"`),`${name}: indexação`);
  check(shouldIndex?html.includes('rel="canonical"'):!html.includes('rel="canonical"'),`${name}: canonical da prévia/produção`);
+ check(html.includes('data-ambient-sound')&&html.includes('data-sound-toggle aria-pressed="false"'),`${name}: ambiente sonoro opcional desligado inicialmente`);
  // Cloudflare enforces script-src 'self'. JSON data is inert; executable
  // inline code would silently disable controls that work on a local preview.
  for(const [,attrs,code] of html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)){
@@ -53,6 +54,16 @@ for(const route of ['', 'para-voce']){
  const html=fs.readFileSync(path.join(root,route,'index.html'),'utf8');
  check(html.includes('data-care-pathways'),`${route||'home'}: apresentação dos caminhos de cuidado`);
  for(const topic of ['psychotherapy','brief-therapy','neuropsychological-assessment','psychiatry-interface','self-knowledge-social-care'])check(html.includes(`data-care-node="${topic}"`),`${route||'home'}: caminho ${topic}`);
+ check(html.includes('data-self-observation'),`${route||'home'}: reflexão educativa`);
+ check((html.match(/data-so-panel="\d"/g)||[]).length===5,`${route||'home'}: cinco etapas de auto-observação em HTML`);
+}
+for(const route of ['para-sua-empresa','riscos-psicossociais-nr1']){
+ const html=fs.readFileSync(path.join(root,route,'index.html'),'utf8');
+ check(html.includes('data-business-experience'),`${route}: continuidade da jornada empresarial`);
+ for(let index=0;index<4;index++)check(html.includes(`data-work-factor="${index}"`),`${route}: condição de trabalho ${index}`);
+ for(let index=0;index<5;index++)check(html.includes(`data-work-stage="${index}"`),`${route}: etapa de prevenção ${index}`);
+ check(html.includes('26 de maio de 2026'),`${route}: vigência NR-1 contextualizada`);
+ check(!html.includes('frente prevista no briefing'),`${route}: conteúdo público sem rascunho interno`);
 }
 const sitemap=fs.readFileSync(path.join(root,'sitemap.xml'),'utf8');
 check((sitemap.match(/<loc>/g)||[]).length===(production?12:0),'Sitemap incompatível com indexação');

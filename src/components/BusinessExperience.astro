@@ -1,0 +1,55 @@
+---
+import ExperienceStage from './ExperienceStage.astro';
+import {workFactors,workSteps,workSources} from '../data/work-contexts';
+import '../styles/experience.css';
+import '../styles/business-experience.css';
+interface Props {title:string;intro:string;detailed?:boolean}
+const {title,intro,detailed=false}=Astro.props;
+---
+<div class="business-experience" data-business-experience>
+  <ExperienceStage entry="business"/>
+  <section class="work-hero" aria-labelledby="work-title">
+    <div class="work-intro">
+      <a class="work-back" href="/#experience-paths">← Voltar às conexões</a>
+      <span class="work-eyebrow">PARA SUA EMPRESA · NR-1 E PREVENÇÃO</span>
+      <h1 id="work-title">{title}</h1>
+      <p class="work-editorial">Avaliar o trabalho.<br/>Orientar a prevenção.</p>
+      <p class="work-lede">{intro}</p>
+      <div class="work-actions"><a class="work-primary" href="#work-pathway">Conheça o percurso de avaliação <span aria-hidden="true">↓</span></a><a href={detailed?'#conteudo-da-jornada':'/riscos-psicossociais-nr1/'}>{detailed?'Entenda as mudanças':'O que mudou na NR-1?'} ↗</a></div>
+      <p class="work-current">Capítulo 1.5 vigente desde 26 de maio de 2026. <a href={workSources[0].url} target="_blank" rel="noopener noreferrer">Consulte a fonte oficial ↗</a></p>
+    </div>
+    <div class="work-space" data-work-space>
+      <span class="work-coordinate" aria-hidden="true">ORGANIZAÇÃO ↔ CONDIÇÕES ↔ PESSOAS</span>
+      <svg class="work-connections" viewBox="0 0 600 620" aria-hidden="true"><path d="M100 150L310 290L490 95M310 290L500 485M310 290L110 520M100 150L110 520L500 485L490 95"/><ellipse cx="310" cy="290" rx="230" ry="150" transform="rotate(-28 310 290)"/></svg>
+      <span class="work-center" aria-hidden="true">TRABALHO<br/>REAL</span>
+      <div class="work-selectors" role="group" aria-label="Explore condições da organização do trabalho">
+        {workFactors.map((factor,index)=><button type="button" class={`work-node work-node-${index}`} id={`work-factor-${factor.id}`} data-work-factor={index} aria-pressed={index===0?'true':'false'} aria-controls={`work-context-${factor.id}`}><span class="work-node-dot" aria-hidden="true"></span>{factor.label}<span class="work-node-arrow" aria-hidden="true">↗</span></button>)}
+      </div>
+      <p class="work-invitation">Toque em uma conexão.<br/>Conheça uma condição a investigar.</p>
+    </div>
+  </section>
+  <section class="work-contexts" id="work-contexts" aria-label="Condições a investigar" aria-live="polite">
+    {workFactors.map((factor,index)=><article class="work-context" id={`work-context-${factor.id}`} data-work-context={index} hidden={index!==0} aria-labelledby={`work-heading-${factor.id}`}>
+      <div><span class="work-eyebrow">UMA CONDIÇÃO A INVESTIGAR</span><h2 id={`work-heading-${factor.id}`} tabindex="-1">{factor.title}</h2></div>
+      <div><h3>O que observar</h3><p>{factor.observe}</p><p class="work-question">{factor.question}</p></div>
+      <div><h3>Da avaliação à ação</h3><p>{factor.action}</p><a class="work-return" href="#work-title">Explorar outra conexão ↑</a></div>
+    </article>)}
+    <p class="work-example-note">Exemplos educativos sobre a organização do trabalho. A identificação de riscos depende da investigação das condições reais.</p>
+  </section>
+  <section class="work-pathway" id="work-pathway" aria-labelledby="work-pathway-title">
+    <header><span class="work-eyebrow">AVALIAÇÃO COM CONSEQUÊNCIA PRÁTICA</span><h2 id="work-pathway-title">Do trabalho real<br/>às decisões de prevenção.</h2><p>Um percurso para compreender condições, definir prioridades e acompanhar mudanças com participação dos trabalhadores.</p></header>
+    <div class="work-steps" role="group" aria-label="Explore as etapas de avaliação e prevenção">
+      {workSteps.map((step,index)=><button type="button" id={`work-step-${step.id}`} data-work-step={index} aria-pressed={index===0?'true':'false'} aria-controls={`work-stage-${step.id}`}><span aria-hidden="true">{String(index+1).padStart(2,'0')}</span>{step.label}</button>)}
+    </div>
+    <div class="work-stages" aria-live="polite">{workSteps.map((step,index)=><article class="work-stage" data-work-stage={index} id={`work-stage-${step.id}`} hidden={index!==0} aria-labelledby={`work-stage-heading-${step.id}`}>
+      <div class="work-stage-symbol" aria-hidden="true"><span>{String(index+1).padStart(2,'0')}</span><i></i><i></i></div>
+      <div><span class="work-eyebrow">{step.eyebrow}</span><h3 tabindex="-1" id={`work-stage-heading-${step.id}`}>{step.title}</h3><p>{step.text}</p><p class="work-result"><span>Resultado da etapa</span>{step.result}</p></div>
+    </article>)}</div>
+    <p class="work-scope">A contribuição da NEXO é construída em articulação com a organização e os responsáveis por Segurança e Saúde no Trabalho, conforme competências e escopo do projeto.</p>
+    <div class="work-sources"><span>Fontes e atualização · 16/10/2026</span>{workSources.map(source=><a href={source.url} target="_blank" rel="noopener noreferrer">{source.label} ↗</a>)}</div>
+    <a class="work-reading" href="#conteudo-da-jornada">{detailed?'Aprofunde as mudanças e as responsabilidades':'Entenda como a NEXO pode contribuir'} ↓</a>
+  </section>
+  <div class="work-motion-control"><button id="experience-pause" type="button" aria-pressed="false">Pausar movimento</button></div>
+</div>
+<noscript><style>.work-selectors,.work-steps,.work-motion-control{display:none}.work-context[hidden],.work-stage[hidden]{display:grid!important}.work-context+.work-context,.work-stage+.work-stage{margin-top:35px;padding-top:35px;border-top:1px solid #92aaa944}.work-return{display:none!important}</style></noscript>
+<script>import '../scripts/business-experience';</script>

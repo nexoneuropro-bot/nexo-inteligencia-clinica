@@ -1,0 +1,92 @@
+---
+import '../styles/self-observation.css';
+
+interface Props { id?: string }
+const { id = 'self-observation' } = Astro.props;
+const steps = [
+  {
+    label: 'Escolha uma situação',
+    title: 'Uma situação concreta. Uma pergunta possível.',
+    question: 'Qual situação recente você gostaria de compreender melhor?',
+    explanation: 'Escolha um episódio do cotidiano, em vez de tentar explicar toda a sua vida de uma vez. Você pode apenas pensar sobre ele; não precisa escrever nem compartilhar nada aqui.',
+    example: 'Exemplo fictício: uma pessoa planejava começar um relatório à tarde. Ao abrir o arquivo, fechou a janela e decidiu cuidar de outras tarefas.',
+    learning: 'Descrever o que aconteceu ajuda a transformar “sou uma pessoa desorganizada” em uma situação que pode ser observada.',
+  },
+  {
+    label: 'Observe o que veio antes',
+    title: 'O contexto também participa da história.',
+    question: 'Onde você estava, o que estava acontecendo e quais condições merecem atenção?',
+    explanation: 'Considere a tarefa, as pessoas presentes, o tempo disponível e acontecimentos anteriores. Essas condições ajudam a formular perguntas; não permitem concluir uma causa por si mesmas.',
+    example: 'No exemplo, o prazo parecia distante, as instruções estavam pouco claras e havia notificações no celular. São condições a investigar, não uma explicação já confirmada.',
+    learning: '“Em que situações isso aparece?” costuma abrir uma investigação mais útil do que um rótulo sobre quem você é.',
+  },
+  {
+    label: 'Reconheça suas respostas',
+    title: 'O que você faz, pensa e sente merece atenção.',
+    question: 'O que você fez naquele momento? Que pensamentos, sensações ou sentimentos percebeu?',
+    explanation: 'A Análise do Comportamento também considera experiências privadas, como pensar e sentir. Elas participam da investigação junto com a história da pessoa e suas relações com o ambiente.',
+    example: 'A pessoa pensou “não sei por onde começar”, percebeu tensão e abriu as mensagens. A descrição reúne o que ela fez e o que percebeu de sua experiência, sem julgar essas respostas.',
+    learning: 'Pensamentos e sentimentos podem ser descritos e acolhidos. A compreensão continua quando investigamos as relações em que aparecem.',
+  },
+  {
+    label: 'Compare as consequências',
+    title: 'O que muda agora? E o que acontece depois?',
+    question: 'O que aconteceu logo após sua resposta? E algumas horas ou dias depois?',
+    explanation: 'Consequência significa o que acontece depois de uma resposta e pode participar de sua repetição. Observar a sequência é um começo: um episódio isolado não demonstra sua função.',
+    example: 'Após adiar o relatório, a pessoa percebeu alívio momentâneo. Mais tarde, encontrou a tarefa acumulada e menos tempo disponível. O alívio pode ser uma hipótese a investigar nesse caso; não é uma conclusão sobre toda situação de adiamento.',
+    learning: 'Um efeito imediato e um efeito posterior podem apontar em direções diferentes. Perceber essa diferença acrescenta uma pergunta à investigação.',
+  },
+  {
+    label: 'Encontre uma diferença',
+    title: 'Quando foi diferente, o que também mudou?',
+    question: 'Você se lembra de uma situação semelhante em que conseguiu agir de outra maneira?',
+    explanation: 'Compare as condições: havia uma orientação mais clara, apoio de alguém, uma etapa menor ou outro prazo? Diferenças podem ajudar a construir hipóteses e objetivos possíveis.',
+    example: 'Em outra ocasião, a pessoa começou depois de esclarecer as instruções e dividir o relatório em partes. Isso sugere condições para observar em novas situações, sem garantir que a mesma estratégia sirva para todos.',
+    learning: 'Você chega ao fim com um modo de observar: situação, contexto, respostas e consequências. A compreensão de um padrão pede história e observações ao longo do tempo.',
+  },
+];
+---
+<section id={id} class="self-observation" data-self-observation data-observation-step="0" aria-labelledby={`${id}-title`}>
+  <div class="so-depth" aria-hidden="true"><span></span><span></span><span></span></div>
+  <div class="so-container">
+    <header class="so-intro">
+      <span class="so-eyebrow">AUTOCONHECIMENTO EM CONTEXTO</span>
+      <h2 id={`${id}-title`}>Um jeito de observar<br/>a própria história.</h2>
+      <p>Explore cinco perguntas inspiradas na Análise do Comportamento. Elas ajudam a organizar uma reflexão sobre o cotidiano, sem produzir um resultado sobre você.</p>
+      <p class="so-private">A reflexão fica com você: esta experiência não solicita respostas pessoais.</p>
+    </header>
+    <div class="so-workspace">
+      <nav class="so-step-map" aria-label="Etapas da reflexão" data-so-controls>
+        {steps.map((step, index) => <button type="button" data-so-step={index} aria-pressed={index === 0 ? 'true' : 'false'} aria-controls={`${id}-panel-${index}`}>
+          <span class="so-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+          <span>{step.label}</span>
+        </button>)}
+      </nav>
+      <div class="so-reading">
+        {steps.map((step, index) => <article id={`${id}-panel-${index}`} class="so-panel" data-so-panel={index} aria-labelledby={`${id}-heading-${index}`}>
+          <span class="so-eyebrow">PERGUNTA {index + 1} DE {steps.length}</span>
+          <h3 id={`${id}-heading-${index}`} tabindex="-1">{step.title}</h3>
+          <p class="so-question">{step.question}</p>
+          <p>{step.explanation}</p>
+          <button class="so-example-toggle" type="button" data-so-example-toggle={index} aria-expanded="false" aria-controls={`${id}-example-${index}`} hidden>Ver um exemplo do cotidiano <span aria-hidden="true">+</span></button>
+          <div id={`${id}-example-${index}`} class="so-example" data-so-example={index}>
+            <span class="so-example-label">EXEMPLO ILUSTRATIVO · ADIAR UMA TAREFA</span>
+            <p>{step.example}</p>
+          </div>
+          <p class="so-learning">{step.learning}</p>
+        </article>)}
+        <div class="so-navigation" data-so-controls>
+          <button type="button" data-so-previous disabled><span aria-hidden="true">←</span> Anterior</button>
+          <p data-so-progress aria-live="polite" aria-atomic="true">Pergunta 1 de 5</p>
+          <button type="button" data-so-next>Próxima <span aria-hidden="true">→</span></button>
+        </div>
+      </div>
+    </div>
+    <footer class="so-footer">
+      <div><p>Esta é uma atividade educativa, sem escore, classificação ou diagnóstico. Na psicoterapia, a investigação pode ser aprofundada com sua história e objetivos.</p><a class="so-service-link" href="/psicoterapia/">Conhecer a psicoterapia em Análise do Comportamento <span aria-hidden="true">↗</span></a></div>
+      <a class="so-source" href="https://www.bfskinner.org/cumulative-record-chapter-28-the-operational-analysis-of-psychological-terms-quote-23/" target="_blank" rel="noopener noreferrer">Referência de leitura: B. F. Skinner sobre termos psicológicos e acontecimentos privados <span aria-hidden="true">↗</span></a>
+    </footer>
+  </div>
+</section>
+<noscript><style>.self-observation [data-so-controls]{display:none}.self-observation .so-panel+.so-panel{margin-top:3rem;padding-top:3rem;border-top:1px solid #9c704e55}</style></noscript>
+<script>import '../scripts/self-observation';</script>

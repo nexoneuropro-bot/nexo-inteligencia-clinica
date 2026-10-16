@@ -20,7 +20,7 @@ export const pages: ContentPage[] = [
   {
     slug: 'para-voce',
     title: 'Sua história merece ser compreendida.',
-    description: 'Conheça a proposta de cuidado da NEXO: psicoterapia, avaliação neuropsicológica e interface com Psiquiatria quando indicada.',
+    description: 'Conheça a psicoterapia em Análise do Comportamento, a avaliação neuropsicológica e a interface com Psiquiatria quando indicada na NEXO.',
     eyebrow: 'Para você',
     intro: 'Nem tudo o que sentimos conseguimos compreender imediatamente. O primeiro passo pode ser uma conversa sobre o que está acontecendo e sobre o que você procura.',
     sections: [
@@ -28,7 +28,7 @@ export const pages: ContentPage[] = [
         title: 'Começar pela sua pergunta.',
         body: [
           'Cada pessoa chega com uma história, um contexto e uma necessidade. O acolhimento ajuda a compreender a demanda e a conversar sobre os caminhos possíveis, sem antecipar conclusões.',
-          'A proposta considera corpo e funcionamento, pensamentos e emoções, relações e ambiente. Você participa das decisões e pode esclarecer suas dúvidas ao longo do processo.',
+          'Na psicoterapia em Análise do Comportamento, investigamos relações entre sua história, as situações que vive, o que faz, pensa e sente e as consequências no cotidiano. Você participa das decisões e pode esclarecer suas dúvidas ao longo do processo.',
         ],
       },
       {
@@ -55,16 +55,17 @@ export const pages: ContentPage[] = [
   },
   {
     slug: 'psicoterapia',
-    title: 'Psicoterapia breve, com foco na sua vida.',
-    description: 'Conheça a proposta de psicoterapia breve em Análise do Comportamento da NEXO, do autoconhecimento aos rastreios e à avaliação quando indicados.',
-    eyebrow: 'Psicoterapia breve',
+    title: 'Psicoterapia em Análise do Comportamento.',
+    description: 'Entenda a psicoterapia em Análise do Comportamento na NEXO: padrões no cotidiano, objetivos de cuidado e organização breve quando indicada.',
+    eyebrow: 'Psicoterapia e terapia breve',
     intro: 'A proposta da NEXO parte da Análise do Comportamento: compreender sua história, reconhecer padrões no cotidiano e construir objetivos de cuidado com você.',
     sections: [
       {
         title: 'Compreender o que acontece em contexto.',
         body: [
           'A Análise do Comportamento busca compreender relações entre o que você faz, as situações em que isso acontece e suas consequências. Pensamentos, emoções e história de aprendizagem também fazem parte dessa compreensão.',
-          'O acompanhamento pode explorar padrões nas relações, nas escolhas e na forma de lidar com dificuldades. Os objetivos são combinados com você e revistos ao longo do processo, conforme suas necessidades.',
+          'No acompanhamento, observamos situações concretas: o que aconteceu antes, como você reagiu e o que veio depois, a curto e a longo prazo. Essa investigação ajuda a construir hipóteses sobre padrões e possibilidades de mudança, sem concluir a partir de um episódio isolado.',
+          'Os objetivos de cuidado são combinados com você e revistos ao longo do processo. As mudanças são acompanhadas em relação às dificuldades e às condições reais da sua vida.',
         ],
       },
       {
@@ -76,9 +77,10 @@ export const pages: ContentPage[] = [
         ],
       },
       {
-        title: 'Um foco combinado. Um tempo a acompanhar.',
+        title: 'Como a psicoterapia pode ser breve?',
         body: [
-          'Na psicoterapia breve, o trabalho se organiza em torno de objetivos delimitados e de um planejamento conversado. Em situações compatíveis com a avaliação individual, podem ser propostos ciclos aproximados de 10 a 20 sessões.',
+          'Breve é uma forma de organizar a psicoterapia em torno de um foco delimitado, com objetivos e planejamento conversados. A abordagem continua sendo a Análise do Comportamento; o formato é considerado conforme a avaliação da demanda.',
+          'Em situações compatíveis com a avaliação individual, podem ser propostos ciclos aproximados de 10 a 20 sessões, com revisão dos objetivos e das necessidades de acompanhamento.',
           'Esse intervalo é uma referência de planejamento. A duração depende da demanda, da avaliação e da evolução do acompanhamento; não representa promessa de resultado nem pacote obrigatório.',
         ],
       },
@@ -96,10 +98,17 @@ export const pages: ContentPage[] = [
   {
     slug: 'avaliacao-neuropsicologica',
     title: 'Investigar com método. Compreender em contexto.',
-    description: 'Entenda as etapas da proposta de avaliação neuropsicológica da NEXO, da anamnese à devolutiva e ao laudo psicológico quando cabível.',
+    description: 'Entenda como a avaliação neuropsicológica investiga atenção, memória e planejamento, integrando história, contexto, devolutiva e recomendações.',
     eyebrow: 'Avaliação neuropsicológica',
-    intro: 'A pergunta que orienta a avaliação importa tanto quanto os instrumentos. O processo busca integrar informações sobre cognição, comportamento e história individual.',
+    intro: 'Atenção, memória e planejamento fazem parte de estudar, trabalhar e organizar a rotina. A avaliação neuropsicológica investiga recursos e dificuldades, integrando a pergunta clínica, a história e o contexto de cada pessoa.',
     sections: [
+      {
+        title: 'O que esse olhar acrescenta?',
+        body: [
+          'O conhecimento em Neuropsicologia permite investigar relações entre funções cognitivas, comportamento e condições de saúde. Entrevistas, observações e instrumentos são selecionados e interpretados em conjunto, conforme a demanda.',
+          'Na devolutiva, os achados podem orientar recomendações para o cotidiano e próximos passos de cuidado. A avaliação busca esclarecer perguntas; um teste isolado não explica toda dificuldade, e o processo não garante um diagnóstico específico.',
+        ],
+      },
       {
         title: 'Um percurso construído para a demanda.',
         body: ['O planejamento considera a necessidade clínica de cada pessoa. A bateria de instrumentos não é igual para todos.'],
@@ -135,10 +144,17 @@ export const pages: ContentPage[] = [
   {
     slug: 'integracao-psiquiatrica',
     title: 'Olhares que podem se complementar.',
-    description: 'Entenda a proposta de integração entre Neuropsicologia e Psiquiatria na NEXO, conforme indicação clínica, consentimento e responsabilidades próprias.',
+    description: 'Saiba quando a avaliação psiquiátrica pode contribuir para o cuidado: investigação médica, opções de tratamento e integração com consentimento.',
     eyebrow: 'Interface com Psiquiatria',
-    intro: 'Em algumas histórias, a compreensão da demanda pode se beneficiar do diálogo entre profissionais. A indicação parte do acolhimento e da avaliação individual.',
+    intro: 'A Psiquiatria acrescenta a avaliação médica às perguntas sobre saúde mental e funcionamento. Quando indicada, pode ampliar a investigação e discutir possibilidades de tratamento, em diálogo com a pessoa atendida.',
     sections: [
+      {
+        title: 'Qual é a contribuição da avaliação médica?',
+        body: [
+          'A consulta pode investigar a história de saúde, sintomas, mudanças no funcionamento e condições médicas que participem da demanda. As opções de cuidado são discutidas conforme a avaliação individual.',
+          'Quando medicamentos são indicados, o acompanhamento médico permite avaliar benefícios, efeitos adversos e necessidade de ajustes. A consulta não pressupõe prescrição, e a decisão é considerada com a pessoa atendida.',
+        ],
+      },
       {
         title: 'Integração quando fizer sentido.',
         body: [
@@ -167,35 +183,40 @@ export const pages: ContentPage[] = [
   },
   {
     slug: 'para-sua-empresa',
-    title: 'Pessoas também constroem resultados.',
-    description: 'Conheça a proposta NEXO para organizações: consultoria, desenvolvimento de lideranças, relações de trabalho e saúde mental no contexto organizacional.',
+    title: 'NR-1 e saúde mental nas empresas.',
+    description: 'Saúde mental nas empresas e NR-1: conheça a atuação NEXO em riscos psicossociais, organização do trabalho e planejamento de ações de prevenção.',
     eyebrow: 'Para sua empresa',
-    intro: 'O que os indicadores mostram e as pessoas ainda não conseguiram dizer? Compreender o trabalho também exige olhar para relações, cultura e contexto.',
+    intro: 'NR-1 e saúde mental no trabalho começam por compreender as condições em que as pessoas trabalham: demandas, autonomia, apoio e relações. Avaliar ajuda a transformar essa compreensão em prioridades de prevenção.',
     sections: [
       {
-        title: 'Começar pela realidade da organização.',
+        title: 'O que mudou na NR-1?',
         body: [
-          'A jornada empresarial parte de uma conversa com gestores, lideranças e Recursos Humanos. O objetivo inicial é compreender a demanda e delimitar um escopo coerente com as necessidades da organização.',
-          'A proposta conecta comportamento humano, relações de trabalho e desenvolvimento organizacional. Cada projeto exige definição de objetivos, responsabilidades e condições de execução.',
+          'Desde 26 de maio de 2026, a redação vigente do capítulo 1.5 da NR-1 inclui expressamente os fatores de risco psicossociais relacionados ao trabalho no Gerenciamento de Riscos Ocupacionais (GRO).',
+          'Para a empresa, isso significa considerar esses fatores na análise das condições de trabalho e na prevenção, articulando NR-1 e NR-17. A avaliação ajuda a reconhecer exposições e fundamentar decisões; sua utilidade continua na implementação e no acompanhamento das medidas.',
         ],
       },
       {
-        title: 'Possibilidades de atuação.',
-        body: ['As frentes abaixo orientam a construção de propostas. A oferta definitiva de serviços com requisitos específicos depende de validação técnica.'],
+        title: 'Que condições merecem atenção?',
+        body: ['Demandas excessivas, pouca autonomia, apoio insuficiente, conflitos de papéis e situações de violência ou assédio são exemplos que podem exigir investigação. A relevância e o nível de risco dependem das atividades, das exposições e das condições concretas de cada organização.'],
         items: [
-          'Consultoria em saúde mental no trabalho.',
-          'Avaliação de fatores de risco psicossociais relacionados ao trabalho.',
-          'Orientações pertinentes ao gerenciamento de riscos ocupacionais e à NR-1.',
-          'Desenvolvimento de lideranças, comunicação e relações interpessoais.',
-          'Treinamentos e desenvolvimento humano.',
-          'Cultura organizacional e apoio a estratégias institucionais de bem-estar.',
+          'Demandas: volume, ritmo, recursos e exigências da atividade.',
+          'Autonomia: possibilidades de organizar e realizar o trabalho.',
+          'Apoio e relações: comunicação, cooperação e acesso à liderança.',
+          'Papéis: clareza de responsabilidades e compatibilidade das orientações.',
         ],
       },
       {
-        title: 'Clareza de escopo, responsabilidade na entrega.',
+        title: 'Como a NEXO pode contribuir?',
         body: [
-          'A consultoria organizacional não transforma diagnósticos clínicos individuais em produtos empresariais. A abordagem considera o trabalho e as relações institucionais, com limites definidos em cada projeto.',
-          'Não há promessa de adequação legal automática nem oferta de certificação. Questões normativas e requisitos de cada serviço precisam ser verificados antes da contratação e da divulgação definitiva.',
+          'A conversa inicial delimita atividades, unidades de avaliação, demandas e responsabilidades. A proposta pode envolver avaliação de fatores psicossociais, devolutiva organizacional, apoio à priorização de medidas e acompanhamento, conforme o escopo e a competência técnica necessários.',
+          'O trabalho se articula com os responsáveis por Segurança e Saúde no Trabalho (SST), a gestão e os trabalhadores. Desenvolvimento de lideranças e comunicação pode complementar as medidas sobre a organização do trabalho, conforme os achados.',
+        ],
+      },
+      {
+        title: 'Avaliar para decidir e acompanhar.',
+        body: [
+          'Conhecer o trabalho real ajuda a definir quais condições precisam mudar, quem ficará responsável e como acompanhar os resultados. O processo deve permitir rever medidas insuficientes e reconhecer novas exposições.',
+          'O projeto organizacional trata das condições de trabalho. Avaliações clínicas individuais têm outra finalidade e preservam seus próprios canais de cuidado e sigilo. A responsabilidade da empresa pelo GRO permanece, sem garantia de adequação automática ou certificação pela contratação de uma consultoria.',
         ],
       },
     ],
@@ -204,34 +225,55 @@ export const pages: ContentPage[] = [
   },
   {
     slug: 'riscos-psicossociais-nr1',
-    title: 'Compreender o trabalho para orientar ações.',
-    description: 'Conheça a proposta de avaliação de fatores de risco psicossociais relacionados ao trabalho e de orientação sobre gerenciamento de riscos ocupacionais.',
-    eyebrow: 'Trabalho e riscos psicossociais',
-    intro: 'O contexto organizacional pede perguntas que conectem pessoas, relações e a forma como o trabalho acontece.',
+    title: 'Avaliação de riscos psicossociais na NR-1.',
+    description: 'Entenda a avaliação de riscos psicossociais na NR-1 vigente: GRO, PGR, integração com NR-17, participação dos trabalhadores e acompanhamento das ações.',
+    eyebrow: 'NR-1 e riscos psicossociais',
+    intro: 'Identificar condições de trabalho, avaliar riscos e orientar medidas de prevenção: compreenda como os fatores psicossociais participam do GRO e do PGR, em articulação com a NR-17.',
     sections: [
       {
-        title: 'Olhar para o contexto.',
+        title: 'NR-1 vigente: o que mudou?',
         body: [
-          'A proposta da NEXO contempla possibilidades de avaliação de fatores de risco psicossociais relacionados ao trabalho e de orientações pertinentes ao gerenciamento de riscos ocupacionais.',
-          'O ponto de partida é compreender a demanda institucional, delimitar o escopo e verificar os requisitos técnicos necessários. Não se trata de oferecer diagnósticos clínicos individuais à empresa.',
+          'A redação do capítulo 1.5 da NR-1 em vigor desde 26 de maio de 2026 tornou expressa a inclusão dos fatores de risco psicossociais relacionados ao trabalho no GRO. São consideradas as condições em que o trabalho é organizado e realizado, inclusive nos regimes remoto e híbrido.',
+          'O GRO é o processo de gestão dos riscos ocupacionais. O Programa de Gerenciamento de Riscos (PGR) materializa esse processo e contempla inventário de riscos e plano de ação, com critérios documentados e acompanhamento das medidas. As obrigações e eventuais dispensas devem ser verificadas para cada organização.',
         ],
       },
       {
-        title: 'Uma proposta a ser delimitada.',
-        body: ['Antes da definição de um projeto, é necessário conversar sobre seu contexto e suas condições de execução.'],
+        title: 'O que a avaliação investiga?',
+        body: [
+          'A investigação considera características das atividades, exigências, recursos, relações e formas de organização que possam gerar exposição a riscos. Ouvir os trabalhadores e observar o trabalho real ajuda a compreender diferenças entre setores, funções e situações.',
+          'A finalidade é orientar a prevenção nas condições de trabalho. Avaliação médica periódica, rastreio de sintomas e diagnóstico psicológico individual não substituem a identificação de perigos e a avaliação de riscos ocupacionais.',
+        ],
+      },
+      {
+        title: 'Como se conectam NR-1, NR-17, AEP e AET?',
+        body: [
+          'A NR-17 prevê a Avaliação Ergonômica Preliminar (AEP), que pode combinar métodos qualitativos e quantitativos. Seus resultados integram o inventário de riscos do PGR, com medidas previstas no plano de ação.',
+          'A Análise Ergonômica do Trabalho (AET) aprofunda a investigação nas situações previstas na NR-17, como necessidade de análise mais detalhada ou insuficiência das medidas adotadas. Ela não é uma etapa automática para toda empresa. A equipe deve verificar a aplicabilidade e as condições específicas da organização.',
+        ],
+      },
+      {
+        title: 'Do reconhecimento às ações.',
+        body: ['O percurso precisa ligar a informação coletada a decisões sobre o trabalho. A organização define responsáveis com conhecimento técnico compatível; a NR-1 e a NR-17 não reservam, de forma geral, a avaliação a uma única categoria profissional.'],
         items: [
-          'Demanda da organização e perguntas que precisam ser investigadas.',
-          'Abrangência do trabalho e responsabilidades dos envolvidos.',
-          'Procedimentos adequados e requisitos de qualificação profissional.',
-          'Cuidados com privacidade, sigilo e comunicação das informações.',
-          'Possibilidades de orientação e desenvolvimento organizacional.',
+          'Planejar: delimitar atividades e exposições, métodos e participação dos trabalhadores.',
+          'Avaliar: reunir evidências, analisar os riscos e registrar critérios e resultados.',
+          'Agir: definir medidas de prevenção, responsáveis, prioridades e prazos.',
+          'Acompanhar: verificar implementação e resultados e revisar o processo conforme a NR-1.',
         ],
       },
       {
-        title: 'Sobre a referência à NR-1.',
+        title: 'Questionário é obrigatório ou suficiente?',
         body: [
-          'Esta página apresenta uma frente prevista no briefing institucional; não substitui a análise técnica das obrigações aplicáveis à sua organização.',
-          'A redação normativa, sua vigência e os requisitos de execução do serviço ainda precisam de validação técnica e jurídica antes da divulgação definitiva. Não são afirmados aqui prazos, exigências detalhadas, certificações ou adequação legal automática.',
+          'Não há questionário obrigatório ou instrumento oficial único. As técnicas devem ser adequadas à realidade avaliada e podem envolver observação, entrevistas, abordagens participativas e instrumentos de levantamento.',
+          'Um questionário isolado não caracteriza todo o gerenciamento dos riscos. Seus resultados, quando utilizados, precisam de análise técnica e integração com a AEP e o PGR. A coleta também exige cuidados com confidencialidade e identificação indireta, especialmente em grupos pequenos.',
+        ],
+      },
+      {
+        title: 'O que combinar antes de contratar?',
+        body: [
+          'Defina a abrangência, os métodos, a equipe, as entregas, o tratamento das informações e a integração com os responsáveis por SST. Uma devolutiva útil descreve o contexto avaliado, os critérios, as limitações e as recomendações que poderão orientar ações.',
+          'A NEXO conversa com sua organização para construir esse escopo. A empresa mantém a responsabilidade pelo PGR e pela implementação das medidas; consultoria, palestra ou relatório isolado não garantem conformidade legal.',
+          'Conteúdo informativo consultado em 16 de outubro de 2026, com base nas fontes oficiais do Ministério do Trabalho e Emprego. A aplicação depende das atividades e dos requisitos pertinentes à organização.',
         ],
       },
     ],
@@ -241,20 +283,34 @@ export const pages: ContentPage[] = [
   {
     slug: 'nossa-abordagem',
     title: 'Antes das respostas, uma boa pergunta.',
-    description: 'Conheça os princípios da NEXO: olhar biopsicossocial, ciência, ética, escuta e respeito à singularidade de pessoas e organizações.',
+    description: 'Conheça a Análise do Comportamento na NEXO: história de aprendizagem, pensamentos, sentimentos e relações com as condições da vida cotidiana.',
     eyebrow: 'Nossa abordagem',
-    intro: 'O X representa uma incógnita. Ele abre espaço para investigar, escutar e compreender o que ainda não encontrou uma formulação.',
+    intro: 'O X representa uma relação que ainda precisamos compreender: o que acontece, em quais situações e com quais consequências. A proposta de psicoterapia da NEXO parte da Análise do Comportamento.',
     sections: [
       {
-        title: 'Um olhar biopsicossocial.',
+        title: 'Compreender relações, construir possibilidades.',
         body: [
-          'Corpo, história individual e contexto social se encontram na experiência humana. A proposta da NEXO é considerar essas relações sem reduzir uma pessoa a uma única característica.',
-          'Esse olhar orienta perguntas e ajuda a organizar informações. Ele não estabelece uma explicação pronta para todas as histórias.',
+          'A Análise do Comportamento investiga como ações se relacionam com as condições em que acontecem e suas consequências, considerando a história de aprendizagem. Na clínica, isso orienta perguntas sobre padrões e possibilidades de mudança em contextos concretos.',
+          'Corpo, experiências de vida e condições sociais participam dessas relações. Organizá-los em dimensões ajuda a observar; eles não constituem três causas independentes nem uma explicação pronta para cada pessoa.',
         ],
         items: [
-          'Biológica: corpo, cérebro, sistema nervoso, saúde e funcionamento.',
-          'Psicológica: pensamentos, emoções, comportamento, cognição e história individual.',
-          'Social: cultura, trabalho, relações, família, ambiente e sociedade.',
+          'Corpo e saúde: condições que participam de como agimos, percebemos e sentimos.',
+          'História e experiência: aprendizagem, ações, pensamentos e sentimentos em relação às situações vividas.',
+          'Contexto e relações: família, cultura, trabalho e condições de vida que ampliam ou restringem possibilidades.',
+        ],
+      },
+      {
+        title: 'E o que pensamos e sentimos?',
+        body: [
+          'Pensar e sentir também fazem parte da investigação. Alguns acontecimentos, como pensamentos e sensações, têm acesso direto particular à própria pessoa. Na tradição do behaviorismo radical, essa privacidade não os coloca fora do estudo do comportamento.',
+          'Quando usamos a palavra subjetividade, precisamos explicitar do que estamos falando. Ela não equivale, em todos os usos, a comportamento privado. O cuidado investiga a experiência relatada em relação à história e ao contexto, sem procurar uma essência escondida que explicaria tudo.',
+        ],
+      },
+      {
+        title: 'Da pesquisa à aplicação clínica.',
+        body: [
+          'A Análise Experimental do Comportamento (AEC) investiga processos comportamentais por meio de pesquisa experimental. É uma dimensão da Análise do Comportamento, que também inclui produção conceitual e aplicações.',
+          'A psicoterapia utiliza conhecimento científico para compreender demandas e construir intervenções individualizadas. Uma conversa clínica ou uma experiência educativa no site não é, por esse motivo, um experimento nem um teste psicológico.',
         ],
       },
       {
