@@ -174,7 +174,7 @@ export const pages: ContentPage[] = [
         title: 'Informação compartilhada com cuidado.',
         body: [
           'O diálogo entre profissionais deve ter finalidade de cuidado e observar as condições de consentimento e sigilo aplicáveis. A pessoa atendida pode esclarecer dúvidas sobre essa integração.',
-          'Laudo psicológico e documento médico não são apresentados como um documento único obrigatório. As condições de oferta e os registros dos profissionais devem ser validados antes da publicação definitiva deste serviço.',
+          'Laudo psicológico e documento médico têm finalidades e responsabilidades próprias. A necessidade de cada documento e as condições do atendimento são esclarecidas com a pessoa atendida.',
         ],
       },
     ],
@@ -334,33 +334,35 @@ export const pages: ContentPage[] = [
   },
   {
     slug: 'profissionais',
-    title: 'Conhecimento com responsabilidade.',
-    description: 'Conheça os nomes e registros informados para a equipe NEXO. Dados profissionais, títulos e especialidades aguardam conferência nos conselhos.',
+    title: 'Pessoas que investigam com você.',
+    description: 'Conheça Gabriel Alves Batista, psicólogo, e Ivo Peixoto Barbosa Júnior, médico: contribuições da Psicologia e da Medicina para o seu cuidado.',
     eyebrow: 'Profissionais',
-    intro: 'Uma atuação responsável começa pela clareza sobre quem atende e sobre os limites de cada atribuição. Os dados abaixo foram fornecidos no briefing e aguardam validação.',
+    intro: 'Conheça quem participa do cuidado na NEXO e o que cada olhar pode acrescentar à compreensão da sua história, das dificuldades do cotidiano e das possibilidades de acompanhamento.',
     sections: [
       {
         title: 'Gabriel Alves Batista',
         body: [
-          'Registro informado: CRP-SP 06/176184.',
-          'Apresentado no briefing como neuropsicólogo, com responsabilidade pela avaliação neuropsicológica e pela elaboração dos documentos psicológicos pertinentes, respeitadas sua habilitação e suas atribuições.',
-          'O registro, o título e a habilitação deverão ser conferidos no conselho profissional antes da publicação definitiva.',
+          'Psicólogo · CRP-SP 06/176184.',
+          'Seu trabalho clínico parte da Análise do Comportamento: compreender o que você faz, pensa e sente nas situações que vive, considerando sua história de aprendizagem e as consequências no cotidiano. A psicoterapia combina objetivos com você e acompanha possibilidades de mudança; a organização breve pode ser considerada conforme a demanda.',
+          'Na avaliação neuropsicológica, investiga recursos e dificuldades em atenção, memória, planejamento e outras funções pertinentes à pergunta clínica. Entrevistas, observações e instrumentos são integrados à história e ao contexto, com devolutiva e recomendações quando apropriadas.',
+          'Você pode procurar esse espaço para compreender padrões nas relações e na rotina ou esclarecer perguntas sobre seu funcionamento. O primeiro encontro ajuda a delimitar a demanda e conversar sobre o percurso de cuidado.',
         ],
       },
       {
         title: 'Ivo Peixoto Barbosa Júnior',
         body: [
-          'Registro informado: CRM-SP 193133.',
-          'Apresentado no briefing para a atuação médica psiquiátrica, com avaliação, orientações e condutas médicas, prescrição quando clinicamente indicada e emissão dos documentos médicos pertinentes.',
-          'O registro, o título e a especialidade ainda precisam de conferência. O registro de qualificação de especialista (RQE) não foi fornecido e deverá ser verificado conforme os requisitos de publicidade médica.',
+          'Médico · CRM-SP 193133.',
+          'Acrescenta a avaliação médica às perguntas sobre saúde mental, considerando a história de saúde, os sintomas, as mudanças no funcionamento e suas relações com condições físicas e com a vida cotidiana.',
+          'A consulta permite discutir opções de tratamento e decidir os próximos passos com a pessoa atendida. Quando medicamentos são indicados, o acompanhamento considera benefícios, efeitos adversos e necessidade de ajustes. A avaliação não pressupõe prescrição.',
+          'O diálogo com a Psicologia pode contribuir quando houver pertinência clínica e consentimento. A avaliação médica é uma possibilidade de cuidado conforme a necessidade individual, sem constituir etapa obrigatória da psicoterapia ou da avaliação neuropsicológica.',
         ],
       },
       {
-        title: 'Informações com transparência.',
+        title: 'Como os olhares podem se complementar.',
         body: [
-          'Esta é uma prévia institucional. A apresentação final da equipe depende da validação dos registros e das qualificações e da aprovação dos profissionais.',
-          'Os retratos reais fornecidos para o projeto estão integrados à prévia. A aprovação para uso público das fotografias permanece pendente.',
-          'Não foram incluídos currículos, instituições de formação, certificações ou experiências adicionais sem documentação. As responsabilidades de Psicologia e Medicina permanecem distintas, inclusive quando há integração de cuidado.',
+          'A Psicologia investiga padrões e funcionamento por seus métodos de avaliação e acompanhamento; a Medicina acrescenta a investigação e as condutas médicas pertinentes. Quando esses olhares se encontram, cada profissional mantém a responsabilidade por sua avaliação, suas orientações e seus documentos.',
+          'O compartilhamento de informações tem finalidade de cuidado e respeita consentimento e sigilo. Você participa das decisões sobre a integração e pode esclarecer o que será conversado entre os profissionais.',
+          'Antes do primeiro encontro, vale pensar em uma situação que deseja compreender, quando ela começou e como interfere na sua vida. Você não precisa chegar com uma explicação pronta: essas perguntas ajudam a iniciar a conversa e a construir objetivos com o profissional.',
         ],
       },
     ],

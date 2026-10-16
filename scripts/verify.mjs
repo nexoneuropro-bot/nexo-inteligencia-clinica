@@ -65,6 +65,9 @@ for(const route of ['para-sua-empresa','riscos-psicossociais-nr1']){
  check(html.includes('26 de maio de 2026'),`${route}: vigência NR-1 contextualizada`);
  check(!html.includes('frente prevista no briefing'),`${route}: conteúdo público sem rascunho interno`);
 }
+const professionalHtml=fs.readFileSync(path.join(root,'profissionais','index.html'),'utf8');
+check(professionalHtml.includes('CRP-SP 06/176184')&&professionalHtml.includes('CRM-SP 193133'),'Profissionais: registros presentes');
+check(!/Registro informado|Apresentado no briefing|Registros, títulos e RQE|registros informados|aguardam conferência/.test(professionalHtml),'Profissionais: apresentação pública sem notas internas');
 const sitemap=fs.readFileSync(path.join(root,'sitemap.xml'),'utf8');
 check((sitemap.match(/<loc>/g)||[]).length===(production?12:0),'Sitemap incompatível com indexação');
 check(fs.readFileSync(path.join(root,'robots.txt'),'utf8').includes('Allow: /'),'Robots deve permitir ler noindex');
