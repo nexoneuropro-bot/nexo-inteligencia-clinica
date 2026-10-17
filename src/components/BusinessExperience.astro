@@ -1,5 +1,6 @@
 ---
 import ExperienceStage from './ExperienceStage.astro';
+import BusinessServices from './BusinessServices.astro';
 import {workFactors,workSteps,workSources} from '../data/work-contexts';
 import '../styles/experience.css';
 import '../styles/business-experience.css';
@@ -11,11 +12,11 @@ const {title,intro,detailed=false}=Astro.props;
   <section class="work-hero" aria-labelledby="work-title">
     <div class="work-intro">
       <a class="work-back" href="/#experience-paths">← Voltar às conexões</a>
-      <span class="work-eyebrow">PARA SUA EMPRESA · NR-1 E PREVENÇÃO</span>
+      <span class="work-eyebrow">{detailed?'PARA SUA EMPRESA · NR-1 E PREVENÇÃO':'PARA SUA EMPRESA · PESSOAS E TRABALHO'}</span>
       <h1 id="work-title">{title}</h1>
-      <p class="work-editorial">Avaliar o trabalho.<br/>Orientar a prevenção.</p>
+      <p class="work-editorial">{detailed?<>Avaliar o trabalho.<br/>Orientar a prevenção.</>:<>Selecionar com critério.<br/>Desenvolver pessoas.<br/>Qualificar o trabalho.</>}</p>
       <p class="work-lede">{intro}</p>
-      <div class="work-actions"><a class="work-primary" href="#work-pathway">Conheça o percurso de avaliação <span aria-hidden="true">↓</span></a><a href={detailed?'#conteudo-da-jornada':'/riscos-psicossociais-nr1/'}>{detailed?'Entenda as mudanças':'O que mudou na NR-1?'} ↗</a></div>
+      <div class="work-actions"><a class="work-primary" href={detailed?'#work-pathway':'#servicos-empresa'}>{detailed?'Conheça o percurso de avaliação':'Explore os serviços para empresas'} <span aria-hidden="true">↓</span></a><a href={detailed?'#conteudo-da-jornada':'/riscos-psicossociais-nr1/'}>{detailed?'Entenda as mudanças':'NR-1 e prevenção'} ↗</a></div>
       <p class="work-current">Capítulo 1.5 vigente desde 26 de maio de 2026. <a href={workSources[0].url} target="_blank" rel="noopener noreferrer">Consulte a fonte oficial ↗</a></p>
     </div>
     <div class="work-space" data-work-space>
@@ -28,6 +29,7 @@ const {title,intro,detailed=false}=Astro.props;
       <p class="work-invitation">Toque em uma conexão.<br/>Conheça uma condição a investigar.</p>
     </div>
   </section>
+  {!detailed&&<BusinessServices id="servicos-empresa"/>}
   <section class="work-contexts" id="work-contexts" aria-label="Condições a investigar" aria-live="polite">
     {workFactors.map((factor,index)=><article class="work-context" id={`work-context-${factor.id}`} data-work-context={index} hidden={index!==0} aria-labelledby={`work-heading-${factor.id}`}>
       <div><span class="work-eyebrow">UMA CONDIÇÃO A INVESTIGAR</span><h2 id={`work-heading-${factor.id}`} tabindex="-1">{factor.title}</h2></div>

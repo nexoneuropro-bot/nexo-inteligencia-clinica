@@ -1,0 +1,1312 @@
+{
+  "slug": "escuta-atencao-e-relacoes",
+  "title": "Escuta, atenção e relações: o que acontece quando ninguém escuta?",
+  "subtitle": "Todo mundo fala. Quem ainda escuta? Uma leitura sobre atenção, empatia, comportamento verbal e o que acontece quando conversar vira apenas esperar a própria vez.",
+  "description": "Entenda escuta ativa, validação, atenção e limites pela Análise do Comportamento, com exemplos cotidianos e perguntas para refletir sem pontuação.",
+  "category": "Escuta e relações",
+  "theme": "listening",
+  "draft": true,
+  "reviewed": false,
+  "migratedAt": "2026-10-16",
+  "source": {
+    "file": "Psicologia_em_Pauta_Epidemia_da_Nao_Escuta_INTERATIVA.pdf",
+    "totalPages": 17,
+    "sha256": "7da24b5dd1e4c9c5c194c8ddc22a084140c03cc79624add2ccbb00ff38462fef"
+  },
+  "credit": {
+    "name": "Gabriel Batista",
+    "label": "Crédito apresentado na edição de origem",
+    "sourcePages": [
+      1,
+      15
+    ],
+    "authorshipConfirmedBySource": false
+  },
+  "adaptationCredit": {
+    "name": "Gabriel Alves Batista",
+    "label": "Texto e curadoria",
+    "confirmedByHolder": true,
+    "confirmedAt": "2026-10-17"
+  },
+  "sections": [
+    {
+      "id": "antes-de-chamar-de-epidemia",
+      "title": "Talvez nunca tenhamos falado tanto. Isso não significa que aprendemos a escutar.",
+      "pages": [
+        1,
+        2
+      ],
+      "blocks": [
+        {
+          "type": "p",
+          "text": "A hipótese de uma epidemia da não escuta e a ditadura da própria realidade. Aqui, “epidemia” é uma provocação editorial, não uma taxa epidemiológica. A pergunta é: alguns repertórios de escuta estão sendo pouco exercitados?"
+        },
+        {
+          "type": "list",
+          "text": "Três cenas fáceis de reconhecer",
+          "items": [
+            "Responder antes de entender. A pessoa ainda constrói a ideia e a nossa defesa já nasceu.",
+            "Disputar protagonismo. A história do outro vira uma ponte para contar a nossa.",
+            "Transformar diferença em erro. “Eu faria diferente” vira “você está errado”."
+          ]
+        },
+        {
+          "type": "p",
+          "text": "O que a pesquisa encontrou. Em dois estudos pré-registrados com 646 participantes, validação verbal e perguntas de acompanhamento apareceram ligadas a marcadores de maior conexão social. Isso não prova uma “epidemia”. Mostra que comportamentos concretos de escuta podem ser observados e estudados (West et al., 2025).",
+          "review": "Referência primária e N total conferidos no resumo. Estudos analisam conversas entre desconhecidos, com parceiros treinados/experimentadores; não são levantamento epidemiológico. Os indicadores verbais foram menos consistentes em small talk, e não há promessa de efeito universal de uma técnica."
+        },
+        {
+          "type": "quote",
+          "text": "O outro corre o risco de desaparecer quando só toleramos o que confirma aquilo que já pensamos.",
+          "attribution": "Síntese editorial inspirada em Byung-Chul Han; não é citação literal de sua obra.",
+          "review": "Amostra oficial da editora Relógio D’Água, p.9–13, consultada. A frase é síntese autoral inspirada no tema do idêntico e do outro; não deve ser apresentada como frase literal de Han nem como resultado epidemiológico."
+        }
+      ]
+    },
+    {
+      "id": "antes-do-diagnostico",
+      "title": "Entre “não é nada” e “é um transtorno” existe um território clínico inteiro.",
+      "pages": [
+        3
+      ],
+      "blocks": [
+        {
+          "type": "p",
+          "text": "Saúde mental não começa no código. Ansiedade, tristeza, irritabilidade, insônia, queda de concentração, evitação e até crise de pânico podem aparecer sem, sozinhos, fecharem um diagnóstico."
+        },
+        {
+          "type": "table",
+          "columns": [
+            "1 · Sinal ou sintoma",
+            "2 · Padrão e impacto",
+            "3 · Avaliação diagnóstica"
+          ],
+          "rows": [
+            [
+              "Algo mudou e merece atenção. Um sintoma isolado não equivale automaticamente a transtorno.",
+              "Frequência, duração, intensidade, prejuízo, risco e repetição ajudam a mostrar o peso clínico.",
+              "Exige história, critérios, diagnóstico diferencial e investigação do contexto biopsicossocial."
+            ]
+          ]
+        },
+        {
+          "type": "p",
+          "text": "Rastreamento não é diagnóstico. Rastrear ajuda a identificar sinais que merecem investigação; um resultado de rastreio precisa ser compreendido em avaliação clínica. Essa distinção aparece, por exemplo, na recomendação de rastreamento de depressão em adultos da USPSTF (2023), que prevê avaliação diagnóstica posterior. Ela não significa aplicar automaticamente no Brasil o fluxo de outro sistema de saúde."
+        },
+        {
+          "type": "p",
+          "text": "O que a Psicologia acrescenta: padrões de comportamento, sofrimento subjetivo, habilidades sociais, história de aprendizagem, impacto funcional e contingências ambientais."
+        },
+        {
+          "type": "quote",
+          "text": "Nem todo sofrimento é transtorno. Todo sofrimento relevante merece escuta.",
+          "attribution": "Formulação editorial da edição de origem."
+        },
+        {
+          "type": "note",
+          "text": "As distinções ajudam a compreender o cuidado e não funcionam como critérios para autodiagnóstico ou para adiar uma avaliação necessária.",
+          "review": "Link incompatível do inventário foi substituído na fundamentação por OMS/CDDR e recomendação oficial USPSTF (2023), limitada à distinção entre rastreamento e avaliação. Não foram importados instrumentos, cortes ou recomendações de aplicação ao visitante."
+        }
+      ]
+    },
+    {
+      "id": "escuta-como-comportamento",
+      "title": "Escutar também é comportamento.",
+      "pages": [
+        4
+      ],
+      "blocks": [
+        {
+          "type": "p",
+          "text": "A teoria entra depois da cena. Em vez de adivinhar uma “essência de bom ouvinte”, podemos observar o que acontece antes, o que a pessoa faz e o que acontece depois."
+        },
+        {
+          "type": "table",
+          "columns": [
+            "A · Antes",
+            "B · Durante",
+            "C · Depois"
+          ],
+          "rows": [
+            [
+              "Estou cansado? Com pressa? Espero crítica? O celular chamou? Quero convencer?",
+              "Interrompo? Pergunto? Rebato? Resumo? Olho o celular? Mudo de assunto?",
+              "Houve alívio, aproximação, silêncio, discussão, atenção ou encerramento?"
+            ]
+          ]
+        },
+        {
+          "type": "p",
+          "text": "Exemplo de 20 segundos. O celular vibra. Você olha “só um instante”. Encontra novidade ou alívio da tensão. Se isso se repete, a tela pode competir com a atenção que a conversa exige."
+        },
+        {
+          "type": "p",
+          "text": "Skinner, sem jargão: o comportamento não aparece no vácuo. Ele se relaciona com contexto, história e consequências. Duas interrupções iguais na aparência podem ter funções diferentes (Skinner, 1953)."
+        },
+        {
+          "type": "note",
+          "text": "Na linguagem técnica: antecedentes, resposta e consequências. Na vida real: o que veio antes, o que eu fiz e o que isso produziu. Essa organização ajuda a formular hipóteses; uma cena isolada não prova uma função."
+        }
+      ]
+    },
+    {
+      "id": "quando-a-conversa-vira-defesa",
+      "title": "Às vezes, a pessoa ainda fala. A nossa resposta já está pronta.",
+      "pages": [
+        5
+      ],
+      "blocks": [
+        {
+          "type": "list",
+          "text": "Você escuta ou espera a sua vez?",
+          "items": [
+            "Ela está na terceira frase. Sua defesa está pronta desde a primeira.",
+            "Você perguntou como ela estava. Quando ela responde, você conta como você está.",
+            "Ela traz um problema. Você oferece solução antes de descobrir se ela queria ajuda."
+          ]
+        },
+        {
+          "type": "p",
+          "text": "Fuga e esquiva, em português comum. Fuga: faço algo para encerrar um desconforto que já começou. Esquiva: faço algo para impedir que um desconforto aconteça. Interromper, ironizar, racionalizar, atacar a forma como a pessoa falou ou mudar de assunto podem funcionar assim em alguns contextos."
+        },
+        {
+          "type": "exercise",
+          "text": "Uma pergunta funcional para refletir, sem registrar resposta",
+          "items": [
+            "O que eu ganho, evito ou encerro quando paro de escutar?"
+          ]
+        },
+        {
+          "type": "note",
+          "text": "Comportamento não é diagnóstico moral. A mesma forma pode ter funções diferentes. É preciso investigar contexto, consequências e história, sem inferir intenção ou função apenas pela aparência."
+        }
+      ]
+    },
+    {
+      "id": "minha-historia-nao-e-regua",
+      "title": "Minha experiência é um dado. Não é uma lei universal.",
+      "pages": [
+        6
+      ],
+      "blocks": [
+        {
+          "type": "quote",
+          "text": "Quando sou escutado e ouvido, consigo perceber meu mundo de uma nova maneira e seguir adiante.",
+          "attribution": "Carl Rogers, A Way of Being, capítulo “Experiences in Communication”, p.12–13 da reprodução inglesa consultada. Tradução livre.",
+          "review": "Trecho inglês conferido diretamente na reprodução primária, p.12–13. A tradução desta adaptação foi ajustada ao sentido do original; não é uma transcrição da tradução EPU de 1983. Relato histórico pessoal, não estimativa de eficácia clínica."
+        },
+        {
+          "type": "p",
+          "text": "Na Abordagem Centrada na Pessoa, Rogers descreve a empatia como tentar compreender a experiência do outro a partir de sua referência, verificando esse entendimento, sem se confundir com ele. É uma contribuição histórica de outra tradição, apresentada aqui em diálogo com o tema da escuta (Rogers, 1975, p.3–4).",
+          "review": "Definições de 1959 retomada e atualizada em 1975 conferidas nas p.3–4 do artigo primário digitalizado; verificação junto à referência editorial SAGE/DOI. Não se atribui esse modelo ao Behaviorismo Radical."
+        },
+        {
+          "type": "p",
+          "text": "O que a Análise do Comportamento acrescenta: histórias diferentes constroem repertórios diferentes. Família, renda, cultura, oportunidades, violência, reforçadores e punições alteram o que uma pessoa aprendeu a fazer."
+        },
+        {
+          "type": "exercise",
+          "text": "Uma pergunta que muda a conversa",
+          "items": [
+            "O que eu ainda não sei sobre a história dessa pessoa?"
+          ]
+        },
+        {
+          "type": "list",
+          "text": "Frases que parecem normais",
+          "items": [
+            "Eu consegui, então qualquer pessoa consegue.",
+            "Para mim foi fácil.",
+            "Na minha época isso não era problema."
+          ]
+        },
+        {
+          "type": "p",
+          "text": "A ditadura da própria realidade começa quando a diferença deixa de ser informação e passa a ser tratada como afronta.",
+          "review": "“Ditadura da própria realidade” é metáfora editorial, sem valor diagnóstico ou epidemiológico."
+        }
+      ]
+    },
+    {
+      "id": "escutar-validar-concordar",
+      "title": "Escutar. Validar. Concordar.",
+      "pages": [
+        7
+      ],
+      "blocks": [
+        {
+          "type": "table",
+          "text": "Três coisas diferentes",
+          "columns": [
+            "Escutar",
+            "Validar",
+            "Concordar"
+          ],
+          "rows": [
+            [
+              "Prestar atenção suficiente para compreender o que está sendo comunicado.",
+              "Reconhecer que uma emoção ou experiência faz sentido para aquela pessoa naquele contexto.",
+              "Aderir à interpretação, decisão ou conclusão apresentada."
+            ]
+          ]
+        },
+        {
+          "type": "p",
+          "text": "“Eu entendo por que isso doeu” não significa “acho correto tudo o que você fez depois disso”."
+        },
+        {
+          "type": "p",
+          "text": "Microcensura cotidiana. Às vezes ninguém proíbe você de falar. Só deixam claro o preço de dizer determinadas coisas."
+        },
+        {
+          "type": "table",
+          "columns": [
+            "Trabalho",
+            "Relacionamento",
+            "Família"
+          ],
+          "rows": [
+            [
+              "“Pode opinar.” Você discorda. Depois, sua presença some das decisões.",
+              "“Pode falar comigo.” Você fala. Recebe ironia, silêncio ou retaliação.",
+              "“Aqui todo mundo conversa.” Alguém questiona uma tradição e vira “o problemático”."
+            ]
+          ],
+          "review": "O original chama o silêncio de “punitivo”. Foi retirado esse qualificativo do exemplo: função e intenção não são inferidas de um silêncio isolado. O contexto e o efeito sobre comportamentos de falar devem ser investigados."
+        }
+      ]
+    },
+    {
+      "id": "diagnostico-e-escuta",
+      "title": "Encontrar um diagnóstico não encerra uma investigação.",
+      "pages": [
+        8
+      ],
+      "blocks": [
+        {
+          "type": "p",
+          "text": "Quando o nome chega antes da história. Diagnósticos podem organizar cuidado, favorecer acesso e dar nome a sofrimentos reais. Mas sintoma, sofrimento e transtorno não são sinônimos."
+        },
+        {
+          "type": "p",
+          "text": "Dois erros cabem na mesma pressa: transformar sofrimento em transtorno sem investigar, ou chamar de “coisa da vida” um quadro que já produz prejuízo importante."
+        },
+        {
+          "type": "list",
+          "text": "Três riscos da escuta apressada",
+          "items": [
+            "Ancoragem: tudo passa a ser explicado pelo primeiro rótulo.",
+            "Identidade rígida: “sou assim porque tenho X” vira regra absoluta.",
+            "Contexto apagado: sono, trauma, saúde física, relações, trabalho e condições sociais somem."
+          ]
+        },
+        {
+          "type": "p",
+          "text": "Diagnóstico é ferramenta. Ele deve ampliar possibilidades de cuidado. Não esgota identidade, contexto nem possibilidade de mudança."
+        },
+        {
+          "type": "note",
+          "text": "Perspectiva biopsicossocial: um bom cuidado não precisa escolher entre biologia, psicologia e contexto social. Precisa integrá-los.",
+          "review": "Preservada a perspectiva do acervo sem sugerir oposição à Psiquiatria. Bradford et al. é revisão sobre erros diagnósticos, não demonstra taxa universal de sobrediagnóstico; OMS/ICD-11 fundamentam a distinção clínica geral."
+        }
+      ]
+    },
+    {
+      "id": "atencao-na-era-digital",
+      "title": "Você está lá. Mas está presente?",
+      "pages": [
+        9
+      ],
+      "blocks": [
+        {
+          "type": "p",
+          "text": "Escuta ativa não é presença física. É presença percebida. A tela pode competir com a relação."
+        },
+        {
+          "type": "p",
+          "text": "Uma meta-análise de 52 estudos, 58 amostras e 19.698 participantes encontrou associação entre partner phubbing — dar atenção ao celular enquanto se deixa de atender o parceiro ou a parceira — e menor satisfação relacional, intimidade, responsividade e maior conflito (Ni et al., 2025)."
+        },
+        {
+          "type": "note",
+          "text": "A maior parte da literatura é correlacional, portanto associação não é sinônimo de causalidade. A síntese trata de relações românticas e não permite classificar uma pessoa ou explicar toda dificuldade de comunicação.",
+          "review": "Números e limitação metodológica conferidos no artigo primário. Não converter expressões causais de trechos do artigo em causalidade estabelecida pela meta-análise."
+        },
+        {
+          "type": "quote",
+          "text": "Minha experiência é aquilo a que concordo em prestar atenção.",
+          "attribution": "William James, The Principles of Psychology (1890), capítulo XI, tradução livre.",
+          "review": "Texto primário conferido no acervo acadêmico da York University, cap. XI, p. 402–403 da paginação histórica. Não interpretar como se atenção dependesse apenas de escolha voluntária."
+        },
+        {
+          "type": "table",
+          "columns": [
+            "Estar ali",
+            "Acolher"
+          ],
+          "rows": [
+            [
+              "Silêncio, respostas automáticas, atenção dividida podem acompanhar a presença física.",
+              "Compreender, verificar, demonstrar curiosidade e responder ao que realmente foi dito podem comunicar acolhimento."
+            ]
+          ],
+          "review": "Acrescentado “podem”: silêncio ou atenção visível não bastam para avaliar escuta, empatia ou condição clínica. Necessidades de comunicação variam."
+        },
+        {
+          "type": "exercise",
+          "text": "Uma pergunta para levar à conversa",
+          "items": [
+            "Depois de falar comigo, o outro sente que foi percebido ou apenas que eu estava fisicamente presente?",
+            "Como posso verificar essa percepção sem presumir que sei o que a pessoa sentiu?"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "escuta-na-pratica",
+      "title": "Oito atitudes possíveis em uma conversa real",
+      "pages": [
+        10
+      ],
+      "blocks": [
+        {
+          "type": "p",
+          "text": "Pequenas atitudes podem mudar a experiência de quem fala. Elas são possibilidades para o contexto da conversa, não uma performance de técnicas ou uma garantia sobre como o outro vai se sentir.",
+          "review": "Preservada a proposta prática, com linguagem de possibilidade em lugar de efeito interpessoal garantido."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Deixe a pessoa terminar. Não preencha todo silêncio.",
+            "Faça perguntas de continuidade. “O que aconteceu depois?”",
+            "Verifique entendimento. “Entendi que você quis dizer... é isso?”",
+            "Reconheça a emoção. Sem transformar validação em concordância.",
+            "Guarde o celular, especialmente em conversas importantes, quando isso for possível.",
+            "Repare quando falhar. “Eu te interrompi. Continua.”",
+            "Não roube a história. Sua experiência pode esperar alguns minutos.",
+            "Pergunte o que a pessoa precisa: escuta, opinião ou ajuda para resolver?"
+          ]
+        },
+        {
+          "type": "exercise",
+          "text": "Pergunta de bolso",
+          "items": [
+            "Você quer que eu apenas escute, quer minha opinião ou quer pensar em soluções comigo?"
+          ]
+        },
+        {
+          "type": "quote",
+          "text": "A atenção é a forma mais rara e mais pura de generosidade.",
+          "attribution": "Simone Weil, carta a Joë Bousquet de 13 de abril de 1942, p.18 da digitalização consultada. Tradução livre.",
+          "review": "Literalidade francesa conferida visualmente na carta primária, segunda página do PDF ARSMAGICA, p.18 impressa. É reflexão epistolar/filosófica, sem valor de prova clínica ou estatística."
+        }
+      ]
+    },
+    {
+      "id": "pausa-limites-e-retorno",
+      "title": "Pausa, limites e possibilidade de retorno",
+      "pages": [
+        11
+      ],
+      "blocks": [
+        {
+          "type": "p",
+          "text": "Falar também é cuidar. Tudo bem não estar pronto para conversar. Quando a conversa pode continuar em segurança, combinar uma pausa e uma possibilidade de retorno ajuda a tornar o limite compreensível."
+        },
+        {
+          "type": "p",
+          "text": "Uma pausa pode ajudar a regular a interação e também pode interromper ou prevenir uma experiência aversiva. A presença ou ausência de retorno, sozinha, não define a função do comportamento. Fuga e esquiva não são diagnósticos morais; em algumas condições, afastar-se é necessário para proteção.",
+          "review": "Revisão precisa da p. 11: retiradas as equivalências “vira esquiva quando [...] nunca existe retorno” e “pausa só é cuidado quando existe uma ponte de volta”. A função exige investigação de relações/história; retorno não é obrigação em situação insegura."
+        },
+        {
+          "type": "list",
+          "text": "Frases possíveis para combinar uma pausa",
+          "items": [
+            "Quero te ouvir, mas agora estou reativo. Posso respirar e voltamos às 20h?",
+            "Esse assunto importa. Preciso de 20 minutos para organizar meus pensamentos e volto.",
+            "Não consigo conversar bem enquanto estamos gritando. Quero continuar quando diminuirmos o tom."
+          ]
+        },
+        {
+          "type": "p",
+          "text": "Quando for possível e seguro, combine um horário, cumpra o retorno e reconheça se adiou além do combinado. O retorno pode ser renegociado; uma pessoa não precisa se manter em uma interação que oferece risco.",
+          "review": "Preservada a orientação prática sobre combinar/retomar e acrescentada a condição de segurança e possibilidade, sem prescrever reconciliação ou permanência."
+        },
+        {
+          "type": "p",
+          "text": "Quando não é hora de insistir: se houver risco, ameaça, violência, intoxicação importante ou perda grave de controle, priorize segurança e ajuda adequada."
+        },
+        {
+          "type": "note",
+          "text": "Escutar não é se abandonar. Limites claros podem proteger a conversa e o vínculo."
+        }
+      ]
+    },
+    {
+      "id": "barreiras-para-observar",
+      "title": "Quais barreiras aparecem quando você tenta escutar?",
+      "pages": [
+        12
+      ],
+      "blocks": [
+        {
+          "type": "p",
+          "text": "Explore as observações abaixo pensando em situações concretas. Você pode apenas refletir: não é necessário marcar frequência, somar pontos ou compartilhar informações pessoais. Um enunciado não descreve toda a sua história."
+        },
+        {
+          "type": "exercise",
+          "text": "Doze observações sobre possíveis barreiras à escuta",
+          "items": [
+            "Enquanto alguém fala, preparo mentalmente a minha resposta.",
+            "Interrompo para corrigir detalhes ou explicar o que eu penso.",
+            "Completo frases de outras pessoas.",
+            "Olho notificações ou mexo no celular durante conversas importantes.",
+            "Quando me sinto criticado, começo a me defender antes de a pessoa terminar.",
+            "Dou conselhos antes de perguntar se a pessoa quer conselho.",
+            "Transformo rapidamente a experiência da pessoa em uma história minha.",
+            "Mudo de assunto quando a conversa começa a me deixar desconfortável.",
+            "Faço perguntas principalmente para provar meu ponto.",
+            "Presumo saber o que a pessoa quis dizer antes de verificar.",
+            "Uso ironia, sarcasmo ou mudança de foco quando discordo.",
+            "Depois da conversa, lembro pouco do que a pessoa realmente disse."
+          ],
+          "review": "Todos os 12 enunciados originais preservados. Retirados período autorreferido de quatro semanas, respostas 0–3, soma, aferição e instrução de consultar faixas; convertidos em reflexão educativa sem coleta, medida ou classificação."
+        },
+        {
+          "type": "exercise",
+          "text": "Perguntas que acrescentam contexto",
+          "items": [
+            "Em que situações algum desses comportamentos aparece?",
+            "O que estava acontecendo antes? O que aconteceu depois?",
+            "Em qual ocasião semelhante foi diferente?"
+          ]
+        },
+        {
+          "type": "note",
+          "text": "Esta atividade não é teste psicológico, não produz diagnóstico e não mede personalidade. As observações não possuem escore, normas ou resultado individual."
+        }
+      ]
+    },
+    {
+      "id": "repertorios-para-observar",
+      "title": "Sua escuta acolhe ou você apenas está presente?",
+      "pages": [
+        13
+      ],
+      "blocks": [
+        {
+          "type": "p",
+          "text": "Aqui você observa comportamentos de escuta ativa: atenção, compreensão, validação, curiosidade e reparo. Considere o contexto e a possibilidade de perguntar ao outro como foi a conversa, sem transformar cada item em exigência universal."
+        },
+        {
+          "type": "exercise",
+          "text": "Outras doze observações sobre repertórios de escuta",
+          "items": [
+            "Faço perguntas ligadas ao que a pessoa acabou de dizer.",
+            "Tolero alguns segundos de silêncio sem preencher imediatamente.",
+            "Verifico se entendi corretamente antes de tirar conclusões.",
+            "Reconheço uma emoção sem precisar concordar com a conclusão.",
+            "Consigo ouvir uma crítica inteira antes de começar a me defender.",
+            "Pergunto se a pessoa quer escuta, opinião ou ajuda para resolver.",
+            "Deixo o celular de lado em conversas importantes.",
+            "Percebo mudanças relevantes no tom, ritmo ou expressão do outro.",
+            "Consigo admitir quando uma informação mudou minha interpretação.",
+            "Lembro depois de informações importantes que alguém compartilhou.",
+            "Quando interrompo ou entendo errado, consigo reparar e devolver a palavra.",
+            "Demonstro curiosidade por realidades diferentes das minhas."
+          ],
+          "review": "Os 12 enunciados originais (13–24) foram preservados integralmente. Retirados escala/soma/anexo classificatório. Observar tom/ritmo/expressão não permite inferir empatia, intenção ou diagnóstico."
+        },
+        {
+          "type": "note",
+          "text": "Pessoas podem precisar de mais tempo, comunicação escrita, pausas ou outras condições sensoriais. Um estilo de comunicação, silêncio ou contato visual não define sozinho interesse ou capacidade de escuta.",
+          "review": "Acréscimo contextual para não converter os prompts em norma rígida ou classificação de pessoas neurodivergentes; precisa de revisão editorial com o restante da edição."
+        }
+      ]
+    },
+    {
+      "id": "contexto-e-instituicoes",
+      "title": "Nem toda falha de escuta tem a mesma origem.",
+      "pages": [
+        14
+      ],
+      "blocks": [
+        {
+          "type": "p",
+          "text": "Contextualizar não é retirar responsabilidade. Sono, dor, ansiedade, depressão, estresse, substâncias, neurodesenvolvimento, sobrecarga, violência, cultura e condições econômicas podem mudar atenção e disponibilidade.",
+          "review": "Preservar “podem” e não inferir condição clínica, substância ou neurodivergência a partir de uma dificuldade de escuta. A lista organiza possibilidades de contexto, sem diagnóstico diferencial automatizado."
+        },
+        {
+          "type": "table",
+          "columns": [
+            "Biológico",
+            "Psicológico",
+            "Social"
+          ],
+          "rows": [
+            [
+              "Sono, dor, saúde física, medicação e substâncias.",
+              "Ansiedade, humor, trauma, história de aprendizagem e repertórios.",
+              "Relações, cultura, poder, trabalho, renda e condições de vida."
+            ]
+          ]
+        },
+        {
+          "type": "list",
+          "text": "Escuta também é institucional",
+          "items": [
+            "Saúde: consulta curta demais para compreender a história.",
+            "Assistência social: demanda transformada apenas em formulário.",
+            "Educação: escuta que só começa depois da crise.",
+            "Trabalho: canal de fala sem consequência real.",
+            "Políticas públicas: decisões que contam números, mas não experiências."
+          ]
+        },
+        {
+          "type": "p",
+          "text": "Uma sociedade que escuta melhor precisa de instituições capazes de responder ao que ouvem."
+        },
+        {
+          "type": "note",
+          "text": "Quando vale buscar ajuda: quando conflitos, explosões, isolamento ou dificuldade de sustentar conversas difíceis começam a afetar repetidamente relações, trabalho, estudo ou bem-estar. A necessidade de ajuda não depende de preencher uma pontuação."
+        }
+      ]
+    },
+    {
+      "id": "como-e-conversar-comigo",
+      "title": "Talvez você fale muito bem. A pergunta é: alguém consegue existir enquanto você fala?",
+      "pages": [
+        15
+      ],
+      "blocks": [
+        {
+          "type": "p",
+          "text": "Escutar não exige abandonar opinião, história ou limites. Exige permitir que outra história tenha espaço suficiente para produzir algum efeito."
+        },
+        {
+          "type": "p",
+          "text": "Uma conversa deixa pistas. Algumas pessoas saem dela mais compreendidas e capazes de pensar. Outras saem corrigidas, culpadas ou cansadas de tentar explicar."
+        },
+        {
+          "type": "p",
+          "text": "Compreender não é justificar. A Análise do Comportamento investiga relações entre contexto, história e consequências, incluindo acontecimentos privados. Rogers discute a compreensão empática na Abordagem Centrada na Pessoa. São perspectivas distintas sobre um tema compartilhado, não uma única teoria. No campo das habilidades sociais, possibilidades de interação podem ser desenvolvidas e avaliadas em seu contexto (Del Prette e Del Prette, 2017).",
+          "review": "Diálogo explicitado sem fundir pressupostos. Escopo geral do livro confirmado na apresentação dos autores, sem afirmar leitura integral ou eficácia de um programa específico."
+        },
+        {
+          "type": "exercise",
+          "text": "Como é conversar comigo? Cinco perguntas para um feedback, quando for possível e seguro",
+          "items": [
+            "Você consegue terminar suas frases quando fala comigo?",
+            "Quando discorda, sente que eu tento compreender antes de responder?",
+            "Minhas perguntas parecem curiosidade ou tentativa de provar um ponto?",
+            "Existe algo que eu faço que faz você desistir de conversar comigo?",
+            "O que eu poderia fazer para você se sentir mais ouvido?"
+          ]
+        },
+        {
+          "type": "p",
+          "text": "Escuta qualificada não é apenas estar perto. Envolve atenção, compreensão, resposta e a possibilidade de a pessoa perceber que foi ouvida.",
+          "review": "Revisão de “produzir no outro a experiência de ter sido percebido”: não prometer controle da percepção alheia. A segunda ocorrência da mesma frase atribuída a Weil foi consolidada na seção de práticas; não se perde argumento ou fonte."
+        }
+      ]
+    },
+    {
+      "id": "possibilidades-sem-classificacao",
+      "title": "Possibilidades de prática, sem classificar você",
+      "pages": [
+        16
+      ],
+      "blocks": [
+        {
+          "type": "p",
+          "text": "Não existe um veredito sobre sua capacidade de escuta nesta leitura. Você pode reconhecer situações em que há mais atenção, outras em que pressa, defesa, distração ou competição atrapalham e ainda outras em que ficar em silêncio não comunica compreensão."
+        },
+        {
+          "type": "list",
+          "text": "Caminhos possíveis a observar no cotidiano",
+          "items": [
+            "Continue pedindo feedback ao outro, mesmo em conversas em que percebe presença e acolhimento.",
+            "Se você fica quieto, mas não verifica o que foi compreendido, experimente perguntas e verificação de entendimento.",
+            "Quando há recursos de escuta, mas eles oscilam sob tensão ou distração, observe quais condições mudaram.",
+            "Se sente que precisa se defender, uma pausa com possibilidade de retorno pode ajudar, quando isso for seguro.",
+            "Se pressa, esquiva ou disputa aparecem com regularidade, considere uma mudança concreta de cada vez e observe o que acontece.",
+            "Considere buscar apoio quando o impacto nas relações, no trabalho ou no bem-estar for relevante."
+          ]
+        },
+        {
+          "type": "note",
+          "text": "O exercício original era educativo e exploratório, sem normas populacionais, valor diagnóstico ou validade psicométrica estabelecida. Nesta adaptação, os temas e possibilidades de prática foram preservados, e as somas, faixas e cruzamentos de resultados foram retirados.",
+          "review": "Mudança substantiva da p. 16: não publicar cortes 0–12/13–24/25–36, perfis “em construção/oscilante/consistente” ou quatro combinações de resultados. Mensagens práticas reescritas para todos os leitores, sem inferir perfil a partir de respostas. O original permanece no acervo local."
+        }
+      ]
+    },
+    {
+      "id": "referencias-e-transparencia",
+      "title": "Bases para concordar, discordar e investigar",
+      "pages": [
+        17
+      ],
+      "blocks": [
+        {
+          "type": "p",
+          "text": "Esta edição propõe uma hipótese e convida à observação. A expressão “epidemia da não escuta” é metáfora editorial, não taxa epidemiológica demonstrada."
+        },
+        {
+          "type": "p",
+          "text": "Sobre a atividade: as observações servem para reflexão e curiosidade. A versão web não utiliza escores nem pontos de corte e não substitui avaliação psicológica ou multiprofissional.",
+          "review": "Atualização necessária da nota original sobre escores após a adaptação sem pontuação."
+        },
+        {
+          "type": "p",
+          "text": "Sobre as citações: os destaques de Rogers, James e Weil são traduções livres de trechos primários conferidos, com obra e localização indicadas. Han aparece como síntese editorial inspirada, sem atribuição literal. Essas contribuições históricas e filosóficas têm papel diferente dos dados de pesquisas e das formulações clínicas da Análise do Comportamento."
+        },
+        {
+          "type": "quote",
+          "text": "Uma escuta qualificada não é uma performance de técnicas. É atenção, compreensão, resposta e capacidade de reparar quando falhamos.",
+          "attribution": "Síntese editorial da edição de origem."
+        }
+      ]
+    }
+  ],
+  "references": [
+    {
+      "label": "BRADFORD, A. et al. Diagnostic error in mental health: a review. BMJ Quality & Safety, v. 33, n. 10, p. 663–672, 2024. DOI: 10.1136/bmjqs-2023-016996.",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11503128/",
+      "verification": "verified",
+      "note": "Nova consulta ao artigo original em reprodução PMC, além do registro PubMed: revisão de definições, métodos e fontes de erro diagnóstico. Não oferece taxa universal de sobrediagnóstico nem diagnóstico de um caso individual."
+    },
+    {
+      "label": "US PREVENTIVE SERVICES TASK FORCE. Depression and suicide risk in adults: screening. Recomendação final, 20 jun. 2023.",
+      "url": "https://www.uspreventiveservicestaskforce.org/uspstf/recommendation/screening-depression-suicide-risk-adults",
+      "verification": "verified",
+      "note": "Seção de avaliação diagnóstica posterior ao rastreamento positivo conferida na recomendação oficial. Substitui o endpoint incompatível de Linhas de Cuidado da bibliografia original; essa referência histórica está preservada nas respostas de revisão. Não importa um protocolo norte-americano para o site nem embasa aplicação de teste."
+    },
+    {
+      "label": "BRASIL. Ministério da Saúde. Pesquisa Nacional de Saúde Mental realiza coleta de dados em 197 municípios. Brasília, DF, 3 set. 2026.",
+      "url": "https://www.gov.br/saude/pt-br/assuntos/noticias-ms/2026/setembro/pesquisa-nacional-de-saude-mental-realiza-coleta-de-dados-em-197-municipios",
+      "verification": "verified",
+      "note": "Notícia oficial e data conferidas. O PDF a lista, mas não desenvolve dado específico no corpo. Manter como leitura de contexto; não inventar resultados finais da pesquisa."
+    },
+    {
+      "label": "DEL PRETTE, A.; DEL PRETTE, Z. A. P. Competência social e habilidades sociais: manual teórico-prático. Petrópolis: Vozes, 2017.",
+      "verification": "verified",
+      "note": "Conferência bibliográfica e de escopo na apresentação dos próprios autores: 1ª edição, Vozes, 2017, ISBN 9788532655271, treino e desenvolvimento contextual de repertórios sociais. Não houve leitura integral; não sustenta eficácia universal das oito atitudes nem validade dos prompts da edição.",
+      "url": "https://institutodelprette.com.br/livros/competencia-social-e-habilidades-sociais-manual-teorico-pratico/"
+    },
+    {
+      "label": "FRANCES, A. Saving normal: an insider’s revolt against out-of-control psychiatric diagnosis. New York: William Morrow, 2013.",
+      "verification": "pending",
+      "note": "A editora confirma título e autoria, mas o exemplar de 2013 e páginas de uso não foram conferidos. Permanece leitura crítica da bibliografia de origem, sem ser base de estatística, critério diagnóstico ou afirmação clínica do corpo. Decisão editorial: mantê-lo apenas como leitura complementar ou conferir exemplar antes de citá-lo substantivamente.",
+      "url": "https://www.harpercollins.com/products/saving-normal-allen-frances"
+    },
+    {
+      "label": "HAN, B.-C. A expulsão do outro. Lisboa: Relógio D’Água, 2018.",
+      "verification": "verified",
+      "note": "Amostra primária oficial da editora, p.9–13, e catálogo editorial consultados. Confirma a discussão filosófica sobre o idêntico/outro; a frase do artigo é síntese autoral inspirada. Não foram conferidos todos os capítulos, nem criada uma citação literal ou evidência de epidemia.",
+      "url": "https://relogiodagua.pt/wp-content/uploads/2018/04/9789896418434.pdf"
+    },
+    {
+      "label": "JAMES, W. The principles of psychology. New York: Henry Holt, 1890. Capítulo XI: Attention.",
+      "url": "https://www.yorku.ca/pclassic/James/Principles/prin11.htm",
+      "verification": "verified",
+      "note": "Texto primário reconferido no capítulo XI, abertura, p.402 da paginação histórica. Frase curta em tradução livre; o próprio capítulo distingue modalidades de atenção. Não implica que atenção dependa apenas de decisão voluntária."
+    },
+    {
+      "label": "NI, N.; AHRARI, S.; ZAREMOHZZABIEH, Z.; ZAREAN, M.; ROSLAN, S. A meta-analytic study of partner phubbing and its antecedents and consequences. Frontiers in Psychology, v. 16, 2025. DOI: 10.3389/fpsyg.2025.1561159.",
+      "url": "https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2025.1561159/full",
+      "verification": "verified",
+      "note": "Resumo, resultados e limitações metodológicas do artigo primário reconferidos: 52 estudos/58 amostras/19.698 participantes, predomínio transversal e associação em relações românticas. Não estabelece direção causal nem diagnóstico de pessoa ou casal."
+    },
+    {
+      "label": "ROGERS, Carl R. A Way of Being. Boston: Houghton Mifflin, 1980. Capítulo Experiences in Communication, p.12–13 da reprodução inglesa consultada.",
+      "url": "https://vedantaatlanta.org/wp-content/uploads/2024/07/5-Rogers-Experiences-in-Communication.pdf",
+      "verification": "verified",
+      "note": "Trecho primário inglês conferido em reprodução digital do capítulo, com folha de rosto e paginação. Tradução livre própria; a referência EPU 1983 da edição de origem foi registrada nas respostas, sem afirmar que essa tradução foi consultada. Texto histórico pessoal, não ensaio controlado de eficácia."
+    },
+    {
+      "label": "SKINNER, B. F. Science and human behavior. New York: Macmillan, 1953.",
+      "url": "https://www.bfskinner.org/wp-content/uploads/2014/02/ScienceHumanBehavior.pdf",
+      "verification": "verified",
+      "note": "Texto primário disponibilizado pela fundação; usado para distinções conceituais e ressalva sobre inferir fuga/esquiva por aparência ou ausência de retorno."
+    },
+    {
+      "label": "WEIL, S. Carta a Joë Bousquet, 13 abr. 1942. In: Correspondance. Lausanne: L’Age d’Homme, 1982.",
+      "verification": "verified",
+      "note": "Carta primária datada 13/04/1942 e frase francesa conferidas visualmente na digitalização: p.18 impressa, segunda página do arquivo. Localização declarada na reprodução efetivamente consultada; não se afirma validar cada dado da ficha da edição de 1982. Tradução livre, reflexão filosófica.",
+      "url": "https://www.arsmagica.fr/sites/default/files/Textes/Weil_Bousquet%20_13_avril_1942.pdf"
+    },
+    {
+      "label": "WEST, T. N.; HUSTON, S.; CHANDLER, K. R.; ZHOU, J.; FREDRICKSON, B. L. High-quality listening behaviors linked to social connection between strangers. Communications Psychology, v. 3, art. 165, 2025. DOI: 10.1038/s44271-025-00342-2.",
+      "url": "https://www.nature.com/articles/s44271-025-00342-2",
+      "verification": "verified",
+      "note": "Resumo original reconferido: dois estudos pré-registrados, total N=646, conversas entre desconhecidos; associação de validação/perguntas com marcadores de conexão mais consistente no estudo de deep talk. Não é taxa de não escuta, ensaio de terapia nem promessa universal de uma técnica."
+    },
+    {
+      "label": "WORLD HEALTH ORGANIZATION. Mental disorders. Geneva: WHO. Página atualizada em 11 set. 2026; a edição de origem a lista como 2025.",
+      "url": "https://www.who.int/en/news-room/fact-sheets/detail/mental-disorders",
+      "verification": "verified",
+      "note": "Página oficial atual consultada, com distinção de transtorno e condições de saúde mental; não introduzidas novas estatísticas de prevalência no artigo."
+    },
+    {
+      "label": "WORLD HEALTH ORGANIZATION. Clinical descriptions and diagnostic requirements for ICD-11 mental, behavioural and neurodevelopmental disorders. Geneva: WHO, 2024.",
+      "url": "https://iris.who.int/bitstream/handle/10665/375767/9789240077263-eng.pdf",
+      "verification": "verified",
+      "note": "Fonte primária acrescentada nesta migração para as distinções gerais de perturbação clinicamente significativa, sofrimento/impacto e avaliação. Não é um roteiro de autodiagnóstico."
+    },
+    {
+      "label": "ROGERS, Carl R. Empathic: an unappreciated way of being. The Counseling Psychologist, v.5, n.2, p.2–10, 1975. DOI: 10.1177/001100007500500202.",
+      "url": "https://journals.sagepub.com/doi/10.1177/001100007500500202",
+      "verification": "verified",
+      "note": "Metadados na editora SAGE conferidos e conteúdo primário das p.3–4 lido na digitalização em https://www.sakkyndig.com/psykologi/artvit/rogers1975.pdf. Fundamenta a paráfrase histórica de empatia. Não representa posição da Análise do Comportamento nem consenso de eficácia atual."
+    }
+  ],
+  "reviewNotes": [
+    "Migração extensa de todas as 17 páginas físicas; argumento, exemplos, distinções, práticas, 24 enunciados e perguntas finais preservados. Cabeçalhos/rodapés repetidos, duplicação da frase de Weil e recorte gráfico residual não foram convertidos em leitura duplicada.",
+    "A edição apresenta Gabriel Batista nas páginas 1 e 15. Em 17/10/2026, o titular confirmou a assinatura desta adaptação HTML: Texto e curadoria de Gabriel Alves Batista.",
+    "Mudanças substantivas da p. 11 estão identificadas por bloco: a ausência de retorno não define esquiva; fuga/esquiva não são julgamentos morais; manter ou retomar uma conversa depende de segurança e possibilidade.",
+    "Mudanças substantivas das p. 12–13/16: preservados os 24 enunciados educativos, retirados escala 0–3, soma, período de aferição, faixas 0–12/13–24/25–36 e cruzamentos classificatórios. Conteúdo prático da p. 16 convertido em possibilidades para todos, sem resultado individual ou dados capturados.",
+    "O PDF informa ausência de validade psicométrica e normas populacionais. Avisos não transformam as faixas originais em medida válida; esta migração não publica esses resultados nem constrói instrumento psicológico.",
+    "Rogers, Weil e James foram conferidos em reproduções primárias; traduções livres e localização efetivamente lida estão identificadas. Han permanece síntese autoral cotejada com a amostra oficial. Retratos do acervo continuam ilustrações editoriais, não fotografias históricas.",
+    "O registro incompatível de Rastreamento/diagnóstico foi substituído nas fontes ativas pela recomendação oficial USPSTF, em conjunto com OMS/CDDR; o título original, o problema e a ação estão preservados em reviewResponses. Não há conclusão sobre causa técnica do endpoint.",
+    "Estudos West/Ni e revisão Bradford foram conferidos. Respeitar contexto de amostras, associações e limites; não transformar dados em epidemia, diagnóstico ou promessa de reparação de vínculos.",
+    "O recorte abaixo da imagem da p. 9 contém fragmento de tabela e texto estranho. É resíduo visual, não gráfico de estudo: não migrar nem inventar legenda/dado. Nenhuma imagem foi incorporada por esta migração de dados.",
+    "Preservado diálogo com biologia/contexto e diferentes tradições, com distinções. A abordagem clínica da NEXO não deve parecer uma fusão não explicada entre Rogers, Skinner, Han, James e Weil.",
+    "Rascunho não aprovado: sem publicação, indexação, escore, diagnóstico, coleta de respostas ou transmissão de dados pessoais. A data de migração não é data de publicação ou aprovação clínica."
+  ],
+  "seoTitle": "Escuta e atenção nas relações",
+  "researchReviewedAt": "2026-10-17",
+  "reviewResponses": [
+    {
+      "note": "Migração extensa de todas as 17 páginas físicas; argumento, exemplos, distinções, práticas, 24 enunciados e perguntas finais preservados. Cabeçalhos/rodapés repetidos, duplicação da frase de Weil e recorte gráfico residual não foram convertidos em leitura duplicada.",
+      "response": "A cobertura das dezessete páginas permanece, com os 24 enunciados e práticas. Somente repetição gráfica e resíduo visual não foram promovidos a conteúdo.",
+      "action": "Conservar a migração extensa e a organização de páginas.",
+      "status": "resolved"
+    },
+    {
+      "note": "A edição apresenta Gabriel Batista nas páginas 1 e 15. Em 17/10/2026, o titular confirmou a assinatura desta adaptação HTML: Texto e curadoria de Gabriel Alves Batista.",
+      "response": "A confirmação do titular já resolve a assinatura da adaptação. Não altera o que o documento original dizia.",
+      "action": "Preservar source, credit e adaptationCredit.",
+      "status": "resolved"
+    },
+    {
+      "note": "Mudanças substantivas da p. 11 estão identificadas por bloco: a ausência de retorno não define esquiva; fuga/esquiva não são julgamentos morais; manter ou retomar uma conversa depende de segurança e possibilidade.",
+      "response": "A função é uma relação a investigar; não é dedutível de retornar ou não à conversa. A orientação de segurança permanece e não obriga reconciliação.",
+      "action": "Manter as correções da p.11 e frases práticas condicionadas à segurança.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "Skinner — Science and Human Behavior, texto primário",
+          "url": "https://www.bfskinner.org/wp-content/uploads/2014/02/ScienceHumanBehavior.pdf"
+        }
+      ]
+    },
+    {
+      "note": "Mudanças substantivas das p. 12–13/16: preservados os 24 enunciados educativos, retirados escala 0–3, soma, período de aferição, faixas 0–12/13–24/25–36 e cruzamentos classificatórios. Conteúdo prático da p. 16 convertido em possibilidades para todos, sem resultado individual ou dados capturados.",
+      "response": "Os 24 temas foram preservados e continuam abertos a reflexão contextual. Não há base psicométrica verificada para pontos de corte ou perfis.",
+      "action": "Manter retirada de soma, escala e classificação; a adaptação pedagógica aguarda aprovação editorial.",
+      "status": "editorial-decision"
+    },
+    {
+      "note": "O PDF informa ausência de validade psicométrica e normas populacionais. Avisos não transformam as faixas originais em medida válida; esta migração não publica esses resultados nem constrói instrumento psicológico.",
+      "response": "Um aviso de ausência de validade não valida a classificação. Os prompts funcionam aqui como material educativo sem resultado individual.",
+      "action": "Não restaurar escores ou faixas; não apresentar os prompts como instrumento psicológico.",
+      "status": "resolved"
+    },
+    {
+      "note": "Citações de Rogers e Weil continuam pendentes de conferência primária; James foi conferido. Han permanece síntese inspirada. Retratos desses pensadores são ilustrações editoriais, não fotografias históricas.",
+      "response": "Weil foi conferida visualmente na carta, p.18. Rogers foi conferido no capítulo inglês, p.12–13, e a definição de empatia no artigo de1975, p.3–4. James foi reconferido no capítulo XI, p.402. Han permanece síntese autoral, cotejada com a amostra oficial. Nenhuma ilustração é fotografia histórica.",
+      "action": "Atualizar traduções/atribuições e referências com as reproduções efetivamente consultadas; não alegar conferência da tradução EPU1983.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "Weil — carta a Joë Bousquet de 13/04/1942, p.18",
+          "url": "https://www.arsmagica.fr/sites/default/files/Textes/Weil_Bousquet%20_13_avril_1942.pdf"
+        },
+        {
+          "label": "Rogers — Experiences in Communication, reprodução primária",
+          "url": "https://vedantaatlanta.org/wp-content/uploads/2024/07/5-Rogers-Experiences-in-Communication.pdf"
+        },
+        {
+          "label": "Rogers — Empathic: An Unappreciated Way of Being, artigo original",
+          "url": "https://journals.sagepub.com/doi/10.1177/001100007500500202"
+        },
+        {
+          "label": "Rogers — digitalização do artigo de 1975, p.3–4",
+          "url": "https://www.sakkyndig.com/psykologi/artvit/rogers1975.pdf"
+        },
+        {
+          "label": "James — The Principles of Psychology, capítulo XI",
+          "url": "https://www.yorku.ca/pclassic/James/Principles/prin11.htm"
+        },
+        {
+          "label": "Han — A expulsão do outro, amostra oficial da editora",
+          "url": "https://relogiodagua.pt/wp-content/uploads/2018/04/9789896418434.pdf"
+        }
+      ]
+    },
+    {
+      "note": "Não manter o link de Rastreamento/diagnóstico que retornou conteúdo incompatível; a referência original aparece sem URL e com verification=replace. Não há conclusão sobre a causa técnica do problema no endpoint.",
+      "response": "O endpoint incompatível não foi reaberto nem usado como evidência. A fundamentação foi substituída por OMS/CDDR e recomendação oficial que distingue rastreio de diagnóstico.",
+      "action": "Retirar o registro inválido das fontes ativas e preservar seu título original nesta resposta: BRASIL. Ministério da Saúde. Rastreamento/diagnóstico — transtornos de ansiedade no adulto. Linhas de Cuidado, [s.d.].",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "OMS — ICD-11 CDDR, documento clínico oficial",
+          "url": "https://www.who.int/publications/i/item/9789240077263"
+        },
+        {
+          "label": "USPSTF — recomendação oficial, seção sobre diagnóstico após rastreamento",
+          "url": "https://www.uspreventiveservicestaskforce.org/uspstf/recommendation/screening-depression-suicide-risk-adults"
+        }
+      ]
+    },
+    {
+      "note": "Estudos West/Ni e revisão Bradford foram conferidos. Respeitar contexto de amostras, associações e limites; não transformar dados em epidemia, diagnóstico ou promessa de reparação de vínculos.",
+      "response": "Os números de West e Ni e os limites da revisão Bradford foram reconferidos nas publicações originais. A linguagem continua associativa e contextual.",
+      "action": "Manter N=646 e 52/58/19.698, sem prevalência de “epidemia”, efeito terapêutico ou causalidade generalizada.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "West et al. — pesquisa original sobre escuta e conexão",
+          "url": "https://www.nature.com/articles/s44271-025-00342-2"
+        },
+        {
+          "label": "Ni et al. — meta-análise original de partner phubbing",
+          "url": "https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2025.1561159/full"
+        },
+        {
+          "label": "Bradford et al. — revisão original de erro diagnóstico",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11503128/"
+        }
+      ]
+    },
+    {
+      "note": "O recorte abaixo da imagem da p. 9 contém fragmento de tabela e texto estranho. É resíduo visual, não gráfico de estudo: não migrar nem inventar legenda/dado. Nenhuma imagem foi incorporada por esta migração de dados.",
+      "response": "O fragmento não é dado científico e não foi incorporado. A pesquisa não atribui legenda ou resultado ao resíduo gráfico.",
+      "action": "Preservar o registro da omissão visual sem perder conteúdo educativo.",
+      "status": "resolved"
+    },
+    {
+      "note": "Preservado diálogo com biologia/contexto e diferentes tradições, com distinções. A abordagem clínica da NEXO não deve parecer uma fusão não explicada entre Rogers, Skinner, Han, James e Weil.",
+      "response": "O diálogo foi explicitado no texto: Rogers pertence à Abordagem Centrada na Pessoa; a NEXO se orienta pela Análise do Comportamento. Filosofia e relato histórico não são pesquisas de eficácia.",
+      "action": "Reescrever a conexão entre perspectivas e distinguir seus papéis na nota final.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "Rogers — Empathic: An Unappreciated Way of Being, artigo original",
+          "url": "https://journals.sagepub.com/doi/10.1177/001100007500500202"
+        },
+        {
+          "label": "Skinner — Science and Human Behavior, texto primário",
+          "url": "https://www.bfskinner.org/wp-content/uploads/2014/02/ScienceHumanBehavior.pdf"
+        },
+        {
+          "label": "Han — A expulsão do outro, amostra oficial da editora",
+          "url": "https://relogiodagua.pt/wp-content/uploads/2018/04/9789896418434.pdf"
+        },
+        {
+          "label": "Instituto Del Prette — apresentação da obra pelos autores",
+          "url": "https://institutodelprette.com.br/livros/competencia-social-e-habilidades-sociais-manual-teorico-pratico/"
+        }
+      ]
+    },
+    {
+      "note": "Rascunho não aprovado: sem publicação, indexação, escore, diagnóstico, coleta de respostas ou transmissão de dados pessoais. A data de migração não é data de publicação ou aprovação clínica.",
+      "response": "A pesquisa científica não substitui a aprovação clínica/editorial. Não houve alteração do estado do artigo ou autorização presumida da versão final.",
+      "action": "Manter draft:true e reviewed:false e datas originais; encaminhar redação e exercícios à decisão do titular.",
+      "status": "editorial-decision"
+    },
+    {
+      "note": "Bloco antes-de-chamar-de-epidemia · 3: Referência primária e N total conferidos no resumo. Estudos analisam conversas entre desconhecidos, com parceiros treinados/experimentadores; não são levantamento epidemiológico. Os indicadores verbais foram menos consistentes em small talk, e não há promessa de efeito universal de uma técnica.",
+      "response": "A pesquisa de West sustenta associação contextual, e a amostra oficial de Han sustenta apenas o diálogo filosófico. Nenhuma das fontes demonstra epidemia de falta de escuta.",
+      "action": "Manter metáfora identificada e síntese editorial sem falsa citação.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "West et al. — pesquisa original sobre escuta e conexão",
+          "url": "https://www.nature.com/articles/s44271-025-00342-2"
+        },
+        {
+          "label": "Han — A expulsão do outro, amostra oficial da editora",
+          "url": "https://relogiodagua.pt/wp-content/uploads/2018/04/9789896418434.pdf"
+        }
+      ]
+    },
+    {
+      "note": "Bloco antes-de-chamar-de-epidemia · 4: Preservar a distinção entre reflexão filosófica e evidência empírica. Conferir edição/página antes de qualquer atribuição literal.",
+      "response": "A pesquisa de West sustenta associação contextual, e a amostra oficial de Han sustenta apenas o diálogo filosófico. Nenhuma das fontes demonstra epidemia de falta de escuta.",
+      "action": "Manter metáfora identificada e síntese editorial sem falsa citação.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "West et al. — pesquisa original sobre escuta e conexão",
+          "url": "https://www.nature.com/articles/s44271-025-00342-2"
+        },
+        {
+          "label": "Han — A expulsão do outro, amostra oficial da editora",
+          "url": "https://relogiodagua.pt/wp-content/uploads/2018/04/9789896418434.pdf"
+        }
+      ]
+    },
+    {
+      "note": "Bloco antes-do-diagnostico · 6: A página de rastreamento do Ministério indicada na bibliografia devolveu conteúdo incompatível na consulta. Para esta seção, verificar a fundamentação no documento primário ICD-11/OMS indicado nas referências; não manter o link problemático.",
+      "response": "A recomendação oficial distingue rastreio e avaliação posterior; OMS/CDDR apoia os critérios clínicos gerais. O endpoint anterior foi substituído, sem aplicar critérios ou testes ao visitante.",
+      "action": "Atualizar o suporte bibliográfico do parágrafo.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "OMS — ICD-11 CDDR, documento clínico oficial",
+          "url": "https://www.who.int/publications/i/item/9789240077263"
+        },
+        {
+          "label": "USPSTF — recomendação oficial, seção sobre diagnóstico após rastreamento",
+          "url": "https://www.uspreventiveservicestaskforce.org/uspstf/recommendation/screening-depression-suicide-risk-adults"
+        }
+      ]
+    },
+    {
+      "note": "Bloco minha-historia-nao-e-regua · 1: Citação pendente de conferência direta de edição e página em A Way of Being (1980) / Um jeito de ser (1983). Não usar sites de frases como validação; na versão aprovada, conferir a citação ou substituir por paráfrase identificada.",
+      "response": "Conferência direta realizada nas reproduções primárias: capítulo inglês p.12–13 e artigo de1975 p.3–4. O destaque é tradução livre própria e o diálogo entre tradições está explicitado.",
+      "action": "Atualizar a atribuição e manter a distinção teórica.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "Rogers — Experiences in Communication, reprodução primária",
+          "url": "https://vedantaatlanta.org/wp-content/uploads/2024/07/5-Rogers-Experiences-in-Communication.pdf"
+        },
+        {
+          "label": "Rogers — Empathic: An Unappreciated Way of Being, artigo original",
+          "url": "https://journals.sagepub.com/doi/10.1177/001100007500500202"
+        },
+        {
+          "label": "Rogers — digitalização do artigo de 1975, p.3–4",
+          "url": "https://www.sakkyndig.com/psykologi/artvit/rogers1975.pdf"
+        }
+      ]
+    },
+    {
+      "note": "Bloco minha-historia-nao-e-regua · 2: Preservada como contribuição histórica de outra tradição. Não apresentar Rogers como fundamento do behaviorismo radical ou como equivalência teórica da abordagem clínica da NEXO.",
+      "response": "Conferência direta realizada nas reproduções primárias: capítulo inglês p.12–13 e artigo de1975 p.3–4. O destaque é tradução livre própria e o diálogo entre tradições está explicitado.",
+      "action": "Atualizar a atribuição e manter a distinção teórica.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "Rogers — Experiences in Communication, reprodução primária",
+          "url": "https://vedantaatlanta.org/wp-content/uploads/2024/07/5-Rogers-Experiences-in-Communication.pdf"
+        },
+        {
+          "label": "Rogers — Empathic: An Unappreciated Way of Being, artigo original",
+          "url": "https://journals.sagepub.com/doi/10.1177/001100007500500202"
+        },
+        {
+          "label": "Rogers — digitalização do artigo de 1975, p.3–4",
+          "url": "https://www.sakkyndig.com/psykologi/artvit/rogers1975.pdf"
+        }
+      ]
+    },
+    {
+      "note": "Bloco minha-historia-nao-e-regua · 6: “Ditadura da própria realidade” é metáfora editorial, sem valor diagnóstico ou epidemiológico.",
+      "response": "Relações funcionais e acontecimentos privados integram a análise; a forma ou sequência isolada de uma cena não determina função ou intenção. A ressalva é coerente com o texto primário.",
+      "action": "Preservar a precisão conceitual, o contexto e os limites da inferência.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "Skinner — Science and Human Behavior, texto primário",
+          "url": "https://www.bfskinner.org/wp-content/uploads/2014/02/ScienceHumanBehavior.pdf"
+        }
+      ]
+    },
+    {
+      "note": "Bloco escutar-validar-concordar · 4: O original chama o silêncio de “punitivo”. Foi retirado esse qualificativo do exemplo: função e intenção não são inferidas de um silêncio isolado. O contexto e o efeito sobre comportamentos de falar devem ser investigados.",
+      "response": "Relações funcionais e acontecimentos privados integram a análise; a forma ou sequência isolada de uma cena não determina função ou intenção. A ressalva é coerente com o texto primário.",
+      "action": "Preservar a precisão conceitual, o contexto e os limites da inferência.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "Skinner — Science and Human Behavior, texto primário",
+          "url": "https://www.bfskinner.org/wp-content/uploads/2014/02/ScienceHumanBehavior.pdf"
+        }
+      ]
+    },
+    {
+      "note": "Bloco diagnostico-e-escuta · 5: Preservada a perspectiva do acervo sem sugerir oposição à Psiquiatria. Bradford et al. é revisão sobre erros diagnósticos, não demonstra taxa universal de sobrediagnóstico; OMS/ICD-11 fundamentam a distinção clínica geral.",
+      "response": "A avaliação depende de história, contexto e requisitos clínicos. A revisão Bradford e OMS não permitem inferir diagnóstico ou prevalência pela aparência de uma conversa.",
+      "action": "Manter “podem”, hipótese contextual e avaliação individual quando necessária.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "Bradford et al. — revisão original de erro diagnóstico",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11503128/"
+        },
+        {
+          "label": "OMS — ICD-11 CDDR, documento clínico oficial",
+          "url": "https://www.who.int/publications/i/item/9789240077263"
+        }
+      ]
+    },
+    {
+      "note": "Bloco atencao-na-era-digital · 3: Números e limitação metodológica conferidos no artigo primário. Não converter expressões causais de trechos do artigo em causalidade estabelecida pela meta-análise.",
+      "response": "Texto histórico de James e dados/limitações da meta-análise foram conferidos nas fontes originais. São âmbitos diferentes: tradução filosófica/histórica e associação empírica em relações românticas.",
+      "action": "Conservar tradução livre, variabilidade de comunicação e ressalva causal.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "James — The Principles of Psychology, capítulo XI",
+          "url": "https://www.yorku.ca/pclassic/James/Principles/prin11.htm"
+        },
+        {
+          "label": "Ni et al. — meta-análise original de partner phubbing",
+          "url": "https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2025.1561159/full"
+        }
+      ]
+    },
+    {
+      "note": "Bloco atencao-na-era-digital · 4: Texto primário conferido no acervo acadêmico da York University, cap. XI, p. 402–403 da paginação histórica. Não interpretar como se atenção dependesse apenas de escolha voluntária.",
+      "response": "Texto histórico de James e dados/limitações da meta-análise foram conferidos nas fontes originais. São âmbitos diferentes: tradução filosófica/histórica e associação empírica em relações românticas.",
+      "action": "Conservar tradução livre, variabilidade de comunicação e ressalva causal.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "James — The Principles of Psychology, capítulo XI",
+          "url": "https://www.yorku.ca/pclassic/James/Principles/prin11.htm"
+        },
+        {
+          "label": "Ni et al. — meta-análise original de partner phubbing",
+          "url": "https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2025.1561159/full"
+        }
+      ]
+    },
+    {
+      "note": "Bloco atencao-na-era-digital · 5: Acrescentado “podem”: silêncio ou atenção visível não bastam para avaliar escuta, empatia ou condição clínica. Necessidades de comunicação variam.",
+      "response": "Texto histórico de James e dados/limitações da meta-análise foram conferidos nas fontes originais. São âmbitos diferentes: tradução filosófica/histórica e associação empírica em relações românticas.",
+      "action": "Conservar tradução livre, variabilidade de comunicação e ressalva causal.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "James — The Principles of Psychology, capítulo XI",
+          "url": "https://www.yorku.ca/pclassic/James/Principles/prin11.htm"
+        },
+        {
+          "label": "Ni et al. — meta-análise original de partner phubbing",
+          "url": "https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2025.1561159/full"
+        }
+      ]
+    },
+    {
+      "note": "Bloco escuta-na-pratica · 1: Preservada a proposta prática, com linguagem de possibilidade em lugar de efeito interpessoal garantido.",
+      "response": "As práticas são possibilidades educativas. A pesquisa não garante a percepção do interlocutor; o diálogo de tradições é explicitado e depende de contexto/feedback.",
+      "action": "Manter linguagem de possibilidade e distinguir os fundamentos teóricos.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "West et al. — pesquisa original sobre escuta e conexão",
+          "url": "https://www.nature.com/articles/s44271-025-00342-2"
+        },
+        {
+          "label": "Rogers — Empathic: An Unappreciated Way of Being, artigo original",
+          "url": "https://journals.sagepub.com/doi/10.1177/001100007500500202"
+        },
+        {
+          "label": "Instituto Del Prette — apresentação da obra pelos autores",
+          "url": "https://institutodelprette.com.br/livros/competencia-social-e-habilidades-sociais-manual-teorico-pratico/"
+        }
+      ]
+    },
+    {
+      "note": "Bloco escuta-na-pratica · 4: Pendente de conferência primária da carta a Joë Bousquet, 13/04/1942, e edição Correspondance (1982). Não validar literalidade apenas por páginas de frases; manter em rascunho ou substituir por paráfrase identificada após revisão.",
+      "response": "Trecho francês localizado e lido na carta primária, p.18 impressa. O destaque é tradução livre e não evidência clínica.",
+      "action": "Atualizar referência/localização; conservar somente uma ocorrência.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "Weil — carta a Joë Bousquet de 13/04/1942, p.18",
+          "url": "https://www.arsmagica.fr/sites/default/files/Textes/Weil_Bousquet%20_13_avril_1942.pdf"
+        }
+      ]
+    },
+    {
+      "note": "Bloco pausa-limites-e-retorno · 2: Revisão precisa da p. 11: retiradas as equivalências “vira esquiva quando [...] nunca existe retorno” e “pausa só é cuidado quando existe uma ponte de volta”. A função exige investigação de relações/história; retorno não é obrigação em situação insegura.",
+      "response": "Relações funcionais e acontecimentos privados integram a análise; a forma ou sequência isolada de uma cena não determina função ou intenção. A ressalva é coerente com o texto primário.",
+      "action": "Preservar a precisão conceitual, o contexto e os limites da inferência.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "Skinner — Science and Human Behavior, texto primário",
+          "url": "https://www.bfskinner.org/wp-content/uploads/2014/02/ScienceHumanBehavior.pdf"
+        }
+      ]
+    },
+    {
+      "note": "Bloco pausa-limites-e-retorno · 4: Preservada a orientação prática sobre combinar/retomar e acrescentada a condição de segurança e possibilidade, sem prescrever reconciliação ou permanência.",
+      "response": "Relações funcionais e acontecimentos privados integram a análise; a forma ou sequência isolada de uma cena não determina função ou intenção. A ressalva é coerente com o texto primário.",
+      "action": "Preservar a precisão conceitual, o contexto e os limites da inferência.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "Skinner — Science and Human Behavior, texto primário",
+          "url": "https://www.bfskinner.org/wp-content/uploads/2014/02/ScienceHumanBehavior.pdf"
+        }
+      ]
+    },
+    {
+      "note": "Bloco barreiras-para-observar · 2: Todos os 12 enunciados originais preservados. Retirados período autorreferido de quatro semanas, respostas 0–3, soma, aferição e instrução de consultar faixas; convertidos em reflexão educativa sem coleta, medida ou classificação.",
+      "response": "O conteúdo educativo permanece. Não foi localizada validação para os cortes dessa atividade autoral, e nenhuma pesquisa foi usada para fingir validá-los.",
+      "action": "Manter reflexão sem somas, faixas, perfis ou respostas capturadas; aprovação pedagógica final com o titular.",
+      "status": "editorial-decision"
+    },
+    {
+      "note": "Bloco repertorios-para-observar · 2: Os 12 enunciados originais (13–24) foram preservados integralmente. Retirados escala/soma/anexo classificatório. Observar tom/ritmo/expressão não permite inferir empatia, intenção ou diagnóstico.",
+      "response": "O conteúdo educativo permanece. Não foi localizada validação para os cortes dessa atividade autoral, e nenhuma pesquisa foi usada para fingir validá-los.",
+      "action": "Manter reflexão sem somas, faixas, perfis ou respostas capturadas; aprovação pedagógica final com o titular.",
+      "status": "editorial-decision"
+    },
+    {
+      "note": "Bloco repertorios-para-observar · 3: Acréscimo contextual para não converter os prompts em norma rígida ou classificação de pessoas neurodivergentes; precisa de revisão editorial com o restante da edição.",
+      "response": "Não há equivalência entre um estilo visível de comunicação e interesse, empatia ou condição clínica. Os prompts permanecem contextuais, sem medir pessoas.",
+      "action": "Preservar condições alternativas de comunicação e revisão editorial final.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "OMS — ICD-11 CDDR, documento clínico oficial",
+          "url": "https://www.who.int/publications/i/item/9789240077263"
+        }
+      ]
+    },
+    {
+      "note": "Bloco contexto-e-instituicoes · 1: Preservar “podem” e não inferir condição clínica, substância ou neurodivergência a partir de uma dificuldade de escuta. A lista organiza possibilidades de contexto, sem diagnóstico diferencial automatizado.",
+      "response": "A avaliação depende de história, contexto e requisitos clínicos. A revisão Bradford e OMS não permitem inferir diagnóstico ou prevalência pela aparência de uma conversa.",
+      "action": "Manter “podem”, hipótese contextual e avaliação individual quando necessária.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "Bradford et al. — revisão original de erro diagnóstico",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11503128/"
+        },
+        {
+          "label": "OMS — ICD-11 CDDR, documento clínico oficial",
+          "url": "https://www.who.int/publications/i/item/9789240077263"
+        }
+      ]
+    },
+    {
+      "note": "Bloco como-e-conversar-comigo · 3: Mantido o diálogo de tradições, sem fundir os pressupostos de Rogers e Skinner. “Repertórios treináveis” foi formulado como possibilidade, sem promessa individual de resultado.",
+      "response": "Conferência direta realizada nas reproduções primárias: capítulo inglês p.12–13 e artigo de1975 p.3–4. O destaque é tradução livre própria e o diálogo entre tradições está explicitado.",
+      "action": "Atualizar a atribuição e manter a distinção teórica.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "Rogers — Experiences in Communication, reprodução primária",
+          "url": "https://vedantaatlanta.org/wp-content/uploads/2024/07/5-Rogers-Experiences-in-Communication.pdf"
+        },
+        {
+          "label": "Rogers — Empathic: An Unappreciated Way of Being, artigo original",
+          "url": "https://journals.sagepub.com/doi/10.1177/001100007500500202"
+        },
+        {
+          "label": "Rogers — digitalização do artigo de 1975, p.3–4",
+          "url": "https://www.sakkyndig.com/psykologi/artvit/rogers1975.pdf"
+        }
+      ]
+    },
+    {
+      "note": "Bloco como-e-conversar-comigo · 5: Revisão de “produzir no outro a experiência de ter sido percebido”: não prometer controle da percepção alheia. A segunda ocorrência da mesma frase atribuída a Weil foi consolidada na seção de práticas; não se perde argumento ou fonte.",
+      "response": "Trecho francês localizado e lido na carta primária, p.18 impressa. O destaque é tradução livre e não evidência clínica.",
+      "action": "Atualizar referência/localização; conservar somente uma ocorrência.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "Weil — carta a Joë Bousquet de 13/04/1942, p.18",
+          "url": "https://www.arsmagica.fr/sites/default/files/Textes/Weil_Bousquet%20_13_avril_1942.pdf"
+        }
+      ]
+    },
+    {
+      "note": "Bloco possibilidades-sem-classificacao · 3: Mudança substantiva da p. 16: não publicar cortes 0–12/13–24/25–36, perfis “em construção/oscilante/consistente” ou quatro combinações de resultados. Mensagens práticas reescritas para todos os leitores, sem inferir perfil a partir de respostas. O original permanece no acervo local.",
+      "response": "O conteúdo educativo permanece. Não foi localizada validação para os cortes dessa atividade autoral, e nenhuma pesquisa foi usada para fingir validá-los.",
+      "action": "Manter reflexão sem somas, faixas, perfis ou respostas capturadas; aprovação pedagógica final com o titular.",
+      "status": "editorial-decision"
+    },
+    {
+      "note": "Bloco referencias-e-transparencia · 2: Atualização necessária da nota original sobre escores após a adaptação sem pontuação.",
+      "response": "O conteúdo educativo permanece. Não foi localizada validação para os cortes dessa atividade autoral, e nenhuma pesquisa foi usada para fingir validá-los.",
+      "action": "Manter reflexão sem somas, faixas, perfis ou respostas capturadas; aprovação pedagógica final com o titular.",
+      "status": "editorial-decision"
+    },
+    {
+      "note": "Referência: BRASIL. Ministério da Saúde. Rastreamento/diagnóstico — transtornos de ansiedade no adulto. Linhas de Cuidado. Brasília, DF, [s.d.]. Referência original preservada para rastreabilidade, sem link. O endpoint consultado retornou conteúdo incompatível de cassino em tailandês. Não usar até nova conferência; documento primário OMS/ICD-11 foi acrescentado para fundamentar as distinções gerais sem copiar um resultado de busca como validação.",
+      "response": "Seção de avaliação diagnóstica posterior ao rastreamento positivo conferida na recomendação oficial. Substitui o endpoint incompatível de Linhas de Cuidado da bibliografia original; essa referência histórica está preservada nas respostas de revisão. Não importa um protocolo norte-americano para o site nem embasa aplicação de teste.",
+      "action": "Atualizar a referência ativa com URL e alcance da conferência, preservando o histórico original nesta resposta.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "US PREVENTIVE SERVICES TASK FORCE. Depression and suicide risk in adults: screening. Recomendação final, 20 jun. 2023.",
+          "url": "https://www.uspreventiveservicestaskforce.org/uspstf/recommendation/screening-depression-suicide-risk-adults"
+        }
+      ]
+    },
+    {
+      "note": "Referência: DEL PRETTE, A.; DEL PRETTE, Z. A. P. Competência social e habilidades sociais: manual teórico-prático. Petrópolis: Vozes, 2017. Referência conceitual presente no PDF; conferir edição/páginas e o papel exato antes da aprovação editorial.",
+      "response": "Conferência bibliográfica e de escopo na apresentação dos próprios autores: 1ª edição, Vozes, 2017, ISBN 9788532655271, treino e desenvolvimento contextual de repertórios sociais. Não houve leitura integral; não sustenta eficácia universal das oito atitudes nem validade dos prompts da edição.",
+      "action": "Atualizar a referência ativa com URL e alcance da conferência, preservando o histórico original nesta resposta.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "DEL PRETTE, A.; DEL PRETTE, Z. A. P. Competência social e habilidades sociais: manual teórico-prático. Petrópolis: Vozes, 2017.",
+          "url": "https://institutodelprette.com.br/livros/competencia-social-e-habilidades-sociais-manual-teorico-pratico/"
+        }
+      ]
+    },
+    {
+      "note": "Referência: FRANCES, A. Saving normal: an insider’s revolt against out-of-control psychiatric diagnosis. New York: William Morrow, 2013. Referência de perspectiva crítica, não consenso sobre qualquer diagnóstico nem base para taxa universal de erro. Conferir edição efetivamente utilizada.",
+      "response": "A editora confirma título e autoria, mas o exemplar de 2013 e páginas de uso não foram conferidos. Permanece leitura crítica da bibliografia de origem, sem ser base de estatística, critério diagnóstico ou afirmação clínica do corpo. Decisão editorial: mantê-lo apenas como leitura complementar ou conferir exemplar antes de citá-lo substantivamente.",
+      "action": "Manter como leitura complementar sem fundamentar alegações clínicas; conferir exemplar apenas se houver citação substantiva.",
+      "status": "pending-source",
+      "sources": [
+        {
+          "label": "FRANCES, A. Saving normal: an insider’s revolt against out-of-control psychiatric diagnosis. New York: William Morrow, 2013.",
+          "url": "https://www.harpercollins.com/products/saving-normal-allen-frances"
+        }
+      ]
+    },
+    {
+      "note": "Referência: HAN, B.-C. A expulsão do outro. Lisboa: Relógio D’Água, 2018. A edição utiliza síntese inspirada, não citação literal; conferir edição antes de paginação. Reflexão filosófica não substitui estudo epidemiológico.",
+      "response": "Amostra primária oficial da editora, p.9–13, e catálogo editorial consultados. Confirma a discussão filosófica sobre o idêntico/outro; a frase do artigo é síntese autoral inspirada. Não foram conferidos todos os capítulos, nem criada uma citação literal ou evidência de epidemia.",
+      "action": "Atualizar a referência ativa com URL e alcance da conferência, preservando o histórico original nesta resposta.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "HAN, B.-C. A expulsão do outro. Lisboa: Relógio D’Água, 2018.",
+          "url": "https://relogiodagua.pt/wp-content/uploads/2018/04/9789896418434.pdf"
+        }
+      ]
+    },
+    {
+      "note": "Referência: ROGERS, C. R. Um jeito de ser. São Paulo: EPU, 1983. Original A Way of Being publicado em 1980. Obra e capítulo Experiences in Communication identificados; tradução e página da citação do PDF ainda não conferidas diretamente em edição primária autorizada.",
+      "response": "Trecho primário inglês conferido em reprodução digital do capítulo, com folha de rosto e paginação. Tradução livre própria; a referência EPU 1983 da edição de origem foi registrada nas respostas, sem afirmar que essa tradução foi consultada. Texto histórico pessoal, não ensaio controlado de eficácia.",
+      "action": "Atualizar a referência ativa com URL e alcance da conferência, preservando o histórico original nesta resposta.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "ROGERS, Carl R. A Way of Being. Boston: Houghton Mifflin, 1980. Capítulo Experiences in Communication, p.12–13 da reprodução inglesa consultada.",
+          "url": "https://vedantaatlanta.org/wp-content/uploads/2024/07/5-Rogers-Experiences-in-Communication.pdf"
+        }
+      ]
+    },
+    {
+      "note": "Referência: WEIL, S. Carta a Joë Bousquet, 13 abr. 1942. In: Correspondance. Lausanne: L’Age d’Homme, 1982. Atribuição e edição constam no acervo, mas o texto primário da carta não foi conferido nesta rodada. Citação literal permanece pendente, sem validar por páginas de frases.",
+      "response": "Carta primária datada 13/04/1942 e frase francesa conferidas visualmente na digitalização: p.18 impressa, segunda página do arquivo. Localização declarada na reprodução efetivamente consultada; não se afirma validar cada dado da ficha da edição de 1982. Tradução livre, reflexão filosófica.",
+      "action": "Atualizar a referência ativa com URL e alcance da conferência, preservando o histórico original nesta resposta.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "WEIL, S. Carta a Joë Bousquet, 13 abr. 1942. In: Correspondance. Lausanne: L’Age d’Homme, 1982.",
+          "url": "https://www.arsmagica.fr/sites/default/files/Textes/Weil_Bousquet%20_13_avril_1942.pdf"
+        }
+      ]
+    }
+  ],
+  "mediaAuthorization": {
+    "confirmedByHolder": true,
+    "confirmedAt": "2026-10-17",
+    "scope": "Fotos de conteúdo próprio com autorização consensual para divulgar o trabalho das equipes, conforme confirmação direta do titular nesta conversa."
+  }
+}

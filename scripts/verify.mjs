@@ -7,7 +7,7 @@ if(!fs.existsSync(root))throw new Error('Execute pnpm build antes de pnpm verify
 const files=walk(root),htmlFiles=files.filter(f=>f.endsWith('.html'));
 const failures=[];const check=(test,message)=>{if(!test)failures.push(message)};
 const titles=new Set();
-const production=process.env.PUBLIC_INDEXABLE==='true';
+const production=process.env.PUBLIC_INDEXABLE==='true'&&process.env.PUBLIC_EDITORIAL_PREVIEW!=='true'&&process.env.PUBLIC_EDITORIAL_SHARED_PREVIEW!=='true';
 for(const file of htmlFiles){
  const html=fs.readFileSync(file,'utf8'),name=path.relative(root,file);
  const shouldIndex=production&&name!=='404.html';
@@ -20,7 +20,8 @@ for(const file of htmlFiles){
  check(shouldIndex?html.includes('rel="canonical"'):!html.includes('rel="canonical"'),`${name}: canonical da prévia/produção`);
  check(html.includes('data-ambient-sound')&&html.includes('data-sound-toggle aria-pressed="false"'),`${name}: ambiente sonoro opcional desligado inicialmente`);
  check(html.includes('id="experience-stage"'),`${name}: continuidade espacial e alternativa estática`);
- check(!/prévia para revisão|biblioteca em preparação|rascunho operacional|apresentado no briefing|registro informado|artigos aguardam|ainda aguardam confirmação|versão preliminar/i.test(html),`${name}: conteúdo público sem notas editoriais internas`);
+ const localEditorialDraft=(process.env.PUBLIC_EDITORIAL_PREVIEW==='true'||process.env.PUBLIC_EDITORIAL_SHARED_PREVIEW==='true')&&(name.split(path.sep).join('/')==='psicologia-em-pauta/index.html'||html.includes('data-editorial-article='));
+ check(localEditorialDraft||!/prévia para revisão|biblioteca em preparação|rascunho operacional|apresentado no briefing|registro informado|artigos aguardam|ainda aguardam confirmação|versão preliminar/i.test(html),`${name}: conteúdo público sem notas editoriais internas`);
  // Cloudflare enforces script-src 'self'. JSON data is inert; executable
  // inline code would silently disable controls that work on a local preview.
  for(const [,attrs,code] of html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)){
@@ -37,7 +38,8 @@ for(const file of htmlFiles){
   if(hash&&target.endsWith('.html'))check(new RegExp(`id=["']${hash}["']`).test(fs.readFileSync(target,'utf8')),`${name}: âncora inexistente ${link}`);
  }
 }
-const routes=['','para-voce','psicoterapia','avaliacao-neuropsicologica','integracao-psiquiatrica','para-sua-empresa','riscos-psicossociais-nr1','nossa-abordagem','profissionais','psicologia-em-pauta','contato','politica-de-privacidade'];
+const businessServices=['recrutamento-e-selecao','treinamento-e-desenvolvimento','avaliacao-psicologica-organizacional'];
+const routes=['','para-voce','psicoterapia','avaliacao-neuropsicologica','integracao-psiquiatrica','para-sua-empresa','riscos-psicossociais-nr1',...businessServices,'nossa-abordagem','profissionais','psicologia-em-pauta','contato','politica-de-privacidade'];
 routes.forEach(route=>check(fs.existsSync(path.join(root,route,'index.html')),`Rota ausente: /${route}/`));
 // A page can build correctly yet remain undiscoverable. Follow the actual HTML
 // links from the home page to check that every institutional route is reachable.
@@ -67,6 +69,14 @@ for(const route of ['para-sua-empresa','riscos-psicossociais-nr1']){
  check(html.includes('26 de maio de 2026'),`${route}: vigência NR-1 contextualizada`);
  check(!html.includes('frente prevista no briefing'),`${route}: conteúdo público sem rascunho interno`);
 }
+// The institutional crawler above checks that each service is discoverable and
+// resolves every local link. These assertions protect the shared spatial entry
+// when a dedicated business service is opened directly from search.
+for(const route of businessServices){
+ const html=fs.readFileSync(path.join(root,route,'index.html'),'utf8');
+ check(html.includes('data-business-service'),`${route}: identificação do serviço empresarial`);
+ check(html.includes('data-entry="business"'),`${route}: continuidade espacial da jornada empresarial`);
+}
 const professionalHtml=fs.readFileSync(path.join(root,'profissionais','index.html'),'utf8');
 check(professionalHtml.includes('CRP-SP 06/176184')&&professionalHtml.includes('CRM-SP 193133'),'Profissionais: registros presentes');
 check(!/Registro informado|Apresentado no briefing|Registros, títulos e RQE|registros informados|aguardam conferência/.test(professionalHtml),'Profissionais: apresentação pública sem notas internas');
@@ -87,7 +97,7 @@ for(const guide of guides){
  for(const section of guide.sections)check(libraryHtml.includes(section.title),`Guia ${guide.slug}: leitura integral em HTML`);
 }
 const sitemap=fs.readFileSync(path.join(root,'sitemap.xml'),'utf8');
-check((sitemap.match(/<loc>/g)||[]).length===(production?12:0),'Sitemap incompatível com indexação');
+check((sitemap.match(/<loc>/g)||[]).length===(production?routes.length:0),'Sitemap incompatível com indexação');
 check(fs.readFileSync(path.join(root,'robots.txt'),'utf8').includes('Allow: /'),'Robots deve permitir ler noindex');
 const headers=fs.readFileSync(path.join(root,'_headers'),'utf8');check(production?!headers.includes('noindex'):headers.includes('noindex'),'X-Robots-Tag');
 const assets=files.filter(f=>/\.(js|css)$/.test(f)).map(f=>({file:path.relative(root,f),bytes:fs.statSync(f).size,gzip:gzipSync(fs.readFileSync(f)).length}));

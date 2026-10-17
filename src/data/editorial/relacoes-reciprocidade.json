@@ -1,0 +1,773 @@
+{
+  "slug": "relacoes-reciprocidade",
+  "title": "Quem cabe na sua vida?",
+  "subtitle": "Amizade, rede de apoio, network, intimidade e limites.",
+  "description": "Uma leitura sobre pertencimento, reciprocidade, expectativas e limites: reconheça o lugar de cada vínculo e a importância de uma rede de apoio.",
+  "category": "Relações e pertencimento",
+  "theme": "relations",
+  "draft": true,
+  "reviewed": false,
+  "migratedAt": "2026-10-16",
+  "source": {
+    "file": "Psicologia_em_Pauta_Relacoes_Reciprocidade_REV05.pdf",
+    "totalPages": 14,
+    "sha256": "e143fee52b9154a8bc9a0af2546af4a54af1cd2189d4ef1124dce6dcb59246fc"
+  },
+  "credit": {
+    "name": "Gabriel Batista",
+    "label": "Curadoria",
+    "sourcePages": [
+      1,
+      2,
+      14
+    ],
+    "authorshipConfirmedBySource": false
+  },
+  "adaptationCredit": {
+    "name": "Gabriel Alves Batista",
+    "label": "Texto e curadoria",
+    "confirmedByHolder": true,
+    "confirmedAt": "2026-10-17"
+  },
+  "sections": [
+    {
+      "id": "reconhecer-lugares",
+      "title": "Nem todo vínculo precisa virar intimidade.",
+      "pages": [
+        2
+      ],
+      "blocks": [
+        {
+          "type": "p",
+          "text": "E nem todo vínculo que não virou intimidade deu errado."
+        },
+        {
+          "type": "p",
+          "text": "Esta edição parte de uma ideia simples: relacionar-se também é aprender a reconhecer lugares. Há pessoas que chegam como amizade, apoio emocional, parceria profissional, companhia, contato de evento, colega, vizinho ou família escolhida. Cada uma dessas relações pode ser valiosa sem precisar prometer a mesma profundidade."
+        },
+        {
+          "type": "p",
+          "text": "Às vezes, o sofrimento envolve expectativas que cresceram mais rápido que o vínculo. Em outras situações, há rejeição, negligência, discriminação ou violência reais. Investigar expectativas não torna a pessoa responsável pelo dano que sofreu. Podemos confundir um limite com rejeição, chamar de amizade uma convivência ainda recente ou aceitar mais do que gostaríamos para tentar pertencer. Cada situação pede contexto.",
+          "review": "Respondida em 17/10/2026: redação contextualizada; expectativas não explicam toda frustração nem transferem a responsabilidade por violência ou discriminação."
+        },
+        {
+          "type": "quote",
+          "text": "O objetivo não é decidir quem é “bom” ou “ruim”. É perceber o que cada vínculo consegue sustentar e escolher onde você coloca tempo, intimidade, expectativa e energia.",
+          "attribution": "Síntese editorial da edição"
+        },
+        {
+          "type": "quote",
+          "text": "Ser protagonista não é controlar os outros. É conhecer necessidades, limites e expectativas para escolher com mais consciência onde investir presença.",
+          "attribution": "Síntese editorial da edição"
+        },
+        {
+          "type": "p",
+          "text": "Ao longo das próximas páginas, ciência, filosofia e situações do cotidiano ajudam a transformar emoção em perguntas mais claras."
+        }
+      ]
+    },
+    {
+      "id": "pertencimento-e-solidao",
+      "title": "Pertencimento, solidão e autonomia.",
+      "pages": [
+        3
+      ],
+      "blocks": [
+        {
+          "type": "p",
+          "text": "A OMS estimou que cerca de uma em cada seis pessoas vivenciou solidão em 2014–2023. O modelo global reúne pessoas a partir dos 13 anos; não é uma medição da situação individual de cada leitor. [1]"
+        },
+        {
+          "type": "p",
+          "text": "As estimativas foram maiores entre adolescentes de 13–17 anos (20,9%; intervalo de incerteza de 95%: 15,6–28,5%) e adultos jovens de 18–29 anos (17,4%; 13,2–23,6%). Métodos e contextos influenciam essas comparações. [1]",
+          "review": "Respondida: percentuais e intervalos conferidos na Figura 2 e texto do relatório, p. 28–29 (páginas físicas 48–49 da cópia consultada)."
+        },
+        {
+          "type": "p",
+          "text": "Solidão não é o mesmo que estar sozinho. Ela aparece quando existe distância entre a conexão que a pessoa deseja e aquela que percebe ter. [1]"
+        },
+        {
+          "type": "p",
+          "text": "Baumeister e Leary propuseram que formar e manter vínculos estáveis é uma motivação humana fundamental. Allen e colaboradores organizaram a discussão sobre pertencimento em quatro componentes: competências, oportunidades, motivações e percepções. São modelos para pensar as relações; não medem o valor de uma pessoa ou de uma amizade. [5][6]"
+        },
+        {
+          "type": "p",
+          "text": "Na Teoria da Autodeterminação, autonomia, competência e relacionamento são necessidades psicológicas básicas. Nessa perspectiva, conexão e escolha podem coexistir. A meta-análise de Slemp e colaboradores encontrou associações entre apoios a essas necessidades e bem-estar; predominam estudos transversais, que limitam conclusões causais. Essa teoria é uma perspectiva citada na edição e tem conceitos próprios, distintos da Análise do Comportamento. [7][8]",
+          "review": "Respondida: Teoria da Autodeterminação identificada como perspectiva própria; retirada a aparência de equivalência com a Análise do Comportamento."
+        }
+      ]
+    },
+    {
+      "id": "mapa-de-vinculos",
+      "title": "Nem todo mundo precisa ocupar o mesmo lugar.",
+      "pages": [
+        4
+      ],
+      "blocks": [
+        {
+          "type": "p",
+          "text": "Uma rede de apoio pode reunir vínculos diferentes, com funções e graus de intimidade diferentes. Colegas, conhecidos e relações profissionais também podem ter valor. Quando uma expectativa não encontra disponibilidade, vale perguntar o que foi combinado, o que ainda está sendo construído e quais condições de vida limitam a presença de cada pessoa."
+        },
+        {
+          "type": "table",
+          "columns": [
+            "Vínculo",
+            "O que pode oferecer"
+          ],
+          "rows": [
+            [
+              "Intimidade",
+              "Confiança construída, vulnerabilidade, conhecimento da história e espaço para conversas difíceis."
+            ],
+            [
+              "Rede de apoio",
+              "Pessoas e serviços que conseguem acolher, orientar ou ajudar em momentos de necessidade."
+            ],
+            [
+              "Amizade / convivência",
+              "Afeto, presença, lazer e troca. Nem toda amizade precisa cumprir todas as funções de apoio."
+            ],
+            [
+              "Network / comunidade",
+              "Informação, colaboração, oportunidade, pertencimento e circulação social. Pode ser valioso sem ser íntimo."
+            ]
+          ]
+        },
+        {
+          "type": "p",
+          "text": "As categorias são móveis. Confiança, contexto e tempo podem aproximar ou afastar pessoas sem que isso transforme alguém em vilão."
+        }
+      ]
+    },
+    {
+      "id": "conexao-e-saude-publica",
+      "title": "A solidão como pauta de saúde pública.",
+      "pages": [
+        5
+      ],
+      "blocks": [
+        {
+          "type": "p",
+          "text": "A conexão social ganhou espaço no debate de saúde pública. Uma revisão de 100 estudos em países ocidentais encontrou associação entre apoio social e menor ocorrência de depressão, com diferenças entre idades, fontes de apoio e desenhos de estudo. Uma síntese de 37 estudos também examinou relações ao longo do tempo entre solidão e sintomas depressivos. Esses resultados não permitem reduzir sofrimento a “falta de amigos” nem garantir proteção individual. [10][11]"
+        },
+        {
+          "type": "table",
+          "columns": [
+            "Publicação",
+            "Data",
+            "Tema da cobertura citada no original"
+          ],
+          "rows": [
+            [
+              "Agência Brasil",
+              "1 jul. 2025",
+              "Divulgação do relatório da OMS e das estimativas de solidão na população jovem. [2]"
+            ],
+            [
+              "CNN Brasil",
+              "25 jul. 2026",
+              "Entrevistas sobre relações afetivas, apoio e saúde mental. Trata-se de reportagem, não de estudo que demonstre causalidade. [3]"
+            ],
+            [
+              "Folha de S.Paulo / BBC News Brasil",
+              "20 jan. 2025",
+              "Discussão sobre a diferença entre estar sem companhia e sentir solidão, inclusive dentro de relações. [4]"
+            ]
+          ],
+          "review": "Respondida: autores, títulos, datas e URLs das três publicações conferidos nos veículos; quadro preservado como cobertura jornalística, com fundamentação científica em [10] e [11]."
+        },
+        {
+          "type": "note",
+          "text": "O quadro registra a cobertura jornalística citada pela edição. As sínteses não são citações literais nem substituem os estudos científicos e o relatório institucional."
+        }
+      ]
+    },
+    {
+      "id": "mudar-de-cidade",
+      "title": "Mudar de cidade também muda a sua rede.",
+      "pages": [
+        6
+      ],
+      "blocks": [
+        {
+          "type": "p",
+          "text": "Uma mudança pode trazer trabalho, estudo, liberdade e novos começos. Mas também pode interromper rotinas de apoio: o café com um amigo, a visita à família, o vizinho conhecido, o grupo de treino, a igreja, o bar, a praça ou aquele contato que não exigia planejamento."
+        },
+        {
+          "type": "p",
+          "text": "Uma transição pode exigir reconstruir apoios e rotinas. Nem toda mudança traz os mesmos riscos: razões da mudança, condições de moradia, recursos e oportunidades de integração importam. Em um estudo histórico com adultos recém-chegados, as novas redes ainda estavam em formação após entrevistas separadas por três meses. Esse recorte não descreve todas as pessoas que mudam. [13]"
+        },
+        {
+          "type": "p",
+          "text": "Em uma coorte de 38.495 adultos expostos ao desastre de 11 de setembro, mudar ao menos uma vez em cada um de dois períodos de quatro anos foi associado a risco relativo de depressão 20% maior que não mudar (RR=1,20; IC 95%: 1,06–1,37). O resultado não representa aumento de 20 pontos percentuais. A integração social foi examinada como possível caminho nessa relação. [12]"
+        },
+        {
+          "type": "note",
+          "text": "Esse estudo não demonstra que toda mudança de cidade causa depressão. A população era específica, mudanças menos frequentes não tiveram a mesma associação e fatores não medidos ainda podem influenciar os resultados. [12]",
+          "review": "Respondida: conferidos desenho, comparação, RR, intervalo e limites do artigo primário. Acrescentados o significado relativo de 20% e o resultado distinto para mudanças menos frequentes."
+        }
+      ]
+    },
+    {
+      "id": "expectativa-e-capacidade",
+      "title": "Quando a demanda fica maior que a disponibilidade.",
+      "pages": [
+        7
+      ],
+      "blocks": [
+        {
+          "type": "quote",
+          "text": "Preciso conversar agora. Você pode resolver isso?",
+          "attribution": "Exemplo de fala apresentado na edição"
+        },
+        {
+          "type": "p",
+          "text": "Quando alguém está só, recém-chegado, em luto, desempregado ou atravessando uma crise, é compreensível procurar mais proximidade. Necessidade de conexão não é defeito de caráter."
+        },
+        {
+          "type": "p",
+          "text": "Ao mesmo tempo, a outra pessoa pode gostar de você e ainda não conseguir ser amigo íntimo, família, terapeuta, hospedagem, companhia constante e solução para todos os problemas."
+        },
+        {
+          "type": "quote",
+          "text": "“Eu gosto de você” e “eu consigo sustentar essa demanda” são perguntas diferentes.",
+          "attribution": "Síntese editorial da edição"
+        },
+        {
+          "type": "list",
+          "items": [
+            "O que eu pedi estava combinado ou eu imaginei que estava?",
+            "Eu deixei espaço para a pessoa dizer “não”?",
+            "Estou pedindo a uma pessoa o trabalho de uma rede inteira?"
+          ],
+          "text": "Antes de concluir que a pessoa não se importa, vale investigar:"
+        }
+      ]
+    },
+    {
+      "id": "network-e-lacos-fracos",
+      "title": "Laços diferentes podem cumprir funções diferentes.",
+      "pages": [
+        8
+      ],
+      "blocks": [
+        {
+          "type": "p",
+          "text": "Colegas, contatos de eventos, ex-chefes, parceiros e conhecidos podem ser relações legítimas mesmo sem intimidade. Valor não é sinônimo de profundidade."
+        },
+        {
+          "type": "p",
+          "text": "Mark Granovetter chamou atenção para a “força dos laços fracos”. Conexões menos íntimas podem ligar grupos diferentes e ampliar acesso a informação, oportunidades e circulação social. [9]"
+        },
+        {
+          "type": "p",
+          "text": "O problema começa na tradução. Se uma pessoa entende a relação como parceria profissional e a outra espera prioridade emocional, o conflito não nasce necessariamente de maldade. Pode nascer de expectativas que nunca foram combinadas."
+        },
+        {
+          "type": "table",
+          "columns": [
+            "Relação",
+            "Possibilidades de troca"
+          ],
+          "rows": [
+            [
+              "Colega",
+              "Respeito, convivência, troca profissional."
+            ],
+            [
+              "Contato",
+              "Informação, oportunidade, ponte entre redes."
+            ],
+            [
+              "Amigo",
+              "Afeto, presença e confiança construídos no tempo."
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "comunicar-limites",
+      "title": "Comunicar disponibilidade, capacidade e escolha.",
+      "pages": [
+        9
+      ],
+      "blocks": [
+        {
+          "type": "quote",
+          "text": "Hoje eu não consigo. Podemos falar amanhã?",
+          "attribution": "Exemplo de comunicação na edição"
+        },
+        {
+          "type": "p",
+          "text": "Limite é informação sobre disponibilidade, capacidade e escolha. Em relações saudáveis, o “não” pode ser frustrante, mas não precisa destruir o vínculo. Autonomia e conexão podem coexistir. [7][8] Dizer não com clareza ajuda o outro a se localizar."
+        },
+        {
+          "type": "table",
+          "columns": [
+            "Situação",
+            "Uma forma mais clara de comunicar"
+          ],
+          "rows": [
+            [
+              "Em vez de sumir",
+              "Hoje não consigo conversar. Posso amanhã?"
+            ],
+            [
+              "Em vez de aceitar e ressentir",
+              "Eu não consigo hospedar, mas posso te ajudar a procurar opções."
+            ],
+            [
+              "Em vez de insinuar",
+              "Prefiro não falar sobre isso agora."
+            ]
+          ]
+        },
+        {
+          "type": "p",
+          "text": "A resposta ao seu limite traz informação. Não é um “teste” definitivo sobre caráter. Mas observar se a pessoa consegue negociar, respeitar e continuar se relacionando ajuda a entender a qualidade daquele vínculo."
+        }
+      ]
+    },
+    {
+      "id": "confianca-e-intimidade",
+      "title": "Vulnerabilidade, confiança e acesso à sua história.",
+      "pages": [
+        10
+      ],
+      "blocks": [
+        {
+          "type": "p",
+          "text": "Vulnerabilidade pode aproximar pessoas, mas intimidade não precisa ser antecipada para provar autenticidade. Confiança costuma ser construída por repetição: respeito, coerência, cuidado com o que foi compartilhado e possibilidade de reparo quando algo falha."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Essa pessoa já demonstrou discrição?",
+            "Há reciprocidade ou só exposição de um lado?",
+            "Estou contando porque quero ou porque tenho medo de perder o vínculo?",
+            "Se a resposta não vier como espero, eu consigo lidar?"
+          ],
+          "text": "Pergunte antes de se abrir:"
+        },
+        {
+          "type": "p",
+          "text": "Protagonismo não é virar uma ilha. É escolher quando, com quem e até onde se vulnerabilizar. Saber o que você gosta, o que não aceita e o que ainda está aprendendo também ajuda a reconhecer relações nas quais existe respeito real."
+        },
+        {
+          "type": "p",
+          "text": "Nos livros VIII e IX da Ética a Nicômaco, Aristóteles distingue vínculos pelo prazer, pela utilidade e pelo apreço ao caráter. Em sua filosofia, a amizade fundada no caráter recebe maior valor. Esse esquema histórico ajuda a formular perguntas sobre os vínculos, mas não é uma classificação psicológica atual nem autoriza julgar pessoas a partir de uma troca. [14]",
+          "review": "Respondida: paráfrase corrigida para reconhecer a hierarquia filosófica de Aristóteles; consultada a seção 9 da versão Summer 2024 de Kraut. Não é citação literal nem validação clínica."
+        }
+      ]
+    },
+    {
+      "id": "tres-procuras",
+      "title": "Exercício das três procuras: observe sem pontuar.",
+      "pages": [
+        11,
+        12
+      ],
+      "blocks": [
+        {
+          "type": "exercise",
+          "items": [
+            "Quando essa pessoa procura você: quase sempre precisa de alguma coisa, alterna demandas com contato ou também procura sem precisar de algo?",
+            "Depois que a necessidade acaba: o contato desaparece, esfria ou continua? Em quais situações?",
+            "Quando você não pode ajudar: o interesse muda, depende da situação ou sua presença continua tendo valor?"
+          ],
+          "text": "Escolha alguém e recorde as três últimas vezes em que essa pessoa procurou você. Observe situações e diferenças de contexto, sem tentar provar algo sobre seu caráter.",
+          "review": "Adaptação editorial explícita: removidos números de resposta, soma 3-9, índice e faixas 3-4/5-7/8-9 das páginas 11-12. Preservadas as perguntas e possibilidades qualitativas; não oferecer resultados, ranking ou aplicação psicológica."
+        },
+        {
+          "type": "p",
+          "text": "O exercício não mede amor, caráter ou diagnóstico. Ele pode ajudar a organizar uma pergunta: essa relação existe também quando não há demanda?"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Como eu me sinto quando essa pessoa me procura?",
+            "Eu consigo dizer não?",
+            "Eu conheço o lugar que esse vínculo ocupa?",
+            "Minhas expectativas foram combinadas ou imaginadas?"
+          ],
+          "text": "Talvez a pergunta mais útil vá além de “essa pessoa me usa?”."
+        },
+        {
+          "type": "p",
+          "text": "Sem expor ninguém: se você repetisse o exercício com 3 pessoas diferentes, quais relações pediriam mais presença, quais pediriam mais limite e quais poderiam simplesmente continuar do tamanho que já são?"
+        }
+      ]
+    },
+    {
+      "id": "construir-uma-rede",
+      "title": "Construa uma rede que distribua possibilidades de apoio.",
+      "pages": [
+        13
+      ],
+      "blocks": [
+        {
+          "type": "p",
+          "text": "Rede de apoio não é sinônimo de “melhor amigo”. Ela pode incluir pessoas próximas, familiares, colegas, comunidade, grupos de interesse, vizinhança, profissionais e serviços. Quanto mais distribuída a rede, menor a pressão para que uma única relação resolva tudo."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Companhia e lazer.",
+            "Orientação profissional.",
+            "Ajuda prática.",
+            "Escuta emocional.",
+            "Cuidado clínico."
+          ],
+          "text": "Para quem você pede o quê?"
+        },
+        {
+          "type": "p",
+          "text": "Pessoas diferentes podem responder melhor a necessidades diferentes."
+        },
+        {
+          "type": "p",
+          "text": "Quando buscar ajuda profissional? Se solidão, ansiedade, tristeza, dependência de validação, conflitos repetidos ou medo de abandono estiverem causando sofrimento ou prejuízo, um psicólogo pode ajudar a entender padrões, necessidades e limites sem transformar relações em culpados."
+        },
+        {
+          "type": "p",
+          "text": "No SUS, a Atenção Primária, por meio da UBS, pode acolher a demanda e coordenar o cuidado. Outros pontos da Rede de Atenção Psicossocial podem participar conforme as necessidades e a organização local. Isso não significa encaminhamento automático para um serviço específico. [15]",
+          "review": "Respondida: páginas atuais do Ministério da Saúde sobre APS e CAPS/RAPS conferidas; descrição geral de acesso, sem promessa de oferta municipal."
+        }
+      ]
+    },
+    {
+      "id": "cuidar-sem-desistir",
+      "title": "Cuidar de si não é desistir das pessoas.",
+      "pages": [
+        14
+      ],
+      "blocks": [
+        {
+          "type": "p",
+          "text": "Talvez maturidade relacional seja permitir que cada pessoa ocupe o lugar que consegue sustentar - sem obrigá-la a ser menos e sem obrigá-la a ser mais. Você pode gostar de alguém e mudar o acesso que essa pessoa tem à sua vida. Pode ajudar sem assumir o problema do outro. Pode ouvir um “não” sem transformar limite em rejeição. E pode dizer “não” sem transformar autocuidado em culpa."
+        },
+        {
+          "type": "quote",
+          "text": "Filtrar não é punir. É organizar presença, expectativa e energia.",
+          "attribution": "Síntese editorial da edição"
+        },
+        {
+          "type": "note",
+          "text": "Este material é educativo e informativo. Não transforma relações em diagnóstico. Se houver sofrimento persistente, prejuízo no dia a dia ou dificuldade para estabelecer limites e vínculos, procure um profissional qualificado ou uma UBS."
+        }
+      ]
+    }
+  ],
+  "references": [
+    {
+      "label": "[1] WORLD HEALTH ORGANIZATION. From loneliness to social connection: charting a path to healthier societies. Geneva: WHO, 2025. ISBN 978-92-4-011236-0.",
+      "verification": "verified",
+      "url": "https://www.who.int/publications/i/item/978240112360",
+      "note": "Conferidos título/ISBN e p. 28–29/Figura 2: idades, percentuais e incerteza; modelo ≥13 anos. PDF consultado em cópia institucional do Ministério da Saúde do Chile, ISBN idêntico: https://www.minsal.cl/wp-content/uploads/2026/01/9789240112360-eng.pdf"
+    },
+    {
+      "label": "[2] LABOISSIÈRE, Paula. OMS: uma em cada seis pessoas no mundo é afetada pela solidão. Agência Brasil, Brasília, 1 jul. 2025.",
+      "verification": "verified",
+      "note": "Conferidos título, Paula Laboissière, Brasília e data 01/07/2025 na publicação. Checagem documental de reportagem; evidência estatística provém de [1].",
+      "url": "https://agenciabrasil.ebc.com.br/geral/noticia/2025-07/oms-uma-em-cada-seis-pessoas-no-mundo-e-afetada-pela-solidao"
+    },
+    {
+      "label": "[3] DAL MAS, Manuella. Vínculos afetivos impactam diretamente a saúde mental, diz especialista. CNN Brasil, São Paulo, 25 jul. 2026.",
+      "verification": "verified",
+      "note": "Conferidos título, Manuella Dal Mas e data 25/07/2026 na publicação. Título causal pertence ao veículo; a adaptação não o apresenta como resultado de pesquisa.",
+      "url": "https://www.cnnbrasil.com.br/saude/vinculos-afetivos-impactam-diretamente-a-saude-mental-diz-especialista/"
+    },
+    {
+      "label": "[4] WARREN, Matt. Você não precisa estar sozinho para se sentir solitário. Folha de S.Paulo / BBC News Brasil, 20 jan. 2025.",
+      "verification": "verified",
+      "note": "Conferidos título, Matt Warren, BBC Future/BBC News Brasil e data 20/01/2025 na edição da Folha. Usada como cobertura jornalística, não evidência clínica.",
+      "url": "https://www1.folha.uol.com.br/equilibrio/2025/01/por-que-voce-nao-precisa-estar-sozinho-para-se-sentir-solitario.shtml"
+    },
+    {
+      "label": "[5] BAUMEISTER, R. F.; LEARY, M. R. The need to belong: desire for interpersonal attachments as a fundamental human motivation. Psychological Bulletin, v. 117, n. 3, p. 497-529, 1995. DOI: 10.1037/0033-2909.117.3.497.",
+      "verification": "verified",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/7777651/",
+      "note": "Metadados e resumo primário conferidos no PubMed (PMID 7777651): hipótese de vínculos fortes/estáveis como motivação. Não é estudo que classifique amizades individuais."
+    },
+    {
+      "label": "[6] ALLEN, K. A. et al. Belonging: a review of conceptual issues, an integrative framework, and directions for future research. Australian Journal of Psychology, v. 73, n. 1, p. 87-102, 2021. DOI: 10.1080/00049530.2021.1883409.",
+      "verification": "verified",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8095671/",
+      "note": "Revisão narrativa original e estrutura de quatro componentes conferidas: competências, oportunidades, motivações e percepções. O modelo é integrativo e ainda requer pesquisa; não é escala aplicada no artigo."
+    },
+    {
+      "label": "[7] RYAN, R. M.; DECI, E. L. Self-determination theory and the facilitation of intrinsic motivation, social development, and well-being. American Psychologist, v. 55, n. 1, p. 68-78, 2000. DOI: 10.1037/0003-066X.55.1.68.",
+      "verification": "verified",
+      "url": "https://selfdeterminationtheory.org/SDT/documents/2000_RyanDeci_SDT.pdf",
+      "note": "Artigo primário consultado, especialmente p. 68 e p. 73–74: autonomia, competência e relacionamento; autonomia não equivale a independência. Teoria distinta da Análise do Comportamento."
+    },
+    {
+      "label": "[8] SLEMP, G. R. et al. Interpersonal supports for basic psychological needs and their relations with motivation, well-being, and performance: a meta-analysis. Journal of Personality and Social Psychology, v. 127, n. 5, p. 1012-1037, 2024. DOI: 10.1037/pspi0000459.",
+      "verification": "verified",
+      "url": "https://selfdeterminationtheory.org/wp-content/uploads/2024/02/2024_SlempFieldRyanEtAl_Interpersonal.pdf",
+      "note": "Resumo e limitações do artigo primário conferidos: 881 amostras/N 443.556; mais de 70% transversais, sem determinar direção causal. Não demonstra efeito de um limite específico ou de toda relação individual."
+    },
+    {
+      "label": "[9] GRANOVETTER, M. S. The strength of weak ties. American Journal of Sociology, v. 78, n. 6, p. 1360-1380, 1973. DOI: 10.1086/225469.",
+      "verification": "verified",
+      "url": "https://www.journals.uchicago.edu/doi/10.1086/225469",
+      "note": "Metadados e resumo do artigo primário conferidos: pontes entre redes, difusão de informação e oportunidades. Conceito sociológico, sem medida de intimidade ou qualidade moral."
+    },
+    {
+      "label": "[10] GARIÉPY, G.; HONKANIEMI, H.; QUESNEL-VALLÉE, A. Social support and protection from depression: systematic review of current findings in Western countries. British Journal of Psychiatry, v. 209, n. 4, p. 284-293, 2016. DOI: 10.1192/bjp.bp.115.169094.",
+      "verification": "verified",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/27445355/",
+      "note": "Resumo primário conferido: 100 estudos, países ocidentais, apoio/depressão, heterogeneidade e possível causalidade reversa; efeitos menores em coortes. Não fundamenta promessa de prevenção individual."
+    },
+    {
+      "label": "[11] CHEN, Zhijia; SONG, Xiaoqi; LEE, Tatia M. C.; ZHANG, Ruibin. The robust reciprocal relationship between loneliness and depressive symptoms among the general population: Evidence from a quantitative analysis of 37 studies. Journal of Affective Disorders, v.343, p. 119–128, 2023. DOI: 10.1016/j.jad.2023.09.035.",
+      "verification": "verified",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/37797753/",
+      "note": "Corrigido WANG para CHEN et al. conforme autores/DOI/resumo primário: 37 estudos, análise de relações recíprocas ao longo do tempo. Resumo conferido; não foi feita auditoria dos 37 estudos."
+    },
+    {
+      "label": "[12] LIM, S. et al. Dynamic residential movement and depression among the World Trade Center Health Registry enrollees. Social Psychiatry and Psychiatric Epidemiology, v. 57, p. 1157-1165, 2022. DOI: 10.1007/s00127-021-02192-9.",
+      "verification": "verified",
+      "url": "https://link.springer.com/article/10.1007/s00127-021-02192-9",
+      "note": "Resumo, métodos e discussão primários conferidos: n 38.495; dois períodos 2007–2014; RR 1,20/IC 95% 1,06–1,37. População exposta ao 11/9, confundimento residual e razões das mudanças não medidas limitam generalização."
+    },
+    {
+      "label": "[13] STARKER, J. E. Psychosocial aspects of geographic relocation: the development of a new social network. American Journal of Health Promotion, v. 5, n. 1, p. 52-57, 1990. DOI: 10.4278/0890-1171-5.1.52.",
+      "verification": "verified",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/22188153/",
+      "note": "Metadados e resumo primário conferidos: duas entrevistas com intervalo de três meses em adultos recém-chegados. Registro histórico de redes em formação; não extrapolar percentuais demográficos de 1990 para hoje."
+    },
+    {
+      "label": "[14] KRAUT, Richard. Aristotle’s Ethics. In: ZALTA, Edward N.; NODELMAN, Uri (ed.). Stanford Encyclopedia of Philosophy, Summer 2024 Edition. Seção 9: Friendship. Stanford: Stanford University, 2024.",
+      "verification": "verified",
+      "url": "https://plato.stanford.edu/archives/sum2024/entries/aristotle-ethics/",
+      "note": "Conferidas autoria, versão arquivada Summer 2024 e seção 9 sobre os três fundamentos de philia. Interpretação filosófica de Kraut, não frase literal de Aristóteles."
+    },
+    {
+      "label": "[15] BRASIL. Ministério da Saúde. Atenção Primária; Centros de Atenção Psicossocial. Brasília, DF. Acesso em 17 out.2026.",
+      "verification": "verified",
+      "url": "https://www.gov.br/saude/pt-br/composicao/saps/",
+      "note": "Páginas institucionais atuais conferidas para acolhimento, coordenação e articulação com a RAPS, sem aferição da oferta local. Página complementar: https://www.gov.br/saude/pt-br/composicao/saes/desmad/raps/caps/caps/"
+    }
+  ],
+  "reviewNotes": [
+    "Documento migrado para revisão. draft=true e reviewed=false: conteúdo não aprovado para publicação automática.",
+    "Base integral: REV 05, 14 páginas. Somente categorias, exemplos, argumentos e referências dessa edição foram migrados; cabeçalhos e rodapés repetidos foram removidos.",
+    "O PDF registra curadoria de Gabriel Batista nas páginas 1, 2 e 14. Em 17/10/2026, o titular confirmou a assinatura desta adaptação HTML: Texto e curadoria de Gabriel Alves Batista.",
+    "Checagem de 17/10/2026: referências jornalísticas [2]–[4] localizadas e documentadas; evidência científica explicitamente separada.",
+    "Checagem de 17/10/2026: estimativas globais e por idade confirmadas no relatório OMS, Figura 2/p. 28–29; período e incerteza preservados.",
+    "O estudo residencial de Lim et al. tem população e comparação específicas. Preservar n=38.495, RR=1,20, IC 95% 1,06-1,37 e o limite de generalização; não afirmar causalidade universal.",
+    "Exercício das páginas 11-12 foi adaptado para observação qualitativa. Nenhum cálculo, índice, faixa interpretativa, classificação ou escore será aplicado no site.",
+    "As ilustrações são mapas editoriais, não classificações validadas de relações. Não converter círculos em hierarquia moral ou teste de personalidade.",
+    "Não importar o retrato do PDF automaticamente: usar ativos profissionais previamente autorizados no site quando pertinentes, e manter fotografias ilustrativas distintas de equipe ou pacientes.",
+    "A página 11 original tem caixa final sobreposta às últimas alternativas; a página 12 também encobre parte da terceira faixa. A migração usa texto extraído e organização semântica, não screenshots como conteúdo.",
+    "Não confundir esta edição com Relacoes_em_Pauta_Edicao_Especial_Revisada.pdf (27 p), que tem temas próprios e deve continuar no banco editorial, sem fusão automática.",
+    "Atualização científica de 17/10/2026: corrigida a autoria de [11] para Chen, Song, Lee e Zhang; adicionada [15] sobre APS/RAPS. O alcance de cada checagem consta em references.note e reviewResponses."
+  ],
+  "seoTitle": "Relações, reciprocidade e limites",
+  "reviewResponses": [
+    {
+      "note": "Nota original 1: Documento migrado para revisão. draft=true e reviewed=false: conteúdo não aprovado para publicação automática.",
+      "response": "O conteúdo está em rascunho; esta checagem de fontes não é aprovação clínica.",
+      "action": "Mantidos draft=true e reviewed=false.",
+      "status": "editorial-decision"
+    },
+    {
+      "note": "Nota original 2: Base integral: REV 05, 14 páginas. Somente categorias, exemplos, argumentos e referências dessa edição foram migrados; cabeçalhos e rodapés repetidos foram removidos.",
+      "response": "As 14 páginas continuam mapeadas. Atualizações científicas preservam exemplos e argumentos; os novos apoios estão documentados.",
+      "action": "Preservadas source, hash e sections.pages; acrescentada referência institucional [15].",
+      "status": "resolved"
+    },
+    {
+      "note": "Nota original 3: O PDF registra curadoria de Gabriel Batista nas páginas 1, 2 e 14. Em 17/10/2026, o titular confirmou a assinatura desta adaptação HTML: Texto e curadoria de Gabriel Alves Batista.",
+      "response": "A confirmação direta do titular permanece válida para a adaptação.",
+      "action": "Mantida a assinatura Texto e curadoria de Gabriel Alves Batista, com data 17/10/2026; original preservado.",
+      "status": "resolved"
+    },
+    {
+      "note": "Nota original 4: Referências [2]-[4] são jornalísticas e têm verificação pendente. Não substituir fontes primárias por manchetes como prova clínica.",
+      "response": "As três matérias foram localizadas nos veículos; autoria e datas conferem. Não são prova clínica.",
+      "action": "Adicionadas URLs e sínteses próprias; apoio científico separado em [10] e [11].",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "Agência Brasil",
+          "url": "https://agenciabrasil.ebc.com.br/geral/noticia/2025-07/oms-uma-em-cada-seis-pessoas-no-mundo-e-afetada-pela-solidao"
+        },
+        {
+          "label": "CNN Brasil",
+          "url": "https://www.cnnbrasil.com.br/saude/vinculos-afetivos-impactam-diretamente-a-saude-mental-diz-especialista/"
+        },
+        {
+          "label": "Folha/BBC",
+          "url": "https://www1.folha.uol.com.br/equilibrio/2025/01/por-que-voce-nao-precisa-estar-sozinho-para-se-sentir-solitario.shtml"
+        }
+      ]
+    },
+    {
+      "note": "Nota original 5: A estimativa global de solidão foi conferida na OMS; os percentuais específicos por idade devem ser verificados na tabela do relatório completo.",
+      "response": "A Figura 2 confirma 20,9% e 17,4%, com intervalos de incerteza e período 2014–2023.",
+      "action": "Números contextualizados no texto; retirado o pedido de conferência futura.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "OMS: relatório e metadados",
+          "url": "https://www.who.int/publications/i/item/978240112360"
+        },
+        {
+          "label": "OMS: cópia institucional, p. 28–29",
+          "url": "https://www.minsal.cl/wp-content/uploads/2026/01/9789240112360-eng.pdf"
+        }
+      ]
+    },
+    {
+      "note": "Nota original 6: O estudo residencial de Lim et al. tem população e comparação específicas. Preservar n=38.495, RR=1,20, IC 95% 1,06-1,37 e o limite de generalização; não afirmar causalidade universal.",
+      "response": "A comparação e os limites foram confirmados no estudo original.",
+      "action": "Mantidos n/RR/IC; explicados risco relativo e mudanças menos frequentes.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "Lim et al.",
+          "url": "https://link.springer.com/article/10.1007/s00127-021-02192-9"
+        }
+      ]
+    },
+    {
+      "note": "Nota original 7: Exercício das páginas 11-12 foi adaptado para observação qualitativa. Nenhum cálculo, índice, faixa interpretativa, classificação ou escore será aplicado no site.",
+      "response": "As perguntas são reflexão editorial, sem validação psicométrica demonstrada.",
+      "action": "Mantida atividade qualitativa, sem soma, faixa, resultado ou classificação.",
+      "status": "resolved"
+    },
+    {
+      "note": "Nota original 8: As ilustrações são mapas editoriais, não classificações validadas de relações. Não converter círculos em hierarquia moral ou teste de personalidade.",
+      "response": "Os mapas não medem valor moral nem representam categorias clínicas validadas.",
+      "action": "Preservada a leitura ilustrativa e contextual; removida redação que culpabilizava quem espera apoio.",
+      "status": "resolved"
+    },
+    {
+      "note": "Nota original 9: Não importar o retrato do PDF automaticamente: usar ativos profissionais previamente autorizados no site quando pertinentes, e manter fotografias ilustrativas distintas de equipe ou pacientes.",
+      "response": "Autorização de retratos é assunto documental, não resolvido por artigo científico. Nenhum novo retrato foi importado. Em 17/10/2026, o titular confirmou que as fotos são de conteúdo próprio e têm autorização consensual para divulgar o trabalho das equipes.",
+      "action": "Autorização do titular registrada; manter imagens e PDFs no contexto editorial, sem atribuir às fotografias valor de evidência científica.",
+      "status": "resolved"
+    },
+    {
+      "note": "Nota original 10: A página 11 original tem caixa final sobreposta às últimas alternativas; a página 12 também encobre parte da terceira faixa. A migração usa texto extraído e organização semântica, não screenshots como conteúdo.",
+      "response": "As sobreposições são defeitos do PDF, já contornados pela transcrição semântica.",
+      "action": "Perguntas preservadas em HTML legível; PDF de origem permanece inalterado.",
+      "status": "resolved"
+    },
+    {
+      "note": "Nota original 11: Não confundir esta edição com Relacoes_em_Pauta_Edicao_Especial_Revisada.pdf (27 p), que tem temas próprios e deve continuar no banco editorial, sem fusão automática.",
+      "response": "O dossiê de 27 páginas tem identidade e assuntos próprios.",
+      "action": "Mantido no acervo de comparação, sem fusão ou perda de rastreabilidade.",
+      "status": "resolved"
+    },
+    {
+      "note": "Bloco reconhecer-lugares/3 — nota original: Texto editorial da fonte: evitar leitura universal de que toda frustração decorre da expectativa de quem sofre; contextualizar sem culpabilização.",
+      "response": "A hipótese de expectativa excessiva não explica todo sofrimento relacional.",
+      "action": "Redação contextualizada com rejeição, negligência, discriminação e violência, sem atribuir a culpa a quem sofre.",
+      "status": "resolved"
+    },
+    {
+      "note": "Bloco pertencimento-e-solidao/2 — nota original: A fonte primária da OMS confirma a ordem de grandeza global; os percentuais 20,9% e 17,4% precisam de conferência na tabela por idade antes da aprovação.",
+      "response": "A Figura 2 confirma os percentuais por idade e seus intervalos.",
+      "action": "Conferência registrada; números mantidos com contexto.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "OMS: p. 28–29/Figura 2",
+          "url": "https://www.minsal.cl/wp-content/uploads/2026/01/9789240112360-eng.pdf"
+        }
+      ]
+    },
+    {
+      "note": "Bloco pertencimento-e-solidao/5 — nota original: Apresentar como perspectiva teórica citada pela edição; não identificar Teoria da Autodeterminação como sinônimo de Análise do Comportamento.",
+      "response": "Ryan/Deci e Slemp usam a Teoria da Autodeterminação; não são definição de Análise do Comportamento.",
+      "action": "Distinção teórica e limite causal acrescentados.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "Ryan e Deci",
+          "url": "https://selfdeterminationtheory.org/SDT/documents/2000_RyanDeci_SDT.pdf"
+        },
+        {
+          "label": "Slemp et al.",
+          "url": "https://selfdeterminationtheory.org/wp-content/uploads/2024/02/2024_SlempFieldRyanEtAl_Interpersonal.pdf"
+        }
+      ]
+    },
+    {
+      "note": "Bloco conexao-e-saude-publica/2 — nota original: As três referências jornalísticas ainda precisam de URLs e verificação das datas/manchetes; não foram consideradas evidência científica primária nesta migração.",
+      "response": "As três publicações foram identificadas; sua função é documental.",
+      "action": "Quadro reescrito em paráfrase e separado das evidências clínicas.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "Agência Brasil",
+          "url": "https://agenciabrasil.ebc.com.br/geral/noticia/2025-07/oms-uma-em-cada-seis-pessoas-no-mundo-e-afetada-pela-solidao"
+        },
+        {
+          "label": "CNN Brasil",
+          "url": "https://www.cnnbrasil.com.br/saude/vinculos-afetivos-impactam-diretamente-a-saude-mental-diz-especialista/"
+        },
+        {
+          "label": "Folha/BBC",
+          "url": "https://www1.folha.uol.com.br/equilibrio/2025/01/por-que-voce-nao-precisa-estar-sozinho-para-se-sentir-solitario.shtml"
+        }
+      ]
+    },
+    {
+      "note": "Bloco mudar-de-cidade/4 — nota original: Lim et al.: população específica exposta ao desastre de 11 de setembro. Associação, não efeito universal de mudar de cidade. RR relativo e intervalo foram conferidos no resumo primário.",
+      "response": "O RR é relativo e a população foi exposta ao 11/9. Há limites de generalização e de confundimento.",
+      "action": "Definida mudança frequente em dois períodos; esclarecidos 20% e comparação.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "Lim et al.",
+          "url": "https://link.springer.com/article/10.1007/s00127-021-02192-9"
+        }
+      ]
+    },
+    {
+      "note": "Bloco confianca-e-intimidade/4 — nota original: Paráfrase filosófica da edição, não citação literal de Aristóteles; conferir referência [14] e data da versão consultada.",
+      "response": "Aristóteles diferencia três fundamentos e privilegia a amizade baseada no caráter.",
+      "action": "Corrigida a paráfrase; fixada versão Summer 2024 de Kraut, seção 9.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "Kraut: Friendship",
+          "url": "https://plato.stanford.edu/archives/sum2024/entries/aristotle-ethics/"
+        }
+      ]
+    },
+    {
+      "note": "Bloco tres-procuras/1 — nota original: Adaptação editorial explícita: removidos números de resposta, soma 3-9, índice e faixas 3-4/5-7/8-9 das páginas 11-12. Preservadas as perguntas e possibilidades qualitativas; não oferecer resultados, ranking ou aplicação psicológica.",
+      "response": "Não há base apresentada para interpretar a soma original como medida psicológica.",
+      "action": "Mantidas perguntas e possibilidades qualitativas; sem aplicação, escores ou resultados.",
+      "status": "resolved"
+    },
+    {
+      "note": "Bloco construir-uma-rede/5 — nota original: Conferir referência institucional atual da RAPS/APS antes da aprovação; não anunciar disponibilidade local ou atendimento automático.",
+      "response": "O Ministério confirma a APS como porta de entrada e a articulação entre serviços.",
+      "action": "Acrescentada referência [15], com oferta condicionada à rede local.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "Ministério da Saúde: APS",
+          "url": "https://www.gov.br/saude/pt-br/composicao/saps/"
+        },
+        {
+          "label": "Ministério da Saúde: CAPS/RAPS",
+          "url": "https://www.gov.br/saude/pt-br/composicao/saes/desmad/raps/caps/caps/"
+        }
+      ]
+    }
+  ],
+  "researchReviewedAt": "2026-10-17",
+  "mediaAuthorization": {
+    "confirmedByHolder": true,
+    "confirmedAt": "2026-10-17",
+    "scope": "Fotos de conteúdo próprio com autorização consensual para divulgar o trabalho das equipes, conforme confirmação direta do titular nesta conversa."
+  }
+}

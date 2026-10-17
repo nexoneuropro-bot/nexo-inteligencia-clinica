@@ -183,44 +183,242 @@ export const pages: ContentPage[] = [
   },
   {
     slug: 'para-sua-empresa',
-    title: 'NR-1 e saúde mental nas empresas.',
-    description: 'Saúde mental nas empresas e NR-1: conheça a atuação NEXO em riscos psicossociais, organização do trabalho e planejamento de ações de prevenção.',
+    title: 'Psicologia organizacional para empresas.',
+    description: 'Psicologia organizacional na NEXO: recrutamento e seleção, treinamento e desenvolvimento, avaliação psicológica e riscos psicossociais na NR-1.',
     eyebrow: 'Para sua empresa',
-    intro: 'NR-1 e saúde mental no trabalho começam por compreender as condições em que as pessoas trabalham: demandas, autonomia, apoio e relações. Avaliar ajuda a transformar essa compreensão em prioridades de prevenção.',
+    intro: 'Contratar, desenvolver pessoas e cuidar das condições de trabalho são decisões que se conectam. A Psicologia Organizacional e do Trabalho ajuda a investigar necessidades e construir ações a partir da realidade da sua empresa.',
     sections: [
       {
-        title: 'O que mudou na NR-1?',
+        title: 'Compreender a empresa e o trabalho real.',
         body: [
-          'Desde 26 de maio de 2026, a redação vigente do capítulo 1.5 da NR-1 inclui expressamente os fatores de risco psicossociais relacionados ao trabalho no Gerenciamento de Riscos Ocupacionais (GRO).',
-          'Para a empresa, isso significa considerar esses fatores na análise das condições de trabalho e na prevenção, articulando NR-1 e NR-17. A avaliação ajuda a reconhecer exposições e fundamentar decisões; sua utilidade continua na implementação e no acompanhamento das medidas.',
+          'Uma dificuldade para preencher vagas, desenvolver lideranças ou organizar a cooperação pede perguntas diferentes. A conversa inicial delimita a demanda, as funções envolvidas, os recursos disponíveis e as decisões que precisam de apoio.',
+          'A proposta pode combinar investigação, intervenção e acompanhamento, conforme a finalidade e a competência técnica necessária. Trabalhadores, lideranças, RH e responsáveis por Segurança e Saúde no Trabalho participam conforme o escopo de cada projeto.',
         ],
       },
       {
-        title: 'Que condições merecem atenção?',
-        body: ['Demandas excessivas, pouca autonomia, apoio insuficiente, conflitos de papéis e situações de violência ou assédio são exemplos que podem exigir investigação. A relevância e o nível de risco dependem das atividades, das exposições e das condições concretas de cada organização.'],
+        title: 'Recrutamento, seleção e avaliação psicológica.',
+        body: [
+          'O recrutamento e a seleção começam por compreender a função: atividades, condições de execução e competências pertinentes. Entrevistas estruturadas e outros procedimentos definidos para a demanda ajudam a reunir evidências para a decisão de contratação.',
+          'Quando houver indicação de avaliação psicológica, entrevistas, observações e instrumentos adequados são integrados em um processo próprio. Os documentos comunicam os resultados pertinentes à finalidade; a escolha entre relatório de seleção e laudo psicológico depende do trabalho realizado e das normas aplicáveis.',
+        ],
         items: [
-          'Demandas: volume, ritmo, recursos e exigências da atividade.',
-          'Autonomia: possibilidades de organizar e realizar o trabalho.',
-          'Apoio e relações: comunicação, cooperação e acesso à liderança.',
-          'Papéis: clareza de responsabilidades e compatibilidade das orientações.',
+          'Definição do perfil da função e dos critérios de seleção.',
+          'Planejamento e condução de etapas de recrutamento e seleção.',
+          'Avaliação psicológica organizacional quando pertinente à demanda.',
+          'Devolutiva e documentação para subsidiar a decisão, com sigilo e limites esclarecidos.',
         ],
       },
       {
-        title: 'Como a NEXO pode contribuir?',
+        title: 'Treinamento e desenvolvimento de pessoas.',
         body: [
-          'A conversa inicial delimita atividades, unidades de avaliação, demandas e responsabilidades. A proposta pode envolver avaliação de fatores psicossociais, devolutiva organizacional, apoio à priorização de medidas e acompanhamento, conforme o escopo e a competência técnica necessários.',
-          'O trabalho se articula com os responsáveis por Segurança e Saúde no Trabalho (SST), a gestão e os trabalhadores. Desenvolvimento de lideranças e comunicação pode complementar as medidas sobre a organização do trabalho, conforme os achados.',
+          'Treinar tem mais sentido quando há uma necessidade definida e condições para aplicar o que se aprende. O levantamento de necessidades orienta objetivos, conteúdos, formatos e acompanhamento, em vez de partir de uma palestra igual para todas as equipes.',
+          'Projetos podem trabalhar comunicação, feedback, cooperação, integração de novos profissionais e desenvolvimento de lideranças. Planos de desenvolvimento individual podem apoiar objetivos acordados, com oportunidades de prática e revisão no cotidiano.',
         ],
       },
       {
-        title: 'Avaliar para decidir e acompanhar.',
+        title: 'NR-1, riscos psicossociais e condições de trabalho.',
         body: [
-          'Conhecer o trabalho real ajuda a definir quais condições precisam mudar, quem ficará responsável e como acompanhar os resultados. O processo deve permitir rever medidas insuficientes e reconhecer novas exposições.',
-          'O projeto organizacional trata das condições de trabalho. Avaliações clínicas individuais têm outra finalidade e preservam seus próprios canais de cuidado e sigilo. A responsabilidade da empresa pelo GRO permanece, sem garantia de adequação automática ou certificação pela contratação de uma consultoria.',
+          'Desde 26 de maio de 2026, a redação vigente do capítulo 1.5 da NR-1 inclui expressamente os fatores de risco psicossociais relacionados ao trabalho no Gerenciamento de Riscos Ocupacionais (GRO). A análise considera demandas, autonomia, apoio, relações e outras condições das atividades, em articulação com a NR-17.',
+          'A avaliação pode apoiar a priorização de medidas e seu acompanhamento com os responsáveis por SST. Treinamentos podem complementar esse trabalho, mas não substituem mudanças necessárias nas condições de trabalho. A empresa mantém suas responsabilidades pelo GRO e pelo PGR.',
+        ],
+      },
+      {
+        title: 'Clima, relações e organização do trabalho.',
+        body: [
+          'Outras demandas podem envolver investigação do clima organizacional, práticas de liderança, cultura, clareza de papéis, cooperação e manejo de conflitos. A finalidade precisa ser delimitada para que a investigação leve a decisões e ações possíveis.',
+          'Um levantamento de clima pode mostrar temas que merecem aprofundamento; uma intervenção nas relações pode exigir escuta e construção de acordos. Nenhuma dessas atividades se confunde automaticamente com avaliação de riscos ocupacionais ou atendimento clínico individual.',
+        ],
+      },
+      {
+        title: 'Como definir o projeto para a sua empresa?',
+        body: [
+          'Apresente a situação que deseja compreender, as equipes envolvidas e a decisão ou mudança pretendida. Com essas informações, conversamos sobre objetivos, métodos, participação das pessoas, cronograma e entregas possíveis.',
+          'O escopo também define acesso às informações, devolutivas e critérios de acompanhamento. Um projeto pode resultar em recomendações, registros do processo, plano de desenvolvimento ou apoio à implementação, conforme a demanda e as decisões que precisam de apoio.',
         ],
       },
     ],
     ctaLabel: 'Conversar sobre sua organização',
+    ctaType: 'business',
+  },
+  {
+    slug: 'recrutamento-e-selecao',
+    title: 'Recrutamento e seleção com critérios claros.',
+    description: 'Recrutamento e seleção na NEXO: perfil da função, entrevistas, avaliação psicológica quando indicada e documentos para apoiar decisões de contratação.',
+    eyebrow: 'Psicologia organizacional · Recrutamento e seleção',
+    intro: 'Uma seleção começa antes da entrevista: é preciso compreender o trabalho e definir quais evidências são relevantes para a função. A Psicologia pode apoiar esse percurso e a comunicação dos resultados.',
+    sections: [
+      {
+        title: 'Que trabalho a pessoa vai realizar?',
+        body: [
+          'A definição do perfil considera atividades, responsabilidades, condições de execução e competências necessárias. Essa análise ajuda a distinguir requisitos pertinentes à vaga de preferências pessoais de quem conduz a seleção.',
+          'Por exemplo, uma função que envolve coordenar entregas pode exigir investigar como a pessoa organiza prioridades e comunica dificuldades. Os critérios devem se apoiar no trabalho previsto, sem procurar um tipo de personalidade ideal para toda empresa.',
+        ],
+      },
+      {
+        title: 'Um processo organizado para a demanda.',
+        body: [
+          'A proposta pode envolver apoio à descrição da vaga, estratégia de recrutamento, análise de informações profissionais e entrevistas estruturadas. Etapas adicionais são planejadas conforme o objetivo, a complexidade da função e as condições do processo.',
+          'Definir previamente critérios e formas de registrar evidências permite comparar informações com maior clareza. A pessoa candidata deve compreender a finalidade das etapas, as condições de participação e como ocorrerá a comunicação dos resultados.',
+        ],
+        items: [
+          'Alinhamento da demanda e dos critérios ocupacionais.',
+          'Planejamento do recrutamento e das etapas de seleção.',
+          'Entrevistas e procedimentos compatíveis com a finalidade.',
+          'Integração das informações, devolutiva e documentação acordada.',
+        ],
+      },
+      {
+        title: 'Como os instrumentos participam da seleção?',
+        body: [
+          'Quando a demanda indicar avaliação psicológica, ela será planejada e conduzida pelo profissional de Psicologia. Entrevistas, observações e testes psicológicos, quando pertinentes, oferecem informações que precisam ser interpretadas em conjunto.',
+          'Testes psicológicos utilizados profissionalmente devem ter parecer favorável no SATEPSI e ser adequados à finalidade, à população e ao contexto, respeitando o manual e as condições de aplicação. Um instrumento disponível na internet não é automaticamente adequado à seleção.',
+          'Pontuações isoladas não definem a contratação. A análise precisa considerar o conjunto de evidências, suas limitações e os critérios da função, com cuidado para não transformar informações clínicas privadas em filtros de seleção.',
+        ],
+      },
+      {
+        title: 'O que a empresa recebe ao final?',
+        body: [
+          'As entregas podem incluir o perfil acordado, registros das etapas, síntese das evidências relacionadas à função e recomendações para apoiar a decisão. O escopo define o conteúdo e os destinatários de cada entrega.',
+          'A documentação para apoiar a contratação é combinada conforme o serviço realizado. O registro ou a síntese de seleção comunica as etapas e as evidências relacionadas à função. Quando há avaliação psicológica, seus resultados são apresentados no documento psicológico cabível, incluindo laudo psicológico conforme a finalidade e as normas profissionais.',
+          'O documento apresenta informações pertinentes, fundamentação e limites. A decisão de contratar é da organização e precisa considerar também as demais informações legítimas do processo; a avaliação não garante desempenho futuro ou permanência na empresa.',
+        ],
+      },
+      {
+        title: 'Sigilo e devolutiva fazem parte do processo.',
+        body: [
+          'Antes da coleta, devem ser esclarecidos a finalidade, o uso dos dados, quem terá acesso e como os resultados serão comunicados. O compartilhamento com a empresa se limita às informações pertinentes à demanda, respeitando o sigilo profissional.',
+          'A pessoa avaliada recebe a devolutiva e as orientações cabíveis. Protocolos de testes e detalhes íntimos sem relação com a finalidade não compõem um pacote irrestrito para a gestão. Condições de saúde não devem substituir a análise dos requisitos e das condições reais do trabalho.',
+        ],
+      },
+      {
+        title: 'Toda seleção precisa de avaliação psicológica?',
+        body: [
+          'Não. Recrutamento, seleção e avaliação psicológica são atividades relacionadas, com finalidades que precisam ser diferenciadas. A inclusão de uma avaliação depende da demanda, da justificativa técnica e dos requisitos aplicáveis à função.',
+          'A conversa inicial ajuda a decidir quais etapas são pertinentes e quais entregas poderão apoiar a empresa. Para apresentar sua demanda, informe a função, o contexto da vaga e o objetivo da seleção, sem encaminhar documentos pessoais de candidatos no primeiro contato.',
+        ],
+      },
+    ],
+    ctaLabel: 'Conversar sobre recrutamento e seleção',
+    ctaType: 'business',
+  },
+  {
+    slug: 'treinamento-e-desenvolvimento',
+    title: 'Treinamento e desenvolvimento para o trabalho real.',
+    description: 'Treinamento e desenvolvimento de pessoas na NEXO: levantamento de necessidades, lideranças, comunicação, feedback e acompanhamento da aprendizagem.',
+    eyebrow: 'Psicologia organizacional · Treinamento e desenvolvimento',
+    intro: 'Desenvolver pessoas exige compreender o que precisa mudar, o que já funciona e quais condições permitem aprender e aplicar novas práticas. O projeto começa pela necessidade da empresa e das equipes.',
+    sections: [
+      {
+        title: 'O que precisa ser aprendido e por quê?',
+        body: [
+          'O levantamento de necessidades de treinamento investiga a distância entre a situação atual e os objetivos do trabalho. Escuta das equipes, análise das atividades e informações da gestão ajudam a definir prioridades.',
+          'Nem toda dificuldade decorre de falta de conhecimento ou habilidade. Recursos insuficientes, orientações conflitantes ou pouca autonomia podem impedir uma boa execução mesmo quando a equipe sabe o que fazer. Identificar essas condições evita atribuir todo problema às pessoas.',
+        ],
+      },
+      {
+        title: 'Objetivos que podem ser observados no cotidiano.',
+        body: [
+          'A proposta transforma temas amplos em práticas que podem ser discutidas e acompanhadas. Em comunicação, por exemplo, o objetivo pode ser melhorar a clareza dos combinados e a forma de pedir ajuda, considerando as condições da equipe.',
+          'Formatos podem incluir oficinas, encontros de desenvolvimento, atividades com situações de trabalho e acompanhamento das aplicações. Conteúdo, duração, acessibilidade e participação são acordados conforme o público e a finalidade.',
+        ],
+      },
+      {
+        title: 'Lideranças, equipes e integração.',
+        body: [
+          'Os projetos podem abordar feedback, cooperação, condução de conversas difíceis, clareza de papéis e desenvolvimento de lideranças. A integração de novos profissionais pode organizar referências, responsabilidades e oportunidades de aprendizagem no início da jornada.',
+          'Um plano de desenvolvimento individual (PDI) pode articular objetivos, ações, apoio necessário e momentos de revisão. O planejamento considera o contexto da função e a participação da pessoa; não se limita a atribuir características ou exigir mudanças sem oferecer condições.',
+        ],
+      },
+      {
+        title: 'Entregas combinadas antes de começar.',
+        body: [
+          'O escopo pode incluir levantamento de necessidades, objetivos de aprendizagem, plano dos encontros, materiais de apoio e orientações para aplicar e acompanhar as práticas. A empresa pode receber uma síntese do percurso e recomendações para continuidade.',
+          'A forma de registro e de devolutiva é combinada desde o início. Exposições pessoais durante encontros não devem ser transformadas em avaliações individuais de desempenho sem finalidade, critérios e condições previamente esclarecidos.',
+        ],
+        items: [
+          'Necessidades e objetivos relacionados ao trabalho.',
+          'Percurso de aprendizagem e materiais previstos.',
+          'Práticas e oportunidades de aplicação no cotidiano.',
+          'Critérios de acompanhamento e revisão do projeto.',
+        ],
+      },
+      {
+        title: 'Como acompanhar o desenvolvimento?',
+        body: [
+          'O acompanhamento pode considerar participação, compreensão, aplicação das práticas e dificuldades encontradas após os encontros. Os critérios precisam corresponder aos objetivos e às condições do projeto.',
+          'Uma avaliação de satisfação informa como o encontro foi recebido, mas não demonstra, sozinha, aprendizagem ou mudança no trabalho. Observar aplicações e ouvir as equipes ajuda a ajustar o percurso, sem prometer aumentos de produtividade ou resultados iguais para todas as organizações.',
+        ],
+      },
+      {
+        title: 'Treinamento resolve os riscos psicossociais da NR-1?',
+        body: [
+          'Treinamento pode fazer parte de um plano de ação quando responde a uma necessidade identificada. Ele não substitui a investigação e a modificação de condições como sobrecarga, falta de recursos, pouca autonomia ou práticas de gestão que produzam exposição a riscos.',
+          'A articulação com a avaliação de riscos psicossociais e os responsáveis por SST ajuda a definir o papel de cada medida. Uma palestra isolada não garante conformidade com a NR-1; a organização precisa implementar e acompanhar as ações pertinentes ao seu contexto.',
+        ],
+      },
+    ],
+    ctaLabel: 'Planejar o desenvolvimento da equipe',
+    ctaType: 'business',
+  },
+  {
+    slug: 'avaliacao-psicologica-organizacional',
+    title: 'Avaliação psicológica no contexto organizacional.',
+    description: 'Entenda a avaliação psicológica organizacional: demanda, instrumentos adequados, devolutiva, sigilo e documentos para subsidiar decisões nas empresas.',
+    eyebrow: 'Psicologia organizacional · Avaliação psicológica',
+    intro: 'Uma avaliação psicológica investiga uma pergunta definida por meio de métodos e informações integrados. No contexto organizacional, sua finalidade, seus limites e o uso dos resultados precisam estar claros antes de começar.',
+    sections: [
+      {
+        title: 'Quando uma avaliação pode contribuir?',
+        body: [
+          'A avaliação pode subsidiar decisões relacionadas a seleção, desenvolvimento ou outras demandas organizacionais compatíveis com a atuação profissional. O primeiro passo é delimitar a questão que será investigada e sua relação com as atividades e condições de trabalho.',
+          'A existência de uma vaga ou de uma dificuldade de desempenho não torna a avaliação automaticamente necessária. O profissional considera a pertinência da demanda, os métodos disponíveis e os requisitos aplicáveis, explicando o que o processo poderá esclarecer.',
+        ],
+      },
+      {
+        title: 'Um processo que integra informações.',
+        body: [
+          'O planejamento define procedimentos, fontes de informação e condições de participação. Entrevistas, observações e testes psicológicos, quando indicados, são utilizados conforme a finalidade e interpretados de forma integrada.',
+          'A análise considera o contexto e a qualidade das evidências, em vez de converter uma pontuação ou uma impressão isolada em conclusão sobre a pessoa. Os resultados respondem à demanda delimitada e precisam explicitar suas limitações.',
+        ],
+        items: [
+          'Esclarecer a demanda, os destinatários e a finalidade da avaliação.',
+          'Planejar e realizar procedimentos tecnicamente pertinentes.',
+          'Integrar as informações e fundamentar as conclusões.',
+          'Realizar a devolutiva e elaborar o documento cabível.',
+        ],
+      },
+      {
+        title: 'Como são escolhidos os instrumentos?',
+        body: [
+          'A escolha depende da pergunta, das características da população e do contexto de uso. Testes psicológicos utilizados profissionalmente precisam ter parecer favorável no SATEPSI e ser empregados conforme as condições e orientações do manual.',
+          'Instrumentos não psicológicos podem oferecer informações complementares quando tecnicamente fundamentados. Questionários genéricos, testes de internet e classificações de personalidade não substituem um processo de avaliação psicológica nem justificam decisões por si só.',
+          'As condições de aplicação e as necessidades de acessibilidade também fazem parte do planejamento. A empresa não precisa escolher uma lista de testes: cabe ao profissional justificar os procedimentos pertinentes à demanda.',
+        ],
+      },
+      {
+        title: 'Relatório ou laudo psicológico?',
+        body: [
+          'O tipo de documento acompanha a finalidade e o trabalho realizado. O relatório psicológico comunica a atuação profissional e o desenvolvimento do processo. O laudo psicológico é decorrente de avaliação psicológica e apresenta análise e conclusões fundamentadas para subsidiar decisões, conforme as normas do CFP.',
+          'Para apoiar uma contratação ou outra decisão organizacional, são combinados desde o início a demanda, os destinatários, as informações necessárias e o documento cabível. O conteúdo responde ao objetivo e preserva o sigilo.',
+          'A devolutiva permite à pessoa avaliada compreender os resultados e seus limites. O documento não autoriza compartilhamento irrestrito de protocolos, informações íntimas ou dados sem relação com a finalidade acordada.',
+        ],
+      },
+      {
+        title: 'Confidencialidade e critérios relacionados ao trabalho.',
+        body: [
+          'Empresa e pessoa avaliada precisam compreender como as informações serão obtidas, utilizadas e comunicadas. Os registros e documentos recebem tratamento compatível com o sigilo profissional e a proteção de dados, com acesso definido conforme a finalidade.',
+          'A avaliação organizacional não é um atalho para obter a história clínica de candidatos ou trabalhadores. Diagnósticos e condições privadas não devem substituir critérios ocupacionais pertinentes. Demandas de cuidado individual têm finalidade e condições próprias.',
+        ],
+      },
+      {
+        title: 'A avaliação garante uma contratação bem-sucedida?',
+        body: [
+          'Não há garantia de desempenho futuro, adaptação permanente ou ausência de dificuldades. A avaliação fornece informações fundamentadas para uma decisão situada no tempo e no contexto; condições de trabalho, oportunidades de aprendizagem e relações também participam do percurso profissional.',
+          'Ela também não substitui a avaliação de riscos psicossociais do trabalho prevista na NR-1. Para definir o serviço pertinente, apresente a decisão que precisa de apoio e o contexto da empresa, sem enviar dados pessoais ou clínicos de trabalhadores no primeiro contato.',
+        ],
+      },
+    ],
+    ctaLabel: 'Conversar sobre avaliação na empresa',
     ctaType: 'business',
   },
   {

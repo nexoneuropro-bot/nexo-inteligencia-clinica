@@ -46,7 +46,7 @@ export default defineConfig({
     build: { target: 'es2022', assetsInlineLimit: 0 },
   },
   integrations:[{name:'nexo-static-headers',hooks:{'astro:build:done':async({dir})=>{
-    const noindex=process.env.PUBLIC_INDEXABLE==='true'?'':'  X-Robots-Tag: noindex, follow\n';
+    const noindex=process.env.PUBLIC_INDEXABLE==='true'&&process.env.PUBLIC_EDITORIAL_PREVIEW!=='true'&&process.env.PUBLIC_EDITORIAL_SHARED_PREVIEW!=='true'?'':'  X-Robots-Tag: noindex, follow\n';
     await writeFile(new URL('_headers',dir),`/*\n${noindex}  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n  Permissions-Policy: camera=(), microphone=(), geolocation=()\n  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'none'\n`);
   }}}]
 });

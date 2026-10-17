@@ -1,0 +1,850 @@
+{
+  "slug": "neurodivergencia-comunicacao",
+  "title": "Você disse ou só achou que disse?",
+  "subtitle": "Neurodivergência, comunicação e o risco de esperar que o outro adivinhe o que você quis dizer.",
+  "description": "Entenda diferenças de interpretação, comunicação clara, sensorialidade e avaliação responsável, com exemplos de casa, escola, trabalho e relações.",
+  "category": "Neurodivergência e comunicação",
+  "theme": "neuro",
+  "draft": true,
+  "reviewed": false,
+  "migratedAt": "2026-10-16",
+  "source": {
+    "file": "psicologia_em_pauta_premium_v2.pdf",
+    "totalPages": 15,
+    "sha256": "d526a282fc4369753e70b302fbc2ad442e71476af5dfbe9cae7b13317e2ae4f5"
+  },
+  "credit": {
+    "name": "Gabriel Batista",
+    "label": "Curadoria e texto",
+    "sourcePages": [
+      1,
+      14
+    ],
+    "authorshipConfirmedBySource": true
+  },
+  "adaptationCredit": {
+    "name": "Gabriel Alves Batista",
+    "label": "Texto e curadoria",
+    "confirmedByHolder": true,
+    "confirmedAt": "2026-10-17"
+  },
+  "sections": [
+    {
+      "id": "intencao-e-mensagem",
+      "title": "Você disse ou só achou que disse?",
+      "pages": [
+        2
+      ],
+      "blocks": [
+        {
+          "type": "p",
+          "text": "A mesma frase pode chegar ao outro com um significado diferente daquele que você imaginou. Isso acontece por cultura, história de vida, idade, contexto, emoção e também por diferenças no modo de perceber pistas sociais e linguagem implícita."
+        },
+        {
+          "type": "quote",
+          "text": "O que está claro dentro da sua cabeça pode continuar invisível para o outro.",
+          "attribution": "Síntese editorial da edição"
+        },
+        {
+          "type": "p",
+          "text": "Por isso, esta edição não ensina \"como identificar um neurodivergente\". Ela ensina algo mais útil: como compreender diferenças sem transformar cada diferença em diagnóstico, e como falar com mais clareza sem perder gentileza."
+        },
+        {
+          "type": "note",
+          "text": "Reconhecer-se em uma situação pode abrir uma pergunta. Não confirma TEA, TDAH ou outra condição."
+        },
+        {
+          "type": "p",
+          "text": "Se algo desperta sofrimento, prejuízo ou dúvida persistente sobre seu desenvolvimento, vale procurar avaliação profissional."
+        },
+        {
+          "type": "p",
+          "text": "Pensamento não vem com Wi-Fi. No Behaviorismo Radical, a privacidade se refere a condições de acesso: pensar e sentir não se tornam automaticamente observáveis para outra pessoa. Isso não os coloca fora da natureza ou da análise científica. Relatar o que sentimos também envolve aprendizagem e contexto; o relato precisa ser compreendido, não tratado como uma janela infalível. [13]",
+          "review": "Respondida: remissão corrigida para [13]; fundamentação substituída por fonte primária aberta de Skinner 1953, cap. XVII, p. 257–262 e 278–282. About Behaviorism 1974 permanece registrado como a referência do PDF original."
+        }
+      ]
+    },
+    {
+      "id": "conceito-neurodivergencia",
+      "title": "O que é neurodivergência?",
+      "pages": [
+        3
+      ],
+      "blocks": [
+        {
+          "type": "p",
+          "text": "Neurodivergência é um termo amplo, sem fronteiras consensuais, usado para falar de formas de funcionamento e desenvolvimento que diferem do padrão considerado típico. Não é uma categoria diagnóstica única do DSM ou da CID. As abordagens de neurodiversidade têm diferenças entre si e podem considerar tanto barreiras do ambiente quanto dificuldades e necessidades individuais. [6][14]"
+        },
+        {
+          "type": "quote",
+          "text": "Não é sobre ser melhor ou pior. É sobre reconhecer diferenças sem transformar diferença em defeito.",
+          "attribution": "Síntese editorial da edição"
+        },
+        {
+          "type": "p",
+          "text": "A comparação do destro e do canhoto ajuda a entender uma parte do problema: ambientes costumam ser planejados para a maioria. Quando a forma de funcionar de alguém é menos comum, pode haver esforço extra, barreiras e necessidade de adaptação."
+        },
+        {
+          "type": "table",
+          "columns": [
+            "Dimensão ilustrativa",
+            "Diferenças que podem ser percebidas"
+          ],
+          "rows": [
+            [
+              "Percepção",
+              "Detalhes e contexto podem receber pesos diferentes."
+            ],
+            [
+              "Atenção",
+              "O foco pode oscilar, hiperfocar ou exigir mais esforço."
+            ],
+            [
+              "Sensorial",
+              "Sons, luzes, cheiros e texturas podem ser vividos com outra intensidade."
+            ],
+            [
+              "Comunicação",
+              "Pistas implícitas e ironias podem não ter o mesmo significado para todos."
+            ]
+          ],
+          "review": "Respondida: quadro explicitamente apresentado como exemplos heterogêneos; não é checklist nem critérios diagnósticos. Conceito e pluralidade das abordagens conferidos em Dwyer 2022."
+        },
+        {
+          "type": "note",
+          "text": "Uma abordagem de neurodiversidade pode coexistir com deficiência, sofrimento e necessidade de suporte. Respeitar identidade não significa negar dificuldades reais. As dimensões do quadro são exemplos heterogêneos, não um perfil compartilhado por todas as pessoas neurodivergentes. [6]"
+        }
+      ]
+    },
+    {
+      "id": "caracteristica-e-diagnostico",
+      "title": "Característica não é diagnóstico.",
+      "pages": [
+        4
+      ],
+      "blocks": [
+        {
+          "type": "p",
+          "text": "Todo mundo pode se distrair, preferir rotina, se incomodar com barulho, não entender uma ironia ou ficar exausto socialmente. A avaliação clínica pergunta outra coisa: isso forma um padrão? Desde quando? Em quais contextos? Com que impacto? Há explicações alternativas? [1][2][3][4]"
+        },
+        {
+          "type": "quote",
+          "text": "Marquei cinco características. Então eu tenho?",
+          "attribution": "Pergunta ilustrativa da edição"
+        },
+        {
+          "type": "p",
+          "text": "Não. Diagnóstico não funciona como bingo. Checklists e vídeos podem levantar perguntas, mas não substituem avaliação profissional."
+        },
+        {
+          "type": "table",
+          "columns": [
+            "Pergunta clínica",
+            "Descrição educativa da edição"
+          ],
+          "rows": [
+            [
+              "TEA",
+              "A descrição clínica do TEA reúne diferenças persistentes de comunicação e interação social e padrões restritos ou repetitivos de comportamento e interesses, que podem incluir respostas sensoriais. Considera desenvolvimento, funcionamento e necessidade de suporte; não se conclui pela presença de um exemplo isolado. [2]"
+            ],
+            [
+              "TDAH",
+              "Considera-se um padrão persistente de desatenção e/ou hiperatividade-impulsividade, presença de vários sintomas antes dos 12 anos, manifestação em mais de um contexto e impacto funcional, além de outras explicações possíveis. [4]"
+            ]
+          ],
+          "review": "Respondida: APA/autismo conferida para a descrição geral. Ficha DSM-5-TR 2022[3] explica uma alteração de redação, não o conjunto completo de critérios; o quadro continua educativo, sem contagem/aplicação."
+        },
+        {
+          "type": "quote",
+          "text": "Identificação pode abrir uma pergunta. Diagnóstico é o processo que tenta respondê-la com método.",
+          "attribution": "Síntese editorial da edição"
+        }
+      ]
+    },
+    {
+      "id": "avaliacao-responsavel",
+      "title": "Como se chega a um diagnóstico responsável?",
+      "pages": [
+        5
+      ],
+      "blocks": [
+        {
+          "type": "p",
+          "text": "Não existe uma única conversa, um único teste ou uma única imagem que conte toda a história. Uma avaliação responsável junta informações e verifica se elas formam um padrão coerente."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Pergunta clínica: o que está acontecendo e o que a pessoa quer compreender?",
+            "História de vida: desenvolvimento, escola, relações, trabalho, saúde e mudanças ao longo do tempo.",
+            "Contextos: como as características aparecem em ambientes e situações diferentes?",
+            "Métodos adequados: entrevistas, anamnese, observação e instrumentos escolhidos para a finalidade.",
+            "Diagnóstico diferencial: o que mais pode explicar essas dificuldades? Sono, saúde, emoções, uso de substâncias, outras condições?",
+            "Devolutiva: o que os dados permitem concluir, quais são os limites e quais próximos passos fazem sentido?"
+          ]
+        },
+        {
+          "type": "p",
+          "text": "No Brasil, avaliação psicológica é um processo estruturado. Quando houver testes psicológicos, a(o) psicóloga(o) deve verificar a condição de uso no SATEPSI e seguir os manuais técnicos aprovados. Testagem não é sinônimo de avaliação. [9]",
+          "review": "Respondida: FAQ e legislação oficiais do SATEPSI continuam remetendo à Resolução 31/2022. Confirmados integração de fontes e seguimento do manual; a condição de uso deve ser consultada no momento da prática, sem lista de instrumentos no site."
+        }
+      ]
+    },
+    {
+      "id": "criterios-e-julgamento-clinico",
+      "title": "O manual orienta o profissional.",
+      "pages": [
+        6
+      ],
+      "blocks": [
+        {
+          "type": "p",
+          "text": "DSM-5-TR e CID-11 organizam descrições e critérios para aumentar consistência clínica e comunicação entre profissionais. A própria APA ressalta que os critérios do DSM são destinados a profissionais treinados, com julgamento clínico, e não ao uso diagnóstico pelo público geral. [1][5]",
+          "review": "Respondida: About DSM-5-TR confirma profissionais treinados e julgamento clínico; OMS/CDDR 2024 confirma finalidade clínica e público profissional. Conferência do uso educativo, sem reprodução integral de critérios."
+        },
+        {
+          "type": "quote",
+          "text": "“Tenho uma característica” não é igual a “preencho critérios diagnósticos”.",
+          "attribution": "Síntese editorial da edição"
+        },
+        {
+          "type": "p",
+          "text": "Uma mesma manifestação pode ter explicações diferentes. Esquecimento pode aparecer com privação de sono, ansiedade, depressão, uso de substâncias, condições clínicas ou TDAH. Evitar contato visual pode depender de cultura, ansiedade, personalidade, contexto ou TEA. O diagnóstico procura o conjunto e a trajetória, não um comportamento isolado."
+        },
+        {
+          "type": "p",
+          "text": "Condições do neurodesenvolvimento são avaliadas considerando desenvolvimento e funcionamento ao longo da vida. Em adultos, características podem ter passado despercebidas, sido compensadas ou ficado mais evidentes quando as demandas aumentaram. Isso não significa que a condição \"começou\" na vida adulta. [2][3][4]"
+        },
+        {
+          "type": "p",
+          "text": "O objetivo não é colecionar rótulos. É entender o que explica melhor o funcionamento da pessoa e quais apoios, adaptações ou tratamentos podem ajudar."
+        }
+      ]
+    },
+    {
+      "id": "falar-com-clareza",
+      "title": "Indireta não vem com legenda.",
+      "pages": [
+        7
+      ],
+      "blocks": [
+        {
+          "type": "p",
+          "text": "Ser assertivo é dizer o que você precisa com clareza e respeito. Isso não serve apenas para pessoas neurodivergentes: ajuda em diferenças culturais, geracionais, familiares e profissionais."
+        },
+        {
+          "type": "table",
+          "columns": [
+            "Como costumamos falar",
+            "Uma forma mais clara"
+          ],
+          "rows": [
+            [
+              "Nossa, como a hora passou rápido...",
+              "Adorei sua companhia. Agora eu preciso descansar. Vamos marcar de novo?"
+            ],
+            [
+              "Faz o que você quiser.",
+              "Eu fiquei chateado e quero conversar antes de você ir."
+            ],
+            [
+              "Você foi ótimo hoje!",
+              "A sua ajuda organizando a mesa me deixou mais tranquilo. Obrigado."
+            ],
+            [
+              "Quando puder, me manda.",
+              "Preciso disso hoje até as 16 h. Se não der, me avise até as 14 h."
+            ]
+          ]
+        },
+        {
+          "type": "quote",
+          "text": "Gentileza não é fazer o outro adivinhar com delicadeza. É ajudá-lo a entender.",
+          "attribution": "Síntese editorial da edição"
+        }
+      ]
+    },
+    {
+      "id": "casa-escola-trabalho",
+      "title": "A mesma frase muda quando o contexto muda.",
+      "pages": [
+        8
+      ],
+      "blocks": [
+        {
+          "type": "p",
+          "text": "Em casa, na escola e no trabalho, a pergunta é a mesma: o outro recebeu o que eu queria comunicar ou recebeu apenas as palavras que eu usei?"
+        },
+        {
+          "type": "table",
+          "columns": [
+            "Situação",
+            "Frase e interpretação possível",
+            "Uma orientação mais clara"
+          ],
+          "rows": [
+            [
+              "Em casa / visitas",
+              "Nossa, como a hora passou rápido... Pode ser apenas um comentário sobre o horário. Se você quer encerrar a visita, diga isso com carinho.",
+              "Adorei que você veio. Agora eu preciso descansar. Vamos marcar de novo?"
+            ],
+            [
+              "Na escola",
+              "Capricha mais. Quem já sabe o que precisa melhorar pode entender. Quem não sabe fica sem direção.",
+              "Revise a ortografia e complete o último exercício. Se tiver dúvida, me chama."
+            ],
+            [
+              "No trabalho",
+              "Quando puder, me manda. Sem prazo e sem prioridade, duas pessoas podem organizar o dia de maneiras incompatíveis.",
+              "Preciso disso hoje até as 16 h. Se houver impedimento, me avise até as 14 h."
+            ]
+          ]
+        },
+        {
+          "type": "note",
+          "text": "Exemplos educativos: não descrevem uma reação única de pessoas neurodivergentes."
+        }
+      ]
+    },
+    {
+      "id": "dupla-empatia",
+      "title": "Quando a intenção e a mensagem se desencontram.",
+      "pages": [
+        9
+      ],
+      "blocks": [
+        {
+          "type": "quote",
+          "text": "Faz o que quiser. E se a outra pessoa fizer?",
+          "attribution": "Situação ilustrativa da edição"
+        },
+        {
+          "type": "p",
+          "text": "Às vezes uma pessoa tenta comunicar frustração por uma indireta; a outra recebe autorização literal. O problema pode estar menos em “quem está certo” e mais na diferença entre intenção e mensagem."
+        },
+        {
+          "type": "table",
+          "columns": [
+            "O que alguém quis dizer",
+            "O que o outro recebeu"
+          ],
+          "rows": [
+            [
+              "Estou magoado e queria que você ficasse.",
+              "Você disse que eu posso ir."
+            ]
+          ]
+        },
+        {
+          "type": "p",
+          "text": "A hipótese do problema da dupla empatia propõe que alguns desencontros entre pessoas autistas e não autistas são recíprocos: pessoas com experiências e formas de comunicação diferentes podem interpretar mal umas às outras. É uma perspectiva de pesquisa, não um critério diagnóstico. [7][8]",
+          "review": "Respondida: manuscrito de Milton 2012 e artigo de Cheang conferidos. A tarefa analisou 81 adultos da população geral assistindo a relatos de quatro narradores; não demonstra reciprocidade universal nem causalidade em relações reais."
+        },
+        {
+          "type": "p",
+          "text": "Em um estudo de Cheang e colaboradores, 81 adultos da população geral tiveram mais dificuldade para acompanhar a intensidade das emoções de narradores autistas em algumas condições de uma tarefa com vídeos. Isso apoia a investigação de desencontros de compreensão, mas não descreve toda pessoa autista nem todo encontro; a tarefa não equivale à avaliação de uma relação cotidiana. [8]"
+        },
+        {
+          "type": "quote",
+          "text": "Uma relação não fica menos espontânea porque você falou claramente. Às vezes fica apenas menos cansativa.",
+          "attribution": "Síntese editorial da edição"
+        }
+      ]
+    },
+    {
+      "id": "sensorialidade-e-acolhimento",
+      "title": "Reconhecer o desconforto sem presumir uma causa.",
+      "pages": [
+        10
+      ],
+      "blocks": [
+        {
+          "type": "p",
+          "text": "O mesmo barulho pode ser só chato para você e muito difícil para outra pessoa."
+        },
+        {
+          "type": "p",
+          "text": "Diferenças sensoriais podem aparecer no autismo e em outras condições, mas uma reação isolada a som, luz, cheiro ou textura não fecha diagnóstico. [2]"
+        },
+        {
+          "type": "table",
+          "columns": [
+            "Em vez de",
+            "Uma possibilidade de acolhimento"
+          ],
+          "rows": [
+            [
+              "Deixa de frescura, já passou.",
+              "Eu vi que esse barulho te incomodou bastante. Quer ir para um lugar mais quieto?"
+            ]
+          ]
+        },
+        {
+          "type": "p",
+          "text": "Validar uma experiência não significa afirmar uma causa clínica. Você pode reconhecer o desconforto sem diagnosticar a pessoa."
+        },
+        {
+          "type": "quote",
+          "text": "Acolher não é diagnosticar.",
+          "attribution": "Síntese editorial da edição"
+        }
+      ]
+    },
+    {
+      "id": "exercicio-comunicacao",
+      "title": "O que você realmente disse?",
+      "pages": [
+        11
+      ],
+      "blocks": [
+        {
+          "type": "exercise",
+          "items": [
+            "“Nossa, essa pia está ficando enorme...” O que foi dito literalmente? Há muita louça na pia. “Lave” ou “me ajude” podem ser intenções, mas não foram verbalizadas.",
+            "Você precisa de silêncio. Qual frase pede isso com menos adivinhação? “Preciso de dez minutos em silêncio, por favor.”",
+            "“Você foi incrível hoje!” Como tornar o elogio mais claro? Diga o comportamento: “Sua ajuda na reunião organizou minhas ideias.”",
+            "“Você nunca me chama.” Como transformar crítica em pedido? “Eu gosto de estar com você e queria que você também me convidasse às vezes.”"
+          ],
+          "text": "Isto é um exercício de comunicação. Não existe placar, resultado ou interpretação clínica."
+        },
+        {
+          "type": "quote",
+          "text": "O que estava claro dentro de você, mas nunca saiu em palavras?",
+          "attribution": "Síntese editorial da edição"
+        }
+      ]
+    },
+    {
+      "id": "trocar-de-lugar",
+      "title": "Receba a mensagem sem supor que conhece a intenção.",
+      "pages": [
+        12
+      ],
+      "blocks": [
+        {
+          "type": "p",
+          "text": "O objetivo não é decorar “como uma pessoa neurodivergente pensa”. É lembrar que ninguém tem acesso automático à experiência e ao ponto de vista do outro. Perguntar, escutar e conferir o entendimento oferece mais informação do que presumir intenções.",
+          "review": "Respondida: subjetividade substituída por experiência/ponto de vista neste trecho. A discussão técnica sobre privacidade permanece no capítulo inicial, fundamentada em [13]."
+        },
+        {
+          "type": "exercise",
+          "items": [
+            "Visita: “Nossa, como a hora passou rápido...” Você entenderia como despedida ou apenas como comentário sobre o horário?",
+            "Escola: “Capricha mais.” Se você fosse aluno, saberia exatamente o que precisa mudar?",
+            "Trabalho: “Quando puder.” Existe prazo, prioridade ou consequência visível?",
+            "Relacionamento: “Faz o que quiser.” É autorização, frustração ou pedido de proximidade? Se é importante, por que não dizer?"
+          ],
+          "text": "Troque de lugar e observe as informações que a mensagem realmente oferece."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Característica não equivale a diagnóstico.",
+            "Identificação não equivale a avaliação.",
+            "Objetividade não equivale a grosseria.",
+            "Diferença não equivale a defeito.",
+            "Acolher não equivale a afirmar uma causa clínica."
+          ],
+          "text": "Distinções para continuar a leitura:"
+        }
+      ]
+    },
+    {
+      "id": "procurar-ajuda",
+      "title": "Curiosidade pode virar cuidado.",
+      "pages": [
+        13
+      ],
+      "blocks": [
+        {
+          "type": "p",
+          "text": "Se você se reconheceu em vários exemplos e isso traz sofrimento, prejuízo, conflitos frequentes ou dúvida persistente, vale procurar um profissional. Identificação não confirma diagnóstico, mas pode ser um bom motivo para conversar com alguém habilitado."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Psicólogo(a) / neuropsicólogo(a): pode investigar aspectos emocionais, comportamentais, do desenvolvimento e, quando indicado, funções cognitivas e neuropsicológicas. [9][10]",
+            "Psiquiatra, neurologista, pediatra ou outras especialidades médicas: podem avaliar aspectos clínicos conforme idade, hipótese e necessidade.",
+            "Fonoaudiologia, terapia ocupacional e outras áreas: podem integrar o cuidado quando comunicação, sensorialidade, autonomia e participação cotidiana pedem avaliação específica."
+          ],
+          "text": "Quem pode participar da avaliação e do cuidado?"
+        },
+        {
+          "type": "p",
+          "text": "A Atenção Primária à Saúde é a principal porta de entrada do SUS. Para investigação de TEA, o Ministério da Saúde orienta procurar a UBS mais próxima. A equipe acolhe e pode encaminhar a serviços especializados, como CAPSi, CER ou serviços de referência, conforme necessidade e organização da rede local. A oferta varia entre municípios. [11][12]",
+          "review": "Respondida: URLs e descrição oficial de APS/UBS/encaminhamento conferidas. Retirada a referência não documentada a policlínicas; não há promessa de acesso automático."
+        },
+        {
+          "type": "list",
+          "items": [
+            "UBS: acolhe e coordena.",
+            "Avaliação: define necessidades.",
+            "Rede: encaminha quando indicado."
+          ],
+          "text": "Um caminho possível, conforme a rede local:"
+        }
+      ]
+    },
+    {
+      "id": "curadoria-e-compreensao",
+      "title": "Ciência precisa chegar às pessoas.",
+      "pages": [
+        14
+      ],
+      "blocks": [
+        {
+          "type": "p",
+          "text": "Esta edição foi construída para fazer uma ponte: manter o rigor de uma discussão clínica sem exigir que o leitor fale a língua da universidade. Simplificar não é empobrecer. É organizar o conhecimento para que ele possa ser compreendido, questionado e usado com responsabilidade."
+        },
+        {
+          "type": "quote",
+          "text": "Compreender não é diagnosticar.",
+          "attribution": "Síntese editorial da edição"
+        },
+        {
+          "type": "p",
+          "text": "Neurodiversidade pode ajudar a olhar para diferenças com menos estigma. O diagnóstico, quando necessário, ajuda a organizar hipóteses, reconhecer necessidades de suporte e planejar cuidado. Uma coisa não precisa apagar a outra."
+        },
+        {
+          "type": "p",
+          "text": "Regra de ouro desta edição: se você quer que o outro entenda algo importante, fale com clareza. E, se algo sobre seu funcionamento merece investigação, procure um profissional habilitado."
+        },
+        {
+          "type": "note",
+          "text": "Material educativo. Não substitui avaliação profissional."
+        }
+      ]
+    }
+  ],
+  "references": [
+    {
+      "label": "[1] AMERICAN PSYCHIATRIC ASSOCIATION. Diagnostic and Statistical Manual of Mental Disorders: DSM-5-TR. 5. ed., text rev. Washington, DC: APA Publishing, 2022. Ver também as atualizações oficiais de critérios e texto publicadas pela APA em 2025.",
+      "verification": "verified",
+      "note": "Conferidas edição 2022 e orientação para profissionais treinados/julgamento clínico na página oficial; portal confirma suplementos, incluindo setembro 2025. Checagem de apresentação oficial, não leitura integral do manual nem de todas as atualizações. Portal: https://www.psychiatry.org/psychiatrists/practice/dsm/updates-to-dsm/updates-to-dsm-5-tr-criteria-text",
+      "url": "https://www.psychiatry.org/psychiatrists/practice/dsm/about-dsm"
+    },
+    {
+      "label": "[2] AMERICAN PSYCHIATRIC ASSOCIATION. What Is Autism Spectrum Disorder? Psychiatry.org, revisão médica jan. 2024.",
+      "verification": "verified",
+      "url": "https://www.psychiatry.org/patients-families/autism/what-is-autism-spectrum-disorder",
+      "note": "Página primária da APA conferida para comunicação/interação, comportamentos repetitivos, desenvolvimento e variabilidade de suporte. Não foram importados fluxos ou tratamentos dos EUA."
+    },
+    {
+      "label": "[3] AMERICAN PSYCHIATRIC ASSOCIATION. Autism Spectrum Disorder. DSM-5-TR Fact Sheets. Washington, DC: APA, 2022.",
+      "verification": "verified",
+      "note": "Ficha oficial de uma página, copyright 2022, conferida integralmente: esclarece a redação do critérioA. Não contém todos os critérios; descrição geral apoiada também em [2] e [5].",
+      "url": "https://www.psychiatry.org/getmedia/d48f7fa6-b6c8-4f6c-888b-b0adfeb9f5b6/APA-DSM5TR-AutismSpectrumDisorder.pdf"
+    },
+    {
+      "label": "[4] AMERICAN PSYCHIATRIC ASSOCIATION. What is ADHD? Psychiatry.org. Revisão médica out.2025. Acesso em 17 out.2026.",
+      "verification": "verified",
+      "url": "https://www.psychiatry.org/patients-families/adhd/what-is-adhd",
+      "note": "Página primária APA conferida: persistência, manifestações anteriores aos 12 anos, mais de um contexto, prejuízo e diferenciais. Página com revisão médica de outubro 2025; não é instrumento aplicado ao visitante."
+    },
+    {
+      "label": "[5] WORLD HEALTH ORGANIZATION. Clinical descriptions and diagnostic requirements for ICD-11 mental, behavioural and neurodevelopmental disorders. Geneva: WHO, 2024.",
+      "verification": "verified",
+      "note": "Conferidos título, ISBN 9789240077263, edição 2024 e finalidade clínica/público profissional na página OMS. PDF integral não acessível nesta checagem: [5] sustenta a finalidade do manual, não a conferência integral dos requisitos de TEA/TDAH.",
+      "url": "https://www.who.int/publications/i/item/9789240077263"
+    },
+    {
+      "label": "[6] DWYER, Patrick. The Neurodiversity Approach(es): What Are They and What Do They Mean for Researchers? Human Development, v. 66, n. 2, p. 73-92, 2022. DOI: 10.1159/000523723.",
+      "verification": "verified",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9261839/",
+      "note": "Resumo e passagens do artigo conceitual original conferidos para pluralidade das abordagens e interação entre características individuais e contexto. Não define categoria diagnóstica nem implica rejeitar suporte clínico; não é uma revisão de eficácia de tratamentos."
+    },
+    {
+      "label": "[7] MILTON, Damian E. M. On the ontological status of autism: the “double empathy problem”. Disability & Society, v. 27, n. 6, p. 883-887, 2012. DOI: 10.1080/09687599.2012.710008.",
+      "verification": "verified",
+      "url": "https://kar.kent.ac.uk/62639/1/Double%20empathy%20problem.pdf",
+      "note": "Manuscrito aceito e metadados no repositório institucional Kent conferidos: proposição teórica de reciprocidade/mutualidade. Não é ensaio clínico nem demonstração empírica universal."
+    },
+    {
+      "label": "[8] CHEANG, Rachael T. S. et al. Do you feel me? Autism, empathic accuracy and the double empathy problem. Autism, v. 29, n. 9, p. 2315-2327, 2025. DOI: 10.1177/13623613241252320.",
+      "verification": "verified",
+      "url": "https://journals.sagepub.com/doi/10.1177/13623613241252320",
+      "note": "Artigo primário conferido, online 17/05/2024/volume 2025:81 participantes analisados e quatro narradores. Tarefa específica; participantes não tiveram diagnóstico confirmado pelos pesquisadores. Sem generalização a todos os encontros."
+    },
+    {
+      "label": "[9] CONSELHO FEDERAL DE PSICOLOGIA. Resolução CFP nº 31/2022. Estabelece diretrizes para avaliação psicológica e regulamenta o Sistema de Avaliação de Testes Psicológicos - SATEPSI. Brasília, DF: CFP, 2022.",
+      "verification": "verified",
+      "url": "https://satepsi.cfp.org.br/faq.cfm",
+      "note": "FAQ e catálogo normativo oficiais consultados em 17/10/2026: Resolução 31/2022, integração de fontes, parecer favorável e manuais. Texto consolidado externo não foi integralmente acessível; checagem cobre as orientações oficiais utilizadas, não auditoria jurídica integral. Catálogo: https://satepsi.cfp.org.br/legislacao.cfm"
+    },
+    {
+      "label": "[10] CONSELHO FEDERAL DE PSICOLOGIA. Manual Neuropsicologia: Ciência e Profissão. Brasília, DF: CFP, 2023. Cap.2: Avaliação neuropsicológica.",
+      "verification": "verified",
+      "url": "https://site.cfp.org.br/wp-content/uploads/2023/09/Neuropsicologia_manual-4.pdf",
+      "note": "Manual primário 2023 consultado, cap. 2: contexto/desenvolvimento, competências e métodos de avaliação. Menção histórica à Resolução 23/2022 confirmada na apresentação; não se usa o manual para atestar título individual."
+    },
+    {
+      "label": "[11] BRASIL. Ministério da Saúde. Atenção Primária. Brasília, DF. Acesso em 17 out.2026.",
+      "verification": "verified",
+      "note": "Página atual do Ministério da Saúde conferida: APS como principal porta de entrada e coordenação da rede. Não verifica a oferta de um município.",
+      "url": "https://www.gov.br/saude/pt-br/composicao/saps/"
+    },
+    {
+      "label": "[12] BRASIL. Ministério da Saúde. Onde posso procurar diagnóstico para TEA no SUS? Saúde de A a Z - Autismo. Atualizado em 8 out. 2025. O primeiro passo indicado é procurar a UBS; encaminhamentos dependem da necessidade e da rede local.",
+      "verification": "verified",
+      "note": "Página oficial conferida: atualização 08/10/2025, UBS como primeiro passo e possível encaminhamento para CAPSi/CER/referência. Oferta condicionada à necessidade e à rede local.",
+      "url": "https://www.gov.br/saude/pt-br/assuntos/saude-de-a-a-z/a/autismo/faq/onde-posso-procurar-diagnostico-para"
+    },
+    {
+      "label": "[13] SKINNER, B. F. Science and Human Behavior. New York: Macmillan, 1953. Cap.XVII: Private events in a natural science, p. 257–282. Edição digital: B.F.Skinner Foundation.",
+      "verification": "verified",
+      "note": "Fonte primária aberta da B.F.Skinner Foundation, cap. XVII, p. 257–262 e 278–282: acesso privado, relato e limites da inferência. Substitui na adaptação a fundamentação não conferida em About Behaviorism 1974; a referência original é preservada no histórico de revisão.",
+      "url": "https://www.bfskinner.org/wp-content/uploads/2014/02/ScienceHumanBehavior.pdf"
+    },
+    {
+      "label": "[14] NHS ENGLAND. Report of the independent ADHD Taskforce: Part 2. Anexo 1: Glossary. 2025. Acesso em 17 out. 2026.",
+      "verification": "verified",
+      "url": "https://www.england.nhs.uk/long-read/report-of-the-independent-adhd-taskforce-part-2/",
+      "note": "Glossário institucional conferido: neurodivergência não tem definição clínica internacional única nem é categoria dos manuais; o termo pode ultrapassar diagnósticos específicos. Apoio conceitual, sem importar políticas de acesso do Reino Unido ao SUS."
+    }
+  ],
+  "reviewNotes": [
+    "Documento migrado para revisão. draft=true e reviewed=false: não representa aprovação profissional ou liberação para publicação.",
+    "Base prioritária premium_v 2, 15 p. Conteúdo foi reestruturado para HTML com argumentos, exemplos e exercícios; cabeçalhos e rodapés duplicados foram removidos.",
+    "Gabriel Batista consta como Curadoria na capa (p. 1) e Curadoria e texto na p. 14. Em 17/10/2026, o titular confirmou o nome completo e a assinatura desta adaptação HTML: Texto e curadoria de Gabriel Alves Batista.",
+    "A edição apresenta Neuropsicólogo | CRP 06/176184; esse crédito documental não acrescenta confirmação de título ao perfil profissional.",
+    "Respondida em 17/10/2026: remissão sobre acontecimentos privados corrigida para [13], com fonte primária aberta de Skinner 1953; a obra 1974 permanece identificada como referência do PDF original.",
+    "DSM/CID são manuais classificatórios citados em explicação educativa, não instrumentos aplicados no site. Não publicar contagem de critérios, triagem automática ou diagnóstico.",
+    "Checagem de 17/10/2026: os 13 registros têm URL e escopo de verificação individual. Leitura de fontes e correções registradas não constituem aprovação clínica nem leitura integral de todos os manuais.",
+    "O problema da dupla empatia é uma perspectiva de pesquisa e não critério diagnóstico. Não inferir que um tipo único de interpretação descreve todas as pessoas autistas ou neurodivergentes.",
+    "Respondida em 17/10/2026: privacidade tratada como condição de acesso; experiência/ponto de vista substituem a equivalência coloquial com subjetividade.",
+    "A extração contém NUL no lugar de sinais gráficos e setas, inclusive p 6, p 7, p 12, p 13; eles foram convertidos em relações escritas, sem importar caracteres invisíveis.",
+    "Não importar fotografias ilustrativas como se representassem pacientes ou equipe NEXO. A p 14 usa foto de folha com texto impresso atrás; a arte não deve ser usada como fonte factual.",
+    "A versão anterior Neurodivergencia_Comunicacao_Premium tem 14 p e é majoritariamente duplicada. A prioritária acrescenta p 6 sobre DSM/CID, reorganiza escola e trabalho em p 8 e separa curadoria(p 14) e referências(p 15)."
+  ],
+  "seoTitle": "Neurodivergência e comunicação",
+  "reviewResponses": [
+    {
+      "note": "Nota original 1: Documento migrado para revisão. draft=true e reviewed=false: não representa aprovação profissional ou liberação para publicação.",
+      "response": "Checagem de fontes não aprova o conteúdo para atendimento ou publicação.",
+      "action": "Mantidos draft=true e reviewed=false.",
+      "status": "editorial-decision"
+    },
+    {
+      "note": "Nota original 2: Base prioritária premium_v 2, 15 p. Conteúdo foi reestruturado para HTML com argumentos, exemplos e exercícios; cabeçalhos e rodapés duplicados foram removidos.",
+      "response": "As 15 páginas continuam identificadas na migração; argumentos e exemplos foram preservados.",
+      "action": "Mantidos source, hash e mapeamento das páginas; acrescentada contextualização do estudo de empatia.",
+      "status": "resolved"
+    },
+    {
+      "note": "Nota original 3: Gabriel Batista consta como Curadoria na capa (p. 1) e Curadoria e texto na p. 14. Em 17/10/2026, o titular confirmou o nome completo e a assinatura desta adaptação HTML: Texto e curadoria de Gabriel Alves Batista.",
+      "response": "O titular confirmou a assinatura completa da adaptação em 17/10/2026.",
+      "action": "Crédito da adaptação e crédito documental permanecem separados.",
+      "status": "resolved"
+    },
+    {
+      "note": "Nota original 4: A edição apresenta Neuropsicólogo | CRP 06/176184; esse crédito documental não acrescenta confirmação de título ao perfil profissional.",
+      "response": "O registro profissional continua apresentado como Registro, conforme solicitado pelo titular. A pesquisa bibliográfica não altera dados do perfil.",
+      "action": "Nenhuma credencial ou novo título foi criado; crédito confirmado preservado.",
+      "status": "resolved"
+    },
+    {
+      "note": "Nota original 5: A p 2 cita [12] após parágrafo sobre acontecimentos privados, embora [13]Skinner seja pertinente. Corrigir remissão e conferir trecho do livro antes de aprovação.",
+      "response": "[12] é fluxo do SUS e não fundamenta privacidade. A remissão foi corrigida para [13], agora com fonte primária aberta.",
+      "action": "Substituída a referência de apoio por Skinner 1953, cap. XVII; About Behaviorism 1974 registrado como origem documental.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "Skinner: cap. XVII",
+          "url": "https://www.bfskinner.org/wp-content/uploads/2014/02/ScienceHumanBehavior.pdf"
+        }
+      ]
+    },
+    {
+      "note": "Nota original 6: DSM/CID são manuais classificatórios citados em explicação educativa, não instrumentos aplicados no site. Não publicar contagem de critérios, triagem automática ou diagnóstico.",
+      "response": "As descrições são educativas, sem aplicação de critérios. APA e OMS confirmam o contexto profissional.",
+      "action": "Preservados limites e ausência de contagem, placar ou diagnóstico automático.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "APA: About DSM-5-TR",
+          "url": "https://www.psychiatry.org/psychiatrists/practice/dsm/about-dsm"
+        },
+        {
+          "label": "OMS: CDDR",
+          "url": "https://www.who.int/publications/i/item/9789240077263"
+        }
+      ]
+    },
+    {
+      "note": "Nota original 7: As referências primárias focais da APA e Cheang foram consultadas. As demais permanecem identificadas como pending quando a checagem não foi concluída; a bibliografia não é uma lista de validação automática.",
+      "response": "Foram checados os 13 registros originais e o novo apoio institucional [14], cada qual com alcance explícito. Conferir metadados/resumo não equivale a ler integralmente toda a obra.",
+      "action": "Atualizados status, URLs e notas; registradas limitações de acesso e substituição de [13]. Acrescentado o glossário do NHS England para a definição do termo.",
+      "status": "resolved"
+    },
+    {
+      "note": "Nota original 8: O problema da dupla empatia é uma perspectiva de pesquisa e não critério diagnóstico. Não inferir que um tipo único de interpretação descreve todas as pessoas autistas ou neurodivergentes.",
+      "response": "Milton formula a hipótese; Cheang oferece evidência de uma tarefa com 81 adultos.",
+      "action": "Diferenciadas proposição teórica e evidência localizada, sem generalização universal.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "Milton 2012",
+          "url": "https://kar.kent.ac.uk/62639/1/Double%20empathy%20problem.pdf"
+        },
+        {
+          "label": "Cheang et al.",
+          "url": "https://journals.sagepub.com/doi/10.1177/13623613241252320"
+        }
+      ]
+    },
+    {
+      "note": "Nota original 9: Revisar a equivalência coloquial entre subjetividade e acontecimentos privados para manter a precisão da comunicação em Análise do Comportamento.",
+      "response": "Privacidade é condição de acesso e não uma definição exaustiva de subjetividade.",
+      "action": "Reescritos os dois trechos, preservando pensamento/sentimento na análise científica.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "Skinner: cap. XVII",
+          "url": "https://www.bfskinner.org/wp-content/uploads/2014/02/ScienceHumanBehavior.pdf"
+        }
+      ]
+    },
+    {
+      "note": "Nota original 10: A extração contém NUL no lugar de sinais gráficos e setas, inclusive p 6, p 7, p 12, p 13; eles foram convertidos em relações escritas, sem importar caracteres invisíveis.",
+      "response": "NUL e sinais quebrados já foram convertidos em texto semanticamente legível.",
+      "action": "Mantido HTML sem caracteres invisíveis ou capturas usadas como texto.",
+      "status": "resolved"
+    },
+    {
+      "note": "Nota original 11: Não importar fotografias ilustrativas como se representassem pacientes ou equipe NEXO. A p 14 usa foto de folha com texto impresso atrás; a arte não deve ser usada como fonte factual.",
+      "response": "As imagens de origem não demonstram casos ou fatos clínicos. Autorização de uso não se prova por bibliografia. Em 17/10/2026, o titular confirmou que as fotos são de conteúdo próprio e têm autorização consensual para divulgar o trabalho das equipes.",
+      "action": "Autorização do titular registrada; manter imagens e PDFs no contexto editorial, sem atribuir às fotografias valor de evidência científica.",
+      "status": "resolved"
+    },
+    {
+      "note": "Nota original 12: A versão anterior Neurodivergencia_Comunicacao_Premium tem 14 p e é majoritariamente duplicada. A prioritária acrescenta p 6 sobre DSM/CID, reorganiza escola e trabalho em p 8 e separa curadoria(p 14) e referências(p 15).",
+      "response": "A prioritária de 15 páginas permanece como base; não houve fusão com a edição antiga.",
+      "action": "Mantida a comparação e a rastreabilidade das páginas.",
+      "status": "resolved"
+    },
+    {
+      "note": "Bloco intencao-e-mensagem/6 — nota original: A fonte cita [12] neste parágrafo, mas a referência pertinente é Skinner [13]. Corrigir cruzamento antes da aprovação. Pensamentos/sentimentos privados não equivalem a todos os usos da palavra subjetividade.",
+      "response": "A remissão a [12] era incorreta; a condição de privacidade foi conferida em Skinner.",
+      "action": "[13] passa a remeter ao cap. XVII de 1953; texto distingue acesso e explicação causal.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "Skinner: fonte primária",
+          "url": "https://www.bfskinner.org/wp-content/uploads/2014/02/ScienceHumanBehavior.pdf"
+        }
+      ]
+    },
+    {
+      "note": "Bloco conceito-neurodivergencia/4 — nota original: Exemplos heterogêneos, não checklist, critérios suficientes ou perfil de todas as pessoas neurodivergentes.",
+      "response": "Dwyer discute abordagens plurais e a interação pessoa/ambiente. Não há um perfil único. O glossário institucional do NHS England confirma o uso amplo e a ausência de uma categoria clínica única.",
+      "action": "Exemplos permanecem ilustrativos, com limite explicitado ao leitor.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "Dwyer 2022",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9261839/"
+        },
+        {
+          "label": "NHS England: glossário conceitual",
+          "url": "https://www.england.nhs.uk/long-read/report-of-the-independent-adhd-taskforce-part-2/"
+        }
+      ]
+    },
+    {
+      "note": "Bloco caracteristica-e-diagnostico/4 — nota original: Resumo educativo incompleto por finalidade: não transformar critérios em aplicação, checklist, triagem ou diagnóstico automático; conferir atualizações dos manuais.",
+      "response": "As páginas APA de autismo/TDAH sustentam a descrição geral; a ficha DSM [3] explica apenas uma alteração de redação.",
+      "action": "Remissões ajustadas; nenhuma aplicação ou lista completa de critérios. O registro OMS [5] é usado somente para a finalidade clínica do manual.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "APA: autismo",
+          "url": "https://www.psychiatry.org/patients-families/autism/what-is-autism-spectrum-disorder"
+        },
+        {
+          "label": "APA: ficha 2022",
+          "url": "https://www.psychiatry.org/getmedia/d48f7fa6-b6c8-4f6c-888b-b0adfeb9f5b6/APA-DSM5TR-AutismSpectrumDisorder.pdf"
+        },
+        {
+          "label": "APA: TDAH",
+          "url": "https://www.psychiatry.org/patients-families/adhd/what-is-adhd"
+        }
+      ]
+    },
+    {
+      "note": "Bloco avaliacao-responsavel/3 — nota original: Conferir referência CFP [9] vigente e a condição atual dos procedimentos no SATEPSI; não anunciar lista de instrumentos.",
+      "response": "SATEPSI confirma integração de fontes e uso conforme parecer/manual; sua lista pode mudar.",
+      "action": "Remissão atual registrada, sem anunciar instrumentos ou condição permanente de uso.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "SATEPSI: FAQ atual",
+          "url": "https://satepsi.cfp.org.br/faq.cfm"
+        },
+        {
+          "label": "SATEPSI: legislação",
+          "url": "https://satepsi.cfp.org.br/legislacao.cfm"
+        }
+      ]
+    },
+    {
+      "note": "Bloco criterios-e-julgamento-clinico/1 — nota original: Confirmar nas fontes oficiais de DSM/CID o uso por profissionais treinados e julgamento clínico; texto não reproduz critérios completos.",
+      "response": "A APA declara uso por profissionais treinados com julgamento clínico; OMS apresenta o CDDR como manual clínico.",
+      "action": "Nota de conferência atualizada; critérios não foram convertidos em teste.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "APA: About DSM-5-TR",
+          "url": "https://www.psychiatry.org/psychiatrists/practice/dsm/about-dsm"
+        },
+        {
+          "label": "OMS: CDDR",
+          "url": "https://www.who.int/publications/i/item/9789240077263"
+        }
+      ]
+    },
+    {
+      "note": "Bloco dupla-empatia/4 — nota original: Milton [7] é proposição teórica; Cheang [8] oferece evidência de tarefa específica com 81 adultos. Não generalizar para todos os encontros ou todas as pessoas autistas.",
+      "response": "Milton é uma proposição teórica; Cheang analisou 81 adultos em tarefa com vídeos.",
+      "action": "Acrescentado desenho e limite da tarefa para distinguir evidência de generalização.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "Milton 2012",
+          "url": "https://kar.kent.ac.uk/62639/1/Double%20empathy%20problem.pdf"
+        },
+        {
+          "label": "Cheang et al.",
+          "url": "https://journals.sagepub.com/doi/10.1177/13623613241252320"
+        }
+      ]
+    },
+    {
+      "note": "Bloco trocar-de-lugar/1 — nota original: Na adaptação pública, preferir acesso à experiência/ponto de vista, sem equiparar todos os sentidos de subjetividade a comportamento privado.",
+      "response": "Experiência e ponto de vista são termos mais precisos para o objetivo deste parágrafo.",
+      "action": "Retirada equivalência ampla entre subjetividade e comportamento privado.",
+      "status": "resolved"
+    },
+    {
+      "note": "Bloco procurar-ajuda/3 — nota original: Conferir URLs atuais de [11] e [12] e oferta variável por município; não prometer acesso direto a serviço específico.",
+      "response": "As páginas atuais do MS confirmam APS/UBS e encaminhamento quando necessário.",
+      "action": "Adicionadas URLs; retirada menção a policlínicas que não constava da fonte consultada.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "Ministério da Saúde: APS",
+          "url": "https://www.gov.br/saude/pt-br/composicao/saps/"
+        },
+        {
+          "label": "Ministério da Saúde: TEA no SUS",
+          "url": "https://www.gov.br/saude/pt-br/assuntos/saude-de-a-a-z/a/autismo/faq/onde-posso-procurar-diagnostico-para"
+        }
+      ]
+    }
+  ],
+  "researchReviewedAt": "2026-10-17",
+  "mediaAuthorization": {
+    "confirmedByHolder": true,
+    "confirmedAt": "2026-10-17",
+    "scope": "Fotos de conteúdo próprio com autorização consensual para divulgar o trabalho das equipes, conforme confirmação direta do titular nesta conversa."
+  }
+}
