@@ -21,6 +21,8 @@ for(const file of htmlFiles){
  check(html.includes('data-ambient-sound')&&html.includes('data-sound-toggle aria-pressed="false"'),`${name}: ambiente sonoro opcional desligado inicialmente`);
  check(html.includes('id="experience-stage"'),`${name}: continuidade espacial e alternativa estática`);
  const localEditorialDraft=(process.env.PUBLIC_EDITORIAL_PREVIEW==='true'||process.env.PUBLIC_EDITORIAL_SHARED_PREVIEW==='true')&&(name.split(path.sep).join('/')==='psicologia-em-pauta/index.html'||html.includes('data-editorial-article='));
+ check(!/class="[^"\n]*\b(?:ed-draft-strip|ed-inline-review|ed-article-review|ed-review-responses|ed-review-panel)\b/.test(html),`${name}: painel interno de revisão não deve aparecer na leitura`);
+ check(!/id="(?:respostas-de-revisao|revisao-do-artigo|painel-editorial)"/.test(html),`${name}: âncora interna de revisão exposta`);
  check(localEditorialDraft||!/prévia para revisão|biblioteca em preparação|rascunho operacional|apresentado no briefing|registro informado|artigos aguardam|ainda aguardam confirmação|versão preliminar/i.test(html),`${name}: conteúdo público sem notas editoriais internas`);
  // Cloudflare enforces script-src 'self'. JSON data is inert; executable
  // inline code would silently disable controls that work on a local preview.

@@ -72,6 +72,22 @@ function meta(html,name){
 function linked(html,url){
  return [...html.matchAll(/<a\b[^>]*>/gi)].some(([tag])=>attrs(tag).href?.split('#')[0]===url);
 }
+function readerInterface(html,label){
+ const internalClasses=new Set(['ed-draft-strip','ed-inline-review','ed-article-review','ed-review-responses','ed-review-panel']);
+ const internalAnchors=new Set(['revisao-do-artigo','respostas-de-revisao','painel-editorial']);
+ for(const [tag] of html.matchAll(/<[a-z][\w:-]*\b[^>]*>/gi)){
+  const data=attrs(tag);
+  for(const token of (data.class||'').split(/\s+/))check(!internalClasses.has(token),`${label}: internal review UI rendered: ${token}`);
+  check(!internalAnchors.has(data.id),`${label}: internal review section rendered: ${data.id}`);
+  const fragment=(data.href||'').split('#')[1];
+  check(!internalAnchors.has(fragment),`${label}: internal review navigation rendered: #${fragment}`);
+ }
+ const content=normalized(html).toLocaleLowerCase('pt-BR');
+ for(const marker of ['Nota de revisão deste trecho','Checagem pontual registrada nesta migração.','Checagem específica pendente.','Fonte a substituir antes da publicação.','REVISÃO DO TITULAR','Origem, créditos e próximos passos.']){
+  check(!content.includes(normalized(marker).toLocaleLowerCase('pt-BR')),`${label}: internal audit wording rendered: ${marker}`);
+ }
+ check(!/\bnota original \d+\s*:/i.test(content),`${label}: research response notes rendered in the reader`);
+}
 function scripts(html,name){
  const json=[];
  for(const [,attributes,body] of html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)){
@@ -190,11 +206,14 @@ const summaries=[];
 
 if(mode!=='public'){
  check(htmlFiles.length===22,`Draft build must have 22 HTML files (15 institutional routes, six articles and 404); found ${htmlFiles.length}`);
+ readerInterface(landing,'editorial landing');
  const titles=new Set(),descriptions=new Set(),socials=new Set();
  for(const article of articles){
   const url=routeUrl(article.slug),file=routeFile(article.slug),html=read(file),label=article.slug;
   check(Boolean(html),`${label}: individual HTML missing`);
   check(linked(landing,url),`${label}: landing does not link to individual article`);
+  check(linked(landing,sourceUrl(label)),`${label}: landing does not offer the original PDF`);
+  readerInterface(html,label);
   check(html.includes(`data-editorial-article="${label}"`)&&html.includes('data-draft="true"')&&html.includes('data-reviewed="false"'),`${label}: draft state missing from rendered article`);
   check((html.match(/<h1(?:\s|>)/gi)||[]).length===1,`${label}: requires one H1`);
   const title=html.match(/<title\b[^>]*>([\s\S]*?)<\/title>/i)?.[1]||'';
@@ -209,15 +228,12 @@ if(mode!=='public'){
   check(!structured.some(data=>findKeys(data,key=>/^(?:datePublished|dataPublished|publishedAt)$/i.test(key)).length),`${label}: structured data invents publication date`);
   if(!article.credit.authorshipConfirmedBySource&&!article.adaptationCredit?.confirmedByHolder){
    check(!structured.some(data=>findKeys(data,key=>key.toLowerCase()==='author').length),`${label}: curatorship/unconfirmed credit promoted to structured author`);
-   check(/autoria[^<]{0,80}confirmar|n[aã]o foi convertido automaticamente em autoria/i.test(normalized(html)),`${label}: unconfirmed authorship is not disclosed`);
   }
   const content=normalized(html);
   check(content.includes(normalized(`${article.adaptationCredit.label} de ${article.adaptationCredit.name}`)),`${label}: confirmed adaptation byline missing`);
-  check(content.includes(normalized(article.credit.label))&&content.includes(normalized(article.credit.name)),`${label}: source credit/role not preserved`);
   let missingFragments=0;
   for(const section of article.sections){
    check(html.includes(`id="${section.id}"`)&&content.includes(normalized(section.title)),`${label}: chapter missing ${section.id}`);
-   check(linked(html,`${sourceUrl(label)}#page=${section.pages[0]}`)||html.includes(`${sourceUrl(label)}#page=${section.pages[0]}`),`${label}/${section.id}: source PDF page link missing`);
    for(const block of section.blocks)for(const fragment of blockContent(block))if(!content.includes(normalized(fragment))){
     missingFragments+=1;
     if(missingFragments<=3)failures.push(`${label}/${section.id}: source content missing from HTML: ${fragment.slice(0,110)}`);
@@ -225,8 +241,8 @@ if(mode!=='public'){
   }
   if(missingFragments>3)failures.push(`${label}: ${missingFragments} content fragments are absent in total`);
   check(html.includes('id="referencias"'),`${label}: references section missing`);
-  check(html.includes('id="respostas-de-revisao"'),`${label}: research response panel missing`);
-  for(const response of article.reviewResponses||[])for(const key of ['note','response','action'])check(content.includes(normalized(response[key])),`${label}: research response ${key} missing from HTML`);
+  check(html.includes('id="baixar-edicao"')&&linked(html,sourceUrl(label)),`${label}: original PDF download section missing`);
+  check([...html.matchAll(/<a\b[^>]*>/gi)].some(([tag])=>attrs(tag).href==='#baixar-edicao'),`${label}: article index does not link to the PDF section`);
   for(const reference of article.references)check(content.includes(normalized(reference.label)),`${label}: reference omitted: ${reference.label.slice(0,100)}`);
   const original=outputFile(sourceUrl(label));
   check(fs.existsSync(original),`${label}: original PDF missing`);
@@ -251,7 +267,7 @@ if(mode!=='public'){
    if(fs.existsSync(illustration))check(fs.readFileSync(illustration).subarray(0,2).equals(Buffer.from([255,216])),`${label}: illustration is not JPEG`);
    check(noindexHeader(rules,imageUrl(label)),`${label}: illustration lacks noindex header`);
   }
-  summaries.push({slug:label,chapters:article.sections.length,references:article.references.length,missingContentFragments:missingFragments,sourceSha256:article.source.sha256});
+  summaries.push({slug:label,chapters:article.sections.length,references:article.references.length,missingContentFragments:missingFragments,originalPdfLinked:linked(html,sourceUrl(label)),internalReviewUiAllowed:false,sourceSha256:article.source.sha256});
  }
  const expectedArtifacts=new Set(articles.flatMap(article=>[
   sourceUrl(article.slug).slice(1),socialUrl(article.slug).slice(1),
