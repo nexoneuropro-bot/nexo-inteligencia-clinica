@@ -4,11 +4,13 @@ import ProfessionalEncounter from './ProfessionalEncounter.astro';
 import CarePathways from './CarePathways.astro';
 import KnowledgePanel from './KnowledgePanel.astro';
 import SelfObservation from './SelfObservation.astro';
+import HomeOpening from './HomeOpening.astro';
 import {knowledgeNodes,xMeanings} from '../data/knowledge';
 import {dimensions,reflections} from '../data/reflections';
 import '../styles/experience.css';
 const featured=knowledgeNodes.filter(n=>['socrates','al-khwarizmi','wundt','arendt'].includes(n.id));
 ---
+<HomeOpening/>
 <div class="ex-narrative">
   <ExperienceStage/>
   <nav class="ex-chapter-nav" aria-label="Capítulos da experiência">

@@ -10,7 +10,8 @@ const titles=new Set();
 const production=process.env.PUBLIC_INDEXABLE==='true'&&process.env.PUBLIC_EDITORIAL_PREVIEW!=='true'&&process.env.PUBLIC_EDITORIAL_SHARED_PREVIEW!=='true';
 for(const file of htmlFiles){
  const html=fs.readFileSync(file,'utf8'),name=path.relative(root,file);
- const shouldIndex=production&&name!=='404.html';
+ const editorialPrivacy=name.split(path.sep).join('/')==='psicologia-em-pauta/privacidade/index.html';
+ const shouldIndex=production&&name!=='404.html'&&!editorialPrivacy;
  check(/<html[^>]*lang="pt-BR"/.test(html),`${name}: idioma`);
  const title=html.match(/<title>(.*?)<\/title>/)?.[1];check(title&&!titles.has(title),`${name}: título ausente/repetido`);titles.add(title);
  check(/name="description" content="[^"]+"/.test(html),`${name}: descrição`);
@@ -19,7 +20,7 @@ for(const file of htmlFiles){
  check(html.includes(`name="robots" content="${shouldIndex?'index,follow':'noindex,follow'}"`),`${name}: indexação`);
  check(shouldIndex?html.includes('rel="canonical"'):!html.includes('rel="canonical"'),`${name}: canonical da prévia/produção`);
  check(html.includes('data-ambient-sound')&&html.includes('data-sound-toggle aria-pressed="false"'),`${name}: ambiente sonoro opcional desligado inicialmente`);
- check(html.includes('id="experience-stage"'),`${name}: continuidade espacial e alternativa estática`);
+ check(editorialPrivacy||html.includes('id="experience-stage"'),`${name}: continuidade espacial e alternativa estática`);
  const localEditorialDraft=(process.env.PUBLIC_EDITORIAL_PREVIEW==='true'||process.env.PUBLIC_EDITORIAL_SHARED_PREVIEW==='true')&&(name.split(path.sep).join('/')==='psicologia-em-pauta/index.html'||html.includes('data-editorial-article='));
  check(!/class="[^"\n]*\b(?:ed-draft-strip|ed-inline-review|ed-article-review|ed-review-responses|ed-review-panel)\b/.test(html),`${name}: painel interno de revisão não deve aparecer na leitura`);
  check(!/id="(?:respostas-de-revisao|revisao-do-artigo|painel-editorial)"/.test(html),`${name}: âncora interna de revisão exposta`);

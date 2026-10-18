@@ -96,7 +96,7 @@ function startEditorialReading(): (() => void) | undefined {
 
   function updateReading() {
     updateFrame = 0;
-    if (disposed || !shell || !chapters.length) return;
+    if (disposed || !shell || !chapters.length || shell.dataset.edMode === 'magazine') return;
     if (needsMeasurement) measureReading();
     const position = window.scrollY + readingOffset;
     const range = Math.max(1, readingEnd - readingStart - Math.max(0, innerHeight - readingOffset));
@@ -127,7 +127,7 @@ function startEditorialReading(): (() => void) | undefined {
 
   if (shell) {
     shell.dataset.edReaderReady = 'true';
-    shell.dataset.edSurface = 'ivory';
+    shell.dataset.edSurface ||= 'ivory';
     surfaceToggle?.setAttribute('aria-pressed', 'false');
     surfaceToggle?.addEventListener('click', () => {
       const night = shell.dataset.edSurface !== 'night';
@@ -174,7 +174,8 @@ function startEditorialReading(): (() => void) | undefined {
 
 function bootEditorialReading() {
   stopEditorialReading?.();
-  stopEditorialReading = startEditorialReading();
+  try{stopEditorialReading = startEditorialReading();}
+  catch(error){console.warn('A leitura permanece disponível sem os efeitos opcionais.',error);}
 }
 
 if (typeof window !== 'undefined') {

@@ -6,6 +6,7 @@ export interface EditorialBlock {
   rows?:string[][];
   attribution?:string;
   review?:string;
+  kind?:'evidence'|'reflection'|'social'|'press';
 }
 export interface EditorialArticle {
   slug:string;
@@ -42,6 +43,7 @@ export const editorialByline=(article:EditorialArticle)=>article.adaptationCredi
 export const publicEditorialArticles=editorialArticles.filter(article=>!article.draft&&article.reviewed&&article.approvedForPublication===true&&Boolean(article.publishedAt)&&hasConfirmedEditorialAuthorship(article));
 export const visibleEditorialArticles=editorialPreview?editorialArticles:publicEditorialArticles;
 export const articleUrl=(slug:string)=>`/psicologia-em-pauta/${slug}/`;
+export const editorialBlockLabel=(block:EditorialBlock)=>block.kind?({evidence:'Evidência científica',reflection:'Reflexão autoral',social:'Análise social contemporânea',press:'Na imprensa · Registro contemporâneo'}[block.kind]):undefined;
 export const articleWordCount=(article:EditorialArticle)=>article.sections.flatMap(section=>section.blocks.flatMap(block=>[block.text||'',...(block.items||[]),...(block.columns||[]),...(block.rows||[]).flat()])).join(' ').trim().split(/\s+/).length;
 export const articleReadingMinutes=(article:EditorialArticle)=>Math.max(1,Math.ceil(articleWordCount(article)/200));
 export const pageLabel=(pages:number[])=>pages.map((page,index)=>index>0&&page===pages[index-1]+1?`–${page}`:`${index?', ':''}${page}`).join('').replace(/–\d+(?=–)/g,'');

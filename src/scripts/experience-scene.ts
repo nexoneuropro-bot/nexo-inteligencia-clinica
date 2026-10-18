@@ -17,6 +17,7 @@ const clamp = (value: number, min = 0, max = 1) => Math.max(min, Math.min(max, v
 const smooth = (value: number) => { const t = clamp(value); return t * t * (3 - 2 * t); };
 
 let stopExperience: (() => void) | undefined;
+const homeOpeningVisible = () => Boolean(document.querySelector<HTMLElement>('[data-home-opening]:not([hidden])'));
 
 function startExperience(): (() => void) | undefined {
   const stageElement = document.getElementById('experience-stage');
@@ -70,6 +71,7 @@ function startExperience(): (() => void) | undefined {
   let selectedPath = entry === 1 ? -1 : entry === 2 ? 1 : 0;
   let interactionPulse = 0;
   let regionVisible = true;
+  let openingCovered = homeOpeningVisible();
 
   stage.dataset.mode = 'static';
   stage.dataset.phase = introComplete ? 'formed' : 'fragments';
@@ -295,12 +297,12 @@ function startExperience(): (() => void) | undefined {
   }
 
   async function loadWebgl() {
-    if (disposed || loading || disposeWebgl || quiet.matches || connection?.saveData) return;
+    if (disposed || openingCovered || loading || disposeWebgl || quiet.matches || connection?.saveData) return;
     loading = true;
     let disposePartial: (() => void) | undefined;
     try {
       const THREE = await import('three');
-      if (disposed || quiet.matches || connection?.saveData) { loading = false; return; }
+      if (disposed || openingCovered || quiet.matches || connection?.saveData) { loading = false; return; }
 
       const mobile = window.matchMedia('(max-width: 760px)').matches;
       const perStrand = quietReading ? (mobile ? 320 : 640) : (mobile ? 480 : 960);
@@ -929,7 +931,7 @@ function startExperience(): (() => void) | undefined {
       const interval = 1000 / (quietReading ? (mobile ? 16 : 20) : (mobile ? 24 : 30));
 
       function renderFrame(delta = 0) {
-        if (sceneDisposed || document.hidden || !visible || !regionVisible) return;
+        if (sceneDisposed || openingCovered || document.hidden || !visible || !regionVisible) return;
         activeTime += delta;
         const scrollFormation = entry ? 1 : clamp(window.scrollY / Math.max(1, window.innerHeight * 0.7));
         const formation = introComplete ? 1 : smooth(Math.max(activeTime / INTRO_MILLISECONDS, scrollFormation));
@@ -1015,7 +1017,7 @@ function startExperience(): (() => void) | undefined {
 
       function draw(now: number) {
         frame = 0;
-        if (sceneDisposed || paused || !visible || !regionVisible || document.hidden) return;
+        if (sceneDisposed || openingCovered || paused || !visible || !regionVisible || document.hidden) return;
         frame = window.requestAnimationFrame(draw);
         if (!firstFrame && now - lastTick < interval) return;
         const delta = lastTick ? Math.min(120, now - lastTick) : 0;
@@ -1024,7 +1026,7 @@ function startExperience(): (() => void) | undefined {
       }
 
       function refresh() {
-        if (sceneDisposed || paused || !visible || !regionVisible || document.hidden) {
+        if (sceneDisposed || openingCovered || paused || !visible || !regionVisible || document.hidden) {
           if (frame) window.cancelAnimationFrame(frame);
           frame = 0;
         } else if (!frame) {
@@ -1105,7 +1107,7 @@ function startExperience(): (() => void) | undefined {
   }
 
   function scheduleWebgl() {
-    if (disposed || quiet.matches || connection?.saveData) return;
+    if (disposed || openingCovered || quiet.matches || connection?.saveData) return;
     if (idleWindow.requestIdleCallback) idleHandle = idleWindow.requestIdleCallback(() => void loadWebgl(), { timeout: 450 });
     else loadTimer = window.setTimeout(() => void loadWebgl(), 0);
   }
@@ -1113,6 +1115,25 @@ function startExperience(): (() => void) | undefined {
   function onMotionChange() {
     if (quiet.matches) useStatic();
     else scheduleWebgl();
+  }
+
+  function onOpeningOpened() {
+    openingCovered = homeOpeningVisible();
+    if (!openingCovered) return;
+    window.clearTimeout(loadTimer);
+    if (idleHandle) idleWindow.cancelIdleCallback?.(idleHandle);
+    loadTimer = idleHandle = 0;
+    refreshWebgl?.();
+  }
+
+  function onOpeningDismissed() {
+    openingCovered = homeOpeningVisible();
+    if (openingCovered) return;
+    measureChapters();
+    if (disposeWebgl) {
+      refreshWebgl?.();
+      if (paused) drawStationary?.();
+    } else scheduleWebgl();
   }
 
   skip?.addEventListener('click', onSkip);
@@ -1126,6 +1147,8 @@ function startExperience(): (() => void) | undefined {
   window.addEventListener('nexo:profession', onProfession);
   window.addEventListener('nexo:work-factor', onWorkFactor);
   window.addEventListener('nexo:work-step', onWorkStep);
+  window.addEventListener('nexo:opening-opened', onOpeningOpened);
+  window.addEventListener('nexo:opening-dismissed', onOpeningDismissed);
   // Educational panels can change height without resizing the fixed canvas or
   // the window. Re-measure later chapter boundaries after that layout settles.
   // The observer reads the narrative; stage updates do not size this region.
@@ -1156,6 +1179,8 @@ function startExperience(): (() => void) | undefined {
     window.removeEventListener('nexo:profession', onProfession);
     window.removeEventListener('nexo:work-factor', onWorkFactor);
     window.removeEventListener('nexo:work-step', onWorkStep);
+    window.removeEventListener('nexo:opening-opened', onOpeningOpened);
+    window.removeEventListener('nexo:opening-dismissed', onOpeningDismissed);
     quiet.removeEventListener('change', onMotionChange);
     skip?.removeEventListener('click', onSkip);
     pause?.removeEventListener('click', onPause);
@@ -1166,11 +1191,14 @@ function startExperience(): (() => void) | undefined {
 }
 
 function bootExperience() {
+  // The home film owns the first frame. Internal pages have no opening marker.
+  if (homeOpeningVisible()) return;
   stopExperience?.();
   stopExperience = startExperience();
 }
 
 if (typeof window !== 'undefined') {
+  window.addEventListener('nexo:opening-dismissed', () => { if (!stopExperience) bootExperience(); });
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', bootExperience, { once: true });
   else bootExperience();
   window.addEventListener('pagehide', () => { stopExperience?.(); stopExperience = undefined; });

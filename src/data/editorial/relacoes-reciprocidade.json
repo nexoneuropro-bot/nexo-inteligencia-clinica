@@ -195,15 +195,18 @@
         },
         {
           "type": "p",
-          "text": "Uma transição pode exigir reconstruir apoios e rotinas. Nem toda mudança traz os mesmos riscos: razões da mudança, condições de moradia, recursos e oportunidades de integração importam. Em um estudo histórico com adultos recém-chegados, as novas redes ainda estavam em formação após entrevistas separadas por três meses. Esse recorte não descreve todas as pessoas que mudam. [13]"
+          "text": "Chegar a um lugar desconhecido pode exigir aprender novos caminhos, reorganizar a rotina e construir vínculos quando ainda não há uma rede de apoio por perto. Essas mudanças podem favorecer sentimentos de solidão, insegurança ou sobrecarga, sobretudo quando faltam recursos e oportunidades de convivência. O apoio disponível e as condições da mudança importam. Em um estudo histórico com adultos recém-chegados, as novas redes ainda estavam em formação após entrevistas separadas por três meses. [13]",
+          "kind": "social"
         },
         {
           "type": "p",
-          "text": "Em uma coorte de 38.495 adultos expostos ao desastre de 11 de setembro, mudar ao menos uma vez em cada um de dois períodos de quatro anos foi associado a risco relativo de depressão 20% maior que não mudar (RR=1,20; IC 95%: 1,06–1,37). O resultado não representa aumento de 20 pontos percentuais. A integração social foi examinada como possível caminho nessa relação. [12]"
+          "text": "Em uma coorte de 38.495 adultos expostos ao desastre de 11 de setembro, mudar ao menos uma vez em cada um de dois períodos de quatro anos foi associado a risco relativo de depressão 20% maior que não mudar (RR=1,20; IC 95%: 1,06–1,37). O resultado não representa aumento de 20 pontos percentuais. A integração social foi examinada como possível caminho nessa relação. [12]",
+          "kind": "evidence"
         },
         {
           "type": "note",
-          "text": "Esse estudo não demonstra que toda mudança de cidade causa depressão. A população era específica, mudanças menos frequentes não tiveram a mesma associação e fatores não medidos ainda podem influenciar os resultados. [12]",
+          "text": "A pesquisa ajuda a compreender o que uma mudança pode ocasionar, especialmente quando afasta a pessoa de vínculos conhecidos e exige formar novas redes. Isso não significa que o sofrimento seja inevitável: algumas mudanças também ampliam segurança, autonomia e oportunidades de apoio. Nesse estudo, a população era específica, mudanças menos frequentes não tiveram a mesma associação e fatores não medidos podem influenciar os resultados. Para compreender cada história, é preciso considerar os motivos da mudança, o apoio que já existia e as condições de construir novas conexões. [12, 13]",
+          "kind": "social",
           "review": "Respondida: conferidos desenho, comparação, RR, intervalo e limites do artigo primário. Acrescentados o significado relativo de 20% e o resultado distinto para mudanças menos frequentes."
         }
       ]

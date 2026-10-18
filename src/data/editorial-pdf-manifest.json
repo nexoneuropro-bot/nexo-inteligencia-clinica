@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-18T06:59:53-03:00",
+  "generator": "scripts/generate-editorial-pdfs.py",
+  "status": "preview",
+  "clinicalApproval": false,
+  "paper": "A4",
+  "palette": [
+    "#F3EFE6",
+    "#082440",
+    "#A16850",
+    "#DCCBBC",
+    "#292D32"
+  ],
+  "embeddedFonts": {
+    "Serif": "georgia.ttf",
+    "SerifBold": "georgiab.ttf",
+    "SerifItalic": "georgiai.ttf",
+    "Sans": "arial.ttf",
+    "SansBold": "arialbd.ttf",
+    "SansItalic": "ariali.ttf"
+  },
+  "sourcePolicy": "Same article JSON as HTML; original PDFs retained separately. No internal audit notes rendered.",
+  "editions": [
+    {
+      "slug": "relacoes-reciprocidade",
+      "source": "src/data/editorial/relacoes-reciprocidade.json",
+      "sourceSha256": "8e48e80932c455584280d2e4c3cf701f1c818ba6d44a5d307ac0e4c925d738c0",
+      "file": "src/assets/editorial-pdfs/relacoes-reciprocidade.pdf",
+      "pdfSha256": "427cdad37ccc76347dffe6cb09cb7a38834d20d0793d15b8d67783cac3532b4a",
+      "pages": 16,
+      "selectableCharacters": 22047,
+      "url": "/psicologia-em-pauta/edicoes/relacoes-reciprocidade.pdf"
+    },
+    {
+      "slug": "neurodivergencia-comunicacao",
+      "source": "src/data/editorial/neurodivergencia-comunicacao.json",
+      "sourceSha256": "e4a3c7fe68715cafbaf2bc0ab131dd52952c4e4b992bd6056f80f36ec5602a6e",
+      "file": "src/assets/editorial-pdfs/neurodivergencia-comunicacao.pdf",
+      "pdfSha256": "c35c76bedfb9b4b0baa527b673c2fec7e21ab26ad5575f09db58327f9ebdc1aa",
+      "pages": 16,
+      "selectableCharacters": 21846,
+      "url": "/psicologia-em-pauta/edicoes/neurodivergencia-comunicacao.pdf"
+    },
+    {
+      "slug": "o-que-faz-um-psicologo",
+      "source": "src/data/editorial/o-que-faz-um-psicologo.json",
+      "sourceSha256": "e8eff39c5be345114febb7614373a0e9f0afa82d76f4f79b7b040a64a9b2702d",
+      "file": "src/assets/editorial-pdfs/o-que-faz-um-psicologo.pdf",
+      "pdfSha256": "752ec9f4a049f54a3c1b34c0d20016e7233ac263f51a3fab580f4b93d9cb8b52",
+      "pages": 15,
+      "selectableCharacters": 20590,
+      "url": "/psicologia-em-pauta/edicoes/o-que-faz-um-psicologo.pdf"
+    },
+    {
+      "slug": "analise-do-comportamento",
+      "source": "src/data/editorial/analise-do-comportamento.json",
+      "sourceSha256": "79d1238aa9f6428d24e7f8eb6f3b68b9a6fe263680a8ea6c29a2269a6e31bfde",
+      "file": "src/assets/editorial-pdfs/analise-do-comportamento.pdf",
+      "pdfSha256": "9961c02e84a436918d4f9dab3e9444d26d713976f503c5b7db1c59953fd367ee",
+      "pages": 10,
+      "selectableCharacters": 16438,
+      "url": "/psicologia-em-pauta/edicoes/analise-do-comportamento.pdf"
+    },
+    {
+      "slug": "escuta-atencao-e-relacoes",
+      "source": "src/data/editorial/escuta-atencao-e-relacoes.json",
+      "sourceSha256": "f97d0f5d956825bd7316be7912f5e193aa6c4ce6a25ae562b5cb5bf2e985ba74",
+      "file": "src/assets/editorial-pdfs/escuta-atencao-e-relacoes.pdf",
+      "pdfSha256": "c1a38d6d96fd5fe8c389a531f84692fcc8209ed5d13acb12557b83d639fa458d",
+      "pages": 20,
+      "selectableCharacters": 27435,
+      "url": "/psicologia-em-pauta/edicoes/escuta-atencao-e-relacoes.pdf"
+    },
+    {
+      "slug": "quem-cuida-de-quem-cuida",
+      "source": "src/data/editorial/quem-cuida-de-quem-cuida.json",
+      "sourceSha256": "da0ea86017ed7b144a5bff9798bacafb14e27b5b863f45571984a6cbe02f843d",
+      "file": "src/assets/editorial-pdfs/quem-cuida-de-quem-cuida.pdf",
+      "pdfSha256": "4bc0b9c7d402e2cb567ab1909bdb21485ab9a914b35b3c1c27802cb9e6b63144",
+      "pages": 21,
+      "selectableCharacters": 39624,
+      "url": "/psicologia-em-pauta/edicoes/quem-cuida-de-quem-cuida.pdf"
+    }
+  ]
+}

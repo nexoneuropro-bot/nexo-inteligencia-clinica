@@ -5,6 +5,7 @@ import LearningLibrary from './LearningLibrary.astro';
 import {visibleEditorialArticles,articleUrl,articleReadingMinutes,editorialPreview} from '../data/editorial';
 import '../styles/experience.css';
 import '../styles/editorial.css';
+import '../styles/editorial-reader-controls.css';
 const shortNames=['Vínculos','Comunicação','Psicologia','Comportamento','Escuta','Cuidado'];
 ---
 <section class="ex-journey-entry ed-landing-hero" id="experience-entry" data-ed-depth aria-labelledby="editorial-heading">
@@ -15,11 +16,13 @@ const shortNames=['Vínculos','Comunicação','Psicologia','Comportamento','Escu
 </section>
 <div class="ed-collection" id="conteudo-da-jornada">
  <section class="ed-collection-intro"><span class="ed-eyebrow">UMA EDITORIA. SEIS PONTOS DE PARTIDA.</span><h2>De uma pergunta<br/>a um olhar mais amplo.</h2><p>Escolha o tema que conversa com o seu momento. Cada edição preserva o percurso do dossiê, com capítulos, exemplos, fontes e espaço para pensar.</p></section>
+ <div class="ed-library-search"><label for="ed-search">Buscar nas edições e nos capítulos</label><input id="ed-search" type="search" data-ed-search placeholder="Busque por relações, escuta, trabalho…" autocomplete="off"/><output data-ed-search-count aria-live="polite">Seis edições para explorar</output></div>
  <div class="ed-editions">{visibleEditorialArticles.map((article,index)=><article class={`ed-edition ed-theme-${article.theme}`} id={`edicao-${article.slug}`} data-editorial-edition={article.slug}>
   <div class="ed-edition-coordinate"><span>0{index+1}</span><p>{article.category}</p><small>{article.source.totalPages} páginas de origem</small></div>
   <div class="ed-edition-copy"><h2><a href={articleUrl(article.slug)}>{article.title}</a></h2><p>{article.subtitle}</p><div class="ed-edition-meta">{articleReadingMinutes(article)} min de leitura · {article.sections.length} capítulos</div><a class="ed-reading-link" href={articleUrl(article.slug)}>Abrir a leitura <span aria-hidden="true">↗</span></a>{editorialPreview&&<a class="ed-pdf-link" href={`/psicologia-em-pauta/originais/${article.slug}.pdf`} target="_blank" rel="noopener noreferrer">Edição original em PDF ↗</a>}<details class="ed-chapter-preview"><summary>Explore os capítulos</summary><ol>{article.sections.map(section=><li><a href={`${articleUrl(article.slug)}#${section.id}`}>{section.title}</a></li>)}</ol></details></div>
   <a class="ed-edition-visual" href={articleUrl(article.slug)} aria-label={`Ler ${article.title}`}>{['neuro','profession'].includes(article.theme)?<img src={`/psicologia-em-pauta/imagens/${article.slug}.jpg`} width={article.theme==='neuro'?524:445} height={article.theme==='neuro'?594:930} loading="lazy" alt="Imagem ilustrativa da edição de origem: pessoas em uma conversa."/>:<EditorialArtwork theme={article.theme} label={`Ilustração conceitual sobre ${article.category.toLowerCase()}.`} compact/>}</a>
+  <nav class="ed-edition-formats" aria-label={`Formatos de ${article.title}`}><a href={`${articleUrl(article.slug)}?leitura=revista#conteudo-da-jornada`}>Folhear revista ↗</a><a href={`${articleUrl(article.slug)}?leitura=continua#conteudo-da-jornada`}>Leitura contínua ↗</a><a href={`/psicologia-em-pauta/edicoes/${article.slug}.pdf`} download>Baixar edição PDF ↓</a></nav>
  </article>)}</div>
  <section class="ed-guides-existing"><LearningLibrary/></section>
 </div>
-<script>import '../scripts/editorial-reading';</script>
+<script>import '../scripts/editorial-reading';import '../scripts/editorial-reader-preferences';</script>

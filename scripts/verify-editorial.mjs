@@ -201,11 +201,21 @@ for(const slug of slugs)check(!sitemap.includes(routeUrl(slug)),`${slug}: unappr
 for(const route of institutional)check(fs.existsSync(path.join(build,route,'index.html')),`Institutional route missing: /${route}/`);
 for(const file of htmlFiles)scripts(read(file),relative(file));
 const landing=read(path.join(build,'psicologia-em-pauta','index.html'));
+const editionManifest=JSON.parse(read(path.join(project,'src/data/editorial-pdf-manifest.json'))||'{"editions":[]}');
+for(const edition of editionManifest.editions){
+ const emitted=path.join(build,'psicologia-em-pauta','edicoes',`${edition.slug}.pdf`);
+ if(mode==='public'){check(!fs.existsSync(emitted),`${edition.slug}: unapproved revised PDF leaked into public build`);continue;}
+ const source=path.join(project,edition.source);
+ check(fs.existsSync(source)&&sha256(fs.readFileSync(source))===edition.sourceSha256,`${edition.slug}: revised PDF is stale relative to article JSON`);
+ check(fs.existsSync(emitted),`${edition.slug}: revised PDF missing`);
+ if(fs.existsSync(emitted))check(sha256(fs.readFileSync(emitted))===edition.pdfSha256,`${edition.slug}: revised PDF differs from checked manifest`);
+ check(noindexHeader(rules,`/psicologia-em-pauta/edicoes/${edition.slug}.pdf`),`${edition.slug}: revised PDF lacks noindex header`);
+}
 const draftArtifacts=files.filter(file=>/^psicologia-em-pauta\/(?:originais|imagens|sociais)\//.test(relative(file)));
 const summaries=[];
 
 if(mode!=='public'){
- check(htmlFiles.length===22,`Draft build must have 22 HTML files (15 institutional routes, six articles and 404); found ${htmlFiles.length}`);
+ check(htmlFiles.length===23,`Draft build must have 23 HTML files (15 institutional routes, six articles, editorial privacy and 404); found ${htmlFiles.length}`);
  readerInterface(landing,'editorial landing');
  const titles=new Set(),descriptions=new Set(),socials=new Set();
  for(const article of articles){
@@ -276,7 +286,7 @@ if(mode!=='public'){
  for(const artifact of draftArtifacts)check(expectedArtifacts.has(relative(artifact)),`Unexpected editorial draft artifact: ${relative(artifact)}`);
  check(draftArtifacts.length===14,`Expected six original PDFs, six social PNGs and two JPEG illustrations; found ${draftArtifacts.length} files`);
 }else{
- check(htmlFiles.length===16,`Public build must retain 16 HTML files / 15 institutional routes; found ${htmlFiles.length}`);
+ check(htmlFiles.length===17,`Public build must retain 17 HTML files / 15 institutional routes, editorial privacy and 404; found ${htmlFiles.length}`);
  for(const slug of slugs){
   check(!fs.existsSync(routeFile(slug)),`${slug}: draft HTML exists in public build`);
   check(!linked(landing,routeUrl(slug)),`${slug}: public landing exposes draft link`);

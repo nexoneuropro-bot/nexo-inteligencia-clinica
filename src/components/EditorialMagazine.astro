@@ -1,0 +1,83 @@
+---
+import { editorialByline, editorialBlockLabel, type EditorialArticle } from '../data/editorial';
+import { buildMagazinePages } from '../lib/magazine-pages';
+import '../styles/editorial-magazine.css';
+
+interface Props { article: EditorialArticle }
+const { article } = Astro.props;
+const pages = buildMagazinePages(article);
+const byline = editorialByline(article);
+const chapterPage = (index: number) => pages.findIndex(page => page.kind === 'chapter' && page.chapterIndex === index);
+const referencesPage = pages.findIndex(page => page.kind === 'references');
+const quizPage = article.slug === 'relacoes-reciprocidade' ? pages.findIndex(page => page.blocks.some(({ block }) => block.type === 'exercise')) : -1;
+const hasPhoto = ['neuro', 'profession'].includes(article.theme);
+const coverNumber = ({ relations: '01', neuro: '02', profession: '03', behavior: '04', listening: '05', care: '06' })[article.theme];
+const formatPage = (page: number) => String(page + 1).padStart(2, '0');
+---
+<!-- Progressive enhancement: the continuous article is the initial, accessible reading mode.
+     Integration API: getMagazineController(element).open({page:0,focus:true}).
+     Events: ed:magazine-open / ed:magazine-close; emitted ed:magazine-change. -->
+<section class="ed-magazine" id={`revista-${article.slug}`} data-ed-magazine data-magazine-slug={article.slug} hidden aria-label={`Revista Psicologia em Pauta: ${article.title}`}>
+ <div class="ed-mag-controls" role="toolbar" aria-label="Comandos da revista">
+  <button type="button" data-mag-previous aria-label="Páginas anteriores" title="Páginas anteriores (seta esquerda)">← <span>Anterior</span></button>
+  <output data-mag-indicator aria-label="Páginas exibidas">1 / {pages.length}</output>
+  <button type="button" data-mag-next aria-label="Próximas páginas" title="Próximas páginas (seta direita)"><span>Próxima</span> →</button>
+  <button type="button" data-mag-contents aria-expanded="false" aria-controls={`sumario-revista-${article.slug}`}>Sumário</button>
+  <div class="ed-mag-size" role="group" aria-label="Tamanho do texto">
+   <button type="button" data-mag-smaller aria-label="Diminuir texto">A−</button>
+   <output data-mag-size aria-label="Tamanho do texto atual">100%</output>
+   <button type="button" data-mag-larger aria-label="Aumentar texto">A+</button>
+  </div>
+  <button type="button" data-mag-fullscreen aria-pressed="false">Tela cheia</button>
+  <button type="button" data-mag-close>Leitura contínua ↗</button>
+ </div>
+ <nav class="ed-mag-drawer" id={`sumario-revista-${article.slug}`} data-mag-drawer hidden aria-label="Sumário da revista">
+  <div><span class="ed-mag-kicker">ENCONTRE SEU PRÓXIMO PONTO DE VISTA</span><h2>Nesta edição.</h2></div>
+  <ol><li><button type="button" data-mag-goto="0">Capa <span>01</span></button></li>
+   {article.sections.map((section, index) => <li><button type="button" data-mag-goto={String(chapterPage(index))}>{section.title}<span>{formatPage(chapterPage(index))}</span></button></li>)}
+   {referencesPage >= 0 && <li><button type="button" data-mag-goto={String(referencesPage)}>Fontes e referências<span>{formatPage(referencesPage)}</span></button></li>}
+  </ol>
+ </nav>
+ <p class="ed-mag-guidance" id={`comandos-revista-${article.slug}`}>Use as setas para folhear. No celular, deslize para os lados. Role dentro da página para continuar o texto; a seleção de palavras e a ampliação permanecem disponíveis.</p>
+ <div class="ed-mag-stage" data-mag-stage tabindex="0" role="group" aria-roledescription="revista folheável" aria-label="Páginas da edição" aria-describedby={`comandos-revista-${article.slug}`}>
+  <button type="button" class="ed-mag-edge ed-mag-edge-before" data-mag-previous aria-label="Virar para as páginas anteriores" tabindex="-1"><span aria-hidden="true">‹</span></button>
+  <div class="ed-mag-book" data-mag-book>
+   {pages.map((page, pageIndex) => <article class:list={['ed-mag-page', `ed-mag-page-${page.kind}`, { 'ed-mag-page-continuation': page.continuation, 'ed-mag-page-feature': page.kind === 'chapter' && page.chapterIndex !== undefined && page.chapterIndex % 3 === 0 && !page.continuation }]} data-mag-page={String(pageIndex)} data-mag-page-kind={page.kind} data-mag-chapter={page.chapterIndex !== undefined ? String(page.chapterIndex) : undefined} hidden aria-label={`Página ${pageIndex + 1}: ${page.title}`}>
+    <div class="ed-mag-page-scroll" data-mag-page-scroll tabindex="0" aria-label={`Ler página ${pageIndex + 1}`}>
+     {page.kind === 'cover' ? <div class:list={['ed-mag-cover', {'ed-mag-cover-photo': hasPhoto}]}>
+      <div class="ed-mag-cover-meta"><span>NEXO · INTELIGÊNCIA CLÍNICA</span><span>EDIÇÃO {coverNumber}</span></div>
+      <p class="ed-mag-masthead">PSICOLOGIA<br/><em>EM PAUTA</em></p>
+      <div class="ed-mag-cover-rule"><span>IDEIAS QUE ENCONTRAM A VIDA</span><span>LEITURA E REFLEXÃO</span></div>
+      {hasPhoto && <figure><img src={`/psicologia-em-pauta/imagens/${article.slug}.jpg`} width={article.theme === 'neuro' ? 524 : 445} height={article.theme === 'neuro' ? 594 : 930} loading="lazy" decoding="async" alt="Pessoas em uma conversa: fotografia do acervo da edição, autorizada para esta prévia."/><figcaption>Acervo editorial próprio · uso autorizado.</figcaption></figure>}
+      <div class="ed-mag-cover-headline"><span class="ed-mag-kicker">{article.category}</span><h2>{article.title}</h2><p>{article.subtitle}</p></div>
+      <p class="ed-mag-cover-byline">{byline}</p>
+      <div class="ed-mag-cover-teasers">{article.sections.slice(0, 3).map(section => <span>{section.title}</span>)}</div>
+     </div> : <>
+      <div class="ed-mag-running-head"><span>PSICOLOGIA EM PAUTA</span><span>{article.category}</span></div>
+      {page.kind === 'contents' && <div class="ed-mag-contents-page"><span class="ed-mag-kicker">UM CONVITE À LEITURA</span><h2>O que você<br/>vai encontrar.</h2><p class="ed-mag-standfirst">{article.description}</p><ol>{article.sections.map((section, index) => <li><button type="button" data-mag-goto={String(chapterPage(index))}><span>{String(index + 1).padStart(2, '0')}</span><strong>{section.title}</strong><small>{formatPage(chapterPage(index))}</small></button></li>)}</ol><p class="ed-mag-reading-note">Leia no seu ritmo. As perguntas desta edição convidam à reflexão; não oferecem diagnóstico nem substituem avaliação profissional.</p></div>}
+      {page.kind === 'chapter' && <>
+       <div class="ed-mag-chapter-heading"><span class="ed-mag-kicker">{`CAPÍTULO ${String((page.chapterIndex || 0) + 1).padStart(2, '0')}${page.continuation ? ' · CONTINUAÇÃO' : ''}`}</span><h2>{page.title}</h2></div>
+       <div class="ed-mag-body">{page.blocks.map(({ block, originalIndex }) => <div class:list={['ed-mag-block', `ed-mag-block-${block.type}`]} data-mag-source-block={`${page.chapterIndex}:${originalIndex}`}>
+        {editorialBlockLabel(block) && <span class="ed-mag-block-label">{editorialBlockLabel(block)}</span>}
+        {block.type === 'p' && <p>{block.text}</p>}
+        {block.type === 'quote' && <blockquote><p>{block.text}</p>{block.attribution && <cite>{block.attribution}</cite>}</blockquote>}
+        {block.type === 'list' && <>{block.text && <p>{block.text}</p>}<ul>{block.items?.map(item => <li>{item}</li>)}</ul></>}
+        {block.type === 'table' && <>{block.text && <p>{block.text}</p>}<div class="ed-mag-table" role="region" tabindex="0" aria-label={`Quadro: ${page.title}`}><table><thead><tr>{block.columns?.map(column => <th scope="col">{column}</th>)}</tr></thead><tbody>{block.rows?.map(row => <tr>{row.map((cell, index) => index === 0 ? <th scope="row">{cell}</th> : <td>{cell}</td>)}</tr>)}</tbody></table></div></>}
+        {block.type === 'exercise' && <aside class="ed-mag-reflection"><span class="ed-mag-kicker">REFLEXÃO AUTORAL · PARA PENSAR</span>{block.text && <p>{block.text}</p>}<ol>{block.items?.map(item => <li>{item}</li>)}</ol><p class="ed-mag-reading-note">Você pode refletir sem compartilhar respostas. Este exercício não produz diagnóstico.</p></aside>}
+        {block.type === 'note' && <aside class="ed-mag-note"><p>{block.text}</p></aside>}
+       </div>)}</div>
+       {pageIndex === quizPage && <aside class="ed-mag-quiz-invitation"><span class="ed-mag-kicker">UM PASSO A MAIS NA REFLEXÃO</span><p>Como seus vínculos aparecem no cotidiano? Experimente um exercício educativo, com respostas e devolutiva apenas neste dispositivo.</p><button type="button" data-mag-quiz-request>Responder ao quiz →</button><small>Você volta a esta mesma página quando terminar.</small></aside>}
+      </>}
+      {page.kind === 'references' && <div class="ed-mag-reference-page"><span class="ed-mag-kicker">PARA APROFUNDAR A LEITURA{page.continuation ? ' · CONTINUAÇÃO' : ''}</span><h2>De onde vêm<br/>as ideias.</h2><ol start={(page.references[0]?.originalIndex ?? 0) + 1}>{page.references.map(({ reference, originalIndex }) => <li value={originalIndex + 1} data-mag-source-reference={String(originalIndex)}>{reference.url && reference.verification !== 'replace' ? <a href={reference.url} target="_blank" rel="noopener noreferrer">{reference.label} <span aria-label="Abre em outra guia">↗</span></a> : reference.label}</li>)}</ol></div>}
+      {page.kind === 'credits' && <div class="ed-mag-credits"><span class="ed-mag-kicker">A LEITURA CONTINUA EM VOCÊ</span><h2>Uma pergunta<br/>leva a outra.</h2><p>{article.subtitle}</p><div class="ed-mag-author"><img src="/images/gabriel.webp" width="140" height="170" loading="lazy" decoding="async" alt="Gabriel Alves Batista, autor e curador da edição."/><div><span>{byline}</span><p>Psicólogo · CRP-SP 06/176184</p></div></div><p class="ed-mag-reading-note">Conteúdo educativo. As informações apoiam a compreensão e a reflexão e não substituem atendimento individualizado.</p><a href={`/psicologia-em-pauta/originais/${article.slug}.pdf`} target="_blank" rel="noopener noreferrer">Consultar edição original em PDF ↗</a><a href="/psicologia-em-pauta/">Explorar outras edições ↗</a><button type="button" data-mag-close>Continuar no artigo HTML ↗</button></div>}
+     </>}
+    </div>
+    <footer class="ed-mag-folio"><span>NEXO · {page.kind === 'cover' ? 'PSICOLOGIA EM PAUTA' : article.title}</span><span>{formatPage(pageIndex)}</span></footer>
+   </article>)}
+  </div>
+  <button type="button" class="ed-mag-edge ed-mag-edge-after" data-mag-next aria-label="Virar para as próximas páginas" tabindex="-1"><span aria-hidden="true">›</span></button>
+ </div>
+ <div class="ed-mag-bottom"><button type="button" data-mag-previous>← Anterior</button><span data-mag-bottom-indicator aria-hidden="true">Página 1</span><button type="button" data-mag-next>Próxima →</button></div>
+ <p class="ed-mag-sr-only" role="status" aria-live="polite" aria-atomic="true" data-mag-live></p>
+</section>
+<script>import '../scripts/editorial-magazine';</script>
