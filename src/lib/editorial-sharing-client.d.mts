@@ -7,7 +7,7 @@ export interface SharingInput {
 }
 export interface SharingAttempt {
   fingerprint: string;
-  payload: { editionSlug: string; quizId: string; quizVersion: number; context: 'personal' | 'company'; result: { fragments: { themeId: string; observation: string; nextStep: string }[] }; pseudonym: string; ageRange: string; uf: string; adultConfirmed: true; consent: { accepted: true; version: string; id: string; givenAt: string } };
+  payload: { editionSlug: string; quizId: string; quizVersion: number; context: 'personal' | 'company'; result: { groups: {groupId: string; total: number}[] } | { fragments: { themeId: string; observation: string; nextStep: string }[] }; pseudonym: string; ageRange: string; uf: string; adultConfirmed: true; consent: { accepted: true; version: string; id: string; givenAt: string } };
 }
 export function isSharingEnabled(status: unknown): boolean;
 export function readSharingAvailability(fetcher?: typeof fetch): Promise<boolean>;

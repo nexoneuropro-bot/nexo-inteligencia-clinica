@@ -35,16 +35,35 @@ test('builder sends only approved fields and is accepted by the strict server co
   const attempt = createSharingAttempt(input(), null, dependencies);
   assert.equal(validateSharePayload(attempt.payload, NOW).valid, true);
   assert.deepEqual(Object.keys(attempt.payload).sort(), ['adultConfirmed','ageRange','consent','context','editionSlug','pseudonym','quizId','quizVersion','result','uf']);
-  assert.equal(attempt.payload.result.fragments.length, quiz.questions.length);
+  assert.deepEqual(attempt.payload.result, { groups: [{ groupId: quiz.scoring.groups[0].id, total: 3 }] });
   assert.equal(attempt.payload.consent.id, ID); assert.equal(attempt.payload.consent.accepted, true);
   const wire = JSON.stringify(attempt.payload);
-  assert.doesNotMatch(wire, /"answers"|"email"|"phone"|"history"|"userAgent"|"score"|"question"/);
+  assert.doesNotMatch(wire, /"answers"|"email"|"phone"|"history"|"userAgent"|"calculation"|"questionId"|"observation"|"band"/);
 });
 
 test('minor, unconfirmed adulthood, absent consent and malformed profile cannot make a request', () => {
   for (const change of [{ ageRange: 'under18' }, { adultConfirmed: false }, { accepted: false }, { uf: 'ZZ' }, { ageRange: 'unknown' }, { pseudonym: '<test>' }]) assert.throws(() => createSharingAttempt({ ...input(), ...change }, null, dependencies));
-  const altered = structuredClone(reflection); altered.themes[0].observation = 'Unconfigured output';
+  const altered = structuredClone(reflection); altered.scores[0].value = 100;
   assert.throws(() => createSharingAttempt({ ...input(), reflection: altered }, null, dependencies));
+});
+
+test('escuta compartilha só os dois totais, sem itens e sem combinar grupos', () => {
+  const definition = editorialQuizzes[1];
+  const answers = Object.fromEntries(definition.questions.map((question, index) => [question.id, question.options[index < 12 ? 0 : 3].id]));
+  const result = calculateQuizReflection(definition, answers);
+  const attempt = createSharingAttempt({ ...input(), quiz: definition, reflection: result }, null, dependencies);
+  assert.deepEqual(attempt.payload.result.groups.map(group => group.total), [0,36]);
+  assert.equal(validateSharePayload(attempt.payload, NOW).valid, true);
+  assert.doesNotMatch(JSON.stringify(attempt.payload), /"points"|"questionId"|"calculation"|"band"|"text"|"answers"/);
+});
+
+test('cliente preserva compatibilidade dos trechos autorais em quiz sem soma', () => {
+  const definition = { ...quiz, id: 'legacy-local', scoring: undefined, questions: [{ id: 'item', theme: 'Tema', prompt: '?', help: '', options: [{ id: 'sim', label: 'Sim', feedback: 'Trecho autoral.', nextStep: 'Pergunta autoral?' }] }] };
+  const result = calculateQuizReflection(definition, { item: 'sim' });
+  const attempt = createSharingAttempt({ ...input(), quiz: definition, reflection: result }, null, dependencies);
+  assert.deepEqual(attempt.payload.result, { fragments: [{ themeId: 'item', observation: 'Trecho autoral.', nextStep: 'Pergunta autoral?' }] });
+  result.themes[0].observation = 'inventado';
+  assert.throws(() => createSharingAttempt({ ...input(), quiz: definition, reflection: result }, null, dependencies));
 });
 
 test('retry preserves exact UUID/time/body until the form or result changes', () => {

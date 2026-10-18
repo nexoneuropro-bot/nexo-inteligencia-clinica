@@ -2,7 +2,7 @@
   "slug": "escuta-atencao-e-relacoes",
   "title": "Escuta, atenção e relações: o que acontece quando ninguém escuta?",
   "subtitle": "Todo mundo fala. Quem ainda escuta? Uma leitura sobre atenção, empatia, comportamento verbal e o que acontece quando conversar vira apenas esperar a própria vez.",
-  "description": "Entenda escuta ativa, validação, atenção e limites pela Análise do Comportamento, com exemplos cotidianos e perguntas para refletir sem pontuação.",
+  "description": "Entenda escuta ativa, validação, atenção e limites pela Análise do Comportamento, com exemplos cotidianos e um exercício autoral de reflexão com duas somas independentes.",
   "category": "Escuta e relações",
   "theme": "listening",
   "draft": true,
@@ -450,11 +450,11 @@
       "blocks": [
         {
           "type": "p",
-          "text": "Explore as observações abaixo pensando em situações concretas. Você pode apenas refletir: não é necessário marcar frequência, somar pontos ou compartilhar informações pessoais. Um enunciado não descreve toda a sua história."
+          "text": "Pense nas últimas quatro semanas. Marque uma frequência para cada item: 0 nunca · 1 raramente · 2 às vezes · 3 frequentemente. Esta é a Parte 1 do exercício autoral original. Some apenas os 12 itens desta parte e guarde o número para o anexo de orientações."
         },
         {
           "type": "exercise",
-          "text": "Doze observações sobre possíveis barreiras à escuta",
+          "text": "Parte 1 · Doze itens sobre barreiras à escuta (itens 1–12)",
           "items": [
             "Enquanto alguém fala, preparo mentalmente a minha resposta.",
             "Interrompo para corrigir detalhes ou explicar o que eu penso.",
@@ -469,7 +469,7 @@
             "Uso ironia, sarcasmo ou mudança de foco quando discordo.",
             "Depois da conversa, lembro pouco do que a pessoa realmente disse."
           ],
-          "review": "Todos os 12 enunciados originais preservados. Retirados período autorreferido de quatro semanas, respostas 0–3, soma, aferição e instrução de consultar faixas; convertidos em reflexão educativa sem coleta, medida ou classificação."
+          "review": "Os 12 enunciados originais foram preservados integralmente. Restaurados período de quatro semanas, escala 0–3 e soma independente 0–36 da p. 12, com faixas autorais da p. 16 explicitamente educativas e exploratórias."
         },
         {
           "type": "exercise",
@@ -482,7 +482,7 @@
         },
         {
           "type": "note",
-          "text": "Esta atividade não é teste psicológico, não produz diagnóstico e não mede personalidade. As observações não possuem escore, normas ou resultado individual."
+          "text": "Este exercício faz uma aferição exploratória e autorreferida. Não é teste psicológico, não produz diagnóstico e não mede personalidade. A soma desta parte vai de 0 a 36. As faixas autorais no anexo organizam reflexão e não possuem normas populacionais ou validade psicométrica estabelecida."
         }
       ]
     },
@@ -495,11 +495,11 @@
       "blocks": [
         {
           "type": "p",
-          "text": "Aqui você observa comportamentos de escuta ativa: atenção, compreensão, validação, curiosidade e reparo. Considere o contexto e a possibilidade de perguntar ao outro como foi a conversa, sem transformar cada item em exigência universal."
+          "text": "Aqui você observa comportamentos de escuta ativa: atenção, compreensão, validação, curiosidade e reparo. Use a mesma escala: 0 nunca · 1 raramente · 2 às vezes · 3 frequentemente. Considere as últimas quatro semanas. Some apenas os 12 itens desta parte: os dois resultados serão lidos separadamente no anexo. Considere também o contexto e a possibilidade de perguntar ao outro como foi a conversa, sem transformar cada item em exigência universal."
         },
         {
           "type": "exercise",
-          "text": "Outras doze observações sobre repertórios de escuta",
+          "text": "Parte 2 · Doze itens sobre repertório de escuta (itens 13–24)",
           "items": [
             "Faço perguntas ligadas ao que a pessoa acabou de dizer.",
             "Tolero alguns segundos de silêncio sem preencher imediatamente.",
@@ -514,7 +514,7 @@
             "Quando interrompo ou entendo errado, consigo reparar e devolver a palavra.",
             "Demonstro curiosidade por realidades diferentes das minhas."
           ],
-          "review": "Os 12 enunciados originais (13–24) foram preservados integralmente. Retirados escala/soma/anexo classificatório. Observar tom/ritmo/expressão não permite inferir empatia, intenção ou diagnóstico."
+          "review": "Os 12 enunciados originais (13–24) foram preservados integralmente. Restauradas escala 0–3 e soma independente 0–36 da p. 13, com faixas autorais da p. 16. Observar tom/ritmo/expressão não permite inferir empatia, intenção ou diagnóstico."
         },
         {
           "type": "note",
@@ -611,14 +611,65 @@
     },
     {
       "id": "possibilidades-sem-classificacao",
-      "title": "Possibilidades de prática, sem classificar você",
+      "title": "Anexo: duas somas e orientações autorais para refletir",
       "pages": [
         16
       ],
       "blocks": [
         {
           "type": "p",
-          "text": "Não existe um veredito sobre sua capacidade de escuta nesta leitura. Você pode reconhecer situações em que há mais atenção, outras em que pressa, defesa, distração ou competição atrapalham e ainda outras em que ficar em silêncio não comunica compreensão."
+          "text": "Agora, veja o que os seus dois números sugerem. Não existe “veredito”. As faixas organizam a frequência autorreferida dos comportamentos para estimular reflexão. Some os itens 1–12 e os itens 13–24 separadamente, sem pesos ou inversões: cada parte vai de 0 a 36. Não há total geral. As faixas e mensagens a seguir são as orientações editoriais da edição original."
+        },
+        {
+          "type": "table",
+          "columns": [
+            "Parte 1 · Barreiras à escuta",
+            "Orientação da edição original"
+          ],
+          "rows": [
+            [
+              "0–12 · Barreiras pouco frequentes",
+              "Sua atenção tende a sofrer menos interferência desses padrões."
+            ],
+            [
+              "13–24 · Barreiras aparecem sob tensão",
+              "Pressa, defesa, distração ou competição podem atrapalhar em alguns contextos."
+            ],
+            [
+              "25–36 · Barreiras frequentes",
+              "A conversa pode estar virando defesa, esquiva ou disputa com regularidade."
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "columns": [
+            "Parte 2 · Repertório de escuta",
+            "Orientação da edição original"
+          ],
+          "rows": [
+            [
+              "0–12 · Em construção",
+              "Você pode estar presente sem necessariamente produzir acolhimento percebido."
+            ],
+            [
+              "13–24 · Presente, mas oscilante",
+              "Há recursos de escuta, mas eles podem cair sob tensão ou distração."
+            ],
+            [
+              "25–36 · Mais consistente",
+              "Os comportamentos de atenção, compreensão e reparo aparecem com maior frequência."
+            ]
+          ]
+        },
+        {
+          "type": "note",
+          "text": "Esta aferição é educativa e exploratória. Não possui normas populacionais, valor diagnóstico ou validade psicométrica estabelecida. Os escores servem para auto-observação e curiosidade; não são pontos de corte clínicos. Fonte: Psicologia_em_Pauta_Epidemia_da_Nao_Escuta_INTERATIVA.pdf, itens nas páginas 12–13 e orientações nas páginas 16–17."
+        },
+        {
+          "type": "note",
+          "text": "As duas somas e as seis orientações autorais acima preservam o exercício original. Os cruzamentos do original entre “poucas/muitas barreiras” e “repertório alto/baixo” não têm regra completa para as faixas intermediárias e não geram uma classificação automática nesta versão. As práticas a seguir podem ser consideradas por qualquer leitor, independentemente da pontuação.",
+          "review": "Restauradas as duas somas independentes 0–36 e suas três faixas autorais 0–12/13–24/25–36, com as seis mensagens originais da p. 16 e aviso de ausência de validação psicométrica. Não automatizados cruzamentos sem regra completa; preservadas as possibilidades práticas para todos."
         },
         {
           "type": "list",
@@ -631,11 +682,6 @@
             "Se pressa, esquiva ou disputa aparecem com regularidade, considere uma mudança concreta de cada vez e observe o que acontece.",
             "Considere buscar apoio quando o impacto nas relações, no trabalho ou no bem-estar for relevante."
           ]
-        },
-        {
-          "type": "note",
-          "text": "O exercício original era educativo e exploratório, sem normas populacionais, valor diagnóstico ou validade psicométrica estabelecida. Nesta adaptação, os temas e possibilidades de prática foram preservados, e as somas, faixas e cruzamentos de resultados foram retirados.",
-          "review": "Mudança substantiva da p. 16: não publicar cortes 0–12/13–24/25–36, perfis “em construção/oscilante/consistente” ou quatro combinações de resultados. Mensagens práticas reescritas para todos os leitores, sem inferir perfil a partir de respostas. O original permanece no acervo local."
         }
       ]
     },
@@ -652,8 +698,8 @@
         },
         {
           "type": "p",
-          "text": "Sobre a atividade: as observações servem para reflexão e curiosidade. A versão web não utiliza escores nem pontos de corte e não substitui avaliação psicológica ou multiprofissional.",
-          "review": "Atualização necessária da nota original sobre escores após a adaptação sem pontuação."
+          "text": "Sobre o checklist: os escores servem para auto-observação e curiosidade. Não são pontos de corte clínicos e não substituem avaliação psicológica ou multiprofissional. Cada uma das duas partes é somada separadamente; as faixas e mensagens são orientações autorais da edição original.",
+          "review": "Restaurada a nota original sobre finalidade educativa dos escores da p. 17, coerente com as duas somas e as faixas autorais das p. 12–13/16. Não se atribui validade psicométrica ao exercício."
         },
         {
           "type": "p",
@@ -763,14 +809,14 @@
     "Migração extensa de todas as 17 páginas físicas; argumento, exemplos, distinções, práticas, 24 enunciados e perguntas finais preservados. Cabeçalhos/rodapés repetidos, duplicação da frase de Weil e recorte gráfico residual não foram convertidos em leitura duplicada.",
     "A edição apresenta Gabriel Batista nas páginas 1 e 15. Em 17/10/2026, o titular confirmou a assinatura desta adaptação HTML: Texto e curadoria de Gabriel Alves Batista.",
     "Mudanças substantivas da p. 11 estão identificadas por bloco: a ausência de retorno não define esquiva; fuga/esquiva não são julgamentos morais; manter ou retomar uma conversa depende de segurança e possibilidade.",
-    "Mudanças substantivas das p. 12–13/16: preservados os 24 enunciados educativos, retirados escala 0–3, soma, período de aferição, faixas 0–12/13–24/25–36 e cruzamentos classificatórios. Conteúdo prático da p. 16 convertido em possibilidades para todos, sem resultado individual ou dados capturados.",
-    "O PDF informa ausência de validade psicométrica e normas populacionais. Avisos não transformam as faixas originais em medida válida; esta migração não publica esses resultados nem constrói instrumento psicológico.",
+    "Restaurados os 24 enunciados educativos das p. 12–13, a escala 0–3, o período de quatro semanas e duas somas independentes 0–36. Faixas autorais 0–12/13–24/25–36 e seis mensagens da p. 16 preservadas. Não automatizar cruzamentos sem regra completa para faixas intermediárias.",
+    "O PDF informa ausência de validade psicométrica e normas populacionais. As faixas originais são apresentadas como orientações editoriais de auto-observação, sem valor diagnóstico, medida de personalidade ou validação clínica alegada.",
     "Rogers, Weil e James foram conferidos em reproduções primárias; traduções livres e localização efetivamente lida estão identificadas. Han permanece síntese autoral cotejada com a amostra oficial. Retratos do acervo continuam ilustrações editoriais, não fotografias históricas.",
     "O registro incompatível de Rastreamento/diagnóstico foi substituído nas fontes ativas pela recomendação oficial USPSTF, em conjunto com OMS/CDDR; o título original, o problema e a ação estão preservados em reviewResponses. Não há conclusão sobre causa técnica do endpoint.",
     "Estudos West/Ni e revisão Bradford foram conferidos. Respeitar contexto de amostras, associações e limites; não transformar dados em epidemia, diagnóstico ou promessa de reparação de vínculos.",
     "O recorte abaixo da imagem da p. 9 contém fragmento de tabela e texto estranho. É resíduo visual, não gráfico de estudo: não migrar nem inventar legenda/dado. Nenhuma imagem foi incorporada por esta migração de dados.",
     "Preservado diálogo com biologia/contexto e diferentes tradições, com distinções. A abordagem clínica da NEXO não deve parecer uma fusão não explicada entre Rogers, Skinner, Han, James e Weil.",
-    "Rascunho não aprovado: sem publicação, indexação, escore, diagnóstico, coleta de respostas ou transmissão de dados pessoais. A data de migração não é data de publicação ou aprovação clínica."
+    "Rascunho: a pontuação educativa não constitui aprovação clínica ou editorial, diagnóstico ou autorização de publicação/indexação. Não coletar ou transmitir externamente respostas pessoais. A data de migração não é data de publicação ou aprovação clínica."
   ],
   "seoTitle": "Escuta e atenção nas relações",
   "researchReviewedAt": "2026-10-17",
@@ -800,15 +846,15 @@
       ]
     },
     {
-      "note": "Mudanças substantivas das p. 12–13/16: preservados os 24 enunciados educativos, retirados escala 0–3, soma, período de aferição, faixas 0–12/13–24/25–36 e cruzamentos classificatórios. Conteúdo prático da p. 16 convertido em possibilidades para todos, sem resultado individual ou dados capturados.",
-      "response": "Os 24 temas foram preservados e continuam abertos a reflexão contextual. Não há base psicométrica verificada para pontos de corte ou perfis.",
-      "action": "Manter retirada de soma, escala e classificação; a adaptação pedagógica aguarda aprovação editorial.",
+      "note": "Restaurados os 24 enunciados educativos das p. 12–13, a escala 0–3, o período de quatro semanas e duas somas independentes 0–36. Faixas autorais 0–12/13–24/25–36 e seis mensagens da p. 16 preservadas. Não automatizar cruzamentos sem regra completa para faixas intermediárias.",
+      "response": "A fonte declara o caráter educativo e exploratório e a ausência de validação psicométrica. Foram restaurados itens, duas somas e faixas autorais originais com essa limitação explícita; não foram inventados cortes clínicos ou regras para cruzamentos incompletos.",
+      "action": "Preservar os 24 itens, a escala 0–3, duas somas independentes e seis mensagens autorais, com fonte e páginas. Manter separação de avaliação psicológica e não automatizar cruzamentos incompletos.",
       "status": "editorial-decision"
     },
     {
-      "note": "O PDF informa ausência de validade psicométrica e normas populacionais. Avisos não transformam as faixas originais em medida válida; esta migração não publica esses resultados nem constrói instrumento psicológico.",
-      "response": "Um aviso de ausência de validade não valida a classificação. Os prompts funcionam aqui como material educativo sem resultado individual.",
-      "action": "Não restaurar escores ou faixas; não apresentar os prompts como instrumento psicológico.",
+      "note": "O PDF informa ausência de validade psicométrica e normas populacionais. As faixas originais são apresentadas como orientações editoriais de auto-observação, sem valor diagnóstico, medida de personalidade ou validação clínica alegada.",
+      "response": "A fonte declara o caráter educativo e exploratório e a ausência de validação psicométrica. Foram restaurados itens, duas somas e faixas autorais originais com essa limitação explícita; não foram inventados cortes clínicos ou regras para cruzamentos incompletos.",
+      "action": "Preservar os 24 itens, a escala 0–3, duas somas independentes e seis mensagens autorais, com fonte e páginas. Manter separação de avaliação psicológica e não automatizar cruzamentos incompletos.",
       "status": "resolved"
     },
     {
@@ -910,7 +956,7 @@
       ]
     },
     {
-      "note": "Rascunho não aprovado: sem publicação, indexação, escore, diagnóstico, coleta de respostas ou transmissão de dados pessoais. A data de migração não é data de publicação ou aprovação clínica.",
+      "note": "Rascunho: a pontuação educativa não constitui aprovação clínica ou editorial, diagnóstico ou autorização de publicação/indexação. Não coletar ou transmitir externamente respostas pessoais. A data de migração não é data de publicação ou aprovação clínica.",
       "response": "A pesquisa científica não substitui a aprovação clínica/editorial. Não houve alteração do estado do artigo ou autorização presumida da versão final.",
       "action": "Manter draft:true e reviewed:false e datas originais; encaminhar redação e exercícios à decisão do titular.",
       "status": "editorial-decision"
@@ -1148,15 +1194,15 @@
       ]
     },
     {
-      "note": "Bloco barreiras-para-observar · 2: Todos os 12 enunciados originais preservados. Retirados período autorreferido de quatro semanas, respostas 0–3, soma, aferição e instrução de consultar faixas; convertidos em reflexão educativa sem coleta, medida ou classificação.",
-      "response": "O conteúdo educativo permanece. Não foi localizada validação para os cortes dessa atividade autoral, e nenhuma pesquisa foi usada para fingir validá-los.",
-      "action": "Manter reflexão sem somas, faixas, perfis ou respostas capturadas; aprovação pedagógica final com o titular.",
+      "note": "Os 12 enunciados originais foram preservados integralmente. Restaurados período de quatro semanas, escala 0–3 e soma independente 0–36 da p. 12, com faixas autorais da p. 16 explicitamente educativas e exploratórias.",
+      "response": "A fonte declara o caráter educativo e exploratório e a ausência de validação psicométrica. Foram restaurados itens, duas somas e faixas autorais originais com essa limitação explícita; não foram inventados cortes clínicos ou regras para cruzamentos incompletos.",
+      "action": "Preservar os 24 itens, a escala 0–3, duas somas independentes e seis mensagens autorais, com fonte e páginas. Manter separação de avaliação psicológica e não automatizar cruzamentos incompletos.",
       "status": "editorial-decision"
     },
     {
-      "note": "Bloco repertorios-para-observar · 2: Os 12 enunciados originais (13–24) foram preservados integralmente. Retirados escala/soma/anexo classificatório. Observar tom/ritmo/expressão não permite inferir empatia, intenção ou diagnóstico.",
-      "response": "O conteúdo educativo permanece. Não foi localizada validação para os cortes dessa atividade autoral, e nenhuma pesquisa foi usada para fingir validá-los.",
-      "action": "Manter reflexão sem somas, faixas, perfis ou respostas capturadas; aprovação pedagógica final com o titular.",
+      "note": "Os 12 enunciados originais (13–24) foram preservados integralmente. Restauradas escala 0–3 e soma independente 0–36 da p. 13, com faixas autorais da p. 16. Observar tom/ritmo/expressão não permite inferir empatia, intenção ou diagnóstico.",
+      "response": "A fonte declara o caráter educativo e exploratório e a ausência de validação psicométrica. Foram restaurados itens, duas somas e faixas autorais originais com essa limitação explícita; não foram inventados cortes clínicos ou regras para cruzamentos incompletos.",
+      "action": "Preservar os 24 itens, a escala 0–3, duas somas independentes e seis mensagens autorais, com fonte e páginas. Manter separação de avaliação psicológica e não automatizar cruzamentos incompletos.",
       "status": "editorial-decision"
     },
     {
@@ -1220,15 +1266,15 @@
       ]
     },
     {
-      "note": "Bloco possibilidades-sem-classificacao · 3: Mudança substantiva da p. 16: não publicar cortes 0–12/13–24/25–36, perfis “em construção/oscilante/consistente” ou quatro combinações de resultados. Mensagens práticas reescritas para todos os leitores, sem inferir perfil a partir de respostas. O original permanece no acervo local.",
-      "response": "O conteúdo educativo permanece. Não foi localizada validação para os cortes dessa atividade autoral, e nenhuma pesquisa foi usada para fingir validá-los.",
-      "action": "Manter reflexão sem somas, faixas, perfis ou respostas capturadas; aprovação pedagógica final com o titular.",
+      "note": "Anexo p. 16: restauradas duas somas independentes e faixas autorais com suas seis mensagens. Cruzamentos sem regra para faixas intermediárias não são calculados. Práticas existentes preservadas para todos.",
+      "response": "A fonte declara o caráter educativo e exploratório e a ausência de validação psicométrica. Foram restaurados itens, duas somas e faixas autorais originais com essa limitação explícita; não foram inventados cortes clínicos ou regras para cruzamentos incompletos.",
+      "action": "Preservar os 24 itens, a escala 0–3, duas somas independentes e seis mensagens autorais, com fonte e páginas. Manter separação de avaliação psicológica e não automatizar cruzamentos incompletos.",
       "status": "editorial-decision"
     },
     {
-      "note": "Bloco referencias-e-transparencia · 2: Atualização necessária da nota original sobre escores após a adaptação sem pontuação.",
-      "response": "O conteúdo educativo permanece. Não foi localizada validação para os cortes dessa atividade autoral, e nenhuma pesquisa foi usada para fingir validá-los.",
-      "action": "Manter reflexão sem somas, faixas, perfis ou respostas capturadas; aprovação pedagógica final com o titular.",
+      "note": "Restaurada a nota original sobre finalidade educativa dos escores da p. 17, coerente com as duas somas e as faixas autorais das p. 12–13/16. Não se atribui validade psicométrica ao exercício.",
+      "response": "A fonte declara o caráter educativo e exploratório e a ausência de validação psicométrica. Foram restaurados itens, duas somas e faixas autorais originais com essa limitação explícita; não foram inventados cortes clínicos ou regras para cruzamentos incompletos.",
+      "action": "Preservar os 24 itens, a escala 0–3, duas somas independentes e seis mensagens autorais, com fonte e páginas. Manter separação de avaliação psicológica e não automatizar cruzamentos incompletos.",
       "status": "editorial-decision"
     },
     {

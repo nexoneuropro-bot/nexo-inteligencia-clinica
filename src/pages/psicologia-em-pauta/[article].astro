@@ -1,11 +1,12 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import ExperienceStage from '../../components/ExperienceStage.astro';
-import EditorialArtwork from '../../components/EditorialArtwork.astro';
+import EditorialPhoto from '../../components/EditorialPhoto.astro';
 import EditorialReaderControls from '../../components/EditorialReaderControls.astro';
 import EditorialMagazine from '../../components/EditorialMagazine.astro';
 import EditorialQuiz from '../../components/EditorialQuiz.astro';
 import {editorialQuizForArticle} from '../../data/editorial-quizzes';
+import {editorialCoverPhoto,editorialChapterPhotos} from '../../data/editorial-photography';
 import {visibleEditorialArticles,articleUrl,articleReadingMinutes,editorialPreview,editorialByline,editorialBlockLabel,type EditorialArticle} from '../../data/editorial';
 import '../../styles/experience.css';
 import '../../styles/approach.css';
@@ -17,24 +18,25 @@ const otherArticles=visibleEditorialArticles.filter(other=>other.slug!==article.
 const originalUrl=`/psicologia-em-pauta/originais/${article.slug}.pdf`;
 const editionUrl=`/psicologia-em-pauta/edicoes/${article.slug}.pdf`;
 const hasQuiz=Boolean(editorialQuizForArticle(article.slug));
-const topics:Record<string,string>={relations:'Diagrama conceitual de seis vínculos conectados em órbitas.',neuro:'Comunicar também é encontrar contexto.',profession:'Conhecimento que encontra pessoas.',behavior:'Diagrama conceitual com A de antecedente, R de resposta e C de consequência, conectados.',listening:'Diagrama de ondas como metáfora da escuta e da atenção.',care:'Diagrama de conexões em torno do cuidado e das condições para quem cuida.'};
+const coverPhoto=editorialCoverPhoto(article.slug);
 const byline=editorialByline(article);
 ---
 <Layout title={article.title} description={article.description} article={article} image={`/psicologia-em-pauta/sociais/${article.slug}.png`} experience>
  <div class={`spatial-page ed-article-page ed-theme-${article.theme}`} data-reading-scene="ideas" data-editorial-article={article.slug} data-draft={String(article.draft)} data-reviewed={String(article.reviewed)}>
   <header class="ex-journey-entry ed-article-hero" id="experience-entry" data-ed-depth>
    <ExperienceStage entry="personal"/>
-   <div class="ed-hero-copy"><a href="/psicologia-em-pauta/" class="ed-back">← Psicologia em Pauta</a><span class="ed-eyebrow">{article.category}</span><h1>{article.title}</h1><p class="ed-deck">{article.subtitle}</p><div class="ed-byline"><span>{byline}</span><span>{articleReadingMinutes(article)} min de leitura · {article.sections.length} capítulos</span></div><a href="#conteudo-da-jornada" class="ex-primary-link">Começar a leitura <span aria-hidden="true">↓</span></a></div>
-   <figure class="ed-hero-art">{editorialPreview&&['neuro','profession'].includes(article.theme)?<><img src={`/psicologia-em-pauta/imagens/${article.slug}.jpg`} width={article.theme==='neuro'?524:445} height={article.theme==='neuro'?594:930} alt="Imagem ilustrativa da edição de origem: pessoas em uma conversa."/><figcaption>Imagem ilustrativa do acervo editorial.</figcaption></>:<EditorialArtwork theme={article.theme} label={topics[article.theme]}/> }</figure>
+   <div class="ed-hero-copy"><a href="/psicologia-em-pauta/" class="ed-back">← Psicologia em Pauta</a><span class="ed-eyebrow">{article.category}</span><h1>{article.title}</h1><p class="ed-deck">{article.subtitle}</p><div class="ed-byline"><span>{byline}</span><span>{articleReadingMinutes(article)} min de leitura · {article.sections.length} capítulos</span></div><a href="#conteudo-da-jornada" class="ex-primary-link">Começar a leitura <span aria-hidden="true">↓</span></a>{hasQuiz&&<a href="#exercicio-interativo" class="ed-quiz-shortcut ed-hero-quiz">Responder ao quiz com pontuação ↗</a>}</div>
+   <div class="ed-hero-art">{coverPhoto&&<EditorialPhoto photo={coverPhoto} class="ed-photo-hero" eager/>}</div>
    <div class="ex-controls"><button id="experience-pause" aria-pressed="false">Pausar movimento</button></div>
   </header>
   <div class="spatial-content ed-reading-shell" id="conteudo-da-jornada" data-ed-surface="ivory">
    <EditorialReaderControls slug={article.slug} pdfUrl={editionUrl}><span slot="chapters">{String(article.sections.length).padStart(2,'0')}</span></EditorialReaderControls>
    <EditorialMagazine article={article}/>
-   <div class="ed-reading-grid" id="leitura-continua"><aside class="ed-article-index" aria-label="Capítulos desta leitura"><span class="ed-eyebrow">NESTA EDIÇÃO</span><nav>{article.sections.map((section,index)=><a href={`#${section.id}`} data-ed-chapter-link={section.id}><span>{String(index+1).padStart(2,'0')}</span>{section.title}</a>)}<a href="#referencias">Fontes e referências</a>{hasQuiz&&<a href="#exercicio-interativo">Responder ao quiz</a>}{editorialPreview&&<a href="#baixar-edicao">Edição em PDF</a>}</nav></aside>
+   <div class="ed-reading-grid" id="leitura-continua"><aside class="ed-article-index" aria-label="Capítulos desta leitura"><span class="ed-eyebrow">NESTA EDIÇÃO</span><nav>{article.sections.map((section,index)=><a href={`#${section.id}`} data-ed-chapter-link={section.id}><span>{String(index+1).padStart(2,'0')}</span>{section.title}</a>)}<a href="#referencias">Fontes e referências</a>{hasQuiz&&<a class="ed-quiz-shortcut" href="#exercicio-interativo">Responder ao quiz com pontuação ↗</a>}{editorialPreview&&<a href="#baixar-edicao">Edição em PDF</a>}</nav></aside>
     <article class="ed-longform" aria-label={article.title}>
      {article.sections.map((section,index)=><section id={section.id} data-ed-chapter={String(index+1)}>
       <span class="ed-chapter-number">CAPÍTULO {String(index+1).padStart(2,'0')}</span><h2>{section.title}</h2>
+      {editorialChapterPhotos(article.slug,section.id).map(photo=><EditorialPhoto photo={photo} class="ed-photo-chapter"/>)}
       {section.blocks.map(block=><div class:list={['ed-content-block',`ed-block-${block.type}`]}>
        {editorialBlockLabel(block)&&<span class="ed-block-kind">{editorialBlockLabel(block)}</span>}
        {block.type==='p'&&<p>{block.text}</p>}

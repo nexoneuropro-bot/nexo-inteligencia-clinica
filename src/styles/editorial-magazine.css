@@ -78,6 +78,22 @@
 [data-ed-surface="night"] .ed-magazine .ed-mag-reflection .ed-mag-kicker{color:#e3b68e}
 [data-ed-surface="night"] .ed-magazine .ed-mag-note{background:#173e4c}
 [data-ed-surface="night"] .ed-magazine .ed-mag-cover figcaption{background:#0a2531e6;color:#e5e8df}
+
+.ed-magazine .ed-photograph{margin:0 0 27px;height:auto;overflow:visible;background:transparent;mask-image:none}
+.ed-magazine .ed-photograph-image{overflow:hidden;background:transparent}
+.ed-magazine .ed-photograph-image img{display:block;width:100%;height:auto;object-position:var(--ed-photo-position,50% 50%);filter:saturate(.82);mask-image:linear-gradient(#000 0%,#000 88%,transparent 100%)}
+.ed-magazine .ed-photograph figcaption{position:static;margin-top:9px;padding:0;background:transparent;color:var(--ed-secondary,#596269);font:400 10px/1.65 var(--sans)}
+.ed-magazine .ed-photograph figcaption span{display:block;margin-top:2px;font-size:9px}
+.ed-magazine .ed-photo-mag-cover .ed-photograph-image{height:280px}
+.ed-magazine .ed-photo-mag-cover .ed-photograph-image img{height:100%;object-fit:contain}
+.ed-magazine .ed-photo-mag-cover.ed-photograph-author .ed-photograph-image{height:310px}
+.ed-magazine .ed-photo-mag-contents .ed-photograph-image{height:160px}
+.ed-magazine .ed-photo-mag-contents .ed-photograph-image img{height:100%;object-fit:contain}
+.ed-magazine .ed-photo-mag-chapter .ed-photograph-image{max-height:290px}
+.ed-magazine .ed-photo-mag-chapter .ed-photograph-image img{max-height:290px;object-fit:contain}
+.ed-mag-controls .ed-mag-quiz-shortcut{color:var(--mag-paper);background:var(--mag-blue);border-color:var(--mag-blue);font-weight:600}
+.ed-mag-controls .ed-mag-quiz-shortcut:hover{background:#174a69}
+@media(max-width:560px){.ed-magazine .ed-photo-mag-cover .ed-photograph-image{height:230px}.ed-magazine .ed-photo-mag-cover.ed-photograph-author .ed-photograph-image{height:260px}.ed-magazine .ed-photo-mag-contents .ed-photograph-image{height:140px}.ed-magazine .ed-photo-mag-chapter .ed-photograph-image,.ed-magazine .ed-photo-mag-chapter .ed-photograph-image img{max-height:230px}.ed-mag-controls .ed-mag-quiz-shortcut{order:4;flex-basis:100%;font-size:12px}}
 [data-ed-surface="night"] .ed-magazine :is(.ed-mag-controls button,.ed-mag-bottom button):hover:not(:disabled){background:#e5e8df;color:#082440}
 [data-ed-surface="night"] .ed-magazine :is(.ed-mag-controls,.ed-mag-running-head,.ed-mag-folio,.ed-mag-contents-page button,.ed-mag-drawer button){border-color:#49626a}
 @media(prefers-reduced-motion:reduce){.ed-magazine[data-mag-turn] .ed-mag-page:not([hidden]){animation:none}.ed-mag-book{transform:none}.ed-magazine *{scroll-behavior:auto!important}}

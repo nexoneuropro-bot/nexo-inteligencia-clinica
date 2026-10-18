@@ -30,7 +30,7 @@ from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfgen.canvas import Canvas
 from reportlab.platypus import (
     BaseDocTemplate, CondPageBreak, Flowable, Frame, LongTable, PageBreak,
-    PageTemplate, Paragraph, Spacer, TableStyle,
+    PageTemplate, Paragraph, Spacer, TableStyle, Image, KeepTogether,
 )
 from reportlab.platypus.tableofcontents import TableOfContents
 
@@ -38,6 +38,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / 'src/data/editorial'
 DEST = ROOT / 'src/assets/editorial-pdfs'
 MANIFEST = ROOT / 'src/data/editorial-pdf-manifest.json'
+PHOTOGRAPHY_FILE = ROOT / 'src/data/editorial-photography.json'
 SITE = 'https://nexo-previa-20261014.pages.dev'
 ORDER = ['relacoes-reciprocidade', 'neurodivergencia-comunicacao',
          'o-que-faz-um-psicologo', 'analise-do-comportamento',
@@ -51,6 +52,23 @@ W, H = A4
 LEFT, RIGHT, TOP, BOTTOM = 58, 58, 70, 57
 TEXT_W = W - LEFT - RIGHT
 FONT_NAMES = {}
+PHOTOGRAPHY = {}
+
+
+def edition_photo(slug, asset_id=None):
+    if asset_id is None:
+        asset_id = PHOTOGRAPHY.get('editions', {}).get(slug, {}).get('cover')
+    return PHOTOGRAPHY.get('assets', {}).get(asset_id)
+
+
+def photo_caption(photo):
+    return ' '.join(filter(None, [photo.get('caption'), photo.get('credit')]))
+
+
+def chapter_photos(slug, section_id):
+    entries = PHOTOGRAPHY.get('editions', {}).get(slug, {}).get('chapters', [])
+    return [edition_photo(slug, entry['assetId']) for entry in entries
+            if entry['sectionId'] == section_id]
 
 
 def sha(path: Path) -> str:
@@ -180,20 +198,26 @@ class Cover(Flowable):
         _, h = byline.wrap(TEXT_W, 80)
         byline.drawOn(c, LEFT, y - h)
         y -= h + 30
-        # Existing authorized editorial photos only; other covers are typographic.
-        photo = ROOT / 'src/assets/editorial-images' / f"{self.article['slug']}.jpg"
-        if photo.is_file() and y > 205:
+        # Use the same authored photography map as the HTML edition.
+        photo_meta = edition_photo(self.article['slug'])
+        photo = ROOT / photo_meta['file'] if photo_meta else None
+        if photo and photo.is_file() and y > 205:
             c.saveState()
-            ph = min(218, y - 127)
+            ph = min(218, y - 145)
             path = c.beginPath()
             path.rect(LEFT, y - ph, TEXT_W, ph)
             c.clipPath(path, stroke=0)
             iw, ih = ImageReader(str(photo)).getSize()
-            scale = max(TEXT_W / iw, ph / ih)
+            scale = (min if photo_meta.get('kind') in ('author', 'documentary') else max)(TEXT_W / iw, ph / ih)
             dw, dh = iw * scale, ih * scale
-            c.drawImage(str(photo), LEFT + (TEXT_W - dw) / 2,
-                        y - ph + (ph - dh) / 2, width=dw, height=dh, mask='auto')
+            values = re.findall(r'([\d.]+)%', photo_meta.get('objectPosition', '50% 50%'))
+            px, py = ([float(v) / 100 for v in values[:2]] if len(values) >= 2 else [.5, .5])
+            c.drawImage(str(photo), LEFT + (TEXT_W - dw) * px,
+                        y - ph + (ph - dh) * (1 - py), width=dw, height=dh, mask='auto')
             c.restoreState()
+            caption = para(photo_caption(photo_meta), styles()['caption'])
+            _, caption_height = caption.wrap(TEXT_W, 50)
+            caption.drawOn(c, LEFT, y - ph - caption_height - 6)
         elif y > 235:
             teaser_top = min(302, y - 18)
             c.setFillColor(SAND)
@@ -383,8 +407,8 @@ def make_pdf(article, number, path):
     story.extend([toc, Spacer(1, 22)])
     article_link = f"{SITE}/psicologia-em-pauta/{article['slug']}/"
     story.append(Paragraph(f'<link href="{article_link}" color="#082440"><u>Continuar a leitura no navegador</u></link>', st['note']))
-    if article['slug'] == 'relacoes-reciprocidade':
-        story.append(Paragraph(f'<link href="{article_link}#exercicio-interativo" color="#082440"><u>Experimentar o exercício educativo interativo</u></link>', st['note']))
+    if article['slug'] in ('relacoes-reciprocidade', 'escuta-atencao-e-relacoes'):
+        story.append(Paragraph(f'<link href="{article_link}?leitura=continua#exercicio-interativo" color="#082440"><u>Responder ao quiz e calcular a pontuação orientativa</u></link>', st['note']))
     story.append(para('A leitura e os exercícios têm finalidade educativa. Exemplos e perguntas ajudam a observar contextos e não substituem avaliação individual.', st['caption']))
     story.append(PageBreak())
     for number, section in enumerate(article['sections'], 1):
@@ -392,6 +416,12 @@ def make_pdf(article, number, path):
         title = para(section['title'], st['section'])
         title._toc_key = section['id']
         story.append(title)
+        for photo in chapter_photos(article['slug'], section['id']):
+            photo_path = ROOT / photo['file']
+            iw, ih = ImageReader(str(photo_path)).getSize()
+            scale = min(TEXT_W / iw, 270 / ih)
+            figure = Image(str(photo_path), width=iw * scale, height=ih * scale, hAlign='CENTER')
+            story.append(KeepTogether([figure, Spacer(1, 7), para(photo_caption(photo), st['caption']), Spacer(1, 9)]))
         add_blocks(story, section['blocks'], st)
         if number < len(article['sections']):
             # Short chapters share a page; long chapters get breathing room.
@@ -415,12 +445,25 @@ def make_pdf(article, number, path):
 
 
 def main():
+    global PHOTOGRAPHY
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--only', choices=ORDER)
     parser.add_argument('--check', action='store_true')
     args = parser.parse_args()
+    PHOTOGRAPHY = json.loads(PHOTOGRAPHY_FILE.read_text(encoding='utf-8-sig'))
+    photo_hashes = {}
+    for photo in PHOTOGRAPHY['assets'].values():
+        if not (ROOT / photo['file']).is_file():
+            raise SystemExit(f"Missing authorized photography asset: {photo['file']}")
+        if not (ROOT / photo['file']).read_bytes().startswith(b'\xff\xd8'):
+            raise SystemExit(f"Photography asset is not a JPEG: {photo['file']}")
+        photo_hashes[photo['file']] = sha(ROOT / photo['file'])
     if args.check:
         manifest = json.loads(MANIFEST.read_text(encoding='utf-8'))
+        if manifest.get('photographySha256') != sha(PHOTOGRAPHY_FILE):
+            raise SystemExit('Outdated photography in editorial PDFs')
+        if manifest.get('photographyAssets') != photo_hashes:
+            raise SystemExit('Photography bytes differ from the generated PDF record')
         for item in manifest['editions']:
             src = ROOT / item['source']
             pdf = ROOT / item['file']
@@ -442,6 +485,8 @@ def main():
         article = json.loads(source.read_text(encoding='utf-8-sig'))
         out = DEST / f'{slug}.pdf'
         pages, chars = make_pdf(article, number, out)
+        if any(sha(ROOT / file) != digest for file, digest in photo_hashes.items()):
+            raise SystemExit('PDF generation changed a source photography asset')
         records.append({'slug': slug, 'source': source.relative_to(ROOT).as_posix(),
                         'sourceSha256': sha(source), 'file': out.relative_to(ROOT).as_posix(),
                         'pdfSha256': sha(out), 'pages': pages, 'selectableCharacters': chars,
@@ -454,7 +499,9 @@ def main():
                     'status': 'preview', 'clinicalApproval': False,
                     'paper': 'A4', 'palette': ['#F3EFE6', '#082440', '#A16850', '#DCCBBC', '#292D32'],
                     'embeddedFonts': FONT_NAMES,
-                    'sourcePolicy': 'Same article JSON as HTML; original PDFs retained separately. No internal audit notes rendered.',
+                    'photographySha256': sha(PHOTOGRAPHY_FILE),
+                    'photographyAssets': photo_hashes,
+                    'sourcePolicy': 'Same article JSON and photography map as HTML; original PDFs retained separately. No internal audit notes rendered.',
                     'editions': records}
         MANIFEST.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
 

@@ -12,18 +12,18 @@ const regions = ['AC','AL','AP','AM','BA','CE','DF','ES','GO','MA','MT','MS','MG
   <div class="ed-quiz-topline"><span>PAUSA PARA REFLETIR</span><button type="button" class="ed-quiz-return" data-quiz-return>Voltar à revista ↗</button></div>
   <h2 id="ed-quiz-title" tabindex="-1">{quiz.title}</h2>
   <p class="ed-quiz-intro">{quiz.introduction}</p>
-  <p class="ed-quiz-scope">Exercício autoral educativo. Não é um instrumento psicológico validado, teste de personalidade ou diagnóstico. Sem pontuação clínica.</p>
+  <p class="ed-quiz-scope">{quiz.scoring?.disclaimer ?? 'Exercício autoral educativo. Não é um instrumento psicológico validado, teste de personalidade ou diagnóstico. Sem pontuação clínica.'}</p>
   <p class="ed-quiz-local" data-quiz-storage>Suas escolhas ficam neste navegador durante a sessão e não são enviadas à NEXO. Você pode apagá-las a qualquer momento.</p>
   <noscript><p>Ative JavaScript para responder neste navegador. Você também pode usar as perguntas da edição como reflexão, sem registrar respostas.</p></noscript>
   <div data-quiz-interactive hidden>
-    <fieldset class="ed-quiz-context"><legend>Como deseja usar esta reflexão?</legend><label><input type="radio" name="quiz-context" value="personal" data-quiz-context checked /> Para mim</label><label><input type="radio" name="quiz-context" value="company" data-quiz-context /> Para pensar o contexto de uma empresa</label><p>Esta escolha adapta a orientação final. Não identifica uma empresa nem avalia pessoas para contratação ou trabalho.</p></fieldset>
+    <fieldset class="ed-quiz-context"><legend>Como deseja usar esta reflexão?</legend><label><input type="radio" name="quiz-context" value="personal" data-quiz-context checked /> Para mim</label><label><input type="radio" name="quiz-context" value="company" data-quiz-context /> Para pensar o contexto de uma empresa</label><p>Esta escolha registra o contexto da reflexão. As perguntas, somas e faixas autorais são as mesmas. Não identifica uma empresa nem avalia pessoas para contratação ou trabalho.</p></fieldset>
     <form data-quiz-form novalidate>
       <div class="ed-quiz-progress"><label for="ed-quiz-progress">Seu percurso <span data-quiz-progress-label></span></label><progress id="ed-quiz-progress" max={quiz.questions.length} value="0"></progress></div>
       {quiz.questions.map((question, index) => <fieldset data-quiz-step data-question-id={question.id} hidden={index !== 0}>
         <legend><span class="ed-quiz-question-number">{String(index + 1).padStart(2, '0')} / {String(quiz.questions.length).padStart(2, '0')}</span>{question.prompt}</legend>
         <p id={`quiz-help-${question.id}`} class="ed-quiz-help">{question.help}{question.kind === 'multiple' ? ` Selecione de ${question.minimum ?? 1} a ${question.maximum ?? question.options.length} opções.` : ' Escolha uma opção.'}</p>
         <div class:list={['ed-quiz-options', { 'is-frequency': question.kind === 'frequency' }]}>
-          {question.options.map(option => <label class="ed-quiz-option"><input type={question.kind === 'multiple' ? 'checkbox' : 'radio'} name={`quiz-${question.id}`} value={option.id} aria-describedby={`quiz-help-${question.id}`} /><span>{option.label}</span></label>)}
+          {question.options.map(option => <label class="ed-quiz-option"><input type={question.kind === 'multiple' ? 'checkbox' : 'radio'} name={`quiz-${question.id}`} value={option.id} aria-describedby={`quiz-help-${question.id}`} /><span>{option.label}{quiz.scoring && <small class="ed-quiz-option-points">{option.points} {option.points === 1 ? 'ponto' : 'pontos'}</small>}</span></label>)}
         </div>
       </fieldset>)}
       <p class="ed-quiz-error" data-quiz-error role="alert" hidden></p>
@@ -31,7 +31,7 @@ const regions = ['AC','AL','AP','AM','BA','CE','DF','ES','GO','MA','MT','MS','MG
     </form>
     <section data-quiz-result class="ed-quiz-result" aria-labelledby="ed-quiz-result-title" hidden>
       <p class="ed-quiz-kicker">SUA DEVOLUTIVA EDUCATIVA</p><h3 id="ed-quiz-result-title" tabindex="-1">{quiz.resultTitle}</h3>
-      <p data-quiz-result-introduction>{quiz.resultIntroduction}</p><div data-quiz-themes></div><p data-quiz-score hidden></p><p>{quiz.resultClosing}</p>
+      <p data-quiz-result-introduction>{quiz.resultIntroduction}</p><div data-quiz-themes></div><div data-quiz-score hidden></div><p>{quiz.resultClosing}</p>
       <div class="ed-quiz-result-actions"><button type="button" data-quiz-copy class="ed-quiz-button">Copiar devolutiva</button><button type="button" data-quiz-save class="ed-quiz-button">Salvar em texto (.txt)</button><button type="button" data-quiz-edit class="ed-quiz-button">Rever escolhas</button></div>
       <section class="ed-quiz-sharing" data-quiz-sharing aria-labelledby="ed-quiz-sharing-title">
         <h4 id="ed-quiz-sharing-title">Gostaria de compartilhar sua reflexão conosco?</h4>
@@ -58,7 +58,13 @@ const regions = ['AC','AL','AP','AM','BA','CE','DF','ES','GO','MA','MT','MS','MG
       </section>
     </section>
     <div class="ed-quiz-footer"><p>{quiz.author}</p><button type="button" class="ed-quiz-clear" data-quiz-clear>Apagar escolhas e recomeçar</button></div>
-    <details class="ed-quiz-method"><summary>Como a devolutiva é produzida?</summary><p>Cada opção corresponde a um comentário e uma pergunta de reflexão previamente escritos. O resultado reúne os comentários dos temas escolhidos, sem somar pontos, atribuir perfil, fazer ranking ou definir cortes clínicos. Você pode mudar as escolhas e comparar as possibilidades. Este exercício autoral não foi validado como instrumento psicológico.</p><ul>{quiz.references.map(reference => <li><a href={reference.url}>{reference.label}</a></li>)}</ul></details>
+    <details class="ed-quiz-method"><summary>Como a devolutiva é produzida?</summary>
+      {quiz.scoring ? <><p>{quiz.scoring.criteria}</p><p>{quiz.scoring.disclaimer}</p>
+        {quiz.scoring.groups.map(group => <section class="ed-quiz-method-group"><h4>{group.title}</h4><p>{group.questionIds.length} itens. Soma possível: {group.min}–{group.max} pontos. Cada faixa abaixo é uma orientação do texto autoral.</p><ul>{group.bands.map(band => <li><strong>{band.min}–{band.max}: {band.title}.</strong> {band.text}</li>)}</ul></section>)}
+        {quiz.source && <p>Fonte: {quiz.source.label}, páginas {quiz.source.pages.join(', ')}. Autoria: Gabriel Alves Batista.</p>}
+      </> : <p>Cada opção corresponde a um comentário e uma pergunta de reflexão previamente escritos. O resultado reúne os comentários dos temas escolhidos. Você pode mudar as escolhas e comparar as possibilidades. Este exercício autoral não foi validado como instrumento psicológico.</p>}
+      <ul>{quiz.references.map(reference => <li><a href={reference.url}>{reference.label}</a></li>)}</ul>
+    </details>
     <p class="ed-quiz-status" data-quiz-status aria-live="polite" aria-atomic="true"></p>
   </div>
 </section>}

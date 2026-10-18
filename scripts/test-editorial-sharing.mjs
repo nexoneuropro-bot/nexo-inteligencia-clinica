@@ -6,9 +6,9 @@ import { handleEditorialShare, handleSharingStatus, PRIVACY_VERSION, RETENTION_S
 const ORIGIN = 'https://nexo-previa-20261014.pages.dev';
 const NOW = Date.parse('2026-10-18T12:00:00.000Z');
 const quiz = editorialQuizzes[0];
-const basePayload = () => ({
-  editionSlug: quiz.articleSlug, quizId: quiz.id, quizVersion: quiz.version, context: 'personal', adultConfirmed: true,
-  result: { fragments: quiz.questions.map(question => ({ themeId: question.id, observation: question.options[0].feedback, nextStep: question.options[0].nextStep })) },
+const basePayload = (definition = quiz) => ({
+  editionSlug: definition.articleSlug, quizId: definition.id, quizVersion: definition.version, context: 'personal', adultConfirmed: true,
+  result: { groups: definition.scoring.groups.map(group => ({ groupId: group.id, total: group.min })) },
   consent: { accepted: true, version: PRIVACY_VERSION, id: '4c942992-f45b-438c-8a5e-a19dd5071afd', givenAt: new Date(NOW).toISOString() },
 });
 class MemoryKV {
@@ -59,11 +59,44 @@ test('menores, idade não declarada e consentimento inválido não enviam', asyn
 });
 test('campos extras e texto livre ou adulterado são rejeitados', () => {
   for (const field of ['answers','ip','userAgent','email','phone','history','name','companyName']) assert.equal(validateSharePayload({ ...basePayload(), [field]: 'hidden' }, NOW).valid, false);
-  const bad = basePayload(); bad.result.fragments[0].observation = 'Resultado inventado';
+  const bad = basePayload(); bad.result.groups[0].band = 'Resultado inventado';
   assert.equal(validateSharePayload(bad, NOW).valid, false);
-  const extra = basePayload(); extra.result.fragments[0].answer = 'raw answer';
+  const extra = basePayload(); extra.result.groups[0].answer = 'raw answer';
   assert.equal(validateSharePayload(extra, NOW).valid, false);
   assert.equal(validateSharePayload({ ...basePayload(), pseudonym: '<script>alert(1)</script>' }, NOW).valid, false);
+});
+test('servidor deriva texto e faixa da soma e rejeita grupos incompletos, duplicados e totais arbitrários', () => {
+  for (const definition of editorialQuizzes) for (let index = 0; index < definition.scoring.groups.length; index++) {
+    const group = definition.scoring.groups[index];
+    for (const band of group.bands) for (const total of [band.min, band.max]) {
+      const payload = basePayload(definition); payload.result.groups[index].total = total;
+      const checked = validateSharePayload(payload, NOW);
+      assert.equal(checked.valid, true); assert.deepEqual(checked.value.result.groups[index].band, band);
+    }
+    for (const total of [-1, group.max + 1, 1.5, '3', null]) {
+      const payload = basePayload(definition); payload.result.groups[index].total = total;
+      assert.equal(validateSharePayload(payload, NOW).valid, false);
+    }
+  }
+  const definition = editorialQuizzes[1];
+  for (const mutate of [
+    payload => payload.result.groups.pop(),
+    payload => { payload.result.groups[1] = { ...payload.result.groups[0] }; },
+    payload => { payload.result.groups[1].groupId = 'inventado'; },
+    payload => { payload.result.total = 72; },
+    payload => { payload.result.groups[0].calculation = [3, 3]; },
+  ]) { const payload = basePayload(definition); mutate(payload); assert.equal(validateSharePayload(payload, NOW).valid, false); }
+});
+test('ordem de grupos é canônica e trechos legados só passam para quiz sem soma', () => {
+  const payload = basePayload(editorialQuizzes[1]); payload.result.groups.reverse();
+  assert.deepEqual(validateSharePayload(payload, NOW).value.result.groups.map(group => group.id), editorialQuizzes[1].scoring.groups.map(group => group.id));
+  const legacy = { ...quiz, id: 'legacy-test', scoring: undefined, questions: [{ id: 'item', theme: 'Tema', options: [{ feedback: 'Trecho autoral.', nextStep: 'Pergunta?' }] }] };
+  editorialQuizzes.push(legacy);
+  try {
+    const item = { ...basePayload(), quizId: legacy.id, result: { fragments: [{ themeId: 'item', observation: 'Trecho autoral.', nextStep: 'Pergunta?' }] } };
+    assert.equal(validateSharePayload(item, NOW).valid, true);
+    item.result.fragments[0].observation = 'inventado'; assert.equal(validateSharePayload(item, NOW).valid, false);
+  } finally { editorialQuizzes.pop(); }
 });
 test('envio mock contém só dados aprovados e devolutiva configurada, sem respostas/IP/UA', async () => {
   const env = configured(); const calls = []; const payload = { ...basePayload(), pseudonym: 'Leitor teste', ageRange: '35–44', uf: 'BA', context: 'company' };
@@ -74,6 +107,8 @@ test('envio mock contém só dados aprovados e devolutiva configurada, sem respo
   assert.deepEqual(Object.keys(email).sort(), ['from','subject','text','to']);
   assert.deepEqual(email.to, ['nexoneuropro@gmail.com']);
   assert.match(email.text, /Leitor teste/); assert.match(email.text, /35–44/); assert.match(email.text, /Empresa/);
+  assert.match(email.text, /3\/9 pontos/); assert.match(email.text, /Utilidade em destaque/);
+  assert.match(email.text, /Totais autorreferidos/);
   assert.doesNotMatch(email.text, /192\.0\.2\.15|userAgent|raw.?answers|Authorization/);
   assert.equal(calls[0].options.headers['idempotency-key'], `editorial/${payload.consent.id}`);
   const recordWrites = env.EDITORIAL_SHARES.writes.filter(write => write.key.startsWith('share:'));

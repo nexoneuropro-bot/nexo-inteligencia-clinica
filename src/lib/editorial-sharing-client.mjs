@@ -1,3 +1,5 @@
+import { resolveQuizScoreGroups } from './editorial-quiz.mjs';
+
 /** Browser-side allowlist. The server remains the authority for every send. */
 export const EDITORIAL_PRIVACY_VERSION = '2026-10-18-v1';
 export const EDITORIAL_SHARE_RECIPIENT = 'nexoneuropro@gmail.com';
@@ -31,15 +33,24 @@ export function createSharingAttempt(input, previous = null, dependencies = {}) 
   const alias = pseudonym.trim();
   if (alias.length > 40 || (alias && !/^[\p{L}\p{M}\p{N} .'-]+$/u.test(alias))) throw new Error('Use um apelido de até 40 caracteres, com letras, números, espaços, ponto, apóstrofo ou hífen.');
   if (!quiz || reflection?.quizId !== quiz.id || reflection.version !== quiz.version ||
-    !['personal', 'company'].includes(reflection.context) || reflection.themes.length !== quiz.questions.length) throw new Error('Esta devolutiva não pode ser compartilhada nesta versão. Você pode copiá-la ou salvá-la no dispositivo.');
-  const fragments = quiz.questions.map(question => {
-    const theme = reflection.themes.find(item => item.id === question.id);
-    if (!theme || !question.options.some(option => option.feedback === theme.observation && option.nextStep === theme.nextStep)) throw new Error('Esta devolutiva não pode ser compartilhada nesta versão. Você pode copiá-la ou salvá-la no dispositivo.');
-    return { themeId: question.id, observation: theme.observation, nextStep: theme.nextStep };
-  });
+    !['personal', 'company'].includes(reflection.context)) throw new Error('Esta devolutiva não pode ser compartilhada nesta versão. Você pode copiá-la ou salvá-la no dispositivo.');
+  let result;
+  if (quiz.scoring) {
+    const groups = resolveQuizScoreGroups(quiz, (reflection.scores ?? []).map(group => ({ groupId: group.id, total: group.value })));
+    // Keep item choices and the per-question calculation entirely local.
+    result = { groups: groups.map(group => ({ groupId: group.id, total: group.value })) };
+  } else {
+    if (!Array.isArray(reflection.themes) || reflection.themes.length !== quiz.questions.length) throw new Error('Esta devolutiva não pode ser compartilhada nesta versão.');
+    const fragments = quiz.questions.map(question => {
+      const theme = reflection.themes.find(item => item.id === question.id);
+      if (!theme || !question.options.some(option => typeof option.feedback === 'string' && option.feedback === theme.observation && option.nextStep === theme.nextStep)) throw new Error('Esta devolutiva não pode ser compartilhada nesta versão. Você pode copiá-la ou salvá-la no dispositivo.');
+      return { themeId: question.id, observation: theme.observation, nextStep: theme.nextStep };
+    });
+    result = { fragments };
+  }
   const body = {
     editionSlug: quiz.articleSlug, quizId: quiz.id, quizVersion: quiz.version,
-    context: reflection.context, result: { fragments }, pseudonym: alias, ageRange, uf, adultConfirmed: true,
+    context: reflection.context, result, pseudonym: alias, ageRange, uf, adultConfirmed: true,
   };
   const fingerprint = JSON.stringify(body);
   if (previous?.fingerprint === fingerprint) return previous;

@@ -19,6 +19,7 @@ const mode=flags[0].slice(2);
 const build=path.resolve(directories[0]||'dist');
 const project=fileURLToPath(new URL('..',import.meta.url));
 const dataDirectory=path.join(project,'src','data','editorial');
+const photography=JSON.parse(fs.readFileSync(path.join(project,'src/data/editorial-photography.json'),'utf8'));
 const expected={
  'relacoes-reciprocidade':{pages:14,hash:'e143fee52b9154a8bc9a0af2546af4a54af1cd2189d4ef1124dce6dcb59246fc'},
  'neurodivergencia-comunicacao':{pages:15,hash:'d526a282fc4369753e70b302fbc2ad442e71476af5dfbe9cae7b13317e2ae4f5'},
@@ -271,20 +272,29 @@ if(mode!=='public'){
   check(fs.existsSync(socialFile),`${label}: social image not emitted`);
   if(fs.existsSync(socialFile))check(fs.readFileSync(socialFile).subarray(0,8).equals(Buffer.from([137,80,78,71,13,10,26,10])),`${label}: social image is not PNG`);
   check(noindexHeader(rules,socialUrl(label)),`${label}: social image lacks noindex header`);
-  if(['neuro','profession'].includes(article.theme)){
-   const illustration=outputFile(imageUrl(label));
-   check(html.includes(imageUrl(label))&&fs.existsSync(illustration),`${label}: approved draft illustration missing`);
+  {
+   const cover=photography.assets[photography.editions[label]?.cover];
+   const photoUrl=cover?.url||imageUrl(label);
+   const illustration=outputFile(photoUrl);
+   check(Boolean(cover)&&html.includes(photoUrl)&&fs.existsSync(illustration),`${label}: editorial cover photography missing`);
    if(fs.existsSync(illustration))check(fs.readFileSync(illustration).subarray(0,2).equals(Buffer.from([255,216])),`${label}: illustration is not JPEG`);
-   check(noindexHeader(rules,imageUrl(label)),`${label}: illustration lacks noindex header`);
+   check(noindexHeader(rules,photoUrl),`${label}: photography lacks noindex header`);
   }
   summaries.push({slug:label,chapters:article.sections.length,references:article.references.length,missingContentFragments:missingFragments,originalPdfLinked:linked(html,sourceUrl(label)),internalReviewUiAllowed:false,sourceSha256:article.source.sha256});
  }
  const expectedArtifacts=new Set(articles.flatMap(article=>[
   sourceUrl(article.slug).slice(1),socialUrl(article.slug).slice(1),
-  ...(['neuro','profession'].includes(article.theme)?[imageUrl(article.slug).slice(1)]:[]),
+  ...Object.values(photography.assets).map(photo=>photo.url.slice(1)),
  ]));
  for(const artifact of draftArtifacts)check(expectedArtifacts.has(relative(artifact)),`Unexpected editorial draft artifact: ${relative(artifact)}`);
- check(draftArtifacts.length===14,`Expected six original PDFs, six social PNGs and two JPEG illustrations; found ${draftArtifacts.length} files`);
+ check(draftArtifacts.length===12+Object.keys(photography.assets).length,`Expected six original PDFs, six social PNGs and ${Object.keys(photography.assets).length} photographs; found ${draftArtifacts.length} files`);
+ for(const [id,photo] of Object.entries(photography.assets)){
+  const emitted=outputFile(photo.url);
+  check(fs.existsSync(emitted),`${id}: photography asset missing`);
+  if(fs.existsSync(emitted))check(fs.readFileSync(emitted).subarray(0,2).equals(Buffer.from([255,216])),`${id}: photography is not JPEG`);
+  check(nonempty(photo.alt)&&nonempty(photo.credit)&&Number.isInteger(photo.source?.page),`${id}: missing photography description or provenance`);
+  check(noindexHeader(rules,photo.url),`${id}: photography asset lacks noindex header`);
+ }
 }else{
  check(htmlFiles.length===17,`Public build must retain 17 HTML files / 15 institutional routes, editorial privacy and 404; found ${htmlFiles.length}`);
  for(const slug of slugs){

@@ -86,7 +86,7 @@ function initialiseQuiz(root: HTMLElement) {
     if (generation !== availabilityGeneration) return;
     checkingSharing = false; sharingEnabled = enabled;
     availability.textContent = enabled
-      ? 'Serviço disponível. Somente após sua confirmação serão enviados a devolutiva, o contexto escolhido, os dados opcionais informados e o registro do consentimento. As respostas completas não serão enviadas.'
+      ? `Serviço disponível. Somente após sua confirmação serão enviados ${quiz.scoring ? 'os totais de cada grupo, a versão do quiz' : 'os trechos da devolutiva'}, o contexto escolhido, os dados opcionais informados e o registro do consentimento. As respostas completas e a memória por pergunta permanecem neste navegador.`
       : 'Compartilhamento indisponível: esta prévia funciona como demonstração. Esta consulta não envia sua devolutiva nem os dados dos campos. Você pode continuar lendo, copiar ou salvar sua reflexão.';
     syncSharingControls();
   };
@@ -120,8 +120,29 @@ function initialiseQuiz(root: HTMLElement) {
       section.append(heading, observation, prompt); themes.append(section);
     }
     const score = find('[data-quiz-score]');
-    score.hidden = !reflection.score;
-    if (reflection.score) score.textContent = `${reflection.score.label}: ${reflection.score.value}. ${reflection.score.explanation}`;
+    score.replaceChildren();
+    score.hidden = !reflection.scores?.length;
+    for (const group of reflection.scores ?? []) {
+      const section = document.createElement('section'); section.className = 'ed-quiz-score-group';
+      const heading = document.createElement('h4'); heading.textContent = group.title;
+      const total = document.createElement('p'); total.className = 'ed-quiz-score-total'; total.textContent = `${group.value}/${group.max} pontos`;
+      const range = document.createElement('p'); range.textContent = `Intervalo possível: ${group.min}–${group.max}. Faixa autoral: ${group.band.min}–${group.band.max}.`;
+      const band = document.createElement('p'); band.className = 'ed-quiz-score-band'; band.textContent = group.band.title;
+      const orientation = document.createElement('p'); orientation.textContent = group.band.text;
+      const memory = document.createElement('details'); memory.className = 'ed-quiz-calculation';
+      const summary = document.createElement('summary'); summary.textContent = 'Conferir a memória de cálculo';
+      const list = document.createElement('ol');
+      for (const item of group.calculation) {
+        const row = document.createElement('li'); row.textContent = `Pergunta ${item.questionNumber}: ${item.points} ${item.points === 1 ? 'ponto' : 'pontos'}.`; list.append(row);
+      }
+      const sum = document.createElement('p'); sum.textContent = `${group.calculation.map(item => item.points).join(' + ')} = ${group.value} pontos.`;
+      memory.append(summary, list, sum); section.append(heading, total, range, band, orientation, memory); score.append(section);
+    }
+    if (reflection.scores?.length && quiz.scoring) {
+      const criteria = document.createElement('p'); criteria.className = 'ed-quiz-score-criteria'; criteria.textContent = quiz.scoring.criteria;
+      const disclaimer = document.createElement('p'); disclaimer.className = 'ed-quiz-scope'; disclaimer.textContent = quiz.scoring.disclaimer;
+      score.append(criteria, disclaimer);
+    }
     completed = true;
     form.hidden = true;
     result.hidden = false;

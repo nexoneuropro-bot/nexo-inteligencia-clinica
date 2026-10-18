@@ -366,7 +366,7 @@
     },
     {
       "id": "tres-procuras",
-      "title": "Exercício das três procuras: observe sem pontuar.",
+      "title": "Exercício das 3 procuras: pontuação autoral para organizar perguntas",
       "pages": [
         11,
         12
@@ -374,17 +374,42 @@
       "blocks": [
         {
           "type": "exercise",
+          "text": "Escolha alguém e pense nas 3 últimas vezes em que essa pessoa te procurou. Responda sem tentar “provar” nada. Em cada rodada, marque 1, 2 ou 3 pontos. No final, some.",
           "items": [
-            "Quando essa pessoa procura você: quase sempre precisa de alguma coisa, alterna demandas com contato ou também procura sem precisar de algo?",
-            "Depois que a necessidade acaba: o contato desaparece, esfria ou continua? Em quais situações?",
-            "Quando você não pode ajudar: o interesse muda, depende da situação ou sua presença continua tendo valor?"
+            "Quando essa pessoa te procura… 1 ponto: Quase sempre precisa de alguma coisa. 2 pontos: Às vezes precisa; às vezes aparece só pelo contato. 3 pontos: Também te procura sem precisar de nada.",
+            "Depois que a necessidade acaba… 1 ponto: O contato praticamente desaparece. 2 pontos: Ainda existe contato, mas esfria bastante. 3 pontos: A relação continua normalmente.",
+            "Quando você não pode ajudar… 1 ponto: O interesse tende a diminuir. 2 pontos: Depende da situação. 3 pontos: Sua presença continua tendo valor."
           ],
-          "text": "Escolha alguém e recorde as três últimas vezes em que essa pessoa procurou você. Observe situações e diferenças de contexto, sem tentar provar algo sobre seu caráter.",
-          "review": "Adaptação editorial explícita: removidos números de resposta, soma 3-9, índice e faixas 3-4/5-7/8-9 das páginas 11-12. Preservadas as perguntas e possibilidades qualitativas; não oferecer resultados, ranking ou aplicação psicológica."
+          "review": "Restaurados os três enunciados, as nove alternativas e os valores 1/2/3 das páginas 11–12 da REV05. Soma simples 3–9 e faixas autorais originais, sem apresentar validação psicológica ou classificação clínica."
         },
         {
           "type": "p",
-          "text": "O exercício não mede amor, caráter ou diagnóstico. Ele pode ajudar a organizar uma pergunta: essa relação existe também quando não há demanda?"
+          "text": "Some os pontos. Seu índice vai de 3 a 9. Ele não mede amor, caráter ou diagnóstico. Serve para organizar uma pergunta: essa relação existe também quando não há demanda?"
+        },
+        {
+          "type": "table",
+          "columns": [
+            "Soma autoral",
+            "Orientação da edição original"
+          ],
+          "rows": [
+            [
+              "3–4 · Utilidade em destaque",
+              "A relação parece aparecer principalmente quando existe uma necessidade. Observe se há espaço para você além do que oferece."
+            ],
+            [
+              "5–7 · Zona de observação",
+              "Há vínculo, mas as necessidades parecem ocupar bastante espaço. Vale observar contexto, fase de vida e reciprocidade."
+            ],
+            [
+              "8–9 · Sinais de reciprocidade",
+              "O contato parece sobreviver à ausência de demanda. Isso não garante intimidade, mas sugere interesse que vai além da utilidade."
+            ]
+          ]
+        },
+        {
+          "type": "note",
+          "text": "As três faixas são orientações editoriais do exercício educativo autoral original, não pontos de corte clínicos ou medidas psicológicas validadas. As respostas são somadas sem pesos ou inversões: três escolhas de 1 a 3 pontos. Fonte: Psicologia_em_Pauta_Relacoes_Reciprocidade_REV05.pdf, páginas 11–12. Não substitui avaliação individual."
         },
         {
           "type": "list",
@@ -561,7 +586,7 @@
     "Checagem de 17/10/2026: referências jornalísticas [2]–[4] localizadas e documentadas; evidência científica explicitamente separada.",
     "Checagem de 17/10/2026: estimativas globais e por idade confirmadas no relatório OMS, Figura 2/p. 28–29; período e incerteza preservados.",
     "O estudo residencial de Lim et al. tem população e comparação específicas. Preservar n=38.495, RR=1,20, IC 95% 1,06-1,37 e o limite de generalização; não afirmar causalidade universal.",
-    "Exercício das páginas 11-12 foi adaptado para observação qualitativa. Nenhum cálculo, índice, faixa interpretativa, classificação ou escore será aplicado no site.",
+    "Exercício das páginas 11–12 restaurado conforme a REV05: três perguntas com alternativas 1/2/3, soma 3–9 e faixas autorais 3–4/5–7/8–9. Devolutiva educativa original, sem validação clínica ou psicométrica alegada.",
     "As ilustrações são mapas editoriais, não classificações validadas de relações. Não converter círculos em hierarquia moral ou teste de personalidade.",
     "Não importar o retrato do PDF automaticamente: usar ativos profissionais previamente autorizados no site quando pertinentes, e manter fotografias ilustrativas distintas de equipe ou pacientes.",
     "A página 11 original tem caixa final sobreposta às últimas alternativas; a página 12 também encobre parte da terceira faixa. A migração usa texto extraído e organização semântica, não screenshots como conteúdo.",
@@ -637,9 +662,9 @@
       ]
     },
     {
-      "note": "Nota original 7: Exercício das páginas 11-12 foi adaptado para observação qualitativa. Nenhum cálculo, índice, faixa interpretativa, classificação ou escore será aplicado no site.",
-      "response": "As perguntas são reflexão editorial, sem validação psicométrica demonstrada.",
-      "action": "Mantida atividade qualitativa, sem soma, faixa, resultado ou classificação.",
+      "note": "Exercício das páginas 11–12 restaurado conforme a REV05: três perguntas com alternativas 1/2/3, soma 3–9 e faixas autorais 3–4/5–7/8–9. Devolutiva educativa original, sem validação clínica ou psicométrica alegada.",
+      "response": "A fonte apresenta um exercício educativo autoral, não um instrumento psicológico. Sua aritmética e mensagens foram restauradas com fonte, páginas e limites explícitos; isso não demonstra validade psicométrica.",
+      "action": "Preservar as três perguntas e as nove alternativas originais, soma simples e três faixas autorais; não interpretar como diagnóstico, medida de amor ou caráter.",
       "status": "resolved"
     },
     {
@@ -745,9 +770,9 @@
       ]
     },
     {
-      "note": "Bloco tres-procuras/1 — nota original: Adaptação editorial explícita: removidos números de resposta, soma 3-9, índice e faixas 3-4/5-7/8-9 das páginas 11-12. Preservadas as perguntas e possibilidades qualitativas; não oferecer resultados, ranking ou aplicação psicológica.",
-      "response": "Não há base apresentada para interpretar a soma original como medida psicológica.",
-      "action": "Mantidas perguntas e possibilidades qualitativas; sem aplicação, escores ou resultados.",
+      "note": "Exercício das páginas 11–12 restaurado conforme a REV05: três perguntas com alternativas 1/2/3, soma 3–9 e faixas autorais 3–4/5–7/8–9. Devolutiva educativa original, sem validação clínica ou psicométrica alegada.",
+      "response": "A fonte apresenta um exercício educativo autoral, não um instrumento psicológico. Sua aritmética e mensagens foram restauradas com fonte, páginas e limites explícitos; isso não demonstra validade psicométrica.",
+      "action": "Preservar as três perguntas e as nove alternativas originais, soma simples e três faixas autorais; não interpretar como diagnóstico, medida de amor ou caráter.",
       "status": "resolved"
     },
     {

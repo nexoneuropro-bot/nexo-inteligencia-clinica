@@ -1,4 +1,5 @@
 import { editorialQuizzes } from '../../src/data/editorial-quizzes.ts';
+import { resolveQuizScoreGroups } from '../../src/lib/editorial-quiz.mjs';
 
 export const PRIVACY_VERSION = '2026-10-18-v1';
 export const RETENTION_DAYS = 90;
@@ -54,23 +55,33 @@ export function validateSharePayload(payload, now = Date.now()) {
   const consentTime = Date.parse(consent.givenAt);
   if (typeof consent.givenAt !== 'string' || !Number.isFinite(consentTime) || new Date(consentTime).toISOString() !== consent.givenAt || consentTime > now + 300000 || consentTime < now - 86400000) return { valid: false, reason: 'expired_consent' };
   const result = payload.result;
-  if (!exactKeys(result, ['fragments']) || !Array.isArray(result.fragments) || result.fragments.length !== quiz.questions.length) return { valid: false, reason: 'invalid_reflection' };
-  const seen = new Set();
-  const fragments = [];
-  for (const item of result.fragments) {
-    if (!exactKeys(item, ['themeId','observation','nextStep']) || seen.has(item.themeId)) return { valid: false, reason: 'invalid_reflection' };
-    const question = quiz.questions.find(question => question.id === item.themeId);
-    // Only authored output fragments from this exact configured quiz may leave the server.
-    const match = question?.options.find(option => option.feedback === item.observation && option.nextStep === item.nextStep);
-    if (!question || !match) return { valid: false, reason: 'invalid_reflection' };
-    seen.add(question.id);
-    fragments.push({ themeId: question.id, theme: question.theme, observation: match.feedback, nextStep: match.nextStep });
+  let canonicalResult;
+  if (quiz.scoring) {
+    if (!exactKeys(result, ['groups']) || !Array.isArray(result.groups) || result.groups.some(item => !exactKeys(item, ['groupId','total']))) return { valid: false, reason: 'invalid_reflection' };
+    try {
+      // Validate attainable reported totals; derive bands/text from the source.
+      // Without collecting answers we cannot attest how the reader answered.
+      const groups = resolveQuizScoreGroups(quiz, result.groups);
+      canonicalResult = { title: quiz.resultTitle, groups, criteria: quiz.scoring.criteria, disclaimer: quiz.scoring.disclaimer };
+    } catch { return { valid: false, reason: 'invalid_score' }; }
+  } else {
+    if (!exactKeys(result, ['fragments']) || !Array.isArray(result.fragments) || result.fragments.length !== quiz.questions.length) return { valid: false, reason: 'invalid_reflection' };
+    const seen = new Set();
+    const fragments = [];
+    for (const item of result.fragments) {
+      if (!exactKeys(item, ['themeId','observation','nextStep']) || seen.has(item.themeId)) return { valid: false, reason: 'invalid_reflection' };
+      const question = quiz.questions.find(question => question.id === item.themeId);
+      const match = question?.options.find(option => typeof option.feedback === 'string' && option.feedback === item.observation && option.nextStep === item.nextStep);
+      if (!question || !match) return { valid: false, reason: 'invalid_reflection' };
+      seen.add(question.id);
+      fragments.push({ themeId: question.id, theme: question.theme, observation: match.feedback, nextStep: match.nextStep });
+    }
+    fragments.sort((a, b) => quiz.questions.findIndex(q => q.id === a.themeId) - quiz.questions.findIndex(q => q.id === b.themeId));
+    canonicalResult = { title: quiz.resultTitle, fragments };
   }
-  // Canonical ordering prevents object ordering from changing the idempotency digest.
-  fragments.sort((a, b) => quiz.questions.findIndex(q => q.id === a.themeId) - quiz.questions.findIndex(q => q.id === b.themeId));
   return { valid: true, value: {
     editionSlug: quiz.articleSlug, quizId: quiz.id, quizVersion: quiz.version,
-    context: payload.context, result: { title: quiz.resultTitle, fragments },
+    context: payload.context, result: canonicalResult,
     pseudonym: pseudonym.trim() || 'Leitor anônimo', ageRange: payload.ageRange || 'Não informado', uf: payload.uf || 'Não informado',
     adultConfirmed: true, consent: { accepted: true, version: PRIVACY_VERSION, id: consent.id.toLowerCase(), givenAt: consent.givenAt },
   } };
@@ -109,7 +120,12 @@ export function reflectionEmailText(value, createdAt) {
     `Contexto: ${value.context === 'company' ? 'Empresa (reflexão educativa, sem avaliação de funcionários)' : 'Pessoal'}`,
     `Identificação opcional: ${value.pseudonym}`, `Faixa etária opcional: ${value.ageRange}`, `UF opcional: ${value.uf}`,
     value.result.title,
-    ...value.result.fragments.flatMap(fragment => [fragment.theme, fragment.observation, `Para pensar: ${fragment.nextStep}`]),
+    ...(value.result.fragments ?? []).flatMap(fragment => [fragment.theme, fragment.observation, `Para pensar: ${fragment.nextStep}`]),
+    ...(value.result.groups ?? []).flatMap(group => [
+      `${group.title}: ${group.value}/${group.max} pontos (intervalo possível: ${group.min}–${group.max}).`,
+      `Faixa autoral: ${group.band.min}–${group.band.max} — ${group.band.title}`, group.band.text,
+    ]),
+    ...(value.result.groups ? [value.result.criteria, value.result.disclaimer, 'Totais autorreferidos. O servidor confere os valores permitidos e aplica a faixa autoral; não recebe respostas por pergunta nem verifica a fidelidade do autorrelato.'] : []),
     `Consentimento: ${value.consent.id}`, `Versão da política: ${value.consent.version}`, `Manifestação: ${value.consent.givenAt}`,
     'Exercício autoral educativo. Não é diagnóstico, instrumento psicológico validado ou avaliação de aptidão.',
     'Pode conter inferências pessoais sensíveis. Uso restrito à finalidade consentida. Prazo máximo de retenção: 90 dias; aplicar também às caixas de e-mail e ao provedor.',

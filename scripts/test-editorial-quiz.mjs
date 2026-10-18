@@ -1,7 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { calculateQuizReflection, quizReflectionText, readQuizSession, validateQuizAnswers } from '../src/lib/editorial-quiz.mjs';
+import { calculateQuizReflection, quizReflectionText, readQuizSession, resolveQuizScoreGroups, validateQuizAnswers } from '../src/lib/editorial-quiz.mjs';
+import { editorialQuizzes } from '../src/data/editorial-quizzes.ts';
 
 const option = id => ({ id, label: `Escolha ${id}`, feedback: `Comentário ${id}.`, nextStep: `Pergunta ${id}?` });
 const quiz = {
@@ -41,20 +42,93 @@ test('devolutiva reflete cada tema sem inventar pontuação ou perfil', () => {
   assert.equal('score' in result, false);
   assert.equal('answers' in result, false);
 });
-test('pontuação só existe com chave transparente completa e explicação', () => {
-  const scored = structuredClone(quiz);
-  scored.scoring = { label: 'Soma educativa configurada', explanation: 'Soma dos valores explícitos; sem cortes clínicos.' };
-  scored.questions[0].scoreKey = { a: 1, b: 2 };
-  scored.questions[1].scoreKey = { a: 2, b: 3, c: 1 };
-  scored.questions[2].scoreKey = { nunca: 0, 'as-vezes': 1, frequente: 2 };
-  assert.equal(calculateQuizReflection(scored, complete).score.value, 5);
-  delete scored.questions[0].scoreKey.b;
-  assert.throws(() => calculateQuizReflection(scored, complete), /chave de pontuação/);
-  scored.questions[0].scoreKey.b = 2;
-  delete scored.questions[1].scoreKey.c;
-  assert.throws(() => calculateQuizReflection(scored, complete), /chave de pontuação/);
-  scored.scoring.explanation = '';
-  assert.throws(() => calculateQuizReflection(scored, complete), /regra explícita/);
+test('pontuação só existe com chave completa, grupos independentes e faixas autorais consistentes', () => {
+  const original = editorialQuizzes[0];
+  const answers = answersForTotals(original, [3]);
+  for (const change of [
+    item => { delete item.questions[0].options[0].points; },
+    item => { item.scoring.criteria = ''; },
+    item => { item.scoring.groups[0].questionIds.push(item.questions[0].id); },
+    item => { item.scoring.groups[0].questionIds.pop(); },
+    item => { item.scoring.groups[0].max = 10; },
+    item => { item.scoring.groups[0].bands[1].min = 4; },
+    item => { item.scoring.groups[0].bands[1].min = 6; },
+  ]) {
+    const altered = structuredClone(original); change(altered);
+    assert.throws(() => calculateQuizReflection(altered, answers), /pontuação autoral/);
+  }
+});
+
+function answersForTotals(definition, totals) {
+  const answers = {};
+  for (let index = 0; index < definition.scoring.groups.length; index++) {
+    const group = definition.scoring.groups[index]; let remaining = totals[index] - group.min;
+    for (const id of group.questionIds) {
+      const question = definition.questions.find(item => item.id === id);
+      const options = [...question.options].sort((a, b) => a.points - b.points);
+      const chosen = options.findLast(option => option.points - options[0].points <= remaining);
+      answers[id] = chosen.id; remaining -= chosen.points - options[0].points;
+    }
+    assert.equal(remaining, 0);
+  }
+  return answers;
+}
+
+test('originais preservam 3 itens, 24 itens e as faixas documentadas', () => {
+  assert.deepEqual(editorialQuizzes.map(item => item.questions.length), [3, 24]);
+  assert.deepEqual(editorialQuizzes.map(item => item.scoring.groups.map(group => [group.min, group.max])), [[[3,9]], [[0,36],[0,36]]]);
+  assert.deepEqual(editorialQuizzes.map(item => item.scoring.groups.map(group => group.bands.map(band => [band.min,band.max]))), [[[[3,4],[5,7],[8,9]]], [[[0,12],[13,24],[25,36]],[[0,12],[13,24],[25,36]]]]);
+});
+test('cada limite de faixa original e cada total permitido produz soma e orientação exatas', () => {
+  for (const definition of editorialQuizzes) for (let index = 0; index < definition.scoring.groups.length; index++) {
+    const group = definition.scoring.groups[index];
+    for (let total = group.min; total <= group.max; total++) {
+      const totals = definition.scoring.groups.map((item, position) => position === index ? total : item.min);
+      const reflection = calculateQuizReflection(definition, answersForTotals(definition, totals));
+      const score = reflection.scores[index];
+      assert.equal(score.value, total); assert.equal(score.max, group.max); assert.equal(score.min, group.min);
+      assert.deepEqual(score.band, group.bands.find(band => total >= band.min && total <= band.max));
+      assert.equal(score.calculation.reduce((sum, item) => sum + item.points, 0), total);
+      assert.equal(new Set(score.calculation.map(item => item.questionId)).size, group.questionIds.length);
+      assert.deepEqual(reflection.themes, []);
+    }
+  }
+});
+test('escuta mantém extremos independentes e não fabrica soma global ou cruzamento', () => {
+  const definition = editorialQuizzes[1];
+  for (const totals of [[0,36], [36,0], [0,0], [36,36]]) {
+    const reflection = calculateQuizReflection(definition, answersForTotals(definition, totals));
+    assert.deepEqual(reflection.scores.map(group => group.value), totals);
+    assert.equal('score' in reflection, false); assert.equal('total' in reflection, false);
+    assert.equal(reflection.scores.length, 2);
+  }
+});
+test('falta de qualquer item impede ambas as somas e sessão não restaura resultado incompleto', () => {
+  for (const definition of editorialQuizzes) {
+    const answers = answersForTotals(definition, definition.scoring.groups.map(group => group.min));
+    delete answers[definition.questions.at(-1).id];
+    assert.throws(() => calculateQuizReflection(definition, answers), /opção válida/);
+    const saved = readQuizSession(definition, JSON.stringify({ quizId: definition.id, version: definition.version, answers, completed: true, current: 0 }));
+    assert.equal(saved.completed, false);
+  }
+});
+test('total reportado exige todos os grupos uma única vez e domínio exato', () => {
+  const definition = editorialQuizzes[1]; const ids = definition.scoring.groups.map(group => group.id);
+  for (const totals of [[], [{groupId:ids[0],total:0}], ids.map(() => ({groupId:ids[0],total:0})), [{groupId:ids[0],total:-1},{groupId:ids[1],total:0}], [{groupId:ids[0],total:36.5},{groupId:ids[1],total:0}], [{groupId:ids[0],total:'3'},{groupId:ids[1],total:0}], [{groupId:ids[0],total:0},{groupId:'inventado',total:0}]]) assert.throws(() => resolveQuizScoreGroups(definition, totals));
+});
+test('sessão original recompõe resultado local e cópia inclui denominador, faixa e cálculo', () => {
+  for (const definition of editorialQuizzes) {
+    const answers = answersForTotals(definition, definition.scoring.groups.map(group => group.max));
+    const saved = readQuizSession(definition, JSON.stringify({ quizId: definition.id, version: definition.version, answers, completed: true, current: 1, context: 'company', pseudonym: 'ignorar' }));
+    assert.equal(saved.completed, true); assert.equal('pseudonym' in saved, false);
+    const reflection = calculateQuizReflection(definition, saved.answers, saved.context);
+    const copied = quizReflectionText(definition, reflection);
+    for (const group of reflection.scores) {
+      assert.ok(copied.includes(`${group.value}/${group.max}`)); assert.ok(copied.includes(group.band.text));
+      assert.ok(copied.includes(`= ${group.value}`));
+    }
+    assert.match(copied, /Memória de cálculo/); assert.match(copied, /Fonte autoral/);
+  }
 });
 test('sessão preserva escolhas e resultado, descartando dados de perfil e versão antiga', () => {
   const raw = JSON.stringify({ quizId: 'demo', version: 1, answers: { ...complete, email: 'ignore' }, current: 99, completed: true, pseudonym: 'ignore' });
