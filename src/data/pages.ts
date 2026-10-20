@@ -22,7 +22,7 @@ export const pages: ContentPage[] = [
     title: 'Sua história merece ser compreendida.',
     description: 'Conheça a psicoterapia em Análise do Comportamento, a avaliação neuropsicológica e a interface com Psiquiatria quando indicada na NEXO.',
     eyebrow: 'Para você',
-    intro: 'Nem tudo o que sentimos conseguimos compreender imediatamente. O primeiro passo pode ser uma conversa sobre o que está acontecendo e sobre o que você procura.',
+    intro: 'Quer fazer terapia, compreender dificuldades de atenção e memória ou ainda não sabe por onde começar? Você pode esclarecer dúvidas sobre os atendimentos antes de escolher um caminho.',
     sections: [
       {
         title: 'Começar pela sua pergunta.',
@@ -45,12 +45,12 @@ export const pages: ContentPage[] = [
       {
         title: 'Uma conversa inicial, com cuidado.',
         body: [
-          'Entre em contato para receber informações sobre modalidades, disponibilidade e organização dos atendimentos. Essas condições serão esclarecidas antes do início do serviço.',
-          'No primeiro contato comercial, basta dizer que deseja informações. Preserve documentos, diagnósticos, medicações e outros dados de saúde para um canal de acolhimento adequadamente combinado.',
+          'Você não precisa saber qual atendimento procurar nem chegar com uma explicação pronta. No primeiro contato, pode pedir informações sobre a proposta, as modalidades, a disponibilidade e as condições antes de decidir como seguir.',
+          'A conversa para obter informações não substitui atendimento ou avaliação profissional. Para começar, basta dizer sobre qual caminho tem dúvidas; preserve documentos, diagnósticos, medicações e outros dados de saúde para um canal de acolhimento adequadamente combinado.',
         ],
       },
     ],
-    ctaLabel: 'Conversar sobre atendimento',
+    ctaLabel: 'Conversar sobre minha dúvida',
     ctaType: 'personal',
   },
   {
@@ -92,7 +92,7 @@ export const pages: ContentPage[] = [
         ],
       },
     ],
-    ctaLabel: 'Saber mais sobre psicoterapia',
+    ctaLabel: 'Conversar sobre psicoterapia',
     ctaType: 'personal',
   },
   {
@@ -138,7 +138,7 @@ export const pages: ContentPage[] = [
         ],
       },
     ],
-    ctaLabel: 'Conversar sobre a avaliação',
+    ctaLabel: 'Conversar sobre avaliação neuropsicológica',
     ctaType: 'personal',
   },
   {
@@ -178,21 +178,21 @@ export const pages: ContentPage[] = [
         ],
       },
     ],
-    ctaLabel: 'Entender os caminhos de cuidado',
+    ctaLabel: 'Conversar sobre caminhos de cuidado',
     ctaType: 'personal',
   },
   {
     slug: 'para-sua-empresa',
-    title: 'Psicologia organizacional para empresas.',
-    description: 'Psicologia organizacional na NEXO: recrutamento e seleção, treinamento e desenvolvimento, avaliação psicológica e riscos psicossociais na NR-1.',
+    title: 'Consultoria em Psicologia para sua empresa.',
+    description: 'Consultoria em Psicologia Organizacional: NR-1 e riscos psicossociais, recrutamento e seleção, treinamento, lideranças e apoio às decisões da empresa.',
     eyebrow: 'Para sua empresa',
-    intro: 'Contratar, desenvolver pessoas e cuidar das condições de trabalho são decisões que se conectam. A Psicologia Organizacional e do Trabalho ajuda a investigar necessidades e construir ações a partir da realidade da sua empresa.',
+    intro: 'Precisa lidar com a NR-1, contratar ou desenvolver sua equipe? A consultoria em Psicologia Organizacional começa pela situação da sua empresa para definir o que investigar, quais ações considerar e que entregas podem apoiar suas decisões.',
     sections: [
       {
-        title: 'Compreender a empresa e o trabalho real.',
+        title: 'Você não precisa saber o nome do serviço.',
         body: [
-          'Uma dificuldade para preencher vagas, desenvolver lideranças ou organizar a cooperação pede perguntas diferentes. A conversa inicial delimita a demanda, as funções envolvidas, os recursos disponíveis e as decisões que precisam de apoio.',
-          'A proposta pode combinar investigação, intervenção e acompanhamento, conforme a finalidade e a competência técnica necessária. Trabalhadores, lideranças, RH e responsáveis por Segurança e Saúde no Trabalho participam conforme o escopo de cada projeto.',
+          'Você pode apresentar uma dificuldade para preencher vagas, conflitos na equipe, dúvidas sobre a NR-1 ou a necessidade de desenvolver lideranças. Não é preciso escolher previamente entre treinamento, avaliação ou consultoria: começamos esclarecendo a pergunta e as possibilidades de trabalho.',
+          'O contato inicial serve para informações sobre possibilidades, disponibilidade e condições. Para um projeto, delimitamos objetivos, funções envolvidas, recursos disponíveis, participação de trabalhadores, lideranças, RH e responsáveis por Segurança e Saúde no Trabalho e as entregas pertinentes. A realização depende de escopo e condições acordados antes da contratação.',
         ],
       },
       {
@@ -230,14 +230,14 @@ export const pages: ContentPage[] = [
         ],
       },
       {
-        title: 'Como definir o projeto para a sua empresa?',
+        title: 'Da primeira conversa ao projeto.',
         body: [
-          'Apresente a situação que deseja compreender, as equipes envolvidas e a decisão ou mudança pretendida. Com essas informações, conversamos sobre objetivos, métodos, participação das pessoas, cronograma e entregas possíveis.',
-          'O escopo também define acesso às informações, devolutivas e critérios de acompanhamento. Um projeto pode resultar em recomendações, registros do processo, plano de desenvolvimento ou apoio à implementação, conforme a demanda e as decisões que precisam de apoio.',
+          'Comece pelo contexto geral: o que está acontecendo, quais equipes estão envolvidas e qual decisão ou mudança pede apoio. Não envie dados pessoais de trabalhadores ou candidatos neste primeiro contato. Com essas informações, esclarecemos as possibilidades e o que precisaria ser investigado.',
+          'Antes de contratar, combinamos finalidade, métodos, participação, cronograma, condições, acesso às informações e devolutivas. Conforme o escopo, as entregas podem incluir critérios de seleção, levantamento de necessidades, plano de desenvolvimento ou recomendações para priorizar ações sobre condições de trabalho. Os critérios de acompanhamento também são definidos para apoiar a revisão das ações.',
         ],
       },
     ],
-    ctaLabel: 'Conversar sobre sua organização',
+    ctaLabel: 'Conversar sobre minha situação',
     ctaType: 'business',
   },
   {
@@ -357,7 +357,7 @@ export const pages: ContentPage[] = [
         ],
       },
     ],
-    ctaLabel: 'Planejar o desenvolvimento da equipe',
+    ctaLabel: 'Conversar sobre treinamento e desenvolvimento',
     ctaType: 'business',
   },
   {
@@ -475,7 +475,7 @@ export const pages: ContentPage[] = [
         ],
       },
     ],
-    ctaLabel: 'Apresentar a demanda da empresa',
+    ctaLabel: 'Conversar sobre riscos psicossociais',
     ctaType: 'business',
   },
   {
@@ -527,7 +527,7 @@ export const pages: ContentPage[] = [
         ],
       },
     ],
-    ctaLabel: 'Conhecer a proposta de cuidado',
+    ctaLabel: 'Conversar sobre cuidado psicológico',
     ctaType: 'personal',
   },
   {
@@ -564,7 +564,7 @@ export const pages: ContentPage[] = [
         ],
       },
     ],
-    ctaLabel: 'Solicitar informações',
+    ctaLabel: 'Conversar sobre atendimento',
     ctaType: 'personal',
   },
   {
@@ -603,23 +603,23 @@ export const pages: ContentPage[] = [
   },
   {
     slug: 'contato',
-    title: 'Toda história merece ser compreendida.',
-    description: 'Fale com a NEXO pelo WhatsApp ou telefone +55 (11) 5444-4366 para informações sobre atendimento ou soluções para organizações.',
+    title: 'Uma conversa para esclarecer o próximo passo.',
+    description: 'Fale com a NEXO sobre atendimento psicológico ou consultoria organizacional: NR-1, recrutamento, treinamento, lideranças e clima. WhatsApp e telefone.',
     eyebrow: 'Vamos conversar',
-    intro: 'Você não precisa chegar com todas as respostas. O primeiro contato pode começar com um pedido de informações.',
+    intro: 'Tem dúvidas sobre atendimento ou sobre uma situação da sua empresa? Você não precisa saber o nome do serviço. Comece pedindo informações sobre possibilidades, disponibilidade e condições.',
     sections: [
       {
         title: 'Para você.',
         body: [
-          'Receba informações sobre psicoterapia, avaliação neuropsicológica e possibilidades de integração do cuidado. Modalidades, disponibilidade e condições do serviço serão esclarecidas no contato.',
+          'Você pode perguntar como começar a psicoterapia, esclarecer a finalidade da avaliação neuropsicológica ou entender quando outro olhar profissional pode contribuir. O primeiro contato traz informações sobre os atendimentos; a indicação de um percurso depende da compreensão da demanda.',
           'O botão de contato abre o WhatsApp com uma mensagem inicial que você pode editar antes de enviar. Nenhuma mensagem é enviada automaticamente.',
         ],
       },
       {
         title: 'Para sua organização.',
         body: [
-          'Converse sobre NR-1, avaliação de fatores de risco psicossociais e condições da organização do trabalho. A proposta considera as atividades, as necessidades e a articulação com os responsáveis por Segurança e Saúde no Trabalho.',
-          'Na área Para Sua Empresa, o contato já começa com uma mensagem voltada à sua organização.',
+          'Apresente dúvidas sobre NR-1 e riscos psicossociais, recrutamento e seleção, avaliação psicológica organizacional, treinamento, desenvolvimento de lideranças, clima ou relações de trabalho. Você também pode dizer que ainda não sabe qual projeto procurar.',
+          'Comece pela situação geral e pela decisão que precisa de apoio, sem enviar dados de trabalhadores ou candidatos. Conversamos sobre possibilidades de atuação e, para um projeto, objetivos, métodos, entregas, cronograma e condições são definidos antes da contratação.',
         ],
       },
       {
@@ -627,7 +627,7 @@ export const pages: ContentPage[] = [
         body: [
           'Telefone e WhatsApp: +55 (11) 5444-4366.',
           'Use o primeiro contato para informações gerais. Evite enviar diagnósticos, receitas, exames, documentos de pacientes ou outros dados sensíveis antes de combinar o canal e as condições de acolhimento.',
-          'Para iniciar a conversa, basta dizer se procura informações sobre atendimento ou deseja apresentar uma demanda da sua organização. Disponibilidade, modalidades e próximos passos serão esclarecidos nesse contato.',
+          'Os botões abrem o WhatsApp com uma mensagem editável. O envio depende da sua ação. O primeiro contato serve para esclarecer informações e próximos passos; não equivale a atendimento, avaliação ou contratação de um projeto.',
         ],
       },
     ],

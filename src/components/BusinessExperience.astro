@@ -1,23 +1,27 @@
 ---
 import ExperienceStage from './ExperienceStage.astro';
 import BusinessServices from './BusinessServices.astro';
+import DecisionGuide from './DecisionGuide.astro';
+import ConsultancyOverview from './ConsultancyOverview.astro';
+import {whatsapp} from '../data/reflections';
 import {workFactors,workSteps,workSources} from '../data/work-contexts';
 import '../styles/experience.css';
 import '../styles/business-experience.css';
 interface Props {title:string;intro:string;detailed?:boolean}
 const {title,intro,detailed=false}=Astro.props;
 ---
-<div class="business-experience" data-business-experience>
+<div class:list={['business-experience',{'business-consultancy':!detailed}]} data-business-experience>
   <ExperienceStage entry="business"/>
   <section class="work-hero" aria-labelledby="work-title">
     <div class="work-intro">
       <a class="work-back" href="/#experience-paths">← Voltar às conexões</a>
       <span class="work-eyebrow">{detailed?'PARA SUA EMPRESA · NR-1 E PREVENÇÃO':'PARA SUA EMPRESA · PESSOAS E TRABALHO'}</span>
       <h1 id="work-title">{title}</h1>
-      <p class="work-editorial">{detailed?<>Avaliar o trabalho.<br/>Orientar a prevenção.</>:<>Selecionar com critério.<br/>Desenvolver pessoas.<br/>Qualificar o trabalho.</>}</p>
+      {detailed&&<p class="work-editorial">Avaliar o trabalho.<br/>Orientar a prevenção.</p>}
       <p class="work-lede">{intro}</p>
-      <div class="work-actions"><a class="work-primary" href={detailed?'#work-pathway':'#servicos-empresa'}>{detailed?'Conheça o percurso de avaliação':'Explore os serviços para empresas'} <span aria-hidden="true">↓</span></a><a href={detailed?'#conteudo-da-jornada':'/riscos-psicossociais-nr1/'}>{detailed?'Entenda as mudanças':'NR-1 e prevenção'} ↗</a></div>
-      <p class="work-current">Capítulo 1.5 vigente desde 26 de maio de 2026. <a href={workSources[0].url} target="_blank" rel="noopener noreferrer">Consulte a fonte oficial ↗</a></p>
+      <div class="work-actions"><a class="work-primary" href={whatsapp('business', detailed?'NR-1 e riscos psicossociais relacionados ao trabalho':'uma situação da minha empresa que ainda preciso compreender')} target="_blank" rel="noopener noreferrer">{detailed?'Conversar sobre prevenção':'Quero apresentar minha situação'} <span aria-hidden="true">↗</span></a><a href={detailed?'#work-pathway':'#decision-business'}>{detailed?'Conheça o percurso':'Ainda não sei por onde começar'} ↓</a></div>
+      <p class="work-contact-note">Você pode começar pela dúvida. O botão abre uma mensagem editável no WhatsApp; possibilidades e condições são esclarecidas no contato.</p>
+      {detailed&&<p class="work-current">Capítulo 1.5 vigente desde 26 de maio de 2026. <a href={workSources[0].url} target="_blank" rel="noopener noreferrer">Consulte a fonte oficial ↗</a></p>}
     </div>
     <div class="work-space" data-work-space>
       <span class="work-coordinate" aria-hidden="true">ORGANIZAÇÃO ↔ CONDIÇÕES ↔ PESSOAS</span>
@@ -29,7 +33,7 @@ const {title,intro,detailed=false}=Astro.props;
       <p class="work-invitation">Toque em uma conexão.<br/>Conheça uma condição a investigar.</p>
     </div>
   </section>
-  {!detailed&&<BusinessServices id="servicos-empresa"/>}
+  {!detailed&&<div class="work-guidance"><DecisionGuide type="business"/><BusinessServices id="servicos-empresa"/><ConsultancyOverview/></div>}
   <section class="work-contexts" id="work-contexts" aria-label="Condições a investigar" aria-live="polite">
     {workFactors.map((factor,index)=><article class="work-context" id={`work-context-${factor.id}`} data-work-context={index} hidden={index!==0} aria-labelledby={`work-heading-${factor.id}`}>
       <div><span class="work-eyebrow">UMA CONDIÇÃO A INVESTIGAR</span><h2 id={`work-heading-${factor.id}`} tabindex="-1">{factor.title}</h2></div>
@@ -38,6 +42,8 @@ const {title,intro,detailed=false}=Astro.props;
     </article>)}
     <p class="work-example-note">Exemplos educativos sobre a organização do trabalho. A identificação de riscos depende da investigação das condições reais.</p>
   </section>
+  <details class="work-depth" open={detailed}>
+  <summary>NR-1: da avaliação às ações de prevenção <span aria-hidden="true">+</span></summary>
   <section class="work-pathway" id="work-pathway" aria-labelledby="work-pathway-title">
     <header><span class="work-eyebrow">AVALIAÇÃO COM CONSEQUÊNCIA PRÁTICA</span><h2 id="work-pathway-title">Do trabalho real<br/>às decisões de prevenção.</h2><p>Um percurso para compreender condições, definir prioridades e acompanhar mudanças com participação dos trabalhadores.</p></header>
     <div class="work-steps" role="group" aria-label="Explore as etapas de avaliação e prevenção">
@@ -51,6 +57,7 @@ const {title,intro,detailed=false}=Astro.props;
     <div class="work-sources"><span>Fontes e atualização · 16/10/2026</span>{workSources.map(source=><a href={source.url} target="_blank" rel="noopener noreferrer">{source.label} ↗</a>)}</div>
     <a class="work-reading" href="#conteudo-da-jornada">{detailed?'Aprofunde as mudanças e as responsabilidades':'Entenda como a NEXO pode contribuir'} ↓</a>
   </section>
+  </details>
   <div class="work-motion-control"><button id="experience-pause" type="button" aria-pressed="false">Pausar movimento</button></div>
 </div>
 <noscript><style>.work-selectors,.work-steps,.work-motion-control{display:none}.work-context[hidden],.work-stage[hidden]{display:grid!important}.work-context+.work-context,.work-stage+.work-stage{margin-top:35px;padding-top:35px;border-top:1px solid #92aaa944}.work-return{display:none!important}</style></noscript>

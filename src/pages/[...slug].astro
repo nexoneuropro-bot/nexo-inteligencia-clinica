@@ -12,6 +12,7 @@ import EditorialLanding from '../components/EditorialLanding.astro';
 import {visibleEditorialArticles} from '../data/editorial';
 import '../styles/approach.css';
 import '../styles/business-service-reading.css';
+import '../styles/journey-guidance.css';
 export function getStaticPaths(){return pages.map(page=>({params:{slug:page.slug},props:{page}}));}
 const {page}=Astro.props as {page:ContentPage};
 const clinical=['para-voce','psicoterapia','avaliacao-neuropsicologica','integracao-psiquiatrica'].includes(page.slug);
@@ -20,6 +21,18 @@ const businessPage=businessSlugs.includes(page.slug);
 const businessService=['recrutamento-e-selecao','treinamento-e-desenvolvimento','avaliacao-psicologica-organizacional'].includes(page.slug);
 const related=businessPage?pages.filter(p=>businessSlugs.includes(p.slug)&&p.slug!==page.slug):clinical?pages.filter(p=>['psicoterapia','avaliacao-neuropsicologica','integracao-psiquiatrica'].includes(p.slug)&&p.slug!==page.slug):pages.filter(p=>['para-voce','para-sua-empresa','nossa-abordagem'].includes(p.slug)&&p.slug!==page.slug);
 const personal=whatsapp('personal');const business=whatsapp('business');
+const contactSubjects:Record<string,string>={
+  'para-voce':'como começar e esclarecer minha dúvida sobre atendimento',
+  'psicoterapia':'psicoterapia em Análise do Comportamento',
+  'avaliacao-neuropsicologica':'avaliação neuropsicológica',
+  'integracao-psiquiatrica':'caminhos de cuidado e avaliação médica',
+  'para-sua-empresa':'uma situação da minha empresa que ainda preciso compreender',
+  'recrutamento-e-selecao':'recrutamento e seleção',
+  'treinamento-e-desenvolvimento':'treinamento e desenvolvimento de pessoas',
+  'avaliacao-psicologica-organizacional':'avaliação psicológica organizacional',
+  'riscos-psicossociais-nr1':'NR-1 e riscos psicossociais relacionados ao trabalho',
+};
+const contactSubject=contactSubjects[page.slug];
 const sectionId=(index:number)=>page.slug==='psicologia-em-pauta'&&index===0?'temas':`secao-${index+1}`;
 const isJourney=page.slug==='para-voce'||page.slug==='para-sua-empresa';
 const isApproach=page.slug==='nossa-abordagem';
@@ -28,7 +41,7 @@ const showEditorial=page.slug==='psicologia-em-pauta'&&visibleEditorialArticles.
 ---
 <Layout title={page.title.replace(/\.$/,'')} description={showEditorial?'Psicologia em Pauta: seis leituras sobre relações, neurodivergência, Análise do Comportamento, escuta e serviços públicos, com capítulos e referências.':page.description} seoTitle={showEditorial?'Psicologia em Pauta | Ciência, comportamento e sociedade | NEXO':undefined} experience={true}>
   <div class:list={['spatial-page',{'ap-page':isApproach,'business-page':businessPage}]} data-business-service={businessService?page.slug:undefined} data-approach-experience={isApproach?true:undefined} data-profession-scene={page.slug==='avaliacao-neuropsicologica'?'neuropsychology':page.slug==='integracao-psiquiatrica'?'psychiatry':page.slug==='psicoterapia'?'dialogue':undefined} data-reading-scene={page.slug==='psicologia-em-pauta'?'ideas':page.slug==='profissionais'?'people':page.slug==='contato'?'contact':page.slug==='politica-de-privacidade'?'privacy':undefined} data-compact-page={['contato','politica-de-privacidade'].includes(page.slug)?true:undefined}>
-  {showEditorial ? <EditorialLanding/> : isBusiness ? <BusinessExperience title={page.title} intro={page.intro} detailed={page.slug==='riscos-psicossociais-nr1'}/> : isApproach ? <ApproachExperience title={page.title} intro={page.intro}/> : <JourneyEntry type={businessPage?'business':'personal'} backHref={businessService?'/para-sua-empresa/':undefined} backLabel={businessService?'← Para sua empresa':undefined} title={page.title} intro={page.intro} eyebrow={page.eyebrow} reading={!isJourney} human={isJourney}/>}
+  {showEditorial ? <EditorialLanding/> : isBusiness ? <BusinessExperience title={page.title} intro={page.intro} detailed={page.slug==='riscos-psicossociais-nr1'}/> : isApproach ? <ApproachExperience title={page.title} intro={page.intro}/> : <JourneyEntry type={businessPage?'business':'personal'} backHref={businessService?'/para-sua-empresa/':undefined} backLabel={businessService?'← Para sua empresa':undefined} title={page.title} intro={page.intro} eyebrow={page.eyebrow} reading={!isJourney} human={isJourney} contactSubject={contactSubject}/>}
   {page.slug==='profissionais'&&<ProfessionalEncounter id="people-perspectives" title="Pessoas, saberes e perspectivas."/>}
   {!showEditorial&&<div class:list={['institutional-shell','spatial-content',{'ap-clinical':isApproach}]} id="conteudo-da-jornada">
   <div class="content-width page-body page-columns"><aside class="page-toc" aria-label="Nesta página"><span class="overline">NESTA PÁGINA</span>{page.slug==='psicologia-em-pauta'&&<a href="#biblioteca">Leituras e downloads</a>}{page.sections.map((s,i)=><a href={`#${sectionId(i)}`}>{s.title}</a>)}<a href="#conversa">Converse com a NEXO ↗</a></aside>
@@ -39,7 +52,14 @@ const showEditorial=page.slug==='psicologia-em-pauta'&&visibleEditorialArticles.
       {page.slug==='riscos-psicossociais-nr1'&&<div><a class="resource-link" href="https://www.gov.br/trabalho-e-emprego/pt-br/acesso-a-informacao/participacao-social/conselhos-e-orgaos-colegiados/comissao-tripartite-partitaria-permanente/normas-regulamentadora/normas-regulamentadoras-vigentes/nr-1" target="_blank" rel="noopener noreferrer">Consulte a NR-1 no Ministério do Trabalho e Emprego ↗</a></div>}
       {businessPage&&page.slug!=='riscos-psicossociais-nr1'&&<aside class="business-references" aria-label="Referências sobre a atuação em empresas"><span class="overline">REFERÊNCIAS PROFISSIONAIS</span><p>Conheça as orientações que fundamentam a definição do trabalho e dos documentos psicológicos.</p><a class="resource-link" href="https://site.cfp.org.br/wp-content/uploads/2024/07/nota_tecnica-1.pdf" target="_blank" rel="noopener noreferrer">CFP · Psicologia nas organizações e no trabalho ↗</a><a class="resource-link" href="https://satepsi.cfp.org.br/faq.cfm" target="_blank" rel="noopener noreferrer">CFP/SATEPSI · Avaliação e instrumentos psicológicos ↗</a><a class="resource-link" href="https://site.cfp.org.br/publicacao/manual-orientativo-de-registro-e-elaboracao-de-documentos-psicologicos/" target="_blank" rel="noopener noreferrer">CFP · Registros e documentos psicológicos ↗</a></aside>}
       <nav class="related-links" aria-label="Explore também">{related.map(p=><a href={`/${p.slug}/`}>{p.eyebrow} ↗</a>)}</nav>
-      <div class="page-contact-card" id="conversa"><span class="overline">{businessPage?'CONHECER O CONTEXTO. DEFINIR O ESCOPO.':'UM ESPAÇO PARA SUA PERGUNTA.'}</span><h3>{businessPage?'Qual questão pede atenção na sua organização?':'Toda conversa é um começo.'}</h3><p>{businessPage?'Apresente o interesse da organização para conversar sobre possibilidades, responsabilidades e escopo de atuação. Preserve informações pessoais dos trabalhadores e candidatos neste primeiro contato.':'Fale sobre seu interesse em atendimento ou consultoria. Evite enviar dados clínicos sensíveis no primeiro contato.'}</p><a href={whatsapp(page.ctaType)} class="button button-copper" target="_blank" rel="noopener noreferrer">{page.ctaLabel} <Arrow diagonal/></a></div>
+      <div class="page-contact-card" id="conversa">
+        <span class="overline">{businessPage?'DA SUA SITUAÇÃO AO PROJETO.':'UM PONTO DE PARTIDA PARA SUA DÚVIDA.'}</span>
+        <h3>{businessPage?'Qual decisão da sua empresa precisa de apoio?':'Você pode começar pela sua pergunta.'}</h3>
+        <p>{businessPage?'Conte o contexto geral, a equipe envolvida e o que precisa compreender. Mesmo sem um serviço escolhido, podemos esclarecer possibilidades e definir o que um projeto pode investigar.':'Se você ainda não sabe qual atendimento procurar, peça informações sobre os caminhos possíveis. Modalidade, disponibilidade e condições são esclarecidas antes de começar.'}</p>
+        <a href={whatsapp(page.ctaType,contactSubject)} class="button button-copper" target="_blank" rel="noopener noreferrer">{page.ctaLabel} <Arrow diagonal/></a>
+        <p class="contact-expectation">O botão abre o WhatsApp com uma mensagem que você pode editar antes de enviar. Comece por informações gerais, preservando dados de saúde e documentos pessoais.</p>
+        {businessPage&&<a class="contact-process-link" href="/para-sua-empresa/#como-comecamos">Entenda como a conversa pode se tornar um projeto ↗</a>}
+      </div>
     </article>
   </div>
   </div>}

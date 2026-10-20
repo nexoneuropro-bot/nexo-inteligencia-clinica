@@ -16,6 +16,13 @@ export const dimensions = [
 ];
 
 export function whatsapp(type:'personal'|'business'='personal', service?:string){
-  const message = type === 'business' ? 'Olá! Conheci a NEXO pelo site e gostaria de conversar sobre soluções para minha organização.' : service ? `Olá! Conheci a NEXO pelo site e gostaria de receber informações sobre ${service}.` : 'Olá! Conheci a NEXO pelo site e gostaria de receber informações sobre os atendimentos.';
+  const subject = service?.trim();
+  const message = type === 'business'
+    ? subject
+      ? `Olá! Conheci a NEXO pelo site e gostaria de conversar sobre ${subject}.`
+      : 'Olá! Conheci a NEXO pelo site e gostaria de apresentar uma situação da minha organização. Ainda preciso de ajuda para definir a demanda.'
+    : subject
+      ? `Olá! Conheci a NEXO pelo site e gostaria de receber informações sobre ${subject}.`
+      : 'Olá! Conheci a NEXO pelo site e tenho dúvidas sobre como começar um atendimento. Gostaria de receber informações.';
   return `https://wa.me/551154444366?text=${encodeURIComponent(message)}`;
 }

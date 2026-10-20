@@ -1,5 +1,6 @@
 ---
 import { businessServices } from '../data/business-services';
+import { whatsapp } from '../data/reflections';
 import '../styles/business-services.css';
 
 interface Props { id?: string }
@@ -57,6 +58,7 @@ const prefix = `${id}-explorer`;
         <div class="bs-deliverables"><h4>O que o projeto pode entregar</h4><p>{service.deliverables}</p></div>
         <p class="bs-scope">{service.scope}</p>
         <a class="bs-link" href={service.href}>{service.linkLabel}<span aria-hidden="true">↗</span></a>
+        <a class="bs-contact" href={whatsapp('business', service.label.toLocaleLowerCase('pt-BR'))} target="_blank" rel="noopener noreferrer">Conversar sobre esta frente <span aria-hidden="true">↗</span><span class="bs-sr-only">: {service.label}, pelo WhatsApp em nova aba</span></a>
         <a class="bs-another" href={`#${id}`}>Explorar outra frente ↑</a>
       </article>)}
     </div>
