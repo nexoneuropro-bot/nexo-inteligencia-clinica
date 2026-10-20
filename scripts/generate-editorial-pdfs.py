@@ -54,6 +54,7 @@ LEFT, RIGHT, TOP, BOTTOM = 58, 58, 70, 57
 TEXT_W = W - LEFT - RIGHT
 FONT_NAMES = {}
 PHOTOGRAPHY = {}
+PRESS = {}
 
 
 def edition_photo(slug, asset_id=None):
@@ -145,6 +146,48 @@ def styles():
     }
 
 
+def draw_faded_photo(c, photo, x, y, width, height, *, cover=False):
+    """Native PDF composition; source photography bytes remain untouched."""
+    c._doc.ensureMinPdfVersion('transparency')
+    c.saveState()
+    crop = c.beginPath(); crop.rect(x, y, width, height)
+    c.clipPath(crop, stroke=0)
+    iw, ih = ImageReader(str(ROOT / photo['file'])).getSize()
+    scale = max(width / iw, height / ih)
+    domain = pdfdoc.PDFArray([0, 1, 0, 1])
+    if cover:
+        alpha = '0.52' if photo.get('kind') == 'author' else '0.92'
+        expression = '{ 180 mul sin abs 0.28 exp exch 0.62 mul 0.32 add mul ' + alpha + ' mul }'
+    else:
+        expression = '{ 180 mul sin abs 0.12 exp exch 180 mul sin abs 0.08 exp mul }'
+    function = pdfdoc.PDFStream(pdfdoc.PDFDictionary({
+        'FunctionType': 4, 'Domain': domain, 'Range': pdfdoc.PDFArray([0, 1]),
+    }), expression.encode('ascii'))
+    shading = pdfdoc.PDFDictionary({
+        'ShadingType': 1, 'ColorSpace': pdfdoc.PDFName('DeviceGray'),
+        'Domain': domain, 'Matrix': pdfdoc.PDFArray([width, 0, 0, height, x, y]),
+        'Function': c._doc.Reference(function),
+    })
+    form = pdfdoc.PDFStream(pdfdoc.PDFDictionary({
+        'Type': pdfdoc.PDFName('XObject'), 'Subtype': pdfdoc.PDFName('Form'),
+        'FormType': 1, 'BBox': pdfdoc.PDFArray([x, y, x + width, y + height]),
+        'Group': pdfdoc.PDFDictionary({'S': pdfdoc.PDFName('Transparency'),
+            'CS': pdfdoc.PDFName('DeviceGray'), 'I': pdfdoc.PDFtrue}),
+        'Resources': pdfdoc.PDFDictionary({'Shading': pdfdoc.PDFDictionary({
+            'PhotoFade': c._doc.Reference(shading),
+        })}),
+    }), b'q /PhotoFade sh Q')
+    soft_mask = pdfdoc.PDFDictionary({'S': pdfdoc.PDFName('Luminosity'),
+        'G': c._doc.Reference(form), 'BC': pdfdoc.PDFArray([0])})
+    c._extgstate.defaults.setdefault('SMask', pdfdoc.PDFName('None'))
+    c._extgstate.set(c, 'SMask', soft_mask)
+    values = re.findall(r'([\d.]+)%', photo.get('objectPosition', '50% 50%'))
+    px, py = ([float(v) / 100 for v in values[:2]] if len(values) >= 2 else [.5, .5])
+    c.drawImage(str(ROOT / photo['file']), x + (width - iw * scale) * px,
+        y + (height - ih * scale) * (1 - py), iw * scale, ih * scale, mask='auto')
+    c.restoreState()
+
+
 class Cover(Flowable):
     def __init__(self, article, number):
         super().__init__()
@@ -154,165 +197,103 @@ class Cover(Flowable):
     def draw(self):
         c = self.canv
         c.saveState()
-        origin_x, origin_y = c.absolutePosition(0, 0)
-        c.translate(-origin_x, -origin_y)
-        if self.article['slug'] == 'analise-do-comportamento':
-            self.draw_photographic_cover(c)
-            c.restoreState()
-            return
-        c.setFillColor(IVORY)
-        c.rect(0, 0, W, H, fill=1, stroke=0)
-        c.setFillColor(BLUE)
-        c.rect(0, H - 159, W, 159, fill=1, stroke=0)
-        c.setFillColor(SAND)
-        c.setFont('Sans', 8)
-        c.drawString(LEFT, H - 40, 'NEXO INTELIGÊNCIA CLÍNICA  /  LEITURAS PARA CONECTAR IDEIAS')
-        c.setFillColor(IVORY)
-        c.setFont('Serif', 34)
-        c.drawString(LEFT, H - 88, 'Psicologia')
-        c.drawString(LEFT, H - 128, 'em Pauta')
-        c.setFillColor(COPPER)
-        c.setFont('SansBold', 9)
-        c.drawRightString(W - RIGHT, H - 127, f'EDIÇÃO {self.number:02d}')
-        y = H - 202
-        kicker = Paragraph(esc(self.article['category'].upper()),
-                           ParagraphStyle('CoverCat', fontName='SansBold', fontSize=9,
-                                          leading=13, textColor=COPPER))
-        _, h = kicker.wrap(TEXT_W, 100)
-        kicker.drawOn(c, LEFT, y - h)
-        y -= h + 24
-        title = Paragraph(esc(self.article['title']),
-                          ParagraphStyle('CoverTitle', fontName='Serif', fontSize=38,
-                                         leading=44, textColor=BLUE))
-        _, h = title.wrap(TEXT_W, 300)
-        title.drawOn(c, LEFT, y - h)
-        y -= h + 21
-        subtitle = Paragraph(esc(self.article['subtitle']),
-                             ParagraphStyle('CoverSubtitle', fontName='Sans', fontSize=13,
-                                            leading=20, textColor=GRAPHITE))
-        _, h = subtitle.wrap(TEXT_W - 27, 150)
-        subtitle.drawOn(c, LEFT, y - h)
-        y -= h + 25
-        c.setStrokeColor(COPPER)
-        c.setLineWidth(.8)
-        c.line(LEFT, y, LEFT + 78, y)
-        y -= 24
-        byline = Paragraph('Texto e curadoria de<br/><b>Gabriel Alves Batista</b>',
-                           ParagraphStyle('Byline', fontName='Sans', fontSize=9.6,
-                                          leading=15, textColor=BLUE))
-        _, h = byline.wrap(TEXT_W, 80)
-        byline.drawOn(c, LEFT, y - h)
-        y -= h + 30
-        # Use the same authored photography map as the HTML edition.
-        photo_meta = edition_photo(self.article['slug'])
-        photo = ROOT / photo_meta['file'] if photo_meta else None
-        if photo and photo.is_file() and y > 205:
-            c.saveState()
-            ph = min(218, y - 145)
-            path = c.beginPath()
-            path.rect(LEFT, y - ph, TEXT_W, ph)
-            c.clipPath(path, stroke=0)
-            iw, ih = ImageReader(str(photo)).getSize()
-            scale = (min if photo_meta.get('kind') in ('author', 'documentary') else max)(TEXT_W / iw, ph / ih)
-            dw, dh = iw * scale, ih * scale
-            values = re.findall(r'([\d.]+)%', photo_meta.get('objectPosition', '50% 50%'))
-            px, py = ([float(v) / 100 for v in values[:2]] if len(values) >= 2 else [.5, .5])
-            c.drawImage(str(photo), LEFT + (TEXT_W - dw) * px,
-                        y - ph + (ph - dh) * (1 - py), width=dw, height=dh, mask='auto')
-            c.restoreState()
-            caption = para(photo_caption(photo_meta), styles()['caption'])
-            _, caption_height = caption.wrap(TEXT_W, 50)
-            caption.drawOn(c, LEFT, y - ph - caption_height - 6)
-        elif y > 235:
-            teaser_top = min(302, y - 18)
-            c.setFillColor(SAND)
-            c.rect(LEFT, 143, TEXT_W, teaser_top - 143, fill=1, stroke=0)
-            teaser_y = teaser_top - 17
-            c.setFillColor(COPPER)
-            c.setFont('SansBold', 8)
-            c.drawString(LEFT + 17, teaser_y, 'NESTA EDIÇÃO')
-            teaser_y -= 18
-            for section in self.article['sections'][:3]:
-                teaser = Paragraph(esc(section['title']),
-                                   ParagraphStyle('Teaser', fontName='Serif', fontSize=12.2,
-                                                  leading=16, textColor=BLUE))
-                _, teaser_h = teaser.wrap(TEXT_W - 36, 60)
-                if teaser_y - teaser_h < 154:
-                    break
-                teaser.drawOn(c, LEFT + 17, teaser_y - teaser_h)
-                teaser_y -= teaser_h + 10
-        c.setFillColor(GRAPHITE)
-        c.setFont('Sans', 8)
-        c.drawString(LEFT, 90, 'Edição digital em A4  •  Texto selecionável  •  Referências e links')
-        c.setFillColor(COPPER)
-        c.drawString(LEFT, 72, 'Uma leitura educativa para ampliar perguntas e possibilidades.')
-        c.restoreState()
-
-    def draw_photographic_cover(self, c):
-        """A photographic magazine composition; source photographs stay intact."""
-        c._doc.ensureMinPdfVersion('transparency')
-        c.setFillColor(BLUE)
-        c.rect(0, 0, W, H, fill=1, stroke=0)
+        ox, oy = c.absolutePosition(0, 0)
+        c.translate(-ox, -oy)
+        c.setFillColor(BLUE); c.rect(0, 0, W, H, fill=1, stroke=0)
         photo = edition_photo(self.article['slug'])
         if photo:
-            x, y, width, height = 132, 110, W - 92, 535
-            c.saveState()
-            crop = c.beginPath(); crop.rect(x, y, width, height)
-            c.clipPath(crop, stroke=0)
-            iw, ih = ImageReader(str(ROOT / photo['file'])).getSize()
-            scale = max(width / iw, height / ih)
-            # A native PDF luminosity mask creates a continuous, four-edge fade.
-            # The photograph itself is neither altered nor rasterized again.
-            domain = pdfdoc.PDFArray([0, 1, 0, 1])
-            function = pdfdoc.PDFStream(pdfdoc.PDFDictionary({
-                'FunctionType': 4, 'Domain': domain, 'Range': pdfdoc.PDFArray([0, 1]),
-            }), b'{ 180 mul sin abs 0.8 exp exch 180 mul sin abs 1.4 exp mul 0.40 mul }')
-            shading = pdfdoc.PDFDictionary({
-                'ShadingType': 1, 'ColorSpace': pdfdoc.PDFName('DeviceGray'),
-                'Domain': domain, 'Matrix': pdfdoc.PDFArray([width, 0, 0, height, x, y]),
-                'Function': c._doc.Reference(function),
-            })
-            form = pdfdoc.PDFStream(pdfdoc.PDFDictionary({
-                'Type': pdfdoc.PDFName('XObject'), 'Subtype': pdfdoc.PDFName('Form'),
-                'FormType': 1, 'BBox': pdfdoc.PDFArray([x, y, x + width, y + height]),
-                'Group': pdfdoc.PDFDictionary({'S': pdfdoc.PDFName('Transparency'),
-                                              'CS': pdfdoc.PDFName('DeviceGray'), 'I': pdfdoc.PDFtrue}),
-                'Resources': pdfdoc.PDFDictionary({'Shading': pdfdoc.PDFDictionary({
-                    'PhotoFade': c._doc.Reference(shading),
-                })}),
-            }), b'q /PhotoFade sh Q')
-            soft_mask = pdfdoc.PDFDictionary({'S': pdfdoc.PDFName('Luminosity'),
-                'G': c._doc.Reference(form), 'BC': pdfdoc.PDFArray([0])})
-            c._extgstate.defaults.setdefault('SMask', pdfdoc.PDFName('None'))
-            c._extgstate.set(c, 'SMask', soft_mask)
-            c.drawImage(str(ROOT / photo['file']), x + (width - iw * scale) * .5,
-                        y + (height - ih * scale) * .5, iw * scale, ih * scale, mask='auto')
-            c.restoreState()
-        c.setFillColor(IVORY); c.setFont('SansBold', 9)
-        c.drawString(LEFT, H - 43, 'NEXO INTELIGÊNCIA CLÍNICA')
-        c.setStrokeColor(COPPER); c.setLineWidth(.7)
-        c.line(LEFT, H - 61, W - RIGHT, H - 61)
-        c.setFillColor(IVORY); c.setFont('Serif', 36)
-        c.drawString(LEFT, H - 109, 'Psicologia em Pauta')
-        c.setFillColor(SAND); c.setFont('SansBold', 9)
-        c.drawString(LEFT, H - 141, f'EDIÇÃO {self.number:02d}  /  ANÁLISE DO COMPORTAMENTO')
+            if photo.get('kind') == 'documentary':
+                iw, ih = ImageReader(str(ROOT / photo['file'])).getSize()
+                draw_faded_photo(c, photo, 0, 200, W, W * ih / iw, cover=True)
+            else:
+                draw_faded_photo(c, photo, 0, 0, W, H, cover=True)
+        c.setFillColor(IVORY); c.setFont('SansBold', 8)
+        c.drawString(LEFT, H - 34, 'NEXO INTELIGÊNCIA CLÍNICA')
+        c.drawRightString(W - RIGHT, H - 34, f'EDIÇÃO {self.number:02d}')
+        c.setStrokeColor(COPPER); c.setLineWidth(.8)
+        c.line(LEFT, H - 48, W - RIGHT, H - 48)
+        c.setFillColor(IVORY); c.setFont('Serif', 48)
+        c.drawString(LEFT - 2, H - 104, 'Psicologia')
+        c.setFont('Serif', 55)
+        c.drawString(LEFT - 2, H - 157, 'em Pauta')
+        c.setFillColor(SAND); c.setFont('SansBold', 8)
+        c.drawString(LEFT, H - 192, clean(self.article['category'].upper()))
         title = Paragraph(esc(self.article['title']), ParagraphStyle('PhotoCoverTitle',
-                          fontName='Serif', fontSize=35, leading=41, textColor=IVORY))
-        _, th = title.wrap(TEXT_W, 230)
-        title.drawOn(c, LEFT, H - 188 - th)
+            fontName='SerifBold', fontSize=33, leading=38, textColor=IVORY))
+        _, th = title.wrap(TEXT_W, 250)
+        title.drawOn(c, LEFT, H - 224 - th)
         subtitle = Paragraph(esc(self.article['subtitle']), ParagraphStyle('PhotoCoverSubtitle',
-                             fontName='Sans', fontSize=12.5, leading=19, textColor=SAND))
-        _, sh = subtitle.wrap(310, 180)
-        subtitle.drawOn(c, LEFT, H - 210 - th - sh)
-        c.setStrokeColor(COPPER); c.line(LEFT, 186, LEFT + 78, 186)
-        byline = Paragraph('Texto e curadoria de<br/><b>Gabriel Alves Batista</b><br/>CRP-SP 06/176184',
-                           ParagraphStyle('PhotoByline', fontName='Sans', fontSize=10,
-                                          leading=16, textColor=IVORY))
-        byline.wrap(260, 100); byline.drawOn(c, LEFT, 119)
-        c.setFillColor(SAND); c.setFont('Sans', 8)
-        c.drawString(LEFT, 71, 'Contexto, relações e possibilidades de mudança.')
-        c.setFont('Sans', 7.5)
-        c.drawString(LEFT, 52, 'Fotografia: acervo do autor  /  Leitura educativa com referências')
+            fontName='Sans', fontSize=12.5, leading=19, textColor=IVORY))
+        _, sh = subtitle.wrap(325, 200)
+        subtitle.drawOn(c, LEFT, H - 244 - th - sh)
+        c.setFillColor(BLUE); c.setFillAlpha(.83)
+        c.rect(0, 0, W, 153, fill=1, stroke=0); c.setFillAlpha(1)
+        c.setStrokeColor(COPPER); c.line(LEFT, 144, LEFT + 72, 144)
+        byline = Paragraph('Texto e curadoria de <b>Gabriel Alves Batista</b><br/>Psicólogo · CRP-SP 06/176184',
+            ParagraphStyle('PhotoByline', fontName='Sans', fontSize=9.3, leading=15, textColor=IVORY))
+        byline.wrap(TEXT_W, 65); byline.drawOn(c, LEFT, 99)
+        c.setFillColor(SAND); c.setFont('SansBold', 7.6)
+        c.drawString(LEFT, 75, 'CONTEXTOS · HISTÓRIAS · PERGUNTAS PARA A VIDA')
+        if photo:
+            credit = Paragraph(esc(photo_caption(photo)), ParagraphStyle('CoverCredit',
+                fontName='Sans', fontSize=7, leading=10, textColor=SAND))
+            _, ch = credit.wrap(TEXT_W, 35); credit.drawOn(c, LEFT, 49 - ch)
+        c.restoreState()
+
+
+class EditorialFigure(Flowable):
+    def __init__(self, photo):
+        super().__init__(); self.photo = photo
+        iw, ih = ImageReader(str(ROOT / photo['file'])).getSize()
+        self.width = TEXT_W
+        self.height = min(265, TEXT_W * ih / iw)
+
+    def draw(self):
+        draw_faded_photo(self.canv, self.photo, 0, 0, self.width, self.height)
+
+
+class PressFeature(Flowable):
+    def __init__(self, article, source):
+        super().__init__(); self.article, self.source = article, source
+        self.width, self.height = TEXT_W, H - TOP - BOTTOM - 4
+
+    def draw(self):
+        c, source = self.canv, self.source
+        c.saveState()
+        c.bookmarkPage('tema-na-vida-publica')
+        c.addOutlineEntry('O tema na vida pública', 'tema-na-vida-publica', 0, False)
+        y = self.height - 8
+        def text(value, size, leading, color=BLUE, font='Sans', gap=12, width=TEXT_W):
+            nonlocal y
+            p = Paragraph(esc(value), ParagraphStyle('PressText', fontName=font,
+                fontSize=size, leading=leading, textColor=color))
+            _, ph = p.wrap(width, self.height)
+            p.drawOn(c, 0, y - ph); y -= ph + gap
+        text('O TEMA NA VIDA PÚBLICA', 8, 12, COPPER, 'SansBold', 17)
+        text(source['heading'], 31, 36, font='SerifBold', gap=18)
+        text(source['context'], 11, 17, GRAPHITE, gap=21)
+        text(source['kind'].upper() + ' / ' + source['vehicle'] + ' / ' + source['date'],
+            8, 12, COPPER, 'SansBold', 11)
+        image = ROOT / 'src/assets/editorial-clippings' / source['image']
+        ih = TEXT_W * source['height'] / source['width']
+        c.setFillColor(colors.white); c.rect(-1, y - ih - 1, TEXT_W + 2, ih + 2, fill=1, stroke=0)
+        c.drawImage(str(image), 0, y - ih, width=TEXT_W, height=ih)
+        c.linkURL(source['url'], (0, y - ih, TEXT_W, y), relative=1)
+        y -= ih + 11
+        text(source['author'] + ' · ' + source['vehicle'] + '. Captura da página original, consultada em ' + source['capturedAt'] + '.',
+            7.8, 11.5, GRAPHITE, gap=12)
+        link = Paragraph('<link href="' + html.escape(source['url'], quote=True) + '" color="#A16850"><u>Ler a publicação original</u></link>',
+            ParagraphStyle('PressLink', fontName='SansBold', fontSize=9, leading=14, textColor=COPPER))
+        _, lh = link.wrap(TEXT_W, 40); link.drawOn(c, 0, y - lh); y -= lh + 22
+        text('PARA LER COM CONTEXTO', 8, 12, COPPER, 'SansBold', 8)
+        text(source['limit'], 10, 15.5, GRAPHITE, gap=18)
+        text('UMA PERGUNTA PARA VOCÊ', 8, 12, COPPER, 'SansBold', 8)
+        text(source['question'], 14, 20, BLUE, 'SerifItalic', 17)
+        text('O recorte aproxima o tema do debate público. A fundamentação científica da edição está nas fontes e referências.',
+            8, 12, GRAPHITE, gap=0)
+        if y < 0:
+            raise ValueError('Press feature overflows the page: ' + self.article['slug'])
+        c.restoreState()
 
 
 class EditionDoc(BaseDocTemplate):
@@ -488,16 +469,15 @@ def make_pdf(article, number, path):
         title._toc_key = section['id']
         story.append(title)
         for photo in chapter_photos(article['slug'], section['id']):
-            photo_path = ROOT / photo['file']
-            iw, ih = ImageReader(str(photo_path)).getSize()
-            scale = min(TEXT_W / iw, 270 / ih)
-            figure = Image(str(photo_path), width=iw * scale, height=ih * scale, hAlign='CENTER')
+            figure = EditorialFigure(photo)
             story.append(KeepTogether([figure, Spacer(1, 7), para(photo_caption(photo), st['caption']), Spacer(1, 9)]))
         add_blocks(story, section['blocks'], st)
         if number < len(article['sections']):
             # Short chapters share a page; long chapters get breathing room.
             # Avoid nearly blank pages when a table has continued overleaf.
             story.extend([Spacer(1, 21), CondPageBreak(310)])
+    if article['slug'] in PRESS:
+        story.extend([PageBreak(), PressFeature(article, PRESS[article['slug']])])
     story.append(PageBreak())
     story.append(para('FONTES PARA APROFUNDAR', st['kicker']))
     ref_title = para('Referências da edição.', st['section'])
@@ -516,12 +496,13 @@ def make_pdf(article, number, path):
 
 
 def main():
-    global PHOTOGRAPHY
+    global PHOTOGRAPHY, PRESS
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--only', choices=ORDER)
     parser.add_argument('--check', action='store_true')
     args = parser.parse_args()
     PHOTOGRAPHY = json.loads(PHOTOGRAPHY_FILE.read_text(encoding='utf-8-sig'))
+    PRESS = json.loads((ROOT / 'src/data/editorial-press.json').read_text(encoding='utf-8'))
     photo_hashes = {}
     for photo in PHOTOGRAPHY['assets'].values():
         if not (ROOT / photo['file']).is_file():
@@ -531,6 +512,10 @@ def main():
         photo_hashes[photo['file']] = sha(ROOT / photo['file'])
     if args.check:
         manifest = json.loads(MANIFEST.read_text(encoding='utf-8'))
+        if manifest.get('pressSha256') != sha(ROOT / 'src/data/editorial-press.json'):
+            raise SystemExit('Outdated press context in editorial PDFs')
+        if manifest.get('pressAssets') != {item['image']: sha(ROOT / 'src/assets/editorial-clippings' / item['image']) for item in PRESS.values()}:
+            raise SystemExit('Press captures differ from the generated PDF record')
         if manifest.get('photographySha256') != sha(PHOTOGRAPHY_FILE):
             raise SystemExit('Outdated photography in editorial PDFs')
         if manifest.get('photographyAssets') != photo_hashes:
@@ -577,6 +562,8 @@ def main():
                     'paper': 'A4', 'palette': ['#F3EFE6', '#082440', '#A16850', '#DCCBBC', '#292D32'],
                     'embeddedFonts': FONT_NAMES,
                     'photographySha256': sha(PHOTOGRAPHY_FILE),
+                    'pressSha256': sha(ROOT / 'src/data/editorial-press.json'),
+                    'pressAssets': {item['image']: sha(ROOT / 'src/assets/editorial-clippings' / item['image']) for item in PRESS.values()},
                     'photographyAssets': photo_hashes,
                     'sourcePolicy': 'Same article JSON and photography map as HTML; original PDFs retained separately. No internal audit notes rendered.',
                     'editions': records}

@@ -7,7 +7,7 @@ export interface MagazineContentBlock {
 }
 
 export interface MagazinePage {
-  kind: 'cover' | 'contents' | 'chapter' | 'references' | 'credits';
+  kind: 'cover' | 'contents' | 'chapter' | 'press' | 'references' | 'credits';
   id: string;
   title: string;
   chapterIndex?: number;
@@ -30,7 +30,7 @@ export function magazineBlockWeight(block: EditorialBlock): number {
  * or converted to a bitmap. Long blocks/tables can scroll inside their page.
  * Content remains in source order and references retain their original numbering.
  */
-export function buildMagazinePages(article: EditorialArticle, targetWords = 300): MagazinePage[] {
+export function buildMagazinePages(article: EditorialArticle, targetWords = 300, includePress = false): MagazinePage[] {
   const pages: MagazinePage[] = [
     { kind: 'cover', id: 'capa', title: 'Capa', blocks: [], references: [] },
     { kind: 'contents', id: 'sumario', title: 'Nesta edição', blocks: [], references: [] },
@@ -55,6 +55,7 @@ export function buildMagazinePages(article: EditorialArticle, targetWords = 300)
     });
     if (blocks.length || !section.blocks.length) flush();
   });
+  if (includePress) pages.push({ kind: 'press', id: 'tema-na-vida-publica', title: 'O tema na vida pública', blocks: [], references: [] });
   let references: MagazinePage['references'] = [];
   let referenceWeight = 0;
   let referencePart = 0;

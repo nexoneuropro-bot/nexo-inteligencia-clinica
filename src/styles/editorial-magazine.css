@@ -81,20 +81,85 @@
 
 .ed-magazine .ed-photograph{margin:0 0 27px;height:auto;overflow:visible;background:transparent;mask-image:none}
 .ed-magazine .ed-photograph-image{overflow:hidden;background:transparent}
-.ed-magazine .ed-photograph-image img{display:block;width:100%;height:auto;object-position:var(--ed-photo-position,50% 50%);filter:saturate(.82);mask-image:linear-gradient(#000 0%,#000 88%,transparent 100%)}
-.ed-magazine .ed-photograph figcaption{position:static;margin-top:9px;padding:0;background:transparent;color:var(--ed-secondary,#596269);font:400 10px/1.65 var(--sans)}
-.ed-magazine .ed-photograph figcaption span{display:block;margin-top:2px;font-size:9px}
-.ed-magazine .ed-photo-mag-cover .ed-photograph-image{height:280px}
-.ed-magazine .ed-photo-mag-cover .ed-photograph-image img{height:100%;object-fit:contain}
-.ed-magazine .ed-photo-mag-cover.ed-photograph-author .ed-photograph-image{height:310px}
-.ed-magazine .ed-photo-mag-contents .ed-photograph-image{height:160px}
-.ed-magazine .ed-photo-mag-contents .ed-photograph-image img{height:100%;object-fit:contain}
-.ed-magazine .ed-photo-mag-chapter .ed-photograph-image{max-height:290px}
-.ed-magazine .ed-photo-mag-chapter .ed-photograph-image img{max-height:290px;object-fit:contain}
+.ed-magazine .ed-photograph-image img{display:block;width:100%;height:auto;object-position:var(--ed-photo-position,50% 50%);filter:saturate(.86);mask-image:none}
+.ed-magazine .ed-photograph figcaption{position:static;margin-top:9px;padding:0;background:transparent;color:var(--ed-secondary,#596269);font:400 11px/1.7 var(--sans)}
+.ed-magazine .ed-photograph figcaption span{display:block;margin-top:3px;font-size:10px;color:var(--mag-copper);opacity:1}
+
+/* Full-cover art sits behind the masthead and story, with a separate credit line. */
+.ed-mag-page-cover .ed-mag-page-scroll{padding:0;background:#082440}
+.ed-magazine .ed-mag-cover{--mag-blue:#f3efe6;--mag-copper:#e0b28d;--mag-paper:#082440;position:relative;isolation:isolate;display:flex;flex-direction:column;min-height:100%;padding:clamp(28px,3.3vw,48px) clamp(25px,3.3vw,48px) 104px;overflow:hidden;background:#082440;color:#f3efe6}
+.ed-magazine .ed-mag-cover::before{content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(180deg,#082440b8 0%,#08244018 30%,#082440c9 56%,#082440fa 80%,#082440 100%),linear-gradient(90deg,#082440a8,transparent 80%)}
+.ed-magazine .ed-mag-cover-meta{font-size:9px;color:#eee8dd;letter-spacing:.09em}
+.ed-magazine .ed-mag-cover .ed-mag-masthead{position:relative;margin:28px 0 24px;font-size:clamp(56px,6.2vw,91px);line-height:.79;letter-spacing:-.055em;color:#f7f0e4;text-shadow:0 2px 20px #08244055}
+.ed-magazine .ed-mag-cover .ed-mag-masthead em{font-size:.7em;letter-spacing:.025em;color:#e5b995}
+.ed-magazine .ed-mag-cover-rule{padding:11px 0;margin-bottom:0;border-color:#f3efe677;font-size:8px;color:#eee8dd}
+.ed-magazine .ed-mag-cover .ed-photo-mag-cover{position:absolute;inset:0;z-index:auto;width:100%;height:100%;margin:0;background:transparent;mask-image:none}
+.ed-magazine .ed-mag-cover .ed-photo-mag-cover .ed-photograph-image{position:absolute;inset:0;z-index:-2;width:100%;height:100%;max-height:none}
+.ed-magazine .ed-mag-cover .ed-photo-mag-cover .ed-photograph-image img{width:100%;height:100%;max-height:none;object-fit:cover;filter:saturate(.78);mask-image:none;animation:ed-mag-cover-photo-appear 1s ease-out both}
+.ed-magazine .ed-mag-cover .ed-photo-mag-cover figcaption{position:absolute;bottom:23px;left:clamp(25px,3.3vw,48px);right:clamp(25px,3.3vw,48px);z-index:1;max-width:none;padding-top:11px;margin:0;border-top:1px solid #e2c3a255;color:#e5e7df;font-size:10px;line-height:1.65;background:transparent}
+.ed-magazine .ed-mag-cover .ed-photo-mag-cover figcaption span{color:#e0b28d;font-size:9px}
+.ed-magazine .ed-mag-cover-headline{position:relative;margin-top:clamp(150px,18vw,230px)}
+.ed-magazine .ed-mag-cover .ed-mag-kicker{color:#e5b995;font-size:10px}
+.ed-magazine .ed-mag-cover h2{max-width:15ch;margin:14px 0 20px;font-size:calc(clamp(45px,4.9vw,69px) * var(--mag-font-scale));line-height:.99;letter-spacing:-.035em;color:#f3efe6;text-shadow:0 2px 15px #08244055}
+.ed-magazine .ed-mag-cover-headline>p{max-width:34ch;margin-bottom:24px;font-size:calc(21px * var(--mag-font-scale));line-height:1.4;color:#f0e8dc}
+.ed-magazine .ed-mag-cover-byline{position:relative;padding-top:16px;border-color:#e2c3a255;color:#e7bea0;font-size:11px;line-height:1.75}
+.ed-magazine .ed-mag-cover-teasers{position:relative;margin-top:26px;padding-top:20px;border-color:#e2c3a255;color:#ece5d8;font-size:calc(18px * var(--mag-font-scale));line-height:1.2}
+.ed-magazine .ed-mag-page-cover .ed-mag-folio{margin:0;padding:16px clamp(25px,3.3vw,48px);background:#082440;color:#d5dedb;border-top:1px solid #e2c3a255}
+.ed-magazine .ed-mag-page-cover .ed-mag-folio span:last-child{color:#e0b28d}
+
+/* Documentary scenes keep the complete frame; the blue field extends the cover. */
+.ed-magazine .ed-mag-cover:has(.ed-photograph-documentary) .ed-photo-mag-cover .ed-photograph-image{inset:155px 0 auto;height:auto;aspect-ratio:1536/990}
+.ed-magazine .ed-mag-cover:has(.ed-photograph-documentary) .ed-photo-mag-cover .ed-photograph-image img{object-fit:contain}
+.ed-magazine .ed-mag-cover:has(.ed-photograph-documentary)::before{background:linear-gradient(180deg,#082440d9 0%,#08244018 24%,#08244018 39%,#082440ed 56%,#082440 76%)}
+/* The sole author portrait is an explicitly credited, faded secondary background. */
+.ed-magazine .ed-mag-cover .ed-photo-mag-cover.ed-photograph-author .ed-photograph-image{inset:145px -12% auto 10%;width:102%;height:560px}
+.ed-magazine .ed-mag-cover .ed-photo-mag-cover.ed-photograph-author .ed-photograph-image img{object-fit:contain;object-position:center top;opacity:.3;mask-image:radial-gradient(ellipse 72% 74% at 54% 36%,#000 36%,#0007 66%,transparent 100%)}
+.ed-magazine .ed-mag-cover:has(.ed-photograph-author)::before{background:linear-gradient(90deg,#082440d9,#08244022),linear-gradient(180deg,#082440aa 0%,transparent 30%,#082440c9 66%,#082440 87%)}
+
+/* Interior photography bleeds to the page edge and returns softly to the paper. */
+.ed-magazine .ed-photo-mag-contents .ed-photograph-image{height:auto;max-height:215px}
+.ed-magazine .ed-photo-mag-contents .ed-photograph-image img{max-height:215px;object-fit:contain;mask-image:linear-gradient(#000 0%,#000 91%,transparent 100%)}
+.ed-magazine .ed-photo-mag-contents.ed-photograph-author{max-width:210px;margin-inline:auto;opacity:.65}
+.ed-magazine .ed-photo-mag-chapter{width:calc(100% + 2 * clamp(25px,3.3vw,52px));max-width:none;margin:3px calc(-1 * clamp(25px,3.3vw,52px)) 30px}
+.ed-magazine .ed-photo-mag-chapter .ed-photograph-image{max-height:none}
+.ed-magazine .ed-photo-mag-chapter .ed-photograph-image img{max-height:340px;object-fit:contain;mask-image:linear-gradient(#000 0%,#000 92%,transparent 100%)}
+.ed-magazine .ed-photo-mag-chapter figcaption{margin:8px clamp(25px,3.3vw,52px) 0;padding-bottom:15px;border-bottom:1px solid var(--ed-rule,#c6b7a7)}
+.ed-mag-page{container-type:inline-size}
+@container(min-width:560px){
+ .ed-mag-page-chapter .ed-mag-body{column-count:2;column-gap:26px;column-rule:1px solid var(--ed-rule,#c6b7a7)}
+ .ed-mag-page-chapter .ed-mag-body>.ed-mag-block{break-inside:avoid-column}
+ .ed-mag-page-chapter .ed-mag-body>.ed-mag-block:is(.ed-mag-block-quote,.ed-mag-block-table,.ed-mag-block-exercise,.ed-mag-block-note){column-span:all}
+ .ed-mag-page-chapter .ed-mag-body>.ed-mag-block-p:first-child>p:first-letter{font-size:calc(61px * var(--mag-font-scale))}
+}
 .ed-mag-controls .ed-mag-quiz-shortcut{color:var(--mag-paper);background:var(--mag-blue);border-color:var(--mag-blue);font-weight:600}
 .ed-mag-controls .ed-mag-quiz-shortcut:hover{background:#174a69}
-@media(max-width:560px){.ed-magazine .ed-photo-mag-cover .ed-photograph-image{height:230px}.ed-magazine .ed-photo-mag-cover.ed-photograph-author .ed-photograph-image{height:260px}.ed-magazine .ed-photo-mag-contents .ed-photograph-image{height:140px}.ed-magazine .ed-photo-mag-chapter .ed-photograph-image,.ed-magazine .ed-photo-mag-chapter .ed-photograph-image img{max-height:230px}.ed-mag-controls .ed-mag-quiz-shortcut{order:4;flex-basis:100%;font-size:12px}}
+@media(max-width:1059px){.ed-magazine .ed-mag-cover .ed-mag-masthead{font-size:83px}.ed-magazine .ed-mag-cover h2{font-size:calc(62px * var(--mag-font-scale))}.ed-magazine .ed-photo-mag-chapter{width:calc(100% + 68px);margin-inline:-34px}.ed-magazine .ed-photo-mag-chapter figcaption{margin-inline:34px}}
+@media(max-width:560px){
+ .ed-magazine .ed-mag-cover{padding:26px 23px 117px}
+ .ed-magazine .ed-mag-cover-meta{font-size:8px;gap:9px}
+ .ed-magazine .ed-mag-cover .ed-mag-masthead{font-size:clamp(48px,13.8vw,74px);margin:25px 0 21px}
+ .ed-magazine .ed-mag-cover-rule{font-size:7px;line-height:1.65;gap:12px}
+ .ed-magazine .ed-mag-cover-headline{margin-top:155px}
+ .ed-magazine .ed-mag-cover h2{font-size:calc(clamp(39px,10.5vw,55px) * var(--mag-font-scale));line-height:1.01}
+ .ed-magazine .ed-mag-cover-headline>p{font-size:calc(20px * var(--mag-font-scale));line-height:1.4}
+ .ed-magazine .ed-mag-cover-teasers{grid-template-columns:1fr;font-size:calc(18px * var(--mag-font-scale));gap:14px}
+ .ed-magazine .ed-mag-cover-teasers>span:last-child{grid-column:auto}
+ .ed-magazine .ed-mag-cover .ed-photo-mag-cover figcaption{left:23px;right:23px;bottom:24px;font-size:10px}
+ .ed-magazine .ed-mag-page-cover .ed-mag-folio{padding-inline:23px}
+ .ed-magazine .ed-mag-cover:has(.ed-photograph-documentary) .ed-photo-mag-cover .ed-photograph-image{top:140px}
+ .ed-magazine .ed-mag-cover:has(.ed-photograph-documentary)::before{background:linear-gradient(180deg,#082440c9 0%,#08244018 17%,#08244018 24%,#082440ed 37%,#082440 50%)}
+ .ed-magazine .ed-mag-cover .ed-photo-mag-cover.ed-photograph-author .ed-photograph-image{top:150px;left:0;width:112%;height:420px}
+ .ed-magazine .ed-photo-mag-contents .ed-photograph-image,.ed-magazine .ed-photo-mag-contents .ed-photograph-image img{max-height:180px}
+ .ed-magazine .ed-photo-mag-chapter{width:calc(100% + 46px);margin-inline:-23px}
+ .ed-magazine .ed-photo-mag-chapter .ed-photograph-image img{max-height:260px}
+ .ed-magazine .ed-photo-mag-chapter figcaption{margin-inline:23px}
+ .ed-mag-controls .ed-mag-quiz-shortcut{order:4;flex-basis:100%;font-size:12px}
+}
+[data-ed-surface="night"] .ed-magazine .ed-mag-cover :is(.ed-mag-cover-meta,.ed-mag-cover-byline,.ed-mag-cover-rule,.ed-mag-kicker){color:#e7bea0}
+[data-ed-surface="night"] .ed-magazine .ed-mag-cover .ed-photograph figcaption{background:transparent;color:#e5e7df}
+@media(forced-colors:active){.ed-magazine .ed-mag-cover{background:Canvas;color:CanvasText}.ed-magazine .ed-mag-cover::before{background:Canvas;opacity:.95}.ed-magazine .ed-mag-cover :is(.ed-mag-masthead,.ed-mag-masthead em,h2,.ed-mag-cover-headline>p,.ed-mag-cover-teasers,.ed-mag-cover-byline,.ed-mag-cover-meta,.ed-mag-cover-rule,.ed-mag-kicker){color:CanvasText;text-shadow:none}}
+@keyframes ed-mag-cover-photo-appear{from{opacity:0}}
 [data-ed-surface="night"] .ed-magazine :is(.ed-mag-controls button,.ed-mag-bottom button):hover:not(:disabled){background:#e5e8df;color:#082440}
 [data-ed-surface="night"] .ed-magazine :is(.ed-mag-controls,.ed-mag-running-head,.ed-mag-folio,.ed-mag-contents-page button,.ed-mag-drawer button){border-color:#49626a}
-@media(prefers-reduced-motion:reduce){.ed-magazine[data-mag-turn] .ed-mag-page:not([hidden]){animation:none}.ed-mag-book{transform:none}.ed-magazine *{scroll-behavior:auto!important}}
+@media(prefers-reduced-motion:reduce){.ed-magazine[data-mag-turn] .ed-mag-page:not([hidden]),.ed-magazine .ed-mag-cover .ed-photo-mag-cover .ed-photograph-image img{animation:none}.ed-mag-book{transform:none}.ed-magazine *{scroll-behavior:auto!important}}
 @media print{.ed-magazine{display:none!important}}

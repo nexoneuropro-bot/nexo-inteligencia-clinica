@@ -1,0 +1,62 @@
+{
+  "relacoes-reciprocidade": {
+    "vehicle": "Agência Brasil", "kind": "Reportagem jornalística", "date": "1 de julho de 2025", "author": "Paula Laboissière",
+    "title": "OMS: uma em cada seis pessoas no mundo é afetada pela solidão",
+    "url": "https://agenciabrasil.ebc.com.br/geral/noticia/2025-07/oms-uma-em-cada-seis-pessoas-no-mundo-e-afetada-pela-solidao",
+    "image": "agencia-brasil-solidao.png", "width": 1280, "height": 250,
+    "heading": "Pertencer também é uma questão social.",
+    "context": "A cobertura sobre o relatório da OMS aproxima o tema das redes de apoio da vida cotidiana. O ponto de partida não é contar contatos, mas perguntar quais vínculos oferecem presença, participação e apoio possível.",
+    "limit": "A notícia contextualiza o debate. Seus dados populacionais não descrevem, por si, a experiência ou a saúde mental de cada leitor.",
+    "question": "Em quais situações você encontra companhia e em quais precisa de uma rede de apoio mais próxima?", "capturedAt": "20 de outubro de 2026"
+  },
+  "neurodivergencia-comunicacao": {
+    "vehicle": "Agência Brasil", "kind": "Reportagem jornalística", "date": "9 de abril de 2026", "author": "Paula Laboissière",
+    "title": "Autismo: pesquisa aponta baixo acesso a diagnóstico e terapias",
+    "url": "https://agenciabrasil.ebc.com.br/saude/noticia/2026-04/autismo-pesquisa-aponta-baixo-acesso-a-diagnostico-e-terapias",
+    "image": "agencia-brasil-autismo.png", "width": 1280, "height": 250,
+    "heading": "Reconhecer necessidades exige acesso.",
+    "context": "A reportagem leva a discussão para as barreiras de acesso à avaliação e ao cuidado. Na leitura desta edição, ela ajuda a pensar em escuta, comunicação acessível e condições concretas para procurar apoio.",
+    "limit": "A matéria aborda uma pesquisa com participantes recrutados on-line. Seus resultados não representam automaticamente toda a população autista. Neurodivergência também não se reduz ao autismo.",
+    "question": "Que ajustes no ambiente e na comunicação poderiam facilitar sua participação ou a de alguém próximo?", "capturedAt": "20 de outubro de 2026"
+  },
+  "o-que-faz-um-psicologo": {
+    "vehicle": "Conselho Federal de Psicologia", "kind": "Notícia institucional", "date": "19 de junho de 2026", "author": "CFP Notícias",
+    "title": "CFP lança guia orientativo sobre atuação da Psicologia nos contextos de atenção básica, secundária e terciária de saúde",
+    "url": "https://site.cfp.org.br/cfp-lanca-guia-orientativo-sobre-atuacao-da-psicologia-nos-contextos-de-atencao-basica-secundaria-e-terciaria-de-saude/",
+    "image": "cfp-atuacao-psicologia.png", "width": 1280, "height": 360,
+    "heading": "Um trabalho que vai além do consultório.",
+    "context": "A publicação do CFP situa a atuação da Psicologia em diferentes níveis de atenção à saúde. Ela amplia o olhar sobre o trabalho técnico, o cuidado em rede e a articulação com outros profissionais.",
+    "limit": "Trata-se de comunicação do conselho profissional sobre um guia de atuação, e não de reportagem independente nem de prova de resultado de um atendimento específico.",
+    "question": "Qual necessidade você quer compreender antes de decidir que tipo de apoio procurar?", "capturedAt": "20 de outubro de 2026"
+  },
+  "analise-do-comportamento": {
+    "vehicle": "Conselho Federal de Psicologia", "kind": "Notícia institucional", "date": "27 de junho de 2025", "author": "CFP Notícias",
+    "title": "Análise do Comportamento Aplicada: Conselho Federal de Psicologia lança nota técnica sobre uso de ABA no cuidado a pessoas autistas",
+    "url": "https://site.cfp.org.br/analise-do-comportamento-aplicada-conselho-federal-de-psicologia-lanca-nota-tecnica-sobre-uso-de-aba-no-cuidado-a-pessoas-autistas/",
+    "image": "cfp-analise-comportamento.png", "width": 1280, "height": 410,
+    "heading": "Contexto, autonomia e responsabilidade.",
+    "context": "A notícia do CFP apresenta um debate contemporâneo sobre uma aplicação da análise do comportamento. Ela oferece uma ponte para discutir objetivos do cuidado, singularidade e responsabilidade profissional.",
+    "limit": "O recorte é específico: ABA no cuidado a pessoas autistas. Ele não define toda a análise do comportamento, não se confunde com a pesquisa básica em AEC e não descreve automaticamente a psicoterapia apresentada nesta edição.",
+    "question": "Se você pudesse mudar uma relação entre sua rotina e suas ações, qual mudança faria sentido para você?", "capturedAt": "20 de outubro de 2026"
+  },
+  "escuta-atencao-e-relacoes": {
+    "vehicle": "Ministério da Saúde", "kind": "Notícia institucional", "date": "3 de setembro de 2026", "author": "João Moraes",
+    "title": "Pesquisa Nacional de Saúde Mental realiza coleta de dados em 197 municípios",
+    "url": "https://www.gov.br/saude/pt-br/assuntos/noticias-ms/2026/setembro/pesquisa-nacional-de-saude-mental-realiza-coleta-de-dados-em-197-municipios",
+    "image": "ministerio-saude-pesquisa.png", "width": 1280, "height": 400,
+    "heading": "Escutar também é conhecer o contexto.",
+    "context": "O anúncio da coleta nacional aproxima a conversa sobre saúde mental das condições de vida e do acesso ao cuidado. Nesta edição, ele convida a observar o que uma escuta individual revela e o que uma investigação populacional precisa perguntar.",
+    "limit": "A notícia anuncia uma etapa de coleta de dados. Ela não apresenta resultados finais e não permite concluir que a pesquisa já confirmou as interpretações desta revista.",
+    "question": "O que costuma ficar de fora quando alguém ouve apenas uma pequena parte da sua história?", "capturedAt": "20 de outubro de 2026"
+  },
+  "quem-cuida-de-quem-cuida": {
+    "vehicle": "SMADS / Prefeitura de São Paulo", "kind": "Notícia institucional", "date": "6 de julho de 2026", "author": "Comunicação institucional da SMADS",
+    "title": "Balanço semestral da rede socioassistencial: saiba os principais resultados da pasta na metade do ano",
+    "url": "https://prefeitura.sp.gov.br/web/popruasp/w/balan%C3%A7o-semestral-da-rede-socioassistencial-saiba-os-principais-resultados-da-pasta-na-metade-do-ano",
+    "image": "smads-rede-socioassistencial.png", "width": 1280, "height": 130,
+    "heading": "Por trás da rede, existem pessoas.",
+    "context": "O balanço público mostra a dimensão de uma rede de proteção social. A reportagem visual desta edição acrescenta outro ponto de observação: o cotidiano das equipes, os encontros e as condições em que o cuidado se torna possível.",
+    "limit": "Os indicadores de atendimento divulgados pela gestão não medem, por si, a saúde mental das equipes nem demonstram o efeito de uma intervenção psicológica.",
+    "question": "Que condições ajudam quem cuida a sustentar seu trabalho com apoio e participação?", "capturedAt": "20 de outubro de 2026"
+  }
+}

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-20T03:35:30-03:00",
+  "generatedAt": "2026-10-20T04:01:49-03:00",
   "generator": "scripts/generate-editorial-pdfs.py",
   "status": "preview",
   "clinicalApproval": false,
@@ -21,6 +21,15 @@
     "SansItalic": "ariali.ttf"
   },
   "photographySha256": "c47becc26414c32300a9c4480ad1c4f0a1ecee6244fdafc20bdd7ac321a187aa",
+  "pressSha256": "bf9b83ac936d55b9f9702063c41996fc16ff8766d42efc180daee433b4f7eb1d",
+  "pressAssets": {
+    "agencia-brasil-solidao.png": "0e6cad281bd14579682bcf44458383df1ada157bc58a2247a47e96093f043b50",
+    "agencia-brasil-autismo.png": "e8f92f9d36491467725c0719b9eff449e909724140d5c218cf7c2f3fbaf5af5c",
+    "cfp-atuacao-psicologia.png": "7da13add8dbd1d448cf50f6f08b14084384bbe97b76aa3d976436a0fbe3c537d",
+    "cfp-analise-comportamento.png": "ddbe691724bfc8c186477ee4b150e1f3c30490132b4cbc165533997250e6e5f0",
+    "ministerio-saude-pesquisa.png": "eae5dce3d5492f56fa4e5983fda55a91a5882bec0807c4d80aa9c77f9c2803bf",
+    "smads-rede-socioassistencial.png": "5cc72694c39c86025e98eb85e0a050fd6d82ddd644e7ed2117ca2aabac9cdf62"
+  },
   "photographyAssets": {
     "src/assets/editorial-images/relacoes-reciprocidade.jpg": "6e79c2ba02e80ebd776912ed3a0c8e3fd319c7c70ac3673f6a7d6f7e77084d22",
     "src/assets/editorial-images/relacoes-reciprocidade-cotidiano.jpg": "254e7b5eae412f167286326ff57d642cbd45779b47a53592453f3506d9f197a8",
@@ -41,9 +50,9 @@
       "source": "src/data/editorial/relacoes-reciprocidade.json",
       "sourceSha256": "f52316616d00458215e2016dd464518049f134c7273307eb87d6843f9ac59d54",
       "file": "src/assets/editorial-pdfs/relacoes-reciprocidade.pdf",
-      "pdfSha256": "7d9bf7aa08dd48e6bc5a5a0a9b1d77bbe0dd422f1f7c64e4ff0c7e95409f99af",
-      "pages": 16,
-      "selectableCharacters": 23130,
+      "pdfSha256": "7a37e2d084d73ab93e1b9b5c9e8d2865c394d0e60521ed562c4efa33dd044eb5",
+      "pages": 17,
+      "selectableCharacters": 23989,
       "url": "/psicologia-em-pauta/edicoes/relacoes-reciprocidade.pdf"
     },
     {
@@ -51,9 +60,9 @@
       "source": "src/data/editorial/neurodivergencia-comunicacao.json",
       "sourceSha256": "e4a3c7fe68715cafbaf2bc0ab131dd52952c4e4b992bd6056f80f36ec5602a6e",
       "file": "src/assets/editorial-pdfs/neurodivergencia-comunicacao.pdf",
-      "pdfSha256": "66c19ea59a3514e2dfb9c8cc22ae688e5defcf9470284be56f09548a18397cc1",
-      "pages": 16,
-      "selectableCharacters": 22131,
+      "pdfSha256": "c3291a4fec4309a81a7ff8239b5bd1608f8598a99d6cde4fdae48f36c66ee186",
+      "pages": 17,
+      "selectableCharacters": 23052,
       "url": "/psicologia-em-pauta/edicoes/neurodivergencia-comunicacao.pdf"
     },
     {
@@ -61,9 +70,9 @@
       "source": "src/data/editorial/o-que-faz-um-psicologo.json",
       "sourceSha256": "e8eff39c5be345114febb7614373a0e9f0afa82d76f4f79b7b040a64a9b2702d",
       "file": "src/assets/editorial-pdfs/o-que-faz-um-psicologo.pdf",
-      "pdfSha256": "9443b2ffaabb5a27fd896598975233fd6377ee7f683c9c68dbcf5879451f6c53",
-      "pages": 15,
-      "selectableCharacters": 20800,
+      "pdfSha256": "e78897e8c76e7e0a0d95305102f30cc08df0e8717f4b4c9ec1b5544db957cc1e",
+      "pages": 16,
+      "selectableCharacters": 21698,
       "url": "/psicologia-em-pauta/edicoes/o-que-faz-um-psicologo.pdf"
     },
     {
@@ -71,9 +80,9 @@
       "source": "src/data/editorial/analise-do-comportamento.json",
       "sourceSha256": "79d1238aa9f6428d24e7f8eb6f3b68b9a6fe263680a8ea6c29a2269a6e31bfde",
       "file": "src/assets/editorial-pdfs/analise-do-comportamento.pdf",
-      "pdfSha256": "5442eedeb88a41c27d5c4c9b52bf34c353e63aa65a89ee76674e0f6cd09fb564",
-      "pages": 10,
-      "selectableCharacters": 16258,
+      "pdfSha256": "5809dcd8802b6e23e3de4cc93eb88b43e0ecd4474f4be7d4c99bd543f71c472b",
+      "pages": 11,
+      "selectableCharacters": 17323,
       "url": "/psicologia-em-pauta/edicoes/analise-do-comportamento.pdf"
     },
     {
@@ -81,19 +90,19 @@
       "source": "src/data/editorial/escuta-atencao-e-relacoes.json",
       "sourceSha256": "c97af2d2823c9e89aa5f7a64d0205c4c9e9ed8f11e7a367cc1b8f7e07f8ef343",
       "file": "src/assets/editorial-pdfs/escuta-atencao-e-relacoes.pdf",
-      "pdfSha256": "30daa1ca2e3e93c35d9dd86a04593f6e98eea0a81b019cd362fad6f315a2ff28",
-      "pages": 21,
-      "selectableCharacters": 29294,
+      "pdfSha256": "12d9e94be506c1115ec9a3e16cc26640f76769c25a01593de86cb8e7b3d7fba0",
+      "pages": 22,
+      "selectableCharacters": 30211,
       "url": "/psicologia-em-pauta/edicoes/escuta-atencao-e-relacoes.pdf"
     },
     {
       "slug": "quem-cuida-de-quem-cuida",
       "source": "src/data/editorial/quem-cuida-de-quem-cuida.json",
-      "sourceSha256": "1e60bb43354e55f1313864eaae7fb3c2b68257a50cd66ba7053337661632cd87",
+      "sourceSha256": "c013c8f37102e7e086c2aa13a3e59b3dec357f919fc2642cbc01c383f0bd904f",
       "file": "src/assets/editorial-pdfs/quem-cuida-de-quem-cuida.pdf",
-      "pdfSha256": "8c5f1e05e0c6972bcadf9a091689b778c45288533f43d2197a2ae350b302b6da",
-      "pages": 21,
-      "selectableCharacters": 39336,
+      "pdfSha256": "bc032b11619ba0431a06598d0d846b74589dd9a7dfa86a09ef356faf1cabb275",
+      "pages": 22,
+      "selectableCharacters": 40288,
       "url": "/psicologia-em-pauta/edicoes/quem-cuida-de-quem-cuida.pdf"
     }
   ]

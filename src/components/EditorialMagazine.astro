@@ -2,16 +2,20 @@
 import { editorialByline, editorialBlockLabel, type EditorialArticle } from '../data/editorial';
 import { buildMagazinePages } from '../lib/magazine-pages';
 import EditorialPhoto from './EditorialPhoto.astro';
+import EditorialPressClipping from './EditorialPressClipping.astro';
+import { editorialPressForArticle } from '../data/editorial-press';
 import { editorialCoverPhoto, editorialChapterPhotos } from '../data/editorial-photography';
 import { editorialQuizForArticle } from '../data/editorial-quizzes';
 import '../styles/editorial-magazine.css';
 
 interface Props { article: EditorialArticle }
 const { article } = Astro.props;
-const pages = buildMagazinePages(article);
+const press = editorialPressForArticle(article.slug);
+const pages = buildMagazinePages(article, 300, Boolean(press));
 const byline = editorialByline(article);
 const chapterPage = (index: number) => pages.findIndex(page => page.kind === 'chapter' && page.chapterIndex === index);
 const referencesPage = pages.findIndex(page => page.kind === 'references');
+const pressPage = pages.findIndex(page => page.kind === 'press');
 const quiz = editorialQuizForArticle(article.slug);
 const quizPage = quiz ? pages.findIndex(page => page.blocks.some(({ block }) => block.type === 'exercise')) : -1;
 const coverPhoto = editorialCoverPhoto(article.slug);
@@ -40,6 +44,7 @@ const formatPage = (page: number) => String(page + 1).padStart(2, '0');
   <div><span class="ed-mag-kicker">ENCONTRE SEU PRÓXIMO PONTO DE VISTA</span><h2>Nesta edição.</h2></div>
   <ol><li><button type="button" data-mag-goto="0">Capa <span>01</span></button></li>
    {article.sections.map((section, index) => <li><button type="button" data-mag-goto={String(chapterPage(index))}>{section.title}<span>{formatPage(chapterPage(index))}</span></button></li>)}
+   {pressPage >= 0 && <li><button type="button" data-mag-goto={String(pressPage)}>O tema na vida pública<span>{formatPage(pressPage)}</span></button></li>}
    {referencesPage >= 0 && <li><button type="button" data-mag-goto={String(referencesPage)}>Fontes e referências<span>{formatPage(referencesPage)}</span></button></li>}
    {quiz && <li><button type="button" data-mag-quiz-request>Responder ao quiz com pontuação<span>↗</span></button></li>}
   </ol>
@@ -75,8 +80,9 @@ const formatPage = (page: number) => String(page + 1).padStart(2, '0');
        </div>)}</div>
        {quiz && pageIndex === quizPage && <aside class="ed-mag-quiz-invitation"><span class="ed-mag-kicker">UM PASSO A MAIS NA REFLEXÃO</span><p>{quiz.title}: {quiz.questions.length} perguntas com pontuação e devolutiva educativa, apenas neste dispositivo.</p><button type="button" data-mag-quiz-request>Responder ao quiz com pontuação →</button><small>Você volta a esta mesma página quando terminar.</small></aside>}
       </>}
+      {page.kind === 'press' && <EditorialPressClipping slug={article.slug}/>}
       {page.kind === 'references' && <div class="ed-mag-reference-page"><span class="ed-mag-kicker">PARA APROFUNDAR A LEITURA{page.continuation ? ' · CONTINUAÇÃO' : ''}</span><h2>De onde vêm<br/>as ideias.</h2><ol start={(page.references[0]?.originalIndex ?? 0) + 1}>{page.references.map(({ reference, originalIndex }) => <li value={originalIndex + 1} data-mag-source-reference={String(originalIndex)}>{reference.url && reference.verification !== 'replace' ? <a href={reference.url} target="_blank" rel="noopener noreferrer">{reference.label} <span aria-label="Abre em outra guia">↗</span></a> : reference.label}</li>)}</ol></div>}
-      {page.kind === 'credits' && <div class="ed-mag-credits"><span class="ed-mag-kicker">A LEITURA CONTINUA EM VOCÊ</span><h2>Uma pergunta<br/>leva a outra.</h2><p>{article.subtitle}</p><div class="ed-mag-author"><img src="/images/gabriel.webp" width="140" height="170" loading="lazy" decoding="async" alt="Gabriel Alves Batista, autor e curador da edição."/><div><span>{byline}</span><p>Psicólogo · CRP-SP 06/176184</p></div></div><p class="ed-mag-reading-note">Conteúdo educativo. As informações apoiam a compreensão e a reflexão e não substituem atendimento individualizado.</p><a href={`/psicologia-em-pauta/originais/${article.slug}.pdf`} target="_blank" rel="noopener noreferrer">Consultar edição original em PDF ↗</a><a href="/psicologia-em-pauta/">Explorar outras edições ↗</a><button type="button" data-mag-close>Continuar no artigo HTML ↗</button></div>}
+      {page.kind === 'credits' && <div class="ed-mag-credits"><span class="ed-mag-kicker">A LEITURA CONTINUA EM VOCÊ</span><h2>Uma pergunta<br/>leva a outra.</h2><p>{article.subtitle}</p><div class="ed-mag-author"><img src="/images/gabriel.webp" width="140" height="170" loading="lazy" decoding="async" alt="Gabriel Alves Batista, autor e curador da edição."/><div><span>{byline}</span><p>Psicólogo · CRP-SP 06/176184</p></div></div><p class="ed-mag-reading-note">Conteúdo educativo. As informações apoiam a compreensão e a reflexão e não substituem atendimento individualizado.</p><a href={`/psicologia-em-pauta/${article.slug === 'analise-do-comportamento' ? 'acervo' : 'originais'}/${article.slug}.pdf`} target="_blank" rel="noopener noreferrer">Consultar edição original em PDF ↗</a><a href="/psicologia-em-pauta/">Explorar outras edições ↗</a><button type="button" data-mag-close>Continuar no artigo HTML ↗</button></div>}
      </>}
     </div>
     <footer class="ed-mag-folio"><span>NEXO · {page.kind === 'cover' ? 'PSICOLOGIA EM PAUTA' : article.title}</span><span>{formatPage(pageIndex)}</span></footer>

@@ -78,6 +78,12 @@ for (const file of files) {
   });
   assertReadingOrder(pages, false, `${file}, mobile`);
   assertReadingOrder(pages, true, `${file}, desktop`);
+  const withPress = buildMagazinePages(article, 300, true);
+  assert.equal(withPress.filter(page => page.kind === 'press').length, 1, `${file}: exactly one press context page`);
+  assert.deepEqual(withPress.flatMap(page => page.blocks), pages.flatMap(page => page.blocks), `${file}: press page preserves all article blocks`);
+  assert.deepEqual(withPress.flatMap(page => page.references), actualReferences, `${file}: press page preserves reference numbering`);
+  assertReadingOrder(withPress, false, `${file}, mobile with press`);
+  assertReadingOrder(withPress, true, `${file}, desktop with press`);
   // Changing page-composition capacity must never drop/summarize content.
   const compact = buildMagazinePages(article, 100);
   assert.deepEqual(compact.flatMap(page => page.blocks.map(({ block }) => block)), expectedBlocks.map(tuple => tuple[2]),

@@ -48,8 +48,8 @@ const byline=editorialByline(article);
        {block.type==='note'&&<aside class="ed-context-note"><p>{block.text}</p></aside>}
       </div>)}
      </section>)}
+     <EditorialPressClipping slug={article.slug}/>
      <section class="ed-references" id="referencias"><span class="ed-chapter-number">CONTINUE A INVESTIGAR</span><h2>Fontes e referências.</h2><ol>{article.references.map(reference=><li><p>{reference.url&&reference.verification!=='replace'?<a href={reference.url} target="_blank" rel="noopener noreferrer">{reference.label} ↗</a>:reference.label}</p></li>)}</ol></section>
-     {article.slug==='relacoes-reciprocidade'&&<EditorialPressClipping/>}
      {editorialPreview&&<section class="ed-article-download" id="baixar-edicao"><span class="ed-chapter-number">PARA GUARDAR E CONSULTAR</span><h2>Leve a leitura com você.</h2><p>Baixe a edição A4 com o mesmo conteúdo desta leitura, referências e links para continuar no navegador.</p><a class="ed-reading-link" href={editionUrl} download>Baixar edição atual em PDF ↓</a><details class="ed-source-archive"><summary>Consultar arquivo de origem</summary><a class="ed-pdf-link" href={originalUrl} target="_blank" rel="noopener noreferrer">Abrir PDF de origem, preservado no acervo ↗</a></details></section>}
      <section class="ed-next-reading"><span class="ed-eyebrow">UMA PERGUNTA LEVA A OUTRA.</span><h2>A leitura continua.</h2><nav aria-label="Outras edições">{otherArticles.map(other=><a href={articleUrl(other.slug)}>{other.title}<span aria-hidden="true">↗</span></a>)}</nav><a class="ed-reading-link" href="/nossa-abordagem/">Conheça a abordagem da NEXO ↗</a></section>
     </article>
