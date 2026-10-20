@@ -10,7 +10,7 @@
     "build": "node scripts/astro.mjs build",
     "preview": "node scripts/astro.mjs preview --host 127.0.0.1",
     "check": "node scripts/astro.mjs check",
-    "verify": "node scripts/verify.mjs"
+    "verify": "node --test --test-isolation=none scripts/test-home-opening.mjs && node scripts/verify.mjs"
   },
   "dependencies": {
     "@fontsource-variable/cormorant-garamond": "5.3.0",

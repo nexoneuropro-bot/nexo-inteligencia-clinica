@@ -44,6 +44,28 @@ for(const file of htmlFiles){
 const businessServices=['recrutamento-e-selecao','treinamento-e-desenvolvimento','avaliacao-psicologica-organizacional'];
 const routes=['','para-voce','psicoterapia','avaliacao-neuropsicologica','integracao-psiquiatrica','para-sua-empresa','riscos-psicossociais-nr1',...businessServices,'nossa-abordagem','profissionais','psicologia-em-pauta','contato','politica-de-privacidade'];
 routes.forEach(route=>check(fs.existsSync(path.join(root,route,'index.html')),`Rota ausente: /${route}/`));
+// The home presentation is optional decoration over working HTML navigation.
+// Keep the cinematic sequence confined to the home and independent of a film.
+const homeHtml=fs.readFileSync(path.join(root,'index.html'),'utf8');
+const opening=homeHtml.match(/<section\b[^>]*\bdata-home-opening(?=[\s=>])[\s\S]*?<\/section>/)?.[0]||'';
+const openingTag=opening.match(/^<section\b[^>]*>/)?.[0]||'';
+const openingCanvas=opening.match(/<canvas\b[^>]*\bdata-opening-canvas(?=[\s=>])[^>]*>/)?.[0]||'';
+const openingPaths=opening.match(/<[a-z][\w:-]*\b[^>]*\bdata-opening-paths(?=[\s=>])[^>]*>/)?.[0]||'';
+const hiddenByDefault=tag=>/\s(?:hidden|inert)(?=[\s=>])/.test(tag);
+check((homeHtml.match(/\bdata-home-opening(?=[\s=>])/g)||[]).length===1,'Home: uma única abertura');
+check(Boolean(opening)&&!hiddenByDefault(openingTag),'Home: abertura e caminhos disponíveis sem JavaScript');
+check(Boolean(openingCanvas),'Home: apresentação sináptica em canvas');
+check(/\baria-hidden="true"/.test(openingCanvas)||/<div\b[^>]*class="[^"]*\bhome-opening-scene\b[^"]*"[^>]*aria-hidden="true"[^>]*>[\s\S]*?<canvas\b/.test(opening),'Home: canvas decorativo oculto da árvore acessível');
+check(Boolean(openingPaths)&&!hiddenByDefault(openingPaths),'Home: escolhas HTML visíveis antes do aprimoramento');
+const openingChoices=[...opening.matchAll(/<a\b[^>]*\bdata-opening-choice(?=[\s=>])[^>]*>/g)].map(match=>match[0]);
+check(openingChoices.length===2,'Home: dois caminhos institucionais na abertura');
+for(const route of ['/para-voce/','/para-sua-empresa/'])check(openingChoices.some(tag=>tag.includes(`href="${route}"`)&&!hiddenByDefault(tag)),`Home: caminho acessível ${route}`);
+for(const control of ['skip','pause'])check(new RegExp(`<button\\b[^>]*\\bdata-opening-${control}(?=[\\s=>])`).test(opening),`Home: controle de ${control==='skip'?'pular':'pausar'} a abertura`);
+check(/<button\b[^>]*\bdata-opening-replay(?=[\s=>])/.test(homeHtml),'Home: opção de rever abertura');
+check(!/<video\b|data-opening-video|\/media\/nexo-abertura\.mp4/i.test(opening),'Home: sequência sem dependência do vídeo anterior');
+for(const file of htmlFiles.filter(file=>file!==path.join(root,'index.html'))){
+ check(!/\bdata-home-opening(?=[\s=>])|\bdata-opening-canvas(?=[\s=>])/.test(fs.readFileSync(file,'utf8')),`${path.relative(root,file)}: abertura exclusiva da home`);
+}
 // A page can build correctly yet remain undiscoverable. Follow the actual HTML
 // links from the home page to check that every institutional route is reachable.
 const routePaths=new Set(routes.map(route=>route?`/${route}/`:'/'));
@@ -103,6 +125,7 @@ const sitemap=fs.readFileSync(path.join(root,'sitemap.xml'),'utf8');
 check((sitemap.match(/<loc>/g)||[]).length===(production?routes.length:0),'Sitemap incompatível com indexação');
 check(fs.readFileSync(path.join(root,'robots.txt'),'utf8').includes('Allow: /'),'Robots deve permitir ler noindex');
 const headers=fs.readFileSync(path.join(root,'_headers'),'utf8');check(production?!headers.includes('noindex'):headers.includes('noindex'),'X-Robots-Tag');
+check(/\bscript-src\s+'self'\s*;/.test(headers),'CSP permite somente scripts da própria origem');
 const assets=files.filter(f=>/\.(js|css)$/.test(f)).map(f=>({file:path.relative(root,f),bytes:fs.statSync(f).size,gzip:gzipSync(fs.readFileSync(f)).length}));
 console.log(JSON.stringify({pages:htmlFiles.length,requestedRoutes:routes.length,reachableRoutes:reached.size,linksAndAssets:'checked',mode:production?'production':'preview',assets,failures},null,2));
 if(failures.length)process.exitCode=1;

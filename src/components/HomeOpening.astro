@@ -3,29 +3,28 @@ import '../styles/home-opening.css';
 ---
 <section class="home-opening" id="home-opening" data-home-opening data-state="choices" aria-labelledby="home-opening-title">
   <div class="home-opening-scene" aria-hidden="true">
-    <video class="home-opening-video" data-opening-video data-src="/media/nexo-abertura.mp4" poster="/brand/logo-nexo-horizontal-sobre-dark.png" muted playsinline preload="none" tabindex="-1" disablepictureinpicture disableRemotePlayback></video>
-    <div class="home-opening-light"></div>
+    <canvas class="home-opening-canvas" data-opening-canvas></canvas>
+    <div class="home-opening-vignette"></div>
+    <div class="home-opening-grain"></div>
   </div>
   <div class="home-opening-controls">
-    <span>Uma conexão começa aqui.</span>
-    <button type="button" data-opening-skip hidden>Pular vídeo <span aria-hidden="true">↗</span></button>
+    <button type="button" data-opening-pause aria-pressed="false" hidden>Pausar</button>
+    <button type="button" data-opening-skip hidden>Pular abertura <span aria-hidden="true">↗</span></button>
+    <button type="button" data-opening-replay-inline hidden>Rever abertura <span aria-hidden="true">↻</span></button>
   </div>
   <div class="home-opening-inner">
     <img class="home-opening-brand" src="/brand/logo-nexo-horizontal-sobre-dark.svg" width="1440" height="400" alt="NEXO Inteligência Clínica" fetchpriority="high"/>
     <div class="home-opening-paths" data-opening-paths>
-      <span class="home-opening-eyebrow">CIÊNCIA · PESSOAS · POSSIBILIDADES</span>
-      <h2 id="home-opening-title">Por onde você quer começar?</h2>
+      <h2 id="home-opening-title">Por onde começa a sua conexão?</h2>
       <div class="home-opening-choices">
         <a class="home-opening-choice" href="/para-voce/" data-opening-choice>
-          <span class="home-opening-coordinate">01 / SUA HISTÓRIA</span>
           <h3>Para mim<span>.</span></h3>
-          <p>Psicoterapia e avaliação neuropsicológica.<br/>Cuidado para compreender sua história.</p>
+          <p>Psicoterapia, avaliação e autoconhecimento.</p>
           <span class="home-opening-arrow" aria-hidden="true">↗</span>
         </a>
         <a class="home-opening-choice" href="/para-sua-empresa/" data-opening-choice>
-          <span class="home-opening-coordinate">02 / PESSOAS E TRABALHO</span>
           <h3>Para minha empresa<span>.</span></h3>
-          <p>Saúde mental no trabalho e riscos psicossociais na NR-1. Seleção, treinamento e desenvolvimento.</p>
+          <p>Pessoas, saúde mental e desenvolvimento.</p>
           <span class="home-opening-arrow" aria-hidden="true">↗</span>
         </a>
       </div>
