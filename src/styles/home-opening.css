@@ -27,7 +27,8 @@
 .home-opening-choice:hover { border-color:#d3a17d; transform:translateY(-3px); }
 .home-opening-choice h3 { font-size:clamp(29px,3vw,38px); line-height:1.12; padding-right:30px; }
 .home-opening-choice h3>span { color:#d3a17d; }
-.home-opening-choice p { font-size:13px; line-height:1.6; color:#bdcece; margin-top:12px; }
+.home-opening-choice p { font-size:14px; line-height:1.65; color:#d6e0dd; margin-top:12px; }
+.home-opening-detail { display:block; margin-top:12px; font-size:12px; line-height:1.65; color:#bdcece; }
 .home-opening-arrow { position:absolute; top:16px; right:0; color:#d3a17d; font-size:21px; line-height:1; }
 .home-opening-explore { display:inline-flex; align-items:center; gap:26px; min-height:44px; padding:10px 0 5px; margin-top:26px; border-bottom:1px solid #b5afa266; font-size:12px; color:#d6dfdb; }
 .home-opening-explore:hover { color:#f4d1ac; }
@@ -50,7 +51,8 @@ body.home-opening-open { overflow:hidden; }
   .home-opening-choices { grid-template-columns:1fr; gap:6px; width:min(360px,100%); margin-top:24px; }
   .home-opening-choice { min-height:89px; padding:15px 0; }
   .home-opening-choice h3 { font-size:32px; }
-  .home-opening-choice p { font-size:13px; margin-top:9px; }
+  .home-opening-choice p { font-size:14px; margin-top:9px; }
+  .home-opening-detail { margin-top:8px; }
   .home-opening-arrow { top:15px; font-size:20px; }
   .home-opening-explore { margin-top:24px; font-size:12px; }
   .home-opening-launcher { top:85px; right:24px; }
