@@ -42,7 +42,7 @@ const walk=directory=>fs.readdirSync(directory,{withFileTypes:true}).flatMap(ent
 const relative=file=>path.relative(build,file).split(path.sep).join('/');
 const routeFile=slug=>path.join(build,'psicologia-em-pauta',slug,'index.html');
 const routeUrl=slug=>`/psicologia-em-pauta/${slug}/`;
-const sourceUrl=slug=>`/psicologia-em-pauta/originais/${slug}.pdf`;
+const sourceUrl=slug=>`/psicologia-em-pauta/${slug==='analise-do-comportamento'?'acervo':'originais'}/${slug}.pdf`;
 const imageUrl=slug=>`/psicologia-em-pauta/imagens/${slug}.jpg`;
 const socialUrl=slug=>`/psicologia-em-pauta/sociais/${slug}.png`;
 const outputFile=url=>path.join(build,...url.replace(/^\//,'').split('/'));
@@ -212,7 +212,7 @@ for(const edition of editionManifest.editions){
  if(fs.existsSync(emitted))check(sha256(fs.readFileSync(emitted))===edition.pdfSha256,`${edition.slug}: revised PDF differs from checked manifest`);
  check(noindexHeader(rules,`/psicologia-em-pauta/edicoes/${edition.slug}.pdf`),`${edition.slug}: revised PDF lacks noindex header`);
 }
-const draftArtifacts=files.filter(file=>/^psicologia-em-pauta\/(?:originais|imagens|sociais)\//.test(relative(file)));
+const draftArtifacts=files.filter(file=>/^psicologia-em-pauta\/(?:originais|acervo|imagens|sociais)\//.test(relative(file)));
 const summaries=[];
 
 if(mode!=='public'){
@@ -286,8 +286,14 @@ if(mode!=='public'){
   sourceUrl(article.slug).slice(1),socialUrl(article.slug).slice(1),
   ...Object.values(photography.assets).map(photo=>photo.url.slice(1)),
  ]));
+ const legacySource='psicologia-em-pauta/originais/analise-do-comportamento.pdf';
+ expectedArtifacts.add(legacySource);
+ const redirectFile=path.join(build,'_redirects');
+ check(fs.existsSync(redirectFile)&&fs.readFileSync(redirectFile,'utf8').split(/\r?\n/).includes(`/${legacySource} /psicologia-em-pauta/edicoes/analise-do-comportamento.pdf 302`),'Legacy PDF must redirect to the revised edition');
+ const legacyFile=path.join(build,legacySource);
+ check(fs.existsSync(legacyFile)&&sha256(fs.readFileSync(legacyFile))===articles.find(article=>article.slug==='analise-do-comportamento')?.source.sha256,'Legacy source bytes must remain preserved');
  for(const artifact of draftArtifacts)check(expectedArtifacts.has(relative(artifact)),`Unexpected editorial draft artifact: ${relative(artifact)}`);
- check(draftArtifacts.length===12+Object.keys(photography.assets).length,`Expected six original PDFs, six social PNGs and ${Object.keys(photography.assets).length} photographs; found ${draftArtifacts.length} files`);
+ check(draftArtifacts.length===expectedArtifacts.size,`Expected ${expectedArtifacts.size} inventoried source/image/social assets including the archived source; found ${draftArtifacts.length} files`);
  for(const [id,photo] of Object.entries(photography.assets)){
   const emitted=outputFile(photo.url);
   check(fs.existsSync(emitted),`${id}: photography asset missing`);

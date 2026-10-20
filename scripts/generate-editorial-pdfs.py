@@ -26,6 +26,7 @@ from reportlab.lib.pagesizes import A4
 from reportlab.lib.styles import ParagraphStyle
 from reportlab.lib.utils import ImageReader
 from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase import pdfdoc
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfgen.canvas import Canvas
 from reportlab.platypus import (
@@ -155,6 +156,10 @@ class Cover(Flowable):
         c.saveState()
         origin_x, origin_y = c.absolutePosition(0, 0)
         c.translate(-origin_x, -origin_y)
+        if self.article['slug'] == 'analise-do-comportamento':
+            self.draw_photographic_cover(c)
+            c.restoreState()
+            return
         c.setFillColor(IVORY)
         c.rect(0, 0, W, H, fill=1, stroke=0)
         c.setFillColor(BLUE)
@@ -242,6 +247,72 @@ class Cover(Flowable):
         c.setFillColor(COPPER)
         c.drawString(LEFT, 72, 'Uma leitura educativa para ampliar perguntas e possibilidades.')
         c.restoreState()
+
+    def draw_photographic_cover(self, c):
+        """A photographic magazine composition; source photographs stay intact."""
+        c._doc.ensureMinPdfVersion('transparency')
+        c.setFillColor(BLUE)
+        c.rect(0, 0, W, H, fill=1, stroke=0)
+        photo = edition_photo(self.article['slug'])
+        if photo:
+            x, y, width, height = 132, 110, W - 92, 535
+            c.saveState()
+            crop = c.beginPath(); crop.rect(x, y, width, height)
+            c.clipPath(crop, stroke=0)
+            iw, ih = ImageReader(str(ROOT / photo['file'])).getSize()
+            scale = max(width / iw, height / ih)
+            # A native PDF luminosity mask creates a continuous, four-edge fade.
+            # The photograph itself is neither altered nor rasterized again.
+            domain = pdfdoc.PDFArray([0, 1, 0, 1])
+            function = pdfdoc.PDFStream(pdfdoc.PDFDictionary({
+                'FunctionType': 4, 'Domain': domain, 'Range': pdfdoc.PDFArray([0, 1]),
+            }), b'{ 180 mul sin abs 0.8 exp exch 180 mul sin abs 1.4 exp mul 0.40 mul }')
+            shading = pdfdoc.PDFDictionary({
+                'ShadingType': 1, 'ColorSpace': pdfdoc.PDFName('DeviceGray'),
+                'Domain': domain, 'Matrix': pdfdoc.PDFArray([width, 0, 0, height, x, y]),
+                'Function': c._doc.Reference(function),
+            })
+            form = pdfdoc.PDFStream(pdfdoc.PDFDictionary({
+                'Type': pdfdoc.PDFName('XObject'), 'Subtype': pdfdoc.PDFName('Form'),
+                'FormType': 1, 'BBox': pdfdoc.PDFArray([x, y, x + width, y + height]),
+                'Group': pdfdoc.PDFDictionary({'S': pdfdoc.PDFName('Transparency'),
+                                              'CS': pdfdoc.PDFName('DeviceGray'), 'I': pdfdoc.PDFtrue}),
+                'Resources': pdfdoc.PDFDictionary({'Shading': pdfdoc.PDFDictionary({
+                    'PhotoFade': c._doc.Reference(shading),
+                })}),
+            }), b'q /PhotoFade sh Q')
+            soft_mask = pdfdoc.PDFDictionary({'S': pdfdoc.PDFName('Luminosity'),
+                'G': c._doc.Reference(form), 'BC': pdfdoc.PDFArray([0])})
+            c._extgstate.defaults.setdefault('SMask', pdfdoc.PDFName('None'))
+            c._extgstate.set(c, 'SMask', soft_mask)
+            c.drawImage(str(ROOT / photo['file']), x + (width - iw * scale) * .5,
+                        y + (height - ih * scale) * .5, iw * scale, ih * scale, mask='auto')
+            c.restoreState()
+        c.setFillColor(IVORY); c.setFont('SansBold', 9)
+        c.drawString(LEFT, H - 43, 'NEXO INTELIGÊNCIA CLÍNICA')
+        c.setStrokeColor(COPPER); c.setLineWidth(.7)
+        c.line(LEFT, H - 61, W - RIGHT, H - 61)
+        c.setFillColor(IVORY); c.setFont('Serif', 36)
+        c.drawString(LEFT, H - 109, 'Psicologia em Pauta')
+        c.setFillColor(SAND); c.setFont('SansBold', 9)
+        c.drawString(LEFT, H - 141, f'EDIÇÃO {self.number:02d}  /  ANÁLISE DO COMPORTAMENTO')
+        title = Paragraph(esc(self.article['title']), ParagraphStyle('PhotoCoverTitle',
+                          fontName='Serif', fontSize=35, leading=41, textColor=IVORY))
+        _, th = title.wrap(TEXT_W, 230)
+        title.drawOn(c, LEFT, H - 188 - th)
+        subtitle = Paragraph(esc(self.article['subtitle']), ParagraphStyle('PhotoCoverSubtitle',
+                             fontName='Sans', fontSize=12.5, leading=19, textColor=SAND))
+        _, sh = subtitle.wrap(310, 180)
+        subtitle.drawOn(c, LEFT, H - 210 - th - sh)
+        c.setStrokeColor(COPPER); c.line(LEFT, 186, LEFT + 78, 186)
+        byline = Paragraph('Texto e curadoria de<br/><b>Gabriel Alves Batista</b><br/>CRP-SP 06/176184',
+                           ParagraphStyle('PhotoByline', fontName='Sans', fontSize=10,
+                                          leading=16, textColor=IVORY))
+        byline.wrap(260, 100); byline.drawOn(c, LEFT, 119)
+        c.setFillColor(SAND); c.setFont('Sans', 8)
+        c.drawString(LEFT, 71, 'Contexto, relações e possibilidades de mudança.')
+        c.setFont('Sans', 7.5)
+        c.drawString(LEFT, 52, 'Fotografia: acervo do autor  /  Leitura educativa com referências')
 
 
 class EditionDoc(BaseDocTemplate):
@@ -492,7 +563,13 @@ def main():
                         'pdfSha256': sha(out), 'pages': pages, 'selectableCharacters': chars,
                         'url': f'/psicologia-em-pauta/edicoes/{slug}.pdf'})
         print(f'{slug}: {pages} pages, {chars} selectable characters, complete source copy.')
-    if not args.only:
+    if args.only:
+        manifest = json.loads(MANIFEST.read_text(encoding='utf-8'))
+        replacements = {item['slug']: item for item in records}
+        manifest['editions'] = [replacements.get(item['slug'], item) for item in manifest['editions']]
+        manifest['generatedAt'] = datetime.now(ZoneInfo('America/Bahia')).isoformat(timespec='seconds')
+        MANIFEST.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+    else:
         manifest = {'schemaVersion': 1,
                     'generatedAt': datetime.now(ZoneInfo('America/Bahia')).isoformat(timespec='seconds'),
                     'generator': 'scripts/generate-editorial-pdfs.py',

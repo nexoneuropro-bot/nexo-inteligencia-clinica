@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-18T16:39:44-03:00",
+  "generatedAt": "2026-10-20T03:35:30-03:00",
   "generator": "scripts/generate-editorial-pdfs.py",
   "status": "preview",
   "clinicalApproval": false,
@@ -71,9 +71,9 @@
       "source": "src/data/editorial/analise-do-comportamento.json",
       "sourceSha256": "79d1238aa9f6428d24e7f8eb6f3b68b9a6fe263680a8ea6c29a2269a6e31bfde",
       "file": "src/assets/editorial-pdfs/analise-do-comportamento.pdf",
-      "pdfSha256": "aa7b155504fe56bac6a5beddbb1362d7620a092124e1a94f5e79034710cec0e9",
+      "pdfSha256": "5442eedeb88a41c27d5c4c9b52bf34c353e63aa65a89ee76674e0f6cd09fb564",
       "pages": 10,
-      "selectableCharacters": 16344,
+      "selectableCharacters": 16258,
       "url": "/psicologia-em-pauta/edicoes/analise-do-comportamento.pdf"
     },
     {

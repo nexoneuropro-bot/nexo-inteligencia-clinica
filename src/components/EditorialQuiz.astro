@@ -40,6 +40,7 @@ const regions = ['AC','AL','AP','AM','BA','CE','DF','ES','GO','MA','MT','MS','MG
         <div data-quiz-share-demo class="ed-quiz-share-demo" hidden>
           <p class="ed-quiz-demo-notice" data-quiz-share-availability role="status">O compartilhamento está desativado nesta demonstração. Os campos opcionais não são salvos nem enviados.</p>
           <button type="button" class="ed-quiz-button" data-quiz-share-check>Verificar disponibilidade</button>
+          <div data-quiz-share-ready hidden>
           <div class="ed-quiz-share-fields">
             <label>Como gostaria de ser identificado? <span>Pseudônimo ou apelido (opcional)</span><input type="text" data-quiz-pseudonym maxlength="40" autocomplete="off" placeholder="Leitor anônimo" /></label>
             <label>Faixa etária <span>(opcional)</span><select data-quiz-age><option value="">Prefiro não informar</option><option value="under18">Até 17 anos</option><option>18–24</option><option>25–34</option><option>35–44</option><option>45–54</option><option>55+</option></select></label>
@@ -52,6 +53,7 @@ const regions = ['AC','AL','AP','AM','BA','CE','DF','ES','GO','MA','MT','MS','MG
             <a href="/psicologia-em-pauta/privacidade/" target="_blank" rel="noopener">Ler a política de privacidade (nova aba)</a>
           </div>
           <button type="button" class="ed-quiz-button" data-quiz-share-submit disabled>Compartilhamento indisponível</button>
+          </div>
           <p data-quiz-share-status class="ed-quiz-demo-notice" role="status" tabindex="-1" hidden></p>
         </div>
         <p data-quiz-share-declined class="ed-quiz-demo-notice" tabindex="-1" hidden>Tudo certo. Nada foi enviado e você pode continuar a leitura.</p>

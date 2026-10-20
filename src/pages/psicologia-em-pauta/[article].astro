@@ -5,6 +5,7 @@ import EditorialPhoto from '../../components/EditorialPhoto.astro';
 import EditorialReaderControls from '../../components/EditorialReaderControls.astro';
 import EditorialMagazine from '../../components/EditorialMagazine.astro';
 import EditorialQuiz from '../../components/EditorialQuiz.astro';
+import EditorialPressClipping from '../../components/EditorialPressClipping.astro';
 import {editorialQuizForArticle} from '../../data/editorial-quizzes';
 import {editorialCoverPhoto,editorialChapterPhotos} from '../../data/editorial-photography';
 import {visibleEditorialArticles,articleUrl,articleReadingMinutes,editorialPreview,editorialByline,editorialBlockLabel,type EditorialArticle} from '../../data/editorial';
@@ -15,7 +16,7 @@ import '../../styles/editorial-reader-controls.css';
 export function getStaticPaths(){return visibleEditorialArticles.map(article=>({params:{article:article.slug},props:{article}}));}
 const {article}=Astro.props as {article:EditorialArticle};
 const otherArticles=visibleEditorialArticles.filter(other=>other.slug!==article.slug);
-const originalUrl=`/psicologia-em-pauta/originais/${article.slug}.pdf`;
+const originalUrl=`/psicologia-em-pauta/${article.slug==='analise-do-comportamento'?'acervo':'originais'}/${article.slug}.pdf`;
 const editionUrl=`/psicologia-em-pauta/edicoes/${article.slug}.pdf`;
 const hasQuiz=Boolean(editorialQuizForArticle(article.slug));
 const coverPhoto=editorialCoverPhoto(article.slug);
@@ -48,7 +49,8 @@ const byline=editorialByline(article);
       </div>)}
      </section>)}
      <section class="ed-references" id="referencias"><span class="ed-chapter-number">CONTINUE A INVESTIGAR</span><h2>Fontes e referências.</h2><ol>{article.references.map(reference=><li><p>{reference.url&&reference.verification!=='replace'?<a href={reference.url} target="_blank" rel="noopener noreferrer">{reference.label} ↗</a>:reference.label}</p></li>)}</ol></section>
-     {editorialPreview&&<section class="ed-article-download" id="baixar-edicao"><span class="ed-chapter-number">PARA GUARDAR E CONSULTAR</span><h2>Leve a leitura com você.</h2><p>Baixe a edição A4 com o mesmo conteúdo desta leitura, referências e links para continuar no navegador.</p><a class="ed-reading-link" href={editionUrl} download>Baixar edição atual em PDF ↓</a><p><a class="ed-pdf-link" href={originalUrl} target="_blank" rel="noopener noreferrer">Abrir edição original em PDF ↗</a></p></section>}
+     {article.slug==='relacoes-reciprocidade'&&<EditorialPressClipping/>}
+     {editorialPreview&&<section class="ed-article-download" id="baixar-edicao"><span class="ed-chapter-number">PARA GUARDAR E CONSULTAR</span><h2>Leve a leitura com você.</h2><p>Baixe a edição A4 com o mesmo conteúdo desta leitura, referências e links para continuar no navegador.</p><a class="ed-reading-link" href={editionUrl} download>Baixar edição atual em PDF ↓</a><details class="ed-source-archive"><summary>Consultar arquivo de origem</summary><a class="ed-pdf-link" href={originalUrl} target="_blank" rel="noopener noreferrer">Abrir PDF de origem, preservado no acervo ↗</a></details></section>}
      <section class="ed-next-reading"><span class="ed-eyebrow">UMA PERGUNTA LEVA A OUTRA.</span><h2>A leitura continua.</h2><nav aria-label="Outras edições">{otherArticles.map(other=><a href={articleUrl(other.slug)}>{other.title}<span aria-hidden="true">↗</span></a>)}</nav><a class="ed-reading-link" href="/nossa-abordagem/">Conheça a abordagem da NEXO ↗</a></section>
     </article>
    </div>

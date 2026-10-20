@@ -51,6 +51,7 @@ function initialiseQuiz(root: HTMLElement) {
     if (!storageAvailable) find('[data-quiz-storage]').textContent = 'O armazenamento de sessão está indisponível. Suas escolhas continuam apenas nesta página e não são enviadas; podem ser perdidas ao recarregar.';
   };
   const syncSharingControls = () => {
+    find('[data-quiz-share-ready]').hidden = !sharingEnabled;
     const minor = find<HTMLSelectElement>('[data-quiz-age]').value === 'under18';
     find('[data-quiz-minor]').hidden = !minor;
     adult.disabled = consent.disabled = !sharingEnabled || minor || sending || shared;
@@ -58,7 +59,7 @@ function initialiseQuiz(root: HTMLElement) {
     sendButton.textContent = sending ? 'Aguardando confirmação…' : shared ? 'Envio aceito pelo provedor' : !sharingEnabled ? 'Compartilhamento indisponível' : shareAttempt ? 'Tentar novamente com a mesma solicitação' : 'Confirmar compartilhamento';
     checkButton.disabled = checkingSharing || sending || shared;
     checkButton.textContent = checkingSharing ? 'Verificando…' : 'Verificar disponibilidade';
-    for (const control of root.querySelectorAll<HTMLInputElement | HTMLSelectElement>('[data-quiz-pseudonym],[data-quiz-age],[data-quiz-uf]')) control.disabled = sending || shared;
+    for (const control of root.querySelectorAll<HTMLInputElement | HTMLSelectElement>('[data-quiz-pseudonym],[data-quiz-age],[data-quiz-uf]')) control.disabled = !sharingEnabled || sending || shared;
     for (const control of root.querySelectorAll<HTMLInputElement | HTMLButtonElement>('[data-quiz-context],[data-quiz-edit],[data-quiz-clear],[data-quiz-share-yes],[data-quiz-share-no]')) control.disabled = sending;
   };
   const resetSharing = () => {
@@ -87,7 +88,7 @@ function initialiseQuiz(root: HTMLElement) {
     checkingSharing = false; sharingEnabled = enabled;
     availability.textContent = enabled
       ? `Serviço disponível. Somente após sua confirmação serão enviados ${quiz.scoring ? 'os totais de cada grupo, a versão do quiz' : 'os trechos da devolutiva'}, o contexto escolhido, os dados opcionais informados e o registro do consentimento. As respostas completas e a memória por pergunta permanecem neste navegador.`
-      : 'Compartilhamento indisponível: esta prévia funciona como demonstração. Esta consulta não envia sua devolutiva nem os dados dos campos. Você pode continuar lendo, copiar ou salvar sua reflexão.';
+      : 'O envio ao autor ainda não foi habilitado. Sua devolutiva continua disponível para copiar, salvar e consultar. Nenhum dado pessoal foi solicitado ou enviado por esta consulta.';
     syncSharingControls();
   };
   const paint = (focus = false) => {

@@ -337,3 +337,12 @@
 .ed-edition-formats .ed-quiz-shortcut{color:#82503c;padding-inline:13px}
 @media(max-width:760px){.ed-landing-cover{margin-top:34px;padding:0}.ed-cover-story>span{font-size:37px}.ed-topic-nav{grid-template-columns:repeat(2,minmax(0,1fr))}.ed-topic-nav a{font-size:21px}.ed-photo-hero .ed-photograph-image img{max-height:420px}.ed-photo-catalog .ed-photograph-image img{aspect-ratio:auto;max-height:350px;object-fit:contain}.ed-photo-chapter{margin-bottom:28px}.ed-photograph figcaption{font-size:12px}.ed-article-index nav>a.ed-quiz-shortcut{padding:12px;margin-top:8px}.ed-hero-copy .ed-hero-quiz{font-size:13px}}
 @media print{.ed-photo-chapter{break-inside:avoid;max-width:15cm}.ed-photograph figcaption{color:#444}.ed-photograph-image img{mask-image:none;filter:none}.ed-quiz-shortcut{display:none!important}}
+/* Photographic edges blend into the magazine; news clippings remain sharp. */
+.ed-photograph-image img{mask-image:radial-gradient(ellipse 80% 85% at 50% 40%,#000 53%,#000c 73%,transparent 100%);animation:ed-photo-appear .9s ease-out both}
+.ed-photograph-author .ed-photograph-image img,.ed-photo-hero.ed-photograph-author .ed-photograph-image img{opacity:.9;mask-image:radial-gradient(ellipse 65% 75% at 50% 40%,#000 44%,#000b 67%,transparent 100%)}
+.ed-photo-hero .ed-photograph-image img{mask-image:radial-gradient(ellipse 80% 85% at 50% 40%,#000 53%,#000c 73%,transparent 100%)}
+.ed-source-archive{margin-top:18px;font-size:13px}.ed-source-archive summary{cursor:pointer;color:var(--ed-secondary,#b9cbc4);padding-block:8px}.ed-source-archive a{display:inline-block;margin-top:8px}
+.ed-press-clipping{padding:28px;border-block:1px solid var(--ed-rule,#b7957444);background:#f9f7f0;color:#153441;margin:30px 0 45px}.ed-press-clipping img{display:block;width:100%;height:auto;max-width:932px}.ed-press-clipping .ed-press-source{font:500 11px/1.7 var(--sans);letter-spacing:.08em;text-transform:uppercase;color:#795239;margin-bottom:17px}.ed-press-clipping blockquote{font:400 clamp(26px,3vw,38px)/1.2 var(--serif);margin:22px 0;color:#153441}.ed-press-clipping figcaption{font:400 13px/1.8 var(--sans);color:#52626a}.ed-press-clipping a{display:inline-block;margin-top:12px;font-size:14px;text-decoration:underline;text-underline-offset:4px}
+@keyframes ed-photo-appear{from{opacity:0}to{opacity:1}}
+@media(prefers-reduced-motion:reduce){.ed-photograph-image img{animation:none}}
+@media print{.ed-photograph-image img{animation:none;mask-image:none}.ed-press-clipping{break-inside:avoid}}
