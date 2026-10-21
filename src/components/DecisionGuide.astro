@@ -1,0 +1,104 @@
+---
+import { whatsapp } from '../data/reflections';
+import '../styles/decision-guide.css';
+
+interface Props { type: 'personal' | 'business' }
+const { type } = Astro.props;
+const business = type === 'business';
+const prefix = `decision-${type}`;
+const situations = business ? [
+  {
+    title: 'Preciso entender o que a NR-1 pede da minha empresa.',
+    text: 'O ponto de partida é compreender as condições e a organização do trabalho. A consultoria pode apoiar a identificação e a avaliação de fatores de risco psicossociais relacionados ao trabalho, em articulação com os responsáveis pelo gerenciamento de riscos ocupacionais.',
+    next: 'Podemos conversar sobre o que a empresa já faz, quais informações existem e que apoio precisa ser planejado.',
+    href: '/riscos-psicossociais-nr1/', label: 'Entender a NR-1 e os riscos psicossociais',
+    context: 'NR-1 e fatores de risco psicossociais relacionados ao trabalho na minha empresa',
+  },
+  {
+    title: 'Estamos contratando e queremos decidir com mais critérios.',
+    text: 'Antes de escolher uma pessoa, é preciso esclarecer as exigências da função e as condições de trabalho. Entrevistas, análise de competências e, quando pertinente, avaliação psicológica podem oferecer informações para a decisão.',
+    next: 'O projeto pode definir critérios de seleção e uma devolutiva adequada à finalidade da contratação. Um instrumento isolado não determina quem deve ser contratado.',
+    href: '/recrutamento-e-selecao/', label: 'Conhecer recrutamento e seleção',
+    context: 'recrutamento, critérios de seleção e apoio à contratação',
+  },
+  {
+    title: 'Há conflitos, falhas de comunicação ou sobrecarga na equipe.',
+    text: 'Essas situações podem envolver relações entre pessoas, mas também metas, recursos, distribuição de tarefas e formas de gestão. A escuta e a análise do trabalho ajudam a investigar o que mantém a dificuldade.',
+    next: 'A partir desse contexto, podemos discutir prioridades de mudança e formas de acompanhar seus efeitos.',
+    href: '/para-sua-empresa/#servicos-empresa', label: 'Explorar as frentes de consultoria',
+    context: 'conflitos, comunicação ou sobrecarga na minha equipe',
+  },
+  {
+    title: 'Quero desenvolver minha equipe e minhas lideranças.',
+    text: 'Um treinamento ganha sentido quando responde a uma necessidade observável. O trabalho pode começar pela identificação de habilidades a desenvolver, situações em que serão usadas e condições para colocá-las em prática.',
+    next: 'Objetivos, atividades e formas de acompanhamento são combinados conforme a realidade da equipe.',
+    href: '/treinamento-e-desenvolvimento/', label: 'Conhecer treinamento e desenvolvimento',
+    context: 'desenvolvimento de equipes e lideranças',
+  },
+  {
+    title: 'Não sei se precisamos de treinamento, avaliação ou outro apoio.',
+    text: 'Você pode começar descrevendo uma situação concreta: o que acontece, em quais momentos e como isso afeta o trabalho. Não é necessário chegar com um serviço escolhido.',
+    next: 'A conversa inicial ajuda a esclarecer a demanda e as possibilidades de um projeto, antes de definir escopo e condições.',
+    href: '/para-sua-empresa/#servicos-empresa', label: 'Conhecer possibilidades de trabalho',
+    context: 'uma situação da empresa que ainda preciso compreender antes de escolher um serviço',
+  },
+] : [
+  {
+    title: 'Penso em começar terapia, mas não sei como funciona.',
+    text: 'A psicoterapia oferece um espaço para compreender dificuldades e construir possibilidades de mudança. Na Análise do Comportamento, investigamos relações entre o que você faz, pensa e sente, sua história e as situações em que vive.',
+    next: 'Você pode iniciar a conversa contando o que motivou sua busca, mesmo sem uma explicação pronta.',
+    href: '/psicoterapia/', label: 'Entender a psicoterapia e a terapia breve',
+    context: 'como começar a psicoterapia e compreender minha demanda',
+  },
+  {
+    title: 'Tenho dúvidas sobre minha atenção, memória ou aprendizagem.',
+    text: 'A avaliação neuropsicológica investiga o funcionamento cognitivo em relação à sua história, à saúde e às demandas do cotidiano. Uma queixa de atenção ou memória pode ter diferentes relações com o contexto; ela não define, sozinha, um diagnóstico.',
+    next: 'O primeiro passo é esclarecer sua pergunta e entender se uma avaliação pode contribuir para respondê-la.',
+    href: '/avaliacao-neuropsicologica/', label: 'Conhecer a avaliação neuropsicológica',
+    context: 'dúvidas sobre atenção, memória ou aprendizagem e o processo de avaliação',
+  },
+  {
+    title: 'Não sei se procuro psicoterapia, avaliação ou cuidado médico.',
+    text: 'São trabalhos com finalidades diferentes. A psicoterapia acompanha processos de mudança; a avaliação investiga perguntas específicas; a avaliação médica examina condições de saúde e possibilidades de cuidado médico.',
+    next: 'Esses caminhos podem se complementar quando houver necessidade. A escolha depende da compreensão da sua demanda e de uma avaliação profissional.',
+    href: '/integracao-psiquiatrica/', label: 'Entender a interface com o cuidado médico',
+    context: 'diferenças entre psicoterapia, avaliação e cuidado médico para minha situação',
+  },
+  {
+    title: 'Só sei que algo me incomoda e quero compreender melhor.',
+    text: 'Você não precisa nomear um problema para conversar sobre ele. Pode começar por uma situação recente: o que aconteceu, como reagiu e o que mudou depois.',
+    next: 'Esse relato pode ajudar a formular perguntas e esclarecer os caminhos de cuidado possíveis para você.',
+    href: '/nossa-abordagem/', label: 'Conhecer nossa forma de compreender',
+    context: 'uma dificuldade que ainda não sei como explicar ou por onde começar',
+  },
+];
+---
+<section class="decision-guide" id={prefix} aria-labelledby={`${prefix}-title`}>
+  <div class="decision-guide-intro">
+    <span class="decision-guide-eyebrow">UM PONTO DE PARTIDA</span>
+    <h2 id={`${prefix}-title`}>{business ? 'O que você precisa compreender?' : 'Ainda não sei por onde começar.'}</h2>
+    <p>{business
+      ? 'Reconhece alguma destas situações? Explore possibilidades para sua empresa, mesmo sem saber o nome do serviço.'
+      : 'Uma dúvida também pode iniciar uma conversa. Abra a situação mais próxima do que você está vivendo.'}</p>
+  </div>
+  <div class="decision-guide-list">
+    {situations.map((situation, index) => <details class="decision-guide-item">
+      <summary>
+        <span class="decision-guide-index" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+        <span class="decision-guide-question">{situation.title}</span>
+        <span class="decision-guide-toggle" aria-hidden="true"></span>
+      </summary>
+      <div class="decision-guide-answer">
+        <p>{situation.text}</p>
+        <p class="decision-guide-next">{situation.next}</p>
+        <div class="decision-guide-actions">
+          <a href={situation.href}>{situation.label}<span aria-hidden="true">↗</span></a>
+          <a class="decision-guide-contact" href={whatsapp(type, situation.context)} target="_blank" rel="noopener noreferrer">{business ? 'Apresentar minha situação' : 'Conversar sobre minha dúvida'}<span aria-hidden="true">↗</span><span class="decision-guide-sr-only"> pelo WhatsApp, em nova aba</span></a>
+        </div>
+      </div>
+    </details>)}
+  </div>
+  <p class="decision-guide-note">{business
+    ? 'Cada projeto considera a demanda, as condições de trabalho e os objetivos da organização. Abrir uma situação aqui não gera avaliação nem coleta informações sobre sua equipe.'
+    : 'Estas explicações ajudam a conhecer possibilidades. A compreensão da sua situação acontece em conversa com um profissional; este guia não realiza avaliação ou diagnóstico.'}</p>
+</section>

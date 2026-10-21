@@ -1,0 +1,68 @@
+---
+import { businessServices } from '../data/business-services';
+import { whatsapp } from '../data/reflections';
+import '../styles/business-services.css';
+
+interface Props { id?: string }
+const { id = 'business-services' } = Astro.props;
+const prefix = `${id}-explorer`;
+---
+<section class="business-services" id={id} data-bs-root aria-labelledby={`${prefix}-title`}>
+  <header class="bs-intro">
+    <span class="bs-eyebrow">PSICOLOGIA PARA EMPRESAS</span>
+    <h2 id={`${prefix}-title`}>Pessoas, trabalho.<br/><em>Conexões que orientam decisões.</em></h2>
+    <p>Selecionar, desenvolver e cuidar das condições de trabalho são desafios diferentes. Conheça como a Psicologia pode contribuir em cada um deles.</p>
+  </header>
+  <div class="bs-explorer">
+    <div class="bs-map" data-bs-map>
+      <div class="bs-orbits" aria-hidden="true">
+        <svg viewBox="0 0 660 650" fill="none">
+          <ellipse cx="330" cy="315" rx="280" ry="165" transform="rotate(-32 330 315)"/>
+          <ellipse cx="330" cy="315" rx="280" ry="165" transform="rotate(32 330 315)"/>
+          <ellipse cx="330" cy="315" rx="235" ry="260" transform="rotate(72 330 315)"/>
+          <path d="M105 130 330 315 555 130M80 315H580M105 515 330 315 555 515M105 130 80 315 105 515 555 515 580 315 555 130Z"/>
+          <circle cx="330" cy="315" r="72"/>
+          <circle cx="330" cy="315" r="84"/>
+          <g class="bs-map-dots"><circle cx="105" cy="130" r="4"/><circle cx="555" cy="130" r="4"/><circle cx="80" cy="315" r="4"/><circle cx="580" cy="315" r="4"/><circle cx="105" cy="515" r="4"/><circle cx="555" cy="515" r="4"/></g>
+        </svg>
+      </div>
+      <span class="bs-center" aria-hidden="true">PESSOAS<span>↔</span>TRABALHO<span>↔</span>CONTEXTO</span>
+      <div class="bs-selectors" role="group" aria-label="Explore os serviços de Psicologia para empresas">
+        {businessServices.map((service, index) => <button
+          type="button"
+          class={`bs-node bs-node-${index}`}
+          id={`${prefix}-button-${service.id}`}
+          data-bs-select={service.id}
+          aria-controls={`${prefix}-panel-${service.id}`}
+          aria-pressed={index === 0 ? 'true' : 'false'}
+        ><span class="bs-node-index" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span><span>{service.label}</span><span class="bs-node-arrow" aria-hidden="true">↗</span></button>)}
+      </div>
+      <p class="bs-map-invitation">Escolha uma frente.<br/>Descubra o que ela pode ajudar a compreender.</p>
+    </div>
+    <div class="bs-panels">
+      <p class="bs-status" data-bs-status aria-live="polite" aria-atomic="true"></p>
+      {businessServices.map((service, index) => <article
+        class="bs-panel"
+        id={`${prefix}-panel-${service.id}`}
+        data-bs-panel={service.id}
+        aria-labelledby={`${prefix}-heading-${service.id}`}
+      >
+        <div class="bs-panel-top"><span class="bs-eyebrow">{service.eyebrow}</span><span class="bs-panel-index" aria-hidden="true">{String(index + 1).padStart(2, '0')} / 06</span></div>
+        <h3 id={`${prefix}-heading-${service.id}`} tabindex="-1">{service.label}</h3>
+        <p class="bs-panel-premise">{service.title}</p>
+        <p>{service.description}</p>
+        <div class="bs-demand"><span class="bs-label">UMA DEMANDA POSSÍVEL</span><p>{service.demand}</p></div>
+        <ol class="bs-steps">
+          {service.steps.map((step, stepIndex) => <li><span class="bs-step-index" aria-hidden="true">{String(stepIndex + 1).padStart(2, '0')}</span><div><h4>{step.title}</h4><p>{step.text}</p></div></li>)}
+        </ol>
+        <div class="bs-deliverables"><h4>O que o projeto pode entregar</h4><p>{service.deliverables}</p></div>
+        <p class="bs-scope">{service.scope}</p>
+        <a class="bs-link" href={service.href}>{service.linkLabel}<span aria-hidden="true">↗</span></a>
+        <a class="bs-contact" href={whatsapp('business', service.label.toLocaleLowerCase('pt-BR'))} target="_blank" rel="noopener noreferrer">Conversar sobre esta frente <span aria-hidden="true">↗</span><span class="bs-sr-only">: {service.label}, pelo WhatsApp em nova aba</span></a>
+        <a class="bs-another" href={`#${id}`}>Explorar outra frente ↑</a>
+      </article>)}
+    </div>
+  </div>
+  <p class="bs-common-scope">Cada projeto começa pela compreensão da demanda e pela definição de objetivos, responsabilidades e limites de uso das informações. Métodos e documentos são escolhidos conforme a finalidade do trabalho e as normas da profissão.</p>
+</section>
+<script>import '../scripts/business-services';</script>

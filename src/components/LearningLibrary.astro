@@ -1,0 +1,32 @@
+---
+import guides from '../data/learning-guides.json';
+import '../styles/learning-library.css';
+const formattedDate = '16 de outubro de 2026';
+---
+<section class="learning-library" id="biblioteca" data-learning-library aria-labelledby="learning-library-title">
+  <header class="ll-introduction">
+    <span class="ll-eyebrow">PSICOLOGIA EM PAUTA · GUIAS EDUCATIVOS</span>
+    <h2 id="learning-library-title">Uma pergunta pode<br/>continuar com você.</h2>
+    <p>Três leituras para compreender relações, conhecer caminhos de cuidado e investigar condições do trabalho. Leia aqui ou leve o PDF para consultar depois.</p>
+  </header>
+  <div class="ll-guides">
+    {guides.map((guide,index) => <article class="ll-guide" data-learning-guide={guide.slug} aria-labelledby={`guide-title-${guide.slug}`}>
+      <div class="ll-cover" aria-hidden="true"><span class="ll-cover-number">0{index+1}</span><span class="ll-cover-line"></span><i></i><i></i><i></i><span class="ll-cover-label">NEXO<br/>CONEXÕES PARA COMPREENDER</span></div>
+      <div class="ll-guide-content">
+        <span class="ll-eyebrow">{guide.eyebrow}</span>
+        <h3 id={`guide-title-${guide.slug}`}>{guide.title}</h3>
+        <p class="ll-summary">{guide.summary}</p>
+        <p class="ll-meta">Edição educativa · <time datetime={guide.date}>{formattedDate}</time></p>
+        <div class="ll-actions"><a class="ll-download" href={guide.download} download>Baixar PDF <span aria-hidden="true">↓</span><small>{guide.pages} páginas · {Math.ceil(guide.bytes / 1024)} KB</small></a></div>
+        <details class="ll-reading">
+          <summary>Ler o guia nesta página <span aria-hidden="true">+</span></summary>
+          <div class="ll-reading-body">
+            {guide.sections.map(section => <section><h4>{section.title}</h4>{section.body.map(paragraph => <p>{paragraph}</p>)}</section>)}
+            <div class="ll-sources"><h4>Fontes para continuar</h4><ul>{guide.sources.map(source => <li><a href={source.url} target="_blank" rel="noopener noreferrer">{source.label} <span aria-hidden="true">↗</span></a></li>)}</ul></div>
+          </div>
+        </details>
+      </div>
+    </article>)}
+  </div>
+  <p class="ll-note">Os materiais foram desenvolvidos a partir dos conteúdos educativos da NEXO e das referências indicadas. As leituras convidam à compreensão; a investigação de uma demanda pessoal ou organizacional acontece em seu próprio contexto.</p>
+</section>

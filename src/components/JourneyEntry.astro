@@ -1,0 +1,39 @@
+---
+import ExperienceStage from './ExperienceStage.astro';
+import ProfessionalEncounter from './ProfessionalEncounter.astro';
+import CarePathways from './CarePathways.astro';
+import SelfObservation from './SelfObservation.astro';
+import DecisionGuide from './DecisionGuide.astro';
+import {whatsapp} from '../data/reflections';
+import '../styles/experience.css';
+import '../styles/journey-guidance.css';
+interface Props {type:'personal'|'business';title:string;intro:string;eyebrow?:string;reading?:boolean;human?:boolean;backHref?:string;backLabel?:string;contactSubject?:string}
+const {type,title,intro,eyebrow,reading=false,human=true,backHref='/#experience-paths',backLabel='← Voltar às conexões',contactSubject}=Astro.props;
+const personal=type==='personal';
+---
+<section class:list={['ex-journey-entry',personal?'entry-personal':'entry-business',{'entry-reading':reading,'entry-guided':human&&personal}]} id="experience-entry" aria-labelledby="entry-title">
+  <ExperienceStage entry={type}/>
+  <div class="ex-entry-copy">
+    <a href={backHref} class="ex-entry-back">{backLabel}</a>
+    <span class="ex-eyebrow">{eyebrow||(personal?'01 / PARA VOCÊ':'02 / PARA SUA EMPRESA')}</span>
+    <h1 id="entry-title">{title}</h1><p>{intro}</p>
+    <div class="entry-guidance-actions">
+      {human&&personal ? <>
+        <a href={whatsapp('personal','como começar e esclarecer minha dúvida sobre atendimento')} class="ex-primary-link" target="_blank" rel="noopener noreferrer">Quero conversar sobre minha dúvida <span aria-hidden="true">↗</span></a>
+        <a href="#decision-personal" class="entry-guidance-link">Ainda não sei por onde começar ↓</a>
+      </> : <>
+        <a href="#conteudo-da-jornada" class="ex-primary-link">{reading?'Continue a leitura':'Explore as possibilidades'} <span aria-hidden="true">↓</span></a>
+        {contactSubject&&<a class="entry-guidance-link" href={whatsapp(type,contactSubject)} target="_blank" rel="noopener noreferrer">Conversar sobre este serviço ↗</a>}
+      </>}
+    </div>
+    {human&&personal&&<p class="entry-contact-note">O primeiro contato esclarece possibilidades, disponibilidade e condições. Você pode começar pela sua pergunta.</p>}
+  </div>
+  <span class="ex-entry-coordinate" aria-hidden="true">{reading?'PERGUNTAS ↔ CONTEXTO ↔ COMPREENSÃO':personal?'SINGULARIDADE ↔ HISTÓRIA ↔ CUIDADO':'PESSOAS ↔ RELAÇÕES ↔ ORGANIZAÇÃO'}</span>
+  <div class="ex-controls"><button id="experience-pause" aria-pressed="false">Pausar movimento</button></div>
+</section>
+{human&&personal&&<div class="personal-decision"><DecisionGuide type="personal"/></div>}
+{human&&personal&&<CarePathways id="journey-care"/>}
+{human&&personal&&<SelfObservation id="journey-self-observation"/>}
+{human&&personal&&<ProfessionalEncounter id="journey-people" title="Compreender também é encontrar pessoas." compact/>}
+{human&&!personal&&<section class="ex-entry-human-strip" aria-label="Uma proposta que conecta ciência e pessoas"><div><span class="ex-eyebrow">{personal?'CUIDADO COM PRESENÇA HUMANA':'COMPREENSÃO DO CONTEXTO'}</span><p>{personal?'Antes de escolher um caminho, há espaço para sua pergunta.':'Pessoas também constroem resultados.'}</p></div><img src="/images/gabriel.webp" width="700" height="727" loading="lazy" alt="Gabriel Alves Batista, em fotografia real fornecida"/><a href="/profissionais/">Conheça os profissionais ↗</a></section>}
+<script>import '../scripts/experience-ui';</script>

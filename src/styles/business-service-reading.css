@@ -1,0 +1,21 @@
+.business-references{margin:46px 0;padding:28px 0;border-block:1px solid #a9b8ae44}
+.business-references p{font-size:16px;max-width:65ch}
+.business-references .resource-link{display:block;width:fit-content;max-width:100%;margin:14px 0;font-size:15px;overflow-wrap:anywhere;text-underline-offset:5px}
+.business-page[data-business-service] .page-article>section{scroll-margin-top:120px}
+@media(max-width:760px){
+ .business-page::after{content:'';position:fixed;top:75px;left:0;right:0;height:58px;z-index:50;background:#061d28f7;border-bottom:1px solid #b2bbae33;pointer-events:none}
+ .business-page .work-motion-control,.business-page .ex-journey-entry .ex-controls{position:fixed;top:80px;bottom:auto;left:16px;right:auto;z-index:54;gap:0}
+ .business-page .work-motion-control button,.business-page .ex-journey-entry .ex-controls button{min-height:44px;font-size:11px;letter-spacing:0;padding:8px 10px;background:#09232ff2;border:1px solid #d7b38e99;border-radius:26px;color:#f4efe6}
+ body:has(.business-page) .ambient-sound{top:80px;bottom:auto;right:16px;z-index:54}
+ body:has(.business-page) .ambient-sound-toggle{font-size:12px;padding-inline:10px;gap:7px}
+ body:has(.business-page) .ambient-sound-panel{position:absolute;top:56px;right:0;margin-bottom:0;max-height:calc(100svh - 160px)}
+ .business-page .work-hero{padding-top:165px}
+ .business-page .entry-reading .ex-entry-copy{padding-top:max(160px,17svh)}
+ .business-page :is([id="conteudo-da-jornada"],section[id],[data-bs-panel],h2[id],h3[id]){scroll-margin-top:150px}
+ .business-page [data-bs-select]{scroll-margin-top:150px}
+}
+@media(max-width:360px){
+ .business-page .work-motion-control button,.business-page .ex-journey-entry .ex-controls button{font-size:10px;padding-inline:8px}
+ body:has(.business-page) .ambient-sound-toggle{font-size:11px;padding-inline:8px;gap:5px}
+}
+@media print{.business-page::after,body:has(.business-page) .ambient-sound,.business-page .work-motion-control,.business-page .ex-controls{display:none!important}}

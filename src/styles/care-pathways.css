@@ -1,0 +1,107 @@
+/* Reading and constellation share the existing spatial stage. There is no opaque content plane. */
+.care-pathways { position:relative; isolation:isolate; z-index:3; padding:115px 7vw 105px 9vw; color:#e8e4d7; --focus:#efc798; scroll-margin-top:95px; }
+.cp-atmosphere { position:absolute; inset:0; z-index:-1; pointer-events:none; background:linear-gradient(90deg,#061c2999,transparent 66%),radial-gradient(ellipse at 78% 46%,#a27c3d12,transparent 50%); }
+.cp-layout { display:grid; grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr); grid-template-rows:auto 1fr; column-gap:6%; max-width:1370px; margin-inline:auto; }
+.cp-introduction { grid-row:1; grid-column:1; max-width:485px; }
+.cp-eyebrow { display:block; color:#d5ad83; font:500 9px/1.8 var(--sans); letter-spacing:.14em; }
+.cp-introduction h2 { font:400 clamp(52px,5.2vw,74px)/1.02 var(--serif); letter-spacing:-.035em; margin:24px 0; max-width:12ch; text-wrap:balance; }
+.cp-introduction>p { font:400 13px/1.9 var(--sans); color:#bfd0cc; max-width:390px; }
+.cp-constellation { grid-column:2; grid-row:1 / 3; position:relative; min-height:720px; }
+.cp-map-coordinate { position:absolute; top:4px; right:0; color:#b6b5a1; font-size:7px; letter-spacing:.13em; }
+.cp-connections { position:absolute; inset:0; width:100%; height:100%; overflow:visible; pointer-events:none; }
+.cp-connections path { fill:none; stroke:#c5ac7b; stroke-width:.6; stroke-opacity:.22; stroke-dasharray:2 7; }
+.cp-node { position:absolute; display:flex; align-items:flex-start; gap:11px; width:190px; min-height:70px; background:none; border:0; padding:8px 0; color:#c0d1cc; text-align:left; transform:translate(-16px,-24px); }
+.cp-node-0 { left:17.5%; top:26.4%; }
+.cp-node-1 { left:70.8%; top:13.2%; width:165px; }
+.cp-node-2 { left:65%; top:47.9%; width:205px; }
+.cp-node-3 { left:80%; top:81.9%; width:190px; transform:translate(-75%,-24px); }
+.cp-node-4 { left:17.5%; top:77.1%; width:215px; }
+.cp-node-orbit { flex:0 0 26px; width:26px; height:26px; border:1px solid #caac7966; border-radius:50%; display:grid; place-items:center; margin-top:14px; transition:border-color .25s,box-shadow .25s; }
+.cp-node-orbit i { width:3px; height:3px; border-radius:50%; background:#e4c490; box-shadow:0 0 12px #ebbf77; }
+.cp-node-copy { display:block; min-width:0; }
+.cp-node-number { display:block; color:#9cb4b4; font:400 7px/1.7 var(--sans); margin-bottom:5px; }
+.cp-node-label { display:block; color:#d3ceba; font:400 23px/1.05 var(--serif); letter-spacing:-.01em; text-wrap:balance; transition:color .25s; text-shadow:0 2px 16px #02121d; }
+.cp-node-hint { display:block; color:#91adb0; font:400 8px/1.7 var(--sans); margin-top:10px; }
+.cp-node:hover .cp-node-label,.cp-node[aria-pressed="true"] .cp-node-label { color:#f0d8b5; }
+.cp-node:hover .cp-node-orbit,.cp-node[aria-pressed="true"] .cp-node-orbit { border-color:#edc89b; box-shadow:0 0 25px #dbb07224; }
+.cp-node[aria-pressed="true"] .cp-node-number { color:#e4bb87; }
+.cp-map-invitation { position:absolute; bottom:0; right:0; color:#9bb1b1; font-size:9px; line-height:1.8; }
+.cp-reading { grid-column:1; grid-row:2; margin-top:45px; padding-top:29px; border-top:1px solid #b99b6f4a; max-width:485px; }
+.cp-context[hidden] { display:none; }
+.cp-context { scroll-margin-top:115px; }
+.cp-return { display:none; }
+.cp-context>.cp-eyebrow { font-size:8px; letter-spacing:.09em; }
+.cp-context h3 { font:400 clamp(34px,3.1vw,43px)/1.08 var(--serif); letter-spacing:-.025em; color:#eee1cd; margin:15px 0 21px; max-width:20ch; text-wrap:balance; }
+.cp-context>p { color:#c0d1cc; font-size:12px; line-height:1.9; max-width:435px; }
+.cp-context>p+p { margin-top:15px; }
+.cp-context>.cp-question { color:#d9ba94; font:italic 25px/1.25 var(--serif); margin-top:27px; max-width:26ch; }
+.cp-service-link { display:inline-flex; align-items:center; gap:23px; color:#e1bd93; border-bottom:1px solid #c4a17066; padding-block:11px; font-size:11px; margin-top:20px; }
+.cp-service-link>span { font-size:18px; }
+.cp-source { display:block; color:#a6bcb9; font-size:9px; line-height:1.9; text-decoration:underline; text-decoration-color:#a6bcb966; text-underline-offset:4px; max-width:435px; margin-top:22px; }
+.cp-source>span:first-child { display:block; color:#839fa3; font-size:8px; margin-bottom:3px; }
+.cp-source:hover { color:#e3ceb0; }
+.cp-compact { padding-block:95px 90px; }
+@media(max-width:1100px) and (min-width:761px) {
+  .care-pathways { padding-inline:8vw 5vw; }
+  .cp-layout { grid-template-columns:minmax(0,1fr) minmax(0,1fr); column-gap:4%; }
+  .cp-introduction h2 { font-size:59px; }
+  .cp-node { width:156px; }
+  .cp-node-1 { left:65%; width:140px; }
+  .cp-node-2 { left:58%; width:172px; }
+  .cp-node-3 { left:81%; width:170px; }
+  .cp-node-4 { left:12%; width:180px; }
+  .cp-node-label { font-size:21px; }
+  .cp-node-hint { font-size:7px; }
+  .cp-node-orbit { flex-basis:23px; width:23px; height:23px; }
+}
+@media(max-width:760px) {
+  .cp-return { display:block; width:max-content; color:#c4ba9f; font-size:10px; padding:14px 0; margin-top:9px; }
+  .cp-constellation { scroll-margin-top:115px; }
+  .care-pathways,.cp-compact { padding:85px 29px 80px; scroll-margin-top:80px; }
+  .cp-atmosphere { background:linear-gradient(90deg,#061c2938,transparent 86%); }
+  .cp-layout { display:flex; flex-direction:column; gap:0; }
+  .cp-introduction { order:0; max-width:none; }
+  .cp-eyebrow { font-size:7px; }
+  .cp-introduction h2 { font-size:49px; margin:23px 0; max-width:11ch; }
+  .cp-introduction>p { font-size:12px; line-height:1.85; }
+  .cp-constellation { order:1; min-height:490px; margin-top:35px; }
+  .cp-map-coordinate { font-size:6px; left:0; right:auto; }
+  .cp-connections { inset:22px 0 20px; height:calc(100% - 42px); opacity:.65; }
+  .cp-node { width:150px; gap:8px; min-height:66px; padding-block:7px; transform:translate(-10px,-17px); }
+  .cp-node-0 { left:5%; top:18%; }
+  .cp-node-1 { left:61%; top:10%; width:135px; }
+  .cp-node-2 { left:60%; top:43%; width:145px; }
+  .cp-node-3 { left:57%; top:75%; width:155px; transform:translate(-10px,-17px); }
+  .cp-node-4 { left:3%; top:62%; width:165px; }
+  .cp-node-orbit { flex:0 0 20px; width:20px; height:20px; margin-top:13px; }
+  .cp-node-label { font-size:20px; line-height:1.08; }
+  .cp-node-number { font-size:6px; margin-bottom:5px; }
+  .cp-node-hint { font-size:7px; margin-top:7px; }
+  .cp-map-invitation { left:0; right:auto; bottom:0; font-size:8px; }
+  .cp-reading { order:2; margin-top:32px; padding-top:27px; max-width:none; }
+  .cp-context>.cp-eyebrow { font-size:7px; }
+  .cp-context h3 { font-size:35px; margin:15px 0 20px; }
+  .cp-context>p { font-size:12px; }
+  .cp-context>.cp-question { font-size:25px; }
+  .cp-service-link { font-size:10px; gap:17px; }
+  .cp-source { font-size:9px; }
+}
+@media(max-width:380px) {
+  .care-pathways,.cp-compact { padding-inline:24px; }
+  .cp-introduction h2 { font-size:45px; }
+  .cp-node-label { font-size:19px; }
+  .cp-node-1 { left:58%; width:128px; }
+  .cp-node-2 { left:58%; width:140px; }
+  .cp-node-3 { left:54%; width:145px; }
+  .cp-node-4 { width:155px; }
+}
+@media(prefers-reduced-motion:reduce) {
+  .cp-node-label,.cp-node-orbit { transition:none; }
+}
+@media print {
+  .care-pathways { color:#173642; padding:30px 0; }
+  .cp-atmosphere,.cp-constellation { display:none; }
+  .cp-layout { display:block; }
+  .cp-context[hidden] { display:block; margin-top:35px; }
+  .cp-introduction>p,.cp-context h3,.cp-context>p,.cp-context>.cp-question,.cp-source { color:#173642; }
+}

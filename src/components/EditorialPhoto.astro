@@ -1,0 +1,9 @@
+---
+import type { EditorialPhotograph } from '../data/editorial-photography';
+interface Props { photo: EditorialPhotograph; class?: string; eager?: boolean; caption?: boolean }
+const { photo, class: className, eager = false, caption = true } = Astro.props;
+---
+<figure class:list={['ed-photograph', `ed-photograph-${photo.kind}`, className]} style={`--ed-photo-position:${photo.objectPosition}`} data-photo-source={`${photo.source.file}#page=${photo.source.page}`}>
+ <div class="ed-photograph-image"><img src={photo.url} width={photo.width} height={photo.height} alt={photo.alt} loading={eager ? 'eager' : 'lazy'} decoding="async" fetchpriority={eager ? 'high' : 'auto'}/></div>
+ {caption && <figcaption>{photo.caption}<span>{photo.credit}.</span></figcaption>}
+</figure>

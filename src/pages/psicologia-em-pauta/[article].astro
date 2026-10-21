@@ -1,0 +1,61 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ExperienceStage from '../../components/ExperienceStage.astro';
+import EditorialPhoto from '../../components/EditorialPhoto.astro';
+import EditorialReaderControls from '../../components/EditorialReaderControls.astro';
+import EditorialMagazine from '../../components/EditorialMagazine.astro';
+import EditorialQuiz from '../../components/EditorialQuiz.astro';
+import EditorialPressClipping from '../../components/EditorialPressClipping.astro';
+import {editorialQuizForArticle} from '../../data/editorial-quizzes';
+import {editorialCoverPhoto,editorialChapterPhotos} from '../../data/editorial-photography';
+import {visibleEditorialArticles,articleUrl,articleReadingMinutes,editorialPreview,editorialByline,editorialBlockLabel,type EditorialArticle} from '../../data/editorial';
+import '../../styles/experience.css';
+import '../../styles/approach.css';
+import '../../styles/editorial.css';
+import '../../styles/editorial-reader-controls.css';
+export function getStaticPaths(){return visibleEditorialArticles.map(article=>({params:{article:article.slug},props:{article}}));}
+const {article}=Astro.props as {article:EditorialArticle};
+const otherArticles=visibleEditorialArticles.filter(other=>other.slug!==article.slug);
+const originalUrl=`/psicologia-em-pauta/${article.slug==='analise-do-comportamento'?'acervo':'originais'}/${article.slug}.pdf`;
+const editionUrl=`/psicologia-em-pauta/edicoes/${article.slug}.pdf`;
+const hasQuiz=Boolean(editorialQuizForArticle(article.slug));
+const coverPhoto=editorialCoverPhoto(article.slug);
+const byline=editorialByline(article);
+---
+<Layout title={article.title} description={article.description} article={article} image={`/psicologia-em-pauta/sociais/${article.slug}.png`} experience>
+ <div class={`spatial-page ed-article-page ed-theme-${article.theme}`} data-reading-scene="ideas" data-editorial-article={article.slug} data-draft={String(article.draft)} data-reviewed={String(article.reviewed)}>
+  <header class="ex-journey-entry ed-article-hero" id="experience-entry" data-ed-depth>
+   <ExperienceStage entry="personal"/>
+   <div class="ed-hero-copy"><a href="/psicologia-em-pauta/" class="ed-back">← Psicologia em Pauta</a><span class="ed-eyebrow">{article.category}</span><h1>{article.title}</h1><p class="ed-deck">{article.subtitle}</p><div class="ed-byline"><span>{byline}</span><span>{articleReadingMinutes(article)} min de leitura · {article.sections.length} capítulos</span></div><a href="#conteudo-da-jornada" class="ex-primary-link">Começar a leitura <span aria-hidden="true">↓</span></a>{hasQuiz&&<a href="#exercicio-interativo" class="ed-quiz-shortcut ed-hero-quiz">Responder ao quiz com pontuação ↗</a>}</div>
+   <div class="ed-hero-art">{coverPhoto&&<EditorialPhoto photo={coverPhoto} class="ed-photo-hero" eager/>}</div>
+   <div class="ex-controls"><button id="experience-pause" aria-pressed="false">Pausar movimento</button></div>
+  </header>
+  <div class="spatial-content ed-reading-shell" id="conteudo-da-jornada" data-ed-surface="ivory">
+   <EditorialReaderControls slug={article.slug} pdfUrl={editionUrl}><span slot="chapters">{String(article.sections.length).padStart(2,'0')}</span></EditorialReaderControls>
+   <EditorialMagazine article={article}/>
+   <div class="ed-reading-grid" id="leitura-continua"><aside class="ed-article-index" aria-label="Capítulos desta leitura"><span class="ed-eyebrow">NESTA EDIÇÃO</span><nav>{article.sections.map((section,index)=><a href={`#${section.id}`} data-ed-chapter-link={section.id}><span>{String(index+1).padStart(2,'0')}</span>{section.title}</a>)}<a href="#referencias">Fontes e referências</a>{hasQuiz&&<a class="ed-quiz-shortcut" href="#exercicio-interativo">Responder ao quiz com pontuação ↗</a>}{editorialPreview&&<a href="#baixar-edicao">Edição em PDF</a>}</nav></aside>
+    <article class="ed-longform" aria-label={article.title}>
+     {article.sections.map((section,index)=><section id={section.id} data-ed-chapter={String(index+1)}>
+      <span class="ed-chapter-number">CAPÍTULO {String(index+1).padStart(2,'0')}</span><h2>{section.title}</h2>
+      {editorialChapterPhotos(article.slug,section.id).map(photo=><EditorialPhoto photo={photo} class="ed-photo-chapter"/>)}
+      {section.blocks.map(block=><div class:list={['ed-content-block',`ed-block-${block.type}`]}>
+       {editorialBlockLabel(block)&&<span class="ed-block-kind">{editorialBlockLabel(block)}</span>}
+       {block.type==='p'&&<p>{block.text}</p>}
+       {block.type==='quote'&&<blockquote><p>{block.text}</p>{block.attribution&&<cite>{block.attribution}</cite>}</blockquote>}
+       {block.type==='list'&&<>{block.text&&<p>{block.text}</p>}<ul>{block.items?.map(item=><li>{item}</li>)}</ul></>}
+       {block.type==='table'&&<>{block.text&&<p>{block.text}</p>}<div class="ed-table-wrap" tabindex="0" role="region" aria-label={`Quadro: ${section.title}`}><table><thead><tr>{block.columns?.map(column=><th scope="col">{column}</th>)}</tr></thead><tbody>{block.rows?.map(row=><tr>{row.map((cell,i)=>i===0?<th scope="row">{cell}</th>:<td>{cell}</td>)}</tr>)}</tbody></table></div></>}
+       {block.type==='exercise'&&<aside class="ed-reflection"><span class="ed-eyebrow">PARA PENSAR EM CONTEXTO</span>{block.text&&<p>{block.text}</p>}<ol>{block.items?.map(item=><li>{item}</li>)}</ol><p class="ed-reflection-note">Você pode usar estas perguntas como reflexão livre. O exercício interativo, quando disponível, é opcional e não produz classificação clínica.</p></aside>}
+       {block.type==='note'&&<aside class="ed-context-note"><p>{block.text}</p></aside>}
+      </div>)}
+     </section>)}
+     <EditorialPressClipping slug={article.slug}/>
+     <section class="ed-references" id="referencias"><span class="ed-chapter-number">CONTINUE A INVESTIGAR</span><h2>Fontes e referências.</h2><ol>{article.references.map(reference=><li><p>{reference.url&&reference.verification!=='replace'?<a href={reference.url} target="_blank" rel="noopener noreferrer">{reference.label} ↗</a>:reference.label}</p></li>)}</ol></section>
+     {editorialPreview&&<section class="ed-article-download" id="baixar-edicao"><span class="ed-chapter-number">PARA GUARDAR E CONSULTAR</span><h2>Leve a leitura com você.</h2><p>Baixe a edição A4 com o mesmo conteúdo desta leitura, referências e links para continuar no navegador.</p><a class="ed-reading-link" href={editionUrl} download>Baixar edição atual em PDF ↓</a><details class="ed-source-archive"><summary>Consultar arquivo de origem</summary><a class="ed-pdf-link" href={originalUrl} target="_blank" rel="noopener noreferrer">Abrir PDF de origem, preservado no acervo ↗</a></details></section>}
+     <section class="ed-next-reading"><span class="ed-eyebrow">UMA PERGUNTA LEVA A OUTRA.</span><h2>A leitura continua.</h2><nav aria-label="Outras edições">{otherArticles.map(other=><a href={articleUrl(other.slug)}>{other.title}<span aria-hidden="true">↗</span></a>)}</nav><a class="ed-reading-link" href="/nossa-abordagem/">Conheça a abordagem da NEXO ↗</a></section>
+    </article>
+   </div>
+   {hasQuiz&&<><section class="ed-quiz-host" id="exercicio-interativo" data-ed-quiz-host><EditorialQuiz articleSlug={article.slug}/></section><dialog class="ed-quiz-dialog" data-ed-quiz-dialog aria-label="Exercício educativo da revista"><div class="ed-quiz-dialog-header"><span>Psicologia em Pauta · Exercício educativo</span><button type="button" data-ed-close-quiz>Voltar à revista ×</button></div><div data-ed-quiz-dialog-body></div></dialog></>}
+  </div>
+ </div>
+</Layout>
+<script>import '../../scripts/editorial-reading';import '../../scripts/editorial-reader-preferences';</script>

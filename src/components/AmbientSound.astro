@@ -1,0 +1,34 @@
+---
+import '../styles/ambient-sound.css';
+---
+<aside class="ambient-sound" data-ambient-sound hidden aria-label="Ambiente sonoro opcional">
+  <div class="ambient-sound-panel" id="ambient-sound-panel" data-sound-panel hidden>
+    <div class="ambient-sound-heading">
+      <strong>Ambiente sonoro opcional</strong>
+      <button type="button" class="ambient-sound-close" data-sound-close aria-label="Fechar ajustes de som">×</button>
+    </div>
+    <p>Trilha original suave, com afinação de referência Lá = 432 Hz. Uma escolha estética, sem finalidade terapêutica.</p>
+    <label class="ambient-sound-volume-label" for="ambient-sound-volume">
+      <span>Volume</span><output for="ambient-sound-volume" data-sound-volume-value>18%</output>
+    </label>
+    <input id="ambient-sound-volume" data-sound-volume type="range" min="0" max="100" step="1" value="18" aria-valuetext="18 por cento"/>
+    <p class="ambient-sound-help">Começa desligado em cada página. Ao sair da aba, o som é pausado.</p>
+  </div>
+  <div class="ambient-sound-controls">
+    <button type="button" class="ambient-sound-toggle" data-sound-toggle aria-pressed="false" aria-describedby="ambient-sound-status">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" width="19" height="19">
+        <path d="M4 10v4h4l5 4V6l-5 4H4Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+        <path class="ambient-sound-waves" d="M16 9a5 5 0 0 1 0 6m3-9a9 9 0 0 1 0 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        <path class="ambient-sound-muted" d="m16 10 5 5m0-5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      <span data-sound-label>Ativar som</span>
+    </button>
+    <button type="button" class="ambient-sound-settings" data-sound-settings aria-expanded="false" aria-controls="ambient-sound-panel" aria-label="Ajustar ambiente sonoro">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" width="19" height="19"><path d="M6 4v6m0 4v6M12 4v10m0 4v2m6-16v2m0 4v10M3 10h6m0 4h6m0-8h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+  <span class="ambient-sound-status" id="ambient-sound-status" data-sound-status role="status">Som desligado.</span>
+</aside>
+<script>
+  import '../scripts/ambient-sound';
+</script>

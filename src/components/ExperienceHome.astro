@@ -1,0 +1,45 @@
+---
+import ExperienceStage from './ExperienceStage.astro';
+import ProfessionalEncounter from './ProfessionalEncounter.astro';
+import CarePathways from './CarePathways.astro';
+import KnowledgePanel from './KnowledgePanel.astro';
+import SelfObservation from './SelfObservation.astro';
+import HomeOpening from './HomeOpening.astro';
+import {knowledgeNodes,xMeanings} from '../data/knowledge';
+import {dimensions,reflections} from '../data/reflections';
+import '../styles/experience.css';
+const featured=knowledgeNodes.filter(n=>['socrates','al-khwarizmi','wundt','arendt'].includes(n.id));
+---
+<HomeOpening/>
+<div class="ex-narrative">
+  <ExperienceStage/>
+  <nav class="ex-chapter-nav" aria-label="Capítulos da experiência">
+    <a href="#experience-intro" data-chapter-link="intro" aria-label="01 A incógnita" aria-current="step"><span>01</span><i>A incógnita</i></a>
+    <a href="#experience-bio" data-chapter-link="bio" aria-label="02 As dimensões"><span>02</span><i>As dimensões</i></a>
+    <a href="#experience-ideas" data-chapter-link="ideas" aria-label="03 As conexões"><span>03</span><i>As conexões</i></a>
+    <a href="#experience-paths" data-chapter-link="paths" aria-label="04 Os caminhos"><span>04</span><i>Os caminhos</i></a>
+  </nav>
+  <div class="ex-controls"><button id="experience-skip-intro">Pular abertura ↗</button><button id="experience-pause" aria-pressed="false">Pausar movimento</button></div>
+  <section id="experience-intro" class="ex-chapter ex-intro" data-scene-chapter="intro" aria-labelledby="intro-title">
+    <div class="ex-frame">
+      <div class="ex-intro-note"><span class="ex-eyebrow">CIÊNCIA · PESSOAS · POSSIBILIDADES</span><p>Nada existe<br/>isoladamente.</p></div>
+      <div class="ex-thought-layer" aria-label="Primeiras conexões para explorar">{featured.map((node,i)=><button class:list={['ex-floating-word',`floating-${i}`]} data-knowledge={node.id} aria-controls="knowledge-panel" aria-expanded="false"><span class="node-spark" aria-hidden="true"></span>{node.name}<small>Descobrir uma ideia ↗</small></button>)}<button class="ex-floating-word floating-cognition" data-knowledge={knowledgeNodes.find(n=>n.group==='cognicao')?.id} aria-controls="knowledge-panel" aria-expanded="false"><span class="node-spark" aria-hidden="true"></span>memória & atenção<small>Explorar a cognição ↗</small></button></div>
+      <div class="ex-intro-title"><span class="ex-brand-reveal">N E X O <small>INTELIGÊNCIA CLÍNICA</small></span><h1 id="intro-title">Qual é o seu <em>X</em>?</h1><p>Uma relação a compreender.</p><span class="ex-intro-subtitle">O que você faz, pensa e sente ganha sentido na sua história e nas condições em que vive.</span><div class="ex-intro-actions"><a class="ex-primary-link" href="#experience-self-observation">Começar a se observar <span aria-hidden="true">↓</span></a><a href="#experience-paths">Encontre seu caminho ↗</a></div></div>
+      <p class="ex-pointer-note">Mova o cursor. Toque nas palavras.<br/>Cada conexão pode abrir uma pergunta.</p>
+      <div class="ex-x-lens"><span class="ex-eyebrow">UM SÍMBOLO. DIFERENTES SENTIDOS.</span><div role="group" aria-label="Explore os sentidos do X">{xMeanings.map((meaning,i)=><button aria-label={meaning.title} data-x-meaning={i} aria-pressed={i===0}>{['x = ?','X = 10','X / Χ','↗ ↘'][i]}</button>)}</div><p id="x-meaning-detail" aria-live="polite">{xMeanings[0].text}</p></div>
+    </div>
+  </section>
+  <section id="experience-bio" class="ex-chapter ex-bio" data-scene-chapter="bio" aria-labelledby="bio-title"><div class="ex-frame"><div class="ex-bio-copy"><span class="ex-eyebrow">02 / UMA HISTÓRIA. RELAÇÕES QUE SE CONECTAM.</span><h2 id="bio-title">Compreender<br/><em>em contexto.</em></h2><p>A Análise do Comportamento investiga relações entre suas respostas, sua história e as condições em que vive. Corpo, experiências privadas e relações sociais participam dessa compreensão.</p><div class="ex-bio-select" role="group" aria-label="Dimensões que se conectam">{dimensions.map((d,i)=><button data-ex-dimension={d.id} aria-pressed={i===0}><span>0{i+1}</span>{d.title}<i aria-hidden="true">+</i></button>)}</div><div class="ex-dimension-detail" aria-live="polite"><h3 id="ex-dimension-title">{dimensions[0].title}</h3><p id="ex-dimension-text">{dimensions[0].text}</p><p id="ex-dimension-connection">{dimensions[0].connection}</p></div><a href="/nossa-abordagem/" class="ex-underlined">Conheça nossa abordagem ↗</a></div><div class="ex-bio-labels" aria-hidden="true"><span>corpo</span><span>experiência</span><span>contexto</span><i>uma história.<br/>relações a investigar.</i></div></div></section>
+  <SelfObservation id="experience-self-observation"/>
+  <section id="experience-ideas" class="ex-chapter ex-ideas" data-scene-chapter="ideas" aria-labelledby="ideas-title"><div class="ex-frame"><div class="ex-ideas-heading"><span class="ex-eyebrow">03 / CONSTELAÇÃO DO CONHECIMENTO</span><h2 id="ideas-title">O que muda quando<br/>você muda <em>a pergunta?</em></h2><p>Toque numa ideia. Descubra o contexto.<br/>Encontre uma nova pergunta.</p></div><div class="ex-knowledge-map" role="group" aria-label="Conexões históricas e científicas interativas">{knowledgeNodes.map((node,i)=><button class="ex-knowledge-node" data-map-node data-knowledge={node.id} data-node-index={i} style={`--node-x:${node.position.x}%;--node-y:${node.position.y}%;--node-depth:${.35+(i%4)*.2}`} aria-controls="knowledge-panel" aria-expanded="false"><span class="node-spark" aria-hidden="true"></span><small>{node.yearLabel}</small><span>{node.name}</span><i aria-hidden="true">+</i></button>)}</div><div class="ex-thought-ribbon"><span class="ex-eyebrow" id="ex-reflection-category">{reflections[0].category}</span><p id="ex-reflection-question" aria-live="polite">{reflections[0].question}</p><button id="ex-next-reflection" aria-label="Descobrir outra pergunta">↗</button></div><button id="ex-next-cluster" class="ex-next-cluster">Outras conexões ↻</button><p class="ex-map-caption">Recortes de diferentes épocas e tradições. As conexões visuais são convites à reflexão, não uma linha única de progresso.</p></div></section>
+  <section id="experience-paths" class="ex-chapter ex-paths" data-scene-chapter="paths" aria-labelledby="paths-title"><div class="ex-frame"><div class="ex-paths-heading"><span class="ex-eyebrow">04 / ENCONTRE SEU PONTO DE CONEXÃO</span><h2 id="paths-title">Compreender relações.<br/><em>Construir possibilidades.</em></h2></div><div class="ex-path-gates"><a href="/para-voce/" class="ex-path-gate" data-path-gate="personal"><span class="ex-path-coordinate">01 / SUA HISTÓRIA</span><h3>Para você<span>.</span></h3><p>Psicoterapia em Análise do Comportamento.<br/>Autoconhecimento, avaliação e cuidado.</p><span class="ex-path-arrow" aria-hidden="true">↗</span></a><a href="/para-sua-empresa/" class="ex-path-gate" data-path-gate="business"><span class="ex-path-coordinate">02 / PESSOAS E TRABALHO</span><h3>Para sua empresa<span>.</span></h3><p>Recrutamento, desenvolvimento e avaliação.<br/>Psicologia no trabalho e prevenção com NR-1.</p><span class="ex-path-arrow" aria-hidden="true">↗</span></a></div><p class="ex-paths-caption">Escolha um caminho. A experiência continua.</p></div></section>
+  <CarePathways id="experience-care" compact/>
+  <ProfessionalEncounter id="experience-human" title="Por trás das conexões, presença humana." compact/>
+  <KnowledgePanel/>
+  <noscript><section class="ex-static-notes"><h2>Conexões para explorar</h2><p>A animação é um aprimoramento visual. Todos os caminhos e conteúdos institucionais continuam disponíveis.</p>{knowledgeNodes.map(n=><article><h3>{n.name}</h3><p>{n.summary}</p><p>{n.connection}</p><a href={n.sourceUrl}>{n.sourceTitle} ↗</a></article>)}</section></noscript>
+</div>
+<script type="application/json" id="experience-dimensions" set:html={JSON.stringify(dimensions)}/>
+<script type="application/json" id="experience-reflections" set:html={JSON.stringify(reflections)}/>
+<script type="application/json" id="experience-x-meanings" set:html={JSON.stringify(xMeanings)}/>
+<script>import '../scripts/experience-ui';</script>
+

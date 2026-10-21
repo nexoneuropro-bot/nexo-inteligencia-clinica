@@ -1,0 +1,94 @@
+---
+import {professionContexts} from '../data/profession-contexts';
+import '../styles/professional-encounter.css';
+
+interface Props {
+  id?:string;
+  compact?:boolean;
+  title?:string;
+  intro?:string;
+}
+const {
+  id='professional-encounter',
+  compact=false,
+  title='Das ideias ao encontro.',
+  intro='Compreender uma pessoa pede mais de uma perspectiva. Conheça os campos que se encontram no cuidado e as pessoas que dão presença a essa conversa.',
+}=Astro.props;
+---
+<section
+  class:list={['professional-encounter',{'pe-compact':compact}]}
+  id={id}
+  data-professional-encounter
+  data-profession-index="0"
+  data-profession-id={professionContexts[0]?.id}
+  aria-labelledby={`${id}-title`}
+>
+  <div class="pe-atmosphere" aria-hidden="true"></div>
+  <div class="pe-layout">
+    <header class="pe-introduction">
+      <span class="pe-eyebrow">CONHECIMENTO QUE ENCONTRA PESSOAS</span>
+      <h2 id={`${id}-title`}>{title}</h2>
+      <p>{intro}</p>
+      <span class="pe-guidance">Três perspectivas. Uma conversa em contexto.</span>
+    </header>
+
+    <div class="pe-human-space">
+      <span class="pe-space-coordinate" aria-hidden="true">CIÊNCIA ↔ ESCUTA ↔ PRESENÇA</span>
+      <span class="pe-spatial-caption" aria-hidden="true">O cuidado se constrói<br/>entre pessoas.</span>
+      <div class="pe-portraits">
+        <figure class="pe-person pe-person-gabriel">
+          <div class="pe-portrait-light" aria-hidden="true"></div>
+          <img src="/images/gabriel.webp" alt="Gabriel Alves Batista" width="700" height="727" loading="lazy" decoding="async"/>
+          <figcaption>
+            <span class="pe-person-field">Psicologia</span>
+            <span class="pe-person-name">Gabriel Alves Batista</span>
+            <span class="pe-person-license">CRP-SP 06/176184</span>
+          </figcaption>
+        </figure>
+        <figure class="pe-person pe-person-ivo">
+          <div class="pe-portrait-light" aria-hidden="true"></div>
+          <img src="/images/ivo.webp" alt="Ivo Peixoto Barbosa Júnior" width="700" height="754" loading="lazy" decoding="async"/>
+          <figcaption>
+            <span class="pe-person-field">Medicina</span>
+            <span class="pe-person-name">Ivo Peixoto Barbosa Júnior</span>
+            <span class="pe-person-license">CRM-SP 193133</span>
+          </figcaption>
+        </figure>
+      </div>
+      <a class="pe-team-link" href="/profissionais/">Conheça os profissionais <span aria-hidden="true">↗</span></a>
+    </div>
+
+    <div class="pe-exploration">
+      <div class="pe-topics" aria-label="Perspectivas para compreender o cuidado">
+        {professionContexts.map((context,index)=><button
+          type="button"
+          class="pe-topic"
+          id={`${id}-topic-${context.id}`}
+          data-profession-topic={context.id}
+          data-profession-topic-index={index}
+          aria-pressed={index===0?'true':'false'}
+          aria-controls={`${id}-context-${context.id}`}
+        ><span class="pe-topic-number" aria-hidden="true">{String(index+1).padStart(2,'0')}</span><span>{context.label}</span><span class="pe-topic-indicator" aria-hidden="true">↗</span></button>)}
+      </div>
+      <div class="pe-contexts">
+        {professionContexts.map((context,index)=><article
+          class="pe-context"
+          id={`${id}-context-${context.id}`}
+          data-profession-context={context.id}
+          aria-labelledby={`${id}-context-title-${context.id}`}
+          hidden={index!==0}
+        >
+          <span class="pe-eyebrow">{context.eyebrow}</span>
+          <h3 id={`${id}-context-title-${context.id}`}>{context.title}</h3>
+          <p class="pe-context-summary">{context.summary}</p>
+          <ul>{context.points.map(point=><li>{point}</li>)}</ul>
+          {context.question&&<p class="pe-context-question">{context.question}</p>}
+          <a class="pe-service-link" href={context.link.href}>{context.link.label} <span aria-hidden="true">↗</span></a>
+          <a class="pe-source" href={context.sourceUrl} target="_blank" rel="noopener noreferrer"><span>Referência de leitura</span>{context.sourceTitle} <span aria-hidden="true">↗</span></a>
+        </article>)}
+      </div>
+    </div>
+  </div>
+</section>
+<noscript><style>.professional-encounter .pe-topics{display:none}.professional-encounter .pe-context[hidden]{display:block!important}.professional-encounter .pe-context+.pe-context{margin-top:48px;padding-top:36px;border-top:1px solid #bd9c7533}</style></noscript>
+<script>import '../scripts/professional-encounter';</script>
