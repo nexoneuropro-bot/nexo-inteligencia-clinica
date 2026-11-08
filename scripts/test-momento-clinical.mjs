@@ -331,3 +331,38 @@ test('limites são globais e por IP com hash; respostas nunca permitem cache/COR
   const source = readFileSync(new URL('../functions/_lib/momento-clinical.js', import.meta.url), 'utf8');
   assert.doesNotMatch(source, /console\.(?:log|error|warn|info)|localStorage|sessionStorage/);
 });
+
+
+test('esclarecimentos de sono/apetite mantêm escore, só aparecem quando pertinentes e são facultativos', () => {
+  const p=payload();
+  p.clarifications={sleep:'more-sleep',appetite:'less-appetite'};
+  const evaluated=validateClinicalSubmission(p,initialNow);
+  assert.deepEqual(evaluated.clarifications,{sleep:'more-sleep',appetite:'less-appetite'});
+  assert.equal(evaluated.results.phq9.score,13);
+  assert.equal(evaluated.results.gad7.score,7);
+  const omitted=validateClinicalSubmission(payload(),initialNow);
+  assert.deepEqual(omitted.clarifications,{sleep:null,appetite:null});
+  const irrelevant=payload();irrelevant.phq9[2]=0;irrelevant.clarifications={sleep:'more-sleep'};
+  assert.throws(()=>validateClinicalSubmission(irrelevant,initialNow));
+  const invalid=payload();invalid.clarifications={sleep:'critical-other'};
+  assert.throws(()=>validateClinicalSubmission(invalid,initialNow));
+  const unknown=payload();unknown.clarifications={unlisted:'secret'};
+  assert.throws(()=>validateClinicalSubmission(unknown,initialNow));
+});
+
+test('interrupção compartilhada é voluntária, registrada sem inferir motivo nem pontuar incompletos', () => {
+  const p=payload();
+  p.phq9[1]=null;p.gad7[6]=null;
+  p.completion={kind:'partial',lastShownId:'phq9-2'};
+  const evaluated=validateClinicalSubmission(p,initialNow);
+  assert.deepEqual(evaluated.completion,{kind:'partial',lastShownId:'phq9-2'});
+  assert.equal(evaluated.results.phq9.score,null);
+  assert.equal(evaluated.results.gad7.score,null);
+  assert.equal('reason' in evaluated.completion,false);
+  const unknown=payload();unknown.completion={kind:'partial',lastShownId:'invented-stage'};
+  assert.throws(()=>validateClinicalSubmission(unknown,initialNow));
+  const invalid=payload();invalid.completion={kind:'complete',lastShownId:'phq9-2'};
+  assert.throws(()=>validateClinicalSubmission(invalid,initialNow));
+  const legacy=validateClinicalSubmission(payload(),initialNow);
+  assert.deepEqual(legacy.completion,{kind:'complete'});
+});

@@ -1,0 +1,38 @@
+name: Validar NEXO Primeira Escuta
+
+on:
+  pull_request:
+    branches: [feat/experiencia-imersiva]
+    paths:
+      - 'src/components/MomentoClinical.astro'
+      - 'src/data/momento-clarifications.ts'
+      - 'src/lib/momento-professional-cues.ts'
+      - 'src/scripts/momento-clinical.ts'
+      - 'src/scripts/momento-professional.ts'
+      - 'functions/_lib/momento-clinical.js'
+      - 'scripts/test-momento-*.mjs'
+      - '.github/workflows/nexo-momento-validation.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.25.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm check
+      - run: pnpm build
+      - run: pnpm verify
+      - name: Testes sintéticos clínicos
+        run: node --experimental-strip-types --experimental-sqlite --test scripts/test-momento-screening.mjs scripts/test-momento-clinical.mjs scripts/test-momento-professional-cues.mjs
