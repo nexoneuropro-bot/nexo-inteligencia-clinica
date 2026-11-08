@@ -1,4 +1,4 @@
-/** Phase 1 is a closed demonstration, not a clinical submission switch. */
+/** These flags belong only to the closed demonstration. The clinical API has separate runtime gates. */
 export const SAFE_FEATURES = Object.freeze({
   NEXO_DEMO_ONLY: true,
   NEXO_ENABLE_REAL_SUBMISSIONS: false,
@@ -15,7 +15,7 @@ export function assertDemoOnlyConfiguration(environment = {}) {
     if (value === undefined || value === '') continue;
     const normalized = typeof value === 'string' ? value.trim().toLowerCase() : value;
     const valid = expected ? normalized === true || normalized === 'true' : normalized === false || normalized === 'false';
-    if (!valid) throw new Error(`NEXO Phase 1 requires ${key}=${expected}; production prerequisites are not implemented.`);
+    if (!valid) throw new Error(`NEXO demonstration requires ${key}=${expected}; clinical access uses separate server configuration.`);
   }
   return SAFE_FEATURES;
 }

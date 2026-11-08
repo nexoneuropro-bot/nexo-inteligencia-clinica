@@ -11,7 +11,7 @@ const production=process.env.PUBLIC_INDEXABLE==='true'&&process.env.PUBLIC_EDITO
 for(const file of htmlFiles){
  const html=fs.readFileSync(file,'utf8'),name=path.relative(root,file);
  const editorialPrivacy=name.split(path.sep).join('/')==='psicologia-em-pauta/privacidade/index.html';
- const privateMomento=name.split(path.sep).join('/').startsWith('conhecendo-meu-momento/');
+ const privateMomento=/^(?:conhecendo-meu-momento|nexo-profissional)\//.test(name.split(path.sep).join('/'));
  const shouldIndex=production&&name!=='404.html'&&!editorialPrivacy&&!privateMomento;
  check(/<html[^>]*lang="pt-BR"/.test(html),`${name}: idioma`);
  const title=html.match(/<title>(.*?)<\/title>/)?.[1];check(title&&!titles.has(title),`${name}: título ausente/repetido`);titles.add(title);
@@ -45,8 +45,9 @@ for(const file of htmlFiles){
 const businessServices=['recrutamento-e-selecao','treinamento-e-desenvolvimento','avaliacao-psicologica-organizacional'];
 const routes=['','para-voce','psicoterapia','avaliacao-neuropsicologica','integracao-psiquiatrica','para-sua-empresa','riscos-psicossociais-nr1',...businessServices,'nossa-abordagem','profissionais','psicologia-em-pauta','contato','politica-de-privacidade'];
 routes.forEach(route=>check(fs.existsSync(path.join(root,route,'index.html')),`Rota ausente: /${route}/`));
-const momentoRoutes=['conhecendo-meu-momento','conhecendo-meu-momento/demonstracao','conhecendo-meu-momento/visao-tecnica'];
+const momentoRoutes=['conhecendo-meu-momento','conhecendo-meu-momento/demonstracao','conhecendo-meu-momento/visao-tecnica','conhecendo-meu-momento/responder','conhecendo-meu-momento/privacidade'];
 momentoRoutes.forEach(route=>check(fs.existsSync(path.join(root,route,'index.html')),`Rota ausente: /${route}/`));
+check(fs.existsSync(path.join(root,'nexo-profissional/index.html')),'Área profissional ausente');
 // The home presentation is optional decoration over working HTML navigation.
 // Keep the cinematic sequence confined to the home and independent of a film.
 const homeHtml=fs.readFileSync(path.join(root,'index.html'),'utf8');
