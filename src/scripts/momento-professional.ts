@@ -1,6 +1,7 @@
 import {startAuthentication,startRegistration} from '@simplewebauthn/browser';
 import {screeningInstruments} from '../data/momento-instruments';
 import {buildProfessionalCues} from '../lib/momento-professional-cues';
+import {clarificationQuestions} from '../data/momento-clarifications';
 import {profileFields,questions} from '../data/momento-demo';
 
 type Data=Record<string,unknown>;
@@ -75,7 +76,15 @@ function startProfessional(){
  function renderRecord(record:Data,metadata:Data){
   const panel=element('pro-record');panel.replaceChildren();
   const details=document.createElement('dl');pair(details,'Recebimento',humanDate(metadata.createdAt??record.createdAt));pair(details,'Acesso ativo até',humanDate(metadata.expiresAt??record.expiresAt));pair(details,'Versão de consentimento',textValue(object(record.consent).version));pair(details,'Regra de pontuação',textValue(record.scoringRulesVersion));panel.append(details);
-  heading(panel,'Contexto informado');const profile=object(record.profile),list=document.createElement('dl');pair(list,'Nome ou pseudônimo',typeof profile.nickname==='string'&&profile.nickname?profile.nickname:'Não informado');
+  const completion=object(record.completion);
+   heading(panel,'Situação da participação');
+   if(completion.kind==='partial'){
+     paragraph(panel,'A pessoa escolheu compartilhar somente o que havia respondido até o momento da interrupção. Nenhum motivo foi atribuído automaticamente.');
+     const stageLabel=String(completion.lastShownId||'');
+     const known=[...questions.map(q=>({id:q.id,label:q.title})),...screeningInstruments.flatMap(q=>[...q.items.map((label,index)=>({id:`${q.id}-${index}`,label})),{id:`${q.id}-impact`,label:q.impactQuestion}]),...clarificationQuestions.map(q=>({id:`clarification-${q.id}`,label:q.title}))].find(q=>q.id===stageLabel);
+     paragraph(panel,'Pergunta que estava no percurso no momento da escolha: '+(known?.label??'Não informada')+'. Isso não permite determinar a razão da interrupção.');
+   }else paragraph(panel,'Respostas enviadas após a etapa final do percurso. A conclusão do formulário não indica, por si só, ausência de dificuldades.');
+   heading(panel,'Contexto informado');const profile=object(record.profile),list=document.createElement('dl');pair(list,'Nome ou pseudônimo',typeof profile.nickname==='string'&&profile.nickname?profile.nickname:'Não informado');
   for(const field of profileFields.filter(field=>field.id!=='nickname'))pair(list,field.label,field.options.find(option=>option.id===profile[field.id])?.label||'Não informado');panel.append(list);
   heading(panel,'Assuntos trazidos para a conversa');const authorAnswers=object(record.authorAnswers),authorList=document.createElement('dl');for(const question of questions)pair(authorList,question.title,question.options.find(option=>option.id===authorAnswers[question.id])?.label||'Sem resposta');panel.append(authorList);
   const results=object(record.results??record.screeningResults),impact=object(record.impact);
@@ -89,7 +98,16 @@ function startProfessional(){
    paragraph(panel,'Impacto funcional: '+(instrument.impactOptions.find(option=>option.value===impact[instrument.id])?.label??'Sem resposta')+'. Não integra o total do instrumento.');
    const source=document.createElement('a');source.href=instrument.sourceUrl;source.textContent='Consultar a fonte da versão utilizada ↗';source.target='_blank';source.rel='noopener noreferrer';source.className='mc-link';panel.append(source);
   }
-  heading(panel,'Pistas descritivas para a entrevista · revisão profissional');
+  heading(panel,'Complementos opcionais, separados das escalas');
+   const clarifications=object(record.clarifications);
+   for(const question of clarificationQuestions){
+     const answer=question.options.find(option=>option.id===clarifications[question.id]);
+     const phq=Array.isArray(record.phq9)?record.phq9 as unknown[]:[];
+     if(typeof phq[question.triggerPhqIndex]==='number'&&Number(phq[question.triggerPhqIndex])>0){
+       paragraph(panel,question.title+' '+(answer?.label??'Sem resposta.'));
+     }else paragraph(panel,question.title+' Não se aplicou com base nas respostas disponíveis.');
+   }
+   heading(panel,'Pistas descritivas para a entrevista · revisão profissional');
   paragraph(panel,'As pistas abaixo têm origem indicada e servem apenas para preparar perguntas. Não são diagnósticos, classificações de risco ou indicações automáticas de testes e tratamentos. O DSM-5-TR pode orientar a investigação humana.');
   for(const cue of buildProfessionalCues(record)){
     const section=document.createElement('section');section.className='mc-pro-cue';
