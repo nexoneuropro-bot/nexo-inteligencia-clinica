@@ -45,10 +45,16 @@ function startClinical(){
  }
  function showSummary(){
   const list=element('mc-summary');list.replaceChildren();
-  for(const question of questions){const option=question.options.find(option=>option.id===answers[question.id]);if(!option)continue;const dt=document.createElement('dt'),dd=document.createElement('dd');dt.textContent=question.theme;dd.textContent=`Você escolheu: “${option.label}”`;list.append(dt,dd);}
-  if(!list.childElementCount){const p=document.createElement('p');p.textContent='Você preferiu deixar as perguntas iniciais sem resposta. O profissional poderá conversar sobre seus temas no encontro.';list.append(p);}
+  const p=document.createElement('p');
+  p.textContent='Esta etapa confirma somente o envio. Não há nota, avaliação, interpretação ou resultado automático para você.';
+  list.append(p);
   const completion=element('mc-completion');completion.replaceChildren();
-  [phq9,gad7].forEach((values,index)=>{const p=document.createElement('p');p.textContent=values.every(value=>value!==null)?`O bloco ${index+1} sobre as últimas duas semanas está completo.`:`O bloco ${index+1} sobre as últimas duas semanas tem perguntas sem resposta. Ele será identificado como incompleto, sem cálculo de resultado.`;completion.append(p);});
+  const missing=[...phq9,...gad7].some(value=>value===null);
+  if(missing){
+   const note=document.createElement('p');
+   note.textContent='Você deixou algumas perguntas sem resposta. Elas permanecerão sem resposta; isso não impede que compartilhe o que escolheu informar.';
+   completion.append(note);
+  }
   element<HTMLInputElement>('mc-send-confirm').checked=false;
  }
  function showReceipt(data:Record<string,unknown>){
