@@ -1,0 +1,47 @@
+---
+import Layout from './Layout.astro';
+interface Props { title:string; description:string }
+const {title,description}=Astro.props;
+---
+<Layout title={title} description={description} experience privateExperience>
+  <div class="momento-universe">
+    <div id="experience-stage" class="momento-constellation" aria-hidden="true">
+      <svg viewBox="0 0 1440 1000" preserveAspectRatio="xMidYMid slice" fill="none">
+        <defs><radialGradient id="momento-aura"><stop stop-color="#b77950" stop-opacity=".17"/><stop offset="1" stop-color="#0b2635" stop-opacity="0"/></radialGradient></defs>
+        <ellipse cx="1050" cy="380" rx="490" ry="390" fill="url(#momento-aura)"/>
+        <g stroke="#dcae8c" stroke-width=".7" opacity=".25"><ellipse cx="1040" cy="410" rx="340" ry="165" transform="rotate(-28 1040 410)"/><ellipse cx="1040" cy="410" rx="320" ry="210" transform="rotate(38 1040 410)"/><path d="M730 120C1080 200 880 590 1360 720M680 760C990 660 1030 210 1390 100"/></g>
+        <g fill="#dcae8c">{Array.from({length:48},(_,i)=><circle cx={100+(i*173)%1270} cy={80+(i*113)%820} r={i%7===0?1.8:.8} opacity={.15+(i%4)*.08}/>)}</g>
+      </svg>
+    </div>
+    <slot/>
+  </div>
+</Layout>
+<style is:global>
+ .momento-universe{position:relative;isolation:isolate;min-height:100svh;background:#071c28;color:#f6f2ea;--focus:#dcae8c}
+ .momento-constellation{position:absolute;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+ .momento-constellation svg{width:100%;height:min(1200px,100%);opacity:.85}
+ .momento-universe a:focus-visible,.momento-universe button:focus-visible,.momento-universe summary:focus-visible{outline:3px solid var(--focus);outline-offset:5px}
+ .momento-universe .moment-wrap{width:min(1160px,calc(100% - 64px));margin:auto;padding:165px 0 90px}
+ .moment-kicker{color:#e2b893;font:500 11px/1.8 var(--sans);letter-spacing:.15em;margin-bottom:25px}
+ .moment-lead{max-width:720px;font:400 20px/1.85 var(--sans);color:#ccd6d6;margin:27px 0}
+ .moment-title{font:400 clamp(48px,6vw,82px)/1.04 var(--serif);max-width:900px}
+ .moment-title em{color:#e2b893;font-weight:400}
+ .moment-actions{display:flex;gap:20px;flex-wrap:wrap;align-items:center;margin:33px 0}
+ .moment-link{font:500 16px/1.6 var(--sans);text-decoration:underline;text-underline-offset:6px}
+ .moment-note{max-width:760px;color:#bbcacc;font:400 15px/1.85 var(--sans);margin-top:18px}
+ .moment-section{padding:45px 0;border-top:1px solid #b7bfb12f;margin-top:38px}
+ .moment-section h2{font:400 clamp(33px,4vw,48px)/1.15 var(--serif);margin-bottom:24px}
+ .moment-section p,.moment-section li{font:400 18px/1.9 var(--sans);max-width:79ch;color:#d0d9d7}
+ .moment-section p+p{margin-top:18px}
+ .moment-section a{text-decoration:underline;text-underline-offset:4px}
+ .moment-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:30px;margin:35px 0}
+ .moment-card{padding:27px 0;border-top:1px solid #dcae8c6b}
+ .moment-card h3{font:400 31px/1.15 var(--serif);margin:16px 0}
+ .moment-card p{font:400 17px/1.85 var(--sans);color:#c5d2d1}
+ .moment-card>span{font:italic 22px var(--serif);color:#e2b893}
+ .moment-section details{border-block-end:1px solid #bac4bb3c;padding:20px 0;max-width:900px}
+ .moment-section summary{cursor:pointer;font:500 18px/1.6 var(--sans);padding:7px 0}
+ .moment-section details p{margin:18px 0 4px}
+ @media(max-width:700px){.momento-universe .moment-wrap{width:calc(100% - 40px);padding-top:135px}.moment-title{font-size:50px}.moment-lead{font-size:19px}.moment-cards{grid-template-columns:1fr;gap:8px}.moment-card{padding-block:22px}.moment-actions .button{font-size:15px;min-height:48px}.moment-section{padding-block:30px}.moment-section p,.moment-section li{font-size:17px}}
+ @media print{.momento-universe{background:#fff;color:#082440}.momento-constellation,.ex-header,.ex-footer,.moment-actions{display:none}.momento-universe .moment-wrap{padding:20px 0;width:100%}.moment-lead,.moment-note,.moment-section p,.moment-section li{color:#222}}
+</style>

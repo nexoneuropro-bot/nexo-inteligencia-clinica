@@ -216,7 +216,7 @@ const draftArtifacts=files.filter(file=>/^psicologia-em-pauta\/(?:originais|acer
 const summaries=[];
 
 if(mode!=='public'){
- check(htmlFiles.length===23,`Draft build must have 23 HTML files (15 institutional routes, six articles, editorial privacy and 404); found ${htmlFiles.length}`);
+ check(htmlFiles.length===26,`Draft build must have 26 HTML files (15 institutional routes, six articles, editorial privacy, three Momento routes and 404); found ${htmlFiles.length}`);
  readerInterface(landing,'editorial landing');
  const titles=new Set(),descriptions=new Set(),socials=new Set();
  for(const article of articles){
@@ -302,7 +302,7 @@ if(mode!=='public'){
   check(noindexHeader(rules,photo.url),`${id}: photography asset lacks noindex header`);
  }
 }else{
- check(htmlFiles.length===17,`Public build must retain 17 HTML files / 15 institutional routes, editorial privacy and 404; found ${htmlFiles.length}`);
+ check(htmlFiles.length===20,`Public build must retain 20 HTML files / 15 institutional routes, editorial privacy, three Momento routes and 404; found ${htmlFiles.length}`);
  for(const slug of slugs){
   check(!fs.existsSync(routeFile(slug)),`${slug}: draft HTML exists in public build`);
   check(!linked(landing,routeUrl(slug)),`${slug}: public landing exposes draft link`);

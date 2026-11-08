@@ -2,6 +2,9 @@ import { defineConfig } from 'astro/config';
 import {writeFile} from 'node:fs/promises';
 import {createRequire} from 'node:module';
 import {fileURLToPath, pathToFileURL} from 'node:url';
+import {assertDemoOnlyConfiguration} from './src/lib/momento-features.mjs';
+
+assertDemoOnlyConfiguration(process.env);
 
 const nativeDevDependencies = ['picomatch', 'yaml', 'eventemitter3'];
 const requireFromProject = createRequire(import.meta.url);
@@ -48,6 +51,9 @@ export default defineConfig({
   integrations:[{name:'nexo-static-headers',hooks:{'astro:build:done':async({dir})=>{
     const noindex=process.env.PUBLIC_INDEXABLE==='true'&&process.env.PUBLIC_EDITORIAL_PREVIEW!=='true'&&process.env.PUBLIC_EDITORIAL_SHARED_PREVIEW!=='true'?'':'  X-Robots-Tag: noindex, follow\n';
     await writeFile(new URL('_headers',dir),`/*\n${noindex}  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n  Permissions-Policy: camera=(), microphone=(), geolocation=()\n  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'none'\n`);
+    const momentoHeaders = ['/conhecendo-meu-momento','/conhecendo-meu-momento/*'].map(route => `${route}\n  ! X-Robots-Tag\n  ! Referrer-Policy\n  X-Robots-Tag: noindex, nofollow, noarchive\n  Cache-Control: no-store, max-age=0\n  Referrer-Policy: no-referrer\n  Content-Security-Policy: connect-src 'none'; form-action 'none'\n`).join('\n');
+    const {appendFile} = await import('node:fs/promises');
+    await appendFile(new URL('_headers',dir),`\n${momentoHeaders}`);
     const editorialPreview=process.env.PUBLIC_EDITORIAL_PREVIEW==='true'||process.env.PUBLIC_EDITORIAL_SHARED_PREVIEW==='true';
     await writeFile(new URL('_redirects',dir),editorialPreview?'/psicologia-em-pauta/originais/analise-do-comportamento.pdf /psicologia-em-pauta/edicoes/analise-do-comportamento.pdf 302\n':'');
   }}}]

@@ -11,15 +11,16 @@ const production=process.env.PUBLIC_INDEXABLE==='true'&&process.env.PUBLIC_EDITO
 for(const file of htmlFiles){
  const html=fs.readFileSync(file,'utf8'),name=path.relative(root,file);
  const editorialPrivacy=name.split(path.sep).join('/')==='psicologia-em-pauta/privacidade/index.html';
- const shouldIndex=production&&name!=='404.html'&&!editorialPrivacy;
+ const privateMomento=name.split(path.sep).join('/').startsWith('conhecendo-meu-momento/');
+ const shouldIndex=production&&name!=='404.html'&&!editorialPrivacy&&!privateMomento;
  check(/<html[^>]*lang="pt-BR"/.test(html),`${name}: idioma`);
  const title=html.match(/<title>(.*?)<\/title>/)?.[1];check(title&&!titles.has(title),`${name}: título ausente/repetido`);titles.add(title);
  check(/name="description" content="[^"]+"/.test(html),`${name}: descrição`);
  check((html.match(/<h1[ >]/g)||[]).length===1,`${name}: exige um H1`);
  check(/<main\s[^>]*id="conteudo"/.test(html),`${name}: conteúdo principal`);
- check(html.includes(`name="robots" content="${shouldIndex?'index,follow':'noindex,follow'}"`),`${name}: indexação`);
+ check(html.includes(`name="robots" content="${privateMomento?'noindex,nofollow,noarchive':shouldIndex?'index,follow':'noindex,follow'}"`),`${name}: indexação`);
  check(shouldIndex?html.includes('rel="canonical"'):!html.includes('rel="canonical"'),`${name}: canonical da prévia/produção`);
- check(html.includes('data-ambient-sound')&&html.includes('data-sound-toggle aria-pressed="false"'),`${name}: ambiente sonoro opcional desligado inicialmente`);
+ check(privateMomento?!html.includes('data-ambient-sound'):html.includes('data-ambient-sound')&&html.includes('data-sound-toggle aria-pressed="false"'),`${name}: áudio compatível com o contexto`);
  check(editorialPrivacy||html.includes('id="experience-stage"'),`${name}: continuidade espacial e alternativa estática`);
  const localEditorialDraft=(process.env.PUBLIC_EDITORIAL_PREVIEW==='true'||process.env.PUBLIC_EDITORIAL_SHARED_PREVIEW==='true')&&(name.split(path.sep).join('/')==='psicologia-em-pauta/index.html'||html.includes('data-editorial-article='));
  check(!/class="[^"\n]*\b(?:ed-draft-strip|ed-inline-review|ed-article-review|ed-review-responses|ed-review-panel)\b/.test(html),`${name}: painel interno de revisão não deve aparecer na leitura`);
@@ -44,6 +45,8 @@ for(const file of htmlFiles){
 const businessServices=['recrutamento-e-selecao','treinamento-e-desenvolvimento','avaliacao-psicologica-organizacional'];
 const routes=['','para-voce','psicoterapia','avaliacao-neuropsicologica','integracao-psiquiatrica','para-sua-empresa','riscos-psicossociais-nr1',...businessServices,'nossa-abordagem','profissionais','psicologia-em-pauta','contato','politica-de-privacidade'];
 routes.forEach(route=>check(fs.existsSync(path.join(root,route,'index.html')),`Rota ausente: /${route}/`));
+const momentoRoutes=['conhecendo-meu-momento','conhecendo-meu-momento/demonstracao','conhecendo-meu-momento/visao-tecnica'];
+momentoRoutes.forEach(route=>check(fs.existsSync(path.join(root,route,'index.html')),`Rota ausente: /${route}/`));
 // The home presentation is optional decoration over working HTML navigation.
 // Keep the cinematic sequence confined to the home and independent of a film.
 const homeHtml=fs.readFileSync(path.join(root,'index.html'),'utf8');
@@ -68,7 +71,7 @@ for(const file of htmlFiles.filter(file=>file!==path.join(root,'index.html'))){
 }
 // A page can build correctly yet remain undiscoverable. Follow the actual HTML
 // links from the home page to check that every institutional route is reachable.
-const routePaths=new Set(routes.map(route=>route?`/${route}/`:'/'));
+const routePaths=new Set([...routes,...momentoRoutes].map(route=>route?`/${route}/`:'/'));
 const reached=new Set(['/']),pending=['/'];
 while(pending.length){
  const current=pending.shift();
@@ -124,7 +127,10 @@ for(const guide of guides){
 const sitemap=fs.readFileSync(path.join(root,'sitemap.xml'),'utf8');
 check((sitemap.match(/<loc>/g)||[]).length===(production?routes.length:0),'Sitemap incompatível com indexação');
 check(fs.readFileSync(path.join(root,'robots.txt'),'utf8').includes('Allow: /'),'Robots deve permitir ler noindex');
-const headers=fs.readFileSync(path.join(root,'_headers'),'utf8');check(production?!headers.includes('noindex'):headers.includes('noindex'),'X-Robots-Tag');
+const headers=fs.readFileSync(path.join(root,'_headers'),'utf8');
+check(headers.includes('/conhecendo-meu-momento/*')&&headers.includes('X-Robots-Tag: noindex, nofollow, noarchive'),'Proteção de indexação da experiência reservada');
+const globalHeaders=headers.split('/conhecendo-meu-momento')[0];
+check(production?!globalHeaders.includes('noindex'):globalHeaders.includes('noindex'),'X-Robots-Tag institucional');
 check(/\bscript-src\s+'self'\s*;/.test(headers),'CSP permite somente scripts da própria origem');
 const assets=files.filter(f=>/\.(js|css)$/.test(f)).map(f=>({file:path.relative(root,f),bytes:fs.statSync(f).size,gzip:gzipSync(fs.readFileSync(f)).length}));
 console.log(JSON.stringify({pages:htmlFiles.length,requestedRoutes:routes.length,reachableRoutes:reached.size,linksAndAssets:'checked',mode:production?'production':'preview',assets,failures},null,2));
