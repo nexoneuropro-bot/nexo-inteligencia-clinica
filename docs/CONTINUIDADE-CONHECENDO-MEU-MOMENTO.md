@@ -1,8 +1,8 @@
 # Conhecendo Meu Momento — continuidade
 
-**Atualização posterior: a bateria completa e o backend foram implementados.** O titular confirmou PHQ-9/GAD-7 e aprovou a configuração privada e a ativação após testes. O estado atual está em `MOMENTO-BATERIA-FONTES-E-ATIVACAO.md`; as descrições de infraestrutura ausente abaixo registram a entrega anterior da Fase 1 e não devem motivar recomeçar o trabalho.
+**Estado atual em 08/11/2026: bateria, infraestrutura privada e ensaio real concluídos na prévia.** O titular cadastrou a própria passkey. PHQ-9 e GAD-7 foram respondidos com dados sintéticos, gravados no D1 cifrado e lidos pela área autenticada com totais 13/7; o serviço confirmou o aviso neutro por e-mail. Cron diário configurado e testado, sem URL pública. O uso começa em `/nexo-profissional/` para criar convites a `/conhecendo-meu-momento/responder/`. O estado detalhado está em `MOMENTO-BATERIA-FONTES-E-ATIVACAO.md`. Todo o restante deste documento registra a entrega HISTÓRICA da Fase 1: não usar seus bloqueios antigos para desativar ou refazer a implementação atual.
 
-Atualizado em 08/11/2026. Integração da Fase 1 implementada e em conferência de publicação. A operação clínica real continua incompleta; não confundir a demonstração com produção clínica.
+Registro histórico da Fase 1: a demonstração permanece separada do fluxo clínico atual.
 
 ## Finalidade e decisões do titular
 
