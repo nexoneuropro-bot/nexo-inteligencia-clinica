@@ -1,5 +1,6 @@
 import {startAuthentication,startRegistration} from '@simplewebauthn/browser';
 import {screeningInstruments} from '../data/momento-instruments';
+import {buildProfessionalCues} from '../lib/momento-professional-cues';
 import {profileFields,questions} from '../data/momento-demo';
 
 type Data=Record<string,unknown>;
@@ -87,6 +88,21 @@ function startProfessional(){
    const questionList=document.createElement('ol');instrument.items.forEach((question,index)=>{const item=document.createElement('li');item.textContent=question+' — '+(instrument.options.find(option=>option.value===values[index])?.label??'Sem resposta');questionList.append(item);});panel.append(questionList);
    paragraph(panel,'Impacto funcional: '+(instrument.impactOptions.find(option=>option.value===impact[instrument.id])?.label??'Sem resposta')+'. Não integra o total do instrumento.');
    const source=document.createElement('a');source.href=instrument.sourceUrl;source.textContent='Consultar a fonte da versão utilizada ↗';source.target='_blank';source.rel='noopener noreferrer';source.className='mc-link';panel.append(source);
+  }
+  heading(panel,'Pistas descritivas para a entrevista · revisão profissional');
+  paragraph(panel,'As pistas abaixo têm origem indicada e servem apenas para preparar perguntas. Não são diagnósticos, classificações de risco ou indicações automáticas de testes e tratamentos. O DSM-5-TR pode orientar a investigação humana.');
+  for(const cue of buildProfessionalCues(record)){
+    const section=document.createElement('section');section.className='mc-pro-cue';
+    heading(section,cue.titulo);
+    const axis=paragraph(section,'Eixo: '+cue.eixo+'.');axis.className='mc-caption';
+    if(cue.evidencias.length){
+      const evidence=document.createElement('ul');
+      for(const fact of cue.evidencias){const li=document.createElement('li');li.textContent=fact;evidence.append(li);}
+      section.append(evidence);
+    } else paragraph(section,'Sem indicadores pontuados suficientes para esta seção.');
+    paragraph(section,'Investigar: '+cue.investigar);
+    const limit=paragraph(section,'Limite interpretativo: '+cue.limite);limit.className='mc-caption';
+    panel.append(section);
   }
   heading(panel,'Perguntas para explorar no encontro');paragraph(panel,'Considere as condições biológicas, psicológicas, sociais e os efeitos no cotidiano. Distinga o que a pessoa declarou das hipóteses que ainda dependem de entrevista. As alternativas escolhidas, isoladamente, não estabelecem função comportamental, diagnóstico ou encaminhamento.');
  }
