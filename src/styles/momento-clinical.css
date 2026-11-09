@@ -80,3 +80,32 @@
 #mc-reflection-topics .mc-choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
 #mc-reflection-topics .mc-choices label{min-width:0;font-size:15px}
 @media(max-width:650px){#mc-reflection-topics .mc-choices{grid-template-columns:1fr}.mc-sensitive-choice{padding:15px}}
+
+/* NEXO · Direção clínica. Extensão da linguagem editorial existente. */
+.mc-guide{border-top:2px solid #a8714d;padding:27px 0 16px;margin-top:23px;break-after:auto}
+.mc-guide>h3{font:400 clamp(27px,3vw,38px)/1.2 var(--serif);margin:6px 0 14px;color:#123d48}
+.mc-guide-section{padding:23px 0;border-top:1px solid #d8d1c5;margin-top:17px}
+.mc-guide-section>h3{font:400 clamp(23px,2.7vw,32px)/1.25 var(--serif);margin:8px 0 16px;color:#123d48}
+.mc-guide-alert{border-left:4px solid #a0603a;background:#f8eee6;padding:18px 22px;margin:20px 0}
+.mc-guide-alert h4{font:600 17px/1.5 var(--sans);color:#6c3a25;margin:0 0 8px}
+.mc-guide-alert p{margin:0;font-size:15px;line-height:1.7;color:#4f3329}
+.mc-guide-opening{margin:12px 0;padding:15px 19px;background:#f1f0ea;border-left:2px solid #aa7b55;font:400 20px/1.65 var(--serif);color:#244651}
+.mc-guide-list{margin:12px 0 16px;padding-left:23px}
+.mc-guide-list li{line-height:1.65;font-size:14px;margin:8px 0;overflow-wrap:anywhere}
+.mc-guide-step,.mc-guide-hd,.mc-guide-tool{border-bottom:1px solid #e2dbcf;padding:19px 0;break-inside:avoid}
+.mc-guide-step h4,.mc-guide-hd h4,.mc-guide-tool h4{font:400 23px/1.25 var(--serif);margin:5px 0 9px;color:#123d48}
+.mc-guide-tool{padding:17px 0}
+.mc-guide-check{display:flex;gap:12px;align-items:flex-start;font-size:16px;font-weight:600;line-height:1.45}
+.mc-guide-check input{accent-color:#895331;min-width:18px;min-height:18px;margin-top:2px}
+.mc-guide-actions{display:flex;gap:15px;flex-wrap:wrap;align-items:center;margin:23px 0}
+.mc-guide-bank{color:#895331;text-decoration:underline;text-underline-offset:3px}
+.mc-guide-actions button:focus-visible,.mc-guide-bank:focus-visible,.mc-guide-check input:focus-visible{outline:3px solid #895331;outline-offset:3px}
+@media(max-width:650px){.mc-guide-opening{font-size:18px}.mc-guide-alert{padding:15px}.mc-guide-actions{flex-direction:column;align-items:stretch}}
+@media print{
+ .mc-guide-actions,.mc-guide-bank,.mc-guide-check input{display:none!important}
+ .mc-guide{border-top:2px solid #895331;break-inside:auto}
+ .mc-guide-opening{background:#fff!important;border-left:2px solid #895331;font-size:13pt}
+ .mc-guide-step,.mc-guide-hd,.mc-guide-tool{break-inside:avoid}
+ .mc-guide-section{break-inside:auto}
+ .mc-guide-alert{background:#fff!important;border-left:3px solid #895331}
+}
