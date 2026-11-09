@@ -2,6 +2,7 @@ import {startAuthentication,startRegistration} from '@simplewebauthn/browser';
 import {screeningInstruments} from '../data/momento-instruments';
 import {buildProfessionalCues} from '../lib/momento-professional-cues';
 import {appendIntegratedProfessionalReport} from './momento-report-view';
+import {appendProfessionalInstrumentAssignments} from './momento-professional-followups';
 import {clarificationQuestions} from '../data/momento-clarifications';
 import {profileFields,questions} from '../data/momento-demo';
 
@@ -128,6 +129,7 @@ function startProfessional(){
   while(panel.firstChild)annex.append(panel.firstChild);
   panel.append(annex);
   appendIntegratedProfessionalReport(panel,record);
+  appendProfessionalInstrumentAssignments(panel,record,currentId,api);
  }
  async function openRecord(id:string){
   if(!/^[a-zA-Z0-9_-]{8,100}$/.test(id))throw new Error('unavailable');clearRecord();const data=await api(`submissions/${encodeURIComponent(id)}`),record=object(data.record),metadata=object(data.metadata);if(!Object.keys(record).length)throw new Error('unavailable');currentId=id;currentRecord=record;currentMetadata=metadata;renderRecord(record,metadata);element('pro-record-id').textContent=`Identificador ${id}. Acesso ao conteúdo registrado para auditoria.`;element('pro-record-section').hidden=false;const h=element('pro-record-title');h.focus({preventScroll:true});h.scrollIntoView({block:'start',behavior:'instant'});

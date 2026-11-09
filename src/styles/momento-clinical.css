@@ -119,3 +119,25 @@
 .mc-catalog-results{margin-top:16px}
 .mc-guide-catalog-alert{padding:13px 15px;border-left:3px solid #a25b39;background:#f8eee4;color:#4b3329;font-size:14px}
 @media print{.mc-catalog{display:none!important}}
+
+/* NEXO · Encaminhamentos internos preservam a linguagem visual do acolhimento. */
+.mc-shell [data-mi-stage]>h2{font:400 clamp(31px,4vw,44px)/1.14 var(--serif);margin:15px 0 24px;scroll-margin-top:100px}
+.mc-shell #mi-options label{font-size:16px;line-height:1.6;display:flex;align-items:flex-start;gap:12px}
+.mc-shell #mi-options input[type=radio]{flex:0 0 20px;margin-top:5px}
+.mc-shell #mi-options label:focus-within{outline:2px solid #895331;outline-offset:3px}
+.mc-shell [data-mi-stage=consent] .mc-field,.mc-shell [data-mi-stage=summary] .mc-field{display:flex;flex-direction:row;align-items:flex-start;gap:12px;font-size:16px;line-height:1.5}
+.mc-shell [data-mi-stage=consent] input[type=checkbox],.mc-shell [data-mi-stage=summary] input[type=checkbox]{min-width:20px;width:20px;height:20px;flex:0 0 20px;margin-top:4px}
+.mc-followup-controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 20px;max-width:720px;margin:20px 0}
+.mc-followup-controls>label{display:flex;flex-direction:column;gap:7px;font-size:14px}
+.mc-followup-controls>label.mc-guide-check{grid-column:1/-1;display:flex;flex-direction:row;gap:10px;align-items:start;font-size:15px}
+.mc-followup-controls select{min-width:0;width:100%;padding:11px;border:1px solid #b9b9aa;background:#fffdf8;color:#0b2635;border-radius:6px}
+.mc-followup-controls>button,.mc-followup-controls>p,.mc-followup-invite{grid-column:1/-1}
+.mc-followup-invite{border:1px solid #d4cbc0;border-radius:8px;padding:17px;display:grid;gap:11px;word-break:break-word;background:#fffaf2}
+.mc-followup-invite[hidden]{display:none!important}
+.mc-followup-invite code{font-weight:700;font-size:18px;letter-spacing:.05em;color:#123d48}
+.mc-followup-invite a{color:#895331;text-decoration:underline}
+.mc-followup-invite button{width:max-content;max-width:100%}
+.mc-followup-item{margin:14px 0;padding:15px;border:1px solid #d7d0c4;border-radius:8px}
+.mc-followup-item button{margin-top:9px}
+@media(max-width:680px){.mc-followup-controls{grid-template-columns:1fr}}
+@media print{.mc-followup-controls,.mc-followup-item button{display:none!important}.mc-followup-section h3{color:#173b48}}

@@ -1,6 +1,6 @@
 import { profileFields, placeOptions, questions } from '../../src/data/momento-demo.ts';
 import { scoreScreening, SCREENING_SCORING_RULES_VERSION } from '../../src/lib/momento-screening.ts';
-import { CLINICAL_CONSENT_VERSION, INSTRUMENT_VERSIONS } from '../../src/data/momento-instruments.ts';
+import { CLINICAL_CONSENT_VERSION, FOLLOWUP_CONSENT_VERSION, INSTRUMENT_VERSIONS } from '../../src/data/momento-instruments.ts';
 import { clarificationQuestions } from '../../src/data/momento-clarifications.ts';
 import { reflectionQuestions, reflectionChoices, reflectionTopics, REFLECTION_MAX_CHARS } from '../../src/data/momento-reflections.ts';
 
@@ -190,6 +190,26 @@ export function validateClinicalSubmission(payload, now = Date.now()) {
     createdAt: new Date(now).toISOString(), expiresAt: new Date(now + CLINICAL_ACTIVE_RETENTION_DAYS * DAY).toISOString() };
 }
 
+export function validateClinicalFollowup(payload,instrumentId,now=Date.now()){
+ requireExact(payload,['consent','instrumentId','instrumentVersion','answers','impact']);
+ requireExact(payload.consent,['adult','accepted','version']);
+ if(payload.consent.adult!==true||payload.consent.accepted!==true||payload.consent.version!==FOLLOWUP_CONSENT_VERSION)
+  throw new ClinicalError(400,'consent_required');
+ if(!['phq9','gad7'].includes(instrumentId)||payload.instrumentId!==instrumentId||payload.instrumentVersion!==INSTRUMENT_VERSIONS[instrumentId])
+  throw new ClinicalError(400,'instrument_mismatch');
+ const count=instrumentId==='phq9'?9:7;
+ if(!Array.isArray(payload.answers)||payload.answers.length!==count||
+    payload.answers.some(v=>v!==null&&(typeof v!=='number'||!Number.isInteger(v)||v<0||v>3)))
+  throw new ClinicalError(400,'invalid_screening');
+ if(payload.impact!==null&&(typeof payload.impact!=='number'||!Number.isInteger(payload.impact)||payload.impact<0||payload.impact>3))
+  throw new ClinicalError(400,'invalid_impact');
+ let result;try{result=scoreScreening(instrumentId,payload.answers);}catch{throw new ClinicalError(400,'invalid_screening');}
+ return {schemaVersion:1,source:'nexo-instrumento-complementar',
+  consent:{adult:true,accepted:true,version:FOLLOWUP_CONSENT_VERSION,acceptedAt:new Date(now).toISOString()},
+  instrumentId,instrumentVersion:payload.instrumentVersion,scoringRulesVersion:SCREENING_SCORING_RULES_VERSION,
+  answers:payload.answers.slice(),impact:payload.impact,result,createdAt:new Date(now).toISOString()};
+}
+
 async function readJSON(request) {
   if (!/^application\/json(?:\s*;|$)/i.test(request.headers.get('content-type') || '') || Number(request.headers.get('content-length') || 0) > MAX_BODY) throw new ClinicalError(400, 'invalid_request');
   const reader = request.body?.getReader(); if (!reader) throw new ClinicalError(400, 'invalid_request');
@@ -258,7 +278,7 @@ const submissionMetadata = row => ({ id: row.id, createdAt: new Date(row.created
 export async function cleanupClinicalData(env, now = Date.now()) {
   const db = env?.NEXO_CLINICAL_DB; if (!db?.batch) throw new Error('clinical_database_unavailable');
   return db.batch([
-    ...['momento_submissions', 'momento_sessions', 'momento_challenges', 'momento_bootstrap', 'momento_rate_limits', 'momento_audit', 'momento_invites'].map(table => stmt(db, `DELETE FROM ${table} WHERE expires_at <= ?`, now)),
+    ...['momento_instrument_results', 'momento_submissions', 'momento_sessions', 'momento_challenges', 'momento_bootstrap', 'momento_rate_limits', 'momento_audit', 'momento_invites'].map(table => stmt(db, `DELETE FROM ${table} WHERE expires_at <= ?`, now)),
     stmt(db, 'INSERT INTO momento_retention_runs (slot, last_success_at) VALUES (1, ?) ON CONFLICT(slot) DO UPDATE SET last_success_at = excluded.last_success_at', now),
     auditStatement(db, 'system', 'retention_purged', 'expired-records', now),
   ]);
@@ -349,6 +369,118 @@ export async function handleClinicalRequest({ request, env }, dependencies = {})
       if (session) await db.batch([stmt(db, 'DELETE FROM momento_sessions WHERE token_hash = ?', session.token_hash), auditStatement(db, role, 'session_ended', role, now)]);
       return jsonResponse(200, { ended: true }, { 'set-cookie': cookieHeader(role, '', 0) });
     }
+    // Instrumentos complementares dentro do próprio NEXO.
+    // Catálogo de aplicação habilitado: somente PHQ-9 e GAD-7 previamente implementados.
+    if(path==='instruments/assign'&&request.method==='POST'){
+      const session=await needAdmin();
+      requireExact(payload,['submissionId','instrumentId','expiresInDays','administrationMode','clinicianReviewed','safetyReviewed']);
+      if(!uuidPattern.test(payload.submissionId||'')||!['phq9','gad7'].includes(payload.instrumentId)||
+         ![1,3,7,14].includes(payload.expiresInDays)||!['session','between-sessions'].includes(payload.administrationMode)||
+         payload.clinicianReviewed!==true||typeof payload.safetyReviewed!=='boolean')
+         throw new ClinicalError(400,'invalid_request');
+      await rateLimit(request,config,db,'instrument-assign',now,20,100);
+      const source=await stmt(db,'SELECT * FROM momento_submissions WHERE id=? AND owner_id=? AND expires_at>?',
+        payload.submissionId,session.owner_id,now).first();
+      if(!source)deny();
+      const original=await decryptClinicalRecord(source,config.key);
+      const p9=Array.isArray(original.phq9)?original.phq9[8]:null;
+      if((p9===null||p9===undefined||p9>0)&&!payload.safetyReviewed)
+        throw new ClinicalError(409,'safety_review_required');
+      const id=crypto.randomUUID(),code=invitationCode(),expiresAt=Math.min(source.expires_at,now+payload.expiresInDays*DAY);
+      if(expiresAt<=now)deny();
+      await db.batch([
+        stmt(db,'INSERT INTO momento_invites (id,owner_id,code_hash,created_at,expires_at,instrument_id,source_submission_id,administration_mode) VALUES (?,?,?,?,?,?,?,?)',
+          id,session.owner_id,await hashClinicalValue(config.secret,'invite',normalizeInvitation(code)),
+          now,expiresAt,payload.instrumentId,source.id,payload.administrationMode),
+        auditStatement(db,'clinician','instrument_assigned',id,now)
+      ]);
+      return jsonResponse(201,{id,code,instrumentId:payload.instrumentId,administrationMode:payload.administrationMode,
+        expiresAt:new Date(expiresAt).toISOString(),url:`${config.origin}/conhecendo-meu-momento/instrumento/`});
+    }
+    if(path==='instruments'&&request.method==='GET'){
+      const session=await needAdmin();
+      const found=await rows(stmt(db,"SELECT i.id,i.instrument_id,i.source_submission_id,i.administration_mode,i.created_at,i.expires_at,i.consumed_at,i.revoked_at,i.submission_id FROM momento_invites i JOIN momento_submissions s ON s.id=i.source_submission_id AND s.owner_id=i.owner_id AND s.expires_at>? WHERE i.owner_id=? AND i.instrument_id IS NOT NULL AND i.expires_at>? ORDER BY i.created_at DESC LIMIT 100",now,session.owner_id,now));
+      return jsonResponse(200,{assignments:found.map(i=>({
+        id:i.id,instrumentId:i.instrument_id,sourceSubmissionId:i.source_submission_id,
+        administrationMode:i.administration_mode,createdAt:new Date(i.created_at).toISOString(),
+        expiresAt:new Date(i.expires_at).toISOString(),redeemed:Boolean(i.consumed_at),
+        revoked:Boolean(i.revoked_at),submitted:Boolean(i.submission_id)
+      }))});
+    }
+    const instrumentResult=path.match(/^instruments\/([0-9a-f-]{36})\/result$/);
+    if(instrumentResult&&request.method==='GET'){
+      const session=await needAdmin(),id=instrumentResult[1];if(!uuidPattern.test(id))deny();
+      const row=await stmt(db,'SELECT r.* FROM momento_instrument_results r JOIN momento_submissions s ON s.id=r.source_submission_id AND s.owner_id=r.owner_id AND s.expires_at>? WHERE r.invite_id=? AND r.owner_id=? AND r.expires_at>?',
+        now,id,session.owner_id,now).first();
+      if(!row)deny();
+      const record=await decryptClinicalRecord(row,config.key);
+      await auditStatement(db,'clinician','instrument_result_read',row.id,now).run();
+      return jsonResponse(200,{record,metadata:{assignmentId:id,sourceSubmissionId:row.source_submission_id,
+        createdAt:new Date(row.created_at).toISOString()}});
+    }
+    const instrumentRevoke=path.match(/^instruments\/([0-9a-f-]{36})\/revoke$/);
+    if(instrumentRevoke&&request.method==='POST'){
+      const session=await needAdmin();requireExact(payload,[]);
+      const id=instrumentRevoke[1];if(!uuidPattern.test(id))deny();
+      const changed=await db.batch([
+        stmt(db,'UPDATE momento_invites SET revoked_at=COALESCE(revoked_at,?) WHERE id=? AND owner_id=? AND instrument_id IS NOT NULL AND submission_id IS NULL RETURNING id',now,id,session.owner_id),
+        stmt(db,'DELETE FROM momento_sessions WHERE invite_id=? AND EXISTS(SELECT 1 FROM momento_invites WHERE id=? AND owner_id=? AND revoked_at IS NOT NULL)',id,id,session.owner_id),
+        auditStatement(db,'clinician','instrument_revoked',id,now)
+      ]);
+      if(!changed[0]?.results?.[0])deny();
+      return jsonResponse(200,{revoked:true});
+    }
+    if(path==='instruments/redeem'&&request.method==='POST'){
+      requireExact(payload,['code']);
+      await rateLimit(request,config,db,'instrument-redeem',now,10,100);
+      const codeHash=await hashClinicalValue(config.secret,'invite',normalizeInvitation(payload.code));
+      const token=randomToken(),csrf=await csrfFor(config,token);
+      const rows=await db.batch([
+        stmt(db,"INSERT INTO momento_sessions (token_hash,role,owner_id,csrf_hash,invite_id,created_at,expires_at) SELECT ?, 'participant', i.owner_id, ?, i.id, ?, MIN(i.expires_at, ?) FROM momento_invites i JOIN momento_submissions s ON s.id=i.source_submission_id AND s.owner_id=i.owner_id WHERE i.code_hash=? AND i.instrument_id IS NOT NULL AND i.consumed_at IS NULL AND i.revoked_at IS NULL AND i.expires_at>? AND s.expires_at>?",
+          await hashClinicalValue(config.secret,'session',token),
+          await hashClinicalValue(config.secret,'csrf-hash',csrf),now,now+SESSION_TTL.participant,codeHash,now,now),
+        stmt(db,'UPDATE momento_invites SET consumed_at=? WHERE code_hash=? AND instrument_id IS NOT NULL AND consumed_at IS NULL AND revoked_at IS NULL AND expires_at>? RETURNING id,instrument_id',
+          now,codeHash,now)
+      ]);
+      if(!changes(rows[0])||!rows[1]?.results?.[0])deny();
+      return jsonResponse(200,{csrf,instrumentId:rows[1].results[0].instrument_id,consentVersion:FOLLOWUP_CONSENT_VERSION},
+        {'set-cookie':cookieHeader('participant',token,SESSION_TTL.participant/1000)});
+    }
+    if(path==='instruments/participant'&&request.method==='GET'){
+      const session=await sessionFor(request,config,db,'participant',now);if(!session)deny();
+      const invite=await stmt(db,"SELECT i.instrument_id,i.submission_id FROM momento_invites i JOIN momento_submissions s ON s.id=i.source_submission_id AND s.owner_id=i.owner_id WHERE i.id=? AND i.owner_id=? AND i.instrument_id IS NOT NULL AND s.expires_at>? AND i.revoked_at IS NULL AND i.expires_at>?",
+        session.invite_id,session.owner_id,now,now).first();
+      if(!invite)deny();
+      return jsonResponse(200,{csrf:session.csrf,instrumentId:invite.instrument_id,
+        instrumentVersion:INSTRUMENT_VERSIONS[invite.instrument_id],consentVersion:FOLLOWUP_CONSENT_VERSION,
+        submitted:Boolean(invite.submission_id)});
+    }
+    if(path==='instruments/submit'&&request.method==='POST'){
+      const session=await sessionFor(request,config,db,'participant',now,true);if(!session)deny();
+      const invite=await stmt(db,"SELECT i.* FROM momento_invites i JOIN momento_submissions s ON s.id=i.source_submission_id AND s.owner_id=i.owner_id WHERE i.id=? AND i.owner_id=? AND i.instrument_id IS NOT NULL AND s.expires_at>? AND i.revoked_at IS NULL AND i.expires_at>?",
+        session.invite_id,session.owner_id,now,now).first();
+      if(!invite)deny();
+      if(invite.submission_id)return jsonResponse(200,{saved:true,id:invite.submission_id});
+      await rateLimit(request,config,db,'instrument-submission',now,10,100);
+      const record=validateClinicalFollowup(payload,invite.instrument_id,now);
+      const id=crypto.randomUUID(),encrypted=await encryptClinicalRecord(record,config.key,id);
+      const source=await stmt(db,'SELECT expires_at FROM momento_submissions WHERE id=? AND owner_id=? AND expires_at>?',
+        invite.source_submission_id,session.owner_id,now).first();
+      if(!source)deny();
+      const expiresAt=Math.min(now+CLINICAL_ACTIVE_RETENTION_DAYS*DAY,source.expires_at);
+      const result=await db.batch([
+        stmt(db,"INSERT INTO momento_instrument_results (id,invite_id,owner_id,source_submission_id,instrument_id,ciphertext,iv,created_at,expires_at) SELECT ?,i.id,i.owner_id,i.source_submission_id,i.instrument_id,?,?,?,? FROM momento_invites i WHERE i.id=? AND i.owner_id=? AND i.submission_id IS NULL AND i.revoked_at IS NULL AND i.expires_at>?",
+          id,encrypted.ciphertext,encrypted.iv,now,expiresAt,session.invite_id,session.owner_id,now),
+        stmt(db,"UPDATE momento_invites SET submission_id=? WHERE id=? AND owner_id=? AND instrument_id IS NOT NULL AND submission_id IS NULL RETURNING id",
+          id,session.invite_id,session.owner_id),
+        auditStatement(db,'participant','instrument_result_created',id,now)
+      ]);
+      if(!changes(result[0])||!result[1]?.results?.[0])deny();
+      let notificationSent=await sendMail(env,fetcher,'NEXO | Novo recebimento',
+        `Há nova resposta no NEXO. Acesse sua área profissional: ${config.origin}/nexo-profissional/`);
+      return jsonResponse(201,{saved:true,id,notificationSent},
+        {'set-cookie':cookieHeader('participant',session.token,900)});
+    }
     if (path === 'invites' && request.method === 'POST') {
       const session = await needAdmin(); requireExact(payload, ['expiresInDays']);
       if (!Number.isInteger(payload.expiresInDays) || payload.expiresInDays < 1 || payload.expiresInDays > 14) throw new ClinicalError(400, 'invalid_expiry');
@@ -359,7 +491,7 @@ export async function handleClinicalRequest({ request, env }, dependencies = {})
     }
     if (path === 'invites' && request.method === 'GET') {
       const session = await needAdmin();
-      const invites = await rows(stmt(db, 'SELECT id, created_at, expires_at, consumed_at, revoked_at, submission_id FROM momento_invites WHERE owner_id = ? AND expires_at > ? ORDER BY created_at DESC LIMIT 100', session.owner_id, now));
+      const invites = await rows(stmt(db, 'SELECT id, created_at, expires_at, consumed_at, revoked_at, submission_id FROM momento_invites WHERE owner_id = ? AND expires_at > ? AND instrument_id IS NULL ORDER BY created_at DESC LIMIT 100', session.owner_id, now));
       return jsonResponse(200, { invites: invites.map(invite => ({ id: invite.id, createdAt: new Date(invite.created_at).toISOString(), expiresAt: new Date(invite.expires_at).toISOString(), redeemedAt: invite.consumed_at ? new Date(invite.consumed_at).toISOString() : null, revokedAt: invite.revoked_at ? new Date(invite.revoked_at).toISOString() : null, submitted: Boolean(invite.submission_id) })) });
     }
     const revoke = path.match(/^invites\/([^/]+)\/revoke$/);
@@ -378,8 +510,8 @@ export async function handleClinicalRequest({ request, env }, dependencies = {})
       const codeHash = await hashClinicalValue(config.secret, 'invite', normalizeInvitation(payload.code));
       const token = randomToken(), csrf = await csrfFor(config, token);
       const results = await db.batch([
-        stmt(db, "INSERT INTO momento_sessions (token_hash, role, owner_id, csrf_hash, invite_id, created_at, expires_at) SELECT ?, 'participant', owner_id, ?, id, ?, MIN(expires_at, ?) FROM momento_invites WHERE code_hash = ? AND consumed_at IS NULL AND revoked_at IS NULL AND expires_at > ?", await hashClinicalValue(config.secret, 'session', token), await hashClinicalValue(config.secret, 'csrf-hash', csrf), now, now + SESSION_TTL.participant, codeHash, now),
-        stmt(db, 'UPDATE momento_invites SET consumed_at = ? WHERE code_hash = ? AND consumed_at IS NULL AND revoked_at IS NULL AND expires_at > ? RETURNING id', now, codeHash, now),
+        stmt(db, "INSERT INTO momento_sessions (token_hash, role, owner_id, csrf_hash, invite_id, created_at, expires_at) SELECT ?, 'participant', owner_id, ?, id, ?, MIN(expires_at, ?) FROM momento_invites WHERE code_hash = ? AND consumed_at IS NULL AND revoked_at IS NULL AND instrument_id IS NULL AND expires_at > ?", await hashClinicalValue(config.secret, 'session', token), await hashClinicalValue(config.secret, 'csrf-hash', csrf), now, now + SESSION_TTL.participant, codeHash, now),
+        stmt(db, 'UPDATE momento_invites SET consumed_at = ? WHERE code_hash = ? AND consumed_at IS NULL AND revoked_at IS NULL AND instrument_id IS NULL AND expires_at > ? RETURNING id', now, codeHash, now),
       ]);
       if (!changes(results[0]) || !results[1]?.results?.[0]) deny();
       return jsonResponse(200, { csrf, consentVersion: CLINICAL_CONSENT_VERSION }, { 'set-cookie': cookieHeader('participant', token, SESSION_TTL.participant / 1000) });
@@ -399,7 +531,7 @@ export async function handleClinicalRequest({ request, env }, dependencies = {})
       const id = crypto.randomUUID(), expiresAt = now + CLINICAL_ACTIVE_RETENTION_DAYS * DAY;
       const encrypted = await encryptClinicalRecord(record, config.key, id);
       const results = await db.batch([
-        stmt(db, 'INSERT INTO momento_submissions (id, owner_id, invite_id, ciphertext, iv, created_at, expires_at) SELECT ?, s.owner_id, s.invite_id, ?, ?, ?, ? FROM momento_sessions s JOIN momento_invites i ON i.id = s.invite_id WHERE s.token_hash = ? AND s.role = ? AND s.expires_at > ? AND i.submission_id IS NULL AND i.owner_id = s.owner_id AND i.revoked_at IS NULL AND i.expires_at > ?', id, encrypted.ciphertext, encrypted.iv, now, expiresAt, session.token_hash, 'participant', now, now),
+        stmt(db, 'INSERT INTO momento_submissions (id, owner_id, invite_id, ciphertext, iv, created_at, expires_at) SELECT ?, s.owner_id, s.invite_id, ?, ?, ?, ? FROM momento_sessions s JOIN momento_invites i ON i.id = s.invite_id WHERE s.token_hash = ? AND s.role = ? AND s.expires_at > ? AND i.submission_id IS NULL AND i.owner_id = s.owner_id AND i.revoked_at IS NULL AND i.instrument_id IS NULL AND i.expires_at > ?', id, encrypted.ciphertext, encrypted.iv, now, expiresAt, session.token_hash, 'participant', now, now),
         stmt(db, 'UPDATE momento_invites SET submission_id = ? WHERE id = ? AND submission_id IS NULL AND EXISTS (SELECT 1 FROM momento_submissions WHERE id = ?) RETURNING id', id, session.invite_id, id),
         stmt(db, 'UPDATE momento_sessions SET expires_at = MIN(expires_at, ?) WHERE token_hash = ? AND EXISTS (SELECT 1 FROM momento_submissions WHERE id = ?)', now + 900000, session.token_hash, id),
         stmt(db, "INSERT INTO momento_audit (id, actor_role, action, resource_id, created_at, expires_at) SELECT ?, 'participant', 'submission_created', ?, ?, ? WHERE EXISTS (SELECT 1 FROM momento_submissions WHERE id = ?)", crypto.randomUUID(), id, now, expiresAt, id),

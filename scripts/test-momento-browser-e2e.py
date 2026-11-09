@@ -183,6 +183,80 @@ def run_case(browser, port, expanded):
         context.close()
 
 
+def run_supplementary_case(browser, port):
+    """Follow-up lives in the same NEXO website; only fictional local API."""
+    context = browser.new_context(viewport={"width": 390, "height": 844}, locale="pt-BR")
+    page = context.new_page()
+    page.set_default_timeout(8000)
+    sent = []
+    errors = []
+    page.on("pageerror", lambda exc: errors.append(str(exc)))
+
+    def intercept(route):
+        part = urlsplit(route.request.url).path
+        def send(code, value):
+            route.fulfill(status=code, body=json.dumps(value), content_type="application/json",
+                          headers={"Cache-Control": "no-store"})
+        if part.endswith("/instruments/participant"):
+            send(403, {"error": "access_denied"})
+        elif part.endswith("/instruments/redeem"):
+            assert route.request.post_data_json == {"code": "NEXO-FICTICIO-PACK"}
+            send(200, {"csrf": "synthetic-csrf", "instrumentId": "phq9",
+                       "consentVersion": "nexo-instrumento-2026-11-09-v1"})
+        elif part.endswith("/instruments/submit"):
+            assert route.request.headers.get("x-nexo-csrf") == "synthetic-csrf"
+            sent.append(route.request.post_data_json)
+            send(201, {"saved": True, "id": "registro-complementar-ficticio"})
+        else:
+            raise AssertionError("Unexpected API operation: "+part)
+
+    page.route("**/api/momento/instruments/**", intercept)
+    try:
+        page.goto(f"http://127.0.0.1:{port}/conhecendo-meu-momento/instrumento/", wait_until="networkidle")
+        expect(page.locator('[data-mi-stage="access"]')).to_be_visible()
+        page.locator("#mi-code").fill("NEXO-FICTICIO-PACK")
+        page.locator('[data-mi-action="redeem"]').click()
+        expect(page.locator('[data-mi-stage="consent"]')).to_be_visible()
+        assert not sent
+        page.locator("#mi-adult").check()
+        page.locator("#mi-privacy").check()
+        page.locator("#mi-consent").check()
+        page.locator('[data-mi-action="start"]').click()
+        expect(page.locator('[data-mi-stage="questions"]')).to_be_visible()
+        for index in range(9):
+            expect(page.locator("#mi-counter")).to_contain_text(f"{index+1} DE 10")
+            if index == 2:
+                page.locator('[data-mi-action="skip"]').click()
+            else:
+                page.locator('input[name="mi-answer"][value="1"]').check()
+                if index == 8:
+                    expect(page.locator("#mi-safety")).to_be_visible()
+                page.locator('[data-mi-action="next"]').click()
+        expect(page.locator("#mi-counter")).to_contain_text("10 DE 10")
+        page.locator('[data-mi-action="skip"]').click()
+        expect(page.locator('[data-mi-stage="summary"]')).to_be_visible()
+        assert not sent, "No upload before explicit final confirmation"
+        page.locator("#mi-send-confirm").check()
+        page.locator('[data-mi-action="submit"]').click()
+        expect(page.locator('[data-mi-stage="submitted"]')).to_be_visible()
+        assert len(sent) == 1
+        data=sent[0]
+        assert data["instrumentId"] == "phq9"
+        assert data["instrumentVersion"]
+        assert len(data["answers"]) == 9
+        assert data["answers"][2] is None
+        assert data["answers"][8] == 1
+        assert data["impact"] is None
+        assert data["consent"] == {"adult": True, "accepted": True,
+                                   "version": "nexo-instrumento-2026-11-09-v1"}
+        width=page.evaluate("({scroll:document.documentElement.scrollWidth,view:window.innerWidth})")
+        assert width["scroll"] <= width["view"]+3, width
+        assert not errors, errors
+        print("PASS: NEXO follow-up phone | invite → consent → source-faithful scale → skip → safety message → explicit submission.",flush=True)
+    finally:
+        context.close()
+
+
 def main():
     assert (DIST / "conhecendo-meu-momento/responder/index.html").exists(), "Run pnpm build first"
     handler = functools.partial(http.server.SimpleHTTPRequestHandler, directory=str(DIST))
@@ -195,6 +269,8 @@ def main():
                 browser = pw.chromium.launch(headless=True, args=['--disable-gpu','--disable-webgl','--disable-accelerated-2d-canvas'])
                 try:
                     run_case(browser, server.server_port, expanded=expanded)
+                    if not expanded:
+                        run_supplementary_case(browser, server.server_port)
                 finally:
                     browser.close()
     finally:

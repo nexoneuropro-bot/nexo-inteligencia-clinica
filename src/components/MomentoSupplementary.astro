@@ -1,0 +1,90 @@
+---
+import '../styles/momento-clinical.css';
+---
+<section class="mc-shell" data-momento-supplementary aria-labelledby="mi-heading">
+ <aside class="mc-path" aria-label="Seu percurso">
+  <p class="mc-kicker">NEXO · SEU MOMENTO CONTINUA</p>
+  <h2>Seu tempo.<br/><em>Sua história.</em></h2>
+  <p>Este convite é para aprofundar um assunto combinado com o profissional. Você pode escolher quando responder.</p>
+  <ol>
+   <li data-mi-progress="access">Convite individual</li>
+   <li data-mi-progress="consent">Sua escolha</li>
+   <li data-mi-progress="questions">Perguntas</li>
+   <li data-mi-progress="summary">Revisão</li>
+  </ol>
+ </aside>
+ <div class="mc-paper">
+  <div class="mc-toolbar"><span>Conhecendo Meu Momento · Complemento</span><div><button type="button" data-mi-action="pause">Pausar nesta aba</button></div></div>
+  <section data-mi-stage="access">
+   <p class="mc-kicker">UM CONVITE PARA CONTINUAR</p>
+   <h2 id="mi-heading" tabindex="-1">Vamos ao seu ritmo.</h2>
+   <p>Se o profissional compartilhou um código individual, digite-o abaixo. Seu código não fica no endereço desta página.</p>
+   <label class="mc-field" for="mi-code">Código pessoal
+    <input id="mi-code" type="text" autocapitalize="characters" autocomplete="off" spellcheck="false" maxlength="40"/>
+   </label>
+   <div class="mc-actions"><button type="button" class="mc-button mc-primary" data-mi-action="redeem">Conferir meu convite →</button></div>
+  </section>
+  <section data-mi-stage="consent" hidden>
+   <p class="mc-kicker">PRIVACIDADE E CONSENTIMENTO</p>
+   <h2 tabindex="-1">Você decide o que compartilhar.</h2>
+   <p>O profissional sugeriu um instrumento complementar para compreender suas experiências. Não é um diagnóstico, nem uma prova. Você pode deixar itens sem resposta, interromper sem enviar ou conversar sobre as perguntas durante a sessão.</p>
+   <p>As respostas só serão enviadas quando você confirmar no final. Seu profissional poderá analisá-las na área clínica protegida. Não há acompanhamento de emergência em tempo real por esta página.</p>
+   <p id="mi-consent-instrument"></p>
+   <label class="mc-field"><input type="checkbox" id="mi-adult"/> Confirmo que sou maior de 18 anos.</label>
+   <label class="mc-field"><input type="checkbox" id="mi-privacy"/> Estou em um ambiente em que posso responder com privacidade.</label>
+   <label class="mc-field"><input type="checkbox" id="mi-consent"/> Aceito voluntariamente responder e compartilhar minhas respostas com meu profissional.</label>
+   <div class="mc-actions">
+    <button type="button" class="mc-button mc-primary" data-mi-action="start">Começar quando eu quiser →</button>
+    <button type="button" class="mc-button" data-mi-action="leave">Não responder agora</button>
+   </div>
+  </section>
+  <section data-mi-stage="questions" hidden>
+   <p class="mc-kicker" id="mi-counter"></p>
+   <h2 id="mi-question" tabindex="-1"></h2>
+   <p id="mi-intro" class="mc-lead"></p>
+   <fieldset id="mi-options" class="mc-choices"><legend class="mc-caption">Selecione uma alternativa, se desejar.</legend></fieldset>
+   <p class="mc-caption" id="mi-note">Não existem respostas certas ou erradas. Você pode pular a pergunta.</p>
+   <div id="mi-safety" class="mc-care-note" role="status" hidden>Se esses pensamentos representam perigo agora, procure alguém de confiança e atendimento presencial imediato (SAMU 192, UPA ou pronto-socorro). Esta página não é monitorada em tempo real.</div>
+   <div class="mc-actions">
+    <button type="button" class="mc-button" data-mi-action="back">← Voltar</button>
+    <button type="button" class="mc-button" data-mi-action="skip">Deixar sem resposta</button>
+    <button type="button" class="mc-button mc-primary" data-mi-action="next">Continuar →</button>
+   </div>
+  </section>
+  <section data-mi-stage="paused" hidden>
+   <p class="mc-kicker">UMA PAUSA É UMA ESCOLHA</p>
+   <h2 tabindex="-1">Pode voltar quando desejar.</h2>
+   <p>Suas respostas permanecem nesta aba enquanto ela estiver aberta. Nenhuma resposta foi enviada. Se fechar ou atualizar a página, o rascunho poderá se perder; você também pode escolher continuar com o profissional durante a sessão.</p>
+   <div class="mc-actions">
+    <button type="button" class="mc-button mc-primary" data-mi-action="resume">Continuar aqui →</button>
+    <button type="button" class="mc-button" data-mi-action="leave">Encerrar sem enviar</button>
+   </div>
+  </section>
+  <section data-mi-stage="summary" hidden>
+   <p class="mc-kicker">ANTES DE COMPARTILHAR</p>
+   <h2 tabindex="-1">Você pode revisar sua escolha.</h2>
+   <p id="mi-summary"></p>
+   <p>O resultado do instrumento será analisado pelo profissional. Nenhum diagnóstico automático será apresentado a você.</p>
+   <label class="mc-field"><input type="checkbox" id="mi-send-confirm"/> Confirmo que desejo enviar as respostas preenchidas até aqui.</label>
+   <div class="mc-actions">
+    <button type="button" class="mc-button" data-mi-action="back">← Rever respostas</button>
+    <button type="button" class="mc-button mc-primary" data-mi-action="submit">Compartilhar com meu profissional →</button>
+    <button type="button" class="mc-button" data-mi-action="leave">Encerrar sem enviar</button>
+   </div>
+  </section>
+  <section data-mi-stage="submitted" hidden>
+   <p class="mc-kicker">COMPARTILHAMENTO CONFIRMADO</p>
+   <h2 tabindex="-1">Seu momento foi acolhido.</h2>
+   <p>Suas respostas foram registradas para a conversa com o profissional. Obrigado por encontrar um espaço para você, no seu ritmo.</p>
+   <p id="mi-receipt" class="mc-caption"></p>
+   <a href="/conhecendo-meu-momento/">Conhecer mais sobre o NEXO ↗</a>
+  </section>
+  <section data-mi-stage="closed" hidden>
+   <h2 tabindex="-1">Sua escolha está respeitada.</h2>
+   <p>Nenhuma resposta foi enviada. Você pode conversar com o profissional sobre outra forma de continuar.</p>
+  </section>
+  <p id="mi-error" role="alert" class="mc-error"></p>
+  <p id="mi-status" role="status" aria-live="polite" class="mc-caption"></p>
+ </div>
+</section>
+<script>import '../scripts/momento-supplementary.ts';</script>
