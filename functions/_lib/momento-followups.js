@@ -142,12 +142,12 @@ export async function handleFollowupRequest({request,env},deps={}){
   if(revoke&&request.method==='POST'){
    const owner=await admin(request,db,config,now,true);exact(data,[]);
    const id=revoke[1];if(!UUID.test(id))deny();
-   const result=await db.batch([
-    stmt(db,'UPDATE momento_followup_orders SET revoked_at=? WHERE id=? AND owner_id=? AND revoked_at IS NULL AND submission_id IS NULL AND expires_at>? RETURNING id',now,id,owner.owner_id,now),
+   const result=await stmt(db,'UPDATE momento_followup_orders SET revoked_at=? WHERE id=? AND owner_id=? AND revoked_at IS NULL AND submission_id IS NULL AND expires_at>? RETURNING id',now,id,owner.owner_id,now).first();
+   if(!result)deny();
+   await db.batch([
     stmt(db,'DELETE FROM momento_followup_sessions WHERE order_id=?',id),
     audit(db,'clinician','followup_revoked',id,now),
    ]);
-   if(!result[0]?.results?.[0])deny();
    return reply(200,{revoked:true});
   }
 
