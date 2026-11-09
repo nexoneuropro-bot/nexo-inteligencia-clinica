@@ -90,6 +90,9 @@ jobs:
                   print('Prévia confirmou escolha de percurso, relato e permissão restrita de microfone.')
                   break
               except Exception as error:
+                  if getattr(error, 'code', None) == 403:
+                      print('::warning::Acesso ao percurso clínico restrito (403). Validação externa não realizada; não contornar proteção. Conferir manualmente com convite autorizado.')
+                      break
                   print(f'Tentativa {attempt}: {error}')
                   if attempt==6: raise
                   time.sleep(8)
