@@ -1,0 +1,14 @@
+{
+  "schema": "nexo-catalogo-metadados-v1",
+  "instruments": [
+    {
+      "id": "exemplo_sono_nao_clinico",
+      "name": "EXEMPLO FICTÍCIO - instrumento de sono (não utilizar)",
+      "domains": ["sono"],
+      "modality": "nao-informado",
+      "version": "não informada",
+      "source": "exemplo ilustrativo; substituir pela fonte real",
+      "rights": "não verificados"
+    }
+  ]
+}
