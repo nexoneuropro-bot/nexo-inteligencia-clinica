@@ -151,7 +151,7 @@ function startProfessional(){
    element('pro-followups-status').textContent='O módulo complementar ainda aguarda ativação segura no servidor e validação da migração. Nenhum convite foi criado.';
    return;
   }
-  element('pro-followups-status').textContent='Convites complementares são opcionais e exclusivamente clínicos. Pesquisa exige aprovação e consentimento específicos.';
+  element('pro-followups-status').textContent='Convites complementares destinam-se ao cuidado clínico. Para pesquisa social sem fins lucrativos, respeitar as autorizações existentes e documentar o consentimento e o enquadramento ético cabíveis.';
   const data=await apiFollowup('case/'+encodeURIComponent(id));
   const followups=records(data.followups);
   if(!followups.length){paragraph(list,'Nenhuma aplicação complementar registrada para este atendimento.');return;}
