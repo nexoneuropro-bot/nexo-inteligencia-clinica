@@ -5,9 +5,9 @@
  * na área profissional. Não há modelo generativo, diagnóstico automatizado,
  * inferência clínica de texto livre, ranqueamento de doenças ou envio de dados.
  */
-import {instrumentLibrary,type InstrumentEntry} from '../data/momento-instrument-library';
-import {buildClinicalInterviewGuide} from './momento-clinical-interview-guide';
-import {buildProfessionalCues} from './momento-professional-cues';
+import {instrumentLibrary,type InstrumentEntry} from '../data/momento-instrument-library.ts';
+import {buildClinicalInterviewGuide} from './momento-clinical-interview-guide.ts';
+import {buildProfessionalCues} from './momento-professional-cues.ts';
 
 export type ClinicalInstrumentRecommendation=Readonly<{
  id:string;
