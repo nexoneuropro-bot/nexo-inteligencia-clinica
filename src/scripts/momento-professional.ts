@@ -265,13 +265,14 @@ function startProfessional(){
    if(typeof item.id==='string'&&item.closed!==true&&status.studyOpen===true&&!researchStudyId)researchStudyId=item.id;
    const aggregates=Array.isArray(item.results)?item.results:[];
    if(!aggregates.length){
-    paragraph(card,'Os resultados por categoria são exibidos apenas a partir de cinco participações, para reduzir risco de identificação por contagens pequenas.');
+    paragraph(card,'Os resultados por categoria são exibidos apenas a partir de dez participações. Distribuições com categorias muito pequenas permanecem suprimidas.');
    }else{
     const details=document.createElement('details');
     const summary=document.createElement('summary');summary.textContent='Ver frequências agregadas do estudo';details.append(summary);
     for(const q of aggregates){
      const value=object(q),sub=document.createElement('section');
      heading(sub,textValue(value.question));
+     if(value.suppressed===true){paragraph(sub,'Esta distribuição foi suprimida por incluir um grupo pequeno. Nenhum dado individual é exibido.');details.append(sub);continue;}
      const ul=document.createElement('ul');
      for(const choice of records(value.options)){
       const li=document.createElement('li');
