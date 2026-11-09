@@ -12,7 +12,7 @@ let disposeClinical:(()=>void)|undefined;
 function startClinical(){
  const candidate=document.querySelector<HTMLElement>('[data-momento-clinical]');if(!candidate)return;
  const root:HTMLElement=candidate;const life=new AbortController();const{signal}=life;
- let stage:Stage='access',resumeStage:Stage='questions',position=0,csrf='',consentAt='',receiptId='',sending=false,enabled=false;
+ let stage:Stage='access',resumeStage:Stage='choice',position=0,csrf='',consentAt='',receiptId='',sending=false,enabled=false;
  let profile:Record<string,string>={},answers:Record<string,string>={},phq9:(number|null)[]=Array(9).fill(null),gad7:(number|null)[]=Array(7).fill(null),impact:{phq9:number|null;gad7:number|null}={phq9:null,gad7:null};
  let context={place:'not-informed',privacy:'',accompaniment:'not-informed'};
   let reflectionMode:'basic'|'extended'='basic',reflectionPosition=0;
@@ -153,7 +153,7 @@ function startClinical(){
   }else if(stage==='privacy'){
    const privacy=radio('mc-privacy');if(!privacy){fail('Escolha como está sua privacidade ou faça uma pausa.');return;}
    context={place:radio('mc-place')||'not-informed',privacy,accompaniment:radio('mc-accompaniment')||'not-informed'};
-   if(privacy==='no'){resumeStage='choice';stage='paused';}else stage=['summary','reflection','questions'].includes(resumeStage)?resumeStage:'choice';
+   if(privacy==='no'){stage='paused';}else stage=['summary','reflection','questions'].includes(resumeStage)?resumeStage:'choice';
   }else if(stage==='choice'){
    const selection=radio('mc-journey');if(!['basic','extended'].includes(selection)){fail('Escolha o percurso breve ou o aprofundado.');return;}
    reflectionMode=selection as 'basic'|'extended';stage='questions';
