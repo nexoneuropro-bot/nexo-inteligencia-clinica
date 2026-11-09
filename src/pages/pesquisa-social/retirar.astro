@@ -1,0 +1,38 @@
+---
+import MomentoLayout from '../../layouts/MomentoLayout.astro';
+import '../../styles/momento-clinical.css';
+---
+<MomentoLayout title="NEXO · Retirar participação em pesquisa social" description="Solicitação voluntária de retirada de resposta por código individual, sem necessidade de identificação.">
+ <main class="moment-wrap" data-nexo-research-withdraw>
+  <p class="moment-kicker">NEXO · CONTROLE DE SUA PARTICIPAÇÃO</p>
+  <h1 class="moment-title">Seu direito de <em>retirar a resposta.</em></h1>
+  <p class="moment-lead">Se você guardou o código recebido após participar, pode utilizá-lo para solicitar a exclusão de sua resposta individual ativa. O código não é enviado por e-mail.</p>
+  <section class="moment-section">
+   <label class="mc-field" for="research-receipt">Código individual de retirada
+    <input id="research-receipt" type="text" maxlength="60" autocomplete="off" spellcheck="false"/>
+   </label>
+   <div class="mc-actions"><button id="research-withdraw-button" class="mc-button mc-primary" type="button">Confirmar retirada</button></div>
+   <p id="research-withdraw-status" role="status" aria-live="polite"></p>
+  </section>
+  <p class="moment-note">O código funciona enquanto o registro ainda estiver ativo. Se perdeu o código, contate <a href="mailto:nexoneuropro@gmail.com">nexoneuropro@gmail.com</a> para orientações de privacidade. Não há coleta de nome nesta página.</p>
+ </main>
+</MomentoLayout>
+<script>
+ const root=document.querySelector('[data-nexo-research-withdraw]');
+ const button=root?.querySelector('#research-withdraw-button');
+ button?.addEventListener('click',async()=>{
+  const input=root.querySelector('#research-receipt');
+  const status=root.querySelector('#research-withdraw-status');
+  if(!(input instanceof HTMLInputElement)||!(status instanceof HTMLElement)||!(button instanceof HTMLButtonElement))return;
+  const receipt=input.value.trim();
+  if(!/^[A-Za-z0-9_-]{43}$/.test(receipt)){status.textContent='Confira o código de retirada informado após a participação.';return;}
+  button.disabled=true;status.textContent='Conferindo o código.';
+  try{
+   const response=await fetch('/api/nexo-research/withdraw',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({receipt}),referrerPolicy:'no-referrer',cache:'no-store',credentials:'omit'});
+   const result=await response.json().catch(()=>({}));
+   if(response.ok&&result.deleted===true){input.value='';status.textContent='A exclusão da resposta ativa foi confirmada.';}
+   else status.textContent='Não foi possível confirmar a retirada. O código pode estar inválido ou o prazo de retenção já ter terminado.';
+  }catch{status.textContent='O servidor não confirmou a retirada. Tente novamente depois ou contate o responsável.';}
+  finally{button.disabled=false;}
+ });
+</script>
