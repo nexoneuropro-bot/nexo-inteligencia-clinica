@@ -6,6 +6,11 @@ on:
     paths:
       - 'src/components/MomentoClinical.astro'
       - 'src/data/momento-clarifications.ts'
+      - 'src/data/momento-welcome.ts'
+      - 'src/scripts/momento-local-dictation.ts'
+      - 'astro.config.mjs'
+      - 'src/pages/conhecendo-meu-momento/privacidade.astro'
+      - 'src/data/momento-instruments.ts'
       - 'src/lib/momento-professional-cues.ts'
       - 'src/lib/momento-professional-report.ts'
       - 'src/scripts/momento-report-view.ts'
