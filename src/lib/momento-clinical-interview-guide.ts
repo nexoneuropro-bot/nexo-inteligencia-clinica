@@ -33,7 +33,6 @@ const response=(a:readonly unknown[],i:number):number|null=>{
 const declared=(x:unknown):number|null=>typeof x==='number'&&Number.isFinite(x)?x:null;
 const phrase=(x:unknown)=>typeof x==='string'?x.trim():'';
 const freezeStep=(s:InterviewStep):InterviewStep=>Object.freeze({...s,questions:Object.freeze([...s.questions])});
-const resource=(name:string)=>name||'Não esclarecido';
 const step=(title:string,objective:string,opening:string,questions:readonly string[],when:string):InterviewStep=>
  freezeStep({title,objective,opening,questions,when});
 const hypothesis=(label:string,basis:readonly string[],check:string):WorkingHypothesis=>
@@ -42,19 +41,17 @@ const tool=(v:InstrumentProposal):InstrumentProposal=>Object.freeze(v);
 
 export function buildClinicalInterviewGuide(input:unknown):ClinicalInterviewGuide{
  const record=object(input),phq=array(record.phq9),gad=array(record.gad7),impact=object(record.impact),res=object(record.results);
- const profile=object(record.profile),reflections=object(record.reflectionAnswers),answers=object(record.authorAnswers),clarifications=object(record.clarifications);
+ const reflections=object(record.reflectionAnswers),answers=object(record.authorAnswers);
  const p=(i:number)=>response(phq,i),g=(i:number)=>response(gad,i);
  const p9=p(8),hasSafetyFlag=p9!==null&&p9>0,safetyUnanswered=p9===null;
  const pScore=declared(object(res.phq9).score),gScore=declared(object(res.gad7).score);
  const depressionSignal=(p(0)!==null&&p(0)!>0)||(p(1)!==null&&p(1)!>0);
  const anxietySignal=[g(0),g(1),g(2),g(3)].some(v=>v!==null&&v>0);
- const distress=depressionSignal||anxietySignal;
  const sleepChange=p(2)!==null&&p(2)!>0;
  const appetiteChange=p(4)!==null&&p(4)!>0;
  const selfCriticism=p(5)!==null&&p(5)!>0;
  const gadImpact=declared(impact.gad7);
- const workContext=phrase(profile.activity);
- const efforts=phrase(answers.resposta),challenge=phrase(answers.contexto);
+ const efforts=phrase(answers.resposta);
  const safeQuote=(item:string)=>{const r=object(reflections[item]);return r.status==='answered'?phrase(r.text):'';};
  const narrative=safeQuote('demanda');
  const opening=hasSafetyFlag?
@@ -158,7 +155,7 @@ export function buildClinicalInterviewGuide(input:unknown):ClinicalInterviewGuid
   why:`Alteração de sono referida (PHQ-9 item 3: ${p(2)}/3).`,
   when:'Se a pessoa tiver condições e aceitar, por período combinado; discutir o registro na sessão.',mode:'pode ser oferecido após aceite',inNexo:false,
   source:'',review:'Registro descritivo, não teste psicológico nem exigência; pode ser feito em papel.'}));
- if(declared(impact.phq9)!>=2||gadImpact!==null&&gadImpact>=2)proposals.push(tool({
+ if((declared(impact.phq9)??0)>=2||(gadImpact!==null&&gadImpact>=2))proposals.push(tool({
   id:'functioning',name:'Funcionamento e participação · avaliação orientada ao contexto',kind:'instrumento complementar',
   why:'Repercussão funcional referida em pelo menos um domínio.',
   when:'Após identificar qual decisão clínica precisa de medida funcional.',mode:'pode ser oferecido após aceite',inNexo:false,
