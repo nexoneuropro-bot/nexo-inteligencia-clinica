@@ -1,4 +1,5 @@
 import {buildClinicalInterviewGuide,type InterviewStep,type WorkingHypothesis,type InstrumentProposal} from '../lib/momento-clinical-interview-guide';
+import {appendInstrumentCatalogImport} from './momento-instrument-catalog-view';
 
 const el=<K extends keyof HTMLElementTagNameMap>(tag:K,className?:string):HTMLElementTagNameMap[K]=>{
  const node=document.createElement(tag);if(className)node.className=className;return node;
@@ -79,21 +80,23 @@ export function appendClinicalInterviewGuide(report:HTMLElement,record:Record<st
  heading(proposals,'h3','Próximos procedimentos e instrumentos a considerar');
  p(proposals,'Sugestões baseadas nas respostas registradas. Marcar significa apenas escolher itens para uma minuta. Não envia formulários, não acessa o banco externo e não altera o prontuário. O profissional deve confirmar finalidade, idade, autorização, versão, direitos, aplicação e SATEPSI quando pertinente.','mc-report-quiet');
  guide.proposals.forEach(item=>toolCard(proposals,item));
+ const catalog=appendInstrumentCatalogImport(proposals,record);
  const actions=el('div','mc-guide-actions');
  const copy=el('button','mc-button');copy.type='button';copy.textContent='Copiar seleção para minha programação clínica';
  copy.addEventListener('click',async()=>{
   const chosen=Array.from(proposals.querySelectorAll<HTMLInputElement>('[data-guide-instrument]:checked')).map(x=>x.value);
   const selected=guide.proposals.filter(x=>chosen.includes(x.id));
-  if(!selected.length){status.textContent='Selecione ao menos um procedimento ou instrumento. Nenhum dado foi enviado.';return;}
-  const documentText=['NEXO · PROGRAMAÇÃO PROFISSIONAL (MINUTA SEM IDENTIFICAÇÃO)','Revisão e autorização clínica obrigatórias. NÃO é agendamento nem envio.',...selected.flatMap(x=>['',x.name,'Finalidade: '+x.why,'Quando: '+x.when,'Modalidade: '+x.mode,'Validação: '+x.review]),'','Antes de enviar: confirmar fonte, direitos, modalidade, consentimento, versão e segurança atual.'].join('\n');
+  const externalCandidates=catalog.getSelected();
+  if(!selected.length&&!externalCandidates.length){status.textContent='Selecione ao menos um procedimento ou candidato para revisão. Nenhum dado foi enviado.';return;}
+  const documentText=['NEXO · PROGRAMAÇÃO PROFISSIONAL (MINUTA SEM IDENTIFICAÇÃO)','Revisão e autorização clínica obrigatórias. NÃO é agendamento nem envio.',...selected.flatMap(x=>['',x.name,'Finalidade: '+x.why,'Quando: '+x.when,'Modalidade: '+x.mode,'Validação: '+x.review]),...externalCandidates.flatMap(x=>['','CANDIDATO EXTERNO, AINDA NÃO VALIDADO: '+x.name,'Domínios informados: '+x.domains.join(', '),'Versão declarada: '+x.version,'Modalidade declarada, NÃO VERIFICADA: '+x.modality,'Fonte declarada: '+x.source,'Direitos declarados: '+x.rights,'Verificar adequação clínica, SATEPSI, licença e aplicação antes de qualquer convite.']),'','Antes de enviar: confirmar fonte, direitos, modalidade, consentimento, versão e segurança atual.'].join('\n');
   try{await navigator.clipboard.writeText(documentText);status.textContent='Minuta anônima copiada. Nenhum dado clínico identificável foi transferido automaticamente.';}
   catch{status.textContent='O navegador não permitiu copiar. Selecione os itens e registre a programação no sistema autorizado.';}
  });
  actions.append(copy);
- const bank=el('a','mc-guide-bank');bank.href='https://nexo-acolhimento.azureplum16.chatgpt.site/painel';bank.target='_blank';bank.rel='noopener noreferrer';bank.textContent='Abrir banco externo NEXO ↗';actions.append(bank);
+ const bank=el('a','mc-guide-bank');bank.href='https://nexo-acolhimento.azureplum16.chatgpt.site/painel';bank.target='_blank';bank.rel='noopener noreferrer';bank.textContent='Consultar catálogo externo (sem dados clínicos) ↗';actions.append(bank);
  proposals.append(actions);
  const status=el('p','mc-report-quiet');status.setAttribute('role','status');status.setAttribute('aria-live','polite');proposals.append(status);
- p(proposals,'IMPORTANTE: não há conexão autorizada ou API confirmada com o painel externo. Abrir o link não transmite respostas; o envio de novas escalas deve ser feito manualmente no sistema autorizado até que a integração técnica, a segurança e o consentimento sejam verificados.','mc-report-quiet');
+ p(proposals,'IMPORTANTE: o catálogo externo não possui API autorizada confirmada. Não utilize ChatGPT Sites para processar dados sensíveis de saúde. A importação de metadados é apenas local; instrumentos e aplicações exigem verificação de licença, SATEPSI e modalidade. A integração com prontuários e o envio de escalas não estão habilitados.','mc-report-quiet');
  root.append(proposals);
  const footer=el('section','mc-guide-section');
  p(footer,guide.boundary,'mc-report-quiet');p(footer,guide.note,'mc-report-quiet');
