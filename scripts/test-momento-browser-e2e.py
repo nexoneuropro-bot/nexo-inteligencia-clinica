@@ -61,6 +61,7 @@ def run_case(browser, port, expanded):
     payloads = []
     issues = []
     page.on("pageerror", lambda error: issues.append(str(error)))
+    page.on("crash", lambda: print('ALERTA: renderizador Chromium encerrou inesperadamente', flush=True))
 
     def intercept(route):
         request = route.request
@@ -118,9 +119,10 @@ def run_case(browser, port, expanded):
         expect(page.locator('[data-mc-stage="questions"]')).to_be_visible()
         print('ETAPA: questionario', flush=True)
         # Repeat a true human browser interaction across every screening/author item.
-        for _ in range(32):
+        for step_number in range(32):
             if not page.locator('[data-mc-stage="questions"]').is_visible():
                 break
+            print('QUESTIONARIO:', step_number+1, page.locator("#mc-question-title").inner_text(), flush=True)
             page.locator('[data-mc-stage="questions"] [data-mc-action="skip"]').click()
         else:
             raise AssertionError("Questionnaire did not advance to the next stage")
@@ -188,7 +190,7 @@ def main():
     try:
         with sync_playwright() as pw:
             for expanded in [False, True]:
-                browser = pw.chromium.launch(headless=True)
+                browser = pw.chromium.launch(headless=True, args=['--disable-gpu','--disable-webgl','--disable-accelerated-2d-canvas'])
                 try:
                     run_case(browser, server.server_port, expanded=expanded)
                 finally:
