@@ -1,4 +1,5 @@
-import {instrumentLibrary,suggestInstrumentLibrary,type InstrumentStatus} from '../data/momento-instrument-library';
+import {instrumentLibrary,type InstrumentStatus} from '../data/momento-instrument-library';
+import {buildClinicalInstrumentRecommendations} from '../lib/momento-instrument-recommendations';
 import {appendNativePackImport} from './momento-native-pack-import-view';
 
 const normalized=(value:string)=>value.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
@@ -31,8 +32,8 @@ export function mountInstrumentLibrary(root:HTMLElement,signal:AbortSignal){
   const state=filter.value;
   const matched=instrumentLibrary.filter(item=>(state==='todos'||item.status===state)&&
    (!keyword||normalized([item.name,item.kind,item.purpose,item.audience,...item.domains].join(' ')).includes(keyword)));
-  const cues=record?suggestInstrumentLibrary(record):[];
-  const suggestionMap=new Map(cues.map(x=>[x.id,x.reason]));
+  const cues=record?buildClinicalInstrumentRecommendations(record).recommendations:[];
+  const suggestionMap=new Map(cues.map(x=>[x.id,x.clinicalQuestion]));
   results.replaceChildren();
   status.textContent=`${matched.length} de ${instrumentLibrary.length} registros no acervo. Apenas PHQ-9 e GAD-7 estão incluídos no percurso inicial; nenhum envio complementar é automático.`;
   context.replaceChildren();
@@ -59,7 +60,7 @@ export function mountInstrumentLibrary(root:HTMLElement,signal:AbortSignal){
    add(card,'p','Público: '+item.audience,'mc-report-quiet');
    add(card,'p',item.useNotes,'mc-report-quiet');
    if(item.status==='curadoria')add(card,'p','Bloqueado para envio: confirmar direitos, tradução, finalidade, evidência, população, versão, SATEPSI (quando aplicável) e modalidade remota.','mc-library-review');
-   if(item.status==='integrado')add(card,'p','Disponível SOMENTE dentro do acolhimento inicial por convite já existente; reaplicação independente não implementada.','mc-library-review');
+   if(item.status==='integrado')add(card,'p','Já utilizado no acolhimento inicial. Uma reaplicação depende do módulo complementar habilitado, consentimento e decisão profissional.','mc-library-review');
    if(item.status==='procedimento')add(card,'p','Procedimento para decisão profissional; não é formulário de rastreio liberado por convite.','mc-library-review');
    if(item.sourceUrl){
     const anchor=document.createElement('a');anchor.href=item.sourceUrl;anchor.target='_blank';anchor.rel='noopener noreferrer';anchor.className='mc-link';anchor.textContent='Consultar fonte ↗';card.append(anchor);
