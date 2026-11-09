@@ -1,0 +1,72 @@
+name: NEXO · piloto em navegador real
+
+on:
+  pull_request:
+    branches: [feat/experiencia-imersiva]
+    paths:
+      - 'scripts/test-momento-browser-e2e.py'
+      - '.github/workflows/nexo-browser-e2e.yml'
+      - 'src/components/MomentoClinical.astro'
+      - 'src/scripts/momento-clinical.ts'
+      - 'src/data/momento-reflections.ts'
+      - 'src/data/momento-instruments.ts'
+      - 'src/styles/momento-clinical.css'
+  push:
+    branches: [feat/experiencia-imersiva]
+    paths:
+      - 'scripts/test-momento-browser-e2e.py'
+      - '.github/workflows/nexo-browser-e2e.yml'
+      - 'src/components/MomentoClinical.astro'
+      - 'src/scripts/momento-clinical.ts'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  piloto-sintetico:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 16
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.25.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: pnpm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Instalar dependências
+        run: pnpm install --frozen-lockfile
+      - name: Verificar e compilar
+        run: |
+          pnpm check
+          pnpm build
+          pnpm verify
+      - name: Preparar Chromium para teste local
+        run: |
+          python -m pip install --disable-pip-version-check playwright==1.58.0
+          python -m playwright install --with-deps chromium
+      - name: Executar fluxo em Chromium, celular e desktop, sem contas clínicas reais
+        run: python scripts/test-momento-browser-e2e.py
+      - name: Confirmar disponibilidade da API clínica pública, sem acessar respostas
+        run: |
+          python3 - <<'PY'
+          import json, re, pathlib, urllib.request
+          text=pathlib.Path('src/data/momento-instruments.ts').read_text(encoding='utf-8')
+          expected=re.search(r"CLINICAL_CONSENT_VERSION\s*=\s*'([^']+)'",text)
+          assert expected, "Versão do consentimento não identificada"
+          request=urllib.request.Request('https://nexo-previa-20261014.pages.dev/api/momento/status',
+              headers={'User-Agent':'NEXO-readiness-public-status/1.0','Accept':'application/json'})
+          with urllib.request.urlopen(request,timeout=15) as response:
+              data=json.loads(response.read().decode('utf-8'))
+          enabled=data.get('enabled') is True
+          consent=data.get('consentVersion')
+          print('API habilitada:',enabled,'| consentimento atualizado:',consent==expected.group(1))
+          if not enabled or consent!=expected.group(1):
+              raise SystemExit('BLOQUEIO: antes de pacientes reais, confirmar manutenção D1 e política de consentimento')
+          print('PASS: endpoint público habilitado e versão correta. Sem acesso clínico ou dados de pacientes.')
+          PY

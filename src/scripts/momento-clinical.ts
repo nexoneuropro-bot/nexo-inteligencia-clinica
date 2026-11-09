@@ -17,7 +17,7 @@ function startClinical(){
  let context={place:'not-informed',privacy:'',accompaniment:'not-informed'};
   let reflectionMode:'basic'|'extended'='basic',reflectionPosition=0;
   let reflectionAnswers:Record<string,{status:'answered'|'later'|'prefer-not'|'unsure';text?:string}>={};
-  let reflectionSensitiveAccepted=false,reflectionSelectedTopics:string[]=[];
+  let reflectionSensitiveAccepted=false,reflectionSelectedTopics:string[]=[],dictationReady=false;
   let reflectionDrafts:Record<string,string>={};
  let clarifications:{sleep:string|null;appetite:string|null}={sleep:null,appetite:null};
  const applicable=(item:Item)=>item.kind!=='clarification'||(phq9[item.triggerPhqIndex!]??0)>0;
@@ -90,13 +90,12 @@ function startClinical(){
    field.value=record?record.status==='answered'?record.text||'':'':reflectionDrafts[prompt.id]||'';
    field.maxLength=REFLECTION_MAX_CHARS;
    const mic=root.querySelector<HTMLButtonElement>('[data-mc-action="dictate"]')!;
-   mic.disabled=true;mic.hidden=context.privacy!=='yes';
-   element('mc-dictation-status').textContent=context.privacy==='yes'?'Verificando se o dispositivo permite transcrição totalmente local.':'Microfone desativado para preservar a privacidade. Você pode escrever ou escolher uma opção.';
-   if(context.privacy==='yes')void dictation.check().then(ok=>{
-    if(stage!=='reflection'||reflectionQuestions[reflectionPosition]?.id!==prompt.id)return;
-    mic.disabled=!ok;
-    element('mc-dictation-status').textContent=ok?'Transcrição local disponível. Nenhum áudio será guardado pela NEXO.':'Transcrição local indisponível neste navegador. Escreva ou reserve para a sessão; nenhum áudio foi enviado.';
-   });
+   mic.hidden=context.privacy!=='yes';
+   mic.disabled=context.privacy!=='yes';
+   mic.textContent=dictationReady?'Falar e transcrever localmente':'Verificar ditado local';
+   element('mc-dictation-status').textContent=context.privacy==='yes'?
+    'O ditado é opcional. Toque para verificar a disponibilidade local; só um segundo toque inicia a transcrição.':
+    'Microfone desativado para preservar sua privacidade. Você pode escrever ou escolher uma opção.';
   }
   function saveReflection(skip=false){
    const prompt=reflectionQuestions[reflectionPosition];
@@ -141,7 +140,7 @@ function startClinical(){
   if(focus&&heading){heading.focus({preventScroll:true});heading.scrollIntoView({block:'start',behavior:'instant'});}
  }
  function clear(){
-  stopSpeech();dictation.stop();profile={};answers={};phq9=Array(9).fill(null);gad7=Array(7).fill(null);impact={phq9:null,gad7:null};clarifications={sleep:null,appetite:null};context={place:'not-informed',privacy:'',accompaniment:'not-informed'};reflectionMode='basic';reflectionPosition=0;reflectionAnswers={};reflectionDrafts={};reflectionSensitiveAccepted=false;reflectionSelectedTopics=[];position=0;consentAt='';
+  stopSpeech();dictation.stop();profile={};answers={};phq9=Array(9).fill(null);gad7=Array(7).fill(null);impact={phq9:null,gad7:null};clarifications={sleep:null,appetite:null};context={place:'not-informed',privacy:'',accompaniment:'not-informed'};reflectionMode='basic';reflectionPosition=0;reflectionAnswers={};reflectionDrafts={};reflectionSensitiveAccepted=false;reflectionSelectedTopics=[];dictationReady=false;position=0;consentAt='';
   root.querySelectorAll<HTMLInputElement>('input').forEach(input=>{if(input.type==='checkbox'||input.type==='radio')input.checked=input.defaultChecked;else input.value='';});
   root.querySelectorAll<HTMLSelectElement>('[data-mc-profile]').forEach(select=>{select.value='not-informed';});
   element('mc-question-options').replaceChildren();element('mc-reflection-options').replaceChildren();element<HTMLTextAreaElement>('mc-reflection-text').value='';element('mc-summary').replaceChildren();element('mc-completion').replaceChildren();element('mc-care-note').hidden=true;
@@ -242,7 +241,22 @@ function startClinical(){
  }
  root.addEventListener('click',async event=>{
   const target=event.target;if(sending||!(target instanceof Element))return;const button=target.closest<HTMLButtonElement>('button[data-mc-action]');if(!button||button.disabled)return;
-  switch(button.dataset.mcAction){case'availability':await checkAvailability();break;case'redeem':await redeem();break;case'next':advance();break;case'back':back();break;case'skip':if(stage==='questions'||stage==='reflection')advance(true);break;case'dictate':if(stage==='reflection'&&context.privacy==='yes'){if(dictation.active)dictation.stop();else if(dictation.start()){button.textContent='Parar ditado';element('mc-dictation-status').textContent='Ouvindo localmente. Revise o texto antes de continuar.';}}break;case'pause':if(!sending&&['profile','privacy','choice','questions','reflection','summary'].includes(stage)){resumeStage=stage==='summary'?'summary':stage==='reflection'?'reflection':stage==='choice'?'choice':'questions';stage='paused';render();}break;case'resume':context.privacy='';root.querySelectorAll<HTMLInputElement>('input[name="mc-privacy"]').forEach(input=>{input.checked=false;});stage='privacy';render();break;case'end':await end();break;case'submit':await submit();break;case'submit-partial':await submit(true);break;case'hear-consent':hearConsent();break;case'stop-speech':stopSpeech();element('mc-voice-status').textContent='Leitura interrompida.';break;case'copy-receipt':try{await navigator.clipboard.writeText(receiptId);status.textContent='Identificador copiado.';}catch{status.textContent='Não foi possível copiar. Anote o identificador exibido.';}break;}
+  switch(button.dataset.mcAction){case'availability':await checkAvailability();break;case'redeem':await redeem();break;case'next':advance();break;case'back':back();break;case'skip':if(stage==='questions'||stage==='reflection')advance(true);break;case'dictate':if(stage==='reflection'&&context.privacy==='yes'){
+     if(dictation.active){dictation.stop();button.textContent='Falar e transcrever localmente';}
+     else if(!dictationReady){
+      button.disabled=true;element('mc-dictation-status').textContent='Verificando a disponibilidade local, sem ativar o microfone.';
+      const ok=await dictation.check();
+      if(stage==='reflection'&&context.privacy==='yes'){
+       dictationReady=ok;button.disabled=!ok;
+       button.textContent=ok?'Falar e transcrever localmente':'Ditado indisponível';
+       element('mc-dictation-status').textContent=ok?
+        'Ditado local disponível. Toque novamente para iniciar e revise o texto antes de enviar.':
+        'Ditado local indisponível. Você pode escrever ou reservar o tema para a sessão.';
+      }
+     }else if(dictation.start()){
+      button.textContent='Parar ditado';element('mc-dictation-status').textContent='Ouvindo localmente. Revise o texto antes de continuar.';
+     }
+    }break;case'pause':if(!sending&&['profile','privacy','choice','questions','reflection','summary'].includes(stage)){resumeStage=stage==='summary'?'summary':stage==='reflection'?'reflection':stage==='choice'?'choice':'questions';stage='paused';render();}break;case'resume':context.privacy='';root.querySelectorAll<HTMLInputElement>('input[name="mc-privacy"]').forEach(input=>{input.checked=false;});stage='privacy';render();break;case'end':await end();break;case'submit':await submit();break;case'submit-partial':await submit(true);break;case'hear-consent':hearConsent();break;case'stop-speech':stopSpeech();element('mc-voice-status').textContent='Leitura interrompida.';break;case'copy-receipt':try{await navigator.clipboard.writeText(receiptId);status.textContent='Identificador copiado.';}catch{status.textContent='Não foi possível copiar. Anote o identificador exibido.';}break;}
  },{signal});
  root.addEventListener('input',event=>{const target=event.target;if(target instanceof HTMLTextAreaElement&&target.id==='mc-reflection-text'&&stage==='reflection'&&target.value.trim()){const selected=root.querySelector<HTMLInputElement>('input[name="mc-reflection-choice"][value="answered"]');if(selected)selected.checked=true;reflectionDrafts[reflectionQuestions[reflectionPosition].id]=target.value;}},{signal});
  root.addEventListener('change',event=>{const target=event.target;if(!(target instanceof HTMLInputElement)||stage!=='reflection'||reflectionQuestions[reflectionPosition].id!=='identidade-vinculos')return;
