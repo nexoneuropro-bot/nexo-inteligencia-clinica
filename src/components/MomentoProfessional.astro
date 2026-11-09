@@ -30,7 +30,40 @@ import '../styles/momento-clinical.css';
    <div id="pro-library-results" class="mc-library-results"></div>
    <div id="pro-library-import" aria-label="Conferir definições de instrumentos previamente exportadas"></div>
   </section>
-  <section id="pro-record-section" hidden aria-labelledby="pro-record-title"><h2 id="pro-record-title" tabindex="-1">Apoio à entrevista.</h2><p class="mc-caption" id="pro-record-id"></p><div class="mc-pro-record" id="pro-record"></div><div class="mc-actions"><button type="button" class="mc-button mc-primary" data-pro-action="print-report">Imprimir / salvar síntese em PDF</button><button type="button" class="mc-button" data-pro-action="export-record">Baixar dados brutos em JSON</button><button type="button" class="mc-button" data-pro-action="feedback-completed">Registrar devolutiva realizada</button><button type="button" class="mc-button" data-pro-action="close-record">Fechar registro</button></div><details><summary>Excluir este registro</summary><p>A exclusão remove o registro ativo. Cópias de segurança seguem a política de retenção e descarte. A exclusão exige confirmação explícita.</p><label class="mc-consent"><input type="checkbox" id="pro-delete-confirm"/><span>Confirmo que solicito excluir este registro ativo.</span></label><button type="button" class="mc-button" data-pro-action="delete-record">Excluir registro confirmado</button></details></section>
+  <section id="pro-record-section" hidden aria-labelledby="pro-record-title"><h2 id="pro-record-title" tabindex="-1">Apoio à entrevista.</h2><p class="mc-caption" id="pro-record-id"></p><div class="mc-pro-record" id="pro-record"></div>
+   <section id="pro-followups-section" class="mc-followup-panel" hidden aria-labelledby="pro-followups-title">
+    <p class="mc-kicker">ACOMPANHAMENTO · ÁREA AUTENTICADA</p>
+    <h3 id="pro-followups-title">Instrumentos complementares</h3>
+    <p class="mc-caption">Envie apenas instrumentos liberados e pertinentes, com justificativa documentada. Cada aplicação permanece vinculada a este registro. Esta função é para cuidado clínico; pesquisa exige protocolo e consentimento próprios.</p>
+    <p id="pro-followups-status" class="mc-caption" role="status"></p>
+    <div id="pro-followups-controls">
+     <div class="mc-library-controls">
+      <label class="mc-field" for="pro-followup-instrument">Instrumento
+       <select id="pro-followup-instrument"><option value="phq9">PHQ-9 · Humor</option><option value="gad7">GAD-7 · Ansiedade</option></select>
+      </label>
+      <label class="mc-field" for="pro-followup-expiry">Prazo de acesso
+       <select id="pro-followup-expiry"><option value="1">1 dia</option><option value="3">3 dias</option><option value="7" selected>7 dias</option><option value="14">14 dias</option></select>
+      </label>
+     </div>
+     <label class="mc-field" for="pro-followup-rationale">Finalidade e justificativa clínica
+      <textarea id="pro-followup-rationale" rows="3" maxlength="500" placeholder="Qual pergunta clínica justifica a reaplicação neste momento?"></textarea>
+     </label>
+     <label class="mc-confirm"><input id="pro-followup-safety" type="checkbox"/><span>Revisei a pertinência, a segurança atual, o consentimento e as condições de aplicação. O instrumento será encaminhado somente por minha decisão.</span></label>
+     <button class="mc-button mc-primary" type="button" data-pro-action="create-followup">Criar convite complementar</button>
+    </div>
+    <div id="pro-followup-created" hidden>
+     <p class="mc-caption">Convite gerado. Compartilhe link e código separadamente com a pessoa, pelo canal combinado. O código só aparece agora.</p>
+     <p><a id="pro-followup-url" href="/conhecendo-meu-momento/complementar/">Abrir percurso complementar</a></p>
+     <p id="pro-followup-code" class="mc-pro-code"></p>
+     <div class="mc-actions">
+      <button class="mc-button" type="button" data-pro-action="copy-followup-url">Copiar endereço</button>
+      <button class="mc-button" type="button" data-pro-action="copy-followup-code">Copiar código</button>
+      <button class="mc-button" type="button" data-pro-action="hide-followup-code">Ocultar código</button>
+     </div>
+    </div>
+    <div id="pro-followups-list" class="mc-pro-list"></div>
+   </section>
+   <div class="mc-actions"><button type="button" class="mc-button mc-primary" data-pro-action="print-report">Imprimir / salvar síntese em PDF</button><button type="button" class="mc-button" data-pro-action="export-record">Baixar dados brutos em JSON</button><button type="button" class="mc-button" data-pro-action="feedback-completed">Registrar devolutiva realizada</button><button type="button" class="mc-button" data-pro-action="close-record">Fechar registro</button></div><details><summary>Excluir este registro</summary><p>A exclusão remove o registro ativo. Cópias de segurança seguem a política de retenção e descarte. A exclusão exige confirmação explícita.</p><label class="mc-consent"><input type="checkbox" id="pro-delete-confirm"/><span>Confirmo que solicito excluir este registro ativo.</span></label><button type="button" class="mc-button" data-pro-action="delete-record">Excluir registro confirmado</button></details></section>
  </div>
  <p class="mc-error" id="pro-error" role="alert"></p><p class="mc-status" id="pro-status" role="status" aria-live="polite" aria-atomic="true"></p>
  <noscript><p>Ative JavaScript para conferir o acesso profissional. Nenhuma resposta é exibida sem autenticação.</p></noscript>
