@@ -1,4 +1,5 @@
 import {buildClinicalInstrumentRecommendations,type ClinicalInstrumentRecommendation} from '../lib/momento-instrument-recommendations';
+import {socialResearchRelevance} from '../lib/nexo-social-recommendation';
 
 type Decision='revisar'|'considerar'|'adiar'|'nao-indicar';
 const choices:readonly {value:Decision;label:string}[]=[
@@ -78,6 +79,39 @@ export function appendInstrumentDecisionSupport(report:HTMLElement,record:Record
   decisions.set(rec.id,{choice:select,reason:note,rec});grid.append(card);
  }
  root.append(grid);
+ // Pesquisa social permanece separada do prontuário e das escalas clínicas.
+ // Exibir sugestão somente se houver uma pista contextual, nunca só por HD.
+ const socialCue=socialResearchRelevance(record);
+ if(socialCue){
+  const study=make('section','mc-recommendation-review');
+  study.id='pro-report-social-study';
+  text(study,'p','PESQUISA SOCIAL · POSSIBILIDADE PARA REVISÃO','mc-report-mini');
+  text(study,'h4','Acessibilidade no pós-pandemia: dos achismos às evidências');
+  const evidence=make('ul','mc-report-evidence');
+  socialCue.evidence.forEach(s=>{const li=make('li');li.textContent=s;evidence.append(li);});
+  study.append(evidence);
+  text(study,'p','Pergunta a esclarecer na entrevista: '+socialCue.question,'mc-recommendation-question');
+  text(study,'p',socialCue.limit,'mc-report-quiet');
+  const label=make('label','mc-field');label.htmlFor='pro-social-rec-choice';
+  text(label,'span','Decisão do profissional sobre um convite de pesquisa');
+  const select=make('select');select.id='pro-social-rec-choice';
+  for(const [value,label] of [['revisar','Ainda não avaliado'],['considerar','Considerar convite após entrevista'],['adiar','Adiar'],['nao-indicar','Não indicar']]){
+   const option=make('option');option.value=value;option.textContent=label;select.append(option);
+  }
+  label.append(select);study.append(label);
+  const go=make('button','mc-button');go.type='button';go.disabled=true;
+  go.textContent='Ir ao estudo-padrão no painel';study.append(go);
+  const hint=text(study,'p','O link não será enviado automaticamente. Esta decisão não altera o acolhimento.','mc-report-quiet');
+  select.addEventListener('change',()=>{go.disabled=select.value!=='considerar';});
+  go.addEventListener('click',()=>{
+   if(select.value!=='considerar')return;
+   const target=report.closest('[data-pro-panel="workspace"]')?.querySelector<HTMLElement>('#pro-social-study');
+   if(!target){hint.textContent='O estudo deve ser acessado na área profissional NEXO.';return;}
+   target.scrollIntoView({behavior:'smooth',block:'start'});
+   hint.textContent='O profissional deverá verificar a coleta, decidir se encaminha e copiar o convite. Nenhuma resposta clínica foi transferida.';
+  });
+  root.append(study);
+ }
  const footer=make('div','mc-recommendation-review');
  text(footer,'h4','Síntese das escolhas do profissional');
  text(footer,'p','As decisões desta tela não são salvas automaticamente. Podem ser incluídas no relatório impresso ou copiadas para o registro profissional autorizado.','mc-report-quiet');
