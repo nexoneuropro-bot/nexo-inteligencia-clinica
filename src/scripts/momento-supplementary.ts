@@ -11,7 +11,7 @@ function start(){
  const find=<T extends HTMLElement=HTMLElement>(id:string)=>root.querySelector<T>('#'+id)!;
  const stages=Array.from(root.querySelectorAll<HTMLElement>('[data-mi-stage]'));
  const error=find('mi-error'),status=find('mi-status');
- let stage:Stage='access',csrf='',instrumentId:InstrumentId='phq9',index=0,busy=false,available=false,finished=false;
+ let stage:Stage='access',csrf='',instrumentId:InstrumentId='phq9',index=0,busy=false,finished=false;
  let responses:(number|null)[]=[],impact:number|null=null;
  let instrument=screeningInstruments[0];
  const api=async(path:string,body?:unknown)=>{
@@ -115,7 +115,7 @@ function start(){
    }
    index=0;renderQuestion();
   }else if(action==='next'&&stage==='questions')next();
-  else if(action==='skip'&&stage==='questions'){if(index===instrument.items.length)impact=null;else responses[index]=null;next();}
+  else if(action==='skip'&&stage==='questions'){root.querySelectorAll<HTMLInputElement>('input[name="mi-answer"]').forEach(x=>x.checked=false);if(index===instrument.items.length)impact=null;else responses[index]=null;next();}
   else if(action==='back')back();
   else if(action==='submit'&&stage==='summary')void submit();
   else if(action==='leave'&&!finished){responses.fill(null);impact=null;changeStage('closed');status.textContent='Nenhuma resposta foi compartilhada.';}
