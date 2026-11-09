@@ -3,7 +3,7 @@ on:
   pull_request:
     branches: [feat/experiencia-imersiva]
   push:
-    branches: [feat/biblioteca-instrumentos-20261109]
+    branches: [feat/biblioteca-instrumentos-20261109, feat/nexo-pesquisa-social-instrumentos]
 
 permissions:
   contents: read
