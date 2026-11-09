@@ -188,3 +188,28 @@
 .mc-library-selected-item textarea{resize:vertical;min-height:72px}
 .mc-library-plan .mc-button:focus-visible,.mc-library-card .mc-button:focus-visible{outline:3px solid #895331;outline-offset:3px}
 @media print{#pro-library-plan{display:none!important}}
+
+
+/* NEXO · investigação social independente, segura e acessível */
+#pro-social-research{border-top:2px solid #b77950;padding:26px 0 30px;margin:24px 0}
+#pro-social-research h2{font:400 clamp(29px,3.3vw,42px)/1.2 var(--serif);color:#113c48}
+#pro-social-research h3{font:400 clamp(23px,2.6vw,31px)/1.3 var(--serif);color:#153c48;margin:25px 0 12px}
+#pro-social-research textarea{width:100%;max-width:100%;min-height:100px;resize:vertical;font:400 15px/1.5 var(--sans);padding:12px;color:#123b49}
+#pro-social-research select,#pro-social-research input[type=file],#pro-social-research input[type=text]{max-width:100%;width:100%}
+#pro-social-research .mc-catalog{margin-top:25px;padding:20px;border:1px solid #d9d0c1;background:#fbf7ef;border-radius:10px}
+#pro-social-research .mc-pro-item{overflow-wrap:anywhere}
+#pro-research-created{border-left:3px solid #b77950;padding:17px 19px;margin:20px 0;background:#f6f0e6;overflow-wrap:anywhere}
+#pro-research-created-url{overflow-wrap:anywhere}
+#pro-research-aggregate{display:grid;gap:12px;margin-top:16px}
+#pro-research-aggregate .mc-library-card{max-width:760px}
+.mc-research-fieldset{border:1px solid #d5cab8;border-radius:10px;background:#fcf9f2;color:#153746;padding:20px;margin:25px 0;min-width:0}
+.mc-research-fieldset legend{font:500 clamp(20px,2.5vw,27px)/1.4 var(--sans);color:#123847;padding:0 10px}
+.mc-research-fieldset .mc-confirm{display:flex;margin:10px 0;line-height:1.6;font-size:16px}
+.mc-research-fieldset .mc-report-quiet{font-size:14px}
+[data-nexo-social-research] [data-r-stage][hidden]{display:none!important}
+[data-nexo-social-research] .mc-confirm{margin:12px 0}
+[data-nexo-social-research] .mc-button{font-size:16px}
+.mc-research-suggestion{margin:20px 0;max-width:770px;border-left:4px solid #b77950}
+.mc-research-suggestion .mc-field{display:block;margin:16px 0}
+.mc-research-suggestion select{width:100%;max-width:500px}
+@media print{#pro-social-research{display:none!important}[data-nexo-social-research] .mc-actions{display:none!important}}
