@@ -369,6 +369,67 @@ export async function handleClinicalRequest({ request, env }, dependencies = {})
       if (session) await db.batch([stmt(db, 'DELETE FROM momento_sessions WHERE token_hash = ?', session.token_hash), auditStatement(db, role, 'session_ended', role, now)]);
       return jsonResponse(200, { ended: true }, { 'set-cookie': cookieHeader(role, '', 0) });
     }
+    // Instrumentos complementares dentro do próprio NEXO.
+    // Catálogo de aplicação habilitado: somente PHQ-9 e GAD-7 previamente implementados.
+    if(path==='instruments/assign'&&request.method==='POST'){
+      const session=await needAdmin();
+      requireExact(payload,['submissionId','instrumentId','expiresInDays','administrationMode','clinicianReviewed','safetyReviewed']);
+      if(!uuidPattern.test(payload.submissionId||'')||!['phq9','gad7'].includes(payload.instrumentId)||
+         ![1,3,7,14].includes(payload.expiresInDays)||!['session','between-sessions'].includes(payload.administrationMode)||
+         payload.clinicianReviewed!==true||typeof payload.safetyReviewed!=='boolean')
+         throw new ClinicalError(400,'invalid_request');
+      await rateLimit(request,config,db,'instrument-assign',now,20,100);
+      const source=await stmt(db,'SELECT * FROM momento_submissions WHERE id=? AND owner_id=? AND expires_at>?',
+        payload.submissionId,session.owner_id,now).first();
+      if(!source)deny();
+      const original=await decryptClinicalRecord(source,config.key);
+      const p9=Array.isArray(original.phq9)?original.phq9[8]:null;
+      if((p9===null||p9===undefined||p9>0)&&!payload.safetyReviewed)
+        throw new ClinicalError(409,'safety_review_required');
+      const id=crypto.randomUUID(),code=invitationCode(),expiresAt=Math.min(source.expires_at,now+payload.expiresInDays*DAY);
+      if(expiresAt<=now)deny();
+      await db.batch([
+        stmt(db,'INSERT INTO momento_invites (id,owner_id,code_hash,created_at,expires_at,instrument_id,source_submission_id,administration_mode) VALUES (?,?,?,?,?,?,?,?)',
+          id,session.owner_id,await hashClinicalValue(config.secret,'invite',normalizeInvitation(code)),
+          now,expiresAt,payload.instrumentId,source.id,payload.administrationMode),
+        auditStatement(db,'clinician','instrument_assigned',id,now)
+      ]);
+      return jsonResponse(201,{id,code,instrumentId:payload.instrumentId,administrationMode:payload.administrationMode,
+        expiresAt:new Date(expiresAt).toISOString(),url:`${config.origin}/conhecendo-meu-momento/instrumento/`});
+    }
+    if(path==='instruments'&&request.method==='GET'){
+      const session=await needAdmin();
+      const found=await rows(stmt(db,"SELECT i.id,i.instrument_id,i.source_submission_id,i.administration_mode,i.created_at,i.expires_at,i.consumed_at,i.revoked_at,i.submission_id FROM momento_invites i JOIN momento_submissions s ON s.id=i.source_submission_id AND s.owner_id=i.owner_id AND s.expires_at>? WHERE i.owner_id=? AND i.instrument_id IS NOT NULL AND i.expires_at>? ORDER BY i.created_at DESC LIMIT 100",now,session.owner_id,now));
+      return jsonResponse(200,{assignments:found.map(i=>({
+        id:i.id,instrumentId:i.instrument_id,sourceSubmissionId:i.source_submission_id,
+        administrationMode:i.administration_mode,createdAt:new Date(i.created_at).toISOString(),
+        expiresAt:new Date(i.expires_at).toISOString(),redeemed:Boolean(i.consumed_at),
+        revoked:Boolean(i.revoked_at),submitted:Boolean(i.submission_id)
+      }))});
+    }
+    const instrumentResult=path.match(/^instruments\/([0-9a-f-]{36})\/result$/);
+    if(instrumentResult&&request.method==='GET'){
+      const session=await needAdmin(),id=instrumentResult[1];if(!uuidPattern.test(id))deny();
+      const row=await stmt(db,'SELECT r.* FROM momento_instrument_results r JOIN momento_submissions s ON s.id=r.source_submission_id AND s.owner_id=r.owner_id AND s.expires_at>? WHERE r.invite_id=? AND r.owner_id=? AND r.expires_at>?',
+        now,id,session.owner_id,now).first();
+      if(!row)deny();
+      const record=await decryptClinicalRecord(row,config.key);
+      await auditStatement(db,'clinician','instrument_result_read',row.id,now).run();
+      return jsonResponse(200,{record,metadata:{assignmentId:id,sourceSubmissionId:row.source_submission_id,
+        createdAt:new Date(row.created_at).toISOString()}});
+    }
+    const instrumentRevoke=path.match(/^instruments\/([0-9a-f-]{36})\/revoke$/);
+    if(instrumentRevoke&&request.method==='POST'){
+      const session=await needAdmin();requireExact(payload,[]);
+      const id=instrumentRevoke[1];if(!uuidPattern.test(id))deny();
+      const changed=await db.batch([
+        stmt(db,'UPDATE momento_invites SET revoked_at=COALESCE(revoked_at,?) WHERE id=? AND owner_id=? AND instrument_id IS NOT NULL AND submission_id IS NULL RETURNING id',now,id,session.owner_id),
+        stmt(db,'DELETE FROM momento_sessions WHERE invite_id=? AND EXISTS(SELECT 1 FROM momento_invites WHERE id=? AND owner_id=? AND revoked_at IS NOT NULL)',id,id,session.owner_id),
+        auditStatement(db,'clinician','instrument_revoked',id,now)
+      ]);
+      if(!changed[0]?.results?.[0])deny();
+      return jsonResponse(200,{revoked:true});
+    }
     if (path === 'invites' && request.method === 'POST') {
       const session = await needAdmin(); requireExact(payload, ['expiresInDays']);
       if (!Number.isInteger(payload.expiresInDays) || payload.expiresInDays < 1 || payload.expiresInDays > 14) throw new ClinicalError(400, 'invalid_expiry');
