@@ -1,8 +1,10 @@
 import {questions,profileFields} from '../data/momento-demo';
 import {screeningInstruments,CLINICAL_CONSENT_VERSION} from '../data/momento-instruments';
 import {clarificationQuestions} from '../data/momento-clarifications';
+import {reflectionQuestions,reflectionChoices,REFLECTION_MAX_CHARS} from '../data/momento-reflections';
+import {createLocalDictation} from './momento-on-device-voice';
 
-type Stage='access'|'consent'|'profile'|'privacy'|'questions'|'summary'|'submitted'|'paused'|'closed';
+type Stage='access'|'consent'|'profile'|'privacy'|'choice'|'questions'|'reflection'|'summary'|'submitted'|'paused'|'closed';
 type Item={kind:'author'|'scale'|'impact'|'clarification';id:string;instrument?:'phq9'|'gad7';index?:number;clarificationKey?:'sleep'|'appetite';triggerPhqIndex?:number;theme:string;title:string;intro:string;options:{value:string;label:string}[]};
 const sequence:Item[]=[...questions.map(question=>({kind:'author' as const,id:question.id,theme:question.theme,title:question.title,intro:question.intro,options:question.options.map(option=>({value:option.id,label:option.label}))})),...screeningInstruments.flatMap(instrument=>[...instrument.items.map((title,index)=>({kind:'scale' as const,id:`${instrument.id}-${index}`,instrument:instrument.id,index,theme:instrument.participantTitle,title,intro:instrument.intro,options:instrument.options.map(option=>({value:String(option.value),label:option.label}))})),{kind:'impact' as const,id:`${instrument.id}-impact`,instrument:instrument.id,theme:'No seu cotidiano',title:instrument.impactQuestion,intro:'Esta resposta ajuda a situar os efeitos no seu dia a dia.',options:instrument.impactOptions.map(option=>({value:String(option.value),label:option.label}))}]),...clarificationQuestions.map(q=>({kind:'clarification' as const,id:`clarification-${q.id}`,clarificationKey:q.id as 'sleep'|'appetite',triggerPhqIndex:q.triggerPhqIndex,theme:q.theme,title:q.title,intro:q.intro,options:q.options.map(option=>({value:option.id,label:option.label}))}))];
 let disposeClinical:(()=>void)|undefined;
@@ -12,7 +14,9 @@ function startClinical(){
  const root:HTMLElement=candidate;const life=new AbortController();const{signal}=life;
  let stage:Stage='access',resumeStage:Stage='questions',position=0,csrf='',consentAt='',receiptId='',sending=false,enabled=false;
  let profile:Record<string,string>={},answers:Record<string,string>={},phq9:(number|null)[]=Array(9).fill(null),gad7:(number|null)[]=Array(7).fill(null),impact:{phq9:number|null;gad7:number|null}={phq9:null,gad7:null};
- let context={place:'not-informed',privacy:''};
+ let context={place:'not-informed',privacy:'',accompaniment:'not-informed'};
+  let reflectionMode:'basic'|'extended'='basic',reflectionPosition=0;
+  let reflectionAnswers:Record<string,{status:'answered'|'later'|'prefer-not'|'unsure';text?:string}>={};
  let clarifications:{sleep:string|null;appetite:string|null}={sleep:null,appetite:null};
  const applicable=(item:Item)=>item.kind!=='clarification'||(phq9[item.triggerPhqIndex!]??0)>0;
  const nextPosition=(initial:number,direction:1|-1):number=>{for(let i=initial;i>=0&&i<sequence.length;i+=direction){if(applicable(sequence[i]))return i;}return -1;};
@@ -23,6 +27,18 @@ function startClinical(){
  const fail=(text:string,focus?:HTMLElement)=>{error.textContent=text;focus?.focus();};
  const radio=(name:string)=>root.querySelector<HTMLInputElement>(`input[name="${name}"]:checked`)?.value||'';
  const stopSpeech=()=>speech?.cancel();
+  const dictation=createLocalDictation({
+   onTranscript:(transcribed)=>{
+    if(stage!=='reflection'||context.privacy!=='yes')return;
+    const field=element<HTMLTextAreaElement>('mc-reflection-text');
+    field.value=[field.value,transcribed].filter(Boolean).join(' ').slice(0,REFLECTION_MAX_CHARS);
+    const option=root.querySelector<HTMLInputElement>('input[name="mc-reflection-choice"][value="answered"]');
+    if(option)option.checked=true;
+    element('mc-dictation-status').textContent='Transcrição local pronta. Revise antes de continuar. Nada foi enviado.';
+   },
+   onMessage:(message)=>{element('mc-dictation-status').textContent=message;},
+   onFinish:()=>{const mic=root.querySelector<HTMLButtonElement>('[data-mc-action="dictate"]');if(mic)mic.textContent='Falar e transcrever localmente';}
+  });
 
  async function api(path:string,body?:unknown){
   const response=await fetch(`/api/momento/${path}`,{method:body===undefined?'GET':'POST',headers:{...(body===undefined?{}:{'Content-Type':'application/json'}),...(csrf?{'X-Nexo-CSRF':csrf}:{})},...(body===undefined?{}:{body:JSON.stringify(body)}),credentials:'same-origin',cache:'no-store',referrerPolicy:'no-referrer',signal});
@@ -43,7 +59,42 @@ function startClinical(){
   for(const option of item.options){const label=document.createElement('label'),input=document.createElement('input'),span=document.createElement('span');input.type='radio';input.name='mc-answer';input.value=option.value;input.checked=currentValue(item)===option.value;span.textContent=option.label;label.append(input,span);list.append(label);}
   element('mc-care-note').hidden=!(item.kind==='scale'&&item.instrument==='phq9'&&item.index===8&&(phq9[8]??0)>0);
  }
- function showSummary(){
+ function showReflection(){
+   const prompt=reflectionQuestions[reflectionPosition];
+   element('mc-reflection-theme').textContent=prompt.theme;
+   element('mc-reflection-title').textContent=prompt.title;
+   element('mc-reflection-intro').textContent=prompt.intro;
+   element('mc-reflection-position').textContent=`Tema opcional ${reflectionPosition+1} de ${reflectionQuestions.length}.`;
+   const list=element('mc-reflection-options');list.replaceChildren();
+   const record=reflectionAnswers[prompt.id];
+   for(const option of reflectionChoices){
+    const label=document.createElement('label'),input=document.createElement('input'),span=document.createElement('span');
+    input.type='radio';input.name='mc-reflection-choice';input.value=option.id;
+    input.checked=record?.status===option.id;span.textContent=option.label;label.append(input,span);list.append(label);
+   }
+   const field=element<HTMLTextAreaElement>('mc-reflection-text');
+   field.value=record?.status==='answered'?record.text||'':'';
+   field.maxLength=REFLECTION_MAX_CHARS;
+   const mic=root.querySelector<HTMLButtonElement>('[data-mc-action="dictate"]')!;
+   mic.disabled=true;mic.hidden=context.privacy!=='yes';
+   element('mc-dictation-status').textContent=context.privacy==='yes'?'Verificando se o dispositivo permite transcrição totalmente local.':'Microfone desativado para preservar a privacidade. Você pode escrever ou escolher uma opção.';
+   if(context.privacy==='yes')void dictation.check().then(ok=>{
+    if(stage!=='reflection'||reflectionQuestions[reflectionPosition]?.id!==prompt.id)return;
+    mic.disabled=!ok;
+    element('mc-dictation-status').textContent=ok?'Transcrição local disponível. Nenhum áudio será guardado pela NEXO.':'Transcrição local indisponível neste navegador. Escreva ou reserve para a sessão; nenhum áudio foi enviado.';
+   });
+  }
+  function saveReflection(skip=false){
+   const prompt=reflectionQuestions[reflectionPosition];
+   const typed=element<HTMLTextAreaElement>('mc-reflection-text').value.trim();
+   const chosen=skip?'prefer-not':radio('mc-reflection-choice')||(typed?'answered':'');
+   if(!reflectionChoices.some(option=>option.id===chosen)){fail('Escolha uma alternativa ou escreva uma resposta, se desejar.',element('mc-reflection-title'));return false;}
+   if(chosen==='answered'&&!typed){fail('Escreva ou dite o que quiser contar, ou escolha outra opção.',element('mc-reflection-text'));return false;}
+   if([...typed].length>REFLECTION_MAX_CHARS&&chosen==='answered'){fail('Use até 1.400 caracteres por tema.',element('mc-reflection-text'));return false;}
+   reflectionAnswers[prompt.id]=chosen==='answered'?{status:'answered',text:typed}:{status:chosen as 'later'|'prefer-not'|'unsure'};
+   return true;
+  }
+  function showSummary(){
   const list=element('mc-summary');list.replaceChildren();
   const p=document.createElement('p');
   p.textContent='Esta etapa confirma somente o envio. Não há nota, avaliação, interpretação ou resultado automático para você.';
@@ -63,19 +114,19 @@ function startClinical(){
   status.textContent='';render();
  }
  function render(focus=true){
-  stopSpeech();error.textContent='';stages.forEach(section=>{section.hidden=section.dataset.mcStage!==stage;});
+  stopSpeech();dictation.stop();error.textContent='';stages.forEach(section=>{section.hidden=section.dataset.mcStage!==stage;});
   root.querySelectorAll<HTMLElement>('[data-mc-progress]').forEach(item=>{if(item.dataset.mcProgress===stage)item.setAttribute('aria-current','step');else item.removeAttribute('aria-current');});
   root.querySelectorAll<HTMLButtonElement>('.mc-toolbar [data-mc-action]').forEach(button=>{button.disabled=!csrf||stage==='closed'||sending||(button.dataset.mcAction==='pause'&&['access','consent','paused','submitted'].includes(stage));});
-  if(stage==='questions')showQuestion();if(stage==='summary')showSummary();
+  if(stage==='questions')showQuestion();if(stage==='reflection')showReflection();if(stage==='summary')showSummary();
   const partialButton=root.querySelector<HTMLButtonElement>('[data-mc-action="submit-partial"]');if(partialButton)partialButton.disabled=stage!=='paused'||!['yes','partial'].includes(context.privacy);
-  const section=stages.find(item=>item.dataset.mcStage===stage),heading=stage==='questions'?element('mc-question-title'):section?.querySelector<HTMLElement>('h2');
+  const section=stages.find(item=>item.dataset.mcStage===stage),heading=stage==='questions'?element('mc-question-title'):stage==='reflection'?element('mc-reflection-title'):section?.querySelector<HTMLElement>('h2');
   if(focus&&heading){heading.focus({preventScroll:true});heading.scrollIntoView({block:'start',behavior:'instant'});}
  }
  function clear(){
-  stopSpeech();profile={};answers={};phq9=Array(9).fill(null);gad7=Array(7).fill(null);impact={phq9:null,gad7:null};clarifications={sleep:null,appetite:null};context={place:'not-informed',privacy:''};position=0;consentAt='';
+  stopSpeech();dictation.stop();profile={};answers={};phq9=Array(9).fill(null);gad7=Array(7).fill(null);impact={phq9:null,gad7:null};clarifications={sleep:null,appetite:null};context={place:'not-informed',privacy:'',accompaniment:'not-informed'};reflectionMode='basic';reflectionPosition=0;reflectionAnswers={};position=0;consentAt='';
   root.querySelectorAll<HTMLInputElement>('input').forEach(input=>{if(input.type==='checkbox'||input.type==='radio')input.checked=input.defaultChecked;else input.value='';});
   root.querySelectorAll<HTMLSelectElement>('[data-mc-profile]').forEach(select=>{select.value='not-informed';});
-  element('mc-question-options').replaceChildren();element('mc-summary').replaceChildren();element('mc-completion').replaceChildren();element('mc-care-note').hidden=true;
+  element('mc-question-options').replaceChildren();element('mc-reflection-options').replaceChildren();element<HTMLTextAreaElement>('mc-reflection-text').value='';element('mc-summary').replaceChildren();element('mc-completion').replaceChildren();element('mc-care-note').hidden=true;
  }
  function saveCurrent(skip=false){
   const item=sequence[position],selected=radio('mc-answer'),valid=item.options.find(option=>option.value===selected);
