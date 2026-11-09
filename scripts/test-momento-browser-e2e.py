@@ -56,6 +56,13 @@ def run_case(browser, port, expanded):
         reduced_motion="reduce",
     )
     page = context.new_page()
+    # Chromium headless can expose an experimental on-device recognition API
+    # without the native speech pack. Explicitly test the safe unavailable path.
+    # The positive local-only speech path has its own deterministic Node tests.
+    page.add_init_script("""
+      Object.defineProperty(window, 'SpeechRecognition', {value: undefined, configurable: true});
+      Object.defineProperty(window, 'webkitSpeechRecognition', {value: undefined, configurable: true});
+    """)
     page.set_default_timeout(8000)
     print('INICIO:', 'aprofundado' if expanded else 'essencial', flush=True)
     payloads = []
