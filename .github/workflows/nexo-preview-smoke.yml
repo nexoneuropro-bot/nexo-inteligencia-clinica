@@ -70,6 +70,8 @@ jobs:
                           if url not in seen and url not in queue:queue.append(url)
                   combined='\\n'.join(source for _,source in chunks)
                   expected_terms=[expected,'Por onde começar, o que investigar e como continuar','Biblioteca NEXO · cruzar metadados de outras escalas']
+                  print('ASSETS:',len(chunks),'TERMOS:',[(term,term in combined) for term in expected_terms])
+                  print('ARQUIVOS:',[url.split('/')[-1] for url,_ in chunks])
                   if all(term in combined for term in expected_terms):
                       print('PUBLICAÇÃO CONFIRMADA: síntese, guia clínico e biblioteca de metadados nos assets:')
                       for asset,source in chunks:
