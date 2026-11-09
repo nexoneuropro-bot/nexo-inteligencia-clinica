@@ -1,5 +1,6 @@
 import {buildClinicalInterviewGuide,type InterviewStep,type WorkingHypothesis,type InstrumentProposal} from '../lib/momento-clinical-interview-guide';
 import {appendInstrumentCatalogImport} from './momento-instrument-catalog-view';
+import {appendNativePackImport} from './momento-native-pack-import-view';
 
 const el=<K extends keyof HTMLElementTagNameMap>(tag:K,className?:string):HTMLElementTagNameMap[K]=>{
  const node=document.createElement(tag);if(className)node.className=className;return node;
@@ -81,6 +82,7 @@ export function appendClinicalInterviewGuide(report:HTMLElement,record:Record<st
  p(proposals,'Sugestões baseadas nas respostas registradas. Marcar significa apenas escolher itens para uma minuta. Não envia formulários, não acessa o banco externo e não altera o prontuário. O profissional deve confirmar finalidade, idade, autorização, versão, direitos, aplicação e SATEPSI quando pertinente.','mc-report-quiet');
  guide.proposals.forEach(item=>toolCard(proposals,item));
  const catalog=appendInstrumentCatalogImport(proposals,record);
+ appendNativePackImport(proposals);
  const actions=el('div','mc-guide-actions');
  const copy=el('button','mc-button');copy.type='button';copy.textContent='Copiar seleção para minha programação clínica';
  copy.addEventListener('click',async()=>{
