@@ -1,6 +1,7 @@
 import {buildIntegratedReport,type ReportPoint,type ReportAxis,type ReportDomain,type ReportInstrument} from '../lib/momento-professional-report';
 import {reflectionQuestions,reflectionChoices,reflectionTopics} from '../data/momento-reflections';
 import {appendClinicalInterviewGuide} from './momento-clinical-guide-view';
+import {appendInstrumentDecisionSupport} from './momento-instrument-recommendation-view';
 
 function element<K extends keyof HTMLElementTagNameMap>(tag:K,className?:string):HTMLElementTagNameMap[K]{
  const node=document.createElement(tag);if(className)node.className=className;return node;
@@ -128,18 +129,19 @@ export function appendIntegratedProfessionalReport(panel:HTMLElement,record:Reco
  const differential=section(root,'pro-report-differential','04 · HIPÓTESES DE INVESTIGAÇÃO','Domínios clínicos que pedem mais informações');
  differential.append(text('p','Referência de organização: DSM-5-TR e avaliação diferencial. Os domínios abaixo não representam transtornos detectados ou hipóteses diagnósticas confirmadas.','mc-report-quiet'));
  if(report.domains.length)report.domains.forEach(item=>domain(differential,item));else differential.append(text('p','Sem sinais suficientes para priorizar domínios a partir deste percurso. A avaliação clínica define o próximo foco.'));
- const methods=section(root,'pro-report-methods','05 · PROCEDIMENTOS POSSÍVEIS','Como aprofundar sem transformar a entrevista em uma prova');
+ root.append(appendInstrumentDecisionSupport(root,record));
+ const methods=section(root,'pro-report-methods','06 · PROCEDIMENTOS POSSÍVEIS','Como aprofundar sem transformar a entrevista em uma prova');
  report.instruments.forEach(item=>instrument(methods,item));
  methods.append(text('p','Nenhuma sugestão equivale a indicação de teste ou afirmação de parecer favorável. Se houver escolha de teste psicológico, verificar versão, público, normas e modalidade de aplicação no SATEPSI vigente.','mc-report-quiet'));
- const gaps=section(root,'pro-report-gaps','06 · LACUNAS E LIMITES','O que o formulário não permite concluir');lines(gaps,report.unanswered);
- const completion=section(root,'pro-report-context','07 · PARTICIPAÇÃO E CONTINUIDADE','Condições a considerar no encontro');lines(completion,report.context);
- const notes=section(root,'pro-report-notes','08 · REVISÃO DO PROFISSIONAL','Observações e prioridades para a devolutiva');
+ const gaps=section(root,'pro-report-gaps','07 · LACUNAS E LIMITES','O que o formulário não permite concluir');lines(gaps,report.unanswered);
+ const completion=section(root,'pro-report-context','08 · PARTICIPAÇÃO E CONTINUIDADE','Condições a considerar no encontro');lines(completion,report.context);
+ const notes=section(root,'pro-report-notes','09 · REVISÃO DO PROFISSIONAL','Observações e prioridades para a devolutiva');
  notes.append(text('p','Espaço de trabalho local desta tela. Não é salvo no banco NEXO, não é enviado automaticamente e não substitui registro em prontuário.','mc-report-quiet'));
  const id='pro-clinical-review-notes';
  const field=element('textarea','mc-report-textarea');field.id=id;field.rows=6;field.maxLength=3000;field.placeholder='Evidências verificadas, perguntas selecionadas, hipóteses descartadas, condições para devolutiva...';
  const label=element('label','mc-report-label');label.htmlFor=id;label.textContent='Anotações do profissional, ainda não persistidas';notes.append(label,field);
  notes.append(text('p','Responsabilidade clínica: interpretação e devolutiva realizadas pelo profissional habilitado, após diálogo com a pessoa.','mc-report-quiet'));
- const sources=section(root,'pro-report-sources','09 · FONTES E DIRETRIZES','Referências para consulta');
+ const sources=section(root,'pro-report-sources','10 · FONTES E DIRETRIZES','Referências para consulta');
  infoLink(sources,'DSM-5-TR (referência editorial da APA)','https://www.psychiatry.org/psychiatrists/practice/dsm');
  infoLink(sources,'SATEPSI · consulta atualizada de testes','https://satepsi.cfp.org.br/');
  infoLink(sources,'CFP · orientação sobre aplicação informatizada/remota','https://site.cfp.org.br/cfp-orienta-psicologas-sobre-o-uso-de-testes-psicologicos-nas-modalidades-informatizada-e-online/');

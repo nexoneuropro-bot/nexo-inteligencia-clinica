@@ -150,3 +150,27 @@
 .mc-followup-panel .mc-pro-code{overflow-wrap:anywhere}
 #pro-report-followups{margin-top:26px;padding-top:14px;border-top:2px solid #b77950}
 @media print{#pro-followups-section{display:none!important}#pro-report-followups{display:block}}
+
+
+/* NEXO · HDs e sugestões de instrumentos sob decisão profissional */
+.mc-recommendations{border-top:2px solid #b77950}
+.mc-recommendation-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:17px;margin:24px 0}
+.mc-recommendation-card{padding:20px;background:#fcfaf4;border:1px solid #d8cfc1;border-radius:12px;min-width:0;overflow-wrap:anywhere;break-inside:avoid}
+.mc-recommendation-card h4{font:400 clamp(21px,2.4vw,25px)/1.25 var(--serif);color:#143b49;margin:0}
+.mc-recommendation-card p{margin:12px 0;font-size:15px;line-height:1.65}
+.mc-recommendation-card .mc-report-mini{font-size:12px}
+.mc-recommendation-card .mc-report-evidence{padding-left:20px;margin:10px 0 16px}
+.mc-recommendation-question{border-left:3px solid #b77950;background:#f5eee2;padding:12px 14px;color:#12394b;font-weight:600}
+.mc-recommendation-card .mc-field{display:block;margin-top:18px;font-size:13px;font-weight:600}
+.mc-recommendation-card .mc-field span{display:block;margin-bottom:7px}
+.mc-recommendation-card select,.mc-recommendation-card textarea{display:block;width:100%;min-width:0;max-width:100%;font:400 15px/1.55 var(--sans);padding:11px;background:#fff;color:#102f3c;border:1px solid #8d9b99;border-radius:6px}
+.mc-recommendation-card textarea{resize:vertical;min-height:70px}
+.mc-recommendation-card .mc-button{margin:14px 0 5px}
+.mc-recommendation-review{padding:21px 23px;margin-top:20px;background:#f6f2ea;border:1px solid #d9d0c1;border-radius:10px}
+.mc-recommendation-review>h4{font:400 24px/1.3 var(--serif);margin:0 0 12px}
+.mc-recommendation-summary{border-top:1px solid #d9d0c1;padding:10px 0;break-inside:avoid}
+.mc-recommendation-summary h4{font-size:16px;color:#173b48;margin:0 0 8px}
+.mc-recommendation-summary p{font-size:14px;margin:5px 0}
+.mc-recommendations select:focus-visible,.mc-recommendations textarea:focus-visible,.mc-recommendations button:focus-visible{outline:3px solid #895331;outline-offset:3px}
+@media(max-width:700px){.mc-recommendation-grid{grid-template-columns:1fr}.mc-recommendation-card{padding:17px}.mc-recommendation-review{padding:16px}}
+@media print{.mc-recommendation-card .mc-field,.mc-recommendation-card .mc-button,.mc-recommendation-review .mc-guide-actions{display:none!important}.mc-recommendation-grid{grid-template-columns:1fr 1fr;gap:11px}.mc-recommendation-card{padding:12px}.mc-recommendation-summary{break-inside:avoid}}

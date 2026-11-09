@@ -6,7 +6,7 @@
  * "integrado" significa integrado ao acolhimento inicial existente, NÃO
  * reenvio isolado nem aprovação genérica para aplicação em qualquer modalidade.
  */
-import {buildProfessionalCues} from '../lib/momento-professional-cues';
+import {buildProfessionalCues} from '../lib/momento-professional-cues.ts';
 
 export type InstrumentStatus='integrado'|'curadoria'|'procedimento';
 export type InstrumentEntry=Readonly<{
