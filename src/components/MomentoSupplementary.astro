@@ -14,7 +14,7 @@ import '../styles/momento-clinical.css';
   </ol>
  </aside>
  <div class="mc-paper">
-  <div class="mc-toolbar"><span>Conhecendo Meu Momento · Complemento</span></div>
+  <div class="mc-toolbar"><span>Conhecendo Meu Momento · Complemento</span><div><button type="button" data-mi-action="pause">Pausar nesta aba</button></div></div>
   <section data-mi-stage="access">
    <p class="mc-kicker">UM CONVITE PARA CONTINUAR</p>
    <h2 id="mi-heading" tabindex="-1">Vamos ao seu ritmo.</h2>
@@ -49,6 +49,15 @@ import '../styles/momento-clinical.css';
     <button type="button" class="mc-button" data-mi-action="back">← Voltar</button>
     <button type="button" class="mc-button" data-mi-action="skip">Deixar sem resposta</button>
     <button type="button" class="mc-button mc-primary" data-mi-action="next">Continuar →</button>
+   </div>
+  </section>
+  <section data-mi-stage="paused" hidden>
+   <p class="mc-kicker">UMA PAUSA É UMA ESCOLHA</p>
+   <h2 tabindex="-1">Pode voltar quando desejar.</h2>
+   <p>Suas respostas permanecem nesta aba enquanto ela estiver aberta. Nenhuma resposta foi enviada. Se fechar ou atualizar a página, o rascunho poderá se perder; você também pode escolher continuar com o profissional durante a sessão.</p>
+   <div class="mc-actions">
+    <button type="button" class="mc-button mc-primary" data-mi-action="resume">Continuar aqui →</button>
+    <button type="button" class="mc-button" data-mi-action="leave">Encerrar sem enviar</button>
    </div>
   </section>
   <section data-mi-stage="summary" hidden>
