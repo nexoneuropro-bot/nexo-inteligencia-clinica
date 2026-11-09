@@ -88,15 +88,15 @@ function start(){
    if(index===0)go('consent');else{index--;render();}
   }
   if(action==='edit'&&study){index=0;render();go('questions');}
-  if(action==='submit'&&study)void lock(async()=>{
+  if(action==='submit'&&study){const activeStudy=study;void lock(async()=>{
    if(!consented)throw new Error('Não há consentimento registrado nesta sessão.');
    if(!answers.some(a=>a!==null))throw new Error('Nenhuma resposta foi escolhida. Você pode encerrar sem enviar.');
-   const result=await api('public/'+token,{consent:{accepted:true,adult:true,version:study.consentVersion},answers});
+   const result=await api('public/'+token,{consent:{accepted:true,adult:true,version:activeStudy.consentVersion},answers});
    if(result.saved!==true||typeof result.withdrawalCode!=='string')throw new Error('O recebimento ainda não foi confirmado.');
    receipt=result.withdrawalCode;token='';answers=[];
    element('research-withdrawal-code').textContent=receipt;go('done');
    element('research-status').textContent='Participação recebida pelo servidor. Obrigado por contribuir.';
-  });
+  });}
   if(action==='decline'){
    token='';answers=[];consented=false;
    go('declined');element('research-status').textContent='Você encerrou o percurso sem enviar respostas.';
