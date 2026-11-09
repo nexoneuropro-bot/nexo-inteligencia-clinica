@@ -41,7 +41,7 @@ function toolCard(parent:HTMLElement,item:InstrumentProposal){
  p(card,item.kind+' · '+(item.mode==='somente profissional'?'CONDUZIDO PELO PROFISSIONAL':'OFERTA SOMENTE APÓS CONCORDÂNCIA'),'mc-report-mini');
  p(card,item.why);p(card,'Momento sugerido: '+item.when,'mc-report-quiet');
  p(card,item.review,'mc-report-quiet');
- if(item.inNexo)p(card,'Já existe como rastreio no acolhimento NEXO. Reaplicação isolada e envio adicional ainda não estão habilitados.','mc-report-quiet');
+ if(item.inNexo)p(card,'Já utilizado no acolhimento NEXO. Reaplicação somente quando a função complementar estiver habilitada, com decisão clínica, consentimento e intervalo justificado.','mc-report-quiet');
  if(item.source)external(card,'Fonte e orientação para conferência',item.source);
  parent.append(card);
 }
@@ -98,7 +98,7 @@ export function appendClinicalInterviewGuide(report:HTMLElement,record:Record<st
  const bank=el('a','mc-guide-bank');bank.href='#pro-instrument-library';bank.textContent='Consultar biblioteca NEXO integrada';actions.append(bank);
  proposals.append(actions);
  const status=el('p','mc-report-quiet');status.setAttribute('role','status');status.setAttribute('aria-live','polite');proposals.append(status);
- p(proposals,'A biblioteca NEXO integrada organiza instrumentos e indicações para análise profissional. Packs importados são lidos localmente, sem incorporar dados clínicos; aplicação complementar, reaplicações e histórico longitudinal somente após implantação, validação e autorização específicas.','mc-report-quiet');
+ p(proposals,'As recomendações vinculadas às HDs estão na seção anterior da síntese integrada. Esta programação é uma minuta complementar; decisões são do profissional. Definições importadas são conferidas localmente, sem dados de participantes. Envio remoto depende de habilitação do serviço, versão e consentimento adequados.','mc-report-quiet');
  root.append(proposals);
  const footer=el('section','mc-guide-section');
  p(footer,guide.boundary,'mc-report-quiet');p(footer,guide.note,'mc-report-quiet');
