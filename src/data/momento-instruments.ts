@@ -1,5 +1,6 @@
 /** Source-faithful text. Digital use still requires the clinician's review of the protocol. */
 export const CLINICAL_CONSENT_VERSION = 'clinical-2026-11-08-v3';
+export const FOLLOWUP_CONSENT_VERSION = 'nexo-instrumento-2026-11-09-v1';
 export const INSTRUMENT_VERSIONS = Object.freeze({
   phq9: 'pt-BR-Pfizer-PHQ9P-2005-source',
   gad7: 'pt-BR-Pfizer-SESSE-2024-annex-B-source',
