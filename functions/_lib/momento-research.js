@@ -236,7 +236,7 @@ export async function handleResearchRequest({request,env},deps={}){
       !safe(data.consent,180,3500)||!safe(data.safetyPlan,50,900)||
       !['aprovado_quando_aplicavel','dispensa_fundamentada'].includes(data.ethicsStatus)||
       !safe(data.ethicsBasis,25,600)||
-      Object.values(data.declaration).some(value=>value!==true))throw new ResearchError(400,'invalid_study_declaration');
+      ['qualifiedProfessional','rightsAndModeConfirmed','privacyAndSafetyReviewed','voluntaryStudy'].some(key=>data.declaration[key]!==true))throw new ResearchError(400,'invalid_study_declaration');
    await rateLimit(db,config,request,'study-create',now,10);
    const pack=await stmt(db,'SELECT id,expires_at FROM momento_research_packs WHERE id=? AND owner_id=? AND expires_at>?',data.packRef,owner.owner_id,now+2*DAY).first();
    if(!pack)deny();
