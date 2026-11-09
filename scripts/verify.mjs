@@ -11,7 +11,7 @@ const production=process.env.PUBLIC_INDEXABLE==='true'&&process.env.PUBLIC_EDITO
 for(const file of htmlFiles){
  const html=fs.readFileSync(file,'utf8'),name=path.relative(root,file);
  const editorialPrivacy=name.split(path.sep).join('/')==='psicologia-em-pauta/privacidade/index.html';
- const privateMomento=/^(?:conhecendo-meu-momento|nexo-profissional)\//.test(name.split(path.sep).join('/'));
+ const privateMomento=/^(?:conhecendo-meu-momento|nexo-profissional|pesquisa-social)\//.test(name.split(path.sep).join('/'));
  const shouldIndex=production&&name!=='404.html'&&!editorialPrivacy&&!privateMomento;
  check(/<html[^>]*lang="pt-BR"/.test(html),`${name}: idioma`);
  const title=html.match(/<title>(.*?)<\/title>/)?.[1];check(title&&!titles.has(title),`${name}: título ausente/repetido`);titles.add(title);
