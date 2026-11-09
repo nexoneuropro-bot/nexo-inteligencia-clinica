@@ -124,7 +124,9 @@ function startClinical(){
    context={place:radio('mc-place')||'not-informed',privacy};
    if(privacy==='no'){resumeStage='questions';stage='paused';}else stage=resumeStage==='summary'?'summary':pathChosen?'questions':'path';
   }else if(stage==='path'){
-   welcomePath=radio('mc-path-choice')==='expanded'?'expanded':'essential';welcomeSetting=radio('mc-setting-choice')==='with-professional'?'with-professional':'solo';pathChosen=true;
+   welcomePath=radio('mc-path-choice')==='expanded'?'expanded':'essential';welcomeSetting=radio('mc-setting-choice')==='with-professional'?'with-professional':'solo';
+   if(welcomePath==='expanded'&&!element<HTMLInputElement>('mc-sensitive-accept').checked){fail('Para escolher o aprofundamento, confirme a autorização específica para os temas íntimos. Você também pode usar o percurso essencial.');return;}
+   pathChosen=true;
    if(welcomePath==='essential')for(const q of welcomeQuestions){if(q.expandedOnly)delete welcomeResponses[q.id];}
    position=nextPosition(0,1);stage='questions';
   }else if(stage==='questions'){
@@ -160,7 +162,7 @@ function startClinical(){
   sending=true;error.textContent='';status.textContent='Enviando suas respostas. Aguarde a confirmação de recebimento.';
   root.querySelectorAll<HTMLButtonElement>('[data-mc-action="submit"],[data-mc-action="submit-partial"],.mc-toolbar button').forEach(button=>{button.disabled=true;});
   try{
-   const data=await api('submissions',{consent:{accepted:true,adult:true,version:CLINICAL_CONSENT_VERSION},profile,context,authorAnswers:answers,phq9,gad7,impact,clarifications,welcome:{path:welcomePath,setting:welcomeSetting,responses:welcomeResponses},completion:partial?{kind:'partial',lastShownId:sequence[position]?.id}:{kind:'complete'}});
+   const data=await api('submissions',{consent:{accepted:true,adult:true,version:CLINICAL_CONSENT_VERSION},profile,context,authorAnswers:answers,phq9,gad7,impact,clarifications,welcome:{path:welcomePath,setting:welcomeSetting,sensitiveAccepted:welcomePath==='expanded'&&element<HTMLInputElement>('mc-sensitive-accept').checked,responses:welcomeResponses},completion:partial?{kind:'partial',lastShownId:sequence[position]?.id}:{kind:'complete'}});
    if(data.saved!==true||typeof(data.id??data.receiptId)!=='string')throw new Error('unavailable');
    showReceipt(data);
   }catch(err){status.textContent='';fail(apiMessage(err));}finally{sending=false;root.querySelectorAll<HTMLButtonElement>('[data-mc-action="submit"],[data-mc-action="submit-partial"]').forEach(button=>{button.disabled=false;});root.querySelectorAll<HTMLButtonElement>('.mc-toolbar [data-mc-action]').forEach(button=>{button.disabled=!csrf||stage==='closed'||(button.dataset.mcAction==='pause'&&['access','consent','paused','submitted'].includes(stage));});}
