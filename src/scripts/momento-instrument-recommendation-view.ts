@@ -1,4 +1,5 @@
 import {buildClinicalInstrumentRecommendations,type ClinicalInstrumentRecommendation} from '../lib/momento-instrument-recommendations';
+import {suggestSocialAccessibilityStudy} from '../lib/momento-social-research-suggestion';
 
 type Decision='revisar'|'considerar'|'adiar'|'nao-indicar';
 const choices:readonly {value:Decision;label:string}[]=[
@@ -78,6 +79,32 @@ export function appendInstrumentDecisionSupport(report:HTMLElement,record:Record
   decisions.set(rec.id,{choice:select,reason:note,rec});grid.append(card);
  }
  root.append(grid);
+ const social=suggestSocialAccessibilityStudy(record);
+ if(social){
+  const project=make('article','mc-recommendation-card mc-research-suggestion');
+  text(project,'p','PESQUISA SOCIAL · CONVITE OPCIONAL · NÃO É ESCALA DIAGNÓSTICA','mc-report-kicker');
+  text(project,'h4',social.title);
+  text(project,'p',social.context,'mc-report-mini');
+  text(project,'p','Evidência contextual: '+social.evidence.join(' · '),'mc-report-quiet');
+  text(project,'p','Pergunta complementar: '+social.question,'mc-recommendation-question');
+  text(project,'p',social.reason);
+  if(social.safetyReviewRequired)text(project,'p','Priorize a entrevista e segurança clínica. Pesquisa nunca substitui o acolhimento.','mc-library-review');
+  const decision=make('select');decision.setAttribute('aria-label','Decisão profissional sobre o convite de pesquisa social');
+  const options=[['revisar','Aguardando avaliação'],['considerar','Considerar convite voluntário'],['adiar','Adiar convite'],['nao-indicar','Não convidar']];
+  options.forEach(([value,label])=>{const item=make('option');item.value=value;item.textContent=label;decision.append(item);});
+  const label=make('label','mc-field');text(label,'span','Decisão do profissional');label.append(decision);project.append(label);
+  const open=make('button','mc-button');open.type='button';open.textContent='Abrir estudos sociais NEXO';open.disabled=true;project.append(open);
+  const feedback=text(project,'p','A participação em pesquisa é independente. Nenhum convite é enviado automaticamente.','mc-report-quiet');
+  decision.addEventListener('change',()=>{open.disabled=decision.value!=='considerar';
+   feedback.textContent=open.disabled?'A decisão foi registrada apenas nesta tela. Não há envio.':'Se decidir convidar, abra o estudo e compartilhe o endereço separadamente, com consentimento de pesquisa.';});
+  open.addEventListener('click',()=>{
+   if(decision.value!=='considerar')return;
+   const panel=document.querySelector<HTMLElement>('#pro-social-research');
+   if(!panel)return;
+   panel.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+  root.append(project);
+ }
  const footer=make('div','mc-recommendation-review');
  text(footer,'h4','Síntese das escolhas do profissional');
  text(footer,'p','As decisões desta tela não são salvas automaticamente. Podem ser incluídas no relatório impresso ou copiadas para o registro profissional autorizado.','mc-report-quiet');
