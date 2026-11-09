@@ -109,3 +109,13 @@
  .mc-guide-section{break-inside:auto}
  .mc-guide-alert{background:#fff!important;border-left:3px solid #895331}
 }
+
+/* Biblioteca de metadados NEXO, somente área profissional. */
+.mc-catalog{margin:25px 0;padding:17px 21px;border:1px solid #d9d0c1;border-radius:9px;background:#fcfaf4}
+.mc-catalog summary{cursor:pointer;font-weight:600;font-size:16px;color:#173b48;line-height:1.6}
+.mc-catalog summary:focus-visible,.mc-catalog-input input:focus-visible{outline:3px solid #895331;outline-offset:4px}
+.mc-catalog-input{display:flex;flex-direction:column;gap:9px;margin:16px 0;font-weight:600;font-size:14px}
+.mc-catalog-input input{max-width:100%;font:400 14px var(--sans);color:#173b48}
+.mc-catalog-results{margin-top:16px}
+.mc-guide-catalog-alert{padding:13px 15px;border-left:3px solid #a25b39;background:#f8eee4;color:#4b3329;font-size:14px}
+@media print{.mc-catalog{display:none!important}}
