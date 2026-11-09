@@ -11,7 +11,7 @@ import {readPackDefinitions,MAX_PACK_BYTES} from '../../src/lib/momento-native-p
 import {DEFAULT_RESEARCH_PACK,DEFAULT_RESEARCH_STUDY} from '../../src/data/nexo-social-accessibility-study.ts';
 
 export const RESEARCH_CONSENT_VERSION='nexo-social-research-consent-2026-11-v1';
-const DAY=86400000,MAX_RECRUIT_DAYS=30,COOKIE='__Host-nexo-clinician',TOK=/^[A-Za-z0-9_-]{43}$/;
+const DAY=86400000,COOKIE='__Host-nexo-clinician',TOK=/^[A-Za-z0-9_-]{43}$/;
 const UUID=/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/;
 const stmt=(db,sql,...params)=>db.prepare(sql).bind(...params);
 const rows=async q=>(await q.all()).results||[];
