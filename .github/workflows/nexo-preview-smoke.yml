@@ -63,7 +63,7 @@ jobs:
                       if asset in seen or not asset.startswith('https://nexo-previa-20261014.pages.dev/_astro/'): continue
                       seen.add(asset)
                       source=get(asset);chunks.append((asset,source))
-                      for dep in re.findall(r"""(?:from|import\\()\\s*['\"]([^'\"]+\\.js)['\"]""",source):
+                      for dep in re.findall(r"""['"]([^'"]+\.js)['"]""",source):
                           url=urllib.parse.urljoin(asset,dep)
                           if url not in seen and url not in queue:queue.append(url)
                   combined='\\n'.join(source for _,source in chunks)
