@@ -8,6 +8,8 @@ on:
       - 'src/scripts/momento-professional.ts'
       - 'src/scripts/momento-report-view.ts'
       - 'src/lib/momento-professional-report.ts'
+      - 'src/lib/momento-clinical-interview-guide.ts'
+      - 'src/scripts/momento-clinical-guide-view.ts'
       - 'src/components/MomentoProfessional.astro'
       - 'src/components/MomentoClinical.astro'
       - 'src/scripts/momento-clinical.ts'
@@ -54,13 +56,23 @@ jobs:
                   parser = Assets(); parser.feed(html)
                   assets = list(dict.fromkeys(urllib.parse.urljoin(page, item) for item in parser.urls))
                   if not assets: raise RuntimeError("Nenhum script encontrado na página")
-                  matched = []
-                  for url in assets:
-                      if expected in get(url): matched.append(url)
-                  if matched:
-                      print("PUBLICAÇÃO CONFIRMADA: a prévia serve o relatório integrado no script:")
-                      for url in matched: print(url)
-                      print("Validação apenas de assets estáticos. Não testa autenticação ou dados clínicos.")
+                  # O relatório pode importar blocos JS separados após o build.
+                  queue=list(assets);seen=set();chunks=[]
+                  while queue and len(seen)<35:
+                      asset=queue.pop(0)
+                      if asset in seen or not asset.startswith('https://nexo-previa-20261014.pages.dev/_astro/'): continue
+                      seen.add(asset)
+                      source=get(asset);chunks.append((asset,source))
+                      for dep in re.findall(r"""(?:from|import\\()\\s*['\"]([^'\"]+\\.js)['\"]""",source):
+                          url=urllib.parse.urljoin(asset,dep)
+                          if url not in seen and url not in queue:queue.append(url)
+                  combined='\\n'.join(source for _,source in chunks)
+                  expected_terms=[expected,'Por onde começar, o que investigar e como continuar']
+                  if all(term in combined for term in expected_terms):
+                      print('PUBLICAÇÃO CONFIRMADA: síntese integrada e novo guia clínico estão nos assets:')
+                      for asset,source in chunks:
+                          if any(term in source for term in expected_terms):print(asset)
+                      print('Verificação somente de assets estáticos. Não consulta prontuários ou login.')
                       break
                   raise RuntimeError("Prévia respondeu, mas ainda não contém a versão integrada")
               except Exception as error:
