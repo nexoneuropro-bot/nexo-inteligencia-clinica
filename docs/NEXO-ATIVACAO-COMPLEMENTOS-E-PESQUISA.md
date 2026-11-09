@@ -28,11 +28,21 @@ A biblioteca cataloga 17 entradas: PHQ-9 e GAD-7 integrados; 11 referências ain
 5. Confirmar no painel autenticado, com caso e convites totalmente sintéticos: criar, resgatar, responder, contabilizar, abrir a evolução, revogar, excluir e conferir a retenção. Não usar códigos reais em testes.
 6. Somente após aceite documentado, liberar a funcionalidade para uso assistencial.
 
-## Pesquisa futura, separada da assistência
+## Autorizações anteriores e finalidade social sem fins lucrativos
 
-**Esta versão não habilita registro de participantes de pesquisa nem uso secundário automático de dados assistenciais.** Antes de cada estudo: definir pergunta, desenho, população, plano de análise, risco, minimização, armazenamento, descarte, responsáveis, eventual apreciação/parecer do CEP conforme legislação e TCLE específico e voluntário. Incluir número e versão de protocolo aprovados, consentimento específico independente do assistencial e revogação. A recusa de pesquisa nunca bloqueia o acolhimento.
+**Não reiniciar procedimentos de autorização já realizados.** O NEXO foi concebido para acolhimento gratuito e projetos de investigação social não lucrativos. O responsável informou autorizações anteriores para essa finalidade; conservar o histórico e não tratá-las como inexistentes. O acervo original `NEXO_BANCO_INSTRUMENTOS_REFERENCIA_v2.json` já identifica fonte, versão e as notas de reprodução de PHQ-9 e GAD-7, incluindo a informação de que os formulários indicam dispensa de permissão de reprodução. Esses instrumentos permanecem integrados.
 
-As autorizações de reprodução e uso já declaradas continuam documentadas, mas devem ser vinculadas à versão e **modalidade efetivamente aplicada**, não extrapoladas para todas as escalas. A orientação publicada pelo CFP em 16/10/2026 diferencia aplicação informatizada de aplicação remota/online.
+A curadoria dos **outros instrumentos** é individual: registrar quais autorizações já existem, sem pedir novamente as mesmas, e conferir somente documentação de versão, idioma, modalidade online e condições que não estiverem demonstradas. Não supor que a autorização de um instrumento se estende aos demais.
+
+## Pesquisa social sem fins lucrativos e cuidados distintos
+
+**Permissão de uso do instrumento**, **consentimento/base legal para tratar dados pessoais** e **enquadramento ético da pesquisa** são dimensões diferentes. A ausência de fins lucrativos não invalida as autorizações já concedidas; tampouco constitui, isoladamente, dispensa de apreciação ética.
+
+As Resoluções CNS nº 510/2016 e nº 674/2022 preveem situações específicas de não submissão ao Sistema CEP/Conep, como pesquisa de opinião pública com participantes não identificáveis e utilização exclusiva de informações já agregadas sem reidentificação. Conferir o enquadramento de **cada método**: registros clínicos vinculáveis, dados sensíveis de saúde e contato por convite profissional não são automaticamente equivalentes a levantamentos de opinião pública não identificáveis. Quando houver necessidade de apreciação ética, registrar o parecer/protocolo correspondente; quando houver dispensa aplicável, registrar os fundamentos sem inventar um parecer.
+
+A versão de software publicada neste momento **não implementa autorização automática para uso secundário em pesquisa de dados recolhidos durante o acolhimento clínico**. Uma pesquisa concreta exige escopo, informação ao participante, processo de consentimento ou outra base legítima adequada, segurança e retenção conforme a finalidade. Eventual recusa não impede atendimento. Dados individuais não podem ser transferidos do fluxo assistencial para pesquisa por mero clique administrativo.
+
+As autorizações já declaradas devem ser vinculadas à **versão e modalidade efetivamente aplicada**, sem extrapolação. A orientação CFP de 16/10/2026 distingue aplicação informatizada de aplicação remota/online para testes psicológicos. Não classificar automaticamente todo rastreio como teste psicológico privativo; conferir seu enquadramento técnico.
 
 ## Limites conhecidos
 
