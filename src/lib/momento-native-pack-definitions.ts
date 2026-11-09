@@ -33,24 +33,26 @@ export function readPackDefinitions(value:unknown):readonly PackDefinition[]{
  const candidatePacks=(value as {packs:unknown[]}).packs;
  for(const raw of candidatePacks){
   if(!plain(raw)||!exactly(raw,['id','name','version','language','source','rights','audience','mode','instructions','referencePeriod','scoringNotes','questions']))invalid('campos inesperados em pack');
-  if(!identifier(raw.id)||ids.has(raw.id)||!printable(raw.name,3,160)||!printable(raw.version,1,110)||!printable(raw.language,2,16)||
-     !printable(raw.source,3,280)||!printable(raw.rights,3,240)||!printable(raw.audience,2,150)||!mode(raw.mode)||
-     !optionalText(raw.instructions,2400)||!optionalText(raw.referencePeriod,400)||!optionalText(raw.scoringNotes,2500)||
-     !Array.isArray(raw.questions)||raw.questions.length<1||raw.questions.length>120)invalid('metadados ou quantidade de perguntas');
   const entry=raw as Dict;
+  if(!identifier(entry.id)||ids.has(entry.id)||!printable(entry.name,3,160)||!printable(entry.version,1,110)||!printable(entry.language,2,16)||
+     !printable(entry.source,3,280)||!printable(entry.rights,3,240)||!printable(entry.audience,2,150)||!mode(entry.mode)||
+     !optionalText(entry.instructions,2400)||!optionalText(entry.referencePeriod,400)||!optionalText(entry.scoringNotes,2500)||
+     !Array.isArray(entry.questions)||entry.questions.length<1||entry.questions.length>120)invalid('metadados ou quantidade de perguntas');
   ids.add(entry.id as string);
   const questionIds=new Set<string>();
   const questions:PackQuestion[]=[];
   for(const q of entry.questions as unknown[]){
-   if(!plain(q)||!exactly(q,['id','prompt','help','choices'])||!identifier(q.id)||questionIds.has(q.id)||
-      !printable(q.prompt,3,1400)||!optionalText(q.help,1100)||!Array.isArray(q.choices)||q.choices.length<2||q.choices.length>12)invalid('perguntas ou alternativas');
+   if(!plain(q)||!exactly(q,['id','prompt','help','choices']))invalid('campos inesperados em pergunta');
    const question=q as Dict;
+   if(!identifier(question.id)||questionIds.has(question.id)||
+      !printable(question.prompt,3,1400)||!optionalText(question.help,1100)||!Array.isArray(question.choices)||question.choices.length<2||question.choices.length>12)invalid('perguntas ou alternativas');
    questionIds.add(question.id as string);
    const choiceIds=new Set<string>(),choices:PackChoice[]=[];
    for(const choice of question.choices as unknown[]){
-    if(!plain(choice)||!exactly(choice,['id','label','value'])||!identifier(choice.id)||choiceIds.has(choice.id)||
-       !printable(choice.label,1,350)||!(choice.value===null||(typeof choice.value==='number'&&Number.isInteger(choice.value)&&choice.value>=-20&&choice.value<=100)))invalid('alternativa ou escore');
+    if(!plain(choice)||!exactly(choice,['id','label','value']))invalid('campos inesperados em alternativa');
     const option=choice as Dict;
+    if(!identifier(option.id)||choiceIds.has(option.id)||
+       !printable(option.label,1,350)||!(option.value===null||(typeof option.value==='number'&&Number.isInteger(option.value)&&option.value>=-20&&option.value<=100)))invalid('alternativa ou escore');
     choiceIds.add(option.id as string);
     choices.push(Object.freeze({id:option.id as string,label:String(option.label).trim(),value:option.value as number|null}));
    }
