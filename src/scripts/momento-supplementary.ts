@@ -1,6 +1,6 @@
 import {screeningInstruments,FOLLOWUP_CONSENT_VERSION} from '../data/momento-instruments';
 
-type Stage='access'|'consent'|'questions'|'summary'|'submitted'|'closed';
+type Stage='access'|'consent'|'questions'|'paused'|'summary'|'submitted'|'closed';
 type InstrumentId='phq9'|'gad7';
 let cleanup:(()=>void)|undefined;
 
@@ -11,7 +11,7 @@ function start(){
  const find=<T extends HTMLElement=HTMLElement>(id:string)=>root.querySelector<T>('#'+id)!;
  const stages=Array.from(root.querySelectorAll<HTMLElement>('[data-mi-stage]'));
  const error=find('mi-error'),status=find('mi-status');
- let stage:Stage='access',csrf='',instrumentId:InstrumentId='phq9',index=0,busy=false,finished=false;
+ let stage:Stage='access',resumeStage:Stage='questions',csrf='',instrumentId:InstrumentId='phq9',index=0,busy=false,finished=false;
  let responses:(number|null)[]=[],impact:number|null=null;
  let instrument=screeningInstruments[0];
  const api=async(path:string,body?:unknown)=>{
@@ -118,6 +118,8 @@ function start(){
   else if(action==='skip'&&stage==='questions'){root.querySelectorAll<HTMLInputElement>('input[name="mi-answer"]').forEach(x=>x.checked=false);if(index===instrument.items.length)impact=null;else responses[index]=null;next();}
   else if(action==='back')back();
   else if(action==='submit'&&stage==='summary')void submit();
+  else if(action==='pause'&&['questions','summary'].includes(stage)){resumeStage=stage;changeStage('paused');status.textContent='Pausa nesta aba. Nenhuma resposta foi enviada.';}
+  else if(action==='resume'&&stage==='paused'){if(resumeStage==='questions')renderQuestion();else changeStage('summary');}
   else if(action==='leave'&&!finished){responses.fill(null);impact=null;changeStage('closed');status.textContent='Nenhuma resposta foi compartilhada.';}
  },{signal});
  root.addEventListener('change',event=>{
