@@ -57,7 +57,7 @@ jobs:
           python3 - <<'PY'
           import json, re, pathlib, urllib.request
           text=pathlib.Path('src/data/momento-instruments.ts').read_text(encoding='utf-8')
-          expected=re.search(r"CLINICAL_CONSENT_VERSION\\s*=\\s*'([^']+)'",text)
+          expected=re.search(r"CLINICAL_CONSENT_VERSION\s*=\s*'([^']+)'",text)
           assert expected, "Versão do consentimento não identificada"
           request=urllib.request.Request('https://nexo-previa-20261014.pages.dev/api/momento/status',
               headers={'User-Agent':'NEXO-readiness-public-status/1.0','Accept':'application/json'})
