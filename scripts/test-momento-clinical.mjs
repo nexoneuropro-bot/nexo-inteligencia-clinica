@@ -366,3 +366,51 @@ test('interrupção compartilhada é voluntária, registrada sem inferir motivo 
   const legacy=validateClinicalSubmission(payload(),initialNow);
   assert.deepEqual(legacy.completion,{kind:'complete'});
 });
+
+
+test('acolhimento novo: mantém consentimento específico e respostas facultativas por opção ou texto', () => {
+ const basic=payload();
+ basic.welcome={path:'essential',setting:'solo',sensitiveAccepted:false,responses:{
+  agora:{status:'answered',method:'choice',choice:'recente'},
+  objetivo:{status:'later'}
+ }};
+ const accepted=validateClinicalSubmission(basic,initialNow);
+ assert.equal(accepted.welcome.path,'essential');
+ assert.equal(accepted.welcome.responses.objetivo.status,'later');
+ assert.equal(accepted.results.phq9.score,13);
+ const deep=payload();
+ deep.welcome={path:'expanded',setting:'with-professional',sensitiveAccepted:true,responses:{
+  agora:{status:'answered',method:'text',text:'  Tenho refletido sobre o momento atual.  '},
+  identidade:{status:'declined'},
+  orientacao:{status:'later'},
+  crencas:{status:'unsure'},
+  historia:{status:'answered',method:'voice',text:'Prefiro falar sobre minha história em um encontro.'}
+ }};
+ const result=validateClinicalSubmission(deep,initialNow);
+ assert.equal(result.welcome.responses.agora.text,'Tenho refletido sobre o momento atual.');
+ assert.equal(result.welcome.responses.historia.method,'voice');
+ assert.equal(result.welcome.responses.identidade.status,'declined');
+ assert.equal(result.welcome.setting,'with-professional');
+ assert.equal('audio' in result.welcome,false);
+ assert.equal(result.results.gad7.score,7);
+});
+
+test('acolhimento: rejeita vazamento entre percursos, dados extras, consentimento ausente e texto inválido', () => {
+ const mk=()=>({path:'expanded',setting:'solo',sensitiveAccepted:true,responses:{
+  agora:{status:'answered',method:'text',text:'Um momento importante.'}
+ }});
+ const variants=[
+  w=>{w.sensitiveAccepted=false},
+  w=>{w.path='essential';w.responses.identidade={status:'later'}},
+  w=>{w.responses.agora.text='x'.repeat(701)},
+  w=>{w.responses.agora.text='teste\\u0000conteúdo'.replace('\\u0000','\\0')},
+  w=>{w.responses.agora.text='   '},
+  w=>{w.responses.agora.method='audio'},
+  w=>{w.responses.agora.audio='arquivo'},
+  w=>{w.responses.agora.choice='recente'},
+  w=>{w.responses.agora.status='declined'},
+  w=>{w.responses.religion={status:'answered',method:'text',text:'abc'}},
+  w=>{w.responses.identidade={status:'answered',method:'choice',choice:'sem-cadastro'}}
+ ];
+ for(const variant of variants){const p=payload();p.welcome=mk();variant(p.welcome);assert.throws(()=>validateClinicalSubmission(p,initialNow));}
+});
