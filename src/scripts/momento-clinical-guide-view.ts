@@ -28,7 +28,7 @@ function hdCard(parent:HTMLElement,item:WorkingHypothesis){
  p(card,'Como esclarecer','mc-report-mini');p(card,item.check);
  p(card,item.notConclusion,'mc-report-quiet');parent.append(card);
 }
-function toolCard(parent:HTMLElement,item:InstrumentProposal,index:number,all:InstrumentProposal[]){
+function toolCard(parent:HTMLElement,item:InstrumentProposal){
  const card=el('article','mc-guide-tool');
  const label=el('label','mc-guide-check');
  const input=el('input');input.type='checkbox';input.value=item.id;
@@ -78,7 +78,7 @@ export function appendClinicalInterviewGuide(report:HTMLElement,record:Record<st
  p(proposals,'05 · PROGRAMAÇÃO SOB REVISÃO PROFISSIONAL','mc-report-mini');
  heading(proposals,'h3','Próximos procedimentos e instrumentos a considerar');
  p(proposals,'Sugestões baseadas nas respostas registradas. Marcar significa apenas escolher itens para uma minuta. Não envia formulários, não acessa o banco externo e não altera o prontuário. O profissional deve confirmar finalidade, idade, autorização, versão, direitos, aplicação e SATEPSI quando pertinente.','mc-report-quiet');
- guide.proposals.forEach((item,i)=>toolCard(proposals,item,i,guide.proposals));
+ guide.proposals.forEach(item=>toolCard(proposals,item));
  const actions=el('div','mc-guide-actions');
  const copy=el('button','mc-button');copy.type='button';copy.textContent='Copiar seleção para minha programação clínica';
  copy.addEventListener('click',async()=>{
