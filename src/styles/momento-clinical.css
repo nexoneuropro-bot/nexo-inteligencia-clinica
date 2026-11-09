@@ -64,3 +64,17 @@
  .mc-report-kicker,.mc-report-mini{color:#895331!important}
  a.mc-report-source{color:#895331!important}
 }
+
+/* Acolhimento narrativo opcional. Mantém paleta, layout e tipografia existentes. */
+.mc-sensitive-choice{background:#f4efe7;border:1px solid #d6c7b6;padding:16px 22px;border-radius:8px;margin:24px 0}
+.mc-sensitive-choice p{font-size:15px;line-height:1.8}
+.mc-sensitive-choice a{color:#895331;text-decoration:underline}
+.mc-narrative-controls{padding:19px 0 0;border-top:1px solid #d9d3c8;margin:18px 0}
+.mc-shell .mc-narrative-controls textarea{box-sizing:border-box;width:100%;resize:vertical;border:1px solid #b4b7ac;border-radius:6px;background:#fffdf8;color:#0b2635;padding:13px;min-height:125px;font:400 16px/1.65 var(--sans)}
+.mc-narrative-controls .mc-actions{margin-top:14px}
+.mc-narrative-controls .mc-button{flex:0 1 auto}
+.mc-shell .mc-narrative-controls textarea:focus-visible{outline:3px solid #895331;outline-offset:3px}
+.mc-report-story{border-left:2px solid #b38c69;padding:16px 20px;margin:13px 0;background:#f5f1e8;border-radius:0 8px 8px 0;break-inside:avoid}
+.mc-report-story h4{margin:0 0 8px!important;font:400 22px/1.25 var(--serif)!important}
+.mc-report-story p{margin:8px 0!important;white-space:pre-wrap;overflow-wrap:anywhere}
+@media(max-width:520px){.mc-sensitive-choice{padding:15px}.mc-narrative-controls .mc-actions{flex-direction:column}.mc-narrative-controls .mc-button{width:100%}}
