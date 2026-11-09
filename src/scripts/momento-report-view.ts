@@ -48,6 +48,38 @@ export function appendIntegratedProfessionalReport(panel:HTMLElement,record:Reco
  const root=element('div','mc-report');
  root.setAttribute('aria-label','Síntese integrada para investigação profissional');
  root.append(text('p','NEXO · INTELIGÊNCIA CLÍNICA','mc-report-kicker'),text('h3','Síntese integrada para a entrevista','mc-report-title'),text('p',report.intro,'mc-report-lead'));
+ const person=(record.profile&&typeof record.profile==='object'&&'nickname'in record.profile&&typeof (record.profile as {nickname?:unknown}).nickname==='string')?(record.profile as {nickname:string}).nickname:'Participante sem identificação informada';
+ root.append(text('p','Participante: '+person,'mc-report-person'));
+ const results=record.results&&typeof record.results==='object'?record.results as Record<string,unknown>:{};
+ const impact=record.impact&&typeof record.impact==='object'?record.impact as Record<string,unknown>:{};
+ const overview=element('div','mc-report-scores');
+ for(const [key,short,limit] of [['phq9','PHQ-9',27],['gad7','GAD-7',21]] as const){
+   const info=results[key]&&typeof results[key]==='object'?results[key] as Record<string,unknown>:{};
+   const score=typeof info.score==='number'?info.score:null;
+   const complete=info.complete===true;
+   const card=element('div','mc-report-score');
+   card.append(text('p',short,'mc-report-mini'),text('strong',complete&&score!==null?`${score}/${limit}`:'Incompleto','mc-report-big'),
+    text('p',complete&&typeof info.band==='string'?'Intensidade de sintomas: '+info.band:'Sem total calculado','mc-report-quiet'));
+   const functional=impact[key];
+   card.append(text('p',typeof functional==='number'? 'Impacto referido: '+(['nenhuma','alguma','muita','extrema'][functional]??'não especificado')+' dificuldade':'Impacto não informado','mc-report-small'));
+   overview.append(card);
+ }
+ root.append(overview);
+ const chart=element('div','mc-report-chart');
+ chart.append(text('h4','Distribuição de respostas por item'),text('p','0 a 3 por item. Barras mostram frequência declarada, não proporção diagnóstica.','mc-report-quiet'));
+ for(const [key,short] of [['phq9','PHQ-9'],['gad7','GAD-7']] as const){
+   const answers=Array.isArray(record[key])?record[key] as unknown[]:[];
+   const group=element('div','mc-report-bar-group');group.append(text('h5',short,'mc-report-mini'));
+   answers.forEach((v,i)=>{
+     const row=element('div','mc-report-bar-row');
+     row.append(text('span','Item '+(i+1)));
+     const track=element('div','mc-report-bar-track'),fill=element('span','mc-report-bar-fill');
+     fill.style.width=typeof v==='number'&&Number.isInteger(v)&&v>=0&&v<=3?`${v*100/3}%`:'0%';
+     track.append(fill);row.append(track,text('span',typeof v==='number'?String(v):'–'));group.append(row);
+   });
+   chart.append(group);
+ }
+ root.append(chart);
  const notice=element('div','mc-report-notice');
  notice.append(text('strong','Documento preparatório reservado ao profissional.'),text('p','Não é laudo, parecer diagnóstico, previsão de risco nem devolutiva ao participante. Todas as inferências dependem de avaliação humana.'));
  root.append(notice);
