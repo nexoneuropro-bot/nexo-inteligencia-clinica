@@ -370,7 +370,7 @@ test('interrupção compartilhada é voluntária, registrada sem inferir motivo 
 test('acolhimento narrativo: consentimento atualizado, respostas opcionais, voz convertida apenas em texto', () => {
  const p = payload();
  p.context.accompaniment = 'with-professional';
- p.reflectionMode='extended';
+ p.reflectionMode='extended';p.reflectionSensitiveAccepted=true;
  p.reflectionAnswers={
   demanda:{status:'answered',text:'Gostaria de organizar meus pensamentos sobre um acontecimento recente.'},
   episodio:{status:'later'},
@@ -390,7 +390,7 @@ test('acolhimento narrativo: consentimento atualizado, respostas opcionais, voz 
  assert.equal(r.consent.version,CLINICAL_CONSENT_VERSION);
 });
 test('acolhimento narrativo: recusas são estados explícitos, não texto nem diagnóstico',()=>{
- const p=payload();p.reflectionMode='extended';p.reflectionAnswers={demanda:{status:'prefer-not'},recursos:{status:'later'}};
+ const p=payload();p.reflectionMode='extended';p.reflectionSensitiveAccepted=true;p.reflectionAnswers={demanda:{status:'prefer-not'},recursos:{status:'later'}};
  const saved=validateClinicalSubmission(p,initialNow);
  assert.deepEqual(saved.reflectionAnswers.demanda,{status:'prefer-not'});
  assert.equal(saved.reflectionAnswers.demanda.text,undefined);
@@ -400,7 +400,7 @@ test('acolhimento narrativo: recusas são estados explícitos, não texto nem di
  assert.deepEqual(legacy.reflectionAnswers,{});
 });
 test('acolhimento narrativo: rejeitar conteúdo além do limite, chaves desconhecidas, áudio e texto em recusas',()=>{
- const base=()=>{const p=payload();p.reflectionMode='extended';p.reflectionAnswers={demanda:{status:'answered',text:'Texto opcional.'}};return p;};
+ const base=()=>{const p=payload();p.reflectionMode='extended';p.reflectionSensitiveAccepted=true;p.reflectionAnswers={demanda:{status:'answered',text:'Texto opcional.'}};return p;};
  const mutations=[
   p=>{p.reflectionMode='unknown';},
   p=>{p.reflectionAnswers.demanda.text='x'.repeat(1401);},
@@ -415,4 +415,36 @@ test('acolhimento narrativo: rejeitar conteúdo além do limite, chaves desconhe
   p=>{p.audio='arquivo indevido';}
  ];
  for(const mutate of mutations){const p=base();mutate(p);assert.throws(()=>validateClinicalSubmission(p,initialNow));}
+});
+
+test('tópicos íntimos: consentimento separado, seleção opcional e sem inferência',()=>{
+ const p=payload();p.reflectionMode='extended';p.reflectionSensitiveAccepted=true;
+ p.reflectionAnswers={'identidade-vinculos':{status:'later'}};
+ p.reflectionTopics=['relacionamentos','genero','orientacao','crencas'];
+ const result=validateClinicalSubmission(p,initialNow);
+ assert.equal(result.reflectionSensitiveAccepted,true);
+ assert.deepEqual(result.reflectionTopics,['relacionamentos','genero','orientacao','crencas']);
+ assert.equal(result.reflectionAnswers['identidade-vinculos'].status,'later');
+ assert.equal('audio' in result,false);
+ const decline=payload();decline.reflectionMode='extended';decline.reflectionSensitiveAccepted=true;decline.reflectionAnswers={'identidade-vinculos':{status:'prefer-not'}};decline.reflectionTopics=[];
+ assert.deepEqual(validateClinicalSubmission(decline,initialNow).reflectionTopics,[]);
+});
+
+test('tópicos íntimos: não coleta sem autorização nem com recusa ou sem apresentação',()=>{
+ const base=()=>{const p=payload();p.reflectionMode='extended';p.reflectionSensitiveAccepted=true;p.reflectionAnswers={'identidade-vinculos':{status:'later'}};p.reflectionTopics=['genero'];return p;};
+ const mutations=[
+  p=>{p.reflectionSensitiveAccepted=false},
+  p=>{p.reflectionTopics=['inexistente']},
+  p=>{p.reflectionTopics=['genero','genero']},
+  p=>{p.reflectionTopics=['genero',123]},
+  p=>{p.reflectionTopics=['genero','orientacao','genero']},
+  p=>{p.reflectionAnswers['identidade-vinculos']={status:'prefer-not'}},
+  p=>{p.reflectionAnswers={}},
+  p=>{p.reflectionMode='basic'},
+  p=>{p.reflectionTopics='genero'},
+  p=>{p.reflectionTopics=['orientacao'];p.reflectionSensitiveAccepted=null}
+ ];
+ for(const mutate of mutations){const p=base();mutate(p);assert.throws(()=>validateClinicalSubmission(p,initialNow));}
+ const basic=payload();basic.reflectionTopics=[];basic.reflectionSensitiveAccepted=false;
+ assert.equal(validateClinicalSubmission(basic,initialNow).reflectionMode,'basic');
 });
