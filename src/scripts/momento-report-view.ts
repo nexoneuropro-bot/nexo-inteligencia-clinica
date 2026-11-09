@@ -1,4 +1,5 @@
 import {buildIntegratedReport,type ReportPoint,type ReportAxis,type ReportDomain,type ReportInstrument} from '../lib/momento-professional-report';
+import {welcomeQuestions} from '../data/momento-welcome';
 
 function element<K extends keyof HTMLElementTagNameMap>(tag:K,className?:string):HTMLElementTagNameMap[K]{
  const node=document.createElement(tag);if(className)node.className=className;return node;
@@ -83,6 +84,31 @@ export function appendIntegratedProfessionalReport(panel:HTMLElement,record:Reco
  const notice=element('div','mc-report-notice');
  notice.append(text('strong','Documento preparatório reservado ao profissional.'),text('p','Não é laudo, parecer diagnóstico, previsão de risco nem devolutiva ao participante. Todas as inferências dependem de avaliação humana.'));
  root.append(notice);
+ const welcome=record.welcome&&typeof record.welcome==='object'?record.welcome as Record<string,unknown>:{};
+ const welcomeResponses=welcome.responses&&typeof welcome.responses==='object'?welcome.responses as Record<string,unknown>:{};
+ const path=welcome.path==='expanded'?'Aprofundado':'Essencial';
+ const setting=welcome.setting==='with-professional'?'Preenchido junto ao profissional':'Preenchido individualmente';
+ const story=section(root,'pro-report-story','00 · ESCUTA E AUTOCONHECIMENTO','O que a pessoa escolheu compartilhar');
+ story.append(text('p','Percurso: '+path+' · '+setting,'mc-report-quiet'));
+ const stories=element('div','mc-report-stories');let shown=0;
+ for(const question of welcomeQuestions){
+  if(question.expandedOnly&&welcome.path!=='expanded')continue;
+  const v=welcomeResponses[question.id];
+  if(!v||typeof v!=='object')continue;
+  const entry=v as Record<string,unknown>;let response='';
+  if(entry.status==='later')response='Preferiu conversar sobre este tema na sessão; motivo não informado.';
+  else if(entry.status==='declined')response='Preferiu não responder; motivo não informado.';
+  else if(entry.status==='unsure')response='Informou que ainda não sabe dizer.';
+  else if(entry.status==='answered'&&entry.method==='choice')response=question.options.find(o=>o.id===entry.choice)?.label??'Alternativa não identificada.';
+  else if(entry.status==='answered'&&typeof entry.text==='string')response=entry.text;
+  else continue;
+  const card=element('article','mc-report-story');
+  card.append(text('h4',question.title),text('p',response));
+  if(entry.status==='later'||entry.status==='declined')card.append(text('p','O profissional pode oferecer espaço para conversar, sem exigir explicação ou deduzir um mecanismo psicológico.','mc-report-quiet'));
+  else if(entry.method==='voice')card.append(text('p','Relato ditado e confirmado em texto. Não existe arquivo de áudio.','mc-report-quiet'));
+  stories.append(card);shown++;
+ }
+ if(shown)story.append(stories);else story.append(text('p','Não foram compartilhadas respostas adicionais neste bloco, ou ele não fazia parte da versão usada.','mc-report-quiet'));
  const summary=section(root,'pro-report-integration','01 · LEITURA CRUZADA','O que merece atenção no conjunto');
  if(!report.highlights.length)summary.append(text('p','Não foram identificadas associações adicionais pelas regras descritivas. A entrevista permanece necessária.'));
  else report.highlights.forEach(item=>point(summary,item));
