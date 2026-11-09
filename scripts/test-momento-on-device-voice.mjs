@@ -49,7 +49,7 @@ test('módulo de ditado não utiliza captura ou envio de áudio e política libe
  const config=await readFile(new URL('../astro.config.mjs',import.meta.url),'utf8');
  assert.ok(code.includes('speech.processLocally=true'));
  assert.ok(code.includes('Ctor.available'));
- assert.doesNotMatch(code,/MediaRecorder|getUserMedia|XMLHttpRequest|fetch\s*\(/);
+ assert.doesNotMatch(code.replace(/\/\*[\s\S]*?\*\//g,''),/MediaRecorder|getUserMedia|XMLHttpRequest|fetch\s*\(/);
  assert.ok(config.includes('microphone=()'));
  assert.ok(config.includes('microphone=(self)'));
  assert.ok(config.includes('/conhecendo-meu-momento/responder'));
