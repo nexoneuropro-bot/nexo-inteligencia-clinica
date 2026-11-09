@@ -407,7 +407,7 @@ test('acolhimento narrativo: rejeitar conteúdo além do limite, chaves desconhe
   p=>{p.reflectionAnswers.demanda.text='  ';},
   p=>{p.reflectionAnswers.demanda.status='danger';},
   p=>{p.reflectionAnswers.demanda.audio='base64';},
-  p=>{p.reflectionAnswers.demanda.text='fala\\u0000invalida';},
+  p=>{p.reflectionAnswers.demanda.text='fala'+String.fromCharCode(0)+'invalida';},
   p=>{p.reflectionAnswers={notAQuestion:{status:'answered',text:'x'}};},
   p=>{p.reflectionMode='basic';},
   p=>{p.reflectionAnswers.demanda={status:'prefer-not',text:'não autorizado'};},
