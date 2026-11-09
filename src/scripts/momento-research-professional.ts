@@ -135,7 +135,8 @@ export function mountResearchPanel(root:HTMLElement,signal:AbortSignal,getCsrf:(
    const data=JSON.parse(await file.text()) as unknown;
    const packs=readPackDefinitions(data);
    if(!packs.length||packs.length>5)throw new Error('Importe entre 1 e 5 instrumentos por operação.');
-   const imported=await request('packs',{schema:'nexo-definicoes-instrumentos-v1',packs,
+   const definitions=packs.map(({status:_reviewStatus,...definition})=>definition);
+   const imported=await request('packs',{schema:'nexo-definicoes-instrumentos-v1',packs:definitions,
     declaration:{qualifiedProfessional:true,authorizedForResearch:true,remoteUseReviewed:true,nonCommercial:true}});
    el('pro-research-pack-status').textContent=String(arr(imported.packs).length)+' instrumento(s) cadastrados. Nenhuma coleta foi iniciada.';
    await refresh();
