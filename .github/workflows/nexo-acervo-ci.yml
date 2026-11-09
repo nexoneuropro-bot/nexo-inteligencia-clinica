@@ -1,0 +1,37 @@
+name: NEXO · conferência antes da publicação
+on:
+  pull_request:
+    branches: [feat/experiencia-imersiva]
+  push:
+    branches: [feat/biblioteca-instrumentos-20261109]
+
+permissions:
+  contents: read
+
+jobs:
+  biblioteca:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Instalar pnpm
+        run: |
+          corepack enable
+          corepack prepare pnpm@11.25.0 --activate
+      - name: Instalar dependências sem atualizar lockfile
+        run: pnpm install --frozen-lockfile
+      - name: Conferir tipos Astro/TypeScript
+        run: pnpm exec astro check
+      - name: Conferir sintaxe do serviço clínico complementar
+        run: |
+          node --check functions/_lib/momento-followups.js
+          node --check 'functions/api/momento-followups/[[path]].js'
+      - name: Testar convites clínicos complementares com banco sintético
+        run: node --experimental-strip-types --experimental-sqlite --test scripts/test-momento-followups.mjs
+      - name: Compilar o site
+        run: pnpm build
+      - name: Testar integridade das páginas
+        run: pnpm verify

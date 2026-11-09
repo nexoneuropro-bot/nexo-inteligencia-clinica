@@ -2,6 +2,7 @@ import {startAuthentication,startRegistration} from '@simplewebauthn/browser';
 import {screeningInstruments} from '../data/momento-instruments';
 import {buildProfessionalCues} from '../lib/momento-professional-cues';
 import {appendIntegratedProfessionalReport} from './momento-report-view';
+import {mountInstrumentLibrary} from './momento-instrument-library';
 import {clarificationQuestions} from '../data/momento-clarifications';
 import {profileFields,questions} from '../data/momento-demo';
 
@@ -13,13 +14,14 @@ let disposeProfessional:(()=>void)|undefined;
 
 function startProfessional(){
  const candidate=document.querySelector<HTMLElement>('[data-momento-professional]');if(!candidate)return;const root:HTMLElement=candidate;
- const life=new AbortController();const{signal}=life;let csrf='',currentId='',currentRecord:Data|undefined,currentMetadata:Data|undefined,inviteCode='',inviteUrl='',busy=false,authenticated=false;
+ const life=new AbortController();const{signal}=life;let csrf='',currentId='',currentRecord:Data|undefined,currentMetadata:Data|undefined,inviteCode='',inviteUrl='',followupCode='',followupUrl='',followupsEnabled=false,busy=false,authenticated=false;
  const element=<T extends HTMLElement=HTMLElement>(id:string)=>root.querySelector<T>(`#${id}`)!;
+ const updateInstrumentLibrary=mountInstrumentLibrary(root,signal);
  const error=element('pro-error'),status=element('pro-status');
  function setPanel(panel:'access'|'enrollment'|'workspace'){root.querySelectorAll<HTMLElement>('[data-pro-panel]').forEach(item=>{item.hidden=item.dataset.proPanel!==panel;});}
  function notice(text:string){status.textContent=text;}
  function fail(text:string){error.textContent=text;}
- function clearRecord(){currentRecord=undefined;currentMetadata=undefined;currentId='';element('pro-record').replaceChildren();element('pro-record-section').hidden=true;element<HTMLInputElement>('pro-delete-confirm').checked=false;}
+ function clearRecord(){updateInstrumentLibrary();currentRecord=undefined;currentMetadata=undefined;currentId='';followupCode='';followupUrl='';followupsEnabled=false;element('pro-followups-section').hidden=true;element('pro-followup-created').hidden=true;element('pro-record').replaceChildren();element('pro-record-section').hidden=true;element<HTMLInputElement>('pro-delete-confirm').checked=false;}
  function hideInvite(){inviteCode='';inviteUrl='';element('pro-invite-code').textContent='';element('pro-invite-expiry').textContent='';element('pro-created-invite').hidden=true;}
  function clearWorkspace(){csrf='';authenticated=false;clearRecord();hideInvite();element('pro-invites').replaceChildren();element('pro-submissions').replaceChildren();element('pro-identity').textContent='';element<HTMLInputElement>('pro-enrollment-code').value='';setPanel('access');}
  function humanDate(value:unknown){if(typeof value!=='string')return'Não informado';const date=new Date(value);return Number.isFinite(date.getTime())?date.toLocaleString('pt-BR',{dateStyle:'short',timeStyle:'short'}):'Não informado';}
@@ -27,6 +29,15 @@ function startProfessional(){
   const response=await fetch(`/api/momento/${path}`,{method:body===undefined?'GET':'POST',headers:{...(body===undefined?{}:{'Content-Type':'application/json'}),...(csrf?{'X-Nexo-CSRF':csrf}:{})},...(body===undefined?{}:{body:JSON.stringify(body)}),credentials:'same-origin',cache:'no-store',referrerPolicy:'no-referrer',signal});
   const data=await response.json().catch(()=>({}));
   if(!response.ok){if(response.status===401&&authenticated){clearWorkspace();throw new Error('expired');}throw new Error(response.status===429?'rate_limited':response.status===401||response.status===403?'access_denied':'unavailable');}
+  return object(data);
+ }
+ async function apiFollowup(path:string,body?:unknown){
+  const response=await fetch('/api/momento-followups/'+path,{method:body===undefined?'GET':'POST',
+   headers:body===undefined?{}:{'Content-Type':'application/json',...(csrf?{'X-Nexo-CSRF':csrf}:{})},
+   body:body===undefined?undefined:JSON.stringify(body),credentials:'same-origin',cache:'no-store',
+   referrerPolicy:'no-referrer',signal});
+  const data=await response.json().catch(()=>({}));
+  if(!response.ok)throw new Error(response.status===429?'rate_limited':response.status===403?'access_denied':'unavailable');
   return object(data);
  }
  function message(err:unknown){return err instanceof Error&&err.message==='expired'?'Seu acesso expirou. Entre novamente com sua chave de acesso.':err instanceof Error&&err.message==='rate_limited'?'Houve várias tentativas em pouco tempo. Aguarde antes de tentar novamente.':err instanceof Error&&err.message==='access_denied'?'Não foi possível verificar este acesso. Confira seu código ou tente a chave de acesso novamente.':'Não foi possível concluir a operação. Nenhuma confirmação foi emitida. Tente novamente.';}
@@ -129,19 +140,111 @@ function startProfessional(){
   panel.append(annex);
   appendIntegratedProfessionalReport(panel,record);
  }
+
+ async function refreshFollowups(id:string){
+  const section=element('pro-followups-section');
+  section.hidden=false;const ready=await apiFollowup('status');
+  const list=element('pro-followups-list');list.replaceChildren();
+  followupsEnabled=ready.enabled===true;
+  element('pro-followups-controls').hidden=!followupsEnabled;
+  if(!followupsEnabled){
+   element('pro-followups-status').textContent='O módulo complementar ainda aguarda ativação segura no servidor e validação da migração. Nenhum convite foi criado.';
+   return;
+  }
+  element('pro-followups-status').textContent='Convites complementares são opcionais e exclusivamente clínicos. Pesquisa exige aprovação e consentimento específicos.';
+  const data=await apiFollowup('case/'+encodeURIComponent(id));
+  const followups=records(data.followups);
+  if(!followups.length){paragraph(list,'Nenhuma aplicação complementar registrada para este atendimento.');return;}
+  const report=element('pro-record');
+  report.querySelector('#pro-report-followups')?.remove();
+  const evolution=document.createElement('section');evolution.id='pro-report-followups';evolution.className='mc-report-section';
+  heading(evolution,'Evolução dos instrumentos · leitura profissional');
+  paragraph(evolution,'Os resultados posteriores permanecem separados e vinculados ao acolhimento inicial. Diferenças numéricas não demonstram, isoladamente, melhora, piora ou causalidade.');
+  const baseline=object(currentRecord?.results??currentRecord?.screeningResults);
+  for(const item of followups){
+   const card=document.createElement('article');card.className='mc-pro-item';
+   const inst=item.instrumentId==='phq9'?'PHQ-9':item.instrumentId==='gad7'?'GAD-7':'Instrumento';
+   heading(card,inst+' · '+humanDate(item.createdAt));
+   paragraph(card,'Justificativa registrada: '+textValue(item.rationale));
+   const result=object(item.result);
+   if(Object.keys(result).length){
+    const calculated=object(result.result),score=calculated.complete===true?calculated.score:null;
+    paragraph(card,score!==null?'Total técnico: '+textValue(score)+'. Faixa: '+textValue(calculated.band)+'.':'Resposta incompleta; não foi calculado total.');
+    paragraph(card,'Impacto funcional declarado: '+(result.impact===null?'Não respondido':textValue(result.impact)+' de 3')+'.');
+    const initial=object(baseline[item.instrumentId as string]);
+    if(typeof score==='number'&&initial.complete===true&&typeof initial.score==='number'){
+     const delta=score-initial.score;
+     paragraph(card,'Comparação numérica com o acolhimento inicial: '+(delta>0?'+':'')+delta+' ponto(s), sem inferência automática de evolução clínica.');
+    }
+    if(item.instrumentId==='phq9'&&calculated.item9AlertFlag===true){
+     const warning=paragraph(card,'Item 9 positivo nesta reaplicação: a segurança atual requer revisão humana pelo protocolo clínico, independentemente da pontuação.');warning.className='mc-care-note';
+    }
+    const ordered=Array.isArray(result.answers)?result.answers as unknown[]:[];
+    paragraph(card,'Respostas registradas, na ordem dos itens: '+ordered.map(x=>x===null?'sem resposta':textValue(x)).join(' · ')+'.');
+    const clone=card.cloneNode(true);
+    evolution.append(clone);
+   }else{
+    paragraph(card,item.revoked===true?'Convite revogado.':item.redeemed===true?'Convite acessado; respostas ainda não recebidas.':'Aguardando utilização do convite, dentro do prazo.');
+    if(item.revoked!==true&&item.redeemed!==true&&typeof item.id==='string'){
+     const label=document.createElement('label'),check=document.createElement('input'),span=document.createElement('span'),revoke=document.createElement('button');
+     label.className='mc-confirm';check.type='checkbox';check.dataset.followupRevokeConfirm=item.id;
+     span.textContent='Confirmo que desejo revogar este convite não utilizado.';label.append(check,span);
+     revoke.className='mc-button';revoke.type='button';revoke.dataset.followupRevoke=item.id;revoke.textContent='Revogar convite';revoke.disabled=true;
+     card.append(label,revoke);
+    }
+   }
+   list.append(card);
+  }
+  if(evolution.children.length>2)report.append(evolution);
+ }
+ async function createFollowup(){
+  if(!currentId||!followupsEnabled)throw new Error('unavailable');
+  const instrumentId=element<HTMLSelectElement>('pro-followup-instrument').value;
+  const expiresInDays=Number(element<HTMLSelectElement>('pro-followup-expiry').value);
+  const rationale=element<HTMLTextAreaElement>('pro-followup-rationale').value.trim();
+  const safetyReviewed=element<HTMLInputElement>('pro-followup-safety').checked;
+  if(!['phq9','gad7'].includes(instrumentId)||![1,3,7,14].includes(expiresInDays)||
+     rationale.length<15||rationale.length>500||!safetyReviewed){
+   fail('Informe a justificativa clínica (15 a 500 caracteres) e confirme a revisão profissional, inclusive da segurança atual.');
+   return;
+  }
+  element('pro-followup-created').hidden=true;followupCode='';followupUrl='';
+  const data=await apiFollowup('orders',{parentId:currentId,instrumentId,expiresInDays,rationale,safetyReviewed});
+  if(typeof data.code!=='string'||typeof data.url!=='string')throw new Error('unavailable');
+  const target=new URL(data.url,window.location.origin);
+  if(target.origin!==window.location.origin||target.pathname!=='/conhecendo-meu-momento/complementar/'||target.search||target.hash)throw new Error('unavailable');
+  followupCode=data.code;followupUrl=target.href;
+  element('pro-followup-code').textContent=followupCode;
+  const link=element<HTMLAnchorElement>('pro-followup-url');link.href=followupUrl;link.textContent=followupUrl;
+  element('pro-followup-created').hidden=false;
+  element<HTMLInputElement>('pro-followup-safety').checked=false;
+  element<HTMLTextAreaElement>('pro-followup-rationale').value='';
+  notice('Convite complementar confirmado. Compartilhe endereço e código separadamente, apenas pelo canal combinado.');
+  await refreshFollowups(currentId);
+ }
+
  async function openRecord(id:string){
-  if(!/^[a-zA-Z0-9_-]{8,100}$/.test(id))throw new Error('unavailable');clearRecord();const data=await api(`submissions/${encodeURIComponent(id)}`),record=object(data.record),metadata=object(data.metadata);if(!Object.keys(record).length)throw new Error('unavailable');currentId=id;currentRecord=record;currentMetadata=metadata;renderRecord(record,metadata);element('pro-record-id').textContent=`Identificador ${id}. Acesso ao conteúdo registrado para auditoria.`;element('pro-record-section').hidden=false;const h=element('pro-record-title');h.focus({preventScroll:true});h.scrollIntoView({block:'start',behavior:'instant'});
+  if(!/^[a-zA-Z0-9_-]{8,100}$/.test(id))throw new Error('unavailable');clearRecord();const data=await api(`submissions/${encodeURIComponent(id)}`),record=object(data.record),metadata=object(data.metadata);if(!Object.keys(record).length)throw new Error('unavailable');currentId=id;currentRecord=record;currentMetadata=metadata;renderRecord(record,metadata);updateInstrumentLibrary(record);await refreshFollowups(id).catch(()=>{element('pro-followups-section').hidden=false;element('pro-followups-controls').hidden=true;element('pro-followups-status').textContent='Não foi possível verificar o serviço complementar. O registro clínico principal permanece acessível.';});element('pro-record-id').textContent=`Identificador ${id}. Acesso ao conteúdo registrado para auditoria.`;element('pro-record-section').hidden=false;const h=element('pro-record-title');h.focus({preventScroll:true});h.scrollIntoView({block:'start',behavior:'instant'});
  }
  async function copy(text:string,success:string){if(!text)return;try{await navigator.clipboard.writeText(text);notice(success);}catch{fail('Não foi possível copiar. Você pode selecionar o texto exibido.');}}
  async function run(action:()=>Promise<void>){if(busy)return;busy=true;error.textContent='';root.setAttribute('aria-busy','true');try{await action();}catch(err){if(err instanceof Error&&['NotAllowedError','AbortError'].includes(err.name))fail('A confirmação no dispositivo foi cancelada ou não foi concluída. Você pode tentar novamente.');else fail(message(err));}finally{busy=false;root.removeAttribute('aria-busy');}}
  root.addEventListener('click',async event=>{
   const target=event.target;if(busy||!(target instanceof Element))return;
   const revoke=target.closest<HTMLButtonElement>('button[data-pro-revoke]');if(revoke?.dataset.proRevoke&&!revoke.disabled){await run(async()=>{const id=revoke.dataset.proRevoke!;if(!/^[a-zA-Z0-9_-]{8,100}$/.test(id))throw new Error('unavailable');const data=await api(`invites/${encodeURIComponent(id)}/revoke`,{});if(data.revoked!==true)throw new Error('unavailable');notice('Revogação do convite confirmada pelo servidor.');await loadLists();});return;}
+  const followupRevoke=target.closest<HTMLButtonElement>('button[data-followup-revoke]');
+  if(followupRevoke?.dataset.followupRevoke&&!followupRevoke.disabled){
+   await run(async()=>{
+    const id=followupRevoke.dataset.followupRevoke!;
+    const data=await apiFollowup('orders/'+encodeURIComponent(id)+'/revoke',{});
+    if(data.revoked!==true)throw new Error('unavailable');
+    notice('Revogação do convite complementar confirmada.');if(currentId)await refreshFollowups(currentId);
+   });return;
+  }
   const open=target.closest<HTMLButtonElement>('button[data-pro-open]');if(open?.dataset.proOpen){await run(()=>openRecord(open.dataset.proOpen!));return;}
   const button=target.closest<HTMLButtonElement>('button[data-pro-action]');if(!button||button.disabled)return;
-  switch(button.dataset.proAction){case'refresh':await run(availability);break;case'request-code':await run(enrollmentRequest);break;case'enroll':await run(enroll);break;case'login':await run(login);break;case'create-invite':await run(createInvite);break;case'reload-workspace':await run(loadLists);break;case'hide-invite':hideInvite();notice('Código ocultado desta tela.');break;case'copy-link':await copy(inviteUrl,'Endereço copiado.');break;case'copy-code':await copy(inviteCode,'Código pessoal copiado. Compartilhe somente com a pessoa convidada.');break;case'close-record':clearRecord();notice('Conteúdo do registro fechado nesta tela.');break;case'logout':await run(async()=>{await api('logout',{});clearWorkspace();notice('Acesso encerrado.');await availability();});break;case'print-report':if(currentId&&currentRecord){notice('O navegador abrirá a impressão. Se desejar, selecione Salvar como PDF. Proteja o documento por conter dados sensíveis.');window.print();}break;case'export-record':if(currentId&&currentRecord){const url=URL.createObjectURL(new Blob([JSON.stringify({record:currentRecord,metadata:currentMetadata},null,2)],{type:'application/json;charset=utf-8'}));const link=document.createElement('a');link.href=url;link.download=`nexo-registro-${currentId}.json`;link.click();window.setTimeout(()=>URL.revokeObjectURL(url),1000);notice('Arquivo criado sob seu controle. Proteja o conteúdo e respeite a política de retenção.');}break;case'feedback-completed':if(currentId)await run(async()=>{await api(`submissions/${encodeURIComponent(currentId)}/feedback`,{completed:true});notice('Realização da devolutiva registrada.');await loadLists();});break;case'delete-record':if(currentId){if(!element<HTMLInputElement>('pro-delete-confirm').checked){fail('Confirme a exclusão deste registro antes de continuar.');element('pro-delete-confirm').focus();return;}await run(async()=>{const data=await api(`submissions/${encodeURIComponent(currentId)}/delete`,{});if(data.deleted!==true&&data.success!==true)throw new Error('unavailable');clearRecord();notice('Exclusão do registro ativo confirmada pelo servidor.');await loadLists();});}break;}
+  switch(button.dataset.proAction){case'refresh':await run(availability);break;case'request-code':await run(enrollmentRequest);break;case'enroll':await run(enroll);break;case'login':await run(login);break;case'create-invite':await run(createInvite);break;case'create-followup':await run(createFollowup);break;case'reload-workspace':await run(loadLists);break;case'hide-invite':hideInvite();notice('Código ocultado desta tela.');break;case'copy-link':await copy(inviteUrl,'Endereço copiado.');break;case'copy-followup-url':await copy(followupUrl,'Endereço complementar copiado.');break;case'copy-followup-code':await copy(followupCode,'Código pessoal complementar copiado.');break;case'hide-followup-code':followupCode='';element('pro-followup-code').textContent='';element('pro-followup-created').hidden=true;notice('Código complementar ocultado.');break;case'copy-code':await copy(inviteCode,'Código pessoal copiado. Compartilhe somente com a pessoa convidada.');break;case'close-record':clearRecord();notice('Conteúdo do registro fechado nesta tela.');break;case'logout':await run(async()=>{await api('logout',{});clearWorkspace();notice('Acesso encerrado.');await availability();});break;case'print-report':if(currentId&&currentRecord){notice('O navegador abrirá a impressão. Se desejar, selecione Salvar como PDF. Proteja o documento por conter dados sensíveis.');window.print();}break;case'export-record':if(currentId&&currentRecord){const url=URL.createObjectURL(new Blob([JSON.stringify({record:currentRecord,metadata:currentMetadata},null,2)],{type:'application/json;charset=utf-8'}));const link=document.createElement('a');link.href=url;link.download=`nexo-registro-${currentId}.json`;link.click();window.setTimeout(()=>URL.revokeObjectURL(url),1000);notice('Arquivo criado sob seu controle. Proteja o conteúdo e respeite a política de retenção.');}break;case'feedback-completed':if(currentId)await run(async()=>{await api(`submissions/${encodeURIComponent(currentId)}/feedback`,{completed:true});notice('Realização da devolutiva registrada.');await loadLists();});break;case'delete-record':if(currentId){if(!element<HTMLInputElement>('pro-delete-confirm').checked){fail('Confirme a exclusão deste registro antes de continuar.');element('pro-delete-confirm').focus();return;}await run(async()=>{const data=await api(`submissions/${encodeURIComponent(currentId)}/delete`,{});if(data.deleted!==true&&data.success!==true)throw new Error('unavailable');clearRecord();notice('Exclusão do registro ativo confirmada pelo servidor.');await loadLists();});}break;}
  },{signal});
- root.addEventListener('change',event=>{const input=event.target;if(input instanceof HTMLInputElement&&input.dataset.proRevokeConfirm){const button=input.closest('article')?.querySelector<HTMLButtonElement>('[data-pro-revoke]');if(button)button.disabled=!input.checked;}},{signal});
+ root.addEventListener('change',event=>{const input=event.target;if(input instanceof HTMLInputElement&&input.dataset.followupRevokeConfirm){const btn=input.closest('article')?.querySelector<HTMLButtonElement>('[data-followup-revoke]');if(btn)btn.disabled=!input.checked;}if(input instanceof HTMLInputElement&&input.dataset.proRevokeConfirm){const button=input.closest('article')?.querySelector<HTMLButtonElement>('[data-pro-revoke]');if(button)button.disabled=!input.checked;}},{signal});
  void run(availability);
  return()=>{clearWorkspace();life.abort();};
 }
