@@ -25,6 +25,10 @@ jobs:
         run: pnpm install --frozen-lockfile
       - name: Conferir tipos Astro/TypeScript
         run: pnpm exec astro check
+      - name: Conferir sintaxe do serviço clínico complementar
+        run: |
+          node --check functions/_lib/momento-followups.js
+          node --check 'functions/api/momento-followups/[[path]].js'
       - name: Compilar o site
         run: pnpm build
       - name: Testar integridade das páginas
