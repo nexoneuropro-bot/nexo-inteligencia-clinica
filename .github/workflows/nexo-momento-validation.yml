@@ -7,6 +7,10 @@ on:
       - 'src/components/MomentoClinical.astro'
       - 'src/data/momento-clarifications.ts'
       - 'src/lib/momento-professional-cues.ts'
+      - 'src/lib/momento-professional-report.ts'
+      - 'src/scripts/momento-report-view.ts'
+      - 'src/styles/momento-clinical.css'
+      - 'src/components/MomentoProfessional.astro'
       - 'src/scripts/momento-clinical.ts'
       - 'src/scripts/momento-professional.ts'
       - 'functions/_lib/momento-clinical.js'
@@ -35,4 +39,4 @@ jobs:
       - run: pnpm build
       - run: pnpm verify
       - name: Testes sintéticos clínicos
-        run: node --experimental-strip-types --experimental-sqlite --test scripts/test-momento-screening.mjs scripts/test-momento-clinical.mjs scripts/test-momento-professional-cues.mjs
+        run: node --experimental-strip-types --experimental-sqlite --test scripts/test-momento-screening.mjs scripts/test-momento-clinical.mjs scripts/test-momento-professional-cues.mjs scripts/test-momento-integrated-report.mjs
