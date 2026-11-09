@@ -147,20 +147,36 @@ function startClinical(){
    consentAt=new Date().toISOString();stage='profile';
   }else if(stage==='profile'){
    const nickname=element<HTMLInputElement>('mc-nickname').value.trim();
-   if(nickname.length>40||/[\u0000-\u001f\u007f]/.test(nickname)){fail('Use até 40 caracteres para o nome ou pseudônimo.',element('mc-nickname'));return;}
+   if(nickname.length>40||/[\\u0000-\\u001f\\u007f]/.test(nickname)){fail('Use até 40 caracteres para o nome ou pseudônimo.',element('mc-nickname'));return;}
    profile=Object.fromEntries(profileFields.filter(field=>field.id!=='nickname').map(field=>[field.id,element<HTMLSelectElement>(`mc-profile-${field.id}`).value]));
    if(nickname)profile.nickname=nickname;stage='privacy';
   }else if(stage==='privacy'){
    const privacy=radio('mc-privacy');if(!privacy){fail('Escolha como está sua privacidade ou faça uma pausa.');return;}
-   context={place:radio('mc-place')||'not-informed',privacy};
-   if(privacy==='no'){resumeStage='questions';stage='paused';}else stage=resumeStage==='summary'?'summary':'questions';
+   context={place:radio('mc-place')||'not-informed',privacy,accompaniment:radio('mc-accompaniment')||'not-informed'};
+   if(privacy==='no'){resumeStage='choice';stage='paused';}else stage=['summary','reflection','questions'].includes(resumeStage)?resumeStage:'choice';
+  }else if(stage==='choice'){
+   const selection=radio('mc-journey');if(!['basic','extended'].includes(selection)){fail('Escolha o percurso breve ou o aprofundado.');return;}
+   reflectionMode=selection as 'basic'|'extended';stage='questions';
   }else if(stage==='questions'){
-   if(!saveCurrent(skip))return;const next=nextPosition(position+1,1);if(next>=0)position=next;else stage='summary';
+   if(!saveCurrent(skip))return;
+   const next=nextPosition(position+1,1);
+   if(next>=0)position=next;
+   else if(reflectionMode==='extended'){reflectionPosition=0;stage='reflection';}
+   else stage='summary';
+  }else if(stage==='reflection'){
+   if(!saveReflection(skip))return;
+   if(reflectionPosition<reflectionQuestions.length-1)reflectionPosition++;
+   else stage='summary';
   }
   render();
  }
  function back(){
-  if(stage==='profile')stage='consent';else if(stage==='privacy')stage='profile';else if(stage==='questions'){const prior=nextPosition(position-1,-1);if(prior>=0)position=prior;else stage='privacy';}else if(stage==='summary'){stage='questions';position=nextPosition(sequence.length-1,-1);}
+  if(stage==='profile')stage='consent';
+  else if(stage==='privacy')stage='profile';
+  else if(stage==='choice')stage='privacy';
+  else if(stage==='questions'){const prior=nextPosition(position-1,-1);if(prior>=0)position=prior;else stage='choice';}
+  else if(stage==='reflection'){if(reflectionPosition>0)reflectionPosition--;else{stage='questions';position=nextPosition(sequence.length-1,-1);}}
+  else if(stage==='summary'){if(reflectionMode==='extended'){stage='reflection';reflectionPosition=reflectionQuestions.length-1;}else{stage='questions';position=nextPosition(sequence.length-1,-1);}}
   render();
  }
  async function checkAvailability(){
@@ -187,7 +203,7 @@ function startClinical(){
   sending=true;error.textContent='';status.textContent='Enviando suas respostas. Aguarde a confirmação de recebimento.';
   root.querySelectorAll<HTMLButtonElement>('[data-mc-action="submit"],[data-mc-action="submit-partial"],.mc-toolbar button').forEach(button=>{button.disabled=true;});
   try{
-   const data=await api('submissions',{consent:{accepted:true,adult:true,version:CLINICAL_CONSENT_VERSION},profile,context,authorAnswers:answers,phq9,gad7,impact,clarifications,completion:partial?{kind:'partial',lastShownId:sequence[position]?.id}:{kind:'complete'}});
+   const data=await api('submissions',{consent:{accepted:true,adult:true,version:CLINICAL_CONSENT_VERSION},profile,context,authorAnswers:answers,phq9,gad7,impact,clarifications,reflectionMode,reflectionAnswers,completion:partial?{kind:'partial',lastShownId:resumeStage==='reflection'?`reflection-${reflectionQuestions[reflectionPosition]?.id}`:resumeStage==='choice'?'journey-choice':sequence[position]?.id}:{kind:'complete'}});
    if(data.saved!==true||typeof(data.id??data.receiptId)!=='string')throw new Error('unavailable');
    showReceipt(data);
   }catch(err){status.textContent='';fail(apiMessage(err));}finally{sending=false;root.querySelectorAll<HTMLButtonElement>('[data-mc-action="submit"],[data-mc-action="submit-partial"]').forEach(button=>{button.disabled=false;});root.querySelectorAll<HTMLButtonElement>('.mc-toolbar [data-mc-action]').forEach(button=>{button.disabled=!csrf||stage==='closed'||(button.dataset.mcAction==='pause'&&['access','consent','paused','submitted'].includes(stage));});}
@@ -205,10 +221,10 @@ function startClinical(){
  }
  root.addEventListener('click',async event=>{
   const target=event.target;if(sending||!(target instanceof Element))return;const button=target.closest<HTMLButtonElement>('button[data-mc-action]');if(!button||button.disabled)return;
-  switch(button.dataset.mcAction){case'availability':await checkAvailability();break;case'redeem':await redeem();break;case'next':advance();break;case'back':back();break;case'skip':if(stage==='questions')advance(true);break;case'pause':if(!sending&&['profile','privacy','questions','summary'].includes(stage)){resumeStage=stage==='summary'?'summary':'questions';stage='paused';render();}break;case'resume':context.privacy='';root.querySelectorAll<HTMLInputElement>('input[name="mc-privacy"]').forEach(input=>{input.checked=false;});stage='privacy';render();break;case'end':await end();break;case'submit':await submit();break;case'submit-partial':await submit(true);break;case'hear-consent':hearConsent();break;case'stop-speech':stopSpeech();element('mc-voice-status').textContent='Leitura interrompida.';break;case'copy-receipt':try{await navigator.clipboard.writeText(receiptId);status.textContent='Identificador copiado.';}catch{status.textContent='Não foi possível copiar. Anote o identificador exibido.';}break;}
+  switch(button.dataset.mcAction){case'availability':await checkAvailability();break;case'redeem':await redeem();break;case'next':advance();break;case'back':back();break;case'skip':if(stage==='questions'||stage==='reflection')advance(true);break;case'dictate':if(stage==='reflection'&&context.privacy==='yes'){if(dictation.active)dictation.stop();else if(dictation.start()){button.textContent='Parar ditado';element('mc-dictation-status').textContent='Ouvindo localmente. Revise o texto antes de continuar.';}}break;case'pause':if(!sending&&['profile','privacy','choice','questions','reflection','summary'].includes(stage)){resumeStage=stage==='summary'?'summary':stage==='reflection'?'reflection':stage==='choice'?'choice':'questions';stage='paused';render();}break;case'resume':context.privacy='';root.querySelectorAll<HTMLInputElement>('input[name="mc-privacy"]').forEach(input=>{input.checked=false;});stage='privacy';render();break;case'end':await end();break;case'submit':await submit();break;case'submit-partial':await submit(true);break;case'hear-consent':hearConsent();break;case'stop-speech':stopSpeech();element('mc-voice-status').textContent='Leitura interrompida.';break;case'copy-receipt':try{await navigator.clipboard.writeText(receiptId);status.textContent='Identificador copiado.';}catch{status.textContent='Não foi possível copiar. Anote o identificador exibido.';}break;}
  },{signal});
  root.addEventListener('change',event=>{const target=event.target;if(target instanceof HTMLInputElement&&target.name==='mc-answer'&&stage==='questions'){saveCurrent(false);const item=sequence[position];if(item.kind==='scale'&&item.instrument==='phq9'&&item.index===8)element('mc-care-note').hidden=Number(target.value)<=0;}},{signal});
- document.addEventListener('visibilitychange',()=>{if(document.hidden)stopSpeech();},{signal});
+ document.addEventListener('visibilitychange',()=>{if(document.hidden){stopSpeech();dictation.stop();}},{signal});
  render(false);void checkAvailability();
  return()=>{clear();csrf='';receiptId='';life.abort();};
 }
