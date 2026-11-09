@@ -63,7 +63,7 @@ test('sem escores nem respostas não inventa HDs e não atribui recursos ou risc
 });
 test('tecnologia nunca obrigatória e instrumentos com revisão humana',()=>{
  const r=buildClinicalInterviewGuide(illustrative());
- assert.ok(r.hereNow.some(s=>s.includes('não obrigatório')||s.includes('não é obrigatória')));
+ assert.ok(r.hereNow.some(s=>s.includes('não obrigatório')||s.includes('não é obrigatória')||s.includes('nunca é obrigatória')));
  assert.ok(r.briefPlan.some(s=>s.includes('segurança demandar')));
  assert.ok(r.proposals.every(x=>x.review.length>15));
  assert.ok(r.proposals.every(x=>x.mode==='somente profissional'||x.mode==='pode ser oferecido após aceite'));
