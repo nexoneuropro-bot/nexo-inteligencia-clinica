@@ -67,3 +67,21 @@ test('orientações não prescrevem ou classificam transtorno',()=>{
  assert.match(report.closing,/SATEPSI/);
  assert.ok(report.instruments.every(item=>!item.decision.includes('aplicar obrigatoriamente')));
 });
+
+
+test('relato de acolhimento não produz diagnóstico e registra temas para conversa',()=>{
+ const v=caio();v.welcome={path:'expanded',setting:'with-professional',sensitiveAccepted:true,responses:{
+  agora:{status:'answered',method:'text',text:'Quero conversar sobre mudanças recentes.'},
+  relacionamentos:{status:'answered',method:'choice',choice:'mudancas'},
+  identidade:{status:'declined'},
+  orientacao:{status:'later'},
+  crencas:{status:'unsure'},
+  continuidade:{status:'answered',method:'choice',choice:'privacidade'}
+ }};
+ const report=buildIntegratedReport(v);
+ assert.ok(report.context.some(x=>x.includes('orientação afetivo-sexual')&&x.includes('reservado')));
+ assert.ok(report.context.some(x=>x.includes('identidade')&&x.includes('Não atribuir motivo')));
+ assert.ok(report.axes.find(x=>x.name==='Social')?.facts.some(x=>x.includes('mudanças ou dúvidas')));
+ assert.ok(report.unanswered.some(x=>x.includes('Conferir em diálogo')));
+ assert.equal(report.axes.length,4);
+});
