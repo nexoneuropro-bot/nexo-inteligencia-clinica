@@ -469,7 +469,7 @@ export async function handleClinicalRequest({ request, env }, dependencies = {})
       if(!source)deny();
       const expiresAt=Math.min(now+CLINICAL_ACTIVE_RETENTION_DAYS*DAY,source.expires_at);
       const result=await db.batch([
-        stmt(db,"INSERT INTO momento_instrument_results (id,invite_id,owner_id,source_submission_id,instrument_id,ciphertext,iv,created_at,expires_at) SELECT ?,i.id,i.owner_id,i.source_submission_id,i.instrument_id,?,?,?,?,? FROM momento_invites i WHERE i.id=? AND i.owner_id=? AND i.submission_id IS NULL AND i.revoked_at IS NULL AND i.expires_at>?",
+        stmt(db,"INSERT INTO momento_instrument_results (id,invite_id,owner_id,source_submission_id,instrument_id,ciphertext,iv,created_at,expires_at) SELECT ?,i.id,i.owner_id,i.source_submission_id,i.instrument_id,?,?,?,? FROM momento_invites i WHERE i.id=? AND i.owner_id=? AND i.submission_id IS NULL AND i.revoked_at IS NULL AND i.expires_at>?",
           id,encrypted.ciphertext,encrypted.iv,now,expiresAt,session.invite_id,session.owner_id,now),
         stmt(db,"UPDATE momento_invites SET submission_id=? WHERE id=? AND owner_id=? AND instrument_id IS NOT NULL AND submission_id IS NULL RETURNING id",
           id,session.invite_id,session.owner_id),
