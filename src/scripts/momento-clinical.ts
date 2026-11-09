@@ -147,7 +147,7 @@ function startClinical(){
    consentAt=new Date().toISOString();stage='profile';
   }else if(stage==='profile'){
    const nickname=element<HTMLInputElement>('mc-nickname').value.trim();
-   if(nickname.length>40||/[\\u0000-\\u001f\\u007f]/.test(nickname)){fail('Use até 40 caracteres para o nome ou pseudônimo.',element('mc-nickname'));return;}
+   if(nickname.length>40||/[\u0000-\u001f\u007f]/.test(nickname)){fail('Use até 40 caracteres para o nome ou pseudônimo.',element('mc-nickname'));return;}
    profile=Object.fromEntries(profileFields.filter(field=>field.id!=='nickname').map(field=>[field.id,element<HTMLSelectElement>(`mc-profile-${field.id}`).value]));
    if(nickname)profile.nickname=nickname;stage='privacy';
   }else if(stage==='privacy'){
