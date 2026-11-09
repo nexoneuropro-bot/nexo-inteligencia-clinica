@@ -5,8 +5,8 @@
  * terapêutica, previsão de evasão, classificação de risco ou interpretação
  * para o participante. Sem chamadas externas, sem modelo generativo.
  */
-import {questions,profileFields} from '../data/momento-demo';
-import {clarificationQuestions} from '../data/momento-clarifications';
+import {questions,profileFields} from '../data/momento-demo.ts';
+import {clarificationQuestions} from '../data/momento-clarifications.ts';
 
 export type ReportPoint=Readonly<{title:string; evidence:readonly string[]; interpretation:string; investigate:string; limitation:string}>;
 export type ReportAxis=Readonly<{name:string; facts:readonly string[]; gaps:string}>;
