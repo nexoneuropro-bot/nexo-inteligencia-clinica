@@ -1,20 +1,21 @@
-import {instrumentLibrary,type InstrumentStatus} from '../data/momento-instrument-library';
+import {instrumentLibrary,type InstrumentEntry,type InstrumentStatus} from '../data/momento-instrument-library';
 import {buildClinicalInstrumentRecommendations} from '../lib/momento-instrument-recommendations';
 import {appendNativePackImport} from './momento-native-pack-import-view';
 
-const normalized=(value:string)=>value.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
-const labelByStatus:Record<InstrumentStatus,string>={
- integrado:'No acolhimento inicial',
- curadoria:'Aguardando conferência',
- procedimento:'Roteiro ou procedimento'
+const normalize=(value:string)=>value.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+const labels:Record<InstrumentStatus,string>={
+ integrado:'Formulário já integrado',
+ curadoria:'Disponível para planejamento',
+ procedimento:'Recurso conduzido pelo profissional'
 };
-function add<K extends keyof HTMLElementTagNameMap>(parent:HTMLElement,tag:K,content:string,className?:string):HTMLElementTagNameMap[K]{
- const node=document.createElement(tag);node.textContent=content;if(className)node.className=className;parent.append(node);return node;
+function add<K extends keyof HTMLElementTagNameMap>(parent:HTMLElement,tag:K,value:string,cls?:string):HTMLElementTagNameMap[K]{
+ const node=document.createElement(tag);node.textContent=value;if(cls)node.className=cls;parent.append(node);return node;
 }
+type Selected={item:InstrumentEntry;decision:'considerar'|'adiar'|'nao-indicar';reason:string};
 
 /**
- * Monta a biblioteca apenas no espaço protegido da área profissional.
- * Retorna atualizador de contexto que não persiste nem transmite dados sensíveis.
+ * O acervo serve à decisão profissional, independentemente da implementação
+ * eletrônica da escala. Selecionar nunca publica itens nem emite convite.
  */
 export function mountInstrumentLibrary(root:HTMLElement,signal:AbortSignal){
  const section=root.querySelector<HTMLElement>('#pro-instrument-library');
@@ -24,52 +25,107 @@ export function mountInstrumentLibrary(root:HTMLElement,signal:AbortSignal){
  const status=section?.querySelector<HTMLElement>('#pro-library-status');
  const context=section?.querySelector<HTMLElement>('#pro-library-context');
  const imports=section?.querySelector<HTMLElement>('#pro-library-import');
- if(!section||!search||!filter||!results||!status||!context)return (_record?:Record<string,unknown>)=>{};
+ const planner=section?.querySelector<HTMLElement>('#pro-library-plan');
+ if(!section||!search||!filter||!results||!status||!context||!planner)return (_record?:Record<string,unknown>)=>{};
+ const plan:HTMLElement=planner;
  if(imports&&!imports.childElementCount)appendNativePackImport(imports);
  let record:Record<string,unknown>|undefined;
- const render=()=>{
-  const keyword=normalized(search.value.trim());
-  const state=filter.value;
-  const matched=instrumentLibrary.filter(item=>(state==='todos'||item.status===state)&&
-   (!keyword||normalized([item.name,item.kind,item.purpose,item.audience,...item.domains].join(' ')).includes(keyword)));
-  const cues=record?buildClinicalInstrumentRecommendations(record).recommendations:[];
-  const suggestionMap=new Map(cues.map(x=>[x.id,x.clinicalQuestion]));
-  results.replaceChildren();
-  status.textContent=`${matched.length} de ${instrumentLibrary.length} registros no acervo. Apenas PHQ-9 e GAD-7 estão incluídos no percurso inicial; nenhum envio complementar é automático.`;
-  context.replaceChildren();
+ const selected=new Map<string,Selected>();
+ function updatePlan(){
+  plan.replaceChildren();
+  add(plan,'h3','Minha seleção para avaliação profissional');
+  add(plan,'p','Escolher um instrumento registra uma possibilidade de trabalho, não um convite. As escolhas ficam apenas nesta tela e podem ser copiadas; não são anexadas automaticamente a prontuários ou pesquisas.','mc-report-quiet');
+  if(!selected.size){
+   add(plan,'p','Nenhum instrumento selecionado. Todos os itens do acervo podem ser considerados, inclusive os que ainda não possuem formulário digital no NEXO.','mc-report-quiet');
+   return;
+  }
+  const list=add(plan,'div','','mc-library-selected');
+  for(const entry of selected.values()){
+   const article=add(list,'article','','mc-library-selected-item');
+   add(article,'h4',entry.item.name);
+   const label=add(article,'label','Decisão do profissional','mc-field');
+   const select=add(label,'select','');
+   const options:[Selected['decision'],string][]=[
+    ['considerar','Considerar após entrevista'],['adiar','Adiar'],['nao-indicar','Não indicar']];
+   for(const [value,text] of options){const opt=add(select,'option',text);opt.value=value;}
+   select.value=entry.decision;
+   select.setAttribute('aria-label','Decisão sobre '+entry.item.name);
+   select.addEventListener('change',()=>{entry.decision=select.value as Selected['decision'];},{signal});
+   const noteLabel=add(article,'label','Justificativa complementar (opcional)','mc-field');
+   const note=add(noteLabel,'textarea','');
+   note.rows=2;note.maxLength=240;note.placeholder='Registrar a pergunta clínica ou motivo da decisão';
+   note.value=entry.reason;
+   note.addEventListener('input',()=>{entry.reason=note.value;},{signal});
+   const remove=add(article,'button','Retirar da seleção','mc-button');
+   remove.type='button';remove.addEventListener('click',()=>{selected.delete(entry.item.id);updatePlan();renderCards();},{signal});
+  }
+  const buttons=add(plan,'div','','mc-actions');
+  const copy=add(buttons,'button','Copiar plano de instrumentos','mc-button mc-primary');
+  copy.type='button';
+  const feedback=add(plan,'p','','mc-report-quiet');
+  feedback.setAttribute('role','status');
+  copy.addEventListener('click',async()=>{
+   const text=['NEXO · PLANEJAMENTO PROFISSIONAL DE INSTRUMENTOS','Seleção clínica sujeita à pertinência, finalidade, modalidade e consentimento. Nenhum envio automático.',
+    ...[...selected.values()].flatMap(x=>['',x.item.name,
+     'Decisão: '+(x.decision==='considerar'?'Considerar após entrevista':x.decision==='adiar'?'Adiar':'Não indicar'),
+     'Finalidade: '+x.item.purpose,'Situação do formulário digital: '+(x.item.status==='integrado'?'Já implementado no NEXO, sujeito à ativação da reaplicação':'Ainda sem aplicação digital cadastrada nesta plataforma'),
+     ...(x.reason.trim()?['Nota: '+x.reason.trim()]:[])])].join('\n');
+   try{await navigator.clipboard.writeText(text);feedback.textContent='Plano copiado. Nenhum dado foi enviado ao servidor.';}
+   catch{feedback.textContent='A cópia não foi permitida pelo navegador. Mantenha a seleção visível para registrar suas decisões.';}
+  },{signal});
+ }
+ function renderCards(){
+  const keyword=normalize(search!.value.trim()),state=filter!.value;
+  const recommendations=record?buildClinicalInstrumentRecommendations(record).recommendations:[];
+  const suggested=new Map(recommendations.map(item=>[item.id,item.clinicalQuestion]));
+  const found=instrumentLibrary.filter(item=>(state==='todos'||item.status===state)&&
+   (!keyword||normalize([item.name,item.kind,item.purpose,item.audience,...item.domains].join(' ')).includes(keyword)));
+  results!.replaceChildren();
+  status!.textContent=found.length+' de '+instrumentLibrary.length+' instrumentos e procedimentos. Todos podem ser selecionados para planejamento profissional. Aplicação digital exige formulário implementado e revisão da modalidade.';
+  context!.replaceChildren();
   if(record){
-   const header=add(context,'h4','Possibilidades relacionadas ao registro aberto');
-   header.className='mc-library-context-title';
-   add(context,'p',cues.length?
-    'Correspondências descritivas para discussão profissional, não prescrição, diagnóstico, nem autorização de aplicação. Em caso de dúvidas de segurança, priorizar a entrevista humana.':
-    'Não há correspondência específica suficiente para sugerir instrumentos adicionais apenas pelo formulário. A entrevista orienta a escolha.','mc-report-quiet');
-  }else add(context,'p','Abra um registro protegido para visualizar possíveis áreas de aprofundamento, sem encaminhamento automático.','mc-report-quiet');
-  if(!matched.length){add(results,'p','Nenhum registro corresponde à busca. Ajuste o termo ou o filtro.','mc-report-quiet');return;}
-  for(const item of [...matched].sort((a,b)=>{
-   const aSuggested=suggestionMap.has(a.id)?1:0,bSuggested=suggestionMap.has(b.id)?1:0;
-   return bSuggested-aSuggested||(['integrado','procedimento','curadoria'].indexOf(a.status)-['integrado','procedimento','curadoria'].indexOf(b.status))||a.name.localeCompare(b.name,'pt-BR');
-  })){
-   const card=document.createElement('article');card.className='mc-library-card';
-   const top=document.createElement('div');top.className='mc-library-top';
+   add(context!,'h4','Recomendações ligadas ao acolhimento e às HDs','mc-library-context-title');
+   add(context!,'p',recommendations.length?
+    'Os candidatos priorizados abaixo apresentam relação descritiva com as respostas e hipóteses de investigação. A pertinência será decidida pelo terapeuta.':
+    'O acolhimento não trouxe dados suficientes para sugerir um instrumento específico. O profissional pode pesquisar toda a biblioteca.','mc-report-quiet');
+  }else add(context!,'p','Abra um registro para destacar instrumentos relacionados às HDs ou explore todo o acervo para planejar estudos sociais e atendimentos gratuitos.','mc-report-quiet');
+  if(!found.length){add(results!,'p','Nenhum instrumento encontrado. Ajuste a pesquisa ou os filtros.','mc-report-quiet');return;}
+  for(const item of [...found].sort((a,b)=>Number(suggested.has(b.id))-Number(suggested.has(a.id))||a.name.localeCompare(b.name,'pt-BR'))){
+   const card=add(results!,'article','','mc-library-card');
+   const top=add(card,'div','','mc-library-top');
    add(top,'h4',item.name);
-   add(top,'span',labelByStatus[item.status],'mc-library-pill');
-   card.append(top);
+   add(top,'span',labels[item.status],'mc-library-pill');
    add(card,'p',item.purpose);
    add(card,'p',item.kind+' · Domínios: '+item.domains.join(', '),'mc-report-mini');
-   if(suggestionMap.has(item.id))add(card,'p','Para avaliar neste registro: '+suggestionMap.get(item.id),'mc-library-reason');
+   if(suggested.has(item.id))add(card,'p','Ligação com a HD: '+suggested.get(item.id),'mc-library-reason');
    add(card,'p','Público: '+item.audience,'mc-report-quiet');
    add(card,'p',item.useNotes,'mc-report-quiet');
-   if(item.status==='curadoria')add(card,'p','Bloqueado para envio: confirmar direitos, tradução, finalidade, evidência, população, versão, SATEPSI (quando aplicável) e modalidade remota.','mc-library-review');
-   if(item.status==='integrado')add(card,'p','Já utilizado no acolhimento inicial. Uma reaplicação depende do módulo complementar habilitado, consentimento e decisão profissional.','mc-library-review');
-   if(item.status==='procedimento')add(card,'p','Procedimento para decisão profissional; não é formulário de rastreio liberado por convite.','mc-library-review');
-   if(item.sourceUrl){
-    const anchor=document.createElement('a');anchor.href=item.sourceUrl;anchor.target='_blank';anchor.rel='noopener noreferrer';anchor.className='mc-link';anchor.textContent='Consultar fonte ↗';card.append(anchor);
+   if(item.status==='integrado'){
+    add(card,'p','Formulário e pontuação já integrados ao acolhimento. Para reaplicação por convite, o módulo clínico precisa estar ativado.','mc-library-review');
+   }else if(item.status==='procedimento'){
+    add(card,'p','Pode ser incluído no planejamento e conduzido pelo profissional. Não é uma escala com escore automatizado.','mc-library-review');
+   }else{
+    add(card,'p','Pode ser selecionado e justificado agora. Para aplicar dentro do NEXO, ainda é necessário cadastrar a versão digital correspondente e conferir suas condições específicas. Não se exige reautorizar o que já foi autorizado.','mc-library-review');
    }
-   results.append(card);
+   const button=add(card,'button',selected.has(item.id)?'Retirar do meu planejamento':'Adicionar ao meu planejamento','mc-button mc-library-select');
+   button.type='button';
+   button.setAttribute('aria-pressed',String(selected.has(item.id)));
+   button.addEventListener('click',()=>{
+    if(selected.has(item.id))selected.delete(item.id);
+    else selected.set(item.id,{item,decision:'considerar',reason:suggested.get(item.id)||''});
+    updatePlan();renderCards();
+   },{signal});
+   if(item.sourceUrl){
+    const link=add(card,'a','Consultar a fonte original ↗','mc-link');
+    link.href=item.sourceUrl;link.target='_blank';link.rel='noopener noreferrer';
+   }
   }
+ }
+ search.addEventListener('input',renderCards,{signal});
+ filter.addEventListener('change',renderCards,{signal});
+ updatePlan();renderCards();
+ return (current?:Record<string,unknown>)=>{
+  if(record!==current){selected.clear();updatePlan();}
+  record=current;renderCards();
  };
- search.addEventListener('input',render,{signal});
- filter.addEventListener('change',render,{signal});
- render();
- return (current?:Record<string,unknown>)=>{record=current;render();};
 }

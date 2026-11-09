@@ -27,7 +27,7 @@ const entries:InstrumentEntry[]=[
   id:'phq9',name:'PHQ-9',kind:'escala',domains:['humor','funcionamento'],
   status:'integrado',audience:'Adultos encaminhados ao percurso clínico NEXO.',
   purpose:'Rastreio de sintomas depressivos e impacto funcional, sem estabelecer diagnóstico.',
-  useNotes:'Versão pt-BR, 9 itens, últimas 2 semanas. Funciona no acolhimento inicial. Reaplicação isolada e convites de seguimento ainda não habilitados; confirmar indicação, intervalo e consentimento.',
+  useNotes:'Versão pt-BR, 9 itens, últimas 2 semanas. Formulário já implementado no acolhimento; reaplicação digital disponível somente após ativação operacional do módulo complementar e decisão do profissional.',
   sourceUrl:'https://multiculturalmentalhealth.ca/wp-content/uploads/2019/07/PHQ-9-Portuguese.pdf',
   origin:'Implementação clínica NEXO; fonte e versão documentadas em docs/MOMENTO-BATERIA-FONTES-E-ATIVACAO.md.'
  },
@@ -35,7 +35,7 @@ const entries:InstrumentEntry[]=[
   id:'gad7',name:'GAD-7',kind:'escala',domains:['ansiedade','funcionamento'],
   status:'integrado',audience:'Adultos encaminhados ao percurso clínico NEXO.',
   purpose:'Rastreio de sintomas ansiosos e interferência referida, sem diagnosticar transtorno.',
-  useNotes:'Versão pt-BR, 7 itens, últimas 2 semanas. Funciona no acolhimento inicial. Reaplicação isolada e convites de seguimento ainda não habilitados.',
+  useNotes:'Versão pt-BR, 7 itens, últimas 2 semanas. Formulário já implementado no acolhimento; reaplicação digital depende de ativação operacional e aprovação do terapeuta.',
   sourceUrl:'https://www.funesa.se.gov.br/wp-content/uploads/2025/03/protocolo-clinico-terapeutico-digital-final.pdf',
   origin:'Implementação clínica NEXO; fonte e versão documentadas em docs/MOMENTO-BATERIA-FONTES-E-ATIVACAO.md.'
  },
@@ -43,7 +43,7 @@ const entries:InstrumentEntry[]=[
   id:'isi',name:'ISI · Insomnia Severity Index',kind:'escala',domains:['sono'],
   status:'curadoria',audience:'Verificar população e versão brasileira específica.',
   purpose:'Aprofundamento de queixas de insônia quando a entrevista justificar.',
-  useNotes:'Instrumento mencionado anteriormente, mas o formulário completo e a licença da versão a utilizar NÃO foram recuperados. Não oferecer até confirmar conteúdo, validade, direitos e aplicação digital/remota.',
+  useNotes:'Incluído no acervo para seleção e planejamento profissional. A definição integral da versão pt-BR não foi recuperada no repositório; o questionário digital ainda não está cadastrado. Reutilizar a autorização anteriormente obtida, quando documentada, e verificar as condições da versão/modo usados.',
   origin:'Referência histórica do projeto; definição integral não localizada.'
  },
  {
@@ -59,7 +59,7 @@ const entries:InstrumentEntry[]=[
   id:'promis-depression',name:'PROMIS · Emotional Distress, Depression (nível 2, adultos)',kind:'medida transversal',
   domains:['humor'],status:'curadoria',audience:'Adultos; versão e normas brasileiras a conferir.',
   purpose:'Aprofundar domínio de humor quando houver pergunta clínica específica.',
-  useNotes:'Não disponível para aplicação no NEXO. Conferir tradução, versão, regras de pontuação, licença e modalidade.',
+  useNotes:'Selecionável para planejamento profissional. Para aplicação digital falta cadastrar a versão, pontuação e condições da tradução específica; preservar autorizações anteriores que já cubram o uso pretendido.',
   sourceUrl:'https://www.psychiatry.org/psychiatrists/practice/dsm/educational-resources/assessment-measures',
   origin:'Família de medidas DSM-5-TR/APA, somente referência.'
  },
@@ -75,7 +75,7 @@ const entries:InstrumentEntry[]=[
   id:'promis-sleep',name:'PROMIS · Sleep Disturbance (nível 2, adultos)',kind:'medida transversal',
   domains:['sono'],status:'curadoria',audience:'Adultos; versão e normas brasileiras a conferir.',
   purpose:'Aprofundar alterações de sono após esclarecer se a queixa é insônia, hipersonia, ritmo ou outra.',
-  useNotes:'Não disponível para aplicação no NEXO. Checar versão portuguesa, pontuação, direitos e aplicação remota.',
+  useNotes:'Selecionável para planejamento profissional. Falta o formulário eletrônico da versão portuguesa com suas regras de pontuação e condições de uso.',
   sourceUrl:'https://www.psychiatry.org/psychiatrists/practice/dsm/educational-resources/assessment-measures',
   origin:'Família de medidas DSM-5-TR/APA, somente referência.'
  },
@@ -83,7 +83,7 @@ const entries:InstrumentEntry[]=[
   id:'asrm',name:'ASRM · Altman Self-Rating Mania Scale (nível 2, adultos)',kind:'escala',
   domains:['humor','ativação episódica'],status:'curadoria',audience:'Adultos; versão e adaptação brasileira a conferir.',
   purpose:'Investigação complementar de ativação episódica, quando entrevista longitudinal indicar pertinência.',
-  useNotes:'Jamais inferir transtorno bipolar automaticamente. Não implementar itens ou aplicação até revisão clínica, direitos e modalidade.',
+  useNotes:'Jamais inferir transtorno bipolar automaticamente. Pode ser considerado na entrevista e no planejamento; não há formulário digital verificado cadastrado. Confirmar a versão, as condições e a pertinência antes da aplicação.',
   sourceUrl:'https://www.psychiatry.org/psychiatrists/practice/dsm/educational-resources/assessment-measures',
   origin:'Família de medidas DSM-5-TR/APA, somente referência.'
  },
@@ -123,7 +123,7 @@ const entries:InstrumentEntry[]=[
   id:'whodas12',name:'WHODAS 2.0 · 12 itens',kind:'escala',
   domains:['funcionamento'],status:'curadoria',audience:'Adultos; versão de aplicação, idioma e adaptação a conferir.',
   purpose:'Descrever funcionamento e participação ao longo da evolução.',
-  useNotes:'A OMS disponibiliza versões de 12 e 36 itens. Confirmar a versão brasileira, algoritmo correto, condições de uso e modalidade digital antes de aplicar.',
+  useNotes:'O manual da OMS disponibiliza o WHODAS 2.0 em domínio público, com registro de usuário previsto. Selecionável para planejamento; a versão pt-BR de 12 itens e a aplicação digital ainda precisam ser cadastradas, sem alteração dos itens.',
   sourceUrl:'https://www.who.int/standards/classifications/international-classification-of-functioning-disability-and-health/who-disability-assessment-schedule',
   origin:'Referência OMS para avaliação funcional discutida no projeto.'
  },
