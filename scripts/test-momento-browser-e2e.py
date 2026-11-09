@@ -56,13 +56,7 @@ def run_case(browser, port, expanded):
         reduced_motion="reduce",
     )
     page = context.new_page()
-    # Chromium headless can expose an experimental on-device recognition API
-    # without the native speech pack. Explicitly test the safe unavailable path.
-    # The positive local-only speech path has its own deterministic Node tests.
-    page.add_init_script("""
-      Object.defineProperty(window, 'SpeechRecognition', {value: undefined, configurable: true});
-      Object.defineProperty(window, 'webkitSpeechRecognition', {value: undefined, configurable: true});
-    """)
+    # No voice API mock: entering the reflection must NEVER call recognition automatically.
     page.set_default_timeout(8000)
     print('INICIO:', 'aprofundado' if expanded else 'essencial', flush=True)
     payloads = []
@@ -136,7 +130,8 @@ def run_case(browser, port, expanded):
         assert len(payloads) == 0
         if expanded:
             expect(page.locator('[data-mc-stage="reflection"]')).to_be_visible()
-            print('ETAPA: narrativas', flush=True)
+            expect(page.locator('[data-mc-action="dictate"]')).to_have_text('Verificar ditado local')
+            print('ETAPA: narrativas sem consulta de voz automática', flush=True)
             # 1 - narrative via text
             page.locator("#mc-reflection-text").fill("Quero compreender mudanças importantes no meu cotidiano.")
             page.locator('[data-mc-stage="reflection"] [data-mc-action="next"]').click()
