@@ -2,8 +2,8 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { DatabaseSync } from 'node:sqlite';
 import { readFileSync } from 'node:fs';
-import { handleClinicalRequest, clinicalConfiguration, encryptClinicalRecord, decryptClinicalRecord, validateClinicalSubmission, cleanupClinicalData } from '../functions/_lib/momento-clinical.js';
-import { CLINICAL_CONSENT_VERSION } from '../src/data/momento-instruments.ts';
+import { handleClinicalRequest, clinicalConfiguration, encryptClinicalRecord, decryptClinicalRecord, validateClinicalSubmission, validateClinicalFollowup, cleanupClinicalData } from '../functions/_lib/momento-clinical.js';
+import { CLINICAL_CONSENT_VERSION, FOLLOWUP_CONSENT_VERSION, INSTRUMENT_VERSIONS } from '../src/data/momento-instruments.ts';
 
 // Every identity, key, response and code in these tests is synthetic. No network.
 const origin = 'https://nexo-previa-20261014.pages.dev';
@@ -28,6 +28,7 @@ class D1Database {
   constructor() {
     this.sqlite = new DatabaseSync(':memory:');
     this.sqlite.exec(readFileSync(new URL('../migrations/0001_momento.sql', import.meta.url), 'utf8'));
+    this.sqlite.exec(readFileSync(new URL('../migrations/0002_momento_instrumentos.sql', import.meta.url), 'utf8'));
     this.sqlite.prepare('INSERT INTO momento_retention_runs (slot, last_success_at) VALUES (1, ?)').run(initialNow);
   }
   prepare(sql) { return new D1Statement(this.sqlite, sql); }
@@ -447,4 +448,95 @@ test('tópicos íntimos: não coleta sem autorização nem com recusa ou sem apr
  for(const mutate of mutations){const p=base();mutate(p);assert.throws(()=>validateClinicalSubmission(p,initialNow));}
  const basic=payload();basic.reflectionTopics=[];basic.reflectionSensitiveAccepted=false;
  assert.equal(validateClinicalSubmission(basic,initialNow).reflectionMode,'basic');
+});
+
+
+test('novo instrumento requer consentimento e versão exata; não altera o rastreio inicial',()=>{
+ const base={consent:{adult:true,accepted:true,version:FOLLOWUP_CONSENT_VERSION},instrumentId:'phq9',
+  instrumentVersion:INSTRUMENT_VERSIONS.phq9,answers:[0,1,1,0,0,0,0,0,1],impact:null};
+ const record=validateClinicalFollowup(base,'phq9',initialNow);
+ assert.equal(record.result.score,3);
+ assert.equal(record.result.item9AlertFlag,true);
+ assert.equal(record.consent.version,FOLLOWUP_CONSENT_VERSION);
+ for(const mutate of [
+  x=>x.consent.accepted=false,x=>x.consent.version='antigo',
+  x=>x.answers[0]=4,x=>x.answers[8]='1',x=>x.answers.pop(),
+  x=>x.instrumentVersion='nao-autorizada',x=>x.answers[0]=undefined,
+  x=>x.impact=4,x=>x.extra='informação clínica inesperada'
+ ]){
+  const v=structuredClone(base);mutate(v);assert.throws(()=>validateClinicalFollowup(v,'phq9',initialNow));
+ }
+});
+
+test('convite complementar seguro: só profissional, ligado ao registro, de uso único, com dados cifrados',async()=>{
+ const f=fixture(),admin=await f.enroll(),participant=await f.participant(admin);
+ const baseline=await f.call('submissions',{method:'POST',body:payload(),...participant});
+ assert.equal(baseline.status,201);
+ const req={submissionId:baseline.data.id,instrumentId:'phq9',expiresInDays:3,
+  administrationMode:'between-sessions',clinicianReviewed:true,safetyReviewed:false};
+ assert.equal((await f.call('instruments/assign',{method:'POST',body:req})).status,403);
+ const created=await f.call('instruments/assign',{method:'POST',body:req,...admin});
+ assert.equal(created.status,201);
+ assert.match(created.data.url,/\/conhecendo-meu-momento\/instrumento\/$/);
+ assert.equal(created.data.instrumentId,'phq9');
+ const id=created.data.id;
+ const list=await f.call('instruments',admin);
+ assert.equal(list.data.assignments[0].sourceSubmissionId,baseline.data.id);
+ assert.equal(list.data.assignments[0].submitted,false);
+ // A tela de acolhimento básico não pode consumir um código de instrumento.
+ assert.equal((await f.call('invitations/redeem',{method:'POST',body:{code:created.data.code}})).status,403);
+ const receipt=await f.call('instruments/redeem',{method:'POST',body:{code:created.data.code}});
+ assert.equal(receipt.status,200);
+ assert.equal(receipt.data.instrumentId,'phq9');
+ assert.equal((await f.call('instruments/redeem',{method:'POST',body:{code:created.data.code}})).status,403);
+ assert.equal((await f.call('instruments/participant',{cookie:receipt.cookie})).data.instrumentVersion,INSTRUMENT_VERSIONS.phq9);
+ const supplementary={consent:{adult:true,accepted:true,version:FOLLOWUP_CONSENT_VERSION},
+  instrumentId:'phq9',instrumentVersion:INSTRUMENT_VERSIONS.phq9,answers:[0,0,0,0,0,0,0,0,1],impact:1};
+ assert.equal((await f.call('instruments/submit',{method:'POST',body:{...supplementary,consent:{...supplementary.consent,accepted:false}},cookie:receipt.cookie,csrf:receipt.data.csrf})).status,400);
+ assert.equal((await f.call('instruments/submit',{method:'POST',body:supplementary,cookie:receipt.cookie})).status,403);
+ const result=await f.call('instruments/submit',{method:'POST',body:supplementary,cookie:receipt.cookie,csrf:receipt.data.csrf});
+ assert.equal(result.status,201);
+ assert.equal(result.data.saved,true);
+ assert.equal((await f.call('instruments/submit',{method:'POST',body:supplementary,cookie:receipt.cookie,csrf:receipt.data.csrf})).data.id,result.data.id);
+ const dbRow=f.db.sqlite.prepare('SELECT * FROM momento_instrument_results WHERE invite_id=?').get(id);
+ assert.ok(dbRow.ciphertext&&dbRow.iv);
+ assert.equal(dbRow.ciphertext.includes('phq9'),false);
+ assert.equal((await f.call('instruments/'+id+'/result')).status,403);
+ const view=await f.call('instruments/'+id+'/result',admin);
+ assert.equal(view.status,200);assert.equal(view.data.record.result.item9AlertFlag,true);
+ assert.equal(view.data.metadata.sourceSubmissionId,baseline.data.id);
+ assert.equal((await f.call('instruments',admin)).data.assignments[0].submitted,true);
+ assert.equal((await f.call('instruments/'+id+'/revoke',{method:'POST',body:{},...admin})).status,403);
+});
+
+test('item 9 positivo no primeiro registro exige revisão profissional antes de encaminhar',async()=>{
+ const f=fixture(),admin=await f.enroll(),participant=await f.participant(admin);
+ const baselinePayload=payload();baselinePayload.phq9[8]=2;
+ const baseline=await f.call('submissions',{method:'POST',body:baselinePayload,...participant});
+ assert.equal(baseline.status,201);
+ const req={submissionId:baseline.data.id,instrumentId:'gad7',expiresInDays:1,
+  administrationMode:'session',clinicianReviewed:true,safetyReviewed:false};
+ assert.equal((await f.call('instruments/assign',{method:'POST',body:req,...admin})).status,409);
+ const created=await f.call('instruments/assign',{method:'POST',body:{...req,safetyReviewed:true},...admin});
+ assert.equal(created.status,201);
+ assert.equal((await f.call('instruments/'+created.data.id+'/revoke',{method:'POST',body:{},...admin})).status,200);
+ assert.equal((await f.call('instruments/redeem',{method:'POST',body:{code:created.data.code}})).status,403);
+});
+
+test('instrumento complementar não pode virar acolhimento inicial ou contaminar outros pacientes',async()=>{
+ const f=fixture(),admin=await f.enroll(),participant=await f.participant(admin);
+ const baseline=await f.call('submissions',{method:'POST',body:payload(),...participant});
+ const req={submissionId:baseline.data.id,instrumentId:'gad7',expiresInDays:3,
+  administrationMode:'session',clinicianReviewed:true,safetyReviewed:false};
+ const assignment=await f.call('instruments/assign',{method:'POST',body:req,...admin});
+ const participant2=await f.call('instruments/redeem',{method:'POST',body:{code:assignment.data.code}});
+ assert.equal(participant2.status,200);
+ const malicious=await f.call('submissions',{method:'POST',body:payload(),cookie:participant2.cookie,csrf:participant2.data.csrf});
+ assert.equal(malicious.status,403);
+ const response={instrumentId:'gad7',instrumentVersion:INSTRUMENT_VERSIONS.gad7,
+  consent:{adult:true,accepted:true,version:FOLLOWUP_CONSENT_VERSION},answers:[1,1,1,1,1,1,1],impact:null};
+ const ok=await f.call('instruments/submit',{method:'POST',body:response,cookie:participant2.cookie,csrf:participant2.data.csrf});
+ assert.equal(ok.status,201);
+ assert.equal(f.db.sqlite.prepare('SELECT COUNT(*) AS n FROM momento_submissions').get().n,1);
+ assert.equal(f.db.sqlite.prepare('SELECT COUNT(*) AS n FROM momento_instrument_results').get().n,1);
 });
