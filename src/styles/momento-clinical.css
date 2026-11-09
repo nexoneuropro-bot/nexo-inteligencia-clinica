@@ -138,3 +138,15 @@
 #pro-library-import>.mc-catalog{margin-top:20px}
 @media(max-width:700px){.mc-library-controls{grid-template-columns:1fr}.mc-library-card{padding:17px}.mc-library-top h4{font-size:20px}}
 @media print{#pro-instrument-library{display:none!important}}
+
+/* Aplicação complementar: manter legibilidade, privacidade e o mesmo desenho clínico. */
+.mc-shell [data-f-stage]>h2{font:400 clamp(31px,4vw,44px)/1.15 var(--serif);color:#0b2635;margin:0 0 20px}
+.mc-shell [data-f-stage] fieldset{min-width:0}
+.mc-shell [data-f-stage] legend{font:500 clamp(18px,2.4vw,23px)/1.5 var(--sans);color:#173b48;margin:15px 0}
+.mc-shell [data-f-stage] .mc-confirm{margin:8px 0}
+.mc-followup-panel{border-top:2px solid #b77950;padding:25px 0;margin:30px 0}
+.mc-followup-panel h3{font:400 clamp(25px,3vw,35px)/1.2 var(--serif);color:#123d48}
+.mc-followup-panel textarea{width:100%;min-height:110px;max-width:100%;font:400 15px/1.5 var(--sans);padding:12px}
+.mc-followup-panel .mc-pro-code{overflow-wrap:anywhere}
+#pro-report-followups{margin-top:26px;padding-top:14px;border-top:2px solid #b77950}
+@media print{#pro-followups-section{display:none!important}#pro-report-followups{display:block}}
