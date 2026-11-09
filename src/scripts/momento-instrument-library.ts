@@ -27,18 +27,19 @@ export function mountInstrumentLibrary(root:HTMLElement,signal:AbortSignal){
  const imports=section?.querySelector<HTMLElement>('#pro-library-import');
  const planner=section?.querySelector<HTMLElement>('#pro-library-plan');
  if(!section||!search||!filter||!results||!status||!context||!planner)return (_record?:Record<string,unknown>)=>{};
+ const plan:HTMLElement=planner;
  if(imports&&!imports.childElementCount)appendNativePackImport(imports);
  let record:Record<string,unknown>|undefined;
  const selected=new Map<string,Selected>();
  function updatePlan(){
-  planner.replaceChildren();
-  add(planner,'h3','Minha seleção para avaliação profissional');
-  add(planner,'p','Escolher um instrumento registra uma possibilidade de trabalho, não um convite. As escolhas ficam apenas nesta tela e podem ser copiadas; não são anexadas automaticamente a prontuários ou pesquisas.','mc-report-quiet');
+  plan.replaceChildren();
+  add(plan,'h3','Minha seleção para avaliação profissional');
+  add(plan,'p','Escolher um instrumento registra uma possibilidade de trabalho, não um convite. As escolhas ficam apenas nesta tela e podem ser copiadas; não são anexadas automaticamente a prontuários ou pesquisas.','mc-report-quiet');
   if(!selected.size){
-   add(planner,'p','Nenhum instrumento selecionado. Todos os itens do acervo podem ser considerados, inclusive os que ainda não possuem formulário digital no NEXO.','mc-report-quiet');
+   add(plan,'p','Nenhum instrumento selecionado. Todos os itens do acervo podem ser considerados, inclusive os que ainda não possuem formulário digital no NEXO.','mc-report-quiet');
    return;
   }
-  const list=add(planner,'div','','mc-library-selected');
+  const list=add(plan,'div','','mc-library-selected');
   for(const entry of selected.values()){
    const article=add(list,'article','','mc-library-selected-item');
    add(article,'h4',entry.item.name);
@@ -58,10 +59,10 @@ export function mountInstrumentLibrary(root:HTMLElement,signal:AbortSignal){
    const remove=add(article,'button','Retirar da seleção','mc-button');
    remove.type='button';remove.addEventListener('click',()=>{selected.delete(entry.item.id);updatePlan();renderCards();},{signal});
   }
-  const buttons=add(planner,'div','','mc-actions');
+  const buttons=add(plan,'div','','mc-actions');
   const copy=add(buttons,'button','Copiar plano de instrumentos','mc-button mc-primary');
   copy.type='button';
-  const feedback=add(planner,'p','','mc-report-quiet');
+  const feedback=add(plan,'p','','mc-report-quiet');
   feedback.setAttribute('role','status');
   copy.addEventListener('click',async()=>{
    const text=['NEXO · PLANEJAMENTO PROFISSIONAL DE INSTRUMENTOS','Seleção clínica sujeita à pertinência, finalidade, modalidade e consentimento. Nenhum envio automático.',
