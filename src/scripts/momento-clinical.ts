@@ -31,6 +31,15 @@ function startClinical(){
    onTranscript:(transcribed)=>{
     if(stage!=='reflection'||context.privacy!=='yes')return;
     const field=element<HTMLTextAreaElement>('mc-reflection-text');
+    const normalized=transcribed.toLocaleLowerCase('pt-BR').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[.!?,;:]+$/,'').trim();
+    const command=normalized==='prefiro nao responder'?'prefer-not':normalized==='prefiro falar depois'||normalized==='quero conversar na sessao'||normalized==='prefiro conversar na sessao'?'later':normalized==='ainda nao sei'||normalized==='nao sei dizer'?'unsure':null;
+    if(command){
+      field.value='';
+      const option=root.querySelector<HTMLInputElement>(`input[name="mc-reflection-choice"][value="${command}"]`);
+      if(option)option.checked=true;
+      element('mc-dictation-status').textContent='Opção reconhecida localmente. Revise a escolha antes de continuar.';
+      return;
+    }
     field.value=[field.value,transcribed].filter(Boolean).join(' ').slice(0,REFLECTION_MAX_CHARS);
     const option=root.querySelector<HTMLInputElement>('input[name="mc-reflection-choice"][value="answered"]');
     if(option)option.checked=true;
@@ -223,7 +232,8 @@ function startClinical(){
   const target=event.target;if(sending||!(target instanceof Element))return;const button=target.closest<HTMLButtonElement>('button[data-mc-action]');if(!button||button.disabled)return;
   switch(button.dataset.mcAction){case'availability':await checkAvailability();break;case'redeem':await redeem();break;case'next':advance();break;case'back':back();break;case'skip':if(stage==='questions'||stage==='reflection')advance(true);break;case'dictate':if(stage==='reflection'&&context.privacy==='yes'){if(dictation.active)dictation.stop();else if(dictation.start()){button.textContent='Parar ditado';element('mc-dictation-status').textContent='Ouvindo localmente. Revise o texto antes de continuar.';}}break;case'pause':if(!sending&&['profile','privacy','choice','questions','reflection','summary'].includes(stage)){resumeStage=stage==='summary'?'summary':stage==='reflection'?'reflection':stage==='choice'?'choice':'questions';stage='paused';render();}break;case'resume':context.privacy='';root.querySelectorAll<HTMLInputElement>('input[name="mc-privacy"]').forEach(input=>{input.checked=false;});stage='privacy';render();break;case'end':await end();break;case'submit':await submit();break;case'submit-partial':await submit(true);break;case'hear-consent':hearConsent();break;case'stop-speech':stopSpeech();element('mc-voice-status').textContent='Leitura interrompida.';break;case'copy-receipt':try{await navigator.clipboard.writeText(receiptId);status.textContent='Identificador copiado.';}catch{status.textContent='Não foi possível copiar. Anote o identificador exibido.';}break;}
  },{signal});
- root.addEventListener('change',event=>{const target=event.target;if(target instanceof HTMLInputElement&&target.name==='mc-answer'&&stage==='questions'){saveCurrent(false);const item=sequence[position];if(item.kind==='scale'&&item.instrument==='phq9'&&item.index===8)element('mc-care-note').hidden=Number(target.value)<=0;}},{signal});
+ root.addEventListener('input',event=>{const target=event.target;if(target instanceof HTMLTextAreaElement&&target.id==='mc-reflection-text'&&stage==='reflection'&&target.value.trim()){const selected=root.querySelector<HTMLInputElement>('input[name="mc-reflection-choice"][value="answered"]');if(selected)selected.checked=true;}},{signal});
+  root.addEventListener('change',event=>{const target=event.target;if(target instanceof HTMLInputElement&&target.name==='mc-answer'&&stage==='questions'){saveCurrent(false);const item=sequence[position];if(item.kind==='scale'&&item.instrument==='phq9'&&item.index===8)element('mc-care-note').hidden=Number(target.value)<=0;}},{signal});
  document.addEventListener('visibilitychange',()=>{if(document.hidden){stopSpeech();dictation.stop();}},{signal});
  render(false);void checkAvailability();
  return()=>{clear();csrf='';receiptId='';life.abort();};
