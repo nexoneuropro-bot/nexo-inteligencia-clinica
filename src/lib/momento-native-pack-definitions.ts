@@ -30,7 +30,8 @@ export function readPackDefinitions(value:unknown):readonly PackDefinition[]{
  if(!plain(value)||!exactly(value,['schema','packs'])||value.schema!==PACK_SCHEMA||!Array.isArray(value.packs)||value.packs.length>70)invalid('estrutura ou quantidade de packs');
  const ids=new Set<string>();
  const packs:PackDefinition[]=[];
- for(const raw of value.packs){
+ const candidatePacks=(value as {packs:unknown[]}).packs;
+ for(const raw of candidatePacks){
   if(!plain(raw)||!exactly(raw,['id','name','version','language','source','rights','audience','mode','instructions','referencePeriod','scoringNotes','questions']))invalid('campos inesperados em pack');
   if(!identifier(raw.id)||ids.has(raw.id)||!printable(raw.name,3,160)||!printable(raw.version,1,110)||!printable(raw.language,2,16)||
      !printable(raw.source,3,280)||!printable(raw.rights,3,240)||!printable(raw.audience,2,150)||!mode(raw.mode)||
