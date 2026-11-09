@@ -11,7 +11,7 @@ import '../styles/momento-clinical.css';
   <section id="pro-instrument-library" aria-labelledby="pro-library-heading">
    <p class="mc-kicker">ACERVO PROFISSIONAL · NEXO</p>
    <h2 id="pro-library-heading">Instrumentos e procedimentos em um só lugar.</h2>
-   <p>Consulte os instrumentos do acolhimento, as medidas ainda em curadoria e os roteiros clínicos. Apenas as versões já implementadas podem aparecer no percurso inicial. A biblioteca não envia escalas automaticamente.</p>
+   <p>Explore todos os instrumentos e procedimentos do acervo, selecione aqueles pertinentes e organize sua programação clínica ou de pesquisa social gratuita. A escolha profissional fica disponível independentemente do formulário digital. O envio pelo site exige implementação efetiva e consentimento.</p>
    <div class="mc-library-controls">
     <label class="mc-field" for="pro-library-search">Buscar por nome, domínio ou finalidade
      <input id="pro-library-search" type="search" autocomplete="off" placeholder="Ex.: sono, ansiedade, funcionamento"/>
@@ -20,7 +20,7 @@ import '../styles/momento-clinical.css';
      <select id="pro-library-filter">
       <option value="todos">Todos os registros</option>
       <option value="integrado">No acolhimento inicial</option>
-      <option value="curadoria">Aguardando conferência</option>
+      <option value="curadoria">Referências para planejamento</option>
       <option value="procedimento">Roteiros e procedimentos</option>
      </select>
     </label>
@@ -28,6 +28,7 @@ import '../styles/momento-clinical.css';
    <p id="pro-library-status" class="mc-caption" role="status" aria-live="polite"></p>
    <aside id="pro-library-context" class="mc-library-context" aria-label="Análise de pertinência para o registro aberto"></aside>
    <div id="pro-library-results" class="mc-library-results"></div>
+   <section id="pro-library-plan" class="mc-library-plan" aria-label="Seleção de instrumentos para planejamento profissional"></section>
    <div id="pro-library-import" aria-label="Conferir definições de instrumentos previamente exportadas"></div>
   </section>
   <section id="pro-record-section" hidden aria-labelledby="pro-record-title"><h2 id="pro-record-title" tabindex="-1">Apoio à entrevista.</h2><p class="mc-caption" id="pro-record-id"></p><div class="mc-pro-record" id="pro-record"></div>
