@@ -2,7 +2,7 @@ import { profileFields, placeOptions, questions } from '../../src/data/momento-d
 import { scoreScreening, SCREENING_SCORING_RULES_VERSION } from '../../src/lib/momento-screening.ts';
 import { CLINICAL_CONSENT_VERSION, INSTRUMENT_VERSIONS } from '../../src/data/momento-instruments.ts';
 import { clarificationQuestions } from '../../src/data/momento-clarifications.ts';
-import { reflectionQuestions, reflectionChoices, REFLECTION_MAX_CHARS } from '../../src/data/momento-reflections.ts';
+import { reflectionQuestions, reflectionChoices, reflectionTopics, REFLECTION_MAX_CHARS } from '../../src/data/momento-reflections.ts';
 
 export const CLINICAL_ADMIN = 'nexoneuropro@gmail.com';
 export const CLINICAL_ACTIVE_RETENTION_DAYS = 81;
@@ -92,7 +92,7 @@ export async function decryptClinicalRecord(record, keyBytes) {
 }
 
 export function validateClinicalSubmission(payload, now = Date.now()) {
-  requireExact(payload, ['consent', 'profile', 'context', 'authorAnswers', 'phq9', 'gad7', 'impact', 'clarifications', 'completion', 'reflectionMode', 'reflectionAnswers']);
+  requireExact(payload, ['consent', 'profile', 'context', 'authorAnswers', 'phq9', 'gad7', 'impact', 'clarifications', 'completion', 'reflectionMode', 'reflectionAnswers', 'reflectionSensitiveAccepted', 'reflectionTopics']);
   requireExact(payload.consent, ['accepted', 'adult', 'version']);
   if (payload.consent.accepted !== true || payload.consent.adult !== true || payload.consent.version !== CLINICAL_CONSENT_VERSION) throw new ClinicalError(400, 'consent_required');
   requireExact(payload.profile, profileFields.map(field => field.id));
@@ -164,6 +164,13 @@ export function validateClinicalSubmission(payload, now = Date.now()) {
       reflectionAnswers[item.id] = { status: entry.status };
     }
   }
+  const reflectionSensitiveAccepted = payload.reflectionSensitiveAccepted ?? false;
+  if (typeof reflectionSensitiveAccepted !== 'boolean' || (reflectionMode === 'extended' && reflectionSensitiveAccepted !== true)) throw new ClinicalError(400, 'sensitive_consent_required');
+  if (payload.reflectionTopics !== undefined && (!Array.isArray(payload.reflectionTopics) || payload.reflectionTopics.length > reflectionTopics.length)) throw new ClinicalError(400, 'invalid_reflection_topics');
+  const selectedTopics = payload.reflectionTopics ?? [];
+  if (reflectionMode === 'basic' && (reflectionSensitiveAccepted || selectedTopics.length)) throw new ClinicalError(400, 'unexpected_reflection_topics');
+  if (new Set(selectedTopics).size !== selectedTopics.length || selectedTopics.some(topic => typeof topic !== 'string' || !reflectionTopics.some(allowed => allowed.id === topic))) throw new ClinicalError(400, 'invalid_reflection_topics');
+  if (selectedTopics.length && (!reflectionAnswers['identidade-vinculos'] || reflectionAnswers['identidade-vinculos'].status === 'prefer-not')) throw new ClinicalError(400, 'invalid_reflection_topics');
   const allowedQuestionIds = new Set([...questions.map(question => question.id), ...Array.from({ length: 9 }, (_, index) => `phq9-${index}`), ...Array.from({ length: 7 }, (_, index) => `gad7-${index}`), 'phq9-impact', 'gad7-impact', 'journey-choice', ...clarificationQuestions.map(question => `clarification-${question.id}`), ...reflectionQuestions.map(question => `reflection-${question.id}`)]);
   const completion = { kind: 'complete' };
   if (payload.completion !== undefined) {
@@ -176,9 +183,9 @@ export function validateClinicalSubmission(payload, now = Date.now()) {
       completion.lastShownId = payload.completion.lastShownId;
     }
   }
-  return { schemaVersion: 3, consent: { accepted: true, adult: true, version: CLINICAL_CONSENT_VERSION, locale: 'pt-BR', acceptedAt: new Date(now).toISOString() }, profile,
+  return { schemaVersion: 4, consent: { accepted: true, adult: true, version: CLINICAL_CONSENT_VERSION, locale: 'pt-BR', acceptedAt: new Date(now).toISOString() }, profile,
     // The temporary place check is validated but not retained in the record.
-    context: { privacy: payload.context.privacy, accompaniment }, authorAnswers, ...originalAnswers, results, impact, clarifications, completion, reflectionMode, reflectionAnswers,
+    context: { privacy: payload.context.privacy, accompaniment }, authorAnswers, ...originalAnswers, results, impact, clarifications, completion, reflectionMode, reflectionAnswers, reflectionSensitiveAccepted, reflectionTopics: selectedTopics,
     instrumentVersions: INSTRUMENT_VERSIONS, scoringRulesVersion: SCREENING_SCORING_RULES_VERSION,
     createdAt: new Date(now).toISOString(), expiresAt: new Date(now + CLINICAL_ACTIVE_RETENTION_DAYS * DAY).toISOString() };
 }

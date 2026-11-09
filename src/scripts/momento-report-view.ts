@@ -1,5 +1,5 @@
 import {buildIntegratedReport,type ReportPoint,type ReportAxis,type ReportDomain,type ReportInstrument} from '../lib/momento-professional-report';
-import {reflectionQuestions,reflectionChoices} from '../data/momento-reflections';
+import {reflectionQuestions,reflectionChoices,reflectionTopics} from '../data/momento-reflections';
 
 function element<K extends keyof HTMLElementTagNameMap>(tag:K,className?:string):HTMLElementTagNameMap[K]{
  const node=document.createElement(tag);if(className)node.className=className;return node;
@@ -100,6 +100,16 @@ export function appendIntegratedProfessionalReport(panel:HTMLElement,record:Reco
    narrative.append(box);
   }
  }else narrative.append(text('p','Nenhuma pergunta narrativa adicional foi solicitada neste percurso.','mc-report-quiet'));
+ const topics=Array.isArray(record.reflectionTopics)?record.reflectionTopics:[];
+ if(record.reflectionMode==='extended'&&topics.length){
+  const selected=reflectionTopics.filter(topic=>topics.includes(topic.id));
+  const card=element('article','mc-report-tool');
+  card.append(text('h4','Assuntos que a pessoa escolheu considerar na sessão'));
+  const list=element('ul','mc-report-evidence');
+  selected.forEach(topic=>list.append(text('li',topic.label)));
+  card.append(list,text('p','A seleção de um assunto não define identidade, crença, orientação ou mecanismo psicológico. Perguntar se a pessoa deseja abordá-lo agora.','mc-report-quiet'));
+  narrative.append(card);
+ }
  narrative.append(text('p','As narrativas são autorrelatos, não resultados psicométricos. O NEXO não infere função do comportamento, trauma ou comportamentos clinicamente relevantes (CRB) da FAP por meio destas respostas. A relação terapêutica e as contingências observadas no encontro exigem avaliação humana.','mc-report-quiet'));
  const notice=element('div','mc-report-notice');
  notice.append(text('strong','Documento preparatório reservado ao profissional.'),text('p','Não é laudo, parecer diagnóstico, previsão de risco nem devolutiva ao participante. Todas as inferências dependem de avaliação humana.'));
