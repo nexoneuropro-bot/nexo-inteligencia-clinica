@@ -37,27 +37,30 @@ export function readPackDefinitions(value:unknown):readonly PackDefinition[]{
      !printable(raw.source,3,280)||!printable(raw.rights,3,240)||!printable(raw.audience,2,150)||!mode(raw.mode)||
      !optionalText(raw.instructions,2400)||!optionalText(raw.referencePeriod,400)||!optionalText(raw.scoringNotes,2500)||
      !Array.isArray(raw.questions)||raw.questions.length<1||raw.questions.length>120)invalid('metadados ou quantidade de perguntas');
-  ids.add(raw.id);
+  const entry=raw as Dict;
+  ids.add(entry.id as string);
   const questionIds=new Set<string>();
   const questions:PackQuestion[]=[];
-  for(const q of raw.questions){
+  for(const q of entry.questions as unknown[]){
    if(!plain(q)||!exactly(q,['id','prompt','help','choices'])||!identifier(q.id)||questionIds.has(q.id)||
       !printable(q.prompt,3,1400)||!optionalText(q.help,1100)||!Array.isArray(q.choices)||q.choices.length<2||q.choices.length>12)invalid('perguntas ou alternativas');
-   questionIds.add(q.id);
+   const question=q as Dict;
+   questionIds.add(question.id as string);
    const choiceIds=new Set<string>(),choices:PackChoice[]=[];
-   for(const choice of q.choices){
+   for(const choice of question.choices as unknown[]){
     if(!plain(choice)||!exactly(choice,['id','label','value'])||!identifier(choice.id)||choiceIds.has(choice.id)||
        !printable(choice.label,1,350)||!(choice.value===null||(typeof choice.value==='number'&&Number.isInteger(choice.value)&&choice.value>=-20&&choice.value<=100)))invalid('alternativa ou escore');
-    choiceIds.add(choice.id);
-    choices.push(Object.freeze({id:choice.id,label:choice.label.trim(),value:choice.value}));
+    const option=choice as Dict;
+    choiceIds.add(option.id as string);
+    choices.push(Object.freeze({id:option.id as string,label:String(option.label).trim(),value:option.value as number|null}));
    }
-   questions.push(Object.freeze({id:q.id,prompt:q.prompt.trim(),help:q.help.trim(),choices:Object.freeze(choices)}));
+   questions.push(Object.freeze({id:question.id as string,prompt:String(question.prompt).trim(),help:String(question.help).trim(),choices:Object.freeze(choices)}));
   }
   packs.push(Object.freeze({
-   id:raw.id,name:raw.name.trim(),version:raw.version.trim(),language:raw.language.trim(),
-   source:raw.source.trim(),rights:raw.rights.trim(),audience:raw.audience.trim(),
-   mode:raw.mode,instructions:raw.instructions.trim(),referencePeriod:raw.referencePeriod.trim(),
-   scoringNotes:raw.scoringNotes.trim(),questions:Object.freeze(questions),
+   id:entry.id as string,name:String(entry.name).trim(),version:String(entry.version).trim(),language:String(entry.language).trim(),
+   source:String(entry.source).trim(),rights:String(entry.rights).trim(),audience:String(entry.audience).trim(),
+   mode:entry.mode as PackDefinition['mode'],instructions:String(entry.instructions).trim(),referencePeriod:String(entry.referencePeriod).trim(),
+   scoringNotes:String(entry.scoringNotes).trim(),questions:Object.freeze(questions),
    status:'somente-revisao-local' as const
   }));
  }
