@@ -120,7 +120,7 @@ export function buildClinicalInterviewGuide(input:unknown):ClinicalInterviewGuid
   'Pedir a descrição de um acontecimento das últimas 48–72 horas; mapear situação → reação → efeitos sem estabelecer causalidade prematura.',
   'Usar escala subjetiva de 0–10 somente para o próprio participante observar mudança no momento, nunca como teste diagnóstico ou classificador de suicídio.',
   'Identificar escolha sob seu controle: uma ação pequena, viável, coerente com valores e condições de vida.',
-  'Consultar se deseja utilizar escrita/voz digital. Em caso negativo, conduzir integralmente em diálogo humano.'
+  'A tecnologia nunca é obrigatória. Consultar se deseja utilizar escrita/voz digital e se pode fazê-lo com privacidade; caso contrário, conduzir integralmente em diálogo humano.'
  ];
  const briefPlan=[
   'Primeiro contato: segurança, acolhimento, demanda definida em conjunto e próximos contatos.',
