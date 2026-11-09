@@ -2,6 +2,7 @@ import {startAuthentication,startRegistration} from '@simplewebauthn/browser';
 import {screeningInstruments} from '../data/momento-instruments';
 import {buildProfessionalCues} from '../lib/momento-professional-cues';
 import {appendIntegratedProfessionalReport} from './momento-report-view';
+import {mountInstrumentLibrary} from './momento-instrument-library';
 import {clarificationQuestions} from '../data/momento-clarifications';
 import {profileFields,questions} from '../data/momento-demo';
 
@@ -15,11 +16,12 @@ function startProfessional(){
  const candidate=document.querySelector<HTMLElement>('[data-momento-professional]');if(!candidate)return;const root:HTMLElement=candidate;
  const life=new AbortController();const{signal}=life;let csrf='',currentId='',currentRecord:Data|undefined,currentMetadata:Data|undefined,inviteCode='',inviteUrl='',busy=false,authenticated=false;
  const element=<T extends HTMLElement=HTMLElement>(id:string)=>root.querySelector<T>(`#${id}`)!;
+ const updateInstrumentLibrary=mountInstrumentLibrary(root,signal);
  const error=element('pro-error'),status=element('pro-status');
  function setPanel(panel:'access'|'enrollment'|'workspace'){root.querySelectorAll<HTMLElement>('[data-pro-panel]').forEach(item=>{item.hidden=item.dataset.proPanel!==panel;});}
  function notice(text:string){status.textContent=text;}
  function fail(text:string){error.textContent=text;}
- function clearRecord(){currentRecord=undefined;currentMetadata=undefined;currentId='';element('pro-record').replaceChildren();element('pro-record-section').hidden=true;element<HTMLInputElement>('pro-delete-confirm').checked=false;}
+ function clearRecord(){updateInstrumentLibrary();currentRecord=undefined;currentMetadata=undefined;currentId='';element('pro-record').replaceChildren();element('pro-record-section').hidden=true;element<HTMLInputElement>('pro-delete-confirm').checked=false;}
  function hideInvite(){inviteCode='';inviteUrl='';element('pro-invite-code').textContent='';element('pro-invite-expiry').textContent='';element('pro-created-invite').hidden=true;}
  function clearWorkspace(){csrf='';authenticated=false;clearRecord();hideInvite();element('pro-invites').replaceChildren();element('pro-submissions').replaceChildren();element('pro-identity').textContent='';element<HTMLInputElement>('pro-enrollment-code').value='';setPanel('access');}
  function humanDate(value:unknown){if(typeof value!=='string')return'Não informado';const date=new Date(value);return Number.isFinite(date.getTime())?date.toLocaleString('pt-BR',{dateStyle:'short',timeStyle:'short'}):'Não informado';}
@@ -130,7 +132,7 @@ function startProfessional(){
   appendIntegratedProfessionalReport(panel,record);
  }
  async function openRecord(id:string){
-  if(!/^[a-zA-Z0-9_-]{8,100}$/.test(id))throw new Error('unavailable');clearRecord();const data=await api(`submissions/${encodeURIComponent(id)}`),record=object(data.record),metadata=object(data.metadata);if(!Object.keys(record).length)throw new Error('unavailable');currentId=id;currentRecord=record;currentMetadata=metadata;renderRecord(record,metadata);element('pro-record-id').textContent=`Identificador ${id}. Acesso ao conteúdo registrado para auditoria.`;element('pro-record-section').hidden=false;const h=element('pro-record-title');h.focus({preventScroll:true});h.scrollIntoView({block:'start',behavior:'instant'});
+  if(!/^[a-zA-Z0-9_-]{8,100}$/.test(id))throw new Error('unavailable');clearRecord();const data=await api(`submissions/${encodeURIComponent(id)}`),record=object(data.record),metadata=object(data.metadata);if(!Object.keys(record).length)throw new Error('unavailable');currentId=id;currentRecord=record;currentMetadata=metadata;renderRecord(record,metadata);updateInstrumentLibrary(record);element('pro-record-id').textContent=`Identificador ${id}. Acesso ao conteúdo registrado para auditoria.`;element('pro-record-section').hidden=false;const h=element('pro-record-title');h.focus({preventScroll:true});h.scrollIntoView({block:'start',behavior:'instant'});
  }
  async function copy(text:string,success:string){if(!text)return;try{await navigator.clipboard.writeText(text);notice(success);}catch{fail('Não foi possível copiar. Você pode selecionar o texto exibido.');}}
  async function run(action:()=>Promise<void>){if(busy)return;busy=true;error.textContent='';root.setAttribute('aria-busy','true');try{await action();}catch(err){if(err instanceof Error&&['NotAllowedError','AbortError'].includes(err.name))fail('A confirmação no dispositivo foi cancelada ou não foi concluída. Você pode tentar novamente.');else fail(message(err));}finally{busy=false;root.removeAttribute('aria-busy');}}
