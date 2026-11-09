@@ -2,7 +2,8 @@ import {screeningInstruments,type ClinicalInstrument} from '../data/momento-inst
 type Stage='access'|'consent'|'questions'|'review'|'done';
 let dispose:(()=>void)|undefined;
 function init(){
- const root=document.querySelector<HTMLElement>('[data-momento-followup]');if(!root)return()=>{};
+ const candidate=document.querySelector<HTMLElement>('[data-momento-followup]');if(!candidate)return()=>{};
+ const root:HTMLElement=candidate;
  const life=new AbortController(),{signal}=life;
  const el=<T extends HTMLElement=HTMLElement>(id:string)=>root.querySelector<T>('#'+id)!;
  let stage:Stage='access',csrf='',consentVersion='',instrument:ClinicalInstrument|undefined;
