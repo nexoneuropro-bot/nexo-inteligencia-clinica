@@ -10,6 +10,8 @@ on:
       - 'src/lib/momento-professional-report.ts'
       - 'src/lib/momento-clinical-interview-guide.ts'
       - 'src/scripts/momento-clinical-guide-view.ts'
+      - 'src/lib/momento-instrument-catalog.ts'
+      - 'src/scripts/momento-instrument-catalog-view.ts'
       - 'src/components/MomentoProfessional.astro'
       - 'src/components/MomentoClinical.astro'
       - 'src/scripts/momento-clinical.ts'
@@ -67,9 +69,9 @@ jobs:
                           url=urllib.parse.urljoin(asset,dep)
                           if url not in seen and url not in queue:queue.append(url)
                   combined='\\n'.join(source for _,source in chunks)
-                  expected_terms=[expected,'Por onde começar, o que investigar e como continuar']
+                  expected_terms=[expected,'Por onde começar, o que investigar e como continuar','Biblioteca NEXO · cruzar metadados de outras escalas']
                   if all(term in combined for term in expected_terms):
-                      print('PUBLICAÇÃO CONFIRMADA: síntese integrada e novo guia clínico estão nos assets:')
+                      print('PUBLICAÇÃO CONFIRMADA: síntese, guia clínico e biblioteca de metadados nos assets:')
                       for asset,source in chunks:
                           if any(term in source for term in expected_terms):print(asset)
                       print('Verificação somente de assets estáticos. Não consulta prontuários ou login.')
