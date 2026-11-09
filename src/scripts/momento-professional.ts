@@ -14,7 +14,7 @@ let disposeProfessional:(()=>void)|undefined;
 
 function startProfessional(){
  const candidate=document.querySelector<HTMLElement>('[data-momento-professional]');if(!candidate)return;const root:HTMLElement=candidate;
- const life=new AbortController();const{signal}=life;let csrf='',currentId='',currentRecord:Data|undefined,currentMetadata:Data|undefined,inviteCode='',inviteUrl='',followupCode='',followupUrl='',followupsEnabled=false,busy=false,authenticated=false;
+ const life=new AbortController();const{signal}=life;let csrf='',currentId='',currentRecord:Data|undefined,currentMetadata:Data|undefined,inviteCode='',inviteUrl='',followupCode='',followupUrl='',followupsEnabled=false,researchStudyId='',researchStudyUrl='',busy=false,authenticated=false;
  const element=<T extends HTMLElement=HTMLElement>(id:string)=>root.querySelector<T>(`#${id}`)!;
  const updateInstrumentLibrary=mountInstrumentLibrary(root,signal);
  const error=element('pro-error'),status=element('pro-status');
@@ -23,7 +23,7 @@ function startProfessional(){
  function fail(text:string){error.textContent=text;}
  function clearRecord(){updateInstrumentLibrary();currentRecord=undefined;currentMetadata=undefined;currentId='';followupCode='';followupUrl='';followupsEnabled=false;element('pro-followups-section').hidden=true;element('pro-followup-created').hidden=true;element('pro-record').replaceChildren();element('pro-record-section').hidden=true;element<HTMLInputElement>('pro-delete-confirm').checked=false;}
  function hideInvite(){inviteCode='';inviteUrl='';element('pro-invite-code').textContent='';element('pro-invite-expiry').textContent='';element('pro-created-invite').hidden=true;}
- function clearWorkspace(){csrf='';authenticated=false;clearRecord();hideInvite();element('pro-invites').replaceChildren();element('pro-submissions').replaceChildren();element('pro-identity').textContent='';element<HTMLInputElement>('pro-enrollment-code').value='';setPanel('access');}
+ function clearWorkspace(){csrf='';authenticated=false;clearRecord();hideInvite();element('pro-invites').replaceChildren();element('pro-submissions').replaceChildren();element('pro-identity').textContent='';element<HTMLInputElement>('pro-enrollment-code').value='';researchStudyId='';researchStudyUrl='';element('pro-social-study-open').hidden=true;setPanel('access');}
  function humanDate(value:unknown){if(typeof value!=='string')return'Não informado';const date=new Date(value);return Number.isFinite(date.getTime())?date.toLocaleString('pt-BR',{dateStyle:'short',timeStyle:'short'}):'Não informado';}
  async function api(path:string,body?:unknown){
   const response=await fetch(`/api/momento/${path}`,{method:body===undefined?'GET':'POST',headers:{...(body===undefined?{}:{'Content-Type':'application/json'}),...(csrf?{'X-Nexo-CSRF':csrf}:{})},...(body===undefined?{}:{body:JSON.stringify(body)}),credentials:'same-origin',cache:'no-store',referrerPolicy:'no-referrer',signal});
@@ -40,6 +40,15 @@ function startProfessional(){
   if(!response.ok)throw new Error(response.status===429?'rate_limited':response.status===403?'access_denied':'unavailable');
   return object(data);
  }
+ async function apiResearch(path:string,body?:unknown){
+  const response=await fetch('/api/momento-research/'+path,{method:body===undefined?'GET':'POST',
+   headers:body===undefined?{}:{'Content-Type':'application/json',...(csrf?{'X-Nexo-CSRF':csrf}:{})},
+   body:body===undefined?undefined:JSON.stringify(body),
+   cache:'no-store',credentials:'same-origin',referrerPolicy:'no-referrer',signal});
+  const data=await response.json().catch(()=>({}));
+  if(!response.ok)throw new Error(response.status===429?'rate_limited':response.status===403?'access_denied':'unavailable');
+  return object(data);
+ }
  function message(err:unknown){return err instanceof Error&&err.message==='expired'?'Seu acesso expirou. Entre novamente com sua chave de acesso.':err instanceof Error&&err.message==='rate_limited'?'Houve várias tentativas em pouco tempo. Aguarde antes de tentar novamente.':err instanceof Error&&err.message==='access_denied'?'Não foi possível verificar este acesso. Confira seu código ou tente a chave de acesso novamente.':'Não foi possível concluir a operação. Nenhuma confirmação foi emitida. Tente novamente.';}
  function paragraph(parent:HTMLElement,text:string){const p=document.createElement('p');p.textContent=text;parent.append(p);return p;}
  function heading(parent:HTMLElement,text:string){const h=document.createElement('h3');h.textContent=text;parent.append(h);}
@@ -50,7 +59,7 @@ function startProfessional(){
   listContainer('pro-invites',records(invites.invites),'Nenhum convite disponível nesta lista.',(item,article)=>{paragraph(article,`Convite ${textValue(item.id)}`);paragraph(article,`Criado em ${humanDate(item.createdAt)} · Válido até ${humanDate(item.expiresAt)}`);paragraph(article,item.submitted===true?'Respostas recebidas.':item.redeemedAt?'Convite utilizado; preenchimento ainda sem recebimento confirmado.':'Aguardando utilização.');if(item.submitted!==true&&typeof item.id==='string'){const label=document.createElement('label'),input=document.createElement('input'),span=document.createElement('span'),button=document.createElement('button');input.type='checkbox';input.dataset.proRevokeConfirm=item.id;span.textContent='Confirmo que desejo revogar este convite e encerrar seu acesso.';label.className='mc-confirm';label.append(input,span);button.type='button';button.className='mc-button';button.dataset.proRevoke=item.id;button.textContent='Revogar convite confirmado';button.disabled=true;article.append(label,button);}});
   listContainer('pro-submissions',records(submissions.submissions),'Nenhuma resposta disponível nesta lista.',(item,article)=>{paragraph(article,`Recebimento ${textValue(item.id)}`);paragraph(article,`Recebido em ${humanDate(item.createdAt)} · Acesso ativo até ${humanDate(item.expiresAt)}`);paragraph(article,item.feedbackCompletedAt?`Devolutiva registrada em ${humanDate(item.feedbackCompletedAt)}.`:'Devolutiva ainda sem registro de realização.');paragraph(article,item.notificationSent===true?'Aviso neutro de recebimento enviado.':'Aviso de e-mail sem confirmação; o registro permanece disponível aqui.');const button=document.createElement('button');button.type='button';button.className='mc-button';button.dataset.proOpen=typeof item.id==='string'?item.id:'';button.textContent='Abrir registro protegido';button.disabled=!button.dataset.proOpen;article.append(button);});
  }
- async function loadWorkspace(){const me=await api('me');if(typeof me.csrf!=='string')throw new Error('access_denied');csrf=me.csrf;authenticated=true;element('pro-identity').textContent=`Acesso autenticado: ${textValue(me.email)}.`;setPanel('workspace');await loadLists();}
+ async function loadWorkspace(){const me=await api('me');if(typeof me.csrf!=='string')throw new Error('access_denied');csrf=me.csrf;authenticated=true;element('pro-identity').textContent=`Acesso autenticado: ${textValue(me.email)}.`;setPanel('workspace');await loadLists();await refreshSocialStudy().catch(()=>{element('pro-social-study-status').textContent='O serviço de pesquisa social não respondeu. Nenhuma coleta foi presumida ativa.';});}
  async function availability(){
   const view=element('pro-availability'),login=root.querySelector<HTMLButtonElement>('[data-pro-action="login"]')!;login.disabled=true;view.textContent='Conferindo a disponibilidade.';
   const config=await api('status');
@@ -223,6 +232,77 @@ function startProfessional(){
   await refreshFollowups(currentId);
  }
 
+
+ async function refreshSocialStudy(){
+  const label=element('pro-social-study-status');
+  researchStudyId='';researchStudyUrl='';
+  element('pro-social-study-open').hidden=true;
+  element('pro-social-study-setup').hidden=false;
+  label.textContent='Consultando o status da pesquisa social.';
+  const status=await apiResearch('status');
+  if(status.studyOpen!==true){
+   label.textContent='Nenhuma coleta ativa. O questionário já está pronto para revisão e abertura pelo profissional responsável. O consentimento dos participantes permanece independente do acolhimento.';
+  }else{
+   element('pro-social-study-setup').hidden=true;
+   element('pro-social-study-open').hidden=false;
+   label.textContent='Pesquisa social aberta para envio voluntário à população. Dados assistenciais não são compartilhados.';
+   const link=element<HTMLAnchorElement>('pro-social-study-link');
+   const url=new URL('/pesquisa/acessibilidade-pos-pandemia/',window.location.origin);
+   researchStudyUrl=url.href;link.href=url.href;link.textContent=url.href;
+  }
+  const destination=element('pro-social-results');
+  destination.replaceChildren();
+  if(status.configured!==true)return;
+  const data=await apiResearch('dashboard');
+  for(const item of records(data.studies)){
+   const card=document.createElement('article');card.className='mc-pro-item';
+   heading(card,textValue(item.title));
+   paragraph(card,'Período da coleta: até '+humanDate(item.closesAt)+'. Situação: '+(item.closed?'encerrada':'registrada')+'.');
+   const amount=typeof item.received==='number'?item.received:null;
+   paragraph(card,amount===null?'Amostra excede o limite de visualização deste painel.':'Participações recebidas: '+amount+'.');
+   paragraph(card,textValue(item.limitations));
+   if(item.limited===true)paragraph(card,'Há mais de 2.000 respostas. Solicite tratamento de agregação em lote antes de interpretar resultados.');
+   if(typeof item.id==='string'&&item.closed!==true&&status.studyOpen===true&&!researchStudyId)researchStudyId=item.id;
+   const aggregates=Array.isArray(item.results)?item.results:[];
+   if(!aggregates.length){
+    paragraph(card,'Os resultados por categoria são exibidos apenas a partir de cinco participações, para reduzir risco de identificação por contagens pequenas.');
+   }else{
+    const details=document.createElement('details');
+    const summary=document.createElement('summary');summary.textContent='Ver frequências agregadas do estudo';details.append(summary);
+    for(const q of aggregates){
+     const value=object(q),sub=document.createElement('section');
+     heading(sub,textValue(value.question));
+     const ul=document.createElement('ul');
+     for(const choice of records(value.options)){
+      const li=document.createElement('li');
+      li.textContent=textValue(choice.label)+': '+textValue(choice.n);ul.append(li);
+     }
+     sub.append(ul);details.append(sub);
+    }
+    card.append(details);
+   }
+   destination.append(card);
+  }
+ }
+ async function openSocialStudy(){
+  const professional=element<HTMLInputElement>('pro-social-professional').value.trim();
+  const credential=element<HTMLInputElement>('pro-social-credential').value.trim();
+  const ethicsBasis=element<HTMLSelectElement>('pro-social-ethics').value;
+  const ethicsReference=element<HTMLTextAreaElement>('pro-social-ethics-reference').value.trim();
+  const days=Number(element<HTMLSelectElement>('pro-social-days').value);
+  const reviewed=element<HTMLInputElement>('pro-social-approval').checked;
+  if(professional.length<4||credential.length<5||
+    !['dispensa-fundamentada','apreciacao-aprovada'].includes(ethicsBasis)||
+    ethicsReference.length<20||!reviewed){
+   fail('Preencha responsável, qualificação, fundamento ético específico e confirme a revisão antes de iniciar a coleta.');
+   return;
+  }
+  const data=await apiResearch('setup',{professional,credential,ethicsBasis,ethicsReference,days,reviewed});
+  if(data.opened!==true)throw new Error('unavailable');
+  await refreshSocialStudy();
+  notice('A abertura do estudo foi confirmada no servidor. Compartilhe somente o link público, sem anexar dados clínicos.');
+ }
+
  async function openRecord(id:string){
   if(!/^[a-zA-Z0-9_-]{8,100}$/.test(id))throw new Error('unavailable');clearRecord();const data=await api(`submissions/${encodeURIComponent(id)}`),record=object(data.record),metadata=object(data.metadata);if(!Object.keys(record).length)throw new Error('unavailable');currentId=id;currentRecord=record;currentMetadata=metadata;renderRecord(record,metadata);updateInstrumentLibrary(record);await refreshFollowups(id).catch(()=>{element('pro-followups-section').hidden=false;element('pro-followups-controls').hidden=true;element('pro-followups-status').textContent='Não foi possível verificar o serviço complementar. O registro clínico principal permanece acessível.';});element('pro-record-id').textContent=`Identificador ${id}. Acesso ao conteúdo registrado para auditoria.`;element('pro-record-section').hidden=false;const h=element('pro-record-title');h.focus({preventScroll:true});h.scrollIntoView({block:'start',behavior:'instant'});
  }
@@ -242,7 +322,7 @@ function startProfessional(){
   }
   const open=target.closest<HTMLButtonElement>('button[data-pro-open]');if(open?.dataset.proOpen){await run(()=>openRecord(open.dataset.proOpen!));return;}
   const button=target.closest<HTMLButtonElement>('button[data-pro-action]');if(!button||button.disabled)return;
-  switch(button.dataset.proAction){case'refresh':await run(availability);break;case'request-code':await run(enrollmentRequest);break;case'enroll':await run(enroll);break;case'login':await run(login);break;case'create-invite':await run(createInvite);break;case'create-followup':await run(createFollowup);break;case'reload-workspace':await run(loadLists);break;case'hide-invite':hideInvite();notice('Código ocultado desta tela.');break;case'copy-link':await copy(inviteUrl,'Endereço copiado.');break;case'copy-followup-url':await copy(followupUrl,'Endereço complementar copiado.');break;case'copy-followup-code':await copy(followupCode,'Código pessoal complementar copiado.');break;case'hide-followup-code':followupCode='';element('pro-followup-code').textContent='';element('pro-followup-created').hidden=true;notice('Código complementar ocultado.');break;case'copy-code':await copy(inviteCode,'Código pessoal copiado. Compartilhe somente com a pessoa convidada.');break;case'close-record':clearRecord();notice('Conteúdo do registro fechado nesta tela.');break;case'logout':await run(async()=>{await api('logout',{});clearWorkspace();notice('Acesso encerrado.');await availability();});break;case'print-report':if(currentId&&currentRecord){notice('O navegador abrirá a impressão. Se desejar, selecione Salvar como PDF. Proteja o documento por conter dados sensíveis.');window.print();}break;case'export-record':if(currentId&&currentRecord){const url=URL.createObjectURL(new Blob([JSON.stringify({record:currentRecord,metadata:currentMetadata},null,2)],{type:'application/json;charset=utf-8'}));const link=document.createElement('a');link.href=url;link.download=`nexo-registro-${currentId}.json`;link.click();window.setTimeout(()=>URL.revokeObjectURL(url),1000);notice('Arquivo criado sob seu controle. Proteja o conteúdo e respeite a política de retenção.');}break;case'feedback-completed':if(currentId)await run(async()=>{await api(`submissions/${encodeURIComponent(currentId)}/feedback`,{completed:true});notice('Realização da devolutiva registrada.');await loadLists();});break;case'delete-record':if(currentId){if(!element<HTMLInputElement>('pro-delete-confirm').checked){fail('Confirme a exclusão deste registro antes de continuar.');element('pro-delete-confirm').focus();return;}await run(async()=>{const data=await api(`submissions/${encodeURIComponent(currentId)}/delete`,{});if(data.deleted!==true&&data.success!==true)throw new Error('unavailable');clearRecord();notice('Exclusão do registro ativo confirmada pelo servidor.');await loadLists();});}break;}
+  switch(button.dataset.proAction){case'refresh':await run(availability);break;case'request-code':await run(enrollmentRequest);break;case'enroll':await run(enroll);break;case'login':await run(login);break;case'create-invite':await run(createInvite);break;case'create-followup':await run(createFollowup);break;case'open-social-study':await run(openSocialStudy);break;case'refresh-social-study':await run(refreshSocialStudy);break;case'copy-social-study':await copy(researchStudyUrl,'Link público da pesquisa copiado. O convite é voluntário e separado do atendimento.');break;case'close-social-study':if(researchStudyId&&window.confirm('Encerrar a coleta da pesquisa agora? Respostas anteriores serão mantidas até o prazo de retenção.'))await run(async()=>{const data=await apiResearch('close',{studyId:researchStudyId});if(data.closed!==true)throw new Error('unavailable');notice('Coleta encerrada pelo servidor.');await refreshSocialStudy();});break;case'reload-workspace':await run(loadLists);break;case'hide-invite':hideInvite();notice('Código ocultado desta tela.');break;case'copy-link':await copy(inviteUrl,'Endereço copiado.');break;case'copy-followup-url':await copy(followupUrl,'Endereço complementar copiado.');break;case'copy-followup-code':await copy(followupCode,'Código pessoal complementar copiado.');break;case'hide-followup-code':followupCode='';element('pro-followup-code').textContent='';element('pro-followup-created').hidden=true;notice('Código complementar ocultado.');break;case'copy-code':await copy(inviteCode,'Código pessoal copiado. Compartilhe somente com a pessoa convidada.');break;case'close-record':clearRecord();notice('Conteúdo do registro fechado nesta tela.');break;case'logout':await run(async()=>{await api('logout',{});clearWorkspace();notice('Acesso encerrado.');await availability();});break;case'print-report':if(currentId&&currentRecord){notice('O navegador abrirá a impressão. Se desejar, selecione Salvar como PDF. Proteja o documento por conter dados sensíveis.');window.print();}break;case'export-record':if(currentId&&currentRecord){const url=URL.createObjectURL(new Blob([JSON.stringify({record:currentRecord,metadata:currentMetadata},null,2)],{type:'application/json;charset=utf-8'}));const link=document.createElement('a');link.href=url;link.download=`nexo-registro-${currentId}.json`;link.click();window.setTimeout(()=>URL.revokeObjectURL(url),1000);notice('Arquivo criado sob seu controle. Proteja o conteúdo e respeite a política de retenção.');}break;case'feedback-completed':if(currentId)await run(async()=>{await api(`submissions/${encodeURIComponent(currentId)}/feedback`,{completed:true});notice('Realização da devolutiva registrada.');await loadLists();});break;case'delete-record':if(currentId){if(!element<HTMLInputElement>('pro-delete-confirm').checked){fail('Confirme a exclusão deste registro antes de continuar.');element('pro-delete-confirm').focus();return;}await run(async()=>{const data=await api(`submissions/${encodeURIComponent(currentId)}/delete`,{});if(data.deleted!==true&&data.success!==true)throw new Error('unavailable');clearRecord();notice('Exclusão do registro ativo confirmada pelo servidor.');await loadLists();});}break;}
  },{signal});
  root.addEventListener('change',event=>{const input=event.target;if(input instanceof HTMLInputElement&&input.dataset.followupRevokeConfirm){const btn=input.closest('article')?.querySelector<HTMLButtonElement>('[data-followup-revoke]');if(btn)btn.disabled=!input.checked;}if(input instanceof HTMLInputElement&&input.dataset.proRevokeConfirm){const button=input.closest('article')?.querySelector<HTMLButtonElement>('[data-pro-revoke]');if(button)button.disabled=!input.checked;}},{signal});
  void run(availability);
