@@ -3,6 +3,7 @@ import {screeningInstruments} from '../data/momento-instruments';
 import {buildProfessionalCues} from '../lib/momento-professional-cues';
 import {appendIntegratedProfessionalReport} from './momento-report-view';
 import {mountInstrumentLibrary} from './momento-instrument-library';
+import {mountResearchPanel} from './momento-research-professional';
 import {clarificationQuestions} from '../data/momento-clarifications';
 import {profileFields,questions} from '../data/momento-demo';
 
@@ -17,13 +18,14 @@ function startProfessional(){
  const life=new AbortController();const{signal}=life;let csrf='',currentId='',currentRecord:Data|undefined,currentMetadata:Data|undefined,inviteCode='',inviteUrl='',followupCode='',followupUrl='',followupsEnabled=false,busy=false,authenticated=false;
  const element=<T extends HTMLElement=HTMLElement>(id:string)=>root.querySelector<T>(`#${id}`)!;
  const updateInstrumentLibrary=mountInstrumentLibrary(root,signal);
+ const research=mountResearchPanel(root,signal,()=>csrf);
  const error=element('pro-error'),status=element('pro-status');
  function setPanel(panel:'access'|'enrollment'|'workspace'){root.querySelectorAll<HTMLElement>('[data-pro-panel]').forEach(item=>{item.hidden=item.dataset.proPanel!==panel;});}
  function notice(text:string){status.textContent=text;}
  function fail(text:string){error.textContent=text;}
  function clearRecord(){updateInstrumentLibrary();currentRecord=undefined;currentMetadata=undefined;currentId='';followupCode='';followupUrl='';followupsEnabled=false;element('pro-followups-section').hidden=true;element('pro-followup-created').hidden=true;element('pro-record').replaceChildren();element('pro-record-section').hidden=true;element<HTMLInputElement>('pro-delete-confirm').checked=false;}
  function hideInvite(){inviteCode='';inviteUrl='';element('pro-invite-code').textContent='';element('pro-invite-expiry').textContent='';element('pro-created-invite').hidden=true;}
- function clearWorkspace(){csrf='';authenticated=false;clearRecord();hideInvite();element('pro-invites').replaceChildren();element('pro-submissions').replaceChildren();element('pro-identity').textContent='';element<HTMLInputElement>('pro-enrollment-code').value='';setPanel('access');}
+ function clearWorkspace(){csrf='';authenticated=false;research.clear();clearRecord();hideInvite();element('pro-invites').replaceChildren();element('pro-submissions').replaceChildren();element('pro-identity').textContent='';element<HTMLInputElement>('pro-enrollment-code').value='';setPanel('access');}
  function humanDate(value:unknown){if(typeof value!=='string')return'Não informado';const date=new Date(value);return Number.isFinite(date.getTime())?date.toLocaleString('pt-BR',{dateStyle:'short',timeStyle:'short'}):'Não informado';}
  async function api(path:string,body?:unknown){
   const response=await fetch(`/api/momento/${path}`,{method:body===undefined?'GET':'POST',headers:{...(body===undefined?{}:{'Content-Type':'application/json'}),...(csrf?{'X-Nexo-CSRF':csrf}:{})},...(body===undefined?{}:{body:JSON.stringify(body)}),credentials:'same-origin',cache:'no-store',referrerPolicy:'no-referrer',signal});
@@ -50,7 +52,7 @@ function startProfessional(){
   listContainer('pro-invites',records(invites.invites),'Nenhum convite disponível nesta lista.',(item,article)=>{paragraph(article,`Convite ${textValue(item.id)}`);paragraph(article,`Criado em ${humanDate(item.createdAt)} · Válido até ${humanDate(item.expiresAt)}`);paragraph(article,item.submitted===true?'Respostas recebidas.':item.redeemedAt?'Convite utilizado; preenchimento ainda sem recebimento confirmado.':'Aguardando utilização.');if(item.submitted!==true&&typeof item.id==='string'){const label=document.createElement('label'),input=document.createElement('input'),span=document.createElement('span'),button=document.createElement('button');input.type='checkbox';input.dataset.proRevokeConfirm=item.id;span.textContent='Confirmo que desejo revogar este convite e encerrar seu acesso.';label.className='mc-confirm';label.append(input,span);button.type='button';button.className='mc-button';button.dataset.proRevoke=item.id;button.textContent='Revogar convite confirmado';button.disabled=true;article.append(label,button);}});
   listContainer('pro-submissions',records(submissions.submissions),'Nenhuma resposta disponível nesta lista.',(item,article)=>{paragraph(article,`Recebimento ${textValue(item.id)}`);paragraph(article,`Recebido em ${humanDate(item.createdAt)} · Acesso ativo até ${humanDate(item.expiresAt)}`);paragraph(article,item.feedbackCompletedAt?`Devolutiva registrada em ${humanDate(item.feedbackCompletedAt)}.`:'Devolutiva ainda sem registro de realização.');paragraph(article,item.notificationSent===true?'Aviso neutro de recebimento enviado.':'Aviso de e-mail sem confirmação; o registro permanece disponível aqui.');const button=document.createElement('button');button.type='button';button.className='mc-button';button.dataset.proOpen=typeof item.id==='string'?item.id:'';button.textContent='Abrir registro protegido';button.disabled=!button.dataset.proOpen;article.append(button);});
  }
- async function loadWorkspace(){const me=await api('me');if(typeof me.csrf!=='string')throw new Error('access_denied');csrf=me.csrf;authenticated=true;element('pro-identity').textContent=`Acesso autenticado: ${textValue(me.email)}.`;setPanel('workspace');await loadLists();}
+ async function loadWorkspace(){const me=await api('me');if(typeof me.csrf!=='string')throw new Error('access_denied');csrf=me.csrf;authenticated=true;element('pro-identity').textContent=`Acesso autenticado: ${textValue(me.email)}.`;setPanel('workspace');await loadLists();await research.refresh().catch(()=>{const e=element('pro-research-status');e.textContent='Não foi possível consultar o módulo de pesquisa. O acesso clínico continua disponível.';});}
  async function availability(){
   const view=element('pro-availability'),login=root.querySelector<HTMLButtonElement>('[data-pro-action="login"]')!;login.disabled=true;view.textContent='Conferindo a disponibilidade.';
   const config=await api('status');
