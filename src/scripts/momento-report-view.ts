@@ -1,5 +1,6 @@
 import {buildIntegratedReport,type ReportPoint,type ReportAxis,type ReportDomain,type ReportInstrument} from '../lib/momento-professional-report';
 import {reflectionQuestions,reflectionChoices,reflectionTopics} from '../data/momento-reflections';
+import {appendClinicalInterviewGuide} from './momento-clinical-guide-view';
 
 function element<K extends keyof HTMLElementTagNameMap>(tag:K,className?:string):HTMLElementTagNameMap[K]{
  const node=document.createElement(tag);if(className)node.className=className;return node;
@@ -51,6 +52,7 @@ export function appendIntegratedProfessionalReport(panel:HTMLElement,record:Reco
  root.append(text('p','NEXO · INTELIGÊNCIA CLÍNICA','mc-report-kicker'),text('h3','Síntese integrada para a entrevista','mc-report-title'),text('p',report.intro,'mc-report-lead'));
  const person=(record.profile&&typeof record.profile==='object'&&'nickname'in record.profile&&typeof (record.profile as {nickname?:unknown}).nickname==='string')?(record.profile as {nickname:string}).nickname:'Participante sem identificação informada';
  root.append(text('p','Participante: '+person,'mc-report-person'));
+ appendClinicalInterviewGuide(root,record);
  const results=record.results&&typeof record.results==='object'?record.results as Record<string,unknown>:{};
  const impact=record.impact&&typeof record.impact==='object'?record.impact as Record<string,unknown>:{};
  const overview=element('div','mc-report-scores');
