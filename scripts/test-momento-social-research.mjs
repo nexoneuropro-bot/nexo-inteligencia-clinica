@@ -122,3 +122,38 @@ test('estudo permanece fechado sem autenticação; revisão abre, recebe e possi
  assert.equal(ctx.sqlite.prepare('SELECT count(*) n FROM momento_research_studies').get().n,0);
  ctx.sqlite.close();
 });
+
+
+test('dez ou mais participações revelam apenas contagens não esparsas (dados sintéticos)',async()=>{
+ const ctx=setup();
+ const sessionHash=await hashClinicalValue(ctx.secret,'session',ctx.token);
+ const csrf=await hashClinicalValue(ctx.secret,'csrf-value',ctx.token);
+ const csrfHash=await hashClinicalValue(ctx.secret,'csrf-hash',csrf);
+ ctx.sqlite.prepare('INSERT INTO momento_sessions(token_hash,role,owner_id,csrf_hash,created_at,expires_at) VALUES(?,?,?,?,?,?)')
+  .run(sessionHash,'clinician','nexo-owner',csrfHash,NOW,NOW+3600000);
+ const auth={cookie:'__Host-nexo-clinician='+ctx.token,'x-nexo-csrf':csrf};
+ const opening=await api(ctx.env,'setup','POST',validReview,auth);
+ assert.equal(opening.status,201);
+ const answers=Object.fromEntries(RESEARCH_STUDY.questions.map(q=>[q.id,q.options[0].id]));
+ for(let i=0;i<9;i++){
+  const res=await api(ctx.env,'submit','POST',{studyId:opening.data.id,
+   consent:{adult:true,accepted:true,version:RESEARCH_CONSENT_VERSION},answers});
+  assert.equal(res.status,201);
+ }
+ const early=await api(ctx.env,'dashboard','GET',undefined,{cookie:auth.cookie});
+ assert.equal(early.data.studies[0].received,9);
+ assert.equal(early.data.studies[0].results,null);
+ const different={...answers,region:RESEARCH_STUDY.questions.find(q=>q.id==='region').options[1].id};
+ const tenth=await api(ctx.env,'submit','POST',{studyId:opening.data.id,
+  consent:{adult:true,accepted:true,version:RESEARCH_CONSENT_VERSION},answers:different});
+ assert.equal(tenth.status,201);
+ const final=await api(ctx.env,'dashboard','GET',undefined,{cookie:auth.cookie});
+ assert.equal(final.data.studies[0].received,10);
+ const region=final.data.studies[0].results.find(q=>q.id==='region');
+ assert.equal(region.suppressed,true);
+ assert.deepEqual(region.options,[]);
+ const connection=final.data.studies[0].results.find(q=>q.id==='connection');
+ assert.equal(connection.suppressed,false);
+ assert.equal(connection.options[0].n,10);
+ ctx.sqlite.close();
+});
