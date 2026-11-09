@@ -43,5 +43,21 @@ jobs:
       - run: pnpm check
       - run: pnpm build
       - run: pnpm verify
+      - name: Conferir HTML e cabeçalhos estáticos do acolhimento
+        run: |
+          node --input-type=module <<'JS'
+          import {readFileSync} from 'node:fs';
+          import assert from 'node:assert/strict';
+          const html=readFileSync('dist/conhecendo-meu-momento/responder/index.html','utf8');
+          const headers=readFileSync('dist/_headers','utf8');
+          for(const marker of ['mc-choice-title','mc-reflection-text','mc-journey','mc-reflection-options']){
+            assert.ok(html.includes(marker),marker);
+          }
+          assert.ok(headers.includes('microphone=()'));
+          assert.ok(headers.includes('microphone=(self)'));
+          assert.ok(headers.includes('on-device-speech-recognition=(self)'));
+          console.log('Novo acolhimento e permissão restrita presentes nos arquivos gerados.');
+          JS
+
       - name: Testes sintéticos clínicos
         run: node --experimental-strip-types --experimental-sqlite --test scripts/test-momento-screening.mjs scripts/test-momento-clinical.mjs scripts/test-momento-professional-cues.mjs scripts/test-momento-integrated-report.mjs scripts/test-momento-on-device-voice.mjs
