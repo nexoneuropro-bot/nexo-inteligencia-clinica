@@ -13,6 +13,7 @@ import json
 import pathlib
 import re
 import threading
+import traceback
 from urllib.parse import urlsplit
 from playwright.sync_api import sync_playwright, expect
 
@@ -55,6 +56,8 @@ def run_case(browser, port, expanded):
         reduced_motion="reduce",
     )
     page = context.new_page()
+    page.set_default_timeout(8000)
+    print('INICIO:', 'aprofundado' if expanded else 'essencial', flush=True)
     payloads = []
     issues = []
     page.on("pageerror", lambda error: issues.append(str(error)))
@@ -103,6 +106,7 @@ def run_case(browser, port, expanded):
         page.locator('input[name="mc-accompaniment"][value="with-professional" ]' if expanded else 'input[name="mc-accompaniment"][value="alone"]').check()
         page.locator('[data-mc-stage="privacy"] [data-mc-action="next"]').click()
         expect(page.locator('[data-mc-stage="choice"]')).to_be_visible()
+        print('ETAPA: escolha', flush=True)
         page.locator(f'input[name="mc-journey"][value="{"extended" if expanded else "basic"}"]').check()
         if expanded:
             page.locator('[data-mc-stage="choice"] [data-mc-action="next"]').click()
@@ -112,6 +116,7 @@ def run_case(browser, port, expanded):
             page.locator("#mc-sensitive-accept").check()
         page.locator('[data-mc-stage="choice"] [data-mc-action="next"]').click()
         expect(page.locator('[data-mc-stage="questions"]')).to_be_visible()
+        print('ETAPA: questionario', flush=True)
         # Repeat a true human browser interaction across every screening/author item.
         for _ in range(32):
             if not page.locator('[data-mc-stage="questions"]').is_visible():
@@ -122,6 +127,7 @@ def run_case(browser, port, expanded):
         assert len(payloads) == 0
         if expanded:
             expect(page.locator('[data-mc-stage="reflection"]')).to_be_visible()
+            print('ETAPA: narrativas', flush=True)
             # 1 - narrative via text
             page.locator("#mc-reflection-text").fill("Quero compreender mudanças importantes no meu cotidiano.")
             page.locator('[data-mc-stage="reflection"] [data-mc-action="next"]').click()
@@ -145,6 +151,7 @@ def run_case(browser, port, expanded):
             page.locator('input[name="mc-reflection-choice"][value="prefer-not"]').check()
             page.locator('[data-mc-stage="reflection"] [data-mc-action="next"]').click()
         expect(page.locator('[data-mc-stage="summary"]')).to_be_visible()
+        print('ETAPA: resumo', flush=True)
         assert len(payloads) == 0, "Never send before explicit final confirmation"
         page.locator("#mc-send-confirm").check()
         page.locator('[data-mc-stage="summary"] [data-mc-action="submit"]').click()
@@ -159,10 +166,14 @@ def run_case(browser, port, expanded):
         print("PASS: " + ("Aprofundado, consentimento e temas sensíveis" if expanded else "Essencial, celular") +
               " |  convite → privacidade → respostas → envio sintético → confirmação.")
     except Exception:
-        print("BROWSER ERRORS:", repr(issues))
-        print("CURRENT URL:", page.url)
-        print("CURRENT STAGE:", page.evaluate("Array.from(document.querySelectorAll('[data-mc-stage]')).filter(x => !x.hidden).map(x => x.dataset.mcStage)"))
-        print("CURRENT ERROR:", page.locator("#mc-error").inner_text())
+        traceback.print_exc()
+        print("BROWSER ERRORS:", repr(issues), flush=True)
+        print("CURRENT URL:", page.url, flush=True)
+        try:
+            print("CURRENT STAGE:", page.evaluate("Array.from(document.querySelectorAll('[data-mc-stage]')).filter(x => !x.hidden).map(x => x.dataset.mcStage)"), flush=True)
+            print("CURRENT ERROR:", page.locator("#mc-error").inner_text(timeout=2000), flush=True)
+        except Exception as investigation_error:
+            print("BROWSER DETAIL UNAVAILABLE:", str(investigation_error), flush=True)
         raise
     finally:
         context.close()
@@ -176,12 +187,12 @@ def main():
     server_thread.start()
     try:
         with sync_playwright() as pw:
-            browser = pw.chromium.launch(headless=True)
-            try:
-                run_case(browser, server.server_port, expanded=False)
-                run_case(browser, server.server_port, expanded=True)
-            finally:
-                browser.close()
+            for expanded in [False, True]:
+                browser = pw.chromium.launch(headless=True)
+                try:
+                    run_case(browser, server.server_port, expanded=expanded)
+                finally:
+                    browser.close()
     finally:
         server.shutdown()
         server.server_close()
