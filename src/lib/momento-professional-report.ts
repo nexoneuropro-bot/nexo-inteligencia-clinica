@@ -7,6 +7,7 @@
  */
 import {questions,profileFields} from '../data/momento-demo.ts';
 import {clarificationQuestions} from '../data/momento-clarifications.ts';
+import {welcomeQuestions} from '../data/momento-welcome.ts';
 
 export type ReportPoint=Readonly<{title:string; evidence:readonly string[]; interpretation:string; investigate:string; limitation:string}>;
 export type ReportAxis=Readonly<{name:string; facts:readonly string[]; gaps:string}>;
@@ -48,6 +49,8 @@ const point=(title:string,evidence:string[],interpretation:string,investigate:st
 export function buildIntegratedReport(value:unknown):IntegratedReport {
  const record=object(value);
  const phq=arr(record.phq9),gad=arr(record.gad7);
+ const welcome=object(record.welcome),welResponses=object(welcome.responses);
+ const welcomeText=(id:string)=>{const question=welcomeQuestions.find(q=>q.id===id),v=object(welResponses[id]);if(v.status!=='answered'||!question)return'';return v.method==='choice'?question.options.find(o=>o.id===v.choice)?.label||'':typeof v.text==='string'?v.text:'';};
  const impact=object(record.impact),answers=object(record.authorAnswers),clar=object(record.clarifications),profile=object(record.profile),completion=object(record.completion);
  const p=(i:number)=>score(phq,i),g=(i:number)=>score(gad,i);
  const phqResult=object(object(record.results).phq9);
@@ -127,6 +130,7 @@ export function buildIntegratedReport(value:unknown):IntegratedReport {
  const activityField=profileFields.find(f=>f.id==='activity');
  const activity=activityField?.options.find(o=>o.id===profile.activity)?.label;
  if(activity&&activity!=='Prefiro não informar')social.push(`Trabalho/estudo: ${activity}`);
+ for(const key of ['relacionamentos','apoio','contexto-social']){const t=welcomeText(key);if(t)social.push(`Relato autoral (${key}): ${t}`);}
  const functionalEvidence=[
   ...(phqImpact!==null?[`Impacto PHQ-9: ${phqImpact}/3`]:[]),
   ...(gadImpact!==null?[`Impacto GAD-7: ${gadImpact}/3`]:[]),
@@ -191,13 +195,16 @@ export function buildIntegratedReport(value:unknown):IntegratedReport {
  for(const q of questions)if(answerText(q.id,answers[q.id])==='Não informado')unanswered.push(`Pergunta autoral sem resposta: ${q.title}`);
  unanswered.push('Não foram coletados história médica completa, exame do estado mental, curso longitudinal ou critérios integrais do DSM-5-TR neste percurso.');
  unanswered.push('Rede de apoio e condições de acesso ao cuidado exigem investigação em diálogo, não estão suficientemente caracterizadas.');
+ if(welcome.path==='expanded'&&welcomeText('continuidade'))unanswered.push('A pessoa compartilhou possíveis condições de continuidade. Conferir em diálogo se alguma delas exige adaptação do cuidado.');
 
  const context:string[]=[];
+ if(welcome.path==='expanded'||welcome.path==='essential')context.push(`Percurso escolhido: ${welcome.path==='expanded'?'aprofundado':'essencial'}; participação ${welcome.setting==='with-professional'?'com profissional':'individual'}.`);
+ for(const question of welcomeQuestions){const v=object(welResponses[question.id]);if(v.status==='later')context.push(`Tema reservado para a sessão: ${question.title}`);else if(v.status==='declined')context.push(`Preferiu não responder sobre: ${question.title}. Não atribuir motivo.`);else if(v.status==='unsure')context.push(`Ainda não sabe responder sobre: ${question.title}.`);}
  if(completion.kind==='partial')context.push('Compartilhamento parcial escolhido pela pessoa: o motivo de interromper não foi fornecido.');
  else context.push('Percurso enviado ao final. A conclusão não informa conforto, compreensão ou ausência de barreiras.');
  if(object(record.context).privacy==='partial')context.push('Privacidade parcial referida na participação; considerar condições ambientais ao contextualizar respostas.');
  context.push('Perfil sociodemográfico é descritivo e não determina diagnóstico nem capacidade.');
- const intro='Síntese preparatória de acolhimento e rastreios. As associações abaixo são regras descritivas, baseadas apenas em respostas declaradas e nos instrumentos exibidos. Não constituem laudo, diagnóstico ou plano terapêutico.';
+ const intro='Síntese preparatória de acolhimento, narrativas opcionais e rastreios. As associações abaixo são regras descritivas, baseadas apenas em respostas declaradas e nos instrumentos exibidos. Não constituem laudo, diagnóstico ou plano terapêutico.';
  const closing='A devolutiva e as decisões pertencem ao profissional habilitado, em diálogo com a pessoa. O enquadramento diferencial deve considerar história, contexto cultural, condições médicas e critérios diagnósticos completos; o manual DSM-5-TR é referência para investigação, não algoritmo de conclusão. A escolha de testes psicológicos exige consulta atualizada ao SATEPSI, à população e à modalidade autorizada.';
  return Object.freeze({
   intro,highlights:Object.freeze(highlights),functional,axes:Object.freeze(axes),domains:Object.freeze(domains),
