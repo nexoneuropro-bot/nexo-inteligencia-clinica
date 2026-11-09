@@ -17,6 +17,7 @@ function startClinical(){
  let context={place:'not-informed',privacy:'',accompaniment:'not-informed'};
   let reflectionMode:'basic'|'extended'='basic',reflectionPosition=0;
   let reflectionAnswers:Record<string,{status:'answered'|'later'|'prefer-not'|'unsure';text?:string}>={};
+  let reflectionDrafts:Record<string,string>={};
  let clarifications:{sleep:string|null;appetite:string|null}={sleep:null,appetite:null};
  const applicable=(item:Item)=>item.kind!=='clarification'||(phq9[item.triggerPhqIndex!]??0)>0;
  const nextPosition=(initial:number,direction:1|-1):number=>{for(let i=initial;i>=0&&i<sequence.length;i+=direction){if(applicable(sequence[i]))return i;}return -1;};
@@ -34,13 +35,14 @@ function startClinical(){
     const normalized=transcribed.toLocaleLowerCase('pt-BR').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[.!?,;:]+$/,'').trim();
     const command=normalized==='prefiro nao responder'?'prefer-not':normalized==='prefiro falar depois'||normalized==='quero conversar na sessao'||normalized==='prefiro conversar na sessao'?'later':normalized==='ainda nao sei'||normalized==='nao sei dizer'?'unsure':null;
     if(command){
-      field.value='';
+      field.value='';delete reflectionDrafts[reflectionQuestions[reflectionPosition].id];
       const option=root.querySelector<HTMLInputElement>(`input[name="mc-reflection-choice"][value="${command}"]`);
       if(option)option.checked=true;
       element('mc-dictation-status').textContent='Opção reconhecida localmente. Revise a escolha antes de continuar.';
       return;
     }
     field.value=[field.value,transcribed].filter(Boolean).join(' ').slice(0,REFLECTION_MAX_CHARS);
+    reflectionDrafts[reflectionQuestions[reflectionPosition].id]=field.value;
     const option=root.querySelector<HTMLInputElement>('input[name="mc-reflection-choice"][value="answered"]');
     if(option)option.checked=true;
     element('mc-dictation-status').textContent='Transcrição local pronta. Revise antes de continuar. Nada foi enviado.';
@@ -82,7 +84,7 @@ function startClinical(){
     input.checked=record?.status===option.id;span.textContent=option.label;label.append(input,span);list.append(label);
    }
    const field=element<HTMLTextAreaElement>('mc-reflection-text');
-   field.value=record?.status==='answered'?record.text||'':'';
+   field.value=record?record.status==='answered'?record.text||'':'':reflectionDrafts[prompt.id]||'';
    field.maxLength=REFLECTION_MAX_CHARS;
    const mic=root.querySelector<HTMLButtonElement>('[data-mc-action="dictate"]')!;
    mic.disabled=true;mic.hidden=context.privacy!=='yes';
@@ -101,6 +103,7 @@ function startClinical(){
    if(chosen==='answered'&&!typed){fail('Escreva ou dite o que quiser contar, ou escolha outra opção.',element('mc-reflection-text'));return false;}
    if([...typed].length>REFLECTION_MAX_CHARS&&chosen==='answered'){fail('Use até 1.400 caracteres por tema.',element('mc-reflection-text'));return false;}
    reflectionAnswers[prompt.id]=chosen==='answered'?{status:'answered',text:typed}:{status:chosen as 'later'|'prefer-not'|'unsure'};
+   if(chosen!=='answered')delete reflectionDrafts[prompt.id];
    return true;
   }
   function showSummary(){
@@ -132,7 +135,7 @@ function startClinical(){
   if(focus&&heading){heading.focus({preventScroll:true});heading.scrollIntoView({block:'start',behavior:'instant'});}
  }
  function clear(){
-  stopSpeech();dictation.stop();profile={};answers={};phq9=Array(9).fill(null);gad7=Array(7).fill(null);impact={phq9:null,gad7:null};clarifications={sleep:null,appetite:null};context={place:'not-informed',privacy:'',accompaniment:'not-informed'};reflectionMode='basic';reflectionPosition=0;reflectionAnswers={};position=0;consentAt='';
+  stopSpeech();dictation.stop();profile={};answers={};phq9=Array(9).fill(null);gad7=Array(7).fill(null);impact={phq9:null,gad7:null};clarifications={sleep:null,appetite:null};context={place:'not-informed',privacy:'',accompaniment:'not-informed'};reflectionMode='basic';reflectionPosition=0;reflectionAnswers={};reflectionDrafts={};position=0;consentAt='';
   root.querySelectorAll<HTMLInputElement>('input').forEach(input=>{if(input.type==='checkbox'||input.type==='radio')input.checked=input.defaultChecked;else input.value='';});
   root.querySelectorAll<HTMLSelectElement>('[data-mc-profile]').forEach(select=>{select.value='not-informed';});
   element('mc-question-options').replaceChildren();element('mc-reflection-options').replaceChildren();element<HTMLTextAreaElement>('mc-reflection-text').value='';element('mc-summary').replaceChildren();element('mc-completion').replaceChildren();element('mc-care-note').hidden=true;
@@ -165,7 +168,7 @@ function startClinical(){
    if(privacy==='no'){stage='paused';}else stage=['summary','reflection','questions'].includes(resumeStage)?resumeStage:'choice';
   }else if(stage==='choice'){
    const selection=radio('mc-journey');if(!['basic','extended'].includes(selection)){fail('Escolha o percurso breve ou o aprofundado.');return;}
-   reflectionMode=selection as 'basic'|'extended';stage='questions';
+   reflectionMode=selection as 'basic'|'extended';if(reflectionMode==='basic'){reflectionAnswers={};reflectionDrafts={};reflectionPosition=0;}stage='questions';
   }else if(stage==='questions'){
    if(!saveCurrent(skip))return;
    const next=nextPosition(position+1,1);
@@ -232,7 +235,7 @@ function startClinical(){
   const target=event.target;if(sending||!(target instanceof Element))return;const button=target.closest<HTMLButtonElement>('button[data-mc-action]');if(!button||button.disabled)return;
   switch(button.dataset.mcAction){case'availability':await checkAvailability();break;case'redeem':await redeem();break;case'next':advance();break;case'back':back();break;case'skip':if(stage==='questions'||stage==='reflection')advance(true);break;case'dictate':if(stage==='reflection'&&context.privacy==='yes'){if(dictation.active)dictation.stop();else if(dictation.start()){button.textContent='Parar ditado';element('mc-dictation-status').textContent='Ouvindo localmente. Revise o texto antes de continuar.';}}break;case'pause':if(!sending&&['profile','privacy','choice','questions','reflection','summary'].includes(stage)){resumeStage=stage==='summary'?'summary':stage==='reflection'?'reflection':stage==='choice'?'choice':'questions';stage='paused';render();}break;case'resume':context.privacy='';root.querySelectorAll<HTMLInputElement>('input[name="mc-privacy"]').forEach(input=>{input.checked=false;});stage='privacy';render();break;case'end':await end();break;case'submit':await submit();break;case'submit-partial':await submit(true);break;case'hear-consent':hearConsent();break;case'stop-speech':stopSpeech();element('mc-voice-status').textContent='Leitura interrompida.';break;case'copy-receipt':try{await navigator.clipboard.writeText(receiptId);status.textContent='Identificador copiado.';}catch{status.textContent='Não foi possível copiar. Anote o identificador exibido.';}break;}
  },{signal});
- root.addEventListener('input',event=>{const target=event.target;if(target instanceof HTMLTextAreaElement&&target.id==='mc-reflection-text'&&stage==='reflection'&&target.value.trim()){const selected=root.querySelector<HTMLInputElement>('input[name="mc-reflection-choice"][value="answered"]');if(selected)selected.checked=true;}},{signal});
+ root.addEventListener('input',event=>{const target=event.target;if(target instanceof HTMLTextAreaElement&&target.id==='mc-reflection-text'&&stage==='reflection'&&target.value.trim()){const selected=root.querySelector<HTMLInputElement>('input[name="mc-reflection-choice"][value="answered"]');if(selected)selected.checked=true;reflectionDrafts[reflectionQuestions[reflectionPosition].id]=target.value;}},{signal});
   root.addEventListener('change',event=>{const target=event.target;if(target instanceof HTMLInputElement&&target.name==='mc-answer'&&stage==='questions'){saveCurrent(false);const item=sequence[position];if(item.kind==='scale'&&item.instrument==='phq9'&&item.index===8)element('mc-care-note').hidden=Number(target.value)<=0;}},{signal});
  document.addEventListener('visibilitychange',()=>{if(document.hidden){stopSpeech();dictation.stop();}},{signal});
  render(false);void checkAvailability();
