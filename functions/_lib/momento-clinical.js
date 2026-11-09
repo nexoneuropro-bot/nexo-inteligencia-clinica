@@ -257,7 +257,12 @@ const submissionMetadata = row => ({ id: row.id, createdAt: new Date(row.created
 /** All time-expired records are denied by reads even before this physical purge. */
 export async function cleanupClinicalData(env, now = Date.now()) {
   const db = env?.NEXO_CLINICAL_DB; if (!db?.batch) throw new Error('clinical_database_unavailable');
+  const researchTables = Boolean(await stmt(db, "SELECT name FROM sqlite_master WHERE type='table' AND name='momento_research_responses'").first());
   return db.batch([
+    ...(researchTables ? [
+      stmt(db, 'DELETE FROM momento_research_responses WHERE expires_at <= ?', now),
+      stmt(db, 'DELETE FROM momento_research_studies WHERE expires_at <= ?', now),
+    ] : []),
     ...['momento_submissions', 'momento_sessions', 'momento_challenges', 'momento_bootstrap', 'momento_rate_limits', 'momento_audit', 'momento_invites'].map(table => stmt(db, `DELETE FROM ${table} WHERE expires_at <= ?`, now)),
     stmt(db, 'INSERT INTO momento_retention_runs (slot, last_success_at) VALUES (1, ?) ON CONFLICT(slot) DO UPDATE SET last_success_at = excluded.last_success_at', now),
     auditStatement(db, 'system', 'retention_purged', 'expired-records', now),
