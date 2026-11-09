@@ -8,6 +8,7 @@ import {
  CLINICAL_ACTIVE_RETENTION_DAYS,
 } from './momento-clinical.js';
 import {readPackDefinitions,MAX_PACK_BYTES} from '../../src/lib/momento-native-pack-definitions.ts';
+import {DEFAULT_RESEARCH_PACK,DEFAULT_RESEARCH_STUDY} from '../../src/data/nexo-social-accessibility-study.ts';
 
 export const RESEARCH_CONSENT_VERSION='nexo-social-research-consent-2026-11-v1';
 const DAY=86400000,MAX_RECRUIT_DAYS=30,COOKIE='__Host-nexo-clinician',TOK=/^[A-Za-z0-9_-]{43}$/;
@@ -141,6 +142,53 @@ export async function handleResearchRequest({request,env},deps={}){
   if(path==='status'&&request.method==='GET')return reply(200,{enabled,consentVersion:RESEARCH_CONSENT_VERSION});
   if(!enabled)return reply(503,{error:'research_not_activated'});
 
+
+  // One-click standard study. The questionnaire is an original NEXO
+  // non-diagnostic social research instrument; it is NOT a psychological test.
+  // Research scope/ethics declaration is entered and reviewed by the
+  // authenticated professional, not assumed from free/nonprofit status.
+  if(path==='default-study'&&request.method==='POST'){
+   const owner=await admin(request,db,config,now,true);
+   const data=await body(request);
+   assertExact(data,['ethicsStatus','ethicsBasis','recruitmentDays','declaration']);
+   assertExact(data.declaration,['qualifiedProfessional','rightsAndModeConfirmed','privacyAndSafetyReviewed','voluntaryStudy']);
+   if(!['aprovado_quando_aplicavel','dispensa_fundamentada'].includes(data.ethicsStatus)||
+      !safe(data.ethicsBasis,25,600)||![7,14,30].includes(data.recruitmentDays)||
+      Object.values(data.declaration).some(x=>x!==true))throw new ResearchError(400,'invalid_study_declaration');
+   await rateLimit(db,config,request,'default-study',now,6);
+   const validated=readPackDefinitions({schema:'nexo-definicoes-instrumentos-v1',packs:[DEFAULT_RESEARCH_PACK]});
+   const definition=validated[0];
+   let pack=await stmt(db,'SELECT id,expires_at FROM momento_research_packs WHERE pack_id=? AND version=? AND owner_id=? AND expires_at>?',definition.id,definition.version,owner.owner_id,now+2*DAY).first();
+   if(!pack){
+    const packId=crypto.randomUUID();
+    const encrypted=await encryptClinicalRecord(definition,config.key,packId);
+    const expiry=now+CLINICAL_ACTIVE_RETENTION_DAYS*DAY;
+    const inserted=await stmt(db,'INSERT INTO momento_research_packs(id,owner_id,pack_id,version,name,language,mode,ciphertext,iv,added_at,expires_at) VALUES (?,?,?,?,?,?,?,?,?,?,?)',
+     packId,owner.owner_id,definition.id,definition.version,definition.name,definition.language,definition.mode,encrypted.ciphertext,encrypted.iv,now,expiry).run();
+    if(!changed(inserted))deny();
+    await audit(db,'clinician','research_default_pack_registered',packId,now).run();
+    pack={id:packId,expires_at:expiry};
+   }
+   const id=crypto.randomUUID(),token=randomToken();
+   const recruitEnds=Math.min(pack.expires_at-2*DAY,now+data.recruitmentDays*DAY);
+   if(recruitEnds<=now)throw new ResearchError(400,'insufficient_retention');
+   const configDocument={
+    ...DEFAULT_RESEARCH_STUDY,ethicsStatus:data.ethicsStatus,
+    ethicsBasis:data.ethicsBasis.trim(),purpose:'pesquisa_social_sem_fins_lucrativos',
+    responsible:'NEXO · responsável profissional autenticado',referenceMethod:'autoral_descritivo_sem_causalidade',
+   };
+   const encrypted=await encryptClinicalRecord(configDocument,config.key,id);
+   const inserted=await stmt(db,'INSERT INTO momento_research_studies(id,owner_id,pack_ref,token_hash,config_ciphertext,config_iv,consent_version,created_at,recruitment_ends_at,expires_at) VALUES (?,?,?,?,?,?,?,?,?,?)',
+    id,owner.owner_id,pack.id,await hashClinicalValue(config.secret,'research-public',token),
+    encrypted.ciphertext,encrypted.iv,RESEARCH_CONSENT_VERSION,now,recruitEnds,pack.expires_at).run();
+   if(!changed(inserted))deny();
+   await audit(db,'clinician','research_default_study_created',id,now).run();
+   return reply(201,{id,title:DEFAULT_RESEARCH_STUDY.title,
+    publicUrl:config.origin+'/pesquisa-social/responder/#estudo='+encodeURIComponent(token),
+    recruitmentEndsAt:new Date(recruitEnds).toISOString(),consentVersion:RESEARCH_CONSENT_VERSION,
+    questionCount:definition.questions.length});
+  }
+
   if(path==='packs'&&request.method==='GET'){
    const owner=await admin(request,db,config,now,false);
    const found=await rows(stmt(db,'SELECT id,pack_id,version,name,language,mode,added_at,expires_at FROM momento_research_packs WHERE owner_id=? AND expires_at>? ORDER BY added_at DESC LIMIT 100',owner.owner_id,now));
@@ -207,7 +255,7 @@ export async function handleResearchRequest({request,env},deps={}){
     encrypted.ciphertext,encrypted.iv,consentVersion,now,recruiting,expiry).run();
    if(!changed(inserted))deny();
    await audit(db,'clinician','research_study_created',id,now).run();
-   return reply(201,{id,publicUrl:config.origin+'/pesquisa-social/responder/?estudo='+encodeURIComponent(token),
+   return reply(201,{id,publicUrl:config.origin+'/pesquisa-social/responder/#estudo='+encodeURIComponent(token),
     recruitmentEndsAt:new Date(recruiting).toISOString(),consentVersion});
   }
   const stop=path.match(/^studies\/([^/]+)\/close$/);
