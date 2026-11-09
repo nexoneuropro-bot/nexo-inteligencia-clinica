@@ -21,8 +21,8 @@ import '../../styles/momento-clinical.css';
  const root=document.querySelector('[data-nexo-research-withdraw]');
  const button=root?.querySelector('#research-withdraw-button');
  button?.addEventListener('click',async()=>{
-  const input=root.querySelector('#research-receipt');
-  const status=root.querySelector('#research-withdraw-status');
+  const input=root?.querySelector('#research-receipt');
+  const status=root?.querySelector('#research-withdraw-status');
   if(!(input instanceof HTMLInputElement)||!(status instanceof HTMLElement)||!(button instanceof HTMLButtonElement))return;
   const receipt=input.value.trim();
   if(!/^[A-Za-z0-9_-]{43}$/.test(receipt)){status.textContent='Confira o código de retirada informado após a participação.';return;}
