@@ -157,7 +157,7 @@ export function validateClinicalSubmission(payload, now = Date.now()) {
     if (entry.status === 'answered') {
       if (typeof entry.text !== 'string') throw new ClinicalError(400, 'invalid_reflection');
       const cleaned = entry.text.normalize('NFC').trim();
-      if (!cleaned || [...cleaned].length > REFLECTION_MAX_CHARS || /[\\u0000-\\u0008\\u000b\\u000c\\u000e-\\u001f\\u007f]/.test(cleaned)) throw new ClinicalError(400, 'invalid_reflection');
+      if (!cleaned || [...cleaned].length > REFLECTION_MAX_CHARS || /[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f]/.test(cleaned)) throw new ClinicalError(400, 'invalid_reflection');
       reflectionAnswers[item.id] = { status: 'answered', text: cleaned };
     } else {
       if (entry.text !== undefined) throw new ClinicalError(400, 'invalid_reflection');
