@@ -2,6 +2,7 @@ import { profileFields, placeOptions, questions } from '../../src/data/momento-d
 import { scoreScreening, SCREENING_SCORING_RULES_VERSION } from '../../src/lib/momento-screening.ts';
 import { CLINICAL_CONSENT_VERSION, INSTRUMENT_VERSIONS } from '../../src/data/momento-instruments.ts';
 import { clarificationQuestions } from '../../src/data/momento-clarifications.ts';
+import { reflectionQuestions, reflectionChoices, REFLECTION_MAX_CHARS } from '../../src/data/momento-reflections.ts';
 
 export const CLINICAL_ADMIN = 'nexoneuropro@gmail.com';
 export const CLINICAL_ACTIVE_RETENTION_DAYS = 81;
@@ -91,7 +92,7 @@ export async function decryptClinicalRecord(record, keyBytes) {
 }
 
 export function validateClinicalSubmission(payload, now = Date.now()) {
-  requireExact(payload, ['consent', 'profile', 'context', 'authorAnswers', 'phq9', 'gad7', 'impact', 'clarifications', 'completion']);
+  requireExact(payload, ['consent', 'profile', 'context', 'authorAnswers', 'phq9', 'gad7', 'impact', 'clarifications', 'completion', 'reflectionMode', 'reflectionAnswers']);
   requireExact(payload.consent, ['accepted', 'adult', 'version']);
   if (payload.consent.accepted !== true || payload.consent.adult !== true || payload.consent.version !== CLINICAL_CONSENT_VERSION) throw new ClinicalError(400, 'consent_required');
   requireExact(payload.profile, profileFields.map(field => field.id));
@@ -107,7 +108,7 @@ export function validateClinicalSubmission(payload, now = Date.now()) {
       profile[field.id] = selected ?? 'not-informed';
     }
   }
-  requireExact(payload.context, ['place', 'privacy']);
+  requireExact(payload.context, ['place', 'privacy', 'accompaniment']);
   if (!['yes', 'partial'].includes(payload.context.privacy) || (payload.context.place !== undefined && !placeOptions.some(option => option.id === payload.context.place))) throw new ClinicalError(400, 'privacy_required');
   requireExact(payload.authorAnswers, questions.map(question => question.id));
   const authorAnswers = {};
@@ -140,7 +141,30 @@ export function validateClinicalSubmission(payload, now = Date.now()) {
     if (selected !== null && (!relevant || !question.options.some(option => option.id === selected))) throw new ClinicalError(400, 'invalid_clarification');
     clarifications[question.id] = selected;
   }
-  const allowedQuestionIds = new Set([...questions.map(question => question.id), ...Array.from({ length: 9 }, (_, index) => `phq9-${index}`), ...Array.from({ length: 7 }, (_, index) => `gad7-${index}`), 'phq9-impact', 'gad7-impact', ...clarificationQuestions.map(question => `clarification-${question.id}`)]);
+  const accompaniment = payload.context.accompaniment ?? 'not-informed';
+  if (!['not-informed', 'alone', 'with-professional'].includes(accompaniment)) throw new ClinicalError(400, 'invalid_accompaniment');
+  const reflectionMode = payload.reflectionMode ?? 'basic';
+  if (!['basic', 'extended'].includes(reflectionMode)) throw new ClinicalError(400, 'invalid_reflection_mode');
+  if (payload.reflectionAnswers !== undefined) requireExact(payload.reflectionAnswers, reflectionQuestions.map(item => item.id));
+  const suppliedReflections = payload.reflectionAnswers ?? {};
+  const reflectionAnswers = {};
+  if (reflectionMode === 'basic' && Object.keys(suppliedReflections).length) throw new ClinicalError(400, 'unexpected_reflection');
+  for (const item of reflectionQuestions) {
+    const entry = suppliedReflections[item.id];
+    if (entry === undefined) continue; // Não apresentada ou não respondida, sem imputação.
+    requireExact(entry, ['status', 'text']);
+    if (!reflectionChoices.some(choice => choice.id === entry.status)) throw new ClinicalError(400, 'invalid_reflection');
+    if (entry.status === 'answered') {
+      if (typeof entry.text !== 'string') throw new ClinicalError(400, 'invalid_reflection');
+      const cleaned = entry.text.normalize('NFC').trim();
+      if (!cleaned || [...cleaned].length > REFLECTION_MAX_CHARS || /[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f]/.test(cleaned)) throw new ClinicalError(400, 'invalid_reflection');
+      reflectionAnswers[item.id] = { status: 'answered', text: cleaned };
+    } else {
+      if (entry.text !== undefined) throw new ClinicalError(400, 'invalid_reflection');
+      reflectionAnswers[item.id] = { status: entry.status };
+    }
+  }
+  const allowedQuestionIds = new Set([...questions.map(question => question.id), ...Array.from({ length: 9 }, (_, index) => `phq9-${index}`), ...Array.from({ length: 7 }, (_, index) => `gad7-${index}`), 'phq9-impact', 'gad7-impact', 'journey-choice', ...clarificationQuestions.map(question => `clarification-${question.id}`), ...reflectionQuestions.map(question => `reflection-${question.id}`)]);
   const completion = { kind: 'complete' };
   if (payload.completion !== undefined) {
     requireExact(payload.completion, ['kind', 'lastShownId']);
@@ -152,9 +176,9 @@ export function validateClinicalSubmission(payload, now = Date.now()) {
       completion.lastShownId = payload.completion.lastShownId;
     }
   }
-  return { schemaVersion: 2, consent: { accepted: true, adult: true, version: CLINICAL_CONSENT_VERSION, locale: 'pt-BR', acceptedAt: new Date(now).toISOString() }, profile,
+  return { schemaVersion: 3, consent: { accepted: true, adult: true, version: CLINICAL_CONSENT_VERSION, locale: 'pt-BR', acceptedAt: new Date(now).toISOString() }, profile,
     // The temporary place check is validated but not retained in the record.
-    context: { privacy: payload.context.privacy }, authorAnswers, ...originalAnswers, results, impact, clarifications, completion,
+    context: { privacy: payload.context.privacy, accompaniment }, authorAnswers, ...originalAnswers, results, impact, clarifications, completion, reflectionMode, reflectionAnswers,
     instrumentVersions: INSTRUMENT_VERSIONS, scoringRulesVersion: SCREENING_SCORING_RULES_VERSION,
     createdAt: new Date(now).toISOString(), expiresAt: new Date(now + CLINICAL_ACTIVE_RETENTION_DAYS * DAY).toISOString() };
 }

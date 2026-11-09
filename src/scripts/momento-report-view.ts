@@ -1,4 +1,5 @@
 import {buildIntegratedReport,type ReportPoint,type ReportAxis,type ReportDomain,type ReportInstrument} from '../lib/momento-professional-report';
+import {reflectionQuestions,reflectionChoices} from '../data/momento-reflections';
 
 function element<K extends keyof HTMLElementTagNameMap>(tag:K,className?:string):HTMLElementTagNameMap[K]{
  const node=document.createElement(tag);if(className)node.className=className;return node;
@@ -80,6 +81,26 @@ export function appendIntegratedProfessionalReport(panel:HTMLElement,record:Reco
    chart.append(group);
  }
  root.append(chart);
+ const reflectionData=record.reflectionAnswers&&typeof record.reflectionAnswers==='object'&&!Array.isArray(record.reflectionAnswers)?record.reflectionAnswers as Record<string,unknown>:{};
+ const context=record.context&&typeof record.context==='object'?record.context as Record<string,unknown>:{};
+ const mode=record.reflectionMode==='extended'?'Conversa aprofundada':'Conversa breve ou versão anterior';
+ const narrative=section(root,'pro-report-narrative','ACOLHIMENTO · RELATO LIVRE','O que a pessoa escolheu compartilhar');
+ narrative.append(text('p','Percurso: '+mode+'. '+(context.accompaniment==='with-professional'?'Preenchimento declarado como acompanhado pelo profissional.':context.accompaniment==='alone'?'Preenchimento declarado como realizado individualmente.':'Modalidade de preenchimento não informada.'),'mc-report-quiet'));
+ if(record.reflectionMode==='extended'){
+  for(const item of reflectionQuestions){
+   const box=element('article','mc-report-tool');
+   box.append(text('h4',item.title));
+   const entry=reflectionData[item.id]&&typeof reflectionData[item.id]==='object'?reflectionData[item.id] as Record<string,unknown>:{};
+   const choice=reflectionChoices.find(option=>option.id===entry.status);
+   const status=choice?.label??'Tema não apresentado ou sem escolha registrada';
+   box.append(text('p','Registro da pessoa: '+status,'mc-report-mini'));
+   if(entry.status==='answered'&&typeof entry.text==='string')box.append(text('p',entry.text,'mc-report-quotation'));
+   if(entry.status==='later')box.append(text('p','Perguntar se a pessoa deseja conversar sobre esse tema na sessão, sem exigir explicações.','mc-report-quiet'));
+   if(entry.status==='prefer-not')box.append(text('p','A pessoa optou por não compartilhar. Não sugerir causa ou pressão para responder.','mc-report-quiet'));
+   narrative.append(box);
+  }
+ }else narrative.append(text('p','Nenhuma pergunta narrativa adicional foi solicitada neste percurso.','mc-report-quiet'));
+ narrative.append(text('p','As narrativas são autorrelatos, não resultados psicométricos. O NEXO não infere função do comportamento, trauma ou comportamentos clinicamente relevantes (CRB) da FAP por meio destas respostas. A relação terapêutica e as contingências observadas no encontro exigem avaliação humana.','mc-report-quiet'));
  const notice=element('div','mc-report-notice');
  notice.append(text('strong','Documento preparatório reservado ao profissional.'),text('p','Não é laudo, parecer diagnóstico, previsão de risco nem devolutiva ao participante. Todas as inferências dependem de avaliação humana.'));
  root.append(notice);

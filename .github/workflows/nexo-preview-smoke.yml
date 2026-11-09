@@ -9,6 +9,11 @@ on:
       - 'src/scripts/momento-report-view.ts'
       - 'src/lib/momento-professional-report.ts'
       - 'src/components/MomentoProfessional.astro'
+      - 'src/components/MomentoClinical.astro'
+      - 'src/scripts/momento-clinical.ts'
+      - 'src/scripts/momento-on-device-voice.ts'
+      - 'src/data/momento-reflections.ts'
+      - 'astro.config.mjs'
   workflow_dispatch:
 
 permissions:
@@ -61,5 +66,31 @@ jobs:
               except Exception as error:
                   print(f"Tentativa {attempt}/5: {error}")
                   if attempt == 5: raise
+                  time.sleep(8)
+          PY
+
+      - name: Confirmar escolha de percurso e permissão restrita de microfone
+        run: |
+          python3 - <<'PY'
+          import time, urllib.request
+          base='https://nexo-previa-20261014.pages.dev'
+          for attempt in range(1,7):
+              try:
+                  with urllib.request.urlopen(base+'/conhecendo-meu-momento/responder/',timeout=14) as r:
+                      participant=r.read().decode('utf-8')
+                      policy=r.headers.get('Permissions-Policy','')
+                  if 'mc-choice-title' not in participant or 'mc-reflection-text' not in participant:
+                      raise AssertionError('Percurso ampliado ainda ausente da prévia')
+                  if 'microphone=(self)' not in policy or 'microphone=()' in policy:
+                      raise AssertionError('Política de microfone do percurso não foi aplicada corretamente: '+policy)
+                  with urllib.request.urlopen(base+'/nexo-profissional/',timeout=14) as r:
+                      other=r.headers.get('Permissions-Policy','')
+                  if 'microphone=()' not in other:
+                      raise AssertionError('Microfone não está bloqueado nas demais áreas')
+                  print('Prévia confirmou escolha de percurso, relato e permissão restrita de microfone.')
+                  break
+              except Exception as error:
+                  print(f'Tentativa {attempt}: {error}')
+                  if attempt==6: raise
                   time.sleep(8)
           PY

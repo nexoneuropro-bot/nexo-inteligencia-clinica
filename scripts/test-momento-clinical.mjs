@@ -366,3 +366,53 @@ test('interrupção compartilhada é voluntária, registrada sem inferir motivo 
   const legacy=validateClinicalSubmission(payload(),initialNow);
   assert.deepEqual(legacy.completion,{kind:'complete'});
 });
+
+test('acolhimento narrativo: consentimento atualizado, respostas opcionais, voz convertida apenas em texto', () => {
+ const p = payload();
+ p.context.accompaniment = 'with-professional';
+ p.reflectionMode='extended';
+ p.reflectionAnswers={
+  demanda:{status:'answered',text:'Gostaria de organizar meus pensamentos sobre um acontecimento recente.'},
+  episodio:{status:'later'},
+  recursos:{status:'unsure'},
+  'identidade-vinculos':{status:'prefer-not'}
+ };
+ const r=validateClinicalSubmission(p,initialNow);
+ assert.equal(r.reflectionMode,'extended');
+ assert.equal(r.context.accompaniment,'with-professional');
+ assert.equal(r.reflectionAnswers.demanda.text,p.reflectionAnswers.demanda.text);
+ assert.deepEqual(r.reflectionAnswers.episodio,{status:'later'});
+ assert.deepEqual(r.reflectionAnswers['identidade-vinculos'],{status:'prefer-not'});
+ assert.equal('audio' in r,false);
+ assert.equal('voice' in r,false);
+ assert.equal(r.results.phq9.score,13);
+ assert.equal(r.results.gad7.score,7);
+ assert.equal(r.consent.version,CLINICAL_CONSENT_VERSION);
+});
+test('acolhimento narrativo: recusas são estados explícitos, não texto nem diagnóstico',()=>{
+ const p=payload();p.reflectionMode='extended';p.reflectionAnswers={demanda:{status:'prefer-not'},recursos:{status:'later'}};
+ const saved=validateClinicalSubmission(p,initialNow);
+ assert.deepEqual(saved.reflectionAnswers.demanda,{status:'prefer-not'});
+ assert.equal(saved.reflectionAnswers.demanda.text,undefined);
+ assert.equal(saved.reflectionAnswers.recursos.text,undefined);
+ const legacy=validateClinicalSubmission(payload(),initialNow);
+ assert.equal(legacy.reflectionMode,'basic');
+ assert.deepEqual(legacy.reflectionAnswers,{});
+});
+test('acolhimento narrativo: rejeitar conteúdo além do limite, chaves desconhecidas, áudio e texto em recusas',()=>{
+ const base=()=>{const p=payload();p.reflectionMode='extended';p.reflectionAnswers={demanda:{status:'answered',text:'Texto opcional.'}};return p;};
+ const mutations=[
+  p=>{p.reflectionMode='unknown';},
+  p=>{p.reflectionAnswers.demanda.text='x'.repeat(1401);},
+  p=>{p.reflectionAnswers.demanda.text='  ';},
+  p=>{p.reflectionAnswers.demanda.status='danger';},
+  p=>{p.reflectionAnswers.demanda.audio='base64';},
+  p=>{p.reflectionAnswers.demanda.text='fala'+String.fromCharCode(0)+'invalida';},
+  p=>{p.reflectionAnswers={notAQuestion:{status:'answered',text:'x'}};},
+  p=>{p.reflectionMode='basic';},
+  p=>{p.reflectionAnswers.demanda={status:'prefer-not',text:'não autorizado'};},
+  p=>{p.context.accompaniment='invalid';},
+  p=>{p.audio='arquivo indevido';}
+ ];
+ for(const mutate of mutations){const p=base();mutate(p);assert.throws(()=>validateClinicalSubmission(p,initialNow));}
+});
