@@ -257,7 +257,14 @@ const submissionMetadata = row => ({ id: row.id, createdAt: new Date(row.created
 /** All time-expired records are denied by reads even before this physical purge. */
 export async function cleanupClinicalData(env, now = Date.now()) {
   const db = env?.NEXO_CLINICAL_DB; if (!db?.batch) throw new Error('clinical_database_unavailable');
+  // Migration 0003 may not be installed on every existing environment.
+  // Purge research only when the three segregated tables are present, in
+  // child-to-parent order, preserving previous sites and their cleanup.
+  const researchTables = ['momento_research_submissions', 'momento_research_studies', 'momento_research_packs'];
+  const existing = await Promise.all(researchTables.map(name => stmt(db, "SELECT name FROM sqlite_master WHERE type = 'table' AND name = ?", name).first()));
+  const researchCleanup = existing.every(Boolean) ? researchTables.map(table => stmt(db, `DELETE FROM ${table} WHERE expires_at <= ?`, now)) : [];
   return db.batch([
+    ...researchCleanup,
     ...['momento_submissions', 'momento_sessions', 'momento_challenges', 'momento_bootstrap', 'momento_rate_limits', 'momento_audit', 'momento_invites'].map(table => stmt(db, `DELETE FROM ${table} WHERE expires_at <= ?`, now)),
     stmt(db, 'INSERT INTO momento_retention_runs (slot, last_success_at) VALUES (1, ?) ON CONFLICT(slot) DO UPDATE SET last_success_at = excluded.last_success_at', now),
     auditStatement(db, 'system', 'retention_purged', 'expired-records', now),
