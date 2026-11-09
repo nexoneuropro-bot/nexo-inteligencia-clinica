@@ -95,10 +95,10 @@ export function appendClinicalInterviewGuide(report:HTMLElement,record:Record<st
   catch{status.textContent='O navegador não permitiu copiar. Selecione os itens e registre a programação no sistema autorizado.';}
  });
  actions.append(copy);
- const bank=el('a','mc-guide-bank');bank.href='https://nexo-acolhimento.azureplum16.chatgpt.site/painel';bank.target='_blank';bank.rel='noopener noreferrer';bank.textContent='Consultar catálogo externo (sem dados clínicos) ↗';actions.append(bank);
+ const bank=el('a','mc-guide-bank');bank.href='#pro-instrument-library';bank.textContent='Consultar biblioteca NEXO integrada';actions.append(bank);
  proposals.append(actions);
  const status=el('p','mc-report-quiet');status.setAttribute('role','status');status.setAttribute('aria-live','polite');proposals.append(status);
- p(proposals,'IMPORTANTE: o catálogo externo não possui API autorizada confirmada. Não utilize ChatGPT Sites para processar dados sensíveis de saúde. A importação de metadados é apenas local; instrumentos e aplicações exigem verificação de licença, SATEPSI e modalidade. A integração com prontuários e o envio de escalas não estão habilitados.','mc-report-quiet');
+ p(proposals,'A biblioteca NEXO integrada organiza instrumentos e indicações para análise profissional. Packs importados são lidos localmente, sem incorporar dados clínicos; aplicação complementar, reaplicações e histórico longitudinal somente após implantação, validação e autorização específicas.','mc-report-quiet');
  root.append(proposals);
  const footer=el('section','mc-guide-section');
  p(footer,guide.boundary,'mc-report-quiet');p(footer,guide.note,'mc-report-quiet');
