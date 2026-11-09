@@ -5,11 +5,20 @@ on:
     branches: [feat/experiencia-imersiva]
     paths:
       - 'src/components/MomentoClinical.astro'
+      - 'src/components/MeuMomento.astro'
+      - 'src/components/MomentoSyntheticPanel.astro'
+      - 'src/layouts/MomentoLayout.astro'
+      - 'src/lib/momento-demo-pilot.ts'
+      - 'src/data/momento-synthetic-case.ts'
       - 'src/data/momento-clarifications.ts'
       - 'src/data/momento-reflections.ts'
       - 'src/scripts/momento-on-device-voice.ts'
-      - 'src/pages/conhecendo-meu-momento/privacidade.astro'
+      - 'src/pages/conhecendo-meu-momento/**'
       - 'astro.config.mjs'
+      - 'src/scripts/meu-momento.ts'
+      - 'src/scripts/momento-synthetic-panel.ts'
+      - 'src/styles/meu-momento.css'
+      - 'src/styles/momento-synthetic-panel.css'
       - 'src/data/momento-instruments.ts'
       - 'src/lib/momento-professional-cues.ts'
       - 'src/lib/momento-professional-report.ts'
@@ -29,6 +38,17 @@ on:
       - 'src/scripts/momento-on-device-voice.ts'
       - 'src/components/MomentoClinical.astro'
       - 'astro.config.mjs'
+      - 'src/layouts/MomentoLayout.astro'
+      - 'src/components/MeuMomento.astro'
+      - 'src/components/MomentoSyntheticPanel.astro'
+      - 'src/lib/momento-demo-pilot.ts'
+      - 'src/data/momento-synthetic-case.ts'
+      - 'src/scripts/meu-momento.ts'
+      - 'src/scripts/momento-synthetic-panel.ts'
+      - 'src/styles/meu-momento.css'
+      - 'src/styles/momento-synthetic-panel.css'
+      - 'src/pages/conhecendo-meu-momento/**'
+      - 'scripts/test-momento-*.mjs'
   workflow_dispatch:
 
 permissions:
@@ -68,4 +88,4 @@ jobs:
           JS
 
       - name: Testes sintéticos clínicos
-        run: node --experimental-strip-types --experimental-sqlite --test scripts/test-momento-screening.mjs scripts/test-momento-clinical.mjs scripts/test-momento-professional-cues.mjs scripts/test-momento-integrated-report.mjs scripts/test-momento-on-device-voice.mjs
+        run: node --experimental-strip-types --experimental-sqlite --test scripts/test-momento-*.mjs

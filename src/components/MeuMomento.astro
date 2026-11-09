@@ -8,7 +8,7 @@ const stages = [
   ['privacy', 'Seu espaço'],
   ['preferences', 'Seu jeito'],
   ['questions', 'A conversa'],
-  ['summary', 'A síntese'],
+  ['summary', 'Encerramento'],
 ];
 const places = [
   ['home', 'Em casa'],
@@ -17,6 +17,7 @@ const places = [
   ['other', 'Em outro lugar'],
   ['not-informed', 'Prefiro não informar'],
 ];
+const profilePurposes:Record<string,string>={nickname:'Reconhecer a forma de apresentação no exemplo.',age:'Situar a fase da vida no contexto do exemplo.',gender:'Respeitar a identidade informada, sem inferir condições de saúde.',education:'Situar o contexto e a comunicação, sem presumir capacidade.',activity:'Conhecer as atividades que organizam o cotidiano.',region:'Situar o contexto aproximado, sem pedir endereço.'};
 ---
 <div class="mm-root" data-mm-root>
   <div class="mm-demo-notice" role="note">
@@ -54,23 +55,23 @@ const places = [
 
         <div class="mm-invitation">
           <span class="mm-small-label">UM CONVITE PARA CONHECER</span>
-          <p>O acolhimento real será acessível por convite individual, após uma conversa com o profissional. Os convites clínicos ainda não estão habilitados.</p>
+          <p>O acolhimento real usa um convite individual, após conversa com o profissional. Este percurso é separado: permite conhecer a experiência com situações fictícias, sem enviar ou guardar respostas.</p>
         </div>
 
         <details class="mm-details">
           <summary>Que perguntas usamos e por quê?</summary>
           <div>
             <p>O percurso reúne perguntas sobre situações do cotidiano, maneiras de responder e assuntos que alguém gostaria de conversar com o profissional.</p>
-            <p>Na versão clínica prevista, poderão ser utilizados PHQ-9, sobre sintomas depressivos, e GAD-7, sobre sintomas ansiosos. Esses instrumentos de rastreio consideram as duas últimas semanas e não fazem diagnóstico por si só. <strong>Eles não são aplicados nesta demonstração.</strong></p>
-            <p>A escolha das versões, da modalidade de aplicação e da interpretação depende de revisão técnico-ética. A futura devolutiva será realizada por um profissional humano, no fluxo combinado com a pessoa encaminhada.</p>
+            <p>Aqui você conhecerá os itens do PHQ-9 e do GAD-7, instrumentos de rastreio sobre as últimas duas semanas, além de perguntas iniciais e complementos opcionais. Explore apenas situações fictícias. A demonstração não é uma aplicação clínica e não apresenta resultados ao participante.</p>
+            <p>No acolhimento real, a interpretação e a devolutiva pertencem ao profissional humano. Os complementos sobre sono e apetite não alteram os instrumentos nem entram no cálculo.</p>
           </div>
         </details>
         <details class="mm-details">
           <summary>Privacidade, escolhas e contato</summary>
           <div>
-            <p>As escolhas desta demonstração ficam apenas na memória da página enquanto você permanece nela. Não há registro de respostas, cadastro, envio ao profissional ou uso para pesquisa. Ao encerrar, recarregar ou sair, o percurso precisa ser iniciado novamente.</p>
-            <p>“Pausar” permite continuar somente enquanto esta página permanece aberta. “Encerrar e limpar” apaga as escolhas da demonstração. Um arquivo de exemplo, caso você escolha baixá-lo, ficará sob seu controle no dispositivo.</p>
-            <p>No futuro fluxo clínico, um pseudônimo poderá continuar vinculado ao convite e não significará anonimização. Antes de qualquer coleta real, deverão ser informados finalidade, base legal, acessos, retenção e formas de exercer seus direitos.</p>
+            <p>As escolhas e os eventos de percurso, como pergunta exibida, resposta confirmada, pergunta pulada e pausa, ficam somente na memória desta aba. Os eventos não incluem o conteúdo das respostas. Nada é enviado a servidor, analytics ou ao profissional; não há cadastro nem pesquisa operacional.</p>
+            <p>“Pausar” permite continuar enquanto esta aba permanecer aberta. “Encerrar e limpar” descarta as escolhas. Sair ou recarregar inicia um novo percurso. Após um período prolongado sem interação, a demonstração encerra as escolhas locais; isso não explica por que alguém interrompeu.</p>
+            <p>No fluxo clínico separado, o convite pode identificar a pessoa; pseudônimo não significa anonimato. As condições próprias são informadas antes do aceite. <a href="/conhecendo-meu-momento/privacidade/">Conheça a privacidade do acolhimento real</a>.</p>
             <p>Responsável pela proposta: Gabriel Alves Batista · CRP-SP 06/176184. Dúvidas: <a href="mailto:nexoneuropro@gmail.com">nexoneuropro@gmail.com</a>. Consulte a <a href="/politica-de-privacidade/">política institucional</a>.</p>
             <p>Esta página não é acompanhada em tempo real e não oferece atendimento de urgência. Para falar sobre um atendimento ou o fluxo de devolutiva, <a href="/contato/">entre em contato com a NEXO</a>.</p>
           </div>
@@ -94,7 +95,7 @@ const places = [
         <p class="mm-lead">Conheça os campos de um perfil de exemplo. Todas as escolhas são opcionais.</p>
         <p class="mm-context">Idade, escolaridade, trabalho e região ajudam a situar uma história. Nesta demonstração, escolha características fictícias para observar o percurso.</p>
         <div class="mm-profile-grid">
-          {profileFields.map(field => <label class="mm-field" for={`mm-profile-${field.id}`}><span>{field.label}<small>Opcional · perfil de exemplo</small></span><select id={`mm-profile-${field.id}`} data-mm-profile={field.id} autocomplete="off">{field.options.map(option => <option value={option.id}>{option.label}</option>)}</select></label>)}
+          {profileFields.map(field => <label class="mm-field" for={`mm-profile-${field.id}`}><span>{field.label}<small>Opcional · {profilePurposes[field.id]}</small></span><select id={`mm-profile-${field.id}`} data-mm-profile={field.id} autocomplete="off">{field.options.map(option => <option value={option.id}>{option.label}</option>)}</select></label>)}
         </div>
         <p class="mm-caption">Você pode manter “Prefiro não informar” em todos os campos e seguir normalmente.</p>
         <div class="mm-actions mm-interactive"><button type="button" class="mm-button" data-mm-action="back">← Voltar</button><button type="button" class="mm-button mm-primary" data-mm-action="continue">Continuar →</button></div>
@@ -123,8 +124,8 @@ const places = [
         <p class="mm-lead">Você escolhe a apresentação. O conteúdo e o acolhimento permanecem os mesmos.</p>
         <fieldset class="mm-fieldset"><legend>Modo de apresentação</legend><div class="mm-choices mm-mode-choices">
           <label class="mm-choice"><input type="radio" name="mm-mode" value="text" checked/><span><strong>Ler e tocar</strong><small>Continue pelo texto, no seu ritmo.</small></span></label>
-          <label class="mm-choice"><input type="radio" name="mm-mode" value="audio" disabled/><span><strong>Ouvir e tocar</strong><small>Quando houver uma voz local em português no dispositivo.</small></span></label>
-          <div class="mm-unavailable"><strong>Falar: indisponível nesta fase</strong><p>O microfone não é ativado. Você pode continuar pelo texto ou pela leitura em voz alta disponível.</p></div>
+          <label class="mm-choice"><input type="radio" name="mm-mode" value="audio" disabled/><span><strong>Ouvir orientações e tocar</strong><small>Quando houver voz local em português. Os itens padronizados continuam em texto.</small></span></label>
+          <div class="mm-unavailable"><strong>Falar: indisponível nesta demonstração</strong><p>O microfone não é ativado. As escalas não são narradas sem revisão da modalidade de aplicação.</p></div>
         </div></fieldset>
         <label class="mm-field mm-voice-field" for="mm-voice"><span>Voz de leitura<small>Independente do personagem escolhido</small></span><select id="mm-voice" disabled><option value="">Aguardando vozes locais em português</option></select></label>
         <fieldset class="mm-fieldset"><legend>Personagem de apoio visual</legend><p class="mm-caption">Ilustrações originais para apresentar o percurso. São recursos visuais, não pessoas reais nem profissionais de saúde.</p><div class="mm-avatar-choices">
@@ -140,21 +141,27 @@ const places = [
         <div class="mm-question-topline"><span class="mm-eyebrow" id="mm-question-topic"></span><span id="mm-question-avatar" data-choice="none" aria-hidden="true"></span></div>
         <span class="mm-sr-only" id="mm-question-position"></span>
         <fieldset class="mm-question-fieldset" aria-describedby="mm-question-intro"><legend id="mm-question-title" tabindex="-1">O que você gostaria de conversar?</legend><p class="mm-question-intro" id="mm-question-intro"></p><div class="mm-choices" id="mm-options"></div></fieldset>
+        <p class="mm-advice" id="mm-clarifier-note" hidden>Este complemento é opcional e não altera a pontuação dos instrumentos.</p>
         <div class="mm-actions mm-interactive"><button type="button" class="mm-button" data-mm-action="back">← Voltar</button><button type="button" class="mm-button mm-primary" data-mm-action="continue">Continuar →</button></div>
         <button type="button" class="mm-subtle-button mm-interactive" data-mm-action="skip">Prefiro pular esta pergunta</button>
       </section>
 
       <section data-mm-stage="summary" aria-labelledby="mm-summary-title" hidden>
-        <span class="mm-eyebrow">SUA SÍNTESE</span>
-        <h2 id="mm-summary-title" tabindex="-1">Um ponto de partida para a conversa.</h2>
-        <p class="mm-lead">Este exemplo organiza as escolhas do percurso, sem notas, classificações ou conclusões sobre uma pessoa.</p>
-        <dl class="mm-summary-lines" id="mm-summary-lines"></dl>
-        <p class="mm-summary-closing" id="mm-summary-closing"></p>
-        <p>No acolhimento real, o profissional que encaminhar a experiência deverá combinar como acontecerá a conversa de devolutiva. Nesta demonstração, nada foi encaminhado e não há agendamento.</p>
-        <div class="mm-actions mm-actions-wrap mm-interactive"><button type="button" class="mm-button" data-mm-action="copy">Copiar o exemplo</button><button type="button" class="mm-button" data-mm-action="download">Baixar o exemplo em texto</button><button type="button" class="mm-button" data-mm-action="back">Revisar escolhas</button></div>
-        <details class="mm-details"><summary>Como estas informações foram organizadas?</summary><div><p>A síntese reúne somente descrições previamente escritas para as alternativas escolhidas. Perguntas puladas permanecem sem resposta, e nenhuma função comportamental é deduzida a partir de uma escolha isolada.</p><p>Não há IA interpretando respostas, escalas aplicadas ou diagnóstico. PHQ-9 e GAD-7 são instrumentos de rastreio previstos para uma fase futura, após revisão das versões, das condições de uso e da infraestrutura. Quando utilizados adequadamente, consideram as duas últimas semanas e apoiam a entrevista; não substituem a avaliação humana.</p></div></details>
+        <span class="mm-eyebrow">NO SEU TEMPO</span>
+        <h2 id="mm-summary-title" tabindex="-1">Obrigado por conhecer este percurso.</h2>
+        <p class="mm-lead">Sua participação nesta demonstração terminou. Nada foi enviado à NEXO.</p>
+        <p>No acolhimento real, o profissional que fez o convite conversará com você sobre as respostas, no encontro combinado. Este percurso não devolve pontuações, classificações ou interpretações automáticas.</p>
+        <details class="mm-details"><summary>Como funciona o apoio à entrevista?</summary><div><p>O profissional pode organizar informações do contexto, respostas dos instrumentos, complementos e pausas. A ausência de resposta permanece distinta de zero; uma pausa não revela, sozinha, sua causa.</p><p>Um <a href="/conhecendo-meu-momento/visao-tecnica/">caso inteiramente fictício</a> mostra essa organização. Ele não usa suas escolhas desta visita.</p></div></details>
         <a class="mm-contact-link" href="/contato/">Quero informações sobre o acolhimento <span aria-hidden="true">↗</span></a>
         <button type="button" class="mm-subtle-button mm-interactive" data-mm-action="restart">Limpar escolhas e recomeçar</button>
+      </section>
+
+      <section data-mm-stage="safety" aria-labelledby="mm-safety-title" hidden>
+        <span class="mm-eyebrow">APOIO HUMANO</span><h2 id="mm-safety-title" tabindex="-1">Seu bem-estar merece atenção.</h2><p class="mm-lead">Este assunto pede uma conversa direta com um profissional.</p><p>A demonstração não acompanha respostas em tempo real e não avalia risco. Se precisar de atendimento imediato, procure um serviço de urgência ou o <a href="tel:192">SAMU 192</a>. O <a href="tel:+55188?oai_link_source=model_response_hotline">CVV 188</a> oferece escuta emocional e não substitui atendimento de emergência.</p><div class="mm-actions mm-interactive"><button type="button" class="mm-button" data-mm-action="safety-exit">Encerrar e buscar apoio</button><button type="button" class="mm-button" data-mm-action="safety-continue">Continuar a demonstração</button></div>
+      </section>
+
+      <section data-mm-stage="expired" aria-labelledby="mm-expired-title" hidden>
+        <span class="mm-eyebrow">PERCURSO ENCERRADO</span><h2 id="mm-expired-title" tabindex="-1">Podemos começar em outro momento.</h2><p>As escolhas locais foram descartadas após um período prolongado sem interação. O encerramento técnico não permite saber por que a pessoa interrompeu o percurso.</p><p>Não há resultado, envio ou interpretação sobre essa interrupção.</p><button type="button" class="mm-button mm-interactive" data-mm-action="restart">Conhecer novamente</button>
       </section>
 
       <section data-mm-stage="paused" aria-labelledby="mm-paused-title" hidden>
@@ -169,7 +176,7 @@ const places = [
 
       <div class="mm-audio-bar mm-interactive" aria-label="Leitura em voz alta">
         <div class="mm-audio-buttons"><button type="button" data-mm-action="tts-play" aria-describedby="mm-tts-status"><span aria-hidden="true">▷</span> Ouvir ou repetir</button><button type="button" data-mm-action="tts-pause">Pausar leitura</button><button type="button" data-mm-action="tts-stop">Parar</button></div>
-        <p id="mm-tts-status" role="status" aria-live="polite">A leitura depende de uma voz local em português disponível no dispositivo. O som começa somente se você escolher ouvir.</p>
+        <p id="mm-tts-status" role="status" aria-live="polite">A leitura das orientações depende de voz local em português e só começa quando você escolhe ouvir. Os itens das escalas não são narrados.</p>
       </div>
 
       <noscript><div class="mm-nojs"><p>Para navegar pela demonstração, ative JavaScript. Você pode ler as informações acima sem registrar qualquer escolha ou <a href="/contato/">pedir informações à NEXO</a>.</p></div><style>.mm-root .mm-interactive,.mm-root .mm-consents{display:none!important}</style></noscript>

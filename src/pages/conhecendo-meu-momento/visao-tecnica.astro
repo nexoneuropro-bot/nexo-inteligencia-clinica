@@ -1,24 +1,22 @@
 ---
 import MomentoLayout from '../../layouts/MomentoLayout.astro';
-const axes=[
-  {title:'Biológico',fact:'Não há informação clínica sobre sono, alimentação, energia ou condições de saúde neste exemplo.',question:'Explorar a rotina e as condições de descanso, se pertinentes à demanda e com finalidade esclarecida.'},
-  {title:'Psicológico',fact:'A personagem relata dificuldade para começar uma atividade quando as orientações estão pouco claras.',question:'Perguntar como compreendeu a tarefa, o que percebeu naquele momento e como agiu em outras ocasiões.'},
-  {title:'Social',fact:'A cena envolve uma atividade de um curso e a possibilidade de pedir esclarecimentos à equipe.',question:'Explorar os apoios disponíveis, a comunicação e as condições de participação.'},
-  {title:'Funcional',fact:'Depois de pedir um exemplo, a personagem iniciou uma parte da atividade; outras etapas continuaram pendentes.',question:'Investigar efeitos imediatos e posteriores e o que torna possível retomar a tarefa. Uma cena não determina a função de um comportamento.'},
-];
+import MomentoSyntheticPanel from '../../components/MomentoSyntheticPanel.astro';
 ---
-<MomentoLayout title="Conhecendo Meu Momento · Estrutura técnica de exemplo" description="Caso fictício separado do percurso de participantes: estrutura de apoio à entrevista, matriz biopsicossocial e requisitos para uma futura área profissional segura.">
+<MomentoLayout title="Conhecendo Meu Momento · Visão técnica sintética" description="Caso inteiramente fictício para revisar respostas, complementos, rastreios, pausas e pistas de entrevista, separado do acesso profissional autenticado.">
   <article class="moment-wrap" data-momento-technical>
-    <p class="moment-kicker">ESTRUTURA TÉCNICA · CASO INTEIRAMENTE FICTÍCIO</p>
-    <h1 class="moment-title">Outro olhar.<br/><em>O mesmo respeito.</em></h1>
-    <p class="moment-lead">Um exemplo de organização para apoiar a entrevista. Este espaço não recebe escolhas da demonstração e não contém dados de participantes.</p>
-    <p class="moment-note">A área clínica real permanece indisponível. Seu acesso depende de autenticação e autorização verificadas no servidor. Esta página mostra apenas uma estrutura pública de exemplo.</p>
-    <div class="moment-actions"><a class="moment-link" href="/conhecendo-meu-momento/">← Conheça a proposta</a><a class="moment-link" href="/conhecendo-meu-momento/demonstracao/">Ver a experiência de demonstração ↗</a></div>
-    <section class="moment-section"><h2>Síntese de acolhimento e rastreio – apoio à entrevista</h2><p>Esse é o nome previsto para uma organização técnica futura, sujeita à revisão profissional. Neste exemplo, não há rastreios aplicados, totais ou classificações.</p><p><strong>Caso fictício:</strong> uma pessoa em um curso procura compreender o que ajuda a iniciar atividades com várias etapas. O exemplo serve para distinguir o relato de perguntas que ainda precisam ser investigadas.</p><p><strong>PHQ-9 e GAD-7:</strong> não aplicados. Não há resultados clínicos ou pontuação nesta fase.</p></section>
-    <section class="moment-section"><h2>Matriz biopsicossocial.</h2>{axes.map(axis=><div class="technical-axis"><h3>{axis.title}</h3><p><strong>Informação do exemplo.</strong> {axis.fact}</p><p><strong>Para explorar na entrevista.</strong> {axis.question}</p></div>)}</section>
-    <section class="moment-section"><h2>Descrever antes de concluir.</h2><p>Uma sequência pode organizar o que veio antes, a resposta e os acontecimentos posteriores. Hipóteses de função dependem da investigação da história e das relações observadas em diferentes situações.</p><p>A leitura profissional pode explorar duração, impacto, condições de saúde, contexto social e outras explicações pertinentes. Não há checklist diagnóstico automatizado, critérios proprietários reproduzidos, indicação de medicação ou encaminhamento por limiar de pontuação.</p></section>
-    <section class="moment-section"><h2>Ativação do fluxo clínico.</h2><p>O atendimento previsto é online, com convite após conversa prévia e aceite. O destinatário administrativo confirmado é nexoneuropro@gmail.com. Não há envio de respostas clínicas por esta demonstração.</p><ul><li>Convites individuais verificados no servidor, com expiração, autorização e uso limitado.</li><li>Autenticação profissional, controle de acesso por participante e registros de auditoria.</li><li>Política e base legal revisadas, consentimentos versionados e processo de retenção e exclusão.</li><li>Armazenamento e transporte protegidos; definição de uma comunicação segura sem dados clínicos em e-mail comum.</li><li>Revisão das versões, modalidades e direitos dos instrumentos, com fluxo humano de segurança e devolutiva.</li></ul></section>
-    <section class="moment-section"><h2>Fontes para a revisão.</h2><p><a href="https://satepsi.cfp.org.br/faq.cfm" target="_blank" rel="noopener noreferrer">CFP/SATEPSI · Avaliação e instrumentos ↗</a></p><p><a href="https://www.gov.br/anpd/pt-br/acesso-a-informacao/perguntas-frequentes" target="_blank" rel="noopener noreferrer">ANPD · Proteção de dados pessoais ↗</a></p><p><a href="https://www.w3.org/TR/WCAG22/" target="_blank" rel="noopener noreferrer">W3C · WCAG 2.2 ↗</a></p></section>
+    <p class="moment-kicker">NEXO · VISÃO TÉCNICA DE DEMONSTRAÇÃO</p>
+    <h1 class="moment-title">Apoio à entrevista.<br/><em>Com a origem à vista.</em></h1>
+    <p class="moment-lead">Um caso fictício permite conhecer como as informações podem ser organizadas para a escuta profissional, com espaço para dúvidas e revisão humana.</p>
+    <div class="moment-actions">
+      <a class="moment-link" href="/conhecendo-meu-momento/demonstracao/">Conhecer o percurso demonstrativo ↗</a>
+      <a class="moment-link" href="/nexo-profissional/">Acessar a área profissional protegida ↗</a>
+    </div>
+    <MomentoSyntheticPanel/>
+    <section class="moment-section">
+      <h2>Do exemplo ao encontro.</h2>
+      <p>O fluxo por convite e a área autenticada são separados desta página. Respostas reais ficam no espaço profissional protegido; a demonstração pública não consulta nem altera esses registros.</p>
+      <p>Os novos complementos e a cronologia são apresentados aqui para revisão. A coleta clínica de respostas parciais e interrupções depende de finalidade e consentimento próprios, retenção, retomada segura e validação da integração. O exemplo não autoriza pesquisa nem decisões automatizadas.</p>
+      <p><a href="/conhecendo-meu-momento/privacidade/">Conhecer as condições de privacidade do fluxo por convite ↗</a></p>
+    </section>
   </article>
 </MomentoLayout>
-<style>.technical-axis{padding:28px 0;border-top:1px solid #dcae8c3b;max-width:900px}.technical-axis h3{font:400 34px/1.2 var(--serif);color:#e2b893;margin-bottom:20px}.technical-axis p{font-size:17px}</style>

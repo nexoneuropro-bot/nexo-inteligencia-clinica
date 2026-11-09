@@ -41,7 +41,6 @@ const complementText=(id:string,value:unknown):string=>{
 const origin=(instrument:'PHQ-9'|'GAD-7',i:number,v:number):string=>`${instrument} item ${i+1}: ${v}/3`;
 const nonzero=(answers:readonly unknown[],instrument:'PHQ-9'|'GAD-7',indices:readonly number[]):string[]=>
   indices.flatMap(i=>{const v=score(answers,i);return v!==null&&v>0?[origin(instrument,i,v)]:[]});
-const label=(key:string,value:unknown):string=>key.toUpperCase()+': '+String(value);
 const point=(title:string,evidence:string[],interpretation:string,investigate:string,limitation:string):ReportPoint=>
  Object.freeze({title,evidence:Object.freeze(evidence),interpretation,investigate,limitation});
 

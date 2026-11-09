@@ -1,0 +1,10 @@
+NEXO · Conhecendo Meu Momento | pacote de demonstração v5 + especificação única v4
+
+SEM NECESSIDADE DE CODEX para abrir a demonstração.
+
+1. Abra NEXO_Conhecendo_Meu_Momento_v5_DEMO.html no navegador para testar o percurso.
+2. Abra NEXO_Painel_Profissional_SINTETICO_v5.html para conhecer a estrutura técnica com dados inventados.
+3. Leia NEXO_ESPECIFICACAO_UNICA_v4.md se quiser compreender todas as decisões, incluindo abandono/pausas, DSM e a separação entre pessoa e profissional.
+4. Se em algum momento retomar o Codex, envie somente os arquivos necessários e o texto COMANDO_CURTO_SE_VOLTRAR_AO_CODEX.txt.
+
+IMPORTANTE: HTML local não envia nem guarda respostas; o painel é fictício e sem autenticação, logo NUNCA usar para pacientes. O pacote NÃO implementa backend, contas, proteção LGPD, coleta real, pesquisa, nem triagem automática. Não confundir demonstração com sistema clínico liberado.

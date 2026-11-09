@@ -1,7 +1,7 @@
 import {questions,profileFields} from '../data/momento-demo';
 import {screeningInstruments,CLINICAL_CONSENT_VERSION} from '../data/momento-instruments';
 import {clarificationQuestions} from '../data/momento-clarifications';
-import {reflectionQuestions,reflectionChoices,reflectionTopics,REFLECTION_MAX_CHARS} from '../data/momento-reflections';
+import {reflectionQuestions,reflectionChoices,REFLECTION_MAX_CHARS} from '../data/momento-reflections';
 import {createLocalDictation} from './momento-on-device-voice';
 
 type Stage='access'|'consent'|'profile'|'privacy'|'choice'|'questions'|'reflection'|'summary'|'submitted'|'paused'|'closed';

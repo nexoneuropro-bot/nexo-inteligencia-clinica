@@ -1,0 +1,64 @@
+{
+  "schema_version": "4.0",
+  "status": "design_not_production",
+  "event_types": [
+    "session_started",
+    "consent_confirmed",
+    "profile_saved",
+    "privacy_checked",
+    "question_presented",
+    "answered",
+    "explicit_skip",
+    "optional_clarification_presented",
+    "clarification_answered",
+    "clarification_skipped",
+    "voluntary_pause",
+    "voluntary_resume",
+    "voluntary_end",
+    "technical_disconnect",
+    "expired_without_completion",
+    "session_completed",
+    "safety_exit"
+  ],
+  "min_fields": [
+    "session_pseudonymous_id",
+    "question_id",
+    "event_type",
+    "occurred_at",
+    "stage",
+    "instrument_version",
+    "response_mode"
+  ],
+  "missing_semantics": {
+    "not_asked": "question never shown",
+    "shown_unanswered": "question shown no confirmed answer",
+    "explicit_skip": "person used skip control",
+    "voluntary_pause": "person used pause control",
+    "technical_disconnect": "supported telemetry indicates connection failure",
+    "expired_without_completion": "session expired with no completion; cause unknown"
+  },
+  "guardrails": [
+    "No inference of psychopathology or avoidance from dropout alone",
+    "No raw question texts or health answers in analytics events",
+    "No partial capture without prior legal basis and disclosed purpose",
+    "No silent inference from avatar, gender, schooling or device",
+    "No notifications containing patient clinical content",
+    "Abandonment event is not sufficient to determine cause; invitation to discuss in session"
+  ],
+  "optional_clarifiers": {
+    "PHQ03": [
+      "dificuldade_iniciar",
+      "despertares",
+      "hipersonia",
+      "misto",
+      "indefinido"
+    ],
+    "PHQ05": [
+      "apetite_reduzido",
+      "apetite_aumentado",
+      "misto",
+      "indefinido"
+    ]
+  },
+  "impact_scoring": "not part of PHQ or GAD total"
+}

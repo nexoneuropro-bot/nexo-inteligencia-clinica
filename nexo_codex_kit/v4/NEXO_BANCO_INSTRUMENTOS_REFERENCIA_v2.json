@@ -1,0 +1,383 @@
+{
+  "schema_version": "2.0.0",
+  "status": "REFERENCE_DRAFT_REQUIRE_CLINICAL_RELEASE_BEFORE_REAL_COLLECTION",
+  "owner": "Nexo Inteligência Clínica",
+  "language": "pt-BR",
+  "intended_population": "adults_18_plus_referred_by_clinician",
+  "notes": [
+    "Dados/questões de referência para implementação e testes com dados sintéticos; uso clínico depende de revisão da modalidade e infraestrutura.",
+    "Os textos dos itens são reproduzidos de formulários que informam dispensa de permissão para reprodução.",
+    "Nenhum escore ou rótulo clínico será exibido ao participante; os instrumentos são informados no consentimento prévio."
+  ],
+  "shared_response_options": [
+    {
+      "value": 0,
+      "label": "Nenhuma vez"
+    },
+    {
+      "value": 1,
+      "label": "Vários dias"
+    },
+    {
+      "value": 2,
+      "label": "Mais da metade dos dias"
+    },
+    {
+      "value": 3,
+      "label": "Quase todos os dias"
+    }
+  ],
+  "instruments": [
+    {
+      "instrument_id": "PHQ-9",
+      "version_id": "phq9_ptbr_pfizer_form_2014_reference_v1",
+      "source_name": "PHQ-9 Portuguese for Brazil Pfizer / PHQ Screeners",
+      "source_url": "https://www.phqscreeners.com/images/sites/g/files/g10060481/f/201412/PHQ9_Portuguese%20for%20Brazil.pdf",
+      "license_note": "No permission required to reproduce, translate, display or distribute (original form).",
+      "recall_period_days": 14,
+      "stem": "Durante as últimas 2 semanas, com que freqüência você foi incomodado/a por qualquer um dos problemas abaixo?",
+      "items": [
+        {
+          "id": "PHQ01",
+          "order": 1,
+          "text": "Pouco interesse ou pouco prazer em fazer as coisas",
+          "internal_domain": "interesse_prazer"
+        },
+        {
+          "id": "PHQ02",
+          "order": 2,
+          "text": "Se sentir “para baixo”, deprimido/a ou sem perspectiva",
+          "internal_domain": "humor_deprimido"
+        },
+        {
+          "id": "PHQ03",
+          "order": 3,
+          "text": "Dificuldade para pegar no sono ou permanecer dormindo, ou dormir mais do que de costume",
+          "internal_domain": "sono"
+        },
+        {
+          "id": "PHQ04",
+          "order": 4,
+          "text": "Se sentir cansado/a ou com pouca energia",
+          "internal_domain": "energia"
+        },
+        {
+          "id": "PHQ05",
+          "order": 5,
+          "text": "Falta de apetite ou comendo demais",
+          "internal_domain": "apetite"
+        },
+        {
+          "id": "PHQ06",
+          "order": 6,
+          "text": "Se sentir mal consigo mesmo/a — ou achar que você é um fracasso ou que decepcionou sua família ou você mesmo/a",
+          "internal_domain": "autovalor"
+        },
+        {
+          "id": "PHQ07",
+          "order": 7,
+          "text": "Dificuldade para se concentrar nas coisas, como ler o jornal ou ver televisão",
+          "internal_domain": "concentracao"
+        },
+        {
+          "id": "PHQ08",
+          "order": 8,
+          "text": "Lentidão para se movimentar ou falar, a ponto das outras pessoas perceberem? Ou o oposto – estar tão agitado/a ou irrequieto/a que você fica andando de um lado para o outro muito mais do que de costume",
+          "internal_domain": "psicomotor"
+        },
+        {
+          "id": "PHQ09",
+          "order": 9,
+          "text": "Pensar em se ferir de alguma maneira ou que seria melhor estar morto/a",
+          "internal_domain": "autolesao_ideacao_morte"
+        }
+      ],
+      "range": [
+        0,
+        27
+      ],
+      "severity_bands_internal_only": [
+        {
+          "min": 0,
+          "max": 4,
+          "label": "Mínima ou ausente"
+        },
+        {
+          "min": 5,
+          "max": 9,
+          "label": "Leve"
+        },
+        {
+          "min": 10,
+          "max": 14,
+          "label": "Moderada"
+        },
+        {
+          "min": 15,
+          "max": 19,
+          "label": "Moderadamente grave"
+        },
+        {
+          "min": 20,
+          "max": 27,
+          "label": "Grave"
+        }
+      ],
+      "safety_trigger": {
+        "item_id": "PHQ09",
+        "values": [
+          1,
+          2,
+          3
+        ],
+        "meaning": "Solicitar avaliação clínica humana de segurança, não estimativa automatizada de risco."
+      },
+      "functional_impact": {
+        "id": "PHQ-9-IMPACT",
+        "scored": false,
+        "prompt": "Se você assinalou qualquer um dos problemas, indique o grau de dificuldade que os mesmos lhe causaram para realizar seu trabalho, tomar conta das coisas em casa ou para se relacionar com as pessoas?",
+        "options": [
+          {
+            "value": 0,
+            "label": "Nenhuma dificuldade"
+          },
+          {
+            "value": 1,
+            "label": "Alguma dificuldade"
+          },
+          {
+            "value": 2,
+            "label": "Muita dificuldade"
+          },
+          {
+            "value": 3,
+            "label": "Extrema dificuldade"
+          }
+        ]
+      }
+    },
+    {
+      "instrument_id": "GAD-7",
+      "version_id": "gad7_ptbr_ses_se_anexo_b_2024_reference_v1",
+      "source_name": "GAD-7 português brasileiro reproduzido no Anexo B do protocolo SES/SE",
+      "source_url": "https://www.funesa.se.gov.br/wp-content/uploads/2025/03/protocolo-clinico-terapeutico-digital-final.pdf",
+      "source_page_printed": 62,
+      "source_page_pdf_0_indexed": 61,
+      "license_note": "No permission required to reproduce, translate, display or distribute (Pfizer attribution in annex).",
+      "recall_period_days": 14,
+      "stem": "Durante as últimas 2 semanas, com que freqüência você foi incomodado/a pelos problemas abaixo?",
+      "items": [
+        {
+          "id": "GAD01",
+          "order": 1,
+          "text": "Sentir-se nervoso/a, ansioso/a ou muito tenso/a",
+          "internal_domain": "nervosismo"
+        },
+        {
+          "id": "GAD02",
+          "order": 2,
+          "text": "Não ser capaz de impedir ou de controlar as preocupações",
+          "internal_domain": "controle_preocupacoes"
+        },
+        {
+          "id": "GAD03",
+          "order": 3,
+          "text": "Preocupar-se muito com diversas coisas",
+          "internal_domain": "multiplas_preocupacoes"
+        },
+        {
+          "id": "GAD04",
+          "order": 4,
+          "text": "Dificuldade para relaxar",
+          "internal_domain": "relaxamento"
+        },
+        {
+          "id": "GAD05",
+          "order": 5,
+          "text": "Ficar tão agitado/a que se torna difícil permanecer sentado/a",
+          "internal_domain": "inquietacao"
+        },
+        {
+          "id": "GAD06",
+          "order": 6,
+          "text": "Ficar facilmente aborrecido/a ou irritado/a",
+          "internal_domain": "irritabilidade"
+        },
+        {
+          "id": "GAD07",
+          "order": 7,
+          "text": "Sentir medo como se algo horrível fosse acontecer",
+          "internal_domain": "medo_pior"
+        }
+      ],
+      "range": [
+        0,
+        21
+      ],
+      "severity_bands_internal_only": [
+        {
+          "min": 0,
+          "max": 4,
+          "label": "Mínima ou ausente"
+        },
+        {
+          "min": 5,
+          "max": 9,
+          "label": "Leve"
+        },
+        {
+          "min": 10,
+          "max": 14,
+          "label": "Moderada"
+        },
+        {
+          "min": 15,
+          "max": 21,
+          "label": "Grave"
+        }
+      ]
+    }
+  ],
+  "scoring_contract": {
+    "algorithm": "sum 0-3 for every item, only if all items present",
+    "missing_answer": "return total=null, status=incomplete; do not impute zeros",
+    "not_scored": [
+      "PHQ-9-IMPACT",
+      "all_autoral_interview_answers",
+      "sociodemographic_answers"
+    ],
+    "clinical_interpretation": "Screening symptom severity only; not a diagnosis, prescription, or automatic referral"
+  },
+  "synthetic_test_vectors": [
+    {
+      "name": "example_13_7_not_patient_data",
+      "phq": [
+        2,
+        1,
+        3,
+        2,
+        3,
+        1,
+        0,
+        1,
+        0
+      ],
+      "phq_expected_total": 13,
+      "gad": [
+        1,
+        1,
+        2,
+        2,
+        0,
+        1,
+        0
+      ],
+      "gad_expected_total": 7,
+      "expected_phq09_flag": false
+    },
+    {
+      "name": "all_zero",
+      "phq": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "phq_expected_total": 0,
+      "gad": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gad_expected_total": 0,
+      "expected_phq09_flag": false
+    },
+    {
+      "name": "all_max",
+      "phq": [
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "phq_expected_total": 27,
+      "gad": [
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "gad_expected_total": 21,
+      "expected_phq09_flag": true
+    },
+    {
+      "name": "item9_positive_low_total",
+      "phq": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "phq_expected_total": 1,
+      "gad": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gad_expected_total": 0,
+      "expected_phq09_flag": true
+    },
+    {
+      "name": "missing_phq_item",
+      "phq": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        null
+      ],
+      "phq_expected_total": null,
+      "gad": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "gad_expected_total": 0,
+      "expected_phq09_flag": null
+    }
+  ]
+}
