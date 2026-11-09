@@ -296,7 +296,7 @@ export async function handleResearchRequest({request,env},deps={}){
    assertExact(data.consent,['accepted','adult','version']);
    if(data.consent.accepted!==true||data.consent.adult!==true||data.consent.version!==study.consent_version)throw new ResearchError(400,'consent_required');
    const answers=validateAnswers(definition,data.answers);
-   await rateLimit(db,config,request,'public-submit:'+study.id,now,6);
+   await rateLimit(db,config,request,'public-submit:'+study.id,now,20);
    const id=crypto.randomUUID(),receipt=randomToken(),expiresAt=Math.min(study.expires_at,now+CLINICAL_ACTIVE_RETENTION_DAYS*DAY);
    const record={purpose:'pesquisa_social_sem_fins_lucrativos',studyId:study.id,
     instrumentId:definition.id,instrumentVersion:definition.version,answers,
