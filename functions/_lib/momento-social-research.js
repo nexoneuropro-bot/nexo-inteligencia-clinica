@@ -128,7 +128,7 @@ export async function handleSocialResearchRequest({request,env},dependencies={})
   }
   if(!ready)return output(503,{error:'not_prepared'});
   if(path==='submit'&&request.method==='POST'){
-   await throttle(request,db,config,'submit',now,5);
+   await throttle(request,db,config,'submit',now,20);
    const body=await read(request);exact(body,['studyId','consent','answers']);
    exact(body.consent,['accepted','adult','version']);
    if(!UUID.test(body.studyId||'')||body.consent.accepted!==true||body.consent.adult!==true||
@@ -173,10 +173,18 @@ export async function handleSocialResearchRequest({request,env},dependencies={})
       else{const opt=q.options.find(o=>o.id===value);if(opt)opt.n++;}
      });
     }
+    // A leitura é apenas agregada. Mesmo na área autenticada, evitar
+    // divulgações indevidas por tabelas de região/idade com células pequenas.
+    const publishable=!limited&&all.length>=10;
+    const safeCollected=publishable?collected.map(q=>{
+     const sparse=q.options.some(option=>option.n>0&&option.n<5)||(q.missing>0&&q.missing<5);
+     return sparse?{id:q.id,question:q.question,options:[],missing:null,suppressed:true}:
+      {...q,suppressed:false};
+    }):null;
     summaries.push({
      id:study.id,title:study.title,createdAt:ISO(study.created_at),closesAt:ISO(study.closes_at),
      closed:Boolean(study.closed_at),received:limited?null:all.length,limited,
-     results:all.length>=5&&!limited?collected:null,
+     results:safeCollected,
      limitations:'Amostra voluntária e não probabilística. Relatos retrospectivos não demonstram causalidade da pandemia.'
     });
    }
