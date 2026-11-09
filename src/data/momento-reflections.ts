@@ -43,3 +43,15 @@ export const reflectionChoices=Object.freeze([
  Object.freeze({id:'prefer-not',label:'Prefiro não responder'}),
  Object.freeze({id:'unsure',label:'Ainda não sei dizer'}),
 ]);
+
+/** Seleção FACULTATIVA de assuntos para a sessão; não é uma escala. */
+export const reflectionTopics=Object.freeze([
+ Object.freeze({id:'relacionamentos',label:'Relacionamentos e vínculos afetivos'}),
+ Object.freeze({id:'genero',label:'Identidade de gênero e forma de tratamento'}),
+ Object.freeze({id:'orientacao',label:'Orientação afetivo-sexual'}),
+ Object.freeze({id:'crencas',label:'Religião, espiritualidade ou filosofia de vida'}),
+ Object.freeze({id:'familia',label:'Família, infância e experiências de vida'}),
+ Object.freeze({id:'trabalho',label:'Trabalho, estudos ou condições materiais'}),
+ Object.freeze({id:'pertencimento',label:'Pertencimento, cultura ou experiências sociais'}),
+ Object.freeze({id:'saude',label:'Saúde, rotina ou acessibilidade'})
+]);
