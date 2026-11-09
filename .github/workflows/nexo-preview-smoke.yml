@@ -79,7 +79,7 @@ jobs:
                   with urllib.request.urlopen(base+'/conhecendo-meu-momento/responder/',timeout=14) as r:
                       participant=r.read().decode('utf-8')
                       policy=r.headers.get('Permissions-Policy','')
-                  if 'mc-choice-title' not in participant or 'mc-reflection-text' not in participant:
+                  if 'mc-choice-title' not in participant or 'mc-reflection-text' not in participant or 'mc-reflection-topics' not in participant or 'mc-sensitive-accept' not in participant:
                       raise AssertionError('Percurso ampliado ainda ausente da prévia')
                   if 'microphone=(self)' not in policy or 'microphone=()' in policy:
                       raise AssertionError('Política de microfone do percurso não foi aplicada corretamente: '+policy)
@@ -87,7 +87,7 @@ jobs:
                       other=r.headers.get('Permissions-Policy','')
                   if 'microphone=()' not in other:
                       raise AssertionError('Microfone não está bloqueado nas demais áreas')
-                  print('Prévia confirmou escolha de percurso, relato e permissão restrita de microfone.')
+                  print('Prévia confirmou temas opcionais, autorização específica e permissão restrita de microfone.')
                   break
               except Exception as error:
                   if getattr(error, 'code', None) == 403:
