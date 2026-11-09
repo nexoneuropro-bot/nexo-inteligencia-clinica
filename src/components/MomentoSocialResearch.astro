@@ -1,0 +1,71 @@
+---
+import '../styles/momento-clinical.css';
+---
+<div class="mc-shell" data-nexo-social-research>
+ <aside class="mc-path" aria-label="Contexto da pesquisa">
+  <p class="mc-kicker">NEXO · PESQUISA SOCIAL</p>
+  <h2>Acessibilidade<br/><em>depois da pandemia</em></h2>
+  <p>Dos achismos às evidências. Queremos compreender vivências, sem confundir opiniões com causas comprovadas.</p>
+  <ol><li>Conheça o estudo</li><li>Decida participar</li><li>Responda no seu ritmo</li><li>Confira e envie</li></ol>
+  <p class="mc-caption">Participar não exige atendimento ou cadastro na NEXO.</p>
+ </aside>
+ <div class="mc-paper">
+  <section data-social-stage="welcome">
+   <p class="mc-kicker">CONVITE LIVRE · SEM FINS LUCRATIVOS</p>
+   <h2 tabindex="-1">O que mudou para você?</h2>
+   <p>Estamos estudando experiências com acesso à internet, serviços públicos, estudo, trabalho e convivência social depois da pandemia de Covid-19. A pesquisa é descritiva e voluntária.</p>
+   <p><strong>Importante:</strong> lembranças e opiniões contam como experiências relatadas, não como prova de que a pandemia causou determinada mudança. Compararemos os resultados agregados com dados públicos do IBGE e do Cetic.br.</p>
+   <p id="social-availability" role="status">Verificando se há coleta aberta.</p>
+   <details><summary>Sobre dados, direitos e participação</summary>
+    <p>Questionário autoral com 13 perguntas de múltipla escolha. Duração estimada: 6 minutos. Todas as perguntas são opcionais. Não solicitamos nome, CPF, telefone nem histórico clínico.</p>
+    <p>O estudo é independente do atendimento psicológico. Aceitar ou recusar não afeta nenhum cuidado, serviço ou vínculo. É possível encerrar sem enviar.</p>
+    <p>Suas respostas serão protegidas e utilizadas apenas de forma agregada para análise social; o painel não mostra respostas individuais aos pesquisadores. O armazenamento ativo dura até 81 dias. Você receberá um código de recibo para pedir retirada dos dados durante esse prazo. Não compartilhe esse código.</p>
+    <p>A coleta pode representar limitações de participação digital e não contempla necessariamente quem não tem internet. A seleção de participantes não é aleatória. O questionário não é teste psicológico nem produz diagnóstico.</p>
+    <p id="social-investigator"></p>
+   </details>
+   <label class="mc-confirm"><input type="checkbox" id="social-adult"/><span>Tenho 18 anos ou mais e moro no Brasil.</span></label>
+   <label class="mc-confirm"><input type="checkbox" id="social-consent"/><span>Li as informações, compreendi que a participação é voluntária e concordo em enviar minhas respostas para esta pesquisa social.</span></label>
+   <div class="mc-actions">
+    <button class="mc-button mc-primary" data-social-action="start" type="button" disabled>Participar livremente</button>
+   </div>
+   <details><summary>Já respondeu? Solicitar retirada com meu código</summary>
+    <p>Informe o código do recibo recebido após o envio. A retirada dos dados é processada sem mostrar se o código existe, por segurança.</p>
+    <label class="mc-field" for="social-withdraw-code">Código do recibo
+     <input id="social-withdraw-code" autocomplete="off" spellcheck="false" maxlength="32"/>
+    </label>
+    <button class="mc-button" data-social-action="withdraw" type="button">Solicitar retirada</button>
+   </details>
+  </section>
+  <section data-social-stage="questions" hidden>
+   <p class="mc-kicker" id="social-progress"></p><h2 tabindex="-1" id="social-question"></h2>
+   <p>Não há resposta certa. Se preferir, siga sem responder.</p>
+   <fieldset><legend>Escolha uma alternativa, se desejar</legend><div id="social-options"></div></fieldset>
+   <div class="mc-actions">
+    <button class="mc-button" data-social-action="back" type="button">Voltar</button>
+    <button class="mc-button mc-primary" data-social-action="next" type="button">Próxima pergunta</button>
+    <button class="mc-button" data-social-action="exit" type="button">Encerrar sem enviar</button>
+   </div>
+  </section>
+  <section data-social-stage="review" hidden>
+   <p class="mc-kicker">CONFIRMAÇÃO FINAL</p><h2 tabindex="-1">Suas escolhas, seu ritmo.</h2>
+   <p id="social-review"></p>
+   <p>As questões deixadas em branco não serão convertidas em respostas negativas. Não existe escore clínico, classificação ou diagnóstico.</p>
+   <div class="mc-actions">
+    <button class="mc-button" data-social-action="revise" type="button">Revisar respostas</button>
+    <button class="mc-button mc-primary" data-social-action="submit" type="button">Confirmar envio voluntário</button>
+    <button class="mc-button" data-social-action="exit" type="button">Encerrar sem enviar</button>
+   </div>
+  </section>
+  <section data-social-stage="done" hidden>
+   <p class="mc-kicker">PARTICIPAÇÃO RECEBIDA</p><h2 tabindex="-1">Obrigado por participar.</h2>
+   <p>O servidor confirmou o recebimento das respostas. Guarde o código abaixo se desejar solicitar a retirada durante o prazo de retenção.</p>
+   <p id="social-receipt" class="mc-pro-code"></p>
+   <button class="mc-button" data-social-action="copy-receipt" type="button">Copiar código de recibo</button>
+   <p>A pesquisa não substitui atendimento clínico nem oferece diagnóstico ou devolutiva individual. Os resultados serão analisados de forma agregada.</p>
+  </section>
+  <p class="mc-error" id="social-error" role="alert"></p>
+  <p class="mc-status" id="social-status" role="status" aria-live="polite"></p>
+  <p class="mc-caption">NEXO · Ciência, contexto e acessibilidade. Fale com o responsável: nexoneuropro@gmail.com</p>
+ </div>
+</div>
+<script>import '../scripts/momento-social-research';</script>
