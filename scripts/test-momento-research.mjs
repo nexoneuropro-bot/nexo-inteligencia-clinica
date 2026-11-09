@@ -148,3 +148,33 @@ test('estudo padrão: profissional autenticado, convite público, consentimento,
  assert.equal(ctx.sqlite.prepare('SELECT count(*) AS n FROM momento_research_packs').get().n,0);
  ctx.sqlite.close();
 });
+
+
+test('outro pack autorizado pode ser cadastrado e encaminhado com consentimento independente',async()=>{
+ const ctx=dbSetup(),credentials=await auth(ctx);
+ const pack={...DEFAULT_RESEARCH_PACK,id:'nexo_acessibilidade_customizada',version:'v2'};
+ const registered=await request(ctx.env,'packs','POST',{
+  schema:'nexo-definicoes-instrumentos-v1',packs:[pack],
+  declaration:{qualifiedProfessional:true,authorizedForResearch:true,remoteUseReviewed:true,nonCommercial:true},
+ },credentials);
+ assert.equal(registered.status,201);
+ assert.equal(registered.data.packs.length,1);
+ const study=await request(ctx.env,'studies','POST',{
+  packRef:registered.data.packs[0].id,
+  title:DEFAULT_RESEARCH_STUDY.title,
+  objective:DEFAULT_RESEARCH_STUDY.objective,
+  eligibility:DEFAULT_RESEARCH_STUDY.eligibility,
+  consent:DEFAULT_RESEARCH_STUDY.consent,
+  safetyPlan:DEFAULT_RESEARCH_STUDY.safetyPlan,
+  ethicsStatus:ethics.ethicsStatus,ethicsBasis:ethics.ethicsBasis,recruitmentDays:7,
+  declaration:ethics.declaration,
+ },credentials);
+ assert.equal(study.status,201);
+ const token=new URLSearchParams(new URL(study.data.publicUrl).hash.slice(1)).get('estudo');
+ const publicStudy=await request(ctx.env,'public/'+token);
+ assert.equal(publicStudy.status,200);
+ assert.equal(publicStudy.data.instrument.version,'v2');
+ assert.equal(publicStudy.data.instrument.questions.length,14);
+ assert.equal(ctx.sqlite.prepare('SELECT count(*) AS n FROM momento_submissions').get().n,0);
+ ctx.sqlite.close();
+});
