@@ -29,6 +29,8 @@ jobs:
         run: |
           node --check functions/_lib/momento-followups.js
           node --check 'functions/api/momento-followups/[[path]].js'
+      - name: Testar convites clínicos complementares com banco sintético
+        run: node --experimental-strip-types --experimental-sqlite --test scripts/test-momento-followups.mjs
       - name: Compilar o site
         run: pnpm build
       - name: Testar integridade das páginas
