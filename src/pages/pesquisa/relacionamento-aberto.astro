@@ -1,0 +1,179 @@
+---
+import MomentoLayout from '../../layouts/MomentoLayout.astro';
+import {RELATION_PROFILE} from '../../data/nexo-relationship-research';
+---
+<MomentoLayout title="NEXO · O que pensamos sobre relacionamento aberto?" description="Pesquisa social exploratória, voluntária e independente do atendimento clínico. O que significa relacionamento aberto para você?">
+ <main class="moment-wrap or-wrap" id="or-survey" data-relation-survey>
+  <div class="or-top"><span>NEXO · INTELIGÊNCIA CLÍNICA</span><span>PESQUISA SOCIAL · O QUE PENSAMOS?</span></div>
+  <header class="or-intro"><p class="moment-kicker">SABER POPULAR, SEM RESPOSTAS PRONTAS</p><h1>Uma expressão.<br/><em>Muitos sentidos?</em></h1><p>O que você entende por <strong>relacionamento aberto</strong>? Queremos ouvir suas palavras antes de trazer a ciência para o debate.</p></header>
+  <div class="or-panel">
+   <aside class="or-side"><p>SEU PERCURSO</p><ol><li>Conheça a pesquisa</li><li>Responda com liberdade</li><li>Conte um pouco do seu perfil</li><li>Revise e escolha enviar</li></ol><p class="or-side-foot">Sem cadastro, sem teste psicológico e sem avaliação individual. Esta pesquisa não faz parte do seu atendimento.</p></aside>
+   <div class="or-body">
+    <div id="or-availability" class="or-availability" role="status" aria-live="polite">Verificando se a coleta está aberta...</div>
+    <noscript><p class="or-alert">Este roteiro interativo precisa de JavaScript. Nenhuma resposta é enviada sem sua confirmação.</p></noscript>
+    <section data-or-stage="welcome" aria-labelledby="or-welcome-title">
+     <p class="or-step">ANTES DE COMEÇAR</p>
+     <h2 id="or-welcome-title" tabindex="-1">Sua percepção importa.</h2>
+     <p>Queremos conhecer o que pessoas de diferentes estados, idades e trajetórias entendem pela expressão “relacionamento aberto”. Não vamos explicar o conceito antes de ouvir você.</p>
+     <p>São três perguntas abertas e, depois, algumas perguntas opcionais sobre seu perfil. Você pode falar ou escrever. Se o seu navegador permitir ditado <strong>no próprio dispositivo</strong>, o áudio não será gravado nem enviado pelo NEXO. Você poderá revisar o texto antes de enviar.</p>
+     <details><summary>Como suas respostas serão utilizadas?</summary><p>Pesquisa social descritiva e voluntária, com recrutamento não probabilístico. O responsável poderá ler suas respostas individualmente para organizar temas e produzir análises agregadas. Não existe diagnóstico, nota, escore ou julgamento do que é correto. A IA não interpreta sua pessoa nem substitui o pesquisador.</p><p>Não pedimos nome, CPF, contato ou cidade. Não escreva nomes de terceiros ou informações que identifiquem alguém. Algumas combinações de respostas podem permitir identificação indireta, por isso protegemos os registros e evitamos divulgar pequenos grupos. Os dados têm prazo máximo de retenção ativa de 81 dias; um código de recibo permite solicitar exclusão nesse período.</p><p>Participar ou recusar não interfere em serviços ou atendimento. Você pode fechar esta página antes do envio, sem que o NEXO receba suas respostas. Para direitos sobre dados: <a href="mailto:nexoneuropro@gmail.com">nexoneuropro@gmail.com</a>.</p></details>
+     <label class="or-check"><input id="or-adult" type="checkbox"/><span>Confirmo que tenho 18 anos ou mais e resido no Brasil.</span></label>
+     <label class="or-check"><input id="or-consent" type="checkbox"/><span>Li as informações e concordo voluntariamente com o uso das minhas respostas nesta pesquisa.</span></label>
+     <label class="or-check"><input id="or-excerpts" type="checkbox"/><span>Autorizo também a divulgação de pequenos trechos anônimos das minhas respostas, após revisão para evitar identificação. (Opcional)</span></label>
+     <div class="or-actions"><button type="button" data-or-action="start" class="or-primary">Começar no meu ritmo</button></div>
+     <details class="or-withdraw"><summary>Já participei? Solicitar exclusão com meu código</summary><p>O código é mostrado após o envio. Não o compartilhe publicamente.</p><label for="or-receipt-input">Código do recibo</label><input id="or-receipt-input" autocomplete="off" spellcheck="false" maxlength="32"/><button type="button" data-or-action="withdraw">Solicitar exclusão</button></details>
+    </section>
+    <section data-or-stage="question" hidden aria-labelledby="or-question-title">
+     <p id="or-progress" class="or-step"></p>
+     <h2 id="or-question-title" tabindex="-1"></h2>
+     <p id="or-hint"></p>
+     <label for="or-answer" class="or-label">Sua resposta, do seu jeito</label>
+     <textarea id="or-answer" rows="6" maxlength="1200" placeholder="Escreva aqui. Não há resposta certa ou errada."></textarea>
+     <div class="or-voice"><button type="button" id="or-mic" data-or-action="voice" disabled><span aria-hidden="true">🎙</span> Responder falando</button><p id="or-voice-status" role="status" aria-live="polite">Verificando se o reconhecimento de voz local está disponível...</p></div>
+     <p class="or-small">Só a transcrição que você aprovar poderá ser enviada. Nenhum arquivo de áudio é criado pelo NEXO.</p>
+     <div class="or-actions"><button type="button" data-or-action="back">Voltar</button><button type="button" data-or-action="next" class="or-primary">Continuar</button><button type="button" data-or-action="exit" class="or-quiet">Encerrar sem enviar</button></div>
+    </section>
+    <section data-or-stage="profile" hidden aria-labelledby="or-profile-title">
+     <p class="or-step">UM POUCO SOBRE QUEM RESPONDE</p><h2 id="or-profile-title" tabindex="-1">Agora, só o que quiser compartilhar.</h2>
+     <p>Esses dados nos ajudam a observar diferenças de compreensão entre grupos. Todas as perguntas abaixo são opcionais. Não pedimos identificação pessoal.</p>
+     <div class="or-grid">{RELATION_PROFILE.map(q=><label class="or-field" for={'or-'+q.id}><span>{q.label}</span><select id={'or-'+q.id} data-or-profile={q.id}><option value="">Prefiro não informar</option>{q.values.map(([id,label])=><option value={id}>{label}</option>)}</select></label>)}</div>
+     <div class="or-actions"><button type="button" data-or-action="back">Voltar</button><button type="button" data-or-action="review" class="or-primary">Revisar antes de enviar</button><button type="button" data-or-action="exit" class="or-quiet">Encerrar sem enviar</button></div>
+    </section>
+    <section data-or-stage="review" hidden aria-labelledby="or-review-title">
+     <p class="or-step">CONFIRMAÇÃO FINAL</p><h2 id="or-review-title" tabindex="-1">Estas são as suas palavras.</h2>
+     <p>Confira suas respostas. Você pode voltar para corrigir, encerrar sem enviar ou confirmar o envio.</p>
+     <div id="or-review-list"></div><p class="or-small">O perfil informado será associado às respostas para comparação de grupos, nunca para classificar pessoas. A síntese e a interpretação são de responsabilidade humana.</p>
+     <div class="or-actions"><button type="button" data-or-action="edit">Revisar respostas</button><button type="button" id="or-submit" data-or-action="submit" class="or-primary" disabled>Confirmar envio voluntário</button><button type="button" data-or-action="exit" class="or-quiet">Encerrar sem enviar</button></div>
+    </section>
+    <section data-or-stage="done" hidden aria-labelledby="or-done-title">
+     <p class="or-step">PARTICIPAÇÃO CONFIRMADA</p><h2 id="or-done-title" tabindex="-1">Obrigado por dividir sua percepção.</h2><p>O servidor confirmou o recebimento. Seu relato será considerado no conjunto de respostas da pesquisa, sem análise psicológica individual.</p>
+     <p>Guarde seu código de recibo para solicitar exclusão durante o prazo informado.</p><p id="or-receipt" class="or-receipt"></p><button type="button" data-or-action="copy">Copiar meu código</button>
+     <p>O debate científico será construído depois da escuta e da revisão metodológica, sem afirmar que esta amostra representa todo o Brasil.</p>
+    </section>
+    <p id="or-error" role="alert" class="or-error"></p><p id="or-status" role="status" aria-live="polite" class="or-status"></p>
+   </div>
+  </div>
+  <footer class="or-footer">NEXO · Conhecimento com responsabilidade. <a href="/conhecendo-meu-momento/">Conheça outros percursos</a>.</footer>
+ </main>
+</MomentoLayout>
+<style>
+.or-wrap{--ink:#16303a;--copper:#a36e4c;max-width:1180px!important}
+.or-top{display:flex;justify-content:space-between;gap:15px;font:600 11px/1.6 var(--sans);letter-spacing:.17em;color:#dfb89a;padding-bottom:25px;border-bottom:1px solid #bfa38a66}
+.or-intro{padding:55px 0 40px;max-width:880px}.or-intro h1{font:400 clamp(50px,7vw,89px)/.99 var(--serif);letter-spacing:-.025em}.or-intro h1 em{font-weight:400;color:#dcb18d}.or-intro>p:last-child{font:400 20px/1.7 var(--sans);max-width:720px;color:#d9e3e2;margin-top:24px}.or-intro strong{color:#fff}
+.or-panel{display:grid;grid-template-columns:275px minmax(0,1fr);background:#faf7f0;color:var(--ink);border-radius:16px;overflow:hidden;box-shadow:0 24px 70px #03131d55}
+.or-side{background:#16333e;color:#fff;padding:45px 30px}.or-side>p:first-child,.or-step{font:700 11px/1.5 var(--sans);letter-spacing:.15em;color:#a36e4c}.or-side>p:first-child{color:#dfb89a}.or-side ol{list-style:decimal;padding:20px 0 0 19px;display:grid;gap:24px;font:500 15px/1.55 var(--sans);color:#ecf0ed}.or-side-foot{font:400 14px/1.75 var(--sans);color:#c5d4d5;margin-top:42px}
+.or-body{padding:44px clamp(24px,4vw,58px) 50px;min-height:555px}
+.or-body section[hidden]{display:none}.or-body h2{font:400 clamp(34px,4vw,48px)/1.15 var(--serif);margin:12px 0 25px;letter-spacing:-.01em}.or-body p{font:400 16px/1.72 var(--sans);margin:12px 0;color:#38505a}
+.or-body details{margin:24px 0;padding:20px 0;border-block:1px solid #d5cec0;font:400 14px/1.65 var(--sans)}.or-body summary{cursor:pointer;font-weight:700}.or-body details p{font-size:14px}
+.or-availability{border-radius:9px;padding:12px 15px;margin:0 0 28px;background:#e9eee9;color:#38544a;font:600 13px/1.5 var(--sans)}.or-availability[data-open="false"]{background:#f4eadc;color:#835336}
+.or-check{display:flex;gap:12px;align-items:flex-start;margin:18px 0;cursor:pointer;font:400 14px/1.65 var(--sans)}.or-check input{width:19px;height:19px;flex-shrink:0;accent-color:#22586b;margin-top:2px}
+.or-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:35px}.or-actions button,.or-voice button,.or-withdraw button,.or-body section[data-or-stage="done"] button{appearance:none;cursor:pointer;border:1px solid #51707a;border-radius:40px;color:#1d4a56;background:transparent;padding:13px 19px;min-height:48px;font:600 14px/1.3 var(--sans)}.or-actions .or-primary{background:#164b5e;border-color:#164b5e;color:#fff}.or-actions .or-quiet{border-color:transparent;text-decoration:underline}.or-actions button:disabled,.or-voice button:disabled{opacity:.47;cursor:not-allowed}
+.or-label{display:block;font:600 13px var(--sans);margin:28px 0 10px}.or-body textarea,.or-field select,.or-withdraw input{width:100%;border:1px solid #b9c0bd;border-radius:9px;background:#fff;color:#173641;font:400 17px/1.6 var(--sans);padding:15px 16px}.or-body textarea{min-height:175px;resize:vertical}
+.or-voice{display:flex;align-items:center;flex-wrap:wrap;gap:10px 18px;margin-top:14px}.or-voice p{font-size:12px;flex:1 1 190px;margin:0}.or-small{font-size:12px!important;color:#697d82!important}.or-voice button{border-color:#d1b7a4;background:#f4ece3}
+.or-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px 17px;margin-top:28px}.or-field span{display:block;font:600 14px/1.5 var(--sans);margin-bottom:9px}.or-field select{font-size:15px;min-height:49px}
+.or-withdraw input{max-width:310px;margin:9px 8px 9px 0}.or-withdraw label{display:block}.or-withdraw button{border-color:#51707a!important}
+.or-review-item{padding:15px 0;border-bottom:1px solid #ddd5cb}.or-review-item strong{display:block;font:600 13px/1.5 var(--sans)}.or-review-item p{white-space:pre-wrap;overflow-wrap:anywhere}.or-error{color:#a3382d!important;font-weight:600!important}.or-status{font-size:13px!important}.or-receipt{display:inline-block;background:#eaf0e8;padding:14px;border-radius:8px;font:600 19px var(--sans)!important;letter-spacing:.07em!important}
+.or-footer{text-align:center;margin:36px 0;color:#d4d6d2;font:400 13px/1.8 var(--sans)}.or-footer a{text-decoration:underline}
+.or-body button:focus-visible,.or-body textarea:focus-visible,.or-body select:focus-visible,.or-body input:focus-visible{outline:3px solid var(--copper);outline-offset:3px}
+@media(max-width:810px){.or-panel{grid-template-columns:1fr}.or-side{padding:22px}.or-side ol{grid-template-columns:repeat(2,1fr);gap:10px 18px}.or-side-foot{margin:15px 0 0}.or-intro{padding-top:37px}.or-body{padding:30px 21px}.or-grid{grid-template-columns:1fr}.or-top{flex-direction:column}.or-wrap{padding-top:130px!important}}
+@media(prefers-reduced-motion:reduce){.or-wrap *{scroll-behavior:auto!important}}
+</style>
+<script>
+ import {RELATION_QUESTIONS,RELATION_PROFILE,RELATION_CONSENT_VERSION} from '../../data/nexo-relationship-research';
+ import {createLocalDictation} from '../../scripts/momento-on-device-voice';
+ type Stage='welcome'|'question'|'profile'|'review'|'done';
+ const root=document.querySelector<HTMLElement>('[data-relation-survey]');
+ if(root){
+  const el=<T extends HTMLElement=HTMLElement>(id:string)=>root.querySelector<T>('#'+id)!;
+  const answers:Record<string,string>=Object.fromEntries(RELATION_QUESTIONS.map(q=>[q.id,'']));
+  let stage:Stage='welcome',index=0,open=false,busy=false,receipt='';
+  const dictation=createLocalDictation({onTranscript:value=>{
+   const area=el<HTMLTextAreaElement>('or-answer');
+   area.value=(area.value.trim()+' '+value).trim();area.focus();el('or-voice-status').textContent='Transcrição adicionada. Revise o texto antes de seguir.';
+  },onMessage:s=>{el('or-voice-status').textContent=s;},onFinish:()=>{
+   const mic=el<HTMLButtonElement>('or-mic');mic.textContent='🎙 Responder falando';
+  }});
+  const stages=root.querySelectorAll<HTMLElement>('[data-or-stage]');
+  const fail=(s:string)=>{el('or-error').textContent=s;};
+  const note=(s:string)=>{el('or-status').textContent=s;};
+  function show(next:Stage){
+   dictation.stop();stage=next;stages.forEach(x=>{x.hidden=x.dataset.orStage!==next;});
+   fail('');el('or-status').textContent='';root.querySelector<HTMLElement>('[data-or-stage="'+next+'"] h2')?.focus({preventScroll:true});
+  }
+  function save(){if(stage==='question')answers[RELATION_QUESTIONS[index].id]=el<HTMLTextAreaElement>('or-answer').value.trim();}
+  function question(){
+   const q=RELATION_QUESTIONS[index];el('or-progress').textContent='PERGUNTA '+(index+1)+' DE '+RELATION_QUESTIONS.length;
+   el('or-question-title').textContent=q.label;el('or-hint').textContent=q.hint;
+   el<HTMLTextAreaElement>('or-answer').value=answers[q.id];show('question');
+  }
+  function reset(){
+   dictation.stop();for(const key of Object.keys(answers))answers[key]='';
+   root.querySelectorAll<HTMLSelectElement>('[data-or-profile]').forEach(x=>x.value='');
+   el<HTMLInputElement>('or-consent').checked=false;el<HTMLInputElement>('or-adult').checked=false;
+   el<HTMLInputElement>('or-excerpts').checked=false;index=0;receipt='';show('welcome');
+  }
+  async function api(path:string,body?:unknown){
+   const response=await fetch('/api/pesquisa-relacionamento/'+path,{method:body===undefined?'GET':'POST',
+    headers:body===undefined?{}:{'content-type':'application/json'},
+    body:body===undefined?undefined:JSON.stringify(body),cache:'no-store',credentials:'same-origin',referrerPolicy:'no-referrer'});
+   const data=await response.json().catch(()=>({})) as Record<string,unknown>;
+   if(!response.ok)throw Error(response.status===429?'rate':response.status===404?'closed':'offline');
+   return data;
+  }
+  const message=(err:unknown)=>err instanceof Error&&err.message==='rate'?'Muitas tentativas em pouco tempo. Tente novamente mais tarde.':err instanceof Error&&err.message==='closed'?'A coleta está fechada. Nenhuma resposta foi enviada.':'Não houve confirmação do servidor. Nenhum envio será presumido.';
+  async function availability(){
+   try{const data=await api('status');open=data.open===true;
+    el('or-availability').dataset.open=String(open);
+    el('or-availability').textContent=open?'Pesquisa aberta para participação voluntária.':'Modo de prévia: o roteiro pode ser testado, mas o envio está desativado.';
+   }catch{open=false;el('or-availability').dataset.open='false';el('or-availability').textContent='O servidor de coleta ainda não está disponível. Você pode conhecer o roteiro, sem enviar dados.';}
+   el<HTMLButtonElement>('or-submit').disabled=!open;
+  }
+  async function localVoice(){
+   const supported=await dictation.check();
+   el<HTMLButtonElement>('or-mic').disabled=!supported;
+   el('or-voice-status').textContent=supported?'Ditado no dispositivo disponível. Nenhum áudio é salvo.':'Ditado local indisponível neste navegador. Escreva sua resposta normalmente.';
+  }
+  void availability();void localVoice();
+  root.addEventListener('click',async event=>{
+   const target=event.target;if(!(target instanceof Element))return;
+   const button=target.closest<HTMLButtonElement>('button[data-or-action]');if(!button||busy)return;
+   const action=button.dataset.orAction;
+   if(action==='start'){
+    if(!el<HTMLInputElement>('or-adult').checked||!el<HTMLInputElement>('or-consent').checked){fail('Confirme sua idade e sua decisão de participar para continuar.');return;}
+    question();
+   }else if(action==='next'){
+    save();if(index<RELATION_QUESTIONS.length-1){index++;question();}else show('profile');
+   }else if(action==='back'){
+    if(stage==='question'){save();if(index>0){index--;question();}else show('welcome');}
+    else if(stage==='profile'){index=RELATION_QUESTIONS.length-1;question();}
+   }else if(action==='review'){
+    const area=el('or-review-list');area.replaceChildren();
+    for(const q of RELATION_QUESTIONS){const box=document.createElement('div');box.className='or-review-item';const strong=document.createElement('strong');strong.textContent=q.label;const p=document.createElement('p');p.textContent=answers[q.id]||'Sem resposta';box.append(strong,p);area.append(box);}
+    show('review');el<HTMLButtonElement>('or-submit').disabled=!open;
+   }else if(action==='edit'){index=0;question();}
+   else if(action==='exit'){reset();note('Participação encerrada sem enviar informações.');}
+   else if(action==='voice'){
+    if(dictation.active){dictation.stop();return;}
+    const ok=dictation.start();if(ok){el('or-voice-status').textContent='Ouvindo apenas no dispositivo. Fale normalmente.';button.textContent='Parar ditado';}
+    else el('or-voice-status').textContent='Não foi possível iniciar o ditado local. Escreva sua resposta.';
+   }else if(action==='submit'){
+    if(!open){fail('A coleta ainda não está aberta. Nenhum dado foi enviado.');return;}
+    if(!Object.values(answers).some(x=>x.trim())){fail('Para participar, responda ao menos uma das três perguntas abertas.');return;}
+    busy=true;button.disabled=true;
+    try{
+     const profile=Object.fromEntries(RELATION_PROFILE.map(q=>[q.id,el<HTMLSelectElement>('or-'+q.id).value||null]));
+     const data=await api('submit',{consent:{adult:true,accepted:true,excerpts:el<HTMLInputElement>('or-excerpts').checked,version:RELATION_CONSENT_VERSION},payload:{answers,profile}});
+     if(data.saved!==true||typeof data.receipt!=='string')throw Error('offline');
+     receipt=data.receipt;for(const key of Object.keys(answers))answers[key]='';el('or-receipt').textContent=receipt;show('done');
+    }catch(err){fail(message(err));button.disabled=false;}finally{busy=false;}
+   }else if(action==='copy'){
+    if(!receipt)return;try{await navigator.clipboard.writeText(receipt);note('Código copiado. Guarde em lugar privado.');}catch{note('Selecione e copie o código exibido.');}
+   }else if(action==='withdraw'){
+    const input=el<HTMLInputElement>('or-receipt-input'),code=input.value.trim();if(!code){fail('Informe o código do recibo.');return;}
+    busy=true;try{const data=await api('withdraw',{receipt:code});if(data.processed!==true)throw Error('offline');input.value='';note('Solicitação processada. Por privacidade, não confirmamos a existência do código.');}
+    catch(err){fail(message(err));}finally{busy=false;}
+   }
+  });
+  window.addEventListener('pagehide',()=>dictation.stop(),{once:true});
+ }
+</script>
