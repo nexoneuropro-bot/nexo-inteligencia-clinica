@@ -55,7 +55,7 @@ import {PROFESSIONAL_SOURCES,RELATION_QUESTIONS,RELATION_PROFILE} from '../../da
     el('rp-locked').hidden=true;el('rp-dashboard').hidden=false;el('rp-total').textContent=String(total);el('rp-loaded').textContent=String(records.length);
     render(fresh);el<HTMLButtonElement>('rp-more-button').disabled=!data.hasMore;
     status('Respostas acessadas em área autenticada. A interpretação é exclusivamente humana.');
-   }catch(err){el('rp-locked').hidden=false;el('rp-dashboard').hidden=true;status(err instanceof Error&&err.message==='login'?'É necessário autenticar-se no NEXO para consultar dados.':'Não foi possível acessar o servidor da pesquisa.');}
+   }catch(err){records=[];offset=0;total=0;el('rp-records').replaceChildren();el('rp-locked').hidden=false;el('rp-dashboard').hidden=true;status(err instanceof Error&&err.message==='login'?'É necessário autenticar-se no NEXO para consultar dados.':'Não foi possível acessar o servidor da pesquisa.');}
    finally{busy=false;}
   }
   function render(items:Item[]){
