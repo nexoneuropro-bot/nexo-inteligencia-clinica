@@ -55,6 +55,7 @@ const {title,intro,detailed=false}=Astro.props;
     </article>)}</div>
     <p class="work-scope">A contribuição da NEXO é construída em articulação com a organização e os responsáveis por Segurança e Saúde no Trabalho, conforme competências e escopo do projeto.</p>
     <div class="work-sources"><span>Fontes e atualização · 16/10/2026</span>{workSources.map(source=><a href={source.url} target="_blank" rel="noopener noreferrer">{source.label} ↗</a>)}</div>
+    <a class="work-reading" href="/nr1-questionario/">Conhecer banco experimental de perguntas NR-1 ↗</a>
     <a class="work-reading" href="#conteudo-da-jornada">{detailed?'Aprofunde as mudanças e as responsabilidades':'Entenda como a NEXO pode contribuir'} ↓</a>
   </section>
   </details>
