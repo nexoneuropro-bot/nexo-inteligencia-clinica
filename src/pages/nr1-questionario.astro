@@ -3,7 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import {nr1Dimensions,nr1Questions,nr1AnswerOptions,nr1References} from '../data/nr1-question-bank';
 ---
 <Layout title="NEXO · Banco exploratório de perguntas NR-1" description="Protótipo gratuito de perguntas sobre condições de trabalho. Não substitui AEP, GRO ou PGR." experience privateExperience>
- <main class="nr1-lab">
+ <div class="nr1-lab">
   <a class="nr1-back" href="/riscos-psicossociais-nr1/">← Voltar ao percurso NR-1</a>
   <p class="nr1-kicker">NEXO · INTELIGÊNCIA CLÍNICA / TRABALHO</p>
   <h1>O trabalho real merece <em>perguntas melhores.</em></h1>
@@ -31,7 +31,7 @@ import {nr1Dimensions,nr1Questions,nr1AnswerOptions,nr1References} from '../data
    <button type="button" id="nr1-export">Baixar o resumo local em JSON</button>
   </section>
   <section class="nr1-references"><h2>Base técnica</h2><p>Questões autorais formuladas para explorar condições de trabalho. Consulte as fontes, revise o instrumento e defina um protocolo adequado antes de qualquer aplicação institucional.</p><ul>{nr1References.map(item=><li><a href={item.url} target="_blank" rel="noopener noreferrer">{item.label} ↗</a></li>)}</ul></section>
- </main>
+ </div>
 </Layout>
 <style>
 .nr1-lab{max-width:1120px;margin:auto;padding:150px 30px 95px;color:#112e38;--nr1-copper:#8c583c}
