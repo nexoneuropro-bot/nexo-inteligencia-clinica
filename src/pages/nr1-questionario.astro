@@ -1,0 +1,100 @@
+---
+import Layout from '../layouts/Layout.astro';
+import {nr1Dimensions,nr1Questions,nr1AnswerOptions,nr1References} from '../data/nr1-question-bank';
+---
+<Layout title="NEXO · Banco exploratório de perguntas NR-1" description="Protótipo gratuito de perguntas sobre condições de trabalho. Não substitui AEP, GRO ou PGR." experience privateExperience>
+ <main class="nr1-lab">
+  <a class="nr1-back" href="/riscos-psicossociais-nr1/">← Voltar ao percurso NR-1</a>
+  <p class="nr1-kicker">NEXO · INTELIGÊNCIA CLÍNICA / TRABALHO</p>
+  <h1>O trabalho real merece <em>perguntas melhores.</em></h1>
+  <p class="nr1-lead">Banco experimental de perguntas sobre organização do trabalho, inspirado nas diretrizes do MTE. Use respostas fictícias para conferir a experiência. Nada é enviado ou salvo no servidor.</p>
+  <aside class="nr1-boundary"><strong>Fase de teste, sem coleta oficial.</strong> Este roteiro autoral não é uma escala psicométrica validada nem um questionário obrigatório da NR-1. Suas respostas individuais não estabelecem risco ocupacional, diagnóstico ou conformidade. A avaliação exige escuta dos trabalhadores, análise de atividades, métodos adequados, AEP/NR-17 e integração ao GRO/PGR por profissionais competentes.</aside>
+  <form id="nr1-local-form">
+   <div class="nr1-formtop"><h2>Condições de trabalho</h2><p>Para cada frase, pense apenas na frequência das situações nos últimos 30 dias. Não escreva nomes, empresa, setor ou outras informações que identifiquem pessoas.</p></div>
+   {nr1Dimensions.map((dimension,index)=><fieldset class="nr1-section">
+    <legend><span>{String(index+1).padStart(2,'0')}</span> {dimension.name}</legend>
+    <p>{dimension.context}</p>
+    {nr1Questions.filter(item=>item.dimension===dimension.id).map(item=><div class="nr1-question">
+     <p><strong>{item.id.slice(-2)}</strong> {item.label}</p>
+     <div class="nr1-answers" role="group" aria-label={item.label}>
+      {nr1AnswerOptions.map(option=><label><input type="radio" name={item.id} value={option.value}/><span>{option.label}</span></label>)}
+     </div>
+    </div>)}
+   </fieldset>)}
+   <div class="nr1-actions"><button type="submit">Conferir respostas locais</button><button type="reset" class="nr1-secondary">Limpar esta página</button></div>
+  </form>
+  <section class="nr1-preview" id="nr1-preview" aria-live="polite" hidden>
+   <h2>Resumo descritivo, sem classificação</h2>
+   <p id="nr1-preview-count"></p>
+   <div id="nr1-preview-items"></div>
+   <p>As frequências não podem ser convertidas automaticamente em um risco da empresa. Falta avaliar condições, exposição, gravidade, controles existentes e diferenças entre grupos, protegendo a confidencialidade.</p>
+   <button type="button" id="nr1-export">Baixar o resumo local em JSON</button>
+  </section>
+  <section class="nr1-references"><h2>Base técnica</h2><p>Questões autorais formuladas para explorar condições de trabalho. Consulte as fontes, revise o instrumento e defina um protocolo adequado antes de qualquer aplicação institucional.</p><ul>{nr1References.map(item=><li><a href={item.url} target="_blank" rel="noopener noreferrer">{item.label} ↗</a></li>)}</ul></section>
+ </main>
+</Layout>
+<style>
+.nr1-lab{max-width:1120px;margin:auto;padding:150px 30px 95px;color:#112e38;--nr1-copper:#8c583c}
+.nr1-back{font:500 13px var(--sans);text-decoration:underline}
+.nr1-kicker{font:700 11px var(--sans);letter-spacing:.18em;color:var(--nr1-copper);margin:36px 0 15px}
+.nr1-lab h1{font:400 clamp(44px,6vw,78px)/1.05 var(--serif);max-width:900px;margin:0 0 28px}
+.nr1-lab h1 em{color:#9a6c4c}
+.nr1-lead{font:400 20px/1.6 var(--sans);max-width:760px;color:#405a61}
+.nr1-boundary{margin:35px 0;background:#f1ebde;border-left:4px solid #a47354;padding:20px 24px;font:400 15px/1.65 var(--sans)}
+.nr1-formtop{border-top:2px solid #9d765b;padding-top:25px;margin-top:55px}
+.nr1-formtop h2,.nr1-preview h2,.nr1-references h2{font:400 37px/1.2 var(--serif);margin:0 0 18px}
+.nr1-formtop>p{font:400 16px/1.6 var(--sans);color:#4d6064;max-width:750px}
+.nr1-section{border:0;border-top:1px solid #c9c8bf;margin:34px 0;padding:28px 0 0}
+.nr1-section legend{font:400 28px/1.2 var(--serif);padding:0 5px}
+.nr1-section legend span{font:700 12px var(--sans);color:var(--nr1-copper);margin-right:14px}
+.nr1-section>p{font:400 15px/1.6 var(--sans);color:#47626a}
+.nr1-question{border-bottom:1px solid #dfdbd1;padding:17px 0 25px}
+.nr1-question>p{font:500 17px/1.6 var(--sans);max-width:750px}
+.nr1-question>p strong{font-size:12px;color:#936243;margin-right:8px}
+.nr1-answers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin-top:16px}
+.nr1-answers label{cursor:pointer;display:flex;align-items:center;gap:9px;padding:11px 13px;border:1px solid #c7c8c1;border-radius:6px;min-height:48px;font:400 13px/1.4 var(--sans);background:#fcfbf7}
+.nr1-answers label:has(input:checked){background:#e8eee8;border-color:#547277}
+.nr1-answers input{accent-color:#1a5660;width:18px;height:18px}
+.nr1-actions{display:flex;flex-wrap:wrap;gap:12px;margin:40px 0}
+.nr1-actions button,.nr1-preview button{padding:13px 22px;font:600 14px var(--sans);background:#143d4c;border:1px solid #143d4c;color:white;border-radius:30px;cursor:pointer;min-height:48px}
+.nr1-actions .nr1-secondary{color:#143d4c;background:transparent}
+.nr1-preview{background:#f8f5ed;border:1px solid #d1c3ae;border-radius:12px;padding:24px;margin-top:35px}
+.nr1-preview p,.nr1-references p,.nr1-references li{font:400 15px/1.7 var(--sans)}
+.nr1-preview article{padding:14px 0;border-bottom:1px solid #d8cbbb}
+.nr1-preview article h3{font:500 17px var(--sans);margin:0}
+.nr1-references{margin-top:80px;border-top:1px solid #c2b6aa;padding-top:30px}
+.nr1-references a{text-decoration:underline}
+.nr1-lab button:focus-visible,.nr1-lab a:focus-visible,.nr1-lab input:focus-visible{outline:3px solid #a47354;outline-offset:4px}
+@media(max-width:680px){.nr1-lab{padding:118px 20px 70px}.nr1-answers{grid-template-columns:1fr 1fr}.nr1-section legend{font-size:24px}}
+@media print{.nr1-answers,.nr1-actions,.nr1-back,.nr1-references{display:none!important}.nr1-lab{padding:20px}}
+</style>
+<script>
+ import {nr1Dimensions,nr1Questions,nr1AnswerOptions} from '../data/nr1-question-bank';
+ const form=document.querySelector<HTMLFormElement>('#nr1-local-form');
+ const preview=document.querySelector<HTMLElement>('#nr1-preview');
+ const items=document.querySelector<HTMLElement>('#nr1-preview-items');
+ const count=document.querySelector<HTMLElement>('#nr1-preview-count');
+ let exportData:Record<string,unknown>|null=null;
+ form?.addEventListener('submit',event=>{
+  event.preventDefault();if(!preview||!items||!count)return;
+  const fd=new FormData(form);items.replaceChildren();
+  const answers=nr1Questions.map(q=>({questionId:q.id,dimension:q.dimension,value:typeof fd.get(q.id)==='string'?fd.get(q.id):null}));
+  count.textContent=answers.filter(a=>a.value!==null).length+' de '+nr1Questions.length+' questões marcadas. Respostas ausentes permanecem ausentes.';
+  for(const dimension of nr1Dimensions){
+   const article=document.createElement('article');const title=document.createElement('h3');title.textContent=dimension.name;article.append(title);
+   const ul=document.createElement('ul');
+   for(const question of nr1Questions.filter(q=>q.dimension===dimension.id)){
+    const li=document.createElement('li'),answer=answers.find(a=>a.questionId===question.id);
+    const label=nr1AnswerOptions.find(o=>o.value===answer?.value)?.label??'Sem resposta';
+    li.textContent=question.label+' → '+label;ul.append(li);
+   }article.append(ul);items.append(article);
+  }
+  exportData={schema:'nexo.nr1.exploratorio.v1',questionnaireVersion:'2026-11-12',nature:'somente resumo local; não é avaliação oficial',answers};
+  preview.hidden=false;preview.scrollIntoView({behavior:'instant',block:'start'});
+ });
+ form?.addEventListener('reset',()=>{if(preview)preview.hidden=true;if(items)items.replaceChildren();exportData=null;});
+ document.querySelector<HTMLButtonElement>('#nr1-export')?.addEventListener('click',()=>{
+  if(!exportData)return;const blob=new Blob([JSON.stringify(exportData,null,2)],{type:'application/json;charset=utf-8'}),url=URL.createObjectURL(blob);
+  const a=document.createElement('a');a.href=url;a.download='nexo-nr1-respostas-exploratorias.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),500);
+ });
+</script>
