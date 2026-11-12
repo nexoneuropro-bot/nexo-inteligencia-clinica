@@ -82,8 +82,9 @@ import {RELATION_PROFILE} from '../../data/nexo-relationship-research';
  import {RELATION_QUESTIONS,RELATION_PROFILE,RELATION_CONSENT_VERSION} from '../../data/nexo-relationship-research';
  import {createLocalDictation} from '../../scripts/momento-on-device-voice';
  type Stage='welcome'|'question'|'profile'|'review'|'done';
- const root=document.querySelector<HTMLElement>('[data-relation-survey]');
- if(root){
+ const candidate=document.querySelector<HTMLElement>('[data-relation-survey]');
+ if(candidate){
+  const root:HTMLElement=candidate;
   const el=<T extends HTMLElement=HTMLElement>(id:string)=>root.querySelector<T>('#'+id)!;
   const answers:Record<string,string>=Object.fromEntries(RELATION_QUESTIONS.map(q=>[q.id,'']));
   let stage:Stage='welcome',index=0,open=false,busy=false,receipt='';
