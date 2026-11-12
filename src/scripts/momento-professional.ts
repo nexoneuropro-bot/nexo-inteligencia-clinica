@@ -317,7 +317,7 @@ function startProfessional(){
   const file=element<HTMLInputElement>('pro-import-file').files?.[0];
   if(!file){fail('Selecione o arquivo JSON exportado do NEXO.');return;}
   if(file.size===0||file.size>512*1024){fail('O arquivo está vazio ou ultrapassa 512 KB.');return;}
-  if(!/\\.json$/i.test(file.name)){fail('Selecione um arquivo JSON.');return;}
+  if(!file.name.toLowerCase().endsWith('.json')){fail('Selecione um arquivo JSON.');return;}
   let parsed:unknown;
   try{parsed=JSON.parse(await file.text());}catch{fail('Não foi possível ler o JSON. Confira o formato do arquivo.');return;}
   const envelope=object(parsed),record=object(envelope.record??parsed);
