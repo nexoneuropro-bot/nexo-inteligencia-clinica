@@ -110,7 +110,7 @@ import {RELATION_PROFILE} from '../../data/nexo-relationship-research';
    dictation.stop();for(const key of Object.keys(answers))answers[key]='';
    root.querySelectorAll<HTMLSelectElement>('[data-or-profile]').forEach(x=>x.value='');
    el<HTMLInputElement>('or-consent').checked=false;el<HTMLInputElement>('or-adult').checked=false;
-   el<HTMLInputElement>('or-excerpts').checked=false;index=0;receipt='';show('welcome');
+   el<HTMLInputElement>('or-excerpts').checked=false;el<HTMLTextAreaElement>('or-answer').value='';el('or-review-list').replaceChildren();el('or-receipt').textContent='';index=0;receipt='';show('welcome');
   }
   async function api(path:string,body?:unknown){
    const response=await fetch('/api/pesquisa-relacionamento/'+path,{method:body===undefined?'GET':'POST',
