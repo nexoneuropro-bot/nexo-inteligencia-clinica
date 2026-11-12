@@ -2,7 +2,11 @@
 export async function purgeExpiredClinicalData(db, now = Date.now()) {
   if (!db?.prepare || !db?.batch) throw new Error('Clinical maintenance database is unavailable.');
   const tables = ['momento_submissions','momento_sessions','momento_challenges','momento_bootstrap','momento_rate_limits','momento_audit','momento_invites'];
+  // Preserva a compatibilidade com instalações sem as migrações sociais opcionais.
+  const names = ['nexo_relationship_responses','momento_research_responses','momento_research_studies'];
+  const present = new Set((await db.prepare("SELECT name FROM sqlite_master WHERE type='table' AND name IN ('nexo_relationship_responses','momento_research_responses','momento_research_studies')").all()).results.map(row => row.name));
   return db.batch([
+    ...names.filter(name => present.has(name)).map(name => db.prepare(`DELETE FROM ${name} WHERE expires_at <= ?`).bind(now)),
     ...tables.map(table => db.prepare(`DELETE FROM ${table} WHERE expires_at <= ?`).bind(now)),
     db.prepare('INSERT INTO momento_retention_runs (slot, last_success_at) VALUES (1, ?) ON CONFLICT(slot) DO UPDATE SET last_success_at = excluded.last_success_at').bind(now),
     db.prepare('INSERT INTO momento_audit (id, actor_role, action, resource_id, created_at, expires_at) VALUES (?, ?, ?, ?, ?, ?)').bind(crypto.randomUUID(),'system','retention_purged','expired-records',now,now+81*86400000),
