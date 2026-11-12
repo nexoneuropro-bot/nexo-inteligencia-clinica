@@ -4,6 +4,7 @@ import {nr1Dimensions,nr1Questions,nr1AnswerOptions,nr1References} from '../data
 ---
 <Layout title="NEXO · Banco exploratório de perguntas NR-1" description="Protótipo gratuito de perguntas sobre condições de trabalho. Não substitui AEP, GRO ou PGR." experience privateExperience>
  <div class="nr1-lab">
+  <div id="experience-stage" class="nr1-spatial" aria-hidden="true"></div>
   <a class="nr1-back" href="/riscos-psicossociais-nr1/">← Voltar ao percurso NR-1</a>
   <p class="nr1-kicker">NEXO · INTELIGÊNCIA CLÍNICA / TRABALHO</p>
   <h1>O trabalho real merece <em>perguntas melhores.</em></h1>
@@ -35,7 +36,9 @@ import {nr1Dimensions,nr1Questions,nr1AnswerOptions,nr1References} from '../data
  </div>
 </Layout>
 <style>
-.nr1-lab{max-width:1120px;margin:auto;padding:150px 30px 95px;color:#112e38;--nr1-copper:#8c583c}
+.nr1-spatial{position:absolute;z-index:0;top:0;right:0;width:min(55%,620px);height:940px;pointer-events:none;background:radial-gradient(ellipse at 68% 25%,#c8d4c190,#e4ded460 33%,transparent 75%)}
+.nr1-lab>*:not(.nr1-spatial){position:relative;z-index:1}
+.nr1-lab{position:relative;isolation:isolate;background:#f9f6ee;max-width:1120px;margin:auto;padding:150px 30px 95px;color:#112e38;--nr1-copper:#8c583c}
 .nr1-back{font:500 13px var(--sans);text-decoration:underline}
 .nr1-kicker{font:700 11px var(--sans);letter-spacing:.18em;color:var(--nr1-copper);margin:36px 0 15px}
 .nr1-lab h1{font:400 clamp(44px,6vw,78px)/1.05 var(--serif);max-width:900px;margin:0 0 28px}
