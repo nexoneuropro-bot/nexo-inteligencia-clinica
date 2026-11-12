@@ -9,7 +9,8 @@ import {nr1Dimensions,nr1Questions,nr1AnswerOptions,nr1References} from '../data
   <h1>O trabalho real merece <em>perguntas melhores.</em></h1>
   <p class="nr1-lead">Banco experimental de perguntas sobre organização do trabalho, inspirado nas diretrizes do MTE. Use respostas fictícias para conferir a experiência. Nada é enviado ou salvo no servidor.</p>
   <aside class="nr1-boundary"><strong>Fase de teste, sem coleta oficial.</strong> Este roteiro autoral não é uma escala psicométrica validada nem um questionário obrigatório da NR-1. Suas respostas individuais não estabelecem risco ocupacional, diagnóstico ou conformidade. A avaliação exige escuta dos trabalhadores, análise de atividades, métodos adequados, AEP/NR-17 e integração ao GRO/PGR por profissionais competentes.</aside>
-  <form id="nr1-local-form">
+  <form id="nr1-local-form" method="post" action="#">
+   <noscript><p>O teste local precisa de JavaScript. Sem ele, não preencha este formulário: não haverá envio ou processamento das respostas.</p></noscript>
    <div class="nr1-formtop"><h2>Condições de trabalho</h2><p>Para cada frase, pense apenas na frequência das situações nos últimos 30 dias. Não escreva nomes, empresa, setor ou outras informações que identifiquem pessoas.</p></div>
    {nr1Dimensions.map((dimension,index)=><fieldset class="nr1-section">
     <legend><span>{String(index+1).padStart(2,'0')}</span> {dimension.name}</legend>
