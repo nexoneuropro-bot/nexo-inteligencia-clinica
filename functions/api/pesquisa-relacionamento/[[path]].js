@@ -20,7 +20,6 @@ const output=(code,data)=>new Response(JSON.stringify(data),{status:code,headers
 }});
 class Invalid extends Error {constructor(code,message){super(message);this.status=code;}}
 const reject=(code=403,message='access_denied')=>{throw new Invalid(code,message);};
-function equal(a,b){if(typeof a!=='string'||typeof b!=='string'||a.length!==b.length)return false;let d=0;for(let i=0;i<a.length;i++)d|=a.charCodeAt(i)^b.charCodeAt(i);return d===0;}
 function cookie(request){
  const values=(request.headers.get('cookie')||'').split(';').map(x=>x.trim()).filter(x=>x.startsWith(ADMIN+'='));
  if(values.length!==1)return null;const value=values[0].slice(ADMIN.length+1);return TOKEN.test(value)?value:null;
