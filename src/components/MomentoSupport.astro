@@ -1,0 +1,49 @@
+---
+import supportPhoto from '../assets/editorial-images/quem-cuida-de-quem-cuida-atendimento.jpg';
+---
+<aside class="nexo-support" aria-label="Contatos de apoio e emergência no Brasil">
+  <details>
+    <summary><span class="nexo-support-pulse" aria-hidden="true">✳</span><span>Precisa de ajuda agora?</span><span class="nexo-support-small">Ver contatos de apoio</span></summary>
+    <div class="nexo-support-body">
+      <div class="nexo-support-photo">
+        <img src={supportPhoto.src} width="620" height="380" loading="lazy" alt="Fotografia ilustrativa de acolhimento e presença humana"/>
+        <div><span>VOCÊ NÃO PRECISA DECIDIR TUDO SOZINHO</span><h2>Há pessoas para ajudar.</h2></div>
+      </div>
+      <p>Este site não é monitorado continuamente e não oferece atendimento de emergência. Se houver perigo imediato, procure um local seguro e ajuda presencial.</p>
+      <ul>
+        <li><a href="tel:192"><strong>192 · SAMU</strong><span>Emergência médica, inclusive em crise de saúde mental</span></a></li>
+        <li><a href="tel:188"><strong>188 · CVV</strong><span>Conversa e apoio emocional gratuito, 24 horas</span></a></li>
+        <li><a href="tel:190"><strong>190 · Polícia</strong><span>Risco imediato à segurança ou violência</span></a></li>
+        <li><a href="tel:193"><strong>193 · Bombeiros</strong><span>Resgate, acidente, incêndio</span></a></li>
+      </ul>
+      <p class="nexo-support-disclaimer">Números válidos no Brasil. Fora do país, use os serviços de emergência locais. Estes contatos são independentes da NEXO.</p>
+      <a class="nexo-support-source" href="https://www.gov.br/saude/pt-br/composicao/saes/samu-192/samu-192" target="_blank" rel="noopener noreferrer">Consultar o SAMU no Ministério da Saúde ↗</a>
+    </div>
+  </details>
+</aside>
+<style>
+.nexo-support{position:fixed;z-index:80;right:clamp(10px,2.8vw,38px);bottom:18px;width:min(390px,calc(100vw - 20px));font-family:var(--sans);color:#0b2635;filter:drop-shadow(0 12px 25px #07182050)}
+.nexo-support details{background:#f9f5ed;border:1px solid #cdb69e;border-radius:13px;overflow:hidden}
+.nexo-support summary{display:flex;align-items:center;gap:9px;min-height:52px;padding:10px 15px;cursor:pointer;color:#0b2635;font-size:13px;font-weight:700;list-style:none}
+.nexo-support summary::-webkit-details-marker{display:none}
+.nexo-support summary:focus-visible,.nexo-support a:focus-visible{outline:3px solid #a9774d;outline-offset:-3px}
+.nexo-support-pulse{font-size:21px;color:#9e5c32}
+.nexo-support-small{margin-left:auto;color:#755039;font-size:11px;font-weight:500}
+.nexo-support details[open] .nexo-support-small{display:none}
+.nexo-support-body{max-height:min(78svh,700px);overflow-y:auto;padding:0 18px 14px}
+.nexo-support-photo{position:relative;height:142px;margin:2px -18px 14px;background:#c3c4b5;isolation:isolate}
+.nexo-support-photo img{width:100%;height:100%;object-fit:cover;object-position:center 42%;opacity:.6;mask-image:linear-gradient(to right,#000 5%,#0007 65%,transparent 100%)}
+.nexo-support-photo:after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,#f9f5ed44,#f9f5eddb 86%);z-index:-1}
+.nexo-support-photo>div{position:absolute;left:18px;bottom:15px;right:12px;text-shadow:0 1px 8px #faf8f0}
+.nexo-support-photo span{font:600 10px/1.3 var(--sans);letter-spacing:.07em}
+.nexo-support-photo h2{font:400 26px/1.1 var(--serif);color:#0b2635;margin:5px 0 0}
+.nexo-support-body>p{font-size:12px;line-height:1.55;margin:10px 0;color:#304c55}
+.nexo-support ul{list-style:none;margin:12px 0;padding:0;display:grid;gap:7px}
+.nexo-support li a{display:flex;flex-direction:column;padding:10px 12px;border:1px solid #d4c9ba;border-radius:7px;background:#fffdf8;color:#0b2635;text-decoration:none;gap:2px}
+.nexo-support li strong{font-size:15px}
+.nexo-support li span{font-size:12px;color:#4e6467}
+.nexo-support-body .nexo-support-disclaimer{font-size:11px}
+.nexo-support-source{display:inline-block;font-size:11px;color:#674626;text-decoration:underline}
+@media(max-width:600px){.nexo-support{right:10px;bottom:10px;width:calc(100vw - 20px)}.nexo-support summary{min-height:48px}.nexo-support-body{max-height:72svh}}
+@media print{.nexo-support{display:none!important}}
+</style>
