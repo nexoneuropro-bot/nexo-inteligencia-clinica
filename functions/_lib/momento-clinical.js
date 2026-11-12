@@ -258,7 +258,9 @@ const submissionMetadata = row => ({ id: row.id, createdAt: new Date(row.created
 export async function cleanupClinicalData(env, now = Date.now()) {
   const db = env?.NEXO_CLINICAL_DB; if (!db?.batch) throw new Error('clinical_database_unavailable');
   const researchTables = Boolean(await stmt(db, "SELECT name FROM sqlite_master WHERE type='table' AND name='momento_research_responses'").first());
+  const relationshipTable = Boolean(await stmt(db, "SELECT name FROM sqlite_master WHERE type='table' AND name='nexo_relationship_responses'").first());
   return db.batch([
+    ...(relationshipTable ? [stmt(db, 'DELETE FROM nexo_relationship_responses WHERE expires_at <= ?', now)] : []),
     ...(researchTables ? [
       stmt(db, 'DELETE FROM momento_research_responses WHERE expires_at <= ?', now),
       stmt(db, 'DELETE FROM momento_research_studies WHERE expires_at <= ?', now),
