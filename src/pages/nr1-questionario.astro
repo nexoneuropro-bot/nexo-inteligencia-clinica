@@ -77,7 +77,7 @@ import {nr1Dimensions,nr1Questions,nr1AnswerOptions,nr1References} from '../data
  const count=document.querySelector<HTMLElement>('#nr1-preview-count');
  let exportData:Record<string,unknown>|null=null;
  form?.addEventListener('submit',event=>{
-  event.preventDefault();if(!preview||!items||!count)return;
+  event.preventDefault();if(!form||!preview||!items||!count)return;
   const fd=new FormData(form);items.replaceChildren();
   const answers=nr1Questions.map(q=>({questionId:q.id,dimension:q.dimension,value:typeof fd.get(q.id)==='string'?fd.get(q.id):null}));
   count.textContent=answers.filter(a=>a.value!==null).length+' de '+nr1Questions.length+' questões marcadas. Respostas ausentes permanecem ausentes.';
