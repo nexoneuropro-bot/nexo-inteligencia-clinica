@@ -212,3 +212,11 @@ body[data-ex-stage="human"] .ex-chapter-nav { opacity:0; pointer-events:none; vi
 .ex-entry-human-strip { background:linear-gradient(90deg,#08222dd9,#15354280,transparent); color:#e9e1d2; border-block:1px solid #c8ad8540; }
 .ex-entry-human-strip .ex-eyebrow { color:#d9af87; }
 .ex-entry-human-strip a { color:#e2c09b; }
+
+
+/* NEXO · fotografia editorial em segundo plano, preservando retratos reais e leitura. */
+.ex-human-portraits figure>div{isolation:isolate}
+.ex-human-portraits figure>div::after{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,transparent 46%,#e9e4d98c 79%,#e9e4d9 100%)}
+.ex-human-portraits img{opacity:.88;mask-image:linear-gradient(180deg,#000 0%,#000 65%,#0000 100%);transition:opacity .35s ease}
+.ex-entry-human-strip img{opacity:.77;mask-image:linear-gradient(180deg,#000 0%,#000 60%,#0000 100%)}
+@media(prefers-reduced-motion:reduce){.ex-human-portraits img{transition:none}}

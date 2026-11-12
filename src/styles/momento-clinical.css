@@ -188,3 +188,15 @@
 .mc-library-selected-item textarea{resize:vertical;min-height:72px}
 .mc-library-plan .mc-button:focus-visible,.mc-library-card .mc-button:focus-visible{outline:3px solid #895331;outline-offset:3px}
 @media print{#pro-library-plan{display:none!important}}
+
+/* Arquivo JSON local: mesmo relatório, sem gravação e sem envio. */
+#pro-import-section{border-top:2px solid #ac8061;margin-top:30px;padding-top:30px}
+#pro-import-preview{margin-top:30px;border-top:1px solid #cfc4b2;padding-top:18px}
+.mc-import-note{font:700 11px/1.7 var(--sans);letter-spacing:.12em;color:#8a5534;margin:0 0 18px}
+#pro-import-report{background:#fcf9f2}
+@media print{
+ body.nexo-print-import .mc-pro,body.nexo-print-import #pro-import-preview,body.nexo-print-import #pro-import-report,body.nexo-print-import #pro-import-report *{visibility:visible!important}
+ body.nexo-print-import #pro-record{visibility:hidden!important}
+ body.nexo-print-import #pro-import-report{position:absolute;top:0;left:0;width:100%!important;background:#fff!important}
+ body.nexo-print-import #pro-import-preview>.mc-actions,body.nexo-print-import .mc-import-note{display:none!important}
+}
