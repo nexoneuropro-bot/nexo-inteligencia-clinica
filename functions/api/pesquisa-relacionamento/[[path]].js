@@ -76,8 +76,9 @@ async function healthy(db,now){
  return Boolean(row&&row.last_success_at>now-25*3600000&&row.last_success_at<now+300000);
 }
 export async function onRequest({request,env}){
- const now=Date.now(),config=clinicalConfiguration(env),db=env?.NEXO_CLINICAL_DB;
+ const now=Date.now(),db=env?.NEXO_CLINICAL_DB;
  try{
+  const config=clinicalConfiguration(env);
   const url=new URL(request.url),path=url.pathname.replace(/^\/api\/pesquisa-relacionamento\/?/,'').replace(/\/$/,'');
   if(!['GET','POST'].includes(request.method))return output(405,{error:'method_not_allowed'});
   if(!config.enabled||!db||config.origin!==url.origin||request.headers.get('sec-fetch-site')==='cross-site')return output(503,{error:'unavailable'});
