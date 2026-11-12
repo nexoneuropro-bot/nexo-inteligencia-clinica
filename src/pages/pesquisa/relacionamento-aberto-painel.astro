@@ -1,0 +1,104 @@
+---
+import MomentoLayout from '../../layouts/MomentoLayout.astro';
+import {PROFESSIONAL_SOURCES} from '../../data/nexo-relationship-research';
+---
+<MomentoLayout title="NEXO · Painel profissional da pesquisa de relacionamentos" description="Área reservada para leitura humana de relatos espontâneos e bibliografia verificável.">
+ <main class="moment-wrap research-pro" data-relation-panel>
+  <p class="moment-kicker">NEXO · ÁREA PROFISSIONAL · PESQUISA SOCIAL</p>
+  <h1 class="moment-title">O que pensamos? <em>Escuta antes da teoria.</em></h1>
+  <p class="moment-lead">Painel reservado para organizar respostas, consultar referências e construir perguntas de investigação. A IA não atribui nota, perfil psicológico, diagnóstico ou interpretação profissional.</p>
+  <p><a href="/nexo-profissional/">← Voltar à área profissional</a></p>
+  <div class="rp-note"><strong>Proteção dos participantes</strong><p>As falas podem conter informações sensíveis ou identificáveis, mesmo sem nome. Acesso exige sua sessão profissional. Revise e retire qualquer identificação antes de citar trechos. A autorização específica para reproduzir um trecho também deve estar registrada.</p></div>
+  <section id="rp-locked">
+   <h2>Acesso protegido</h2><p>Entre pela área profissional NEXO usando sua chave de acesso e retorne aqui. Não há acesso público a respostas.</p>
+   <a href="/nexo-profissional/">Abrir autenticação NEXO</a>
+  </section>
+  <section id="rp-dashboard" hidden>
+   <div class="rp-grid"><div class="rp-metric"><span>Respostas recebidas</span><strong id="rp-total">0</strong></div><div class="rp-metric"><span>Registros visualizados nesta sessão</span><strong id="rp-loaded">0</strong></div></div>
+   <p class="rp-warning">Amostra voluntária não probabilística. Perfis e respostas não permitem, sem desenho amostral apropriado, generalizar conclusões para a população brasileira. Não utilizar esses dados para avaliação individual.</p>
+   <div class="rp-actions"><button type="button" data-rp-action="more">Carregar mais respostas</button><button type="button" data-rp-action="export">Exportar JSON para análise humana local</button><button type="button" data-rp-action="clear">Limpar da tela</button></div>
+   <div id="rp-records" class="rp-records"></div>
+  </section>
+  <p id="rp-status" role="status" aria-live="polite"></p>
+  <section class="rp-sources">
+   <p class="moment-kicker">CURADORIA DOCUMENTAL · FONTES PARA O DEBATE POSTERIOR</p>
+   <h2>Fontes verificáveis, não respostas prontas.</h2>
+   <p>Esta bibliografia é para consulta do responsável. Não é exibida aos participantes antes do preenchimento, para preservar a espontaneidade. A relevância de cada fonte precisa ser apreciada por um profissional, com atenção ao contexto, ao método e à data.</p>
+   <ul>{PROFESSIONAL_SOURCES.map(source=><li><a href={source.url} target="_blank" rel="noopener noreferrer">{source.name} ↗</a><p>{source.use}</p></li>)}</ul>
+  </section>
+ </main>
+</MomentoLayout>
+<style>
+.research-pro{max-width:1120px}.research-pro>p>a,.rp-sources a,.research-pro section a{text-decoration:underline;text-underline-offset:4px}.research-pro h2{font:400 38px/1.2 var(--serif);margin:25px 0 14px}.research-pro>p{font:400 16px/1.75 var(--sans)}
+.rp-note{border-left:4px solid #b58263;background:#1e3844;padding:18px 24px;margin:35px 0;color:#fff}.rp-note strong{color:#f2c29c}.rp-note p{font:400 15px/1.7 var(--sans);color:#dfebe9}
+.rp-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:35px}.rp-metric{border:1px solid #667987;padding:25px;border-radius:8px}.rp-metric span{display:block;font:500 12px var(--sans);color:#c5d6d6}.rp-metric strong{display:block;font:400 40px var(--serif);margin-top:9px}
+.rp-warning{font:400 14px/1.7 var(--sans);color:#d8e1e0}.rp-actions{display:flex;gap:13px;flex-wrap:wrap;margin:28px 0}.rp-actions button{min-height:46px;border:1px solid #bc9a80;background:transparent;color:#fff;border-radius:25px;padding:10px 18px;cursor:pointer}
+.rp-records{display:grid;gap:18px}.rp-record{background:#eef0e9;color:#1a3b46;padding:25px;border-radius:9px}.rp-record h3{font:600 16px var(--sans);margin:0 0 12px}.rp-record dt{font:600 12px/1.5 var(--sans);margin-top:18px}.rp-record dd{font:400 15px/1.7 var(--sans);white-space:pre-wrap;overflow-wrap:anywhere;margin:5px 0}
+.rp-record details{margin-top:15px;border-top:1px solid #abbaba;padding-top:12px}.rp-sources{border-top:1px solid #acb7ba;margin-top:60px;padding-top:40px}.rp-sources ul{padding-left:22px}.rp-sources li{margin:20px 0}.rp-sources li p{font:400 14px/1.6 var(--sans);color:#cedada}.rp-sources a{color:#f0c3a4}
+@media(max-width:690px){.rp-grid{grid-template-columns:1fr}.rp-record{padding:18px}}
+</style>
+<script>
+ import {RELATION_QUESTIONS,RELATION_PROFILE} from '../../data/nexo-relationship-research';
+ type Item={id:string;createdAt:string;answers:Record<string,string>;profile:Record<string,string|null>;excerptPermission:boolean};
+ const root=document.querySelector<HTMLElement>('[data-relation-panel]');
+ if(root){
+  const el=<T extends HTMLElement=HTMLElement>(id:string)=>root.querySelector<T>('#'+id)!;
+  let records:Item[]=[],offset=0,total=0,busy=false;
+  const status=(msg:string)=>{el('rp-status').textContent=msg;};
+  async function load(){
+   if(busy)return;busy=true;
+   try{
+    const res=await fetch('/api/pesquisa-relacionamento/records?offset='+offset,{credentials:'same-origin',cache:'no-store',referrerPolicy:'no-referrer'});
+    if(!res.ok)throw Error(res.status===403?'login':'offline');
+    const data=await res.json() as {records:Item[];total:number;hasMore:boolean};
+    const fresh=Array.isArray(data.records)?data.records:[];records.push(...fresh);offset+=fresh.length;total=data.total;
+    el('rp-locked').hidden=true;el('rp-dashboard').hidden=false;el('rp-total').textContent=String(total);el('rp-loaded').textContent=String(records.length);
+    render(fresh);el<HTMLButtonElement>('rp-more-button').disabled=!data.hasMore;
+    status('Respostas acessadas em área autenticada. A interpretação é exclusivamente humana.');
+   }catch(err){records=[];offset=0;total=0;el('rp-records').replaceChildren();el('rp-locked').hidden=false;el('rp-dashboard').hidden=true;status(err instanceof Error&&err.message==='login'?'É necessário autenticar-se no NEXO para consultar dados.':'Não foi possível acessar o servidor da pesquisa.');}
+   finally{busy=false;}
+  }
+  function render(items:Item[]){
+   const list=el('rp-records');
+   for(const item of items){
+    const article=document.createElement('article');article.className='rp-record';
+    const heading=document.createElement('h3');heading.textContent='Registro recebido · '+new Date(item.createdAt).toLocaleString('pt-BR');article.append(heading);
+    const dl=document.createElement('dl');
+    for(const q of RELATION_QUESTIONS){const dt=document.createElement('dt'),dd=document.createElement('dd');dt.textContent=q.label;dd.textContent=item.answers[q.id]||'Sem resposta';dl.append(dt,dd);}
+    article.append(dl);
+    const details=document.createElement('details'),summary=document.createElement('summary');summary.textContent='Ver perfil informado e permissão para trechos';
+    details.append(summary);
+    const profile=document.createElement('dl');
+    for(const q of RELATION_PROFILE){const dt=document.createElement('dt'),dd=document.createElement('dd');dt.textContent=q.label;const value=item.profile[q.id];
+     dd.textContent=q.values.find(x=>x[0]===value)?.[1]||'Não informado';profile.append(dt,dd);}
+    const p=document.createElement('p');p.textContent=item.excerptPermission?'Trechos: autorizados para revisão e desidentificação antes da divulgação.':'Trechos: não autorizados para publicação literal.';
+    details.append(profile,p);article.append(details);list.append(article);
+   }
+  }
+  async function fetchAll(){
+   while(records.length<total&&records.length<10000){
+    const previous=records.length;await load();if(records.length===previous)break;
+   }
+  }
+  const more=document.querySelector<HTMLButtonElement>('button[data-rp-action="more"]');
+  if(more)more.id='rp-more-button';
+  root.addEventListener('click',async ev=>{
+   const target=ev.target;if(!(target instanceof Element))return;
+   const btn=target.closest<HTMLButtonElement>('button[data-rp-action]');if(!btn)return;
+   const action=btn.dataset.rpAction;
+   if(action==='more')await load();
+   if(action==='clear'){
+    records=[];offset=0;total=0;el('rp-records').replaceChildren();el('rp-dashboard').hidden=true;
+    el('rp-locked').hidden=false;status('Dados retirados da tela nesta sessão.');return;
+   }
+   if(action==='export'){
+    await fetchAll();if(!records.length){status('Nenhum registro para exportar.');return;}
+    const blob=new Blob([JSON.stringify({study:'relacionamento-aberto',nature:'pesquisa descritiva; sem codificação automatizada',records},null,2)],{type:'application/json'});
+    const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='nexo-relacionamento-aberto-respostas-para-revisao.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+    status('Arquivo baixado para revisão humana. Guarde-o em local restrito e protegido.');
+   }
+  });
+  void load();
+  window.addEventListener('pagehide',()=>{records=[];el('rp-records').replaceChildren();},{once:true});
+ }
+</script>
