@@ -1,0 +1,56 @@
+name: Verificar publicação da pesquisa NEXO na prévia
+on:
+  push:
+    branches: [feat/experiencia-imersiva]
+    paths:
+      - '.github/workflows/nexo-pesquisa-preview.yml'
+      - 'src/pages/pesquisa/relacionamento-aberto.astro'
+      - 'functions/api/pesquisa-relacionamento/[[path]].js'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  external-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - name: Conferir página pública e API sem enviar respostas
+        run: |
+          python3 - <<'PY'
+          import json,time,urllib.request,urllib.error
+          base='https://nexo-previa-20261014.pages.dev'
+          last=None
+          for attempt in range(1,16):
+              try:
+                  with urllib.request.urlopen(urllib.request.Request(base+'/pesquisa/relacionamento-aberto/',headers={'User-Agent':'NEXO-research-publish-check/1.0'}),timeout=12) as response:
+                      html=response.read(350000).decode('utf-8')
+                      if response.status!=200 or 'data-relation-survey' not in html or 'or-survey' not in html:
+                          raise ValueError('A página da pesquisa ainda não foi implantada')
+                      print('Página publicada com formulário de pesquisa.')
+                  req=urllib.request.Request(base+'/api/pesquisa-relacionamento/status',headers={'User-Agent':'NEXO-research-publish-check/1.0'})
+                  try:
+                      response=urllib.request.urlopen(req,timeout=12)
+                  except urllib.error.HTTPError as e:
+                      response=e
+                  with response:
+                      raw=response.read(5000).decode('utf-8')
+                      if 'application/json' not in response.headers.get('Content-Type',''):
+                          raise ValueError('Rota API não devolveu JSON da aplicação')
+                      obj=json.loads(raw)
+                      if response.status==200:
+                          if obj.get('version')!='nexo-saber-popular-relacao-aberta-2026-11-12-v1':
+                              raise ValueError('Versão da API não coincide com a página')
+                          if obj.get('open') is not False:
+                              raise ValueError('Coleta aberta: verificação exige estado fechado, sem aprovação externa')
+                          print('API publicada e coleta fechada por padrão.')
+                      elif response.status==503 and obj.get('error')=='unavailable':
+                          print('API publicada, porém sem configurações para operar: coleta fechada.')
+                      else:
+                          raise ValueError('API devolveu resposta inesperada: '+str(response.status)+' '+raw[:150])
+                  break
+              except Exception as e:
+                  last=e
+                  print(f'Tentativa {attempt}/15: {e}')
+                  if attempt==15:raise SystemExit('Publicação não comprovada: '+str(last))
+                  time.sleep(12)
+          PY
