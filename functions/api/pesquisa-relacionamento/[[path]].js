@@ -96,13 +96,14 @@ export async function onRequest({request,env}){
    const body=await parse(request);
    if(Object.keys(body).sort().join('|')!=='consent|payload')reject(400,'invalid_payload');
    const c=body.consent;
-   if(!c||typeof c!=='object'||Array.isArray(c)||Object.keys(c).sort().join('|')!=='accepted|adult|excerpts|version'||
-    c.accepted!==true||c.adult!==true||typeof c.excerpts!=='boolean'||c.version!==RELATION_CONSENT_VERSION)reject(400,'consent_required');
+   if(!c||typeof c!=='object'||Array.isArray(c)||Object.keys(c).sort().join('|')!=='accepted|adult|excerpts|orientation|version'||
+    c.accepted!==true||c.adult!==true||typeof c.excerpts!=='boolean'||typeof c.orientation!=='boolean'||c.version!==RELATION_CONSENT_VERSION)reject(400,'consent_required');
    const payload=validateRelationPayload(body.payload);if(!payload)reject(400,'invalid_answers');
+   if(payload.profile.orientacao!==null && c.orientation!==true)reject(400,'sensitive_consent_required');
    const id=crypto.randomUUID(),code=receipt(),expires=Math.min(now+CLINICAL_ACTIVE_RETENTION_DAYS*DAY,Date.parse(env.NEXO_RELATIONSHIP_RESEARCH_OPEN_UNTIL)+CLINICAL_ACTIVE_RETENTION_DAYS*DAY);
    const encrypted=await encryptClinicalRecord({
      study:'open-relationship-lay-meaning',version:RELATION_STUDY_VERSION,consentVersion:RELATION_CONSENT_VERSION,
-     excerptPermission:c.excerpts,answers:payload.answers,profile:payload.profile,createdAt:new Date(now).toISOString()
+     excerptPermission:c.excerpts,orientationConsent:c.orientation===true,answers:payload.answers,profile:payload.profile,createdAt:new Date(now).toISOString()
    },config.key,id);
    const saved=await stmt(db,'INSERT INTO nexo_relationship_responses(id,receipt_hash,ciphertext,iv,created_at,expires_at) VALUES(?,?,?,?,?,?)',
     id,await hashClinicalValue(config.secret,'relationship-receipt',normalized(code)),encrypted.ciphertext,encrypted.iv,now,expires).run();
