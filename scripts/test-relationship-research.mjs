@@ -46,7 +46,7 @@ test('sem fontes ou definições no questionário: escuta livre e perfil só dep
  assert.equal(RELATION_QUESTIONS.length,3);
  assert.equal(RELATION_PROFILE.length,8);
  assert.ok(RELATION_PROFILE.some(x=>x.id==='orientacao'),'dado sensível opcional, após perguntas espontâneas');
- assert.ok(RELATION_CONSENT_VERSION.endsWith('-v3'));
+ assert.ok(RELATION_CONSENT_VERSION.endsWith('-v4'));
  const valid=validateRelationPayload(payload());assert.ok(valid);
  assert.equal(valid.answers.significado,payload().answers.significado);
  assert.equal(validateRelationPayload({...payload(),cpf:'123'}),null);
@@ -59,6 +59,8 @@ test('RCLE completo acessível antes do consentimento, cópia imprimível e resp
  assert.ok(form.includes('/pesquisa/relacionamento-aberto-termo/'));
  assert.ok(term.includes('Gabriel Alves Batista') && term.includes('06/176184'));
  assert.ok(term.includes('Imprimir ou salvar em PDF'));
+ assert.ok(form.includes('Resolução CNS nº 510/2016'));
+ assert.ok(term.includes('dispensa de avaliação pelo Sistema CEP/Conep'));
  assert.ok(form.includes('id="or-orientacao-consent"'));
  assert.ok(form.includes('disabled={q.id===\'orientacao\'}'));
  assert.ok(form.includes('<details class="or-consent-info">'),'termo completo recolhido por padrão para uma entrada simples');
