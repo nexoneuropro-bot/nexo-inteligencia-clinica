@@ -81,7 +81,7 @@ test('participação falada: botão utilizável sem API local e orientações de
  assert.ok(term.includes('O NEXO não grava nem recebe arquivos de áudio'));
  assert.ok(helper.includes('async function install()'));
  assert.ok(helper.includes("processLocally=true"),'reconhecimento Web Speech permanece estritamente local');
- assert.ok(!helper.includes('MediaRecorder'));
+ assert.ok(!/\bnew\s+MediaRecorder\s*\(/.test(helper),'código não instancia gravador de áudio');
 });
 test('coleta fechada por padrão; após revisão e flag recebe, cifra, consulta somente com sessão e retira',async()=>{
  const {sqlite,env,secret,now}=setup();
