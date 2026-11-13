@@ -2,8 +2,8 @@
 import Layout from './Layout.astro';
 import MomentoSupport from '../components/MomentoSupport.astro';
 import '../styles/experience.css';
-interface Props { title:string; description:string }
-const {title,description}=Astro.props;
+interface Props { title:string; description:string; screeningSupport?:boolean }
+const {title,description,screeningSupport=false}=Astro.props;
 ---
 <Layout title={title} description={description} experience privateExperience>
   <div class="momento-universe">
@@ -16,7 +16,7 @@ const {title,description}=Astro.props;
       </svg>
     </div>
     <slot/>
-    <MomentoSupport/>
+    {screeningSupport&&<MomentoSupport/>}
   </div>
 </Layout>
 <style is:global>
