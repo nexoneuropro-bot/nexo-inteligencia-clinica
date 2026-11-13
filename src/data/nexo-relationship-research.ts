@@ -1,6 +1,6 @@
 /** Pesquisa AUTORAL sobre significados populares. Não mede acerto, aprovação ou diagnóstico. */
 export const RELATION_STUDY_VERSION = 'nexo-saber-popular-relacao-aberta-2026-11-12-v1';
-export const RELATION_CONSENT_VERSION = 'nexo-relacionamento-aberto-consent-2026-11-12-v2';
+export const RELATION_CONSENT_VERSION = 'nexo-relacionamento-aberto-consent-2026-11-12-v3';
 export const RELATION_QUESTIONS = Object.freeze([
   {id:'associacoes',label:'Quando você ouve a expressão “relacionamento aberto”, quais são as primeiras palavras ou ideias que vêm à sua mente?',hint:'Pode escrever uma palavra, uma frase ou várias ideias.'},
   {id:'significado',label:'Com suas próprias palavras, o que você entende por relacionamento aberto?',hint:'Não precisa procurar definições. Queremos ouvir como você entende a expressão.'},
@@ -14,6 +14,7 @@ export const RELATION_PROFILE = Object.freeze([
  {id:'uf',label:'Em qual estado você mora?',values:BRAZIL_STATES},
  {id:'escolaridade',label:'Qual sua escolaridade?',values:[['fundamental','Ensino fundamental'],['medio','Ensino médio'],['superior-incompleto','Ensino superior incompleto'],['superior-completo','Ensino superior completo'],['pos','Pós-graduação']]},
  {id:'genero',label:'Como você descreve seu gênero?',values:[['mulher','Mulher'],['homem','Homem'],['nao-binario','Pessoa não binária'],['outra','Outra forma de identificação']]},
+ {id:'orientacao',label:'Orientação sexual (opcional e sensível)',values:[['heterossexual','Heterossexual'],['gay-lesbica','Gay ou lésbica'],['bissexual','Bissexual'],['pansexual','Pansexual'],['assexual','Assexual'],['outra','Outra forma de identificação']]},
  {id:'situacao',label:'Qual descreve sua situação afetiva hoje?',values:[['solteira','Sem relacionamento atualmente'],['namorando','Namorando'],['casada-uniao','Casada(o) ou em união estável'],['multiplos','Em mais de um vínculo afetivo'],['outra','Outra situação']]},
  {id:'territorio',label:'Você mora em...',values:[['capital','Uma capital'],['metropolitana','Região metropolitana, fora da capital'],['interior','Outra cidade do interior'],['rural','Área rural']]},
  {id:'familiaridade',label:'Antes desta pesquisa, já tinha ouvido a expressão “relacionamento aberto”?',values:[['sim','Sim'],['nao','Não'],['nao-sei','Não tenho certeza']]},
