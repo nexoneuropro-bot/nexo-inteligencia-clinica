@@ -1,0 +1,71 @@
+---
+import {whatsapp} from '../data/reflections';
+const fallback=whatsapp();
+---
+<section class="nexo-contact-form" id="contato-direto" aria-labelledby="nexo-contact-title">
+ <div class="nexo-contact-heading">
+  <span>CONTATO · NEXO INTELIGÊNCIA CLÍNICA</span>
+  <h2 id="nexo-contact-title">Uma conversa começa por aqui.</h2>
+  <p>Conte brevemente sua dúvida. Você escolhe se prefere abrir um e-mail ou uma conversa no WhatsApp.</p>
+ </div>
+ <form id="nexo-contact-form">
+  <div class="nexo-contact-fields">
+   <label for="nexo-contact-subject">Qual assunto?
+    <select id="nexo-contact-subject" name="assunto" required>
+     <option value="" selected disabled>Selecione um assunto</option>
+     <option value="Informações sobre psicoterapia">Informações sobre psicoterapia</option>
+     <option value="Avaliação neuropsicológica">Avaliação neuropsicológica</option>
+     <option value="Consultoria para empresas e NR-1">Consultoria para empresas e NR-1</option>
+     <option value="Pesquisa, conteúdo e parcerias">Pesquisa, conteúdo e parcerias</option>
+     <option value="Outra dúvida">Outra dúvida</option>
+    </select>
+   </label>
+   <label for="nexo-contact-name">Como podemos chamar você? <small>(opcional)</small>
+    <input id="nexo-contact-name" name="nome" maxlength="70" autocomplete="given-name" placeholder="Seu primeiro nome"/>
+   </label>
+  </div>
+  <label for="nexo-contact-message">O que gostaria de saber?
+   <textarea id="nexo-contact-message" name="mensagem" rows="4" maxlength="1000" minlength="3" required placeholder="Escreva apenas informações gerais sobre sua dúvida."></textarea>
+  </label>
+  <p class="nexo-contact-note">Não inclua diagnósticos, documentos, prontuários ou outras informações sensíveis. Este formulário prepara uma mensagem no aplicativo escolhido: nada é transmitido automaticamente à NEXO.</p>
+  <div class="nexo-contact-actions">
+   <button type="button" data-contact-send="whatsapp">Conversar no WhatsApp <span aria-hidden="true">↗</span></button>
+   <button type="button" data-contact-send="email">Preparar e-mail <span aria-hidden="true">↗</span></button>
+  </div>
+  <p class="nexo-contact-status" id="nexo-contact-status" role="status" aria-live="polite"></p>
+ </form>
+ <div class="nexo-contact-alternatives"><a href={fallback} target="_blank" rel="noopener noreferrer">WhatsApp direto ↗</a><a href="mailto:nexoneuropro@gmail.com">nexoneuropro@gmail.com ↗</a><a href="tel:+551154444366">+55 (11) 5444-4366</a></div>
+</section>
+<style>
+.nexo-contact-form{position:relative;width:min(1050px,calc(100% - 40px));margin:75px auto 85px;padding:clamp(25px,5vw,54px);background:#f6f2e9;color:#18333b;border:1px solid #d9cfc0;border-radius:18px;box-shadow:0 22px 55px #03141e26;isolation:isolate}
+.nexo-contact-heading{max-width:650px}.nexo-contact-heading>span{font:700 11px/1.6 var(--sans);letter-spacing:.16em;color:#92684d}
+.nexo-contact-heading h2{font:400 clamp(35px,4vw,58px)/1.07 var(--serif);margin:12px 0 15px}.nexo-contact-heading p{font:400 17px/1.65 var(--sans);margin:0 0 24px;color:#435961}
+.nexo-contact-form form{display:grid;gap:17px}.nexo-contact-fields{display:grid;grid-template-columns:1fr 1fr;gap:17px}
+.nexo-contact-form label{display:flex;flex-direction:column;gap:9px;font:600 14px/1.5 var(--sans)}.nexo-contact-form label small{display:inline;font:400 12px var(--sans);color:#597078}
+.nexo-contact-form input,.nexo-contact-form select,.nexo-contact-form textarea{width:100%;padding:13px 14px;min-height:50px;border:1px solid #a6b3b4;border-radius:7px;background:#fff;color:#18333b;font:400 16px/1.55 var(--sans);box-sizing:border-box}
+.nexo-contact-form textarea{resize:vertical}.nexo-contact-form :is(button,input,textarea,select,a):focus-visible{outline:3px solid #a57855;outline-offset:3px}
+.nexo-contact-form .nexo-contact-note{font:400 12px/1.6 var(--sans);color:#61747a;max-width:720px;margin:0}
+.nexo-contact-actions{display:flex;flex-wrap:wrap;gap:12px}.nexo-contact-actions button{border-radius:30px;border:1px solid #174456;background:#174456;color:white;padding:13px 23px;min-height:48px;font:600 14px var(--sans);cursor:pointer}.nexo-contact-actions button+button{background:transparent;color:#174456}
+.nexo-contact-status{min-height:18px;font:400 13px/1.5 var(--sans);margin:0}.nexo-contact-alternatives{display:flex;gap:15px 25px;flex-wrap:wrap;border-top:1px solid #d3d4d0;padding-top:19px;margin-top:23px;font:500 13px var(--sans)}.nexo-contact-alternatives a{text-decoration:underline;color:#23566a}
+@media(max-width:640px){.nexo-contact-fields{grid-template-columns:1fr}.nexo-contact-form{margin:40px auto 60px}.nexo-contact-actions button{flex:1 1 150px}}
+</style>
+<script>
+const form=document.querySelector<HTMLFormElement>('#nexo-contact-form');
+form?.querySelectorAll<HTMLButtonElement>('[data-contact-send]').forEach(button=>button.addEventListener('click',()=>{
+ if(!form.reportValidity())return;
+ const fd=new FormData(form);
+ const subject=String(fd.get('assunto')||'').trim();
+ const name=String(fd.get('nome')||'').trim();
+ const message=String(fd.get('mensagem')||'').trim();
+ if(!subject||message.length<3)return;
+ const composed=[name?'Nome: '+name:null,'Assunto: '+subject,'Mensagem: '+message].filter(Boolean).join('\n');
+ const status=form.querySelector<HTMLElement>('#nexo-contact-status');
+ if(button.dataset.contactSend==='whatsapp'){
+  if(status)status.textContent='Abrindo o WhatsApp. Revise e confirme o envio por lá.';
+  window.open('https://wa.me/551154444366?text='+encodeURIComponent('Olá! Vim pelo site NEXO.\n'+composed),'_blank','noopener,noreferrer');
+ }else{
+  if(status)status.textContent='Abrindo seu aplicativo de e-mail. Revise e envie sua mensagem por lá.';
+  window.location.href='mailto:nexoneuropro@gmail.com?subject='+encodeURIComponent('NEXO · '+subject)+'&body='+encodeURIComponent(composed);
+ }
+}));
+</script>
