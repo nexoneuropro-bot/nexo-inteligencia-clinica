@@ -1,6 +1,6 @@
 /** Pesquisa AUTORAL sobre significados populares. Não mede acerto, aprovação ou diagnóstico. */
 export const RELATION_STUDY_VERSION = 'nexo-saber-popular-relacao-aberta-2026-11-12-v1';
-export const RELATION_CONSENT_VERSION = 'nexo-relacionamento-aberto-consent-2026-11-12-v1';
+export const RELATION_CONSENT_VERSION = 'nexo-relacionamento-aberto-consent-2026-11-12-v2';
 export const RELATION_QUESTIONS = Object.freeze([
   {id:'associacoes',label:'Quando você ouve a expressão “relacionamento aberto”, quais são as primeiras palavras ou ideias que vêm à sua mente?',hint:'Pode escrever uma palavra, uma frase ou várias ideias.'},
   {id:'significado',label:'Com suas próprias palavras, o que você entende por relacionamento aberto?',hint:'Não precisa procurar definições. Queremos ouvir como você entende a expressão.'},
@@ -14,7 +14,6 @@ export const RELATION_PROFILE = Object.freeze([
  {id:'uf',label:'Em qual estado você mora?',values:BRAZIL_STATES},
  {id:'escolaridade',label:'Qual sua escolaridade?',values:[['fundamental','Ensino fundamental'],['medio','Ensino médio'],['superior-incompleto','Ensino superior incompleto'],['superior-completo','Ensino superior completo'],['pos','Pós-graduação']]},
  {id:'genero',label:'Como você descreve seu gênero?',values:[['mulher','Mulher'],['homem','Homem'],['nao-binario','Pessoa não binária'],['outra','Outra forma de identificação']]},
- {id:'orientacao',label:'Como você descreve sua orientação sexual?',values:[['heterossexual','Heterossexual'],['gay-lesbica','Gay ou lésbica'],['bissexual','Bissexual'],['pansexual','Pansexual'],['assexual','Assexual'],['outra','Outra forma de identificação']]},
  {id:'situacao',label:'Qual descreve sua situação afetiva hoje?',values:[['solteira','Sem relacionamento atualmente'],['namorando','Namorando'],['casada-uniao','Casada(o) ou em união estável'],['multiplos','Em mais de um vínculo afetivo'],['outra','Outra situação']]},
  {id:'territorio',label:'Você mora em...',values:[['capital','Uma capital'],['metropolitana','Região metropolitana, fora da capital'],['interior','Outra cidade do interior'],['rural','Área rural']]},
  {id:'familiaridade',label:'Antes desta pesquisa, já tinha ouvido a expressão “relacionamento aberto”?',values:[['sim','Sim'],['nao','Não'],['nao-sei','Não tenho certeza']]},
@@ -25,6 +24,8 @@ export const PROFESSIONAL_SOURCES = Object.freeze([
  {name:'Scoats & Campbell (2022) · What do we know about consensual non-monogamy?',url:'https://doi.org/10.1016/j.copsyc.2022.101468',use:'Revisão de literatura para debate posterior, nunca exibida antes das respostas.'},
  {name:'CNS · Resolução 510/2016',url:'https://bvsms.saude.gov.br/bvs/saudelegis/cns/2016/res0510_07_04_2016.html',use:'Apoio à revisão de enquadramento ético de pesquisa de opinião não identificável.'},
  {name:'ANPD · Guia de dados para estudos e pesquisas',url:'https://www.gov.br/anpd/pt-br/centrais-de-conteudo/materiais-educativos-e-publicacoes/guia-orientativo-tratamento-de-dados-pessoais-para-fins-academicos-e-para-a-realizacao-de-estudos-e-pesquisas',use:'Finalidade, dados sensíveis, segurança, minimização e direitos do participante.'},
+ {name:'CFP · Código de Ética Profissional do Psicólogo (Resolução nº 10/2005)',url:'https://transparencia.cfp.org.br/wp-content/uploads/sites/16/2024/08/Resolucao-do-Exercicio-Profissional-10-2005-do-Conselho-Federal-de-Psicologia-BR.pdf',use:'Art. 16: princípios éticos para pesquisas e divulgação de resultados.'},
+ {name:'Lei 14.874/2024 e Decreto 12.651/2025',url:'https://www2.camara.leg.br/legin/fed/lei/2024/lei-14874-28-maio-2024-795693-norma-pl.html',use:'Marco normativo de pesquisa com seres humanos; conferir aplicabilidade e tramitação com instância competente.'},
  {name:'MDN · SpeechRecognition.processLocally',url:'https://developer.mozilla.org/en-US/docs/Web/API/SpeechRecognition/processLocally',use:'Verificação técnica de transcrição no dispositivo, sem fallback remoto.'},
 ]);
 export type RelationAnswers=Record<'associacoes'|'significado'|'funcionamento',string>;

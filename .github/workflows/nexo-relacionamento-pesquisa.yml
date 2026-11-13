@@ -1,7 +1,7 @@
 name: Validar pesquisa NEXO · Relacionamento aberto
 on:
   push:
-    branches: [feat/nexo-pesquisa-relacionamento-aberto-20261112]
+    branches: [feat/nexo-pesquisa-relacionamento-aberto-20261112, feat/nexo-rcle-revisao-etica-20261112]
   pull_request:
     branches: [feat/nexo-piloto-seguro-20261112, feat/experiencia-imersiva]
   workflow_dispatch:
