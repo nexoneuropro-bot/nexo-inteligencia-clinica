@@ -18,11 +18,11 @@ jobs:
           BASE="https://nexo-previa-20261014.pages.dev"
           for i in $(seq 1 12); do
             PAGE=$(curl -fsSL --max-time 15 "$BASE/pesquisa/relacionamento-aberto/" || true)
-            if echo "$PAGE" | grep -q 'data-relation-survey'; then
+            if echo "$PAGE" | grep -q 'data-relation-survey' && echo "$PAGE" | grep -q 'id="or-orientacao-consent"' && echo "$PAGE" | grep -q 'or-consent-info'; then
               CODE=$(curl -sSL --max-time 15 -o /tmp/nexo-status.json -w '%{http_code}' "$BASE/api/pesquisa-relacionamento/status" || true)
               echo "Resposta da API HTTP: $CODE"
               if [ "$CODE" = "200" ] || [ "$CODE" = "503" ]; then
-                if python3 -c 'import json; d=json.load(open("/tmp/nexo-status.json")); assert d.get("open") is False or d.get("error")=="unavailable"'; then
+                if python3 -c 'import json; d=json.load(open("/tmp/nexo-status.json")); assert d.get("open") is False and d.get("consentVersion")=="nexo-relacionamento-aberto-consent-2026-11-12-v3"'; then
                   echo "Formulário e API confirmados; coleta fechada."
                   exit 0
                 fi
