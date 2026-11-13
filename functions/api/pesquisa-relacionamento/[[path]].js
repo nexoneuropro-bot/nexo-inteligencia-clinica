@@ -2,7 +2,8 @@
  * NEXO | pesquisa sobre significados populares de relacionamento aberto.
  * Endpoint separado de prontuários e instrumentos. Não usa IA, classificação
  * psicológica, provedor de transcrição, cookies de participantes ou analytics.
- * Coleta FECHADA por padrão. Requer revisão ética documentada, D1, retenção
+ * Coleta FECHADA por padrão. Requer enquadramento ético documentado (dispensa
+ * nos casos legalmente previstos ou apreciação competente, sem parecer fictício), D1, retenção
  * operacional e ativação explícita nas variáveis Cloudflare Pages.
  */
 import {clinicalConfiguration,hashClinicalValue,encryptClinicalRecord,decryptClinicalRecord,CLINICAL_ACTIVE_RETENTION_DAYS} from '../../_lib/momento-clinical.js';
@@ -59,7 +60,8 @@ async function throttle(request,db,config,action,now,max=12){
  }
 }
 function enabled(env,now){
- // Uma aprovação de estudo não pode ser inferida da ativação clínica.
+ // A decisão de enquadramento ético (inclusive eventual dispensa do CEP) é separada da ativação clínica.
+ // ETHICS_REFERENCE deve apontar para decisão real; nunca inventar número de parecer.
  const until=Date.parse(env?.NEXO_RELATIONSHIP_RESEARCH_OPEN_UNTIL||'');
  return env?.NEXO_RELATIONSHIP_RESEARCH_ENABLED==='true' &&
   env?.NEXO_RELATIONSHIP_RESEARCH_REVIEWED==='true' &&
