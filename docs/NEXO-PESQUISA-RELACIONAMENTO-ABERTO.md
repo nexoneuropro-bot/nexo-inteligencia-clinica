@@ -70,6 +70,8 @@ O código GitHub e o endereço planejado **não comprovam publicação**. A cole
 - Decreto 12.651/2025: https://www2.camara.leg.br/legin/fed/decret/2025/decreto-12651-7-outubro-2025-798105-publicacaooriginal-176652-pe.html
 - LGPD, Lei 13.709/2018: https://www2.camara.leg.br/legin/fed/lei/2018/lei-13709-14-agosto-2018-787077-normaatualizada-pl.html
 
+Para rastreabilidade da declaração de enquadramento comunicada pelo pesquisador responsável, ver [registro interno de 13/11/2026](./NEXO-REGISTRO-ENQUADRAMENTO-OPINIAO-PUBLICA-2026-11-13.md). O registro não constitui parecer de CEP nem atestado de anonimato absoluto.
+
 ## Critérios verificáveis para eventual dispensa de CEP/Conep
 
 A não submissão prevista na Resolução CNS 510/2016, art. 1º, parágrafo único, I, **não é uma regra automática para qualquer pesquisa voluntária, curta ou sem nome**. A equipe deve conservar registro interno datado, assinado pelo responsável técnico, respondendo:
