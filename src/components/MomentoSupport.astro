@@ -1,7 +1,7 @@
 ---
 import supportPhoto from '../assets/editorial-images/quem-cuida-de-quem-cuida-atendimento.jpg';
 ---
-<aside class="nexo-support" aria-label="Contatos de apoio e emergência no Brasil">
+<aside class="nexo-support" hidden aria-label="Contatos de apoio e emergência no Brasil">
   <details>
     <summary><span class="nexo-support-pulse" aria-hidden="true">✳</span><span>Precisa de ajuda agora?</span><span class="nexo-support-small">Ver contatos de apoio</span></summary>
     <div class="nexo-support-body">
@@ -22,6 +22,7 @@ import supportPhoto from '../assets/editorial-images/quem-cuida-de-quem-cuida-at
   </details>
 </aside>
 <style>
+.nexo-support[hidden]{display:none!important}
 .nexo-support{position:fixed;z-index:80;right:clamp(10px,2.8vw,38px);bottom:18px;width:min(390px,calc(100vw - 20px));font-family:var(--sans);color:#0b2635;filter:drop-shadow(0 12px 25px #07182050)}
 .nexo-support details{background:#f9f5ed;border:1px solid #cdb69e;border-radius:13px;overflow:hidden}
 .nexo-support summary{display:flex;align-items:center;gap:9px;min-height:52px;padding:10px 15px;cursor:pointer;color:#0b2635;font-size:13px;font-weight:700;list-style:none}
@@ -47,3 +48,18 @@ import supportPhoto from '../assets/editorial-images/quem-cuida-de-quem-cuida-at
 @media(max-width:600px){.nexo-support{right:10px;bottom:10px;width:calc(100vw - 20px)}.nexo-support summary{min-height:48px}.nexo-support-body{max-height:72svh}}
 @media print{.nexo-support{display:none!important}}
 </style>
+<script>
+  const support=document.querySelector<HTMLElement>('.nexo-support');
+  const screening=document.querySelector<HTMLElement>('[data-momento-clinical], [data-mm-root], [data-momento-followup]');
+  if(support&&screening){
+   const sync=()=>{
+    const visible=screening.dataset.screeningActive==='true';
+    support.hidden=!visible;
+    if(!visible)support.querySelector('details')?.removeAttribute('open');
+   };
+   const observer=new MutationObserver(sync);
+   observer.observe(screening,{attributes:true,attributeFilter:['data-screening-active']});
+   sync();
+   document.addEventListener('astro:before-swap',()=>observer.disconnect(),{once:true});
+  }
+</script>

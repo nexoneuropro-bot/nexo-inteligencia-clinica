@@ -60,6 +60,8 @@ function startMomento(){
   }
   function render(focus=true){
     stopSpeech();error.textContent='';const view=viewStage();sections.forEach(section=>{section.hidden=section.dataset.mmStage!==view;});
+    const active=activePilotQuestions(session).find(item=>item.id===session.currentQuestionId);
+    root.dataset.screeningActive=String(safetyVisible||(view==='questions'&&Boolean(active&&['scale','impact','clarifier'].includes(active.kind))));
     root.querySelectorAll<HTMLElement>('[data-mm-progress]').forEach(item=>{const current=item.dataset.mmProgress===(view==='summary'?'summary':session.stage);if(current)item.setAttribute('aria-current','step');else item.removeAttribute('aria-current');});
     root.querySelectorAll<HTMLButtonElement>('.mm-utility [data-mm-action="pause"]').forEach(button=>{button.disabled=!session.accepted||safetyVisible||['paused','done','closed','expired'].includes(session.stage);});
     root.querySelectorAll<HTMLButtonElement>('.mm-utility [data-mm-action="exit"]').forEach(button=>{button.disabled=['closed','expired'].includes(session.stage);});

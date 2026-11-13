@@ -132,6 +132,7 @@ function startClinical(){
  }
  function render(focus=true){
   stopSpeech();dictation.stop();error.textContent='';stages.forEach(section=>{section.hidden=section.dataset.mcStage!==stage;});
+  root.dataset.screeningActive=String(stage==='questions'&&['scale','impact','clarification'].includes(sequence[position]?.kind));
   root.querySelectorAll<HTMLElement>('[data-mc-progress]').forEach(item=>{if(item.dataset.mcProgress===stage)item.setAttribute('aria-current','step');else item.removeAttribute('aria-current');});
   root.querySelectorAll<HTMLButtonElement>('.mc-toolbar [data-mc-action]').forEach(button=>{button.disabled=!csrf||stage==='closed'||sending||(button.dataset.mcAction==='pause'&&['access','consent','paused','submitted'].includes(stage));});
   if(stage==='questions')showQuestion();if(stage==='reflection')showReflection();if(stage==='summary')showSummary();
