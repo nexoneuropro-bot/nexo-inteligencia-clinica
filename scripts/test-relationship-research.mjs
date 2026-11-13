@@ -44,11 +44,22 @@ async function api(env,path,method='GET',body,cookie){
 }
 test('sem fontes ou definições no questionário: escuta livre e perfil só depois',()=>{
  assert.equal(RELATION_QUESTIONS.length,3);
- assert.equal(RELATION_PROFILE.length,8);
+ assert.equal(RELATION_PROFILE.length,7);
+ assert.ok(!RELATION_PROFILE.some(x=>x.id==='orientacao'),'sem variável de orientação sexual');
+ assert.ok(RELATION_CONSENT_VERSION.endsWith('-v2'));
  const valid=validateRelationPayload(payload());assert.ok(valid);
  assert.equal(valid.answers.significado,payload().answers.significado);
  assert.equal(validateRelationPayload({...payload(),cpf:'123'}),null);
  assert.equal(validateRelationPayload({answers:{...payload().answers,significado:'x'.repeat(1201)},profile:payload().profile}),null);
+});
+test('RCLE completo acessível antes do consentimento, cópia imprimível e responsável identificado',()=>{
+ const form=readFileSync('src/pages/pesquisa/relacionamento-aberto.astro','utf8');
+ const term=readFileSync('src/pages/pesquisa/relacionamento-aberto-termo.astro','utf8');
+ assert.ok(form.indexOf('or-consent-info')>0 && form.indexOf('or-consent-info')<form.indexOf('id="or-consent"'));
+ assert.ok(form.includes('/pesquisa/relacionamento-aberto-termo/'));
+ assert.ok(term.includes('Gabriel Alves Batista') && term.includes('06/176184'));
+ assert.ok(term.includes('Imprimir ou salvar em PDF'));
+ assert.ok(!form.includes('id:&#39;orientacao&#39;'));
 });
 test('coleta fechada por padrão; após revisão e flag recebe, cifra, consulta somente com sessão e retira',async()=>{
  const {sqlite,env,secret,now}=setup();
