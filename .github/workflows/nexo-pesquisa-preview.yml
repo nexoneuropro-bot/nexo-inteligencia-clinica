@@ -16,20 +16,31 @@ jobs:
         run: |
           set -euo pipefail
           BASE="https://nexo-previa-20261014.pages.dev"
-          for i in $(seq 1 12); do
-            HOME=$(curl -fsSL --max-time 15 "$BASE/" || true)
-            CONTACT=$(curl -fsSL --max-time 15 "$BASE/contato/" || true)
-            SURVEY=$(curl -fsSL --max-time 15 "$BASE/pesquisa/relacionamento-aberto/" || true)
-            CLINIC=$(curl -fsSL --max-time 15 "$BASE/conhecendo-meu-momento/responder/" || true)
-            echo "Marcadores: home_form=$([[ "$HOME" == *'id="nexo-contact-form"'* ]] && echo sim || echo nao) contato_form=$([[ "$CONTACT" == *'id="nexo-contact-form"'* ]] && echo sim || echo nao) pesquisa_sem_aviso=$([[ "$SURVEY" != *'class="nexo-support"'* ]] && echo sim || echo nao) clinica_com_aviso=$([[ "$CLINIC" == *'class="nexo-support"'* ]] && echo sim || echo nao) clinica_hidden=$([[ "$CLINIC" == *'class="nexo-support" hidden'* ]] && echo sim || echo nao)"
-            if [[ "$HOME" == *'id="nexo-contact-form"'* ]] && [[ "$CONTACT" == *'id="nexo-contact-form"'* ]] && [[ "$SURVEY" != *'class="nexo-support"'* ]] && [[ "$CLINIC" == *'class="nexo-support"'* ]]; then
-              echo "Contato na home e página de contato; apoio ausente da pesquisa e inicialmente oculto na experiência clínica."
+          HOME_OK=0
+          CONTACT_OK=0
+          CLINIC_OK=0
+          SURVEY_OK=0
+          for i in $(seq 1 8); do
+            HOME=$(curl -fsSL --retry 2 --retry-delay 1 --max-time 15 "$BASE/" 2>/dev/null || true)
+            if [[ "$HOME" == *'id="nexo-contact-form"'* ]]; then HOME_OK=1; fi
+
+            CONTACT=$(curl -fsSL --retry 2 --retry-delay 1 --max-time 15 "$BASE/contato/" 2>/dev/null || true)
+            if [[ "$CONTACT" == *'id="nexo-contact-form"'* ]]; then CONTACT_OK=1; fi
+
+            SURVEY=$(curl -fsSL --retry 2 --retry-delay 1 --max-time 15 "$BASE/pesquisa/relacionamento-aberto/" 2>/dev/null || true)
+            if [[ "$SURVEY" == *'data-relation-survey'* ]] && [[ "$SURVEY" != *'class="nexo-support"'* ]]; then SURVEY_OK=1; fi
+
+            CLINIC=$(curl -fsSL --retry 2 --retry-delay 1 --max-time 15 "$BASE/conhecendo-meu-momento/responder/" 2>/dev/null || true)
+            if [[ "$CLINIC" == *'class="nexo-support" hidden'* ]]; then CLINIC_OK=1; fi
+
+            echo "Tentativa $i: home=$HOME_OK contato=$CONTACT_OK pesquisa_sem_aviso=$SURVEY_OK clinica_aviso_oculto=$CLINIC_OK"
+            if [[ "$HOME_OK" == "1" && "$CONTACT_OK" == "1" && "$SURVEY_OK" == "1" && "$CLINIC_OK" == "1" ]]; then
+              echo "PUBLICAÇÃO CONFIRMADA: contato nas duas páginas, pesquisa sem aviso e rastreio com aviso inicialmente oculto."
               exit 0
             fi
-            echo "Tentativa $i: alterações de contato/apoio ainda não confirmadas."
-            sleep 12
+            sleep 8
           done
-          echo "::error::A nova versão de contato/apoio não pôde ser confirmada no domínio da prévia."
+          echo "::error::Não foi possível observar todas as páginas atualizadas em verificações independentes."
           exit 1
       - name: Conferir versão publicada sem coletar respostas
         shell: bash
