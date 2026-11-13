@@ -1,6 +1,6 @@
 /** Pesquisa AUTORAL sobre significados populares. Não mede acerto, aprovação ou diagnóstico. */
 export const RELATION_STUDY_VERSION = 'nexo-saber-popular-relacao-aberta-2026-11-12-v1';
-export const RELATION_CONSENT_VERSION = 'nexo-relacionamento-aberto-consent-2026-11-12-v3';
+export const RELATION_CONSENT_VERSION = 'nexo-relacionamento-aberto-consent-2026-11-13-v4';
 export const RELATION_QUESTIONS = Object.freeze([
   {id:'associacoes',label:'Quando você ouve a expressão “relacionamento aberto”, quais são as primeiras palavras ou ideias que vêm à sua mente?',hint:'Pode escrever uma palavra, uma frase ou várias ideias.'},
   {id:'significado',label:'Com suas próprias palavras, o que você entende por relacionamento aberto?',hint:'Não precisa procurar definições. Queremos ouvir como você entende a expressão.'},
