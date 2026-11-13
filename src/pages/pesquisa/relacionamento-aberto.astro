@@ -14,11 +14,11 @@ import {RELATION_PROFILE} from '../../data/nexo-relationship-research';
     <section data-or-stage="welcome" aria-labelledby="or-welcome-title">
      <p class="or-step">PESQUISA CIENTÍFICA EXPLORATÓRIA · ABORDAGEM QUALITATIVA</p>
      <h2 id="or-welcome-title" tabindex="-1">Sua percepção importa.</h2>
-     <p>Queremos conhecer, com as suas próprias palavras, o que pessoas adultas residentes no Brasil entendem pela expressão <strong>“relacionamento aberto”</strong>. Não vamos apresentar uma definição antes de ouvir você. Não existe resposta certa ou errada.</p>
-     <p><strong>Pesquisador responsável:</strong> Gabriel Alves Batista, psicólogo (CRP 06/176184), NEXO Inteligência Clínica. Duração estimada: 3 a 5 minutos. A participação não faz parte de qualquer atendimento clínico.</p>
-     <details open class="or-consent-info">
+     <p>Queremos saber o que <strong>“relacionamento aberto”</strong> significa para você. São três perguntas, sem resposta certa ou errada. Você pode escrever ou falar, quando o ditado local estiver disponível.</p>
+     <p><strong>Leva cerca de 3 a 5 minutos.</strong> Participar é voluntário e não interfere em nenhum atendimento. As respostas são analisadas por profissionais, não pela IA. Não pedimos seu nome; dados opcionais de perfil ajudam a compreender diferenças entre grupos. Você pode desistir, e os registros são protegidos por até 81 dias.</p><p class="or-small">Responsável: Gabriel Alves Batista, psicólogo (CRP 06/176184) · NEXO Inteligência Clínica. Contato: <a href="mailto:nexoneuropro@gmail.com">nexoneuropro@gmail.com</a>.</p>
+     <details class="or-consent-info">
       <summary>Registro de Consentimento Livre e Esclarecido (RCLE)</summary>
-      <p><strong>Objetivo e procedimentos.</strong> Você responderá a três perguntas abertas, digitando ou usando ditado exclusivamente no dispositivo, quando o navegador for compatível. O NEXO não grava arquivos de áudio. Após as respostas, poderá informar dados opcionais de perfil, como idade em faixas, estado, escolaridade, gênero, situação afetiva e território. Não perguntamos orientação sexual nesta etapa.</p>
+      <p><strong>Objetivo e procedimentos.</strong> Você responderá a três perguntas abertas, digitando ou usando ditado exclusivamente no dispositivo, quando o navegador for compatível. O NEXO não grava arquivos de áudio. Após as respostas, poderá informar dados opcionais de perfil, como idade em faixas, estado, escolaridade, gênero, situação afetiva e território. A pergunta sobre orientação sexual é inteiramente opcional, classificada como sensível e apresentada com aceite separado. Você pode participar sem respondê-la.</p>
       <p><strong>Participação e retirada.</strong> Você pode desistir antes de enviar fechando a página. Após o envio, receberá um código aleatório para solicitar exclusão no próprio formulário enquanto o registro estiver armazenado, por até 81 dias após o recebimento, sem justificativa ou prejuízo.</p>
       <p><strong>Riscos e benefícios.</strong> A equipe propõe preliminarmente risco mínimo, sujeito à revisão ética cabível. Pode haver desconforto ao pensar sobre relações e risco residual de quebra de sigilo. Você pode interromper a participação. Não há pagamento nem benefício individual garantido; o objetivo é contribuir para a produção científica. Em caso de dano decorrente da pesquisa, permanecem os direitos de assistência e de buscar indenização previstos na legislação.</p>
       <p><strong>Privacidade.</strong> Não pedimos nome, CPF, e-mail pessoal, telefone ou endereço. Não mencione nomes de terceiros. Mesmo sem identificação direta, respostas livres e perfis raros podem permitir identificação indireta. Os registros são cifrados e acessíveis apenas a profissionais autorizados. A retenção ativa é de até 81 dias por resposta; cópias e exportações seguem o plano de descarte da equipe. Resultados públicos serão agregados; citações curtas exigem permissão opcional e revisão de desidentificação.</p>
@@ -45,8 +45,17 @@ import {RELATION_PROFILE} from '../../data/nexo-relationship-research';
     </section>
     <section data-or-stage="profile" hidden aria-labelledby="or-profile-title">
      <p class="or-step">UM POUCO SOBRE QUEM RESPONDE</p><h2 id="or-profile-title" tabindex="-1">Agora, só o que quiser compartilhar.</h2>
-     <p>Esses dados nos ajudam a observar diferenças de compreensão entre grupos. Todas as perguntas abaixo são opcionais. Não pedimos identificação pessoal.</p>
-     <div class="or-grid">{RELATION_PROFILE.map(q=><label class="or-field" for={'or-'+q.id}><span>{q.label}</span><select id={'or-'+q.id} data-or-profile={q.id}><option value="">Prefiro não informar</option>{q.values.map(([id,label])=><option value={id}>{label}</option>)}</select></label>)}</div>
+     <p>Esses dados ajudam os pesquisadores a compreender diferentes perspectivas. <strong>Tudo aqui é opcional.</strong> Você pode escolher “Prefiro não informar” em qualquer campo.</p>
+     <div class="or-grid">{RELATION_PROFILE.map(q=><div class="or-field">
+      <label for={'or-'+q.id}><span>{q.label}</span></label>
+      <select id={'or-'+q.id} data-or-profile={q.id} disabled={q.id==='orientacao'}>
+       <option value="">Prefiro não informar</option>{q.values.map(([id,label])=><option value={id}>{label}</option>)}
+      </select>
+      {q.id==='orientacao' && <label class="or-sensitive-choice" for="or-orientacao-consent">
+       <input id="or-orientacao-consent" type="checkbox"/>
+       <span>Quero informar esse dado sensível. Autorizo seu uso somente nesta pesquisa, para comparação de grupos.</span>
+      </label>}
+     </div>)}</div>
      <div class="or-actions"><button type="button" data-or-action="back">Voltar</button><button type="button" data-or-action="review" class="or-primary">Revisar antes de enviar</button><button type="button" data-or-action="exit" class="or-quiet">Encerrar sem enviar</button></div>
     </section>
     <section data-or-stage="review" hidden aria-labelledby="or-review-title">
@@ -80,7 +89,7 @@ import {RELATION_PROFILE} from '../../data/nexo-relationship-research';
 .or-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:35px}.or-actions button,.or-voice button,.or-withdraw button,.or-body section[data-or-stage="done"] button{appearance:none;cursor:pointer;border:1px solid #51707a;border-radius:40px;color:#1d4a56;background:transparent;padding:13px 19px;min-height:48px;font:600 14px/1.3 var(--sans)}.or-actions .or-primary{background:#164b5e;border-color:#164b5e;color:#fff}.or-actions .or-quiet{border-color:transparent;text-decoration:underline}.or-actions button:disabled,.or-voice button:disabled{opacity:.47;cursor:not-allowed}
 .or-label{display:block;font:600 13px var(--sans);margin:28px 0 10px}.or-body textarea,.or-field select,.or-withdraw input{width:100%;border:1px solid #b9c0bd;border-radius:9px;background:#fff;color:#173641;font:400 17px/1.6 var(--sans);padding:15px 16px}.or-body textarea{min-height:175px;resize:vertical}
 .or-voice{display:flex;align-items:center;flex-wrap:wrap;gap:10px 18px;margin-top:14px}.or-voice p{font-size:12px;flex:1 1 190px;margin:0}.or-small{font-size:12px!important;color:#697d82!important}.or-voice button{border-color:#d1b7a4;background:#f4ece3}
-.or-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px 17px;margin-top:28px}.or-field span{display:block;font:600 14px/1.5 var(--sans);margin-bottom:9px}.or-field select{font-size:15px;min-height:49px}
+.or-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px 17px;margin-top:28px}.or-field span{display:block;font:600 14px/1.5 var(--sans);margin-bottom:9px}.or-field select{font-size:15px;min-height:49px}.or-sensitive-choice{display:flex;align-items:flex-start;gap:9px;cursor:pointer;font:400 12px/1.45 var(--sans);margin-top:10px;color:#4b616b}.or-sensitive-choice input{width:17px;height:17px;flex-shrink:0;accent-color:#22586b;margin-top:2px}.or-sensitive-choice span{display:block!important;font:inherit!important;margin:0!important}
 .or-withdraw input{max-width:310px;margin:9px 8px 9px 0}.or-withdraw label{display:block}.or-withdraw button{border-color:#51707a!important}
 .or-review-item{padding:15px 0;border-bottom:1px solid #ddd5cb}.or-review-item strong{display:block;font:600 13px/1.5 var(--sans)}.or-review-item p{white-space:pre-wrap;overflow-wrap:anywhere}.or-error{color:#a3382d!important;font-weight:600!important}.or-status{font-size:13px!important}.or-receipt{display:inline-block;background:#eaf0e8;padding:14px;border-radius:8px;font:600 19px var(--sans)!important;letter-spacing:.07em!important}
 .or-footer{text-align:center;margin:36px 0;color:#d4d6d2;font:400 13px/1.8 var(--sans)}.or-footer a{text-decoration:underline}
@@ -120,6 +129,7 @@ import {RELATION_PROFILE} from '../../data/nexo-relationship-research';
   function reset(){
    dictation.stop();for(const key of Object.keys(answers))answers[key]='';
    root.querySelectorAll<HTMLSelectElement>('[data-or-profile]').forEach(x=>x.value='');
+   el<HTMLInputElement>('or-orientacao-consent').checked=false;el<HTMLSelectElement>('or-orientacao').disabled=true;
    el<HTMLInputElement>('or-consent').checked=false;el<HTMLInputElement>('or-adult').checked=false;
    el<HTMLInputElement>('or-excerpts').checked=false;el<HTMLTextAreaElement>('or-answer').value='';el('or-review-list').replaceChildren();el('or-receipt').textContent='';index=0;receipt='';show('welcome');
   }
@@ -145,6 +155,14 @@ import {RELATION_PROFILE} from '../../data/nexo-relationship-research';
    el('or-voice-status').textContent=supported?'Ditado no dispositivo disponível. Nenhum áudio é salvo.':'Ditado local indisponível neste navegador. Escreva sua resposta normalmente.';
   }
   void availability();void localVoice();
+  root.addEventListener('change',event=>{
+   const target=event.target;
+   if(target instanceof HTMLInputElement&&target.id==='or-orientacao-consent'){
+    const select=el<HTMLSelectElement>('or-orientacao');
+    select.disabled=!target.checked;
+    if(!target.checked)select.value='';
+   }
+  });
   root.addEventListener('click',async event=>{
    const target=event.target;if(!(target instanceof Element))return;
    const button=target.closest<HTMLButtonElement>('button[data-or-action]');if(!button||busy)return;
@@ -173,7 +191,7 @@ import {RELATION_PROFILE} from '../../data/nexo-relationship-research';
     busy=true;button.disabled=true;
     try{
      const profile=Object.fromEntries(RELATION_PROFILE.map(q=>[q.id,el<HTMLSelectElement>('or-'+q.id).value||null]));
-     const data=await api('submit',{consent:{adult:true,accepted:true,excerpts:el<HTMLInputElement>('or-excerpts').checked,version:RELATION_CONSENT_VERSION},payload:{answers,profile}});
+     const data=await api('submit',{consent:{adult:true,accepted:true,excerpts:el<HTMLInputElement>('or-excerpts').checked,orientation:el<HTMLInputElement>('or-orientacao-consent').checked,version:RELATION_CONSENT_VERSION},payload:{answers,profile}});
      if(data.saved!==true||typeof data.receipt!=='string')throw Error('offline');
      receipt=data.receipt;for(const key of Object.keys(answers))answers[key]='';el('or-receipt').textContent=receipt;show('done');
     }catch(err){fail(message(err));button.disabled=false;}finally{busy=false;}
