@@ -44,7 +44,7 @@ O código GitHub e o endereço planejado **não comprovam publicação**. A cole
 6. Somente após confirmação real de todos os requisitos, configurar no ambiente de produção:
    - `NEXO_RELATIONSHIP_RESEARCH_ENABLED=true`
    - `NEXO_RELATIONSHIP_RESEARCH_REVIEWED=true`
-   - `NEXO_RELATIONSHIP_RESEARCH_ETHICS_REFERENCE` = documentação concreta do enquadramento ético (mín. 20 caracteres)
+   - `NEXO_RELATIONSHIP_RESEARCH_ETHICS_REFERENCE` = referência textual concreta à decisão ética documentada (mín. 20 caracteres). Se dispensado do CEP, usar nota interna real de enquadramento CNS 510/2016 art. 1º p.u. I, com data/responsável e justificativa; não inventar número de parecer.
    - `NEXO_RELATIONSHIP_RESEARCH_OPEN_UNTIL` = data ISO futura de encerramento da coleta
    As flags do acolhimento clínico são independentes. Não alterar `NEXO_DEMO_ONLY` para contorná-las.
 7. Confirmar `GET /api/pesquisa-relacionamento/status` com `open:true` **no domínio publicado** e uma submissão sintética de ponta a ponta, retirando-a antes de divulgar o link.
@@ -53,20 +53,36 @@ O código GitHub e o endereço planejado **não comprovam publicação**. A cole
 - **Pesquisador responsável informado pelo titular:** Gabriel Alves Batista, psicólogo, CRP 06/176184. NEXO Inteligência Clínica, nexoneuro.com.br.
 - **Natureza:** estudo científico qualitativo, exploratório, de escuta dos significados populares. A análise e a interpretação cabem a profissionais; IA não lê ou codifica respostas individuais.
 - **RCLE para participantes:** texto integral no início da página /pesquisa/relacionamento-aberto/; cópia imprimível em /pesquisa/relacionamento-aberto-termo/ com opção de imprimir/salvar PDF pelo navegador. Versão `nexo-relacionamento-aberto-consent-2026-11-12-v3`.
-- **Contato institucional disponível na aplicação:** nexoneuropro@gmail.com. Dados do CEP responsável ainda não documentados e não podem ser inventados.
+- **Contato institucional disponível na aplicação:** nexoneuropro@gmail.com. Informar dados de CEP apenas se o estudo for submetido ou a instância for aplicável; jamais inventar vínculo ou parecer. Em caso de enquadramento documentado na dispensa, indicar a base normativa e o contato do responsável.
 - **Risco:** classificação preliminar proposta como mínima; arts. 18 e 21 da Resolução CNS 510/2016 disciplinam risco e gradação, enquanto o art. 19 determina precauções e proteção. A gradação definitiva depende de avaliação aplicável.
-- **Pesquisa de opinião não identificável:** a exceção do art. 1º, parágrafo único, I, exige análise específica. Pesquisa exploratória não é mero contato preliminar; por prudência, aguardar decisão documentada da instância ética/CEP aplicável antes da coleta. Não presumir que toda pesquisa qualitativa exige CEP automaticamente, mas adotar exigência de revisão formal neste projeto.
+- **Pesquisa de opinião não identificável:** o art. 1º, parágrafo único, I, da Resolução CNS 510/2016 e o art. 26, I, da Resolução CNS 674/2022 dispensam de registro/avaliação no Sistema CEP/Conep as pesquisas que se enquadrem como opinião pública com participantes não identificáveis. O art. 2º, XIV, da 510 inclui a descrição de sentidos atribuídos a temas. O Ofício Circular Conep 17/2022 exige finalidade exclusivamente descritiva e ausência de possibilidade de identificação desde a coleta. Não é exigível número de parecer CEP quando o projeto estiver efetivamente enquadrado na dispensa; isso não elimina responsabilidade técnica, protocolo interno, consentimento e LGPD. Com três relatos livres associados a oito campos opcionais de perfil, especialmente orientação sexual, a ausência de identificação indireta não está demonstrada automaticamente. Documentar a decisão fundamentada com os critérios abaixo; em dúvida substantiva, consultar instância de ética competente antes da coleta.
 - **LGPD:** fundamentar e registrar base jurídica efetivamente aplicável, incluindo as hipóteses para dado sensível do art. 11. O dado orientação sexual tem consentimento específico no formulário; consentimento para participação não substitui avaliação de base legal do tratamento. O enquadramento `órgão de pesquisa` (art. 7º, IV) não deve ser presumido sem conferência da natureza e constituição da instituição; dados eventualmente sensíveis dependem de análise adicional do art. 11.
 - **Retenção:** a aplicação define até 81 dias **por resposta**, não 81 dias para o ciclo inteiro da pesquisa. O Worker programado elimina registros expirados da tabela. Documentar o tratamento e descarte de exportações locais, cópias e backups, sem prometer apagamento irreversível não verificado.
-- **Ativação condicionada:** `NEXO_RELATIONSHIP_RESEARCH_REVIEWED` não significa só o aceite editorial deste texto: requer documentação ética real, identificação da instância competente e revisão operacional. Não preencher `ETHICS_REFERENCE` com esta minuta.
+- **Ativação condicionada:** `NEXO_RELATIONSHIP_RESEARCH_REVIEWED` requer decisão documentada pelo responsável técnico sobre aplicação da dispensa **ou** apreciação ética cabível, e revisão operacional. `ETHICS_REFERENCE` pode apontar para uma nota interna assinada de enquadramento no art. 1º, parágrafo único, I, se a pesquisa satisfizer as condições; não inventar parecer CEP ou preencher apenas com esta minuta. Se não for possível assegurar a não identificabilidade, não usar a dispensa como atalho.
 - **Responsabilidade:** art. 16 da Resolução CFP 10/2005 contempla riscos da pesquisa, participação voluntária, sigilo e proteção. Direitos à assistência e indenização dependem das disposições aplicáveis, não são substituídos pela declaração de risco mínimo.
 
 ### Normas consultadas
 - Resolução CNS 510/2016: https://bvsms.saude.gov.br/bvs/saudelegis/cns/2016/res0510_07_04_2016.html
+- Resolução CNS 674/2022, art. 26: https://bvs.saude.gov.br/bvs/saudelegis/cns/2022/res0674_06_07_2022.html
+- Ofício Circular Conep 17/2022: https://www.ufmg.br/bioetica/cep/wp-content/uploads/2022/07/SEI_MS-0027884544-Of%C3%ADcio-Circular-1.html
 - Código de Ética CFP 10/2005: https://transparencia.cfp.org.br/wp-content/uploads/sites/16/2024/08/Resolucao-do-Exercicio-Profissional-10-2005-do-Conselho-Federal-de-Psicologia-BR.pdf
 - Lei 14.874/2024: https://www2.camara.leg.br/legin/fed/lei/2024/lei-14874-28-maio-2024-795693-norma-pl.html
 - Decreto 12.651/2025: https://www2.camara.leg.br/legin/fed/decret/2025/decreto-12651-7-outubro-2025-798105-publicacaooriginal-176652-pe.html
 - LGPD, Lei 13.709/2018: https://www2.camara.leg.br/legin/fed/lei/2018/lei-13709-14-agosto-2018-787077-normaatualizada-pl.html
+
+## Critérios verificáveis para eventual dispensa de CEP/Conep
+
+A não submissão prevista na Resolução CNS 510/2016, art. 1º, parágrafo único, I, **não é uma regra automática para qualquer pesquisa voluntária, curta ou sem nome**. A equipe deve conservar registro interno datado, assinado pelo responsável técnico, respondendo:
+
+1. A finalidade **única** desta etapa é descrever significados atribuídos à expressão, sem avaliação individual, intervenção clínica, pontuação psicológica ou produção de perfis interpretativos individualizados? Uma futura pesquisa maior será objeto de protocolo próprio?
+2. Há impossibilidade prática de identificação do participante **desde o instante da coleta**, considerando trechos livres, possíveis nomes inseridos, idade em faixas, UF, escolaridade, gênero, orientação sexual, situação afetiva e localidade, individualmente ou combinados?
+3. A infraestrutura registra IP, user agent, logs, métricas ou outras chaves que poderiam reidentificar os dados? O uso de recibos e contadores de taxa deve ser revisado à luz dessa impossibilidade de identificação.
+4. O dado sensível opcional de orientação sexual é necessário, está respaldado por base jurídica adequada (LGPD, art. 11), possui aceite destacado, acesso restrito, política de divulgação agregada e controles que evitem reidentificação de grupos pequenos?
+5. O aviso ao participante, registro do consentimento, direito de retirada, retenção, segurança, descarte e contato institucional são verificáveis?
+
+**Decisão:** Se todos os requisitos forem demonstrados, registrar a dispensa de submissão ao Sistema CEP/Conep com base na norma, e não em número de parecer inexistente. Se não forem demonstrados, adaptar a coleta ou buscar a análise ética cabível. Guardar esta decisão separadamente da configuração clínica. Esta seção registra critérios, não certifica que a versão atual do formulário já os atende.
+
+Base normativa: Resolução CNS 510/2016, arts. 1º e 2º, XIV; Resolução CNS 674/2022, art. 26, I; Ofício Circular Conep 17/2022; LGPD, arts. 6º, 7º e 11.
 
 ## Justificativa da orientação sexual e não indução
 
