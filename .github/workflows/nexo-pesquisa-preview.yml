@@ -53,7 +53,7 @@ jobs:
               CODE=$(curl -sSL --max-time 15 -o /tmp/nexo-status.json -w '%{http_code}' "$BASE/api/pesquisa-relacionamento/status" || true)
               echo "Resposta da API HTTP: $CODE"
               if [ "$CODE" = "200" ] || [ "$CODE" = "503" ]; then
-                if python3 -c 'import json; d=json.load(open("/tmp/nexo-status.json")); assert d.get("open") is False and d.get("consentVersion")=="nexo-relacionamento-aberto-consent-2026-11-12-v3"'; then
+                if python3 -c 'import json; d=json.load(open("/tmp/nexo-status.json")); assert d.get("open") is False and d.get("consentVersion")=="nexo-relacionamento-aberto-consent-2026-11-13-v4"'; then
                   echo "Formulário e API confirmados; coleta fechada."
                   exit 0
                 fi
