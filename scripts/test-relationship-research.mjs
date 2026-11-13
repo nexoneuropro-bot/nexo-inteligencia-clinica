@@ -65,6 +65,24 @@ test('RCLE completo acessível antes do consentimento, cópia imprimível e resp
  assert.ok(form.includes('disabled={q.id===\'orientacao\'}'));
  assert.ok(form.includes('<details class="or-consent-info">'),'termo completo recolhido por padrão para uma entrada simples');
 });
+test('participação falada: botão utilizável sem API local e orientações de ditado no celular e computador',()=>{
+ const form=readFileSync('src/pages/pesquisa/relacionamento-aberto.astro','utf8');
+ const term=readFileSync('src/pages/pesquisa/relacionamento-aberto-termo.astro','utf8');
+ const helper=readFileSync('src/scripts/momento-on-device-voice.ts','utf8');
+ assert.ok(form.includes('id="or-mic" data-or-action="voice" aria-describedby="or-voice-status"'));
+ assert.ok(!form.includes('id="or-mic" data-or-action="voice" disabled'));
+ assert.ok(form.includes("mic.disabled=false"),'microfone da interface continua acessível');
+ assert.ok(form.includes("voiceFallback()"),'fallback de ditado pelo teclado');
+ assert.ok(form.includes('Windows + H'));
+ assert.ok(form.includes('Samsung ou Gboard'));
+ assert.ok(form.includes('microfone do teclado do iPhone'));
+ assert.ok(form.includes('Ditado configurado nos Ajustes do macOS'));
+ assert.ok(form.includes('O serviço de voz do teclado pode processar o áudio'));
+ assert.ok(term.includes('O NEXO não grava nem recebe arquivos de áudio'));
+ assert.ok(helper.includes('async function install()'));
+ assert.ok(helper.includes("processLocally=true"),'reconhecimento Web Speech permanece estritamente local');
+ assert.ok(!/\bnew\s+MediaRecorder\s*\(/.test(helper),'código não instancia gravador de áudio');
+});
 test('coleta fechada por padrão; após revisão e flag recebe, cifra, consulta somente com sessão e retira',async()=>{
  const {sqlite,env,secret,now}=setup();
  let result=await api(env,'status');assert.equal(result.status,200);assert.equal(result.data.open,false);
