@@ -44,9 +44,9 @@ async function api(env,path,method='GET',body,cookie){
 }
 test('sem fontes ou definições no questionário: escuta livre e perfil só depois',()=>{
  assert.equal(RELATION_QUESTIONS.length,3);
- assert.equal(RELATION_PROFILE.length,7);
- assert.ok(!RELATION_PROFILE.some(x=>x.id==='orientacao'),'sem variável de orientação sexual');
- assert.ok(RELATION_CONSENT_VERSION.endsWith('-v2'));
+ assert.equal(RELATION_PROFILE.length,8);
+ assert.ok(RELATION_PROFILE.some(x=>x.id==='orientacao'),'dado sensível opcional, após perguntas espontâneas');
+ assert.ok(RELATION_CONSENT_VERSION.endsWith('-v3'));
  const valid=validateRelationPayload(payload());assert.ok(valid);
  assert.equal(valid.answers.significado,payload().answers.significado);
  assert.equal(validateRelationPayload({...payload(),cpf:'123'}),null);
@@ -59,16 +59,26 @@ test('RCLE completo acessível antes do consentimento, cópia imprimível e resp
  assert.ok(form.includes('/pesquisa/relacionamento-aberto-termo/'));
  assert.ok(term.includes('Gabriel Alves Batista') && term.includes('06/176184'));
  assert.ok(term.includes('Imprimir ou salvar em PDF'));
- assert.ok(!form.includes('id:&#39;orientacao&#39;'));
+ assert.ok(form.includes('id="or-orientacao-consent"'));
+ assert.ok(form.includes('disabled={q.id===\'orientacao\'}'));
+ assert.ok(form.includes('<details class="or-consent-info">'),'termo completo recolhido por padrão para uma entrada simples');
 });
 test('coleta fechada por padrão; após revisão e flag recebe, cifra, consulta somente com sessão e retira',async()=>{
  const {sqlite,env,secret,now}=setup();
  let result=await api(env,'status');assert.equal(result.status,200);assert.equal(result.data.open,false);
- const consent={adult:true,accepted:true,excerpts:false,version:RELATION_CONSENT_VERSION};
+ const consent={adult:true,accepted:true,excerpts:false,orientation:false,version:RELATION_CONSENT_VERSION};
  result=await api(env,'submit','POST',{consent,payload:payload()});assert.equal(result.status,404);
  env.NEXO_RELATIONSHIP_RESEARCH_ENABLED='true';
  result=await api(env,'status');assert.equal(result.data.open,true);
  result=await api(env,'submit','POST',{consent:{...consent,accepted:false},payload:payload()});assert.equal(result.status,400);
+ const sensitive=payload();sensitive.profile.orientacao='bissexual';
+ result=await api(env,'submit','POST',{consent,payload:sensitive});assert.equal(result.status,400,'não recebe dado sensível sem aceite separado');
+ result=await api(env,'submit','POST',{consent:{...consent,orientation:true},payload:sensitive});
+ assert.equal(result.status,201,'pessoa optante pode compartilhar dado sensível');
+ assert.ok(!sqlite.prepare('SELECT ciphertext FROM nexo_relationship_responses').get().ciphertext.includes('bissexual'));
+ const sensitiveReceipt=result.data.receipt;
+ result=await api(env,'withdraw','POST',{receipt:sensitiveReceipt});
+ assert.equal(result.status,200,'participação sensível removível pelo recibo');
  result=await api(env,'submit','POST',{consent,payload:payload()});
  assert.equal(result.status,201);assert.equal(result.data.saved,true);assert.ok(result.data.receipt);
  const row=sqlite.prepare('SELECT ciphertext,receipt_hash FROM nexo_relationship_responses').get();
