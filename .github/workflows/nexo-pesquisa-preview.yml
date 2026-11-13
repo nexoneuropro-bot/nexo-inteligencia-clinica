@@ -11,6 +11,25 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
+      - name: Conferir contato e apoio restrito publicado
+        shell: bash
+        run: |
+          set -euo pipefail
+          BASE="https://nexo-previa-20261014.pages.dev"
+          for i in $(seq 1 12); do
+            HOME=$(curl -fsSL --max-time 15 "$BASE/" || true)
+            CONTACT=$(curl -fsSL --max-time 15 "$BASE/contato/" || true)
+            SURVEY=$(curl -fsSL --max-time 15 "$BASE/pesquisa/relacionamento-aberto/" || true)
+            CLINIC=$(curl -fsSL --max-time 15 "$BASE/conhecendo-meu-momento/responder/" || true)
+            if echo "$HOME" | grep -q 'id="nexo-contact-form"' && echo "$CONTACT" | grep -q 'id="nexo-contact-form"' && ! echo "$SURVEY" | grep -q 'class="nexo-support"' && echo "$CLINIC" | grep -q 'class="nexo-support" hidden'; then
+              echo "Contato na home e página de contato; apoio ausente da pesquisa e inicialmente oculto na experiência clínica."
+              exit 0
+            fi
+            echo "Tentativa $i: alterações de contato/apoio ainda não confirmadas."
+            sleep 12
+          done
+          echo "::error::A nova versão de contato/apoio não pôde ser confirmada no domínio da prévia."
+          exit 1
       - name: Conferir versão publicada sem coletar respostas
         shell: bash
         run: |
