@@ -17,6 +17,7 @@ type LocalRecognizerCtor={
  new():LocalRecognizer;
  readonly prototype:LocalRecognizer;
  available?:(options:{langs:string[];processLocally:boolean})=>Promise<string>;
+ install?:(options:{langs:string[];processLocally?:boolean})=>Promise<boolean>;
 };
 export function createLocalDictation(handlers:{
  onTranscript:(value:string)=>void;
@@ -27,15 +28,31 @@ export function createLocalDictation(handlers:{
  const Ctor=host.SpeechRecognition??host.webkitSpeechRecognition;
  let recognizer:LocalRecognizer|null=null;
  let supported=false;
+ let downloadable=false;
  let active=false;
  async function check():Promise<boolean>{
   supported=false;
+  downloadable=false;
   if(!window.isSecureContext||!Ctor||typeof Ctor.available!=='function'||!('processLocally'in Ctor.prototype))return false;
   try{
    const state=await Ctor.available({langs:['pt-BR'],processLocally:true});
    supported=state==='available';
-  }catch{supported=false;}
+   downloadable=(state==='downloadable'||state==='downloading')&&typeof Ctor.install==='function';
+  }catch{supported=false;downloadable=false;}
   return supported;
+ }
+ // A instalação só ocorre após uma escolha explícita da pessoa, nunca em segundo plano.
+ async function install():Promise<boolean>{
+  if(!downloadable||!Ctor||typeof Ctor.install!=='function')return false;
+  try{
+   handlers.onMessage('Preparando o pacote de português para ditado no dispositivo...');
+   const installed=await Ctor.install({langs:['pt-BR'],processLocally:true});
+   const ready=await check();
+   return Boolean(installed&&ready);
+  }catch{
+   await check();
+   return false;
+  }
  }
  function stop(){
   if(!recognizer)return;
@@ -60,5 +77,5 @@ export function createLocalDictation(handlers:{
    recognizer=null;active=false;handlers.onFinish();return false;
   }
  }
- return {check,start,stop,get active(){return active;}};
+ return {check,install,start,stop,get active(){return active;},get canInstall(){return downloadable;}};
 }
