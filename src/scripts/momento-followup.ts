@@ -9,7 +9,7 @@ function init(){
  let stage:Stage='access',csrf='',consentVersion='',instrument:ClinicalInstrument|undefined;
  let responses:(number|null)[]=[],impact:number|null=null,questionIndex=0,busy=false;
  const stages=root.querySelectorAll<HTMLElement>('[data-f-stage]');
- function show(next:Stage){stage=next;stages.forEach(node=>node.hidden=node.dataset.fStage!==next);el('f-error').textContent='';const heading=root.querySelector<HTMLElement>('[data-f-stage="'+next+'"] h2');heading?.setAttribute('tabindex','-1');heading?.focus({preventScroll:true});}
+ function show(next:Stage){stage=next;stages.forEach(node=>node.hidden=node.dataset.fStage!==next);root.dataset.screeningActive=String(next==='questions');el('f-error').textContent='';const heading=root.querySelector<HTMLElement>('[data-f-stage="'+next+'"] h2');heading?.setAttribute('tabindex','-1');heading?.focus({preventScroll:true});}
  const error=(s:string)=>{el('f-error').textContent=s;};
  const note=(s:string)=>{el('f-status').textContent=s;};
  async function api(path:string,payload?:unknown){
