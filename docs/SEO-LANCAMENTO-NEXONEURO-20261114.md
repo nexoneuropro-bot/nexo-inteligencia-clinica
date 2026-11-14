@@ -21,6 +21,19 @@ Revisao tecnica: 14/11/2026. Este documento registra verificacoes e portas de ap
 4. `scripts/seo-release-audit.mjs` confere 15 rotas institucionais, titulo, metadescricao, H1, robots, canonical, `og:url`, imagem de compartilhamento, JSON-LD, sitemap, headers e exclusao das rotas clinicas do sitemap.
 5. A acao `nexo-seo-release-gate.yml` compila separadamente uma previa nao indexavel e uma producao **simulada** indexavel. Nao executa deploy nem altera configuracoes Cloudflare.
 
+## Liberacao intermediaria por lista explicita (novembro de 2026)
+
+Existe um caminho intermediario para ativar SEO institucional sem converter o ambiente clinico em pagina indexavel:
+
+- A chave `PUBLIC_INDEXABLE=true` habilita somente as paginas listadas em `src/data/seo-public-policy.mjs`. A lista nao inclui `/profissionais/` ou `/integracao-psiquiatrica/`, pois aguardam verificacao cadastral e revisao de qualificacoes.
+- Com `PUBLIC_EDITORIAL_SHARED_PREVIEW=true`, a landing `/psicologia-em-pauta/` e os seis dossies ainda marcados como rascunho permanecem `noindex` e fora do sitemap. O acervo pode ser lido na experiencia atual, mas **nao** e apresentado ao Google como material editorial aprovado.
+- Rotas `/conhecendo-meu-momento/`, `/nexo-profissional/`, `/nr1-questionario/` e `/pesquisa/` continuam com `noindex,nofollow,noarchive` por meta e/ou header. Isso nao equivale a controle de acesso: a seguranca real depende da autenticacao, autorizacao, isolamento e backend.
+- O host oficial `https://nexoneuro.com` apresenta canonical e sitemap somente das paginas institucionais elegiveis. Regras de `_headers` com seletores de hostname Cloudflare aplicam `X-Robots-Tag: noindex` aos enderecos `*.pages.dev`, inclusive previews versionados.
+- A auditoria `SEO_AUDIT_MODE=mixed` verifica os tres cenarios. O Search Console so deve receber o sitemap **depois** do deploy no dominio oficial e da verificacao HTTP.
+- Esta opcao nao substitui a migracao futura para ambientes realmente separados; nao altera banco D1, convites ou funcoes clinicas.
+
+**Gate de publicacao:** confirmar com o responsavel a legitimidade dos servicos oferecidos e corrigir avisos/identidade profissional; preservar com cuidado as paginas em revisao; garantir HTTP 200, canonical de dominio, sitemap, headers de noindex das rotas reservadas e teste de `pages.dev` antes de solicitar indexacao.
+
 ## Separacao indispensavel: preview x producao
 
 **Nao basta mudar `PUBLIC_INDEXABLE=true` no projeto `nexo-previa-20261014`.** Isso passaria a servir o mesmo artefato indexavel tambem no host `pages.dev`, e a plataforma clinica compartilha rotas/funcoes.
