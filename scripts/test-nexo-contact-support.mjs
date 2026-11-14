@@ -8,7 +8,7 @@ test('contato direto aparece na home e na rota contato, sem captura automática 
  const form=read('src/components/NexoContactForm.astro');
  assert.match(read('src/components/ExperienceHome.astro'),/<NexoContactForm\s*\/>/);
  assert.match(read('src/pages/[...slug].astro'),/page\.slug==='contato'&&<NexoContactForm\s*\/>/);
- assert.ok(form.includes('mailto:nexoneuropro@gmail.com'));
+ assert.ok(form.includes('mailto:contato@nexoneuro.com'));
  assert.ok(form.includes('https://wa.me/551154444366?text='));
  assert.ok(form.includes("window.open("));
  assert.ok(form.includes('window.location.href='));
