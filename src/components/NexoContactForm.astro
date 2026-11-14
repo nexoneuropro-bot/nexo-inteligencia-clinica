@@ -34,7 +34,7 @@ const fallback=whatsapp();
   </div>
   <p class="nexo-contact-status" id="nexo-contact-status" role="status" aria-live="polite"></p>
  </form>
- <div class="nexo-contact-alternatives"><a href={fallback} target="_blank" rel="noopener noreferrer">WhatsApp direto ↗</a><a href="mailto:nexoneuropro@gmail.com">nexoneuropro@gmail.com ↗</a><a href="tel:+551154444366">+55 (11) 5444-4366</a></div>
+ <div class="nexo-contact-alternatives"><a href={fallback} target="_blank" rel="noopener noreferrer">WhatsApp direto ↗</a><a href="mailto:contato@nexoneuro.com">contato@nexoneuro.com ↗</a><a href="tel:+551154444366">+55 (11) 5444-4366</a></div>
 </section>
 <style>
 .nexo-contact-form{position:relative;width:min(1050px,calc(100% - 40px));margin:75px auto 85px;padding:clamp(25px,5vw,54px);background:#f6f2e9;color:#18333b;border:1px solid #d9cfc0;border-radius:18px;box-shadow:0 22px 55px #03141e26;isolation:isolate}
@@ -65,7 +65,7 @@ form?.querySelectorAll<HTMLButtonElement>('[data-contact-send]').forEach(button=
   window.open('https://wa.me/551154444366?text='+encodeURIComponent('Olá! Vim pelo site NEXO.\n'+composed),'_blank','noopener,noreferrer');
  }else{
   if(status)status.textContent='Abrindo seu aplicativo de e-mail. Revise e envie sua mensagem por lá.';
-  window.location.href='mailto:nexoneuropro@gmail.com?subject='+encodeURIComponent('NEXO · '+subject)+'&body='+encodeURIComponent(composed);
+  window.location.href='mailto:contato@nexoneuro.com?subject='+encodeURIComponent('NEXO · '+subject)+'&body='+encodeURIComponent(composed);
  }
 }));
 </script>
