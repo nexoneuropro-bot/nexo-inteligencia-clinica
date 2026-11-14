@@ -56,7 +56,15 @@ export default defineConfig({
     const localVoiceHeaders = ['/conhecendo-meu-momento/responder', '/conhecendo-meu-momento/responder/*', '/pesquisa/relacionamento-aberto', '/pesquisa/relacionamento-aberto/*'].map(route => `${route}\n  ! Permissions-Policy\n  Permissions-Policy: camera=(), microphone=(self), geolocation=(), on-device-speech-recognition=(self)\n`).join('\n');
     const demoHeaders = ['/conhecendo-meu-momento/demonstracao','/conhecendo-meu-momento/demonstracao/*','/conhecendo-meu-momento/visao-tecnica','/conhecendo-meu-momento/visao-tecnica/*'].map(route => `${route}\n  Content-Security-Policy: connect-src 'none'; form-action 'none'\n`).join('\n');
     const {appendFile} = await import('node:fs/promises');
-    await appendFile(new URL('_headers',dir),`\n${momentoHeaders}\n${localVoiceHeaders}\n${demoHeaders}`);
+    // Canonical oficial no .com; todas as URLs pages.dev permanecem noindex.
+    // Regra por hostname documentada pela Cloudflare Pages.
+    const previewHostHeaders = `https://:project.pages.dev/*
+  X-Robots-Tag: noindex, follow
+
+https://:version.:project.pages.dev/*
+  X-Robots-Tag: noindex, follow
+`;
+    await appendFile(new URL('_headers',dir),`\n${previewHostHeaders}\n${momentoHeaders}\n${localVoiceHeaders}\n${demoHeaders}`);
     const editorialPreview=process.env.PUBLIC_EDITORIAL_PREVIEW==='true'||process.env.PUBLIC_EDITORIAL_SHARED_PREVIEW==='true';
     await writeFile(new URL('_redirects',dir),editorialPreview?'/psicologia-em-pauta/originais/analise-do-comportamento.pdf /psicologia-em-pauta/edicoes/analise-do-comportamento.pdf 302\n':'');
   }}}]
