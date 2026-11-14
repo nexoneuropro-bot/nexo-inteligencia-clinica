@@ -45,3 +45,14 @@ jobs:
           pnpm build
           pnpm verify
           SEO_AUDIT_MODE=production node scripts/seo-release-audit.mjs
+
+      - name: Compilar e verificar PRODUCAO SELETIVA com editoria em previa
+        env:
+          PUBLIC_INDEXABLE: 'true'
+          PUBLIC_SITE_URL: https://nexoneuro.com
+          PUBLIC_EDITORIAL_PREVIEW: 'false'
+          PUBLIC_EDITORIAL_SHARED_PREVIEW: 'true'
+        run: |
+          pnpm build
+          pnpm verify
+          SEO_AUDIT_MODE=mixed node scripts/seo-release-audit.mjs
