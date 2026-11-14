@@ -4,7 +4,7 @@ O projeto gera arquivos estáticos em `dist/` e pode ser hospedado no Cloudflare
 
 ## 1. Validar a prévia
 
-Revise a home e as onze páginas em desktop e celular. Confira navegação por teclado, foco, menu móvel, movimento reduzido, alternativa à cena 3D, links e mensagens de WhatsApp. Verifique também se o conteúdo permanece disponível quando o JavaScript não executa.
+Revise a home e as doze páginas em desktop e celular. Confira navegação por teclado, foco, menu móvel, movimento reduzido, alternativa à cena 3D, links e mensagens de WhatsApp. Verifique também se o conteúdo permanece disponível quando o JavaScript não executa.
 
 Antes da publicação definitiva, resolva os pontos de [FONTES-E-VALIDACOES.md](FONTES-E-VALIDACOES.md): registros e qualificações, RQE quando aplicável, identificação institucional, redação clínica, oferta empresarial, imagens autorizadas e privacidade. Artigos só devem ser apresentados como aprovados após revisão efetiva.
 
