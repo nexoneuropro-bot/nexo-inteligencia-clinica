@@ -1,18 +1,25 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import {gzipSync} from 'node:zlib';
+import {eligibleInstitutionalSlug} from '../src/data/seo-public-policy.mjs';
 const root=path.resolve(process.argv[2]||'dist');
 const walk=dir=>fs.readdirSync(dir,{withFileTypes:true}).flatMap(e=>e.isDirectory()?walk(path.join(dir,e.name)):[path.join(dir,e.name)]);
 if(!fs.existsSync(root))throw new Error('Execute pnpm build antes de pnpm verify.');
 const files=walk(root),htmlFiles=files.filter(f=>f.endsWith('.html'));
 const failures=[];const check=(test,message)=>{if(!test)failures.push(message)};
 const titles=new Set();
-const production=process.env.PUBLIC_INDEXABLE==='true'&&process.env.PUBLIC_EDITORIAL_PREVIEW!=='true'&&process.env.PUBLIC_EDITORIAL_SHARED_PREVIEW!=='true';
+const production=process.env.PUBLIC_INDEXABLE==='true';
+const editorialPreview=process.env.PUBLIC_EDITORIAL_PREVIEW==='true'||process.env.PUBLIC_EDITORIAL_SHARED_PREVIEW==='true';
+let expectedIndexUrls=0;
 for(const file of htmlFiles){
  const html=fs.readFileSync(file,'utf8'),name=path.relative(root,file);
  const editorialPrivacy=name.split(path.sep).join('/')==='psicologia-em-pauta/privacidade/index.html';
  const privateMomento=/^(?:conhecendo-meu-momento|nexo-profissional|pesquisa|nr1-questionario)\//.test(name.split(path.sep).join('/'));
- const shouldIndex=production&&name!=='404.html'&&!editorialPrivacy&&!privateMomento;
+ const slug=name.split(path.sep).join('/').replace(/\/index\.html$/,'');
+ const publicInstitutional=slug===''||(!slug.includes('/')&&eligibleInstitutionalSlug(slug,{editorialPreview}));
+ const approvedEditorialArticle=!editorialPreview&&/^psicologia-em-pauta\/[^/]+$/.test(slug)&&!editorialPrivacy;
+ const shouldIndex=production&&!privateMomento&&!editorialPrivacy&&(publicInstitutional||approvedEditorialArticle);
+ if(shouldIndex)expectedIndexUrls++;
  check(/<html[^>]*lang="pt-BR"/.test(html),`${name}: idioma`);
  const title=html.match(/<title>(.*?)<\/title>/)?.[1];check(title&&!titles.has(title),`${name}: título ausente/repetido`);titles.add(title);
  check(/name="description" content="[^"]+"/.test(html),`${name}: descrição`);
@@ -126,12 +133,12 @@ for(const guide of guides){
  for(const section of guide.sections)check(libraryHtml.includes(section.title),`Guia ${guide.slug}: leitura integral em HTML`);
 }
 const sitemap=fs.readFileSync(path.join(root,'sitemap.xml'),'utf8');
-check((sitemap.match(/<loc>/g)||[]).length===(production?routes.length:0),'Sitemap incompatível com indexação');
+check((sitemap.match(/<loc>/g)||[]).length===expectedIndexUrls,'Sitemap incompatível com indexação');
 check(fs.readFileSync(path.join(root,'robots.txt'),'utf8').includes('Allow: /'),'Robots deve permitir ler noindex');
 const headers=fs.readFileSync(path.join(root,'_headers'),'utf8');
 check(headers.includes('/conhecendo-meu-momento/*')&&headers.includes('X-Robots-Tag: noindex, nofollow, noarchive'),'Proteção de indexação da experiência reservada');
-const globalHeaders=headers.split('/conhecendo-meu-momento')[0];
-check(production?!globalHeaders.includes('noindex'):globalHeaders.includes('noindex'),'X-Robots-Tag institucional');
+const globalHeaders=headers.split('\n\n')[0];
+check(production?!globalHeaders.includes('X-Robots-Tag: noindex'):globalHeaders.includes('X-Robots-Tag: noindex'),'X-Robots-Tag institucional');
 check(/\bscript-src\s+'self'\s*;/.test(headers),'CSP permite somente scripts da própria origem');
 const assets=files.filter(f=>/\.(js|css)$/.test(f)).map(f=>({file:path.relative(root,f),bytes:fs.statSync(f).size,gzip:gzipSync(fs.readFileSync(f)).length}));
 console.log(JSON.stringify({pages:htmlFiles.length,requestedRoutes:routes.length,reachableRoutes:reached.size,linksAndAssets:'checked',mode:production?'production':'preview',assets,failures},null,2));
