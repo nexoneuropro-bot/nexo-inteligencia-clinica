@@ -414,3 +414,83 @@
 @media(forced-colors:active){.ed-landing-hero::before,.ed-article-hero::before{background:Canvas;opacity:.92}.ed-landing-intro h1,.ed-landing-intro h1 em,.ed-landing-intro>p,.ed-hero-description,.ed-hero-copy h1,.ed-article-hero .ed-deck,.ed-article-hero .ed-byline,.ed-cover-story{color:CanvasText}.ed-press-clipping{border:1px solid CanvasText}}
 @media(prefers-reduced-motion:reduce){.ed-landing-hero .ed-photo-opening .ed-photograph-image img,.ed-article-hero .ed-photo-hero .ed-photograph-image img{animation:none}}
 @media print{.ed-photograph-image img{mask-image:none!important;opacity:1!important}.ed-press-clipping{break-inside:avoid;box-shadow:none}}
+
+
+/* NEXO · fotografia como contexto, nao como protagonista.
+   O documento original e as legendas permanecem intactos.
+   A imagem apoia a leitura, nunca substitui o titulo ou o conteudo. */
+.ed-landing-hero .ed-photo-opening .ed-photograph-image{
+  inset:0 0 0 22%;
+  width:78%;
+  background:#082440;
+}
+.ed-landing-hero .ed-photo-opening .ed-photograph-image img{
+  opacity:.34;
+  filter:grayscale(.18) saturate(.54) brightness(.85);
+  mask-image:linear-gradient(90deg,transparent 0%,#000 22%,#000 76%,transparent 100%);
+}
+.ed-landing-hero::before{
+  background:
+    linear-gradient(90deg,#082440fc 0%,#082440e8 28%,#082440aa 64%,#082440bd 100%),
+    linear-gradient(0deg,#082440 0%,#08244000 56%,#08244088 100%);
+}
+.ed-landing-cover,.ed-landing-intro{position:relative;z-index:4}
+.ed-cover-story>span{text-shadow:0 2px 16px #041c2ba8}
+.ed-article-hero .ed-photo-hero .ed-photograph-image img{
+  opacity:.38;
+  filter:grayscale(.12) saturate(.58) brightness(.88);
+  mask-image:linear-gradient(90deg,transparent 0%,#000 26%,#000 78%,transparent 100%);
+}
+.ed-article-hero .ed-photo-hero.ed-photograph-author .ed-photograph-image img{
+  opacity:.24;
+  mask-image:radial-gradient(ellipse 72% 78% at 60% 40%,#000 39%,transparent 100%);
+}
+.ed-article-hero::before{
+  background:
+    linear-gradient(90deg,#082440fa 0%,#082440ef 32%,#082440ad 72%,#082440b3 100%),
+    linear-gradient(0deg,#082440 0%,transparent 70%);
+}
+/* No indice, os registros ganham bordas suaves e nao parecem cards sociais. */
+.ed-photo-catalog .ed-photograph-image{background:#082440}
+.ed-photo-catalog .ed-photograph-image img{
+  opacity:.75;
+  filter:grayscale(.13) saturate(.63) brightness(.92);
+  mask-image:radial-gradient(ellipse 74% 78% at 50% 48%,#000 48%,#000b 69%,transparent 100%);
+}
+.ed-photo-catalog.ed-photograph-author .ed-photograph-image img{opacity:.56}
+.ed-collection .ed-photograph figcaption{color:#c8d2cb}
+.ed-longform .ed-photo-chapter .ed-photograph-image img{
+  opacity:.84;
+  filter:saturate(.7) contrast(.97);
+  mask-image:linear-gradient(180deg,transparent 0%,#000 11%,#000 78%,transparent 100%);
+}
+@media(max-width:760px){
+  .ed-landing-hero .ed-photo-opening .ed-photograph-image{
+    inset:80px 0 auto;
+    width:100%;
+    height:clamp(300px,100vw,560px);
+  }
+  .ed-landing-hero .ed-photo-opening .ed-photograph-image img{
+    opacity:.26;
+    mask-image:linear-gradient(180deg,transparent 0%,#000 18%,#000 48%,transparent 100%);
+  }
+  .ed-landing-hero::before{
+    background:linear-gradient(180deg,#082440cc 0%,#082440dd 23%,#082440f5 55%,#082440 100%);
+  }
+  .ed-article-hero .ed-photo-hero .ed-photograph-image img{opacity:.29}
+  .ed-article-hero::before{
+    background:linear-gradient(180deg,#082440cf 0%,#082440df 25%,#082440f7 57%,#082440 100%);
+  }
+}
+@media(forced-colors:active){
+  .ed-landing-hero::before,.ed-article-hero::before{background:Canvas}
+  .ed-cover-story>span{text-shadow:none}
+}
+@media print{
+  .ed-photo-catalog .ed-photograph-image img,
+  .ed-longform .ed-photo-chapter .ed-photograph-image img{
+    opacity:1!important;
+    filter:none!important;
+    mask-image:none!important;
+  }
+}
