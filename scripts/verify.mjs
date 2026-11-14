@@ -15,7 +15,7 @@ for(const file of htmlFiles){
  const html=fs.readFileSync(file,'utf8'),name=path.relative(root,file);
  const editorialPrivacy=name.split(path.sep).join('/')==='psicologia-em-pauta/privacidade/index.html';
  const privateMomento=/^(?:conhecendo-meu-momento|nexo-profissional|pesquisa|nr1-questionario)\//.test(name.split(path.sep).join('/'));
- const slug=name.split(path.sep).join('/').replace(/\/index\.html$/,'');
+ const slug=name==='index.html'?'':name.split(path.sep).join('/').replace(/\/index\.html$/,'');
  const publicInstitutional=slug===''||(!slug.includes('/')&&eligibleInstitutionalSlug(slug,{editorialPreview}));
  const approvedEditorialArticle=!editorialPreview&&/^psicologia-em-pauta\/[^/]+$/.test(slug)&&!editorialPrivacy;
  const shouldIndex=production&&!privateMomento&&!editorialPrivacy&&(publicInstitutional||approvedEditorialArticle);
