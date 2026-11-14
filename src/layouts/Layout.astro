@@ -8,10 +8,11 @@ import ExperienceFooter from '../components/ExperienceFooter.astro';
 import AmbientSound from '../components/AmbientSound.astro';
 import '../styles/reading-comfort.css';
 import { pages } from '../data/pages';
+import {eligibleInstitutionalSlug} from '../data/seo-public-policy.mjs';
 import {editorialPreview,hasConfirmedEditorialAuthorship,editorialAuthorName,type EditorialArticle} from '../data/editorial';
 interface Props { title:string; description:string; home?:boolean; experience?:boolean; article?:EditorialArticle; image?:string; seoTitle?:string; privateExperience?:boolean; }
 const {title,description,home=false,experience=false,article,image,seoTitle,privateExperience=false}=Astro.props;
-const indexable=import.meta.env.PUBLIC_INDEXABLE === 'true'&&!editorialPreview;
+const indexable=import.meta.env.PUBLIC_INDEXABLE === 'true';
 const site=import.meta.env.PUBLIC_SITE_URL || 'https://nexoneuro.com';
 const canonical = new URL(Astro.url.pathname,site).href;
 const siteRoot = new URL('/',site).href;
@@ -38,7 +39,7 @@ const metaTitle=seoTitle||(article?.seoTitle?`${article.seoTitle} | NEXO`:home?'
 const metaImage=image||'/og-image.png';
 // Unknown routes, including the static 404, must not inherit production indexing.
 const articleApproved=article&&!article.draft&&article.reviewed&&article.approvedForPublication===true&&Boolean(article.publishedAt)&&hasConfirmedEditorialAuthorship(article);
-const pageIndexable=!privateExperience&&indexable&&(home||Boolean(contentPage)||Boolean(articleApproved));
+const pageIndexable=!privateExperience&&indexable&&(home||Boolean(contentPage&&eligibleInstitutionalSlug(contentPage.slug,{editorialPreview}))||Boolean(articleApproved));
 const nav=[['Para você','/para-voce/'],['Para sua empresa','/para-sua-empresa/'],['Nossa perspectiva','/nossa-abordagem/'],['Em pauta','/psicologia-em-pauta/']];
 const organizationId=`${siteRoot}#organization`;
 const websiteId=`${siteRoot}#website`;
