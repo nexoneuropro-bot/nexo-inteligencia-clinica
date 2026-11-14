@@ -64,7 +64,7 @@ if(production){
 const headers=read('_headers');
 assert.ok(headers.includes('https://:project.pages.dev/*')&&headers.includes('https://:version.:project.pages.dev/*'),
   'Previa pages.dev sem noindex por hostname');
-const general=headers.split('/conhecendo-meu-momento')[0];
+const general=headers.split('\n\n')[0];
 assert.equal(general.includes('X-Robots-Tag: noindex, follow'),!production,'X-Robots-Tag global divergente');
 for(const privateRoute of ['/conhecendo-meu-momento/*','/nexo-profissional/*','/nr1-questionario/*','/pesquisa/relacionamento-aberto/*','/pesquisa/*']){
   assert.ok(headers.includes(privateRoute),'Cabecalho privado ausente: '+privateRoute);
