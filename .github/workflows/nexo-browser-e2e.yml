@@ -70,3 +70,5 @@ jobs:
               raise SystemExit('BLOQUEIO: antes de pacientes reais, confirmar manutenção D1 e política de consentimento')
           print('PASS: endpoint público habilitado e versão correta. Sem acesso clínico ou dados de pacientes.')
           PY
+
+# Auditoria sintética de lançamento institucional em 14/11/2026, sem dados reais.
