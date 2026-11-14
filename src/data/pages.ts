@@ -53,7 +53,7 @@ export const pages: ContentPage[] = [
   },
   {
     slug: 'psicoterapia',
-    title: 'Dar espaço ao que precisa de escuta.',
+    title: 'Psicoterapia: atendimento psicológico e escuta qualificada',
     description: 'Conheça a proposta de psicoterapia da NEXO: escuta qualificada, objetivos de cuidado e duração definida pela avaliação individual.',
     eyebrow: 'Psicoterapia',
     intro: 'Um espaço para compreender experiências, reconhecer perguntas e construir possibilidades de mudança com acompanhamento psicológico.',
@@ -84,9 +84,48 @@ export const pages: ContentPage[] = [
     ctaType: 'personal',
   },
   {
+    slug: 'psicoterapia-breve',
+    title: 'Psicoterapia breve: objetivos e acompanhamento',
+    description: 'Conheça a proposta de psicoterapia breve da NEXO: acolhimento, objetivos compartilhados, acompanhamento individualizado e revisão do percurso quando necessário.',
+    eyebrow: 'Psicoterapia breve',
+    intro: 'A psicoterapia breve busca organizar um percurso de cuidado com objetivos definidos em conjunto, sem reduzir a singularidade de cada história a um número fixo de sessões.',
+    sections: [
+      {
+        title: 'O que significa psicoterapia breve?',
+        body: [
+          'Trata-se de uma modalidade de acompanhamento psicológico planejada a partir da demanda apresentada, com foco e objetivos construídos com a pessoa atendida.',
+          'A proposta considera o contexto, a história e as possibilidades de intervenção. Ser breve não significa apressar a escuta nem garantir um resultado em prazo determinado.',
+        ],
+      },
+      {
+        title: 'Como o acompanhamento é organizado?',
+        body: [
+          'No acolhimento inicial, profissional e pessoa atendida investigam a demanda, discutem expectativas e avaliam se essa modalidade é pertinente.',
+          'Quando indicada, pode haver um planejamento inicial de aproximadamente 10 a 20 encontros, sujeito à avaliação individual, à evolução do processo e à revisão compartilhada dos objetivos.',
+          'O número de sessões não constitui pacote obrigatório nem previsão taxativa de resultado.',
+        ],
+      },
+      {
+        title: 'Quando considerar outros caminhos?',
+        body: [
+          'Nem toda demanda se beneficia de uma proposta breve. Em alguns casos, poderá ser indicado outro formato de acompanhamento ou encaminhamento profissional.',
+          'A decisão exige avaliação profissional, conversa sobre as possibilidades e respeito ao consentimento e à autonomia da pessoa.',
+        ],
+      },
+      {
+        title: 'Como iniciar uma conversa?',
+        body: [
+          'Você pode entrar em contato para saber sobre a proposta e a disponibilidade do atendimento. Evite enviar informações sensíveis de saúde no primeiro contato comercial.',
+        ],
+      },
+    ],
+    ctaLabel: 'Conversar sobre psicoterapia breve',
+    ctaType: 'personal',
+  },
+  {
     slug: 'avaliacao-neuropsicologica',
-    title: 'Investigar com método. Compreender em contexto.',
-    description: 'Entenda as etapas da proposta de avaliação neuropsicológica da NEXO, da anamnese à devolutiva e ao laudo psicológico quando cabível.',
+    title: 'Avaliação neuropsicológica: etapas e devolutiva',
+    description: 'Entenda a avaliação neuropsicológica: anamnese, seleção de instrumentos, integração dos resultados, devolutiva e documentos cabíveis na NEXO.',
     eyebrow: 'Avaliação neuropsicológica',
     intro: 'A pergunta que orienta a avaliação importa tanto quanto os instrumentos. O processo busca integrar informações sobre cognição, comportamento e história individual.',
     sections: [
@@ -194,8 +233,8 @@ export const pages: ContentPage[] = [
   },
   {
     slug: 'riscos-psicossociais-nr1',
-    title: 'Compreender o trabalho para orientar ações.',
-    description: 'Conheça a proposta de avaliação de fatores de risco psicossociais relacionados ao trabalho e de orientação sobre gerenciamento de riscos ocupacionais.',
+    title: 'NR-1 e riscos psicossociais relacionados ao trabalho',
+    description: 'NR-1 e riscos psicossociais no trabalho: conheça a proposta NEXO para avaliação de fatores relacionados à organização do trabalho e orientação a empresas.',
     eyebrow: 'Trabalho e riscos psicossociais',
     intro: 'O contexto organizacional pede perguntas que conectem pessoas, relações e a forma como o trabalho acontece.',
     sections: [
@@ -221,7 +260,8 @@ export const pages: ContentPage[] = [
         title: 'Sobre a referência à NR-1.',
         body: [
           'Esta página apresenta uma frente prevista no briefing institucional; não substitui a análise técnica das obrigações aplicáveis à sua organização.',
-          'A redação normativa, sua vigência e os requisitos de execução do serviço ainda precisam de validação técnica e jurídica antes da divulgação definitiva. Não são afirmados aqui prazos, exigências detalhadas, certificações ou adequação legal automática.',
+          'A nova redação do capítulo 1.5 da NR-1 entrou em vigor em 26 de maio de 2026 e inclui expressamente os fatores de risco psicossociais relacionados ao trabalho no Gerenciamento de Riscos Ocupacionais.',
+          'Antes da oferta definitiva, métodos, responsabilidades, equipe e entregáveis precisam de validação técnica e institucional. Esta página não promete adequação legal automática, certificações ou eliminação dos riscos.',
         ],
       },
     ],

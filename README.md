@@ -1,6 +1,6 @@
 # NEXO Inteligência Clínica
 
-Prévia institucional em português brasileiro, construída com Astro, TypeScript, CSS e Three.js. O projeto entrega uma home navegável e onze páginas internas estáticas. A publicação no domínio definitivo depende de aprovação expressa.
+Prévia institucional em português brasileiro, construída com Astro, TypeScript, CSS e Three.js. O projeto entrega uma home navegável e doze páginas internas estáticas. A publicação no domínio definitivo depende de aprovação expressa.
 
 ## Executar localmente
 
@@ -65,7 +65,7 @@ Os textos institucionais ficam em `src/data/pages.ts`; as reflexões e os contat
 
 ## Rotas
 
-`/`, `/para-voce/`, `/psicoterapia/`, `/avaliacao-neuropsicologica/`, `/integracao-psiquiatrica/`, `/para-sua-empresa/`, `/riscos-psicossociais-nr1/`, `/nossa-abordagem/`, `/profissionais/`, `/psicologia-em-pauta/`, `/contato/` e `/politica-de-privacidade/`.
+`/`, `/para-voce/`, `/psicoterapia/`, `/psicoterapia-breve/`, `/avaliacao-neuropsicologica/`, `/integracao-psiquiatrica/`, `/para-sua-empresa/`, `/riscos-psicossociais-nr1/`, `/nossa-abordagem/`, `/profissionais/`, `/psicologia-em-pauta/`, `/contato/` e `/politica-de-privacidade/`.
 
 ## Prévia, SEO e domínio
 

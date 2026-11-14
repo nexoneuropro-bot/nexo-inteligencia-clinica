@@ -5,8 +5,8 @@ import {pages,type ContentPage} from '../data/pages';
 import {whatsapp} from '../data/reflections';
 export function getStaticPaths(){return pages.map(page=>({params:{slug:page.slug},props:{page}}));}
 const {page}=Astro.props as {page:ContentPage};
-const clinical=['para-voce','psicoterapia','avaliacao-neuropsicologica','integracao-psiquiatrica'].includes(page.slug);
-const related=clinical?pages.filter(p=>['psicoterapia','avaliacao-neuropsicologica','integracao-psiquiatrica'].includes(p.slug)&&p.slug!==page.slug):pages.filter(p=>['para-voce','para-sua-empresa','nossa-abordagem'].includes(p.slug)&&p.slug!==page.slug);
+const clinical=['para-voce','psicoterapia','psicoterapia-breve','avaliacao-neuropsicologica','integracao-psiquiatrica'].includes(page.slug);
+const related=clinical?pages.filter(p=>['psicoterapia','psicoterapia-breve','avaliacao-neuropsicologica','integracao-psiquiatrica'].includes(p.slug)&&p.slug!==page.slug):pages.filter(p=>['para-voce','para-sua-empresa','riscos-psicossociais-nr1','nossa-abordagem'].includes(p.slug)&&p.slug!==page.slug);
 const personal=whatsapp('personal');const business=whatsapp('business');
 const sectionId=(index:number)=>page.slug==='psicologia-em-pauta'&&index===0?'temas':`secao-${index+1}`;
 ---

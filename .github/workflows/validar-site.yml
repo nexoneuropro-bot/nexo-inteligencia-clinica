@@ -1,0 +1,46 @@
+name: Validar site NEXO (sem publicar)
+
+on:
+  push:
+    branches:
+      - seo/nexo-prepublicacao-20261114
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validar:
+    name: Build, rotas e SEO estático
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.25.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm check
+      - name: Compilar prévia sem indexação
+        run: pnpm build
+        env:
+          PUBLIC_INDEXABLE: 'false'
+          PUBLIC_SITE_URL: https://nexoneuro.com
+      - name: Verificar prévia
+        run: pnpm verify
+        env:
+          PUBLIC_INDEXABLE: 'false'
+      - name: Compilar modo de produção para teste (sem deploy)
+        run: pnpm build
+        env:
+          PUBLIC_INDEXABLE: 'true'
+          PUBLIC_SITE_URL: https://nexoneuro.com
+      - name: Verificar modo de produção
+        run: pnpm verify
+        env:
+          PUBLIC_INDEXABLE: 'true'
