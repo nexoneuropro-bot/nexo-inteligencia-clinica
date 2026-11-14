@@ -45,7 +45,7 @@ export const pages: ContentPage[] = [
       {
         title: 'Uma conversa inicial, com cuidado.',
         body: [
-          'Você não precisa saber qual atendimento procurar nem chegar com uma explicação pronta. No primeiro contato, pode pedir informações sobre a proposta, as modalidades, a disponibilidade e as condições antes de decidir como seguir.',
+          'Uma primeira conversa ajuda a transformar dúvidas em perguntas mais claras. Você pode conhecer a proposta, as modalidades, a disponibilidade e as condições do atendimento antes de decidir como seguir.',
           'A conversa para obter informações não substitui atendimento ou avaliação profissional. Para começar, basta dizer sobre qual caminho tem dúvidas; preserve documentos, diagnósticos, medicações e outros dados de saúde para um canal de acolhimento adequadamente combinado.',
         ],
       },
@@ -100,7 +100,7 @@ export const pages: ContentPage[] = [
     title: 'Investigar com método. Compreender em contexto.',
     description: 'Entenda como a avaliação neuropsicológica investiga atenção, memória e planejamento, integrando história, contexto, devolutiva e recomendações.',
     eyebrow: 'Avaliação neuropsicológica',
-    intro: 'Atenção, memória e planejamento fazem parte de estudar, trabalhar e organizar a rotina. A avaliação neuropsicológica investiga recursos e dificuldades, integrando a pergunta clínica, a história e o contexto de cada pessoa.',
+    intro: 'Compreender como atenção, memória e planejamento participam da vida cotidiana ajuda a reconhecer recursos e dificuldades e a pensar em orientações possíveis. A avaliação neuropsicológica reúne informações da história e do contexto para esclarecer a pergunta de cada pessoa.',
     sections: [
       {
         title: 'O que esse olhar acrescenta?',
@@ -186,13 +186,13 @@ export const pages: ContentPage[] = [
     title: 'Consultoria em Psicologia para sua empresa.',
     description: 'Consultoria em Psicologia Organizacional: NR-1 e riscos psicossociais, recrutamento e seleção, treinamento, lideranças e apoio às decisões da empresa.',
     eyebrow: 'Para sua empresa',
-    intro: 'Precisa lidar com a NR-1, contratar ou desenvolver sua equipe? A consultoria em Psicologia Organizacional começa pela situação da sua empresa para definir o que investigar, quais ações considerar e que entregas podem apoiar suas decisões.',
+    intro: 'O conhecimento psicológico ajuda a compreender pessoas, relações e condições de trabalho. Essa leitura pode orientar critérios de contratação, desenvolvimento de equipes, práticas de liderança e prevenção de riscos psicossociais. Cada projeto começa pelas perguntas reais da organização.',
     sections: [
       {
-        title: 'Você não precisa saber o nome do serviço.',
+        title: 'Compreender o trabalho abre possibilidades.',
         body: [
-          'Você pode apresentar uma dificuldade para preencher vagas, conflitos na equipe, dúvidas sobre a NR-1 ou a necessidade de desenvolver lideranças. Não é preciso escolher previamente entre treinamento, avaliação ou consultoria: começamos esclarecendo a pergunta e as possibilidades de trabalho.',
-          'O contato inicial serve para informações sobre possibilidades, disponibilidade e condições. Para um projeto, delimitamos objetivos, funções envolvidas, recursos disponíveis, participação de trabalhadores, lideranças, RH e responsáveis por Segurança e Saúde no Trabalho e as entregas pertinentes. A realização depende de escopo e condições acordados antes da contratação.',
+          'A Psicologia Organizacional ajuda a olhar para o que acontece no cotidiano: como as pessoas são selecionadas, aprendem, cooperam, recebem orientações e lidam com as condições de trabalho. Essa compreensão oferece referências para formular perguntas melhores e identificar ações pertinentes.',
+          'A organização pode começar contando sua situação, mesmo sem ter escolhido um serviço. A partir disso, conversamos sobre objetivos, pessoas envolvidas, recursos, participação das equipes e possibilidades de atuação. Métodos, responsabilidades, entregas e condições são definidos em conjunto antes de um projeto.',
         ],
       },
       {
@@ -232,7 +232,7 @@ export const pages: ContentPage[] = [
       {
         title: 'Da primeira conversa ao projeto.',
         body: [
-          'Comece pelo contexto geral: o que está acontecendo, quais equipes estão envolvidas e qual decisão ou mudança pede apoio. Não envie dados pessoais de trabalhadores ou candidatos neste primeiro contato. Com essas informações, esclarecemos as possibilidades e o que precisaria ser investigado.',
+          'Compartilhe o contexto geral da organização, as equipes envolvidas e a decisão ou mudança que merece atenção. Essas informações já ajudam a identificar questões relevantes e possibilidades de investigação. Dados pessoais de trabalhadores e candidatos devem ser tratados em canais e condições apropriados, quando necessários.',
           'Antes de contratar, combinamos finalidade, métodos, participação, cronograma, condições, acesso às informações e devolutivas. Conforme o escopo, as entregas podem incluir critérios de seleção, levantamento de necessidades, plano de desenvolvimento ou recomendações para priorizar ações sobre condições de trabalho. Os critérios de acompanhamento também são definidos para apoiar a revisão das ações.',
         ],
       },
@@ -245,7 +245,7 @@ export const pages: ContentPage[] = [
     title: 'Recrutamento e seleção com critérios claros.',
     description: 'Recrutamento e seleção na NEXO: perfil da função, entrevistas, avaliação psicológica quando indicada e documentos para apoiar decisões de contratação.',
     eyebrow: 'Psicologia organizacional · Recrutamento e seleção',
-    intro: 'Uma seleção começa antes da entrevista: é preciso compreender o trabalho e definir quais evidências são relevantes para a função. A Psicologia pode apoiar esse percurso e a comunicação dos resultados.',
+    intro: 'Compreender as exigências reais da função ajuda a organizar critérios de seleção e reunir informações pertinentes. A Psicologia contribui com análise do trabalho, entrevistas e integração das evidências para apoiar decisões de contratação mais fundamentadas.',
     sections: [
       {
         title: 'Que trabalho a pessoa vai realizar?',
@@ -291,10 +291,10 @@ export const pages: ContentPage[] = [
         ],
       },
       {
-        title: 'Toda seleção precisa de avaliação psicológica?',
+        title: 'O que a Psicologia acrescenta à seleção?',
         body: [
-          'Não. Recrutamento, seleção e avaliação psicológica são atividades relacionadas, com finalidades que precisam ser diferenciadas. A inclusão de uma avaliação depende da demanda, da justificativa técnica e dos requisitos aplicáveis à função.',
-          'A conversa inicial ajuda a decidir quais etapas são pertinentes e quais entregas poderão apoiar a empresa. Para apresentar sua demanda, informe a função, o contexto da vaga e o objetivo da seleção, sem encaminhar documentos pessoais de candidatos no primeiro contato.',
+          'O conhecimento psicológico contribui para esclarecer o perfil da função, construir critérios pertinentes, formular perguntas e interpretar informações no contexto do trabalho. Com isso, a organização pode tomar decisões apoiadas em evidências relacionadas à vaga, enquanto as pessoas participantes compreendem melhor as etapas da seleção.',
+          'A avaliação psicológica pode ampliar essa investigação quando há uma questão que justifique sua utilização. Nem toda seleção exige essa etapa; a escolha considera a finalidade e as condições técnicas aplicáveis. Para conversar sobre o processo, bastam informações gerais da função, do contexto da vaga e do objetivo da contratação. Documentos pessoais dos candidatos ficam para canais e condições adequados, quando necessários.',
         ],
       },
     ],
@@ -306,13 +306,13 @@ export const pages: ContentPage[] = [
     title: 'Treinamento e desenvolvimento para o trabalho real.',
     description: 'Treinamento e desenvolvimento de pessoas na NEXO: levantamento de necessidades, lideranças, comunicação, feedback e acompanhamento da aprendizagem.',
     eyebrow: 'Psicologia organizacional · Treinamento e desenvolvimento',
-    intro: 'Desenvolver pessoas exige compreender o que precisa mudar, o que já funciona e quais condições permitem aprender e aplicar novas práticas. O projeto começa pela necessidade da empresa e das equipes.',
+    intro: 'O desenvolvimento de pessoas ganha sentido quando a aprendizagem dialoga com situações reais de trabalho. A Psicologia ajuda a reconhecer necessidades, valorizar recursos já presentes nas equipes e construir oportunidades de prática e acompanhamento.',
     sections: [
       {
         title: 'O que precisa ser aprendido e por quê?',
         body: [
           'O levantamento de necessidades de treinamento investiga a distância entre a situação atual e os objetivos do trabalho. Escuta das equipes, análise das atividades e informações da gestão ajudam a definir prioridades.',
-          'Nem toda dificuldade decorre de falta de conhecimento ou habilidade. Recursos insuficientes, orientações conflitantes ou pouca autonomia podem impedir uma boa execução mesmo quando a equipe sabe o que fazer. Identificar essas condições evita atribuir todo problema às pessoas.',
+          'Distinguir o que pode ser aprendido daquilo que precisa mudar na organização torna o planejamento mais útil. Recursos, orientações, autonomia e condições de trabalho também participam do desempenho; reconhecê-los ajuda a propor ações dirigidas à situação, sem responsabilizar isoladamente as pessoas.',
         ],
       },
       {
@@ -350,10 +350,10 @@ export const pages: ContentPage[] = [
         ],
       },
       {
-        title: 'Treinamento resolve os riscos psicossociais da NR-1?',
+        title: 'Como a aprendizagem pode contribuir para a prevenção?',
         body: [
-          'Treinamento pode fazer parte de um plano de ação quando responde a uma necessidade identificada. Ele não substitui a investigação e a modificação de condições como sobrecarga, falta de recursos, pouca autonomia ou práticas de gestão que produzam exposição a riscos.',
-          'A articulação com a avaliação de riscos psicossociais e os responsáveis por SST ajuda a definir o papel de cada medida. Uma palestra isolada não garante conformidade com a NR-1; a organização precisa implementar e acompanhar as ações pertinentes ao seu contexto.',
+          'A aprendizagem pode apoiar práticas de comunicação, liderança e cooperação quando essas necessidades fazem parte de um plano de prevenção. A análise das condições reais de trabalho orienta o que precisa ser desenvolvido e o que demanda mudanças em recursos, autonomia, carga de trabalho ou gestão.',
+          'Em conjunto com os responsáveis por SST, é possível situar cada medida no gerenciamento de riscos e acompanhar seus efeitos. Treinamentos e palestras são recursos complementares: a conformidade com a NR-1 depende das medidas aplicáveis, implementadas e acompanhadas pela organização.',
         ],
       },
     ],
@@ -365,7 +365,7 @@ export const pages: ContentPage[] = [
     title: 'Avaliação psicológica no contexto organizacional.',
     description: 'Entenda a avaliação psicológica organizacional: demanda, instrumentos adequados, devolutiva, sigilo e documentos para subsidiar decisões nas empresas.',
     eyebrow: 'Psicologia organizacional · Avaliação psicológica',
-    intro: 'Uma avaliação psicológica investiga uma pergunta definida por meio de métodos e informações integrados. No contexto organizacional, sua finalidade, seus limites e o uso dos resultados precisam estar claros antes de começar.',
+    intro: 'A avaliação psicológica ajuda a investigar perguntas relevantes para o trabalho com método e interpretação contextualizada. Entrevistas, observações e instrumentos pertinentes podem ampliar a compreensão e subsidiar decisões, preservando a finalidade e os direitos das pessoas avaliadas.',
     sections: [
       {
         title: 'Quando uma avaliação pode contribuir?',
@@ -411,10 +411,10 @@ export const pages: ContentPage[] = [
         ],
       },
       {
-        title: 'A avaliação garante uma contratação bem-sucedida?',
+        title: 'Que contribuição a avaliação oferece à decisão?',
         body: [
-          'Não há garantia de desempenho futuro, adaptação permanente ou ausência de dificuldades. A avaliação fornece informações fundamentadas para uma decisão situada no tempo e no contexto; condições de trabalho, oportunidades de aprendizagem e relações também participam do percurso profissional.',
-          'Ela também não substitui a avaliação de riscos psicossociais do trabalho prevista na NR-1. Para definir o serviço pertinente, apresente a decisão que precisa de apoio e o contexto da empresa, sem enviar dados pessoais ou clínicos de trabalhadores no primeiro contato.',
+          'A avaliação oferece informações fundamentadas sobre aspectos pertinentes à pergunta investigada. A devolutiva ajuda a compreender os achados, suas possibilidades de uso e seus limites. A decisão considera também as condições da função, as oportunidades de aprendizagem e as relações no trabalho; nenhum procedimento prevê integralmente o desempenho futuro.',
+          'Avaliar pessoas para uma finalidade específica e avaliar fatores de risco psicossociais relacionados ao trabalho são processos com objetivos distintos. Compartilhar a decisão que precisa de apoio e o contexto geral da organização já permite iniciar essa diferenciação, preservando dados pessoais e clínicos para canais e finalidades adequados.',
         ],
       },
     ],
@@ -426,7 +426,7 @@ export const pages: ContentPage[] = [
     title: 'Avaliação de riscos psicossociais na NR-1.',
     description: 'Entenda a avaliação de riscos psicossociais na NR-1 vigente: GRO, PGR, integração com NR-17, participação dos trabalhadores e acompanhamento das ações.',
     eyebrow: 'NR-1 e riscos psicossociais',
-    intro: 'Identificar condições de trabalho, avaliar riscos e orientar medidas de prevenção: compreenda como os fatores psicossociais participam do GRO e do PGR, em articulação com a NR-17.',
+    intro: 'Compreender como o trabalho é organizado ajuda a reconhecer fatores de risco psicossociais e orientar prioridades de prevenção. A Psicologia contribui para a leitura das relações e condições de trabalho, em articulação com o GRO, o PGR e a NR-17.',
     sections: [
       {
         title: 'NR-1 vigente: o que mudou?',
@@ -460,17 +460,17 @@ export const pages: ContentPage[] = [
         ],
       },
       {
-        title: 'Questionário é obrigatório ou suficiente?',
+        title: 'O que ajuda a compreender os riscos do trabalho?',
         body: [
-          'Não há questionário obrigatório ou instrumento oficial único. As técnicas devem ser adequadas à realidade avaliada e podem envolver observação, entrevistas, abordagens participativas e instrumentos de levantamento.',
-          'Um questionário isolado não caracteriza todo o gerenciamento dos riscos. Seus resultados, quando utilizados, precisam de análise técnica e integração com a AEP e o PGR. A coleta também exige cuidados com confidencialidade e identificação indireta, especialmente em grupos pequenos.',
+          'A observação das atividades, a escuta dos trabalhadores, as entrevistas e os levantamentos pertinentes oferecem perspectivas complementares sobre as condições de trabalho. A escolha dos métodos depende das perguntas e das características da organização; não existe um questionário oficial único obrigatório.',
+          'Os dados obtidos ganham significado quando são analisados em conjunto e relacionados à AEP, ao PGR e às medidas de prevenção. Questionários podem contribuir, mas não substituem essa investigação. A coleta deve preservar a confidencialidade e considerar o risco de identificação indireta, sobretudo em equipes pequenas.',
         ],
       },
       {
-        title: 'O que combinar antes de contratar?',
+        title: 'Da investigação às decisões de prevenção.',
         body: [
-          'Defina a abrangência, os métodos, a equipe, as entregas, o tratamento das informações e a integração com os responsáveis por SST. Uma devolutiva útil descreve o contexto avaliado, os critérios, as limitações e as recomendações que poderão orientar ações.',
-          'A NEXO conversa com sua organização para construir esse escopo. A empresa mantém a responsabilidade pelo PGR e pela implementação das medidas; consultoria, palestra ou relatório isolado não garantem conformidade legal.',
+          'Uma investigação útil transforma informações do trabalho real em subsídios para escolher prioridades, responsabilidades e medidas de prevenção. Para isso, são definidos abrangência, métodos, participação das equipes, tratamento das informações e articulação com os responsáveis por SST. A devolutiva apresenta o contexto, os achados, os limites e as recomendações pertinentes.',
+          'O diálogo com a organização ajuda a construir um escopo adequado ao seu contexto. A responsabilidade pelo PGR e pela implementação das medidas permanece com a empresa; relatórios e orientações técnicas apoiam o processo, mas não equivalem, isoladamente, à conformidade legal.',
           'Conteúdo informativo consultado em 16 de outubro de 2026, com base nas fontes oficiais do Ministério do Trabalho e Emprego. A aplicação depende das atividades e dos requisitos pertinentes à organização.',
         ],
       },
