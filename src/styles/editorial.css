@@ -420,14 +420,14 @@
    O documento original e as legendas permanecem intactos.
    A imagem apoia a leitura, nunca substitui o titulo ou o conteudo. */
 .ed-landing-hero .ed-photo-opening .ed-photograph-image{
-  inset:0 0 0 22%;
-  width:78%;
+  inset:0 0 0 37%;
+  width:63%;
   background:#082440;
 }
 .ed-landing-hero .ed-photo-opening .ed-photograph-image img{
-  opacity:.34;
-  filter:grayscale(.18) saturate(.54) brightness(.85);
-  mask-image:linear-gradient(90deg,transparent 0%,#000 22%,#000 76%,transparent 100%);
+  opacity:.23;
+  filter:grayscale(.24) saturate(.44) brightness(.79);
+  mask-image:linear-gradient(90deg,transparent 0%,#000 26%,#000 67%,transparent 100%);
 }
 .ed-landing-hero::before{
   background:
@@ -437,8 +437,8 @@
 .ed-landing-intro,.ed-landing-cover>.ed-eyebrow,.ed-landing-cover .ed-cover-story,.ed-landing-cover .ed-topic-nav{z-index:4}
 .ed-cover-story>span{text-shadow:0 2px 16px #041c2ba8}
 .ed-article-hero .ed-photo-hero .ed-photograph-image img{
-  opacity:.38;
-  filter:grayscale(.12) saturate(.58) brightness(.88);
+  opacity:.31;
+  filter:grayscale(.15) saturate(.52) brightness(.85);
   mask-image:linear-gradient(90deg,transparent 0%,#000 26%,#000 78%,transparent 100%);
 }
 .ed-article-hero .ed-photo-hero.ed-photograph-author .ed-photograph-image img{
@@ -453,11 +453,11 @@
 /* No indice, os registros ganham bordas suaves e nao parecem cards sociais. */
 .ed-photo-catalog .ed-photograph-image{background:#082440}
 .ed-photo-catalog .ed-photograph-image img{
-  opacity:.75;
-  filter:grayscale(.13) saturate(.63) brightness(.92);
+  opacity:.63;
+  filter:grayscale(.14) saturate(.58) brightness(.9);
   mask-image:radial-gradient(ellipse 74% 78% at 50% 48%,#000 48%,#000b 69%,transparent 100%);
 }
-.ed-photo-catalog.ed-photograph-author .ed-photograph-image img{opacity:.56}
+.ed-photo-catalog.ed-photograph-author .ed-photograph-image img{opacity:.48}
 .ed-photo-catalog:not(.ed-photograph-author) .ed-photograph-image img{
   mask-image:radial-gradient(ellipse 74% 78% at 50% 48%,#000 48%,#000b 69%,transparent 100%);
 }
