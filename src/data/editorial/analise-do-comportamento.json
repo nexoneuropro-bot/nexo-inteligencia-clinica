@@ -1,0 +1,741 @@
+{
+  "slug": "analise-do-comportamento",
+  "title": "Por que nosso comportamento muda conforme o contexto?",
+  "subtitle": "Você é a mesma pessoa quando ninguém está olhando? Um passeio por contingências, promessas, controle aversivo, liberdade, punição e coerência.",
+  "description": "Entenda como contexto, regras e consequências participam dos comportamentos, da confiança e dos acordos, com exemplos da Análise do Comportamento.",
+  "category": "Análise do Comportamento",
+  "theme": "behavior",
+  "draft": true,
+  "reviewed": false,
+  "migratedAt": "2026-10-16",
+  "source": {
+    "file": "Psicologia_em_Pauta_Analise_do_Comportamento.pdf",
+    "totalPages": 7,
+    "sha256": "1f3eca20c50046dced189b6885ea2574aa49d4de90ec275a04b6061dc7084f52"
+  },
+  "credit": {
+    "name": "Gabriel Batista",
+    "label": "Autor e curadoria, conforme o crédito explícito da edição de origem",
+    "sourcePages": [
+      7
+    ],
+    "authorshipConfirmedBySource": true
+  },
+  "adaptationCredit": {
+    "name": "Gabriel Alves Batista",
+    "label": "Texto e curadoria",
+    "confirmedByHolder": true,
+    "confirmedAt": "2026-10-17"
+  },
+  "sections": [
+    {
+      "id": "quando-a-vigilancia-muda",
+      "title": "O que muda quando a vigilância muda?",
+      "pages": [
+        1,
+        2
+      ],
+      "blocks": [
+        {
+          "type": "p",
+          "text": "No trabalho, nos relacionamentos, nas redes sociais ou em família, existe uma pergunta desconfortavelmente simples: o que sustenta um comportamento quando ninguém está fiscalizando?"
+        },
+        {
+          "type": "quote",
+          "text": "Palavras importam. Mas, para compreender um padrão, precisamos observar o que acontece antes, o que a pessoa faz e o que acontece depois.",
+          "attribution": "Reflexão editorial da edição de origem; não é citação literal atribuída a Skinner."
+        },
+        {
+          "type": "p",
+          "text": "A Análise do Comportamento não começa perguntando “quem a pessoa é de verdade?”. Ela começa perguntando em quais condições aquele comportamento aparece, desaparece ou muda. Isso tira a discussão do território nebuloso do “caráter” e a leva para relações que podem ser investigadas: contexto, resposta e consequência.",
+          "review": "A expressão original “algo observável” foi precisada para não excluir acontecimentos privados nem sugerir que toda variável seja diretamente observável por terceiros."
+        },
+        {
+          "type": "p",
+          "text": "Pensamentos e sentimentos também pertencem a essa investigação. Na linguagem do Behaviorismo Radical, acontecimentos privados têm acesso restrito à própria pessoa; isso não os transforma em uma essência separada do corpo ou da história. Conversar sobre eles é uma fonte de informação que precisa ser compreendida em contexto, e não uma leitura direta da mente (Skinner, 1953, cap. XVII).",
+          "review": "Esclarecimento conceitual acrescentado a partir do capítulo XVII; não equipara todo acontecimento privado a um pensamento verbal nem descarta relato de sofrimento."
+        },
+        {
+          "type": "p",
+          "text": "Essa lente ajuda a compreender por que alguém pode agir de um jeito perto do chefe e de outro quando ele sai; fazer promessas em uma relação e se comportar de forma incompatível com elas em outro contexto; ou seguir regras apenas quando existe risco imediato de punição."
+        },
+        {
+          "type": "p",
+          "text": "“Todo mundo faz o que quer” é uma boa provocação, mas não uma explicação comportamental. Para o Behaviorismo Radical, o comportamento não nasce de uma vontade solta dentro da pessoa. Nessa perspectiva, história evolutiva, aprendizagem ao longo da vida e práticas culturais participam da seleção de repertórios; as contingências atuais também importam. Outras pessoas fazem parte do ambiente e podem alterar consequências, regras e possibilidades de ação (Skinner, 1953; 1981).",
+          "review": "Preservada como apresentação da perspectiva teórica do material, sem afirmar determinação por um único antecedente nem acrescentar alegações clínicas de eficácia."
+        },
+        {
+          "type": "table",
+          "columns": [
+            "A · Antecedente",
+            "B · Comportamento",
+            "C · Consequência"
+          ],
+          "rows": [
+            [
+              "O que está acontecendo antes? Quem está presente? Há regra, pedido, ameaça, sinal ou oportunidade?",
+              "O que a pessoa efetivamente faz, diz, evita, procura, adia ou repete?",
+              "O que acontece depois? Alívio, atenção, dinheiro, conflito evitado, proximidade, aprovação, perda?"
+            ]
+          ]
+        },
+        {
+          "type": "note",
+          "text": "Esse esquema organiza perguntas. Uma sequência temporal ou um episódio isolado não demonstra, por si, a função de um comportamento."
+        }
+      ]
+    },
+    {
+      "id": "comportamento-e-ambiente",
+      "title": "Quando o comportamento muda junto com o ambiente",
+      "pages": [
+        3
+      ],
+      "blocks": [
+        {
+          "type": "quote",
+          "text": "Contexto não é desculpa. É dado.",
+          "attribution": "Formulação editorial da edição de origem."
+        },
+        {
+          "type": "p",
+          "text": "Controle de estímulos. Comportamentos diferentes podem aparecer em contextos diferentes porque certos sinais passam a indicar quais consequências estão disponíveis. A presença do chefe, do parceiro, de uma câmera, de uma regra formal ou de uma testemunha pode funcionar como parte desse contexto."
+        },
+        {
+          "type": "p",
+          "text": "Coerência não significa rigidez. Uma mudança de conduta pode ser compatível com diferentes demandas. O ponto de atenção é outro: quando uma conduta só existe sob vigilância e some assim que o risco de consequência desaparece, vale investigar quais contingências a mantêm."
+        },
+        {
+          "type": "p",
+          "text": "Prometer também é comportamento. Na tradição skinneriana, comportamento verbal também é comportamento operante. Portanto, o contraste útil não é “verbal versus operante”, mas o que mantém o que a pessoa diz e o que mantém o que ela faz (Skinner, 1957).",
+          "review": "Capítulo II, p.20–22, conferido na edição ampliada disponibilizada pela fundação. Comportamento verbal é analisado por variáveis funcionais, sem atribuir ao autor as formulações editoriais sobre promessas."
+        },
+        {
+          "type": "list",
+          "text": "Três cenas cotidianas",
+          "items": [
+            "Trabalho: a produtividade aumenta apenas quando a liderança entra na sala.",
+            "Relação: existe um acordo explícito, mas o comportamento muda radicalmente em ambientes nos quais a chance de descoberta é baixa.",
+            "Rede social: a pessoa apresenta uma versão pública altamente controlada, enquanto interações privadas seguem regras diferentes."
+          ]
+        },
+        {
+          "type": "note",
+          "text": "Nenhuma cena prova intenção, mentira ou diagnóstico. Ela apenas mostra que o contexto pode estar exercendo controle importante."
+        },
+        {
+          "type": "p",
+          "text": "O erro mais comum é ver uma discrepância e concluir imediatamente: “agora eu descobri quem essa pessoa é”. A análise funcional é menos cinematográfica e mais útil. Ela pergunta: em quais condições esse padrão ocorre, o que ele produz e por que continua?"
+        },
+        {
+          "type": "quote",
+          "text": "Um comportamento isolado conta uma história curta. Um padrão em diferentes contextos conta muito mais.",
+          "attribution": "Reflexão editorial da edição de origem."
+        }
+      ]
+    },
+    {
+      "id": "fuga-esquiva-e-punicao",
+      "title": "Fuga e esquiva: o comportamento que procura alívio",
+      "pages": [
+        4
+      ],
+      "blocks": [
+        {
+          "type": "p",
+          "text": "Às vezes o comportamento “adequado” não é mantido por compromisso, valor compartilhado ou consequência positiva. Ele existe porque reduz, encerra ou previne algo aversivo."
+        },
+        {
+          "type": "table",
+          "columns": [
+            "Fuga",
+            "Esquiva"
+          ],
+          "rows": [
+            [
+              "O estímulo aversivo já começou. A resposta produz o fim ou a redução dele. Exemplo: a discussão começou e a pessoa concorda com qualquer coisa apenas para fazê-la parar.",
+              "O estímulo aversivo ainda não aconteceu. A resposta diminui a chance de que aconteça. Exemplo: alguém altera o comportamento porque prevê cobrança, bronca, exposição ou perda."
+            ]
+          ],
+          "review": "Exemplos mantidos como ilustrações de funções possíveis; observar uma concordância ou uma mudança de conduta não basta para demonstrar fuga/esquiva."
+        },
+        {
+          "type": "p",
+          "text": "Por que o controle aversivo é tão sedutor? Porque pode produzir efeitos rápidos: a pessoa para, obedece, entrega, silencia ou evita. O problema é que suprimir uma resposta não ensina necessariamente uma alternativa melhor. A coerção também pode favorecer esquiva, fuga, contracontrole, reações emocionais e formas mais sofisticadas de evitar a fonte de punição (Sidman, 1989; 1993).",
+          "review": "Discussão conferida no artigo primário de Sidman (1993), p.79–81, explicitamente adaptado do livro de 1989. O texto mantém possibilidades, sem generalizar frequência, duração ou inevitabilidade dos efeitos."
+        },
+        {
+          "type": "quote",
+          "text": "Controle forte pode produzir conformidade visível e, ao mesmo tempo, aumentar o repertório de escapar do controlador.",
+          "attribution": "Síntese editorial da discussão sobre controle aversivo."
+        },
+        {
+          "type": "table",
+          "columns": [
+            "Punição positiva",
+            "Punição negativa"
+          ],
+          "rows": [
+            [
+              "Uma consequência é acrescentada e a probabilidade futura do comportamento diminui.",
+              "Algo reforçador é retirado e a probabilidade futura do comportamento diminui."
+            ]
+          ]
+        },
+        {
+          "type": "p",
+          "text": "Detalhe que salva provas e conversas: “positivo” e “negativo” não significam bom e ruim. Significam acrescentar ou retirar estímulos."
+        },
+        {
+          "type": "note",
+          "text": "Não confunda: reforçamento negativo aumenta um comportamento porque ele remove ou evita algo aversivo. Punição, por definição funcional, reduz a probabilidade futura de uma resposta.",
+          "review": "Acrescentado “por definição funcional” para distinguir a definição didática contemporânea da discussão histórica/procedimental de punição em Skinner (1953)."
+        },
+        {
+          "type": "p",
+          "text": "Uma distinção ajuda a ler essas obras: aqui usamos uma definição funcional de punição, baseada no efeito sobre a resposta. Skinner e Sidman também a discutiram como procedimento. Além disso, os efeitos colaterais exigem investigação: uma revisão da literatura ressalta que eles não são necessariamente universais, duradouros ou exclusivos da punição (Fontes e Shahan, 2021).",
+          "review": "Acrescentada distinção histórica e atualização científica; não transforma uma revisão conceitual em recomendação de procedimento clínico."
+        }
+      ]
+    },
+    {
+      "id": "liberdade-controle-e-acordos",
+      "title": "Livre de quê? E controlado por quê?",
+      "pages": [
+        5
+      ],
+      "blocks": [
+        {
+          "type": "p",
+          "text": "Em Beyond Freedom and Dignity, Skinner propõe investigar as condições que levam as pessoas a escapar de controles aversivos e observa que também existem formas menos visíveis de controle. Nessa leitura, sentir-se livre não dispensa perguntar o que está influenciando o comportamento (Skinner, 1971).",
+          "review": "Paráfrase ajustada ao excerto primário efetivamente consultado, p.278–281 da reprodução acadêmica, sem inventar paginação da edição Knopf nem uma citação literal sobre “homem autônomo”."
+        },
+        {
+          "type": "list",
+          "text": "Três perguntas sobre controle e responsabilidade",
+          "items": [
+            "Menos coerção não é ausência de controle. Mesmo sem ameaça explícita, atenção, afeto, status, dinheiro, acesso, redes sociais e consequências atrasadas podem manter padrões.",
+            "Responsabilidade é social. “Responsabilidade” não é um termo técnico básico da Análise do Comportamento. Pode ser traduzida, no cotidiano, como responder às consequências, sustentar acordos e reparar efeitos produzidos.",
+            "Acordos organizam contingências. Uma relação, um contrato de trabalho ou uma combinação familiar cria expectativas sobre consequências. Quebrar o acordo reorganiza o ambiente para todos."
+          ]
+        },
+        {
+          "type": "quote",
+          "text": "Liberdade não precisa significar “faço tudo o que quero”. Uma pergunta mais comportamental seria: quais controles estão presentes, quão transparentes são e quais custos produzem?",
+          "attribution": "Reflexão editorial a partir da discussão de liberdade e controle."
+        },
+        {
+          "type": "p",
+          "text": "Isso “passa pano” para comportamentos prejudiciais? Não. Explicar função não é absolver dano. Investigar por que um comportamento é mantido pode ajudar a planejar mudanças, estabelecer limites mais claros e acompanhar consequências menos coercitivas.",
+          "review": "Revisão precisa da promessa original “permite intervir com mais precisão”/“mais eficazes”: mantida a finalidade, sem assegurar eficácia de intervenção individual nem presumir função já demonstrada."
+        },
+        {
+          "type": "exercise",
+          "text": "Na prática: trocar um rótulo por uma descrição",
+          "items": [
+            "Observe a diferença entre “essa pessoa é assim” e “esse padrão aparece especialmente quando X acontece e costuma produzir Y”.",
+            "A segunda frase abre espaço para análise. A primeira fecha a conversa com um rótulo. Descrever um padrão continua exigindo dados e hipóteses revisáveis."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "confianca-e-historia",
+      "title": "Confiança é história de aprendizagem",
+      "pages": [
+        6
+      ],
+      "blocks": [
+        {
+          "type": "p",
+          "text": "Confiança não precisa ser tratada como uma substância que “existe” dentro da relação. Podemos entendê-la como uma história repetida em que o comportamento do outro se torna relativamente previsível em diferentes situações."
+        },
+        {
+          "type": "list",
+          "text": "O que observar sem virar detetive da própria vida",
+          "items": [
+            "Coerência entre contextos: o comportamento permanece semelhante com e sem vigilância?",
+            "Resposta a limites: a pessoa negocia, repara e tolera frustração ou apenas evita ser descoberta?",
+            "Custo da honestidade: o discurso muda quando falar a verdade passa a ter consequência desagradável?",
+            "Reparo observável: depois de uma quebra, aparecem novas ações consistentes ou somente novas promessas?",
+            "Padrão, não episódio: a mesma discrepância se repete em situações funcionalmente parecidas?"
+          ]
+        },
+        {
+          "type": "p",
+          "text": "A quebra de confiança. Uma descoberta pode funcionar como um evento aversivo importante e alterar rapidamente expectativas. A pessoa pode passar a procurar sinais, revisar eventos anteriores e aumentar a vigilância. Isso não significa que toda ruptura gere “hipervigilância crônica”, nem que a confiança seja irreparável. A intensidade depende da história, do contexto e das consequências posteriores.",
+          "review": "Preservada como possibilidade contextual; ajustado “a pessoa passa” para “pode passar” para evitar generalização clínica. Não há estudo específico de ruptura/hipervigilância na bibliografia da edição."
+        },
+        {
+          "type": "note",
+          "text": "Nenhum desses sinais, isoladamente, prova mentira, infidelidade, manipulação ou transtorno psicológico. Análise do Comportamento não é leitura mental. Ela exige dados, contexto e hipóteses funcionais revisáveis."
+        },
+        {
+          "type": "table",
+          "text": "Diz, faz e repara: uma organização de perguntas, sem medida ou classificação",
+          "columns": [
+            "1 · Diz",
+            "2 · Faz",
+            "3 · Repara"
+          ],
+          "rows": [
+            [
+              "Qual regra, promessa ou compromisso foi verbalizado?",
+              "O que ocorre de forma repetida quando as condições variam?",
+              "Quando há efeito negativo, quais mudanças concretas aparecem e se mantêm?"
+            ]
+          ],
+          "review": "A “régua simples” do PDF foi explicitada como organização educativa, sem propriedades de medida psicológica."
+        }
+      ]
+    },
+    {
+      "id": "outro-repertorio",
+      "title": "O que precisa mudar para outro repertório aparecer?",
+      "pages": [
+        7
+      ],
+      "blocks": [
+        {
+          "type": "quote",
+          "text": "Talvez o mais interessante não seja descobrir “quem alguém é”. Talvez seja descobrir o que o ambiente torna provável, quais consequências mantêm um padrão e o que precisa mudar para que outro repertório tenha chance de aparecer.",
+          "attribution": "Conclusão editorial da edição de origem."
+        },
+        {
+          "type": "p",
+          "text": "O texto que originou esta edição nasceu de uma inquietação cotidiana: por que algumas pessoas parecem diferentes quando a fiscalização desaparece? A Análise do Comportamento amplia essa pergunta. Em vez de procurar uma essência escondida, ela observa relações entre contexto, resposta e consequência."
+        },
+        {
+          "type": "p",
+          "text": "Fuga, esquiva, punição, regras, comportamento verbal e controle de estímulos ajudam a explicar por que a conformidade pode ser circunstancial e por que sistemas coercitivos, embora rápidos, podem cobrar “juros comportamentais”.",
+          "review": "Metáfora editorial mantida com “podem”, para evitar generalização de frequência não sustentada. Fontes e Shahan (2021) ressaltam os limites da evidência sobre efeitos colaterais da punição."
+        },
+        {
+          "type": "p",
+          "text": "E há uma consequência ética dessa leitura: compreender não é justificar. Compreender permite escolher melhor onde colocar limites, quais contingências reorganizar e quando deixar de acreditar apenas no que é dito para observar o que se mantém no tempo."
+        },
+        {
+          "type": "exercise",
+          "text": "Para pensar esta semana, sem responder ou registrar dados aqui",
+          "items": [
+            "Que comportamento seu muda quando a vigilância some?",
+            "Você mantém algum acordo por escolha ou apenas para evitar consequência?",
+            "O que suas ações ensinam às pessoas sobre o que elas podem esperar de você?"
+          ],
+          "review": "As três perguntas foram preservadas. Não há pontuação, classificação de personalidade, diagnóstico ou captura de respostas."
+        }
+      ]
+    },
+    {
+      "id": "glossario-e-leitura",
+      "title": "Glossário de bolso e caminhos de leitura",
+      "pages": [
+        7
+      ],
+      "blocks": [
+        {
+          "type": "table",
+          "columns": [
+            "Conceito",
+            "Explicação"
+          ],
+          "rows": [
+            [
+              "Contingência",
+              "Relação entre antecedentes, comportamento e consequências."
+            ],
+            [
+              "Reforço e punição",
+              "Reforço aumenta a probabilidade futura da resposta; punição a reduz, em uma definição funcional."
+            ],
+            [
+              "Fuga e esquiva",
+              "Fuga encerra algo aversivo já presente; esquiva procura preveni-lo ou adiá-lo."
+            ]
+          ]
+        },
+        {
+          "type": "note",
+          "text": "Material educativo: não substitui avaliação psicológica individual. Os exemplos não permitem concluir o que outra pessoa pensa, pretende ou qual diagnóstico possui."
+        }
+      ]
+    }
+  ],
+  "references": [
+    {
+      "label": "MOREIRA, Márcio Borges; MEDEIROS, Carlos Augusto de. Princípios básicos de análise do comportamento. 2. ed. Porto Alegre: Artmed, 2019.",
+      "verification": "verified",
+      "note": "Conferência bibliográfica na editora: autores, 2ª edição, Artmed, 2019 e sumário. A obra é apoio didático; o texto integral e páginas internas não foram conferidos. Conceitos do artigo são sustentados também pelos textos primários ligados abaixo, sem citação literal deste manual.",
+      "url": "https://loja.grupoa.com.br/novo/eb-principios-basicos-de-anal-do-comportamento9788582715161-p1004118"
+    },
+    {
+      "label": "SIDMAN, Murray. Coercion and its fallout. Boston: Authors Cooperative, 1989.",
+      "verification": "verified",
+      "note": "Existência, autor, editora e ano confirmados em anúncio original da Authors Cooperative no programa ABAI de 1990. Conferência do argumento feita no artigo primário Sidman (1993), explicitamente adaptado do livro. Não se afirma leitura integral do exemplar de 1989.",
+      "url": "https://media.abainternational.org/Events/ProgramBooks/16th%20Annual%20Convention%2C%20May%2027-31%2C%201990.pdf"
+    },
+    {
+      "label": "SKINNER, B. F. Science and human behavior. New York: Macmillan, 1953.",
+      "url": "https://www.bfskinner.org/wp-content/uploads/2014/02/ScienceHumanBehavior.pdf",
+      "verification": "verified",
+      "note": "Texto primário da fundação consultado: capítulos VII, XI, XII, XIII e XVII. Apoia discriminação, aversão/esquiva, discussão procedimental de punição, função versus forma e acontecimentos privados. Sem citação literal nova nem inferência individual de intenção."
+    },
+    {
+      "label": "SKINNER, B. F. Verbal behavior. New York: Appleton-Century-Crofts, 1957.",
+      "url": "https://bfskinner.org/wp-content/uploads/2020/11/978_0_9964539_1_2.pdf",
+      "verification": "verified",
+      "note": "URL antiga devolveu 404 na nova consulta e foi substituída pela edição ampliada disponibilizada pela própria fundação. Capítulo II, p.20–22, e análise funcional do operante verbal conferidos. O ano 1957 identifica a obra original; a reprodução consultada é a edição ampliada de 2020."
+    },
+    {
+      "label": "SKINNER, B. F. Beyond freedom and dignity. New York: Alfred A. Knopf, 1971.",
+      "url": "https://faculty.salisbury.edu/~mllewis/Utopia/SkinnerBFaD.pdf",
+      "verification": "verified",
+      "note": "Excerto primário reproduzido por instituição acadêmica consultado, p.278–281 da reprodução: liberdade, controle aversivo e controle não aversivo. O parágrafo foi ajustado a esse conteúdo; não se afirma leitura integral nem conferência de paginação do volume Knopf de 1971."
+    },
+    {
+      "label": "SKINNER, B. F. Selection by consequences. Science, v. 213, n. 4507, p. 501–504, 1981. DOI: 10.1126/science.7244649.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/7244649/",
+      "verification": "verified",
+      "note": "Resumo original e metadados conferidos no PubMed: autor, Science 213(4507), p.501–504, DOI; seleção em evolução, comportamento individual e cultura. Alcance limitado ao argumento do resumo; não é estudo de confiança, mentira ou eficácia terapêutica."
+    },
+    {
+      "label": "SIDMAN, Murray. Reflections on behavior analysis and coercion. Behavior and Social Issues, v.3, n.1–2, p.75–85, 1993. DOI: 10.5210/bsi.v3i1.199.",
+      "url": "https://link.springer.com/content/pdf/10.5210/bsi.v3i1.199.pdf",
+      "verification": "verified",
+      "note": "Texto primário integral consultado, com foco nas p.75 e 79–81. O próprio autor declara adaptação do livro de 1989. Discussão conceitual, sem taxa universal dos efeitos e sem orientação para aplicar punição."
+    },
+    {
+      "label": "FONTES, Rafaela M.; SHAHAN, Timothy A. Punishment and its putative fallout: a reappraisal. Journal of the Experimental Analysis of Behavior, v.115, n.1, p.185–203, 2021. DOI: 10.1002/jeab.653.",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7855474/",
+      "verification": "verified",
+      "note": "Artigo original de revisão consultado: definição procedimental versus funcional e limites da generalização sobre efeitos colaterais. Publicado online em dezembro de 2020, volume de janeiro de 2021. Não fornece recomendação individual nem prova ausência de riscos."
+    }
+  ],
+  "reviewNotes": [
+    "Migração longa das páginas físicas 1–7. Textos, exemplos, distinções, metáforas, perguntas e glossário preservados; capa, cabeçalhos/rodapés repetidos e nota interna de correção não viram conteúdo de leitura.",
+    "O crédito da p. 7 é Autor e curadoria — Gabriel Batista. Em 17/10/2026, o titular confirmou a assinatura desta adaptação HTML: Texto e curadoria de Gabriel Alves Batista.",
+    "As aspas em blocos editoriais não são citações verificadas de Skinner ou Sidman. Reflexões autorais e paráfrases teóricas foram identificadas para impedir atribuições falsas.",
+    "Revisões substantivas identificadas por bloco: relações investigáveis em vez de excluir eventos privados por “observável”; não prometer eficácia individual; possibilidade de vigilância após ruptura; sentido funcional de punição; “régua” sem valor de medida.",
+    "Conferência científica respondida em reviewResponses: primários de Skinner/Sidman, catálogo da edição didática e revisão Fontes/Shahan. A diferença entre punição procedimental e funcional foi explicitada. As notas de cada referência delimitam o que foi lido; permanece decisão editorial/clínica do titular.",
+    "A ilustração de B. F. Skinner na p. 5 é editorial e não fotográfica; a nota do PDF deve orientar sua legenda se uma imagem for utilizada. Nenhuma imagem foi incluída por esta migração de dados.",
+    "A edição afirma que reorganiza/recalibra reflexões fornecidas pelo autor. Manter o histórico editorial interno, sem apresentá-lo ao visitante como citação de fonte científica.",
+    "Rascunho não aprovado: sem publicação, indexação, instrumento psicológico, score, formulário ou diagnóstico. A data de migração não é data de publicação nem de aprovação clínica."
+  ],
+  "seoTitle": "Análise do Comportamento: contexto e aprendizagem",
+  "researchReviewedAt": "2026-10-17",
+  "reviewResponses": [
+    {
+      "note": "Migração longa das páginas físicas 1–7. Textos, exemplos, distinções, metáforas, perguntas e glossário preservados; capa, cabeçalhos/rodapés repetidos e nota interna de correção não viram conteúdo de leitura.",
+      "response": "Cobertura e encadeamento das sete páginas preservados. A conferência científica acrescentou explicações e fontes sem retirar exemplos, glossário ou as três perguntas finais.",
+      "action": "Manter migração longa e referências por página; sem nova aprovação presumida.",
+      "status": "resolved"
+    },
+    {
+      "note": "O crédito da p. 7 é Autor e curadoria — Gabriel Batista. Em 17/10/2026, o titular confirmou a assinatura desta adaptação HTML: Texto e curadoria de Gabriel Alves Batista.",
+      "response": "Crédito documental e confirmação do titular têm funções diferentes. A assinatura da adaptação permanece como o titular determinou.",
+      "action": "Preservar integralmente source, credit e adaptationCredit.",
+      "status": "resolved"
+    },
+    {
+      "note": "As aspas em blocos editoriais não são citações verificadas de Skinner ou Sidman. Reflexões autorais e paráfrases teóricas foram identificadas para impedir atribuições falsas.",
+      "response": "As formulações em destaque são do editorial. Nenhum trecho foi convertido em frase histórica de Skinner ou Sidman.",
+      "action": "Manter atribuições editoriais explícitas; ligações primárias apenas para os conceitos.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "Skinner — Science and Human Behavior, texto primário",
+          "url": "https://www.bfskinner.org/wp-content/uploads/2014/02/ScienceHumanBehavior.pdf"
+        },
+        {
+          "label": "Sidman — Reflections on Behavior Analysis and Coercion",
+          "url": "https://link.springer.com/content/pdf/10.5210/bsi.v3i1.199.pdf"
+        }
+      ]
+    },
+    {
+      "note": "Revisões substantivas identificadas por bloco: relações investigáveis em vez de excluir eventos privados por “observável”; não prometer eficácia individual; possibilidade de vigilância após ruptura; sentido funcional de punição; “régua” sem valor de medida.",
+      "response": "As ressalvas conceituais foram preservadas. Pensamentos e sentimentos ganharam explicação legível; exemplos continuam hipóteses, sem diagnóstico ou eficácia garantida.",
+      "action": "Conservar limites das inferências, inclusive confiança/vigilância e diz/faz/repara.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "Skinner — Science and Human Behavior, texto primário",
+          "url": "https://www.bfskinner.org/wp-content/uploads/2014/02/ScienceHumanBehavior.pdf"
+        },
+        {
+          "label": "Skinner — Verbal Behavior, edição ampliada da fundação",
+          "url": "https://bfskinner.org/wp-content/uploads/2020/11/978_0_9964539_1_2.pdf"
+        }
+      ]
+    },
+    {
+      "note": "Revisão científica final deve conferir livros e edição efetivamente utilizada, além de diferenciar a formulação histórica de punição em Skinner (1953) das definições funcionais didáticas atuais.",
+      "response": "Conceitos foram conferidos em fontes primárias e a diferença entre punição como procedimento e definição funcional foi explicitada. Livros sem leitura integral têm esse alcance declarado em cada referência.",
+      "action": "Acrescentar Sidman1993 e Fontes/Shahan2021; ajustar generalização na conclusão.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "Sidman — Reflections on Behavior Analysis and Coercion",
+          "url": "https://link.springer.com/content/pdf/10.5210/bsi.v3i1.199.pdf"
+        },
+        {
+          "label": "Fontes e Shahan — Punishment and Its Putative Fallout: A Reappraisal",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7855474/"
+        },
+        {
+          "label": "Artmed — ficha editorial e sumário da segunda edição",
+          "url": "https://loja.grupoa.com.br/novo/eb-principios-basicos-de-anal-do-comportamento9788582715161-p1004118"
+        }
+      ]
+    },
+    {
+      "note": "A ilustração de B. F. Skinner na p. 5 é editorial e não fotográfica; a nota do PDF deve orientar sua legenda se uma imagem for utilizada. Nenhuma imagem foi incluída por esta migração de dados.",
+      "response": "Nenhum retrato foi acrescentado aos blocos. A indicação de que o retrato original é ilustração permanece na rastreabilidade.",
+      "action": "Manter a distinção documental se houver uso visual posterior.",
+      "status": "resolved"
+    },
+    {
+      "note": "A edição afirma que reorganiza/recalibra reflexões fornecidas pelo autor. Manter o histórico editorial interno, sem apresentá-lo ao visitante como citação de fonte científica.",
+      "response": "A observação descreve o histórico autoral da edição, não um resultado de pesquisa.",
+      "action": "Preservar histórico sem apresentá-lo como citação científica.",
+      "status": "resolved"
+    },
+    {
+      "note": "Rascunho não aprovado: sem publicação, indexação, instrumento psicológico, score, formulário ou diagnóstico. A data de migração não é data de publicação nem de aprovação clínica.",
+      "response": "A pesquisa responde pendências técnicas, mas não é aprovação clínica do responsável. A decisão final sobre redação, exercícios e publicação continua humana.",
+      "action": "Manter draft:true e reviewed:false, sem data fictícia de publicação.",
+      "status": "editorial-decision"
+    },
+    {
+      "note": "Bloco quando-a-vigilancia-muda · 3: A expressão original “algo observável” foi precisada para não excluir acontecimentos privados nem sugerir que toda variável seja diretamente observável por terceiros.",
+      "response": "Relações funcionais e acontecimentos privados integram a análise; a forma ou sequência isolada de uma cena não determina função ou intenção. A ressalva é coerente com o texto primário.",
+      "action": "Preservar a precisão conceitual, o contexto e os limites da inferência.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "Skinner — Science and Human Behavior, texto primário",
+          "url": "https://www.bfskinner.org/wp-content/uploads/2014/02/ScienceHumanBehavior.pdf"
+        }
+      ]
+    },
+    {
+      "note": "Bloco quando-a-vigilancia-muda · 5: Preservada como apresentação da perspectiva teórica do material, sem afirmar determinação por um único antecedente nem acrescentar alegações clínicas de eficácia.",
+      "response": "Relações funcionais e acontecimentos privados integram a análise; a forma ou sequência isolada de uma cena não determina função ou intenção. A ressalva é coerente com o texto primário.",
+      "action": "Preservar a precisão conceitual, o contexto e os limites da inferência.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "Skinner — Science and Human Behavior, texto primário",
+          "url": "https://www.bfskinner.org/wp-content/uploads/2014/02/ScienceHumanBehavior.pdf"
+        }
+      ]
+    },
+    {
+      "note": "Bloco comportamento-e-ambiente · 4: Retirada apenas a nota interna “uma correção técnica importante ao texto-base”; argumento e distinção conceitual preservados. Conferir edição antes de eventual citação literal de Verbal Behavior.",
+      "response": "A análise de operantes verbais foi conferida no capítulo II da reprodução da própria fundação, p.20–22. Prometer e agir exigem investigar variáveis, sem dicotomia verbal/operante.",
+      "action": "Substituir a URL404 e preservar a explicação conceitual.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "Skinner — Verbal Behavior, edição ampliada da fundação",
+          "url": "https://bfskinner.org/wp-content/uploads/2020/11/978_0_9964539_1_2.pdf"
+        }
+      ]
+    },
+    {
+      "note": "Bloco fuga-esquiva-e-punicao · 2: Exemplos mantidos como ilustrações de funções possíveis; observar uma concordância ou uma mudança de conduta não basta para demonstrar fuga/esquiva.",
+      "response": "Skinner/Sidman foram cotejados e a revisão Fontes/Shahan explicita limites da generalização sobre efeitos da punição. Metáfora não é taxa e um exemplo não prova função.",
+      "action": "Preservar possibilidades e incluir a distinção de definições/efeitos.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "Skinner — Science and Human Behavior, texto primário",
+          "url": "https://www.bfskinner.org/wp-content/uploads/2014/02/ScienceHumanBehavior.pdf"
+        },
+        {
+          "label": "Sidman — Reflections on Behavior Analysis and Coercion",
+          "url": "https://link.springer.com/content/pdf/10.5210/bsi.v3i1.199.pdf"
+        },
+        {
+          "label": "Fontes e Shahan — Punishment and Its Putative Fallout: A Reappraisal",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7855474/"
+        }
+      ]
+    },
+    {
+      "note": "Bloco fuga-esquiva-e-punicao · 3: Conferir a edição de Sidman efetivamente consultada. Não transformar “pode” e “não necessariamente” em afirmação de que punição nunca produz efeitos duradouros.",
+      "response": "Skinner/Sidman foram cotejados e a revisão Fontes/Shahan explicita limites da generalização sobre efeitos da punição. Metáfora não é taxa e um exemplo não prova função.",
+      "action": "Preservar possibilidades e incluir a distinção de definições/efeitos.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "Skinner — Science and Human Behavior, texto primário",
+          "url": "https://www.bfskinner.org/wp-content/uploads/2014/02/ScienceHumanBehavior.pdf"
+        },
+        {
+          "label": "Sidman — Reflections on Behavior Analysis and Coercion",
+          "url": "https://link.springer.com/content/pdf/10.5210/bsi.v3i1.199.pdf"
+        },
+        {
+          "label": "Fontes e Shahan — Punishment and Its Putative Fallout: A Reappraisal",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7855474/"
+        }
+      ]
+    },
+    {
+      "note": "Bloco fuga-esquiva-e-punicao · 7: Acrescentado “por definição funcional” para distinguir a definição didática contemporânea da discussão histórica/procedimental de punição em Skinner (1953).",
+      "response": "Skinner/Sidman foram cotejados e a revisão Fontes/Shahan explicita limites da generalização sobre efeitos da punição. Metáfora não é taxa e um exemplo não prova função.",
+      "action": "Preservar possibilidades e incluir a distinção de definições/efeitos.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "Skinner — Science and Human Behavior, texto primário",
+          "url": "https://www.bfskinner.org/wp-content/uploads/2014/02/ScienceHumanBehavior.pdf"
+        },
+        {
+          "label": "Sidman — Reflections on Behavior Analysis and Coercion",
+          "url": "https://link.springer.com/content/pdf/10.5210/bsi.v3i1.199.pdf"
+        },
+        {
+          "label": "Fontes e Shahan — Punishment and Its Putative Fallout: A Reappraisal",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7855474/"
+        }
+      ]
+    },
+    {
+      "note": "Bloco liberdade-controle-e-acordos · 1: Apresentação histórica da perspectiva de Skinner. A referência foi confirmada bibliograficamente, mas não foi conferida uma página específica para citação literal nesta migração.",
+      "response": "O parágrafo sobre liberdade foi ajustado ao excerto primário efetivamente lido. Explicar relações não estabelece eficácia clínica nem absolve consequências prejudiciais.",
+      "action": "Manter paráfrase e registrar a paginação da reprodução, sem citação literal inventada.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "Skinner — Beyond Freedom and Dignity, excerto primário",
+          "url": "https://faculty.salisbury.edu/~mllewis/Utopia/SkinnerBFaD.pdf"
+        },
+        {
+          "label": "Skinner — Science and Human Behavior, texto primário",
+          "url": "https://www.bfskinner.org/wp-content/uploads/2014/02/ScienceHumanBehavior.pdf"
+        }
+      ]
+    },
+    {
+      "note": "Bloco liberdade-controle-e-acordos · 4: Revisão precisa da promessa original “permite intervir com mais precisão”/“mais eficazes”: mantida a finalidade, sem assegurar eficácia de intervenção individual nem presumir função já demonstrada.",
+      "response": "O parágrafo sobre liberdade foi ajustado ao excerto primário efetivamente lido. Explicar relações não estabelece eficácia clínica nem absolve consequências prejudiciais.",
+      "action": "Manter paráfrase e registrar a paginação da reprodução, sem citação literal inventada.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "Skinner — Beyond Freedom and Dignity, excerto primário",
+          "url": "https://faculty.salisbury.edu/~mllewis/Utopia/SkinnerBFaD.pdf"
+        },
+        {
+          "label": "Skinner — Science and Human Behavior, texto primário",
+          "url": "https://www.bfskinner.org/wp-content/uploads/2014/02/ScienceHumanBehavior.pdf"
+        }
+      ]
+    },
+    {
+      "note": "Bloco confianca-e-historia · 3: Preservada como possibilidade contextual; ajustado “a pessoa passa” para “pode passar” para evitar generalização clínica. Não há estudo específico de ruptura/hipervigilância na bibliografia da edição.",
+      "response": "O trecho é hipótese educativa/editorial sobre um caso possível, sem estudo específico de ruptura ou hipervigilância e sem alegar instrumento de medida.",
+      "action": "Manter “pode” e o quadro diz/faz/repara como organização de perguntas.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "Skinner — Science and Human Behavior, texto primário",
+          "url": "https://www.bfskinner.org/wp-content/uploads/2014/02/ScienceHumanBehavior.pdf"
+        }
+      ]
+    },
+    {
+      "note": "Bloco confianca-e-historia · 5: A “régua simples” do PDF foi explicitada como organização educativa, sem propriedades de medida psicológica.",
+      "response": "O trecho é hipótese educativa/editorial sobre um caso possível, sem estudo específico de ruptura ou hipervigilância e sem alegar instrumento de medida.",
+      "action": "Manter “pode” e o quadro diz/faz/repara como organização de perguntas.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "Skinner — Science and Human Behavior, texto primário",
+          "url": "https://www.bfskinner.org/wp-content/uploads/2014/02/ScienceHumanBehavior.pdf"
+        }
+      ]
+    },
+    {
+      "note": "Bloco outro-repertorio · 3: “Juros comportamentais” é metáfora editorial, não indicador mensurado ou resultado quantitativo de estudo.",
+      "response": "Skinner/Sidman foram cotejados e a revisão Fontes/Shahan explicita limites da generalização sobre efeitos da punição. Metáfora não é taxa e um exemplo não prova função.",
+      "action": "Preservar possibilidades e incluir a distinção de definições/efeitos.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "Skinner — Science and Human Behavior, texto primário",
+          "url": "https://www.bfskinner.org/wp-content/uploads/2014/02/ScienceHumanBehavior.pdf"
+        },
+        {
+          "label": "Sidman — Reflections on Behavior Analysis and Coercion",
+          "url": "https://link.springer.com/content/pdf/10.5210/bsi.v3i1.199.pdf"
+        },
+        {
+          "label": "Fontes e Shahan — Punishment and Its Putative Fallout: A Reappraisal",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7855474/"
+        }
+      ]
+    },
+    {
+      "note": "Bloco outro-repertorio · 5: As três perguntas foram preservadas. Não há pontuação, classificação de personalidade, diagnóstico ou captura de respostas.",
+      "response": "O conteúdo educativo permanece. Não foi localizada validação para os cortes dessa atividade autoral, e nenhuma pesquisa foi usada para fingir validá-los.",
+      "action": "Manter reflexão sem somas, faixas, perfis ou respostas capturadas; aprovação pedagógica final com o titular.",
+      "status": "editorial-decision"
+    },
+    {
+      "note": "Referência: MOREIRA, Márcio Borges; MEDEIROS, Carlos Augusto de. Princípios básicos de análise do comportamento. 2. ed. Porto Alegre: Artmed, 2019. Referência didática presente na p. 7; conferir edição efetivamente utilizada e páginas antes de acrescentar citações literais.",
+      "response": "Conferência bibliográfica na editora: autores, 2ª edição, Artmed, 2019 e sumário. A obra é apoio didático; o texto integral e páginas internas não foram conferidos. Conceitos do artigo são sustentados também pelos textos primários ligados abaixo, sem citação literal deste manual.",
+      "action": "Atualizar a referência ativa com URL e alcance da conferência, preservando o histórico original nesta resposta.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "MOREIRA, Márcio Borges; MEDEIROS, Carlos Augusto de. Princípios básicos de análise do comportamento. 2. ed. Porto Alegre: Artmed, 2019.",
+          "url": "https://loja.grupoa.com.br/novo/eb-principios-basicos-de-anal-do-comportamento9788582715161-p1004118"
+        }
+      ]
+    },
+    {
+      "note": "Referência: SIDMAN, Murray. Coercion and its fallout. Boston: Authors Cooperative, 1989. Referência conceitual indicada na p. 4 e listada na p. 7; conferir edição e trechos antes da aprovação editorial.",
+      "response": "Existência, autor, editora e ano confirmados em anúncio original da Authors Cooperative no programa ABAI de 1990. Conferência do argumento feita no artigo primário Sidman (1993), explicitamente adaptado do livro. Não se afirma leitura integral do exemplar de 1989.",
+      "action": "Atualizar a referência ativa com URL e alcance da conferência, preservando o histórico original nesta resposta.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "SIDMAN, Murray. Coercion and its fallout. Boston: Authors Cooperative, 1989.",
+          "url": "https://media.abainternational.org/Events/ProgramBooks/16th%20Annual%20Convention%2C%20May%2027-31%2C%201990.pdf"
+        }
+      ]
+    },
+    {
+      "note": "Referência: SKINNER, B. F. Beyond freedom and dignity. New York: Alfred A. Knopf, 1971. Referência bibliográfica confirmada na fundação; edição/página da discussão específica de liberdade ainda não conferida para citação literal.",
+      "response": "Excerto primário reproduzido por instituição acadêmica consultado, p.278–281 da reprodução: liberdade, controle aversivo e controle não aversivo. O parágrafo foi ajustado a esse conteúdo; não se afirma leitura integral nem conferência de paginação do volume Knopf de 1971.",
+      "action": "Atualizar a referência ativa com URL e alcance da conferência, preservando o histórico original nesta resposta.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "SKINNER, B. F. Beyond freedom and dignity. New York: Alfred A. Knopf, 1971.",
+          "url": "https://faculty.salisbury.edu/~mllewis/Utopia/SkinnerBFaD.pdf"
+        }
+      ]
+    },
+    {
+      "note": "Referência: SKINNER, B. F. Selection by consequences. Science, v. 213, n. 4507, p. 501–504, 1981. DOI: 10.1126/science.7244649. Referência primária indicada na p. 7; confirmar o texto completo antes de ampliar alegações ou usar citações. Não a tratar como estudo sobre confiança ou mentira.",
+      "response": "Resumo original e metadados conferidos no PubMed: autor, Science 213(4507), p.501–504, DOI; seleção em evolução, comportamento individual e cultura. Alcance limitado ao argumento do resumo; não é estudo de confiança, mentira ou eficácia terapêutica.",
+      "action": "Atualizar a referência ativa com URL e alcance da conferência, preservando o histórico original nesta resposta.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "SKINNER, B. F. Selection by consequences. Science, v. 213, n. 4507, p. 501–504, 1981. DOI: 10.1126/science.7244649.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/7244649/"
+        }
+      ]
+    }
+  ],
+  "mediaAuthorization": {
+    "confirmedByHolder": true,
+    "confirmedAt": "2026-10-17",
+    "scope": "Fotos de conteúdo próprio com autorização consensual para divulgar o trabalho das equipes, conforme confirmação direta do titular nesta conversa."
+  }
+}

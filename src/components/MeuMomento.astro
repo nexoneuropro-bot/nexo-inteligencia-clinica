@@ -1,0 +1,187 @@
+---
+import { profileFields } from '../data/momento-demo';
+import '../styles/meu-momento.css';
+
+const stages = [
+  ['consent', 'Seu convite'],
+  ['profile', 'Uma apresentação'],
+  ['privacy', 'Seu espaço'],
+  ['preferences', 'Seu jeito'],
+  ['questions', 'A conversa'],
+  ['summary', 'Encerramento'],
+];
+const places = [
+  ['home', 'Em casa'],
+  ['work', 'No trabalho ou estudo'],
+  ['shared', 'Em um lugar público ou compartilhado'],
+  ['other', 'Em outro lugar'],
+  ['not-informed', 'Prefiro não informar'],
+];
+const profilePurposes:Record<string,string>={nickname:'Reconhecer a forma de apresentação no exemplo.',age:'Situar a fase da vida no contexto do exemplo.',gender:'Respeitar a identidade informada, sem inferir condições de saúde.',education:'Situar o contexto e a comunicação, sem presumir capacidade.',activity:'Conhecer as atividades que organizam o cotidiano.',region:'Situar o contexto aproximado, sem pedir endereço.'};
+---
+<div class="mm-root" data-mm-root>
+  <div class="mm-demo-notice" role="note">
+    <span class="mm-notice-mark" aria-hidden="true"></span>
+    <p><strong>Demonstração.</strong> Explore situações fictícias. Nada é enviado à NEXO.</p>
+  </div>
+
+  <div class="mm-layout">
+    <aside class="mm-aside" aria-label="Seu percurso">
+      <span class="mm-eyebrow">NEXO · CONHECENDO MEU MOMENTO</span>
+      <h2>Uma conversa,<br/><em>com espaço para você.</em></h2>
+      <p>Primeiro, conheça a proposta. Depois, escolha como acompanhar e explore uma experiência de cada vez.</p>
+      <ol class="mm-progress" aria-label="Etapas do percurso">
+        {stages.map(([id, label], index) => <li data-mm-progress={id} aria-current={index === 0 ? 'step' : undefined}><span class="mm-progress-dot" aria-hidden="true"></span><span>{label}</span></li>)}
+      </ol>
+      <p class="mm-aside-note">Sem respostas certas ou erradas.<br/>Você pode voltar, pular uma pergunta ou fazer uma pausa.</p>
+      <a class="mm-text-link mm-home-link" href="/conhecendo-meu-momento/">← Sobre a experiência</a>
+      <span class="mm-aside-orbit" aria-hidden="true"></span>
+    </aside>
+
+    <div class="mm-panel">
+      <div class="mm-panel-heading">
+        <span class="mm-wordmark">Conhecendo Meu Momento</span>
+        <div class="mm-utility mm-interactive" aria-label="Controles do percurso">
+          <button type="button" data-mm-action="pause">Pausar</button>
+          <button type="button" data-mm-action="exit">Encerrar e limpar</button>
+        </div>
+      </div>
+
+      <section data-mm-stage="consent" aria-labelledby="mm-consent-title">
+        <span class="mm-eyebrow">ANTES DE COMEÇAR</span>
+        <h2 id="mm-consent-title" tabindex="-1">Que bom ter você aqui.</h2>
+        <p class="mm-lead">Um espaço para organizar experiências e pensamentos antes de uma conversa com o profissional.</p>
+        <p>Nesta visita, você conhecerá o percurso por meio de um perfil de exemplo e de situações fictícias. A demonstração é gratuita e não recebe informações pessoais ou de saúde.</p>
+
+        <div class="mm-invitation">
+          <span class="mm-small-label">UM CONVITE PARA CONHECER</span>
+          <p>O acolhimento real usa um convite individual, após conversa com o profissional. Este percurso é separado: permite conhecer a experiência com situações fictícias, sem enviar ou guardar respostas.</p>
+        </div>
+
+        <details class="mm-details">
+          <summary>Que perguntas usamos e por quê?</summary>
+          <div>
+            <p>O percurso reúne perguntas sobre situações do cotidiano, maneiras de responder e assuntos que alguém gostaria de conversar com o profissional.</p>
+            <p>Aqui você conhecerá os itens do PHQ-9 e do GAD-7, instrumentos de rastreio sobre as últimas duas semanas, além de perguntas iniciais e complementos opcionais. Explore apenas situações fictícias. A demonstração não é uma aplicação clínica e não apresenta resultados ao participante.</p>
+            <p>No acolhimento real, a interpretação e a devolutiva pertencem ao profissional humano. Os complementos sobre sono e apetite não alteram os instrumentos nem entram no cálculo.</p>
+          </div>
+        </details>
+        <details class="mm-details">
+          <summary>Privacidade, escolhas e contato</summary>
+          <div>
+            <p>As escolhas e os eventos de percurso, como pergunta exibida, resposta confirmada, pergunta pulada e pausa, ficam somente na memória desta aba. Os eventos não incluem o conteúdo das respostas. Nada é enviado a servidor, analytics ou ao profissional; não há cadastro nem pesquisa operacional.</p>
+            <p>“Pausar” permite continuar enquanto esta aba permanecer aberta. “Encerrar e limpar” descarta as escolhas. Sair ou recarregar inicia um novo percurso. Após um período prolongado sem interação, a demonstração encerra as escolhas locais; isso não explica por que alguém interrompeu.</p>
+            <p>No fluxo clínico separado, o convite pode identificar a pessoa; pseudônimo não significa anonimato. As condições próprias são informadas antes do aceite. <a href="/conhecendo-meu-momento/privacidade/">Conheça a privacidade do acolhimento real</a>.</p>
+            <p>Responsável pela proposta: Gabriel Alves Batista · CRP-SP 06/176184. Dúvidas: <a href="mailto:nexoneuropro@gmail.com">nexoneuropro@gmail.com</a>. Consulte a <a href="/politica-de-privacidade/">política institucional</a>.</p>
+            <p>Esta página não é acompanhada em tempo real e não oferece atendimento de urgência. Para falar sobre um atendimento ou o fluxo de devolutiva, <a href="/contato/">entre em contato com a NEXO</a>.</p>
+          </div>
+        </details>
+
+        <div class="mm-consents mm-interactive">
+          <label class="mm-check"><input id="mm-adult" type="checkbox"/><span>Tenho 18 anos ou mais.</span></label>
+          <label class="mm-check"><input id="mm-consent" type="checkbox"/><span>Li as informações e quero explorar a demonstração usando apenas exemplos fictícios. Compreendo que não se trata de atendimento ou avaliação profissional.</span></label>
+          <div class="mm-research-choice">
+            <label class="mm-check"><input id="mm-research" type="checkbox"/><span><strong>Escolha separada e opcional:</strong> gostaria de receber informações sobre possíveis estudos futuros.</span></label>
+            <p>Aqui, essa escolha é apenas um exemplo: nenhum interesse ou contato é cadastrado. Ela não autoriza o uso de respostas para pesquisa, e deixá-la desmarcada não impede continuar.</p>
+          </div>
+        </div>
+        <div class="mm-actions mm-interactive"><button type="button" class="mm-button mm-primary" data-mm-action="continue">Quero conhecer o percurso <span aria-hidden="true">→</span></button></div>
+        <button type="button" class="mm-subtle-button mm-interactive" data-mm-action="underage">Tenho menos de 18 anos</button>
+      </section>
+
+      <section data-mm-stage="profile" aria-labelledby="mm-profile-title" hidden>
+        <span class="mm-eyebrow">UM POUCO DE CONTEXTO</span>
+        <h2 id="mm-profile-title" tabindex="-1">Uma forma de se apresentar.</h2>
+        <p class="mm-lead">Conheça os campos de um perfil de exemplo. Todas as escolhas são opcionais.</p>
+        <p class="mm-context">Idade, escolaridade, trabalho e região ajudam a situar uma história. Nesta demonstração, escolha características fictícias para observar o percurso.</p>
+        <div class="mm-profile-grid">
+          {profileFields.map(field => <label class="mm-field" for={`mm-profile-${field.id}`}><span>{field.label}<small>Opcional · {profilePurposes[field.id]}</small></span><select id={`mm-profile-${field.id}`} data-mm-profile={field.id} autocomplete="off">{field.options.map(option => <option value={option.id}>{option.label}</option>)}</select></label>)}
+        </div>
+        <p class="mm-caption">Você pode manter “Prefiro não informar” em todos os campos e seguir normalmente.</p>
+        <div class="mm-actions mm-interactive"><button type="button" class="mm-button" data-mm-action="back">← Voltar</button><button type="button" class="mm-button mm-primary" data-mm-action="continue">Continuar →</button></div>
+      </section>
+
+      <section data-mm-stage="privacy" aria-labelledby="mm-privacy-title" hidden>
+        <span class="mm-eyebrow">SEU ESPAÇO</span>
+        <h2 id="mm-privacy-title" tabindex="-1">Há espaço para responder com tranquilidade?</h2>
+        <p class="mm-lead">Antes da conversa, vale olhar ao redor. Você pode continuar em silêncio ou escolher outro momento.</p>
+        <fieldset class="mm-fieldset"><legend>Onde você está neste momento?</legend><div class="mm-choices mm-choices-compact">
+          {places.map(([id,label]) => <label class="mm-choice"><input type="radio" name="mm-place" value={id}/><span>{label}</span></label>)}
+        </div></fieldset>
+        <fieldset class="mm-fieldset"><legend>Você sente que tem privacidade para responder?</legend><div class="mm-choices">
+          <label class="mm-choice"><input type="radio" name="mm-privacy" value="yes"/><span>Sim, posso continuar com tranquilidade.</span></label>
+          <label class="mm-choice"><input type="radio" name="mm-privacy" value="partial"/><span>Mais ou menos. Prefiro ter algumas opções.</span></label>
+          <label class="mm-choice"><input type="radio" name="mm-privacy" value="no"/><span>Não agora. Prefiro outro momento.</span></label>
+        </div></fieldset>
+        <p class="mm-advice" id="mm-privacy-advice" role="status" aria-live="polite"></p>
+        <div class="mm-actions mm-interactive"><button type="button" class="mm-button" data-mm-action="back">← Voltar</button><button type="button" class="mm-button mm-primary" data-mm-action="continue">Continuar →</button></div>
+        <button type="button" class="mm-subtle-button mm-interactive" data-mm-action="pause">Prefiro continuar em outro momento</button>
+      </section>
+
+      <section data-mm-stage="preferences" aria-labelledby="mm-preferences-title" hidden>
+        <span class="mm-eyebrow">DO SEU JEITO</span>
+        <h2 id="mm-preferences-title" tabindex="-1">Como prefere acompanhar?</h2>
+        <p class="mm-lead">Você escolhe a apresentação. O conteúdo e o acolhimento permanecem os mesmos.</p>
+        <fieldset class="mm-fieldset"><legend>Modo de apresentação</legend><div class="mm-choices mm-mode-choices">
+          <label class="mm-choice"><input type="radio" name="mm-mode" value="text" checked/><span><strong>Ler e tocar</strong><small>Continue pelo texto, no seu ritmo.</small></span></label>
+          <label class="mm-choice"><input type="radio" name="mm-mode" value="audio" disabled/><span><strong>Ouvir orientações e tocar</strong><small>Quando houver voz local em português. Os itens padronizados continuam em texto.</small></span></label>
+          <div class="mm-unavailable"><strong>Falar: indisponível nesta demonstração</strong><p>O microfone não é ativado. As escalas não são narradas sem revisão da modalidade de aplicação.</p></div>
+        </div></fieldset>
+        <label class="mm-field mm-voice-field" for="mm-voice"><span>Voz de leitura<small>Independente do personagem escolhido</small></span><select id="mm-voice" disabled><option value="">Aguardando vozes locais em português</option></select></label>
+        <fieldset class="mm-fieldset"><legend>Personagem de apoio visual</legend><p class="mm-caption">Ilustrações originais para apresentar o percurso. São recursos visuais, não pessoas reais nem profissionais de saúde.</p><div class="mm-avatar-choices">
+          <label class="mm-avatar-choice"><input type="radio" name="mm-avatar" value="a"/><span class="mm-avatar-art" aria-hidden="true"><svg viewBox="0 0 140 140" fill="none"><circle cx="70" cy="70" r="65" fill="#e7dbcc"/><path d="M24 132c2-30 19-44 46-44s44 14 46 44" fill="#284a54"/><path d="M56 85v12c5 9 23 9 28 0V85" fill="#bd8667"/><ellipse cx="70" cy="58" rx="29" ry="36" fill="#b97755"/><path d="M40 58c-8-34 8-47 30-47 28 0 36 24 30 58-5-11-7-29-11-34-12 12-26 18-49 23Z" fill="#233b3e"/><path d="M51 63h9m20 0h9M64 79c4 3 9 3 13 0" stroke="#26383d" stroke-width="2.5" stroke-linecap="round"/><path d="M36 76c-1 15 4 24 12 29M103 72c4 16 0 27-10 36" stroke="#233b3e" stroke-width="9" stroke-linecap="round"/></svg></span><strong>Personagem A</strong><small>Uma presença ilustrada</small></label>
+          <label class="mm-avatar-choice"><input type="radio" name="mm-avatar" value="b"/><span class="mm-avatar-art" aria-hidden="true"><svg viewBox="0 0 140 140" fill="none"><circle cx="70" cy="70" r="65" fill="#e0e6df"/><path d="M22 132c4-27 22-43 48-43s44 16 48 43" fill="#93684f"/><path d="M57 84v12c5 8 21 8 27 0V84" fill="#ca9a79"/><ellipse cx="70" cy="58" rx="29" ry="36" fill="#d7ad8c"/><path d="M40 53c-2-28 8-42 31-42 24 0 35 18 29 44-5-13-9-18-17-22-11 9-27 12-43 20Z" fill="#49565a"/><path d="M51 63h9m20 0h9M64 80c4 2 9 2 13 0" stroke="#4e4740" stroke-width="2.5" stroke-linecap="round"/><path d="M50 79c5 16 13 20 20 20s15-4 21-20" stroke="#49565a" stroke-width="4" stroke-linecap="round"/></svg></span><strong>Personagem B</strong><small>Uma presença ilustrada</small></label>
+          <label class="mm-avatar-choice"><input type="radio" name="mm-avatar" value="none" checked/><span class="mm-avatar-art mm-avatar-neutral" aria-hidden="true"><svg viewBox="0 0 140 140" fill="none"><circle cx="70" cy="70" r="64" stroke="currentColor" stroke-width="1.2"/><ellipse cx="70" cy="70" rx="47" ry="19" transform="rotate(-35 70 70)" stroke="currentColor" stroke-width="1.2"/><ellipse cx="70" cy="70" rx="47" ry="19" transform="rotate(35 70 70)" stroke="currentColor" stroke-width="1.2"/><circle cx="70" cy="70" r="4" fill="currentColor"/></svg></span><strong>Sem personagem</strong><small>Apenas texto e escolhas</small></label>
+        </div></fieldset>
+        <div class="mm-actions mm-interactive"><button type="button" class="mm-button" data-mm-action="back">← Voltar</button><button type="button" class="mm-button mm-primary" data-mm-action="continue">Começar a conversa →</button></div>
+      </section>
+
+      <section data-mm-stage="questions" aria-labelledby="mm-conversation-title" hidden>
+        <h2 class="mm-sr-only" id="mm-conversation-title" tabindex="-1">A conversa</h2>
+        <div class="mm-question-topline"><span class="mm-eyebrow" id="mm-question-topic"></span><span id="mm-question-avatar" data-choice="none" aria-hidden="true"></span></div>
+        <span class="mm-sr-only" id="mm-question-position"></span>
+        <fieldset class="mm-question-fieldset" aria-describedby="mm-question-intro"><legend id="mm-question-title" tabindex="-1">O que você gostaria de conversar?</legend><p class="mm-question-intro" id="mm-question-intro"></p><div class="mm-choices" id="mm-options"></div></fieldset>
+        <p class="mm-advice" id="mm-clarifier-note" hidden>Este complemento é opcional e não altera a pontuação dos instrumentos.</p>
+        <div class="mm-actions mm-interactive"><button type="button" class="mm-button" data-mm-action="back">← Voltar</button><button type="button" class="mm-button mm-primary" data-mm-action="continue">Continuar →</button></div>
+        <button type="button" class="mm-subtle-button mm-interactive" data-mm-action="skip">Prefiro pular esta pergunta</button>
+      </section>
+
+      <section data-mm-stage="summary" aria-labelledby="mm-summary-title" hidden>
+        <span class="mm-eyebrow">NO SEU TEMPO</span>
+        <h2 id="mm-summary-title" tabindex="-1">Obrigado por conhecer este percurso.</h2>
+        <p class="mm-lead">Sua participação nesta demonstração terminou. Nada foi enviado à NEXO.</p>
+        <p>No acolhimento real, o profissional que fez o convite conversará com você sobre as respostas, no encontro combinado. Este percurso não devolve pontuações, classificações ou interpretações automáticas.</p>
+        <details class="mm-details"><summary>Como funciona o apoio à entrevista?</summary><div><p>O profissional pode organizar informações do contexto, respostas dos instrumentos, complementos e pausas. A ausência de resposta permanece distinta de zero; uma pausa não revela, sozinha, sua causa.</p><p>Um <a href="/conhecendo-meu-momento/visao-tecnica/">caso inteiramente fictício</a> mostra essa organização. Ele não usa suas escolhas desta visita.</p></div></details>
+        <a class="mm-contact-link" href="/contato/">Quero informações sobre o acolhimento <span aria-hidden="true">↗</span></a>
+        <button type="button" class="mm-subtle-button mm-interactive" data-mm-action="restart">Limpar escolhas e recomeçar</button>
+      </section>
+
+      <section data-mm-stage="safety" aria-labelledby="mm-safety-title" hidden>
+        <span class="mm-eyebrow">APOIO HUMANO</span><h2 id="mm-safety-title" tabindex="-1">Seu bem-estar merece atenção.</h2><p class="mm-lead">Este assunto pede uma conversa direta com um profissional.</p><p>A demonstração não acompanha respostas em tempo real e não avalia risco. Se precisar de atendimento imediato, procure um serviço de urgência ou o <a href="tel:192">SAMU 192</a>. O <a href="tel:+55188?oai_link_source=model_response_hotline">CVV 188</a> oferece escuta emocional e não substitui atendimento de emergência.</p><div class="mm-actions mm-interactive"><button type="button" class="mm-button" data-mm-action="safety-exit">Encerrar e buscar apoio</button><button type="button" class="mm-button" data-mm-action="safety-continue">Continuar a demonstração</button></div>
+      </section>
+
+      <section data-mm-stage="expired" aria-labelledby="mm-expired-title" hidden>
+        <span class="mm-eyebrow">PERCURSO ENCERRADO</span><h2 id="mm-expired-title" tabindex="-1">Podemos começar em outro momento.</h2><p>As escolhas locais foram descartadas após um período prolongado sem interação. O encerramento técnico não permite saber por que a pessoa interrompeu o percurso.</p><p>Não há resultado, envio ou interpretação sobre essa interrupção.</p><button type="button" class="mm-button mm-interactive" data-mm-action="restart">Conhecer novamente</button>
+      </section>
+
+      <section data-mm-stage="paused" aria-labelledby="mm-paused-title" hidden>
+        <span class="mm-eyebrow">UMA PAUSA</span><h2 id="mm-paused-title" tabindex="-1">Podemos continuar depois.</h2><p class="mm-lead">O percurso está pausado nesta página.</p><p>As escolhas do exemplo permanecem apenas enquanto esta página ficar aberta. Ao sair ou recarregar, elas serão descartadas. Você pode encerrar agora ou retomar quando se sentir à vontade.</p><div class="mm-actions mm-interactive"><button type="button" class="mm-button mm-primary" data-mm-action="resume">Retomar o percurso</button><button type="button" class="mm-button" data-mm-action="exit">Encerrar e limpar</button></div>
+      </section>
+      <section data-mm-stage="closed" aria-labelledby="mm-closed-title" hidden>
+        <span class="mm-eyebrow">PERCURSO ENCERRADO</span><h2 id="mm-closed-title" tabindex="-1">As escolhas foram limpas.</h2><p class="mm-lead">Nada foi enviado à NEXO.</p><p id="mm-closed-message">Esta demonstração é voltada a adultos. Se quiser, você pode conhecer a proposta ou pedir informações sobre as possibilidades de acolhimento.</p><div class="mm-actions mm-interactive"><button type="button" class="mm-button" data-mm-action="restart">Conhecer novamente</button><a class="mm-button mm-primary" href="/contato/">Falar com a NEXO ↗</a></div>
+      </section>
+
+      <p id="mm-error" class="mm-error" role="alert"></p>
+      <p id="mm-status" class="mm-status" role="status" aria-live="polite" aria-atomic="true"></p>
+
+      <div class="mm-audio-bar mm-interactive" aria-label="Leitura em voz alta">
+        <div class="mm-audio-buttons"><button type="button" data-mm-action="tts-play" aria-describedby="mm-tts-status"><span aria-hidden="true">▷</span> Ouvir ou repetir</button><button type="button" data-mm-action="tts-pause">Pausar leitura</button><button type="button" data-mm-action="tts-stop">Parar</button></div>
+        <p id="mm-tts-status" role="status" aria-live="polite">A leitura das orientações depende de voz local em português e só começa quando você escolhe ouvir. Os itens das escalas não são narrados.</p>
+      </div>
+
+      <noscript><div class="mm-nojs"><p>Para navegar pela demonstração, ative JavaScript. Você pode ler as informações acima sem registrar qualquer escolha ou <a href="/contato/">pedir informações à NEXO</a>.</p></div><style>.mm-root .mm-interactive,.mm-root .mm-consents{display:none!important}</style></noscript>
+    </div>
+  </div>
+  <footer class="mm-footnote"><p>Uma experiência para organizar assuntos, com tempo e respeito à história de cada pessoa.</p><a href="/conhecendo-meu-momento/visao-tecnica/">Conhecer a estrutura técnica de exemplo ↗</a></footer>
+</div>
+<script>import '../scripts/meu-momento';</script>

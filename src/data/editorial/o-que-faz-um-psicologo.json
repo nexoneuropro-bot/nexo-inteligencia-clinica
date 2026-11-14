@@ -1,0 +1,869 @@
+{
+  "slug": "o-que-faz-um-psicologo",
+  "title": "Você sabe mesmo o que um psicólogo faz?",
+  "subtitle": "Ciência, avaliação, responsabilidades profissionais e trabalho em rede",
+  "description": "Dossiê educativo sobre Psicologia, Neuropsicologia, diagnóstico, psicofármacos, SUS, SUAS e colaboração entre profissões.",
+  "category": "Profissão, ciência e sociedade",
+  "theme": "profession",
+  "draft": true,
+  "reviewed": false,
+  "migratedAt": "2026-10-16",
+  "source": {
+    "file": "01_EDICOES_PRIORITARIAS/Psicologia_em_Pauta_Tabloid_Premium_v4.pdf",
+    "totalPages": 12,
+    "sha256": "3568e5554f4d5686be87c0dbc292fb908a5d62c43bb1799f21041b041a412411"
+  },
+  "credit": {
+    "name": "Gabriel Batista",
+    "label": "Conteúdo autoral declarado no PDF: Neuropsicólogo | CRP 06/176184",
+    "sourcePages": [
+      1,
+      2,
+      12
+    ],
+    "authorshipConfirmedBySource": true
+  },
+  "adaptationCredit": {
+    "name": "Gabriel Alves Batista",
+    "label": "Texto e curadoria",
+    "confirmedByHolder": true,
+    "confirmedAt": "2026-10-17"
+  },
+  "sections": [
+    {
+      "id": "por-que-esta-edicao",
+      "title": "Por que esta edição existe",
+      "pages": [
+        1,
+        2
+      ],
+      "blocks": [
+        {
+          "type": "p",
+          "text": "Um dossiê para quem cuida, para quem trabalha em rede e para quem só quer entender melhor onde buscar ajuda."
+        },
+        {
+          "type": "p",
+          "text": "Este editorial nasce de uma pergunta simples: quanto a população realmente sabe sobre Psicologia? Não se trata de disputar espaço com Medicina ou Serviço Social. Trata-se de tornar visível o que cada profissão acrescenta e como elas podem trabalhar juntas sem apagar suas diferenças."
+        },
+        {
+          "type": "p",
+          "text": "Quando Psicologia vira apenas “escuta”, perde-se de vista um campo científico que estuda comportamento, cognição, desenvolvimento, aprendizagem, relações, saúde, trabalho e muito mais."
+        },
+        {
+          "type": "p",
+          "text": "A saúde mental ganhou espaço público, mas a compreensão sobre quem faz o quê não cresceu na mesma velocidade. O resultado é um paciente que circula entre profissionais e, muitas vezes, precisa traduzir sozinho o próprio cuidado."
+        },
+        {
+          "type": "p",
+          "text": "A Psicologia brasileira é uma profissão relativamente jovem, regulamentada em 1962. Desde então, ampliou-se da clínica para escolas, hospitais, organizações, justiça, assistência social, atenção básica, neuropsicologia, reabilitação e pesquisa. A imagem pública, porém, ainda costuma caber num divã.",
+          "review": "Conferência de fontes em 17/10/2026: Lei 4.119/1962 confirma a regulamentação e o diagnóstico psicológico; a enumeração de campos é uma apresentação educativa, sem ampliar credenciais pessoais. Texto e referência legal conferidos. A decisão editorial/clínica da adaptação permanece com o responsável."
+        },
+        {
+          "type": "quote",
+          "text": "Se a sua definição de Psicologia cabe apenas na palavra escuta, talvez este dossiê mostre o tamanho do pedaço que ficou de fora.",
+          "attribution": "Gabriel Batista — texto da edição original"
+        }
+      ]
+    },
+    {
+      "id": "psicologia-ciencia",
+      "title": "Como a Psicologia produz conhecimento",
+      "pages": [
+        3
+      ],
+      "blocks": [
+        {
+          "type": "p",
+          "text": "A Psicologia mantém um diálogo histórico com a Filosofia e produz conhecimento por métodos científicos próprios. Formula hipóteses, produz medidas, compara grupos, acompanha trajetórias, testa relações, constrói instrumentos e revisa modelos conforme os dados."
+        },
+        {
+          "type": "quote",
+          "text": "Se a Psicologia não prevê tudo, então não é ciência?",
+          "attribution": "Gabriel Batista — texto da edição original"
+        },
+        {
+          "type": "p",
+          "text": "Não. Ciência não exige adivinhação perfeita. Epidemiologia, medicina, economia e meteorologia também trabalham com incerteza. Em Psicologia, muitas previsões são probabilísticas: diante de determinadas condições, certos comportamentos tornam-se mais ou menos prováveis."
+        },
+        {
+          "type": "list",
+          "items": [
+            "experimentos e estudos observacionais",
+            "psicometria e testes padronizados",
+            "estatística e modelos probabilísticos",
+            "medidas psicofisiológicas e neurociência",
+            "métodos qualitativos e análise contextual"
+          ]
+        },
+        {
+          "type": "p",
+          "text": "As diretrizes curriculares atuais exigem formação fundamentada em conhecimento científico e compreensão da complexidade do fenômeno psicológico.",
+          "review": "Conferência de fontes em 17/10/2026: A DCN 2023 exige construção científica e pluralidade teórico-metodológica. A provocação contra a Filosofia foi reescrita positivamente, preservando a explicação de métodos e incerteza. Redação ajustada; decisão de tom pode ser revista pelo autor. A decisão editorial/clínica da adaptação permanece com o responsável."
+        }
+      ]
+    },
+    {
+      "id": "biopsicossocial",
+      "title": "Corpo, história e contexto na mesma investigação",
+      "pages": [
+        4
+      ],
+      "blocks": [
+        {
+          "type": "quote",
+          "text": "Antes de chamar de depressão, você olhou para o resto da pessoa?",
+          "attribution": "Gabriel Batista — texto da edição original"
+        },
+        {
+          "type": "p",
+          "text": "Sintomas psicológicos não chegam etiquetados com a origem. Corpo, história, medicamentos, sono, ambiente, trabalho e relações podem participar do mesmo quadro.",
+          "review": "Conferência de fontes em 17/10/2026: O caso continua explicitamente ilustrativo. NICE 1.2.6–1.2.7 sustenta avaliação contextual com saúde física, sono, funcionamento e medicamentos; as leis profissionais sustentam o quadro de contribuições, sem repartir a pessoa entre categorias. Mantidos exemplo e encaminhamento individual; não há bateria universal ou diagnóstico. A decisão editorial/clínica da adaptação permanece com o responsável."
+        },
+        {
+          "type": "p",
+          "text": "O modelo biopsicossocial não é um condomínio em que o médico recebe o “bio”, o psicólogo o “psico” e o assistente social o “social”. Cada profissional precisa enxergar a pessoa inteira, ainda que responda por métodos e responsabilidades diferentes."
+        },
+        {
+          "type": "note",
+          "text": "Caso ilustrativo: “Estou cansado, sem concentração, sem desejo sexual e não consigo trabalhar. É depressão?”"
+        },
+        {
+          "type": "p",
+          "text": "Pode haver sofrimento depressivo. Também pode haver efeitos de medicamento, alterações do sono, condições clínicas, sobrecarga laboral, uso de substâncias ou outras variáveis. O ponto não é pedir uma bateria de exames para todo mundo. É reconhecer sinais que tornam uma avaliação médica clinicamente indicada.",
+          "review": "Conferência de fontes em 17/10/2026: O caso continua explicitamente ilustrativo. NICE 1.2.6–1.2.7 sustenta avaliação contextual com saúde física, sono, funcionamento e medicamentos; as leis profissionais sustentam o quadro de contribuições, sem repartir a pessoa entre categorias. Mantidos exemplo e encaminhamento individual; não há bateria universal ou diagnóstico. A decisão editorial/clínica da adaptação permanece com o responsável."
+        },
+        {
+          "type": "table",
+          "columns": [
+            "Perspectiva",
+            "Contribuição descrita no original"
+          ],
+          "rows": [
+            [
+              "Psicologia",
+              "Funcionamento psicológico, comportamento, história e contexto."
+            ],
+            [
+              "Medicina",
+              "Condições clínicas, exame médico, investigação orgânica e tratamento."
+            ],
+            [
+              "Serviço Social",
+              "Direitos, território, proteção social e condições concretas de vida."
+            ]
+          ],
+          "review": "Conferência de fontes em 17/10/2026: O caso continua explicitamente ilustrativo. NICE 1.2.6–1.2.7 sustenta avaliação contextual com saúde física, sono, funcionamento e medicamentos; as leis profissionais sustentam o quadro de contribuições, sem repartir a pessoa entre categorias. Mantidos exemplo e encaminhamento individual; não há bateria universal ou diagnóstico. A decisão editorial/clínica da adaptação permanece com o responsável."
+        }
+      ]
+    },
+    {
+      "id": "profissoes",
+      "title": "Uma pessoa, quatro lentes profissionais",
+      "pages": [
+        5
+      ],
+      "blocks": [
+        {
+          "type": "p",
+          "text": "As profissões se encontram, mas não são intercambiáveis. O objetivo desta página não é erguer muros; é deixar as portas identificadas."
+        },
+        {
+          "type": "table",
+          "columns": [
+            "Profissão",
+            "Atuação apresentada no dossiê"
+          ],
+          "rows": [
+            [
+              "Psicólogo",
+              "Avalia e intervém sobre processos psicológicos e comportamento. Pode atuar em clínica, saúde, educação, trabalho, justiça, políticas públicas, pesquisa e outros campos."
+            ],
+            [
+              "Neuropsicólogo",
+              "Na Psicologia, a Neuropsicologia investiga relações entre cognição, comportamento e funcionalidade por avaliação e intervenção. É uma especialidade reconhecida pelo CFP. O registro de especialista reconhece uma qualificação; segundo o CFP, não é condição obrigatória para o exercício profissional, que exige competência técnica para a atividade."
+            ],
+            [
+              "Psiquiatra",
+              "É médico com formação especializada em Psiquiatria. Realiza avaliação médica em saúde mental e pode conduzir investigação clínica e tratamento medicamentoso quando indicado. O cuidado pode envolver outras intervenções e trabalho em equipe."
+            ],
+            [
+              "Assistente social",
+              "Atua sobre direitos, políticas sociais, condições concretas de vida, proteção social, acesso a serviços e estudos sociais/socioeconômicos."
+            ]
+          ],
+          "review": "Conferência de fontes em 17/10/2026: CFP diferencia campo de Neuropsicologia, registro de especialista e competência técnica. “Especialização reconhecida” foi substituída para evitar afirmar que o registro é requisito universal ou comprovar título individual. Quadro precisado e Psiquiatria descrita como avaliação e tratamento médico. A decisão editorial/clínica da adaptação permanece com o responsável."
+        },
+        {
+          "type": "quote",
+          "text": "Interdisciplinaridade não é todo mundo fazer a mesma coisa. É saber onde seu trabalho encontra o do outro.",
+          "attribution": "Gabriel Batista — texto da edição original"
+        }
+      ]
+    },
+    {
+      "id": "diagnostico-neuropsicologia",
+      "title": "Diagnóstico, hipóteses e Neuropsicologia",
+      "pages": [
+        6
+      ],
+      "blocks": [
+        {
+          "type": "quote",
+          "text": "Se o psiquiatra falou, acabou?",
+          "attribution": "Gabriel Batista — texto da edição original"
+        },
+        {
+          "type": "p",
+          "text": "Não. Uma hipótese diagnóstica pode ser revisada. O valor do diagnóstico está na qualidade das evidências, no raciocínio diferencial e na evolução do caso, não apenas no título de quem o formulou.",
+          "review": "Conferência de fontes em 17/10/2026: Lei 4.119/1962 e SATEPSI sustentam diagnóstico psicológico e integração de fontes; a Lei 12.842 preserva competências das outras profissões. Foram retirados exemplos soltos de grandiosidade/necessidade de atenção que favoreciam rotulação. Preservados raciocínio, história e funcionalidade; um teste ou comportamento isolado não decide o caso. A decisão editorial/clínica da adaptação permanece com o responsável."
+        },
+        {
+          "type": "p",
+          "text": "O psicólogo realiza diagnóstico psicológico dentro de suas competências e pode integrar classificações diagnósticas quando isso for tecnicamente pertinente. O psiquiatra realiza diagnóstico no âmbito médico, podendo investigar condições orgânicas e prescrever. Nenhum dos dois transforma uma primeira conversa em verdade imutável.",
+          "review": "Conferência de fontes em 17/10/2026: Lei 4.119/1962 e SATEPSI sustentam diagnóstico psicológico e integração de fontes; a Lei 12.842 preserva competências das outras profissões. Foram retirados exemplos soltos de grandiosidade/necessidade de atenção que favoreciam rotulação. Preservados raciocínio, história e funcionalidade; um teste ou comportamento isolado não decide o caso. A decisão editorial/clínica da adaptação permanece com o responsável."
+        },
+        {
+          "type": "p",
+          "text": "Um teste não fecha um diagnóstico."
+        },
+        {
+          "type": "p",
+          "text": "Avaliação neuropsicológica integra entrevista, história, observação, dados funcionais, instrumentos padronizados e análise do contexto. Atenção, memória, linguagem ou funções executivas são partes de um perfil, não etiquetas isoladas.",
+          "review": "Conferência de fontes em 17/10/2026: Lei 4.119/1962 e SATEPSI sustentam diagnóstico psicológico e integração de fontes; a Lei 12.842 preserva competências das outras profissões. Foram retirados exemplos soltos de grandiosidade/necessidade de atenção que favoreciam rotulação. Preservados raciocínio, história e funcionalidade; um teste ou comportamento isolado não decide o caso. A decisão editorial/clínica da adaptação permanece com o responsável."
+        },
+        {
+          "type": "p",
+          "text": "Dificuldades de atenção, alterações do humor ou conflitos nas relações precisam ser compreendidos ao longo do tempo e em seu contexto. Um comportamento isolado não permite ao leitor concluir um diagnóstico. Em situações complexas, o profissional integra história, funcionamento cotidiano e outras fontes pertinentes.",
+          "review": "Conferência de fontes em 17/10/2026: Lei 4.119/1962 e SATEPSI sustentam diagnóstico psicológico e integração de fontes; a Lei 12.842 preserva competências das outras profissões. Foram retirados exemplos soltos de grandiosidade/necessidade de atenção que favoreciam rotulação. Preservados raciocínio, história e funcionalidade; um teste ou comportamento isolado não decide o caso. A decisão editorial/clínica da adaptação permanece com o responsável."
+        }
+      ]
+    },
+    {
+      "id": "psicofarmacos",
+      "title": "Compreender, colaborar e respeitar os limites de prescrição",
+      "pages": [
+        7
+      ],
+      "blocks": [
+        {
+          "type": "quote",
+          "text": "Se o psicólogo não prescreve, por que deveria entender psicofármaco?",
+          "attribution": "Gabriel Batista — texto da edição original"
+        },
+        {
+          "type": "p",
+          "text": "Alguns medicamentos podem produzir efeitos no cotidiano, inclusive sobre sono, apetite e vida sexual. A ocorrência e a intensidade dependem do medicamento e da pessoa. Na Psicologia, esse relato pode ser acolhido e registrado para favorecer o diálogo com o profissional prescritor; não é uma orientação para alterar o tratamento por conta própria.",
+          "review": "Conferência de fontes em 17/10/2026: APA 2025 foi identificada e o Novo México documenta uma jurisdição específica. NHS sustenta os exemplos de possíveis efeitos. Essas fontes não autorizam prescrição no Brasil nem orientam dose. Referências genéricas substituídas; colaboração e decisões do prescritor separadas. A decisão editorial/clínica da adaptação permanece com o responsável."
+        },
+        {
+          "type": "table",
+          "columns": [
+            "Ação",
+            "O que a edição diferencia"
+          ],
+          "rows": [
+            [
+              "Compreender",
+              "Efeitos percebidos, adesão, impacto psicológico e sinais de alerta."
+            ],
+            [
+              "Colaborar",
+              "Registrar, encaminhar e conversar com o prescritor quando houver consentimento e necessidade."
+            ],
+            [
+              "Prescrever",
+              "Selecionar medicamento, dose e mudanças do tratamento exige habilitação legal específica. No atendimento psicológico aqui descrito, essas decisões são encaminhadas ao profissional prescritor."
+            ]
+          ],
+          "review": "Conferência de fontes em 17/10/2026: APA 2025 foi identificada e o Novo México documenta uma jurisdição específica. NHS sustenta os exemplos de possíveis efeitos. Essas fontes não autorizam prescrição no Brasil nem orientam dose. Referências genéricas substituídas; colaboração e decisões do prescritor separadas. A decisão editorial/clínica da adaptação permanece com o responsável."
+        },
+        {
+          "type": "p",
+          "text": "Nos Estados Unidos, o Novo México oferece um exemplo delimitado: o conselho estadual prevê certificados próprios para psicólogos com autorização de prescrição, incluindo etapa supervisionada e revisão dos registros antes da autorização plena. As exigências pertencem àquela jurisdição; não autorizam prescrição por psicólogos no Brasil.",
+          "review": "Conferência de fontes em 17/10/2026: APA 2025 foi identificada e o Novo México documenta uma jurisdição específica. NHS sustenta os exemplos de possíveis efeitos. Essas fontes não autorizam prescrição no Brasil nem orientam dose. Referências genéricas substituídas; colaboração e decisões do prescritor separadas. A decisão editorial/clínica da adaptação permanece com o responsável."
+        },
+        {
+          "type": "quote",
+          "text": "Entender não é prescrever. Mas não entender também pode empobrecer o cuidado.",
+          "attribution": "Gabriel Batista — texto da edição original"
+        }
+      ]
+    },
+    {
+      "id": "sus-suas-rede",
+      "title": "Psicologia, SUS, SUAS e trabalho em rede",
+      "pages": [
+        8
+      ],
+      "blocks": [
+        {
+          "type": "quote",
+          "text": "Quando a política é social, o psicólogo vira assistente social?",
+          "attribution": "Gabriel Batista — texto da edição original"
+        },
+        {
+          "type": "p",
+          "text": "Não. Estar no mesmo equipamento não apaga formação, método e atribuições. Há atividades compartilháveis e núcleos profissionais diferentes.",
+          "review": "Conferência de fontes em 17/10/2026: CFP/CREPOP 2021 diferencia finalidade psicossocial no CRAS de psicoterapia e o Código de Ética limita compartilhamento às informações necessárias, com sigilo. CFESS 2011 e Lei 8.662 delimitam Serviço Social. Tabela mantida como síntese; fonte exata e limites adicionados. A decisão editorial/clínica da adaptação permanece com o responsável."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Acolhimento.",
+            "Trabalho em equipe.",
+            "Articulação de rede.",
+            "Planejamento.",
+            "Discussão de casos.",
+            "Defesa do acesso a direitos e cuidado."
+          ]
+        },
+        {
+          "type": "table",
+          "columns": [
+            "Perspectiva",
+            "Contribuição descrita"
+          ],
+          "rows": [
+            [
+              "Psicologia",
+              "Processos psicológicos, vínculos, comportamento, desenvolvimento, sofrimento, grupos e funcionamento psicológico."
+            ],
+            [
+              "Serviço Social",
+              "Direitos, políticas sociais, benefícios, proteção social, condições concretas de vida, estudos sociais e socioeconômicos."
+            ]
+          ],
+          "review": "Conferência de fontes em 17/10/2026: CFP/CREPOP 2021 diferencia finalidade psicossocial no CRAS de psicoterapia e o Código de Ética limita compartilhamento às informações necessárias, com sigilo. CFESS 2011 e Lei 8.662 delimitam Serviço Social. Tabela mantida como síntese; fonte exata e limites adicionados. A decisão editorial/clínica da adaptação permanece com o responsável."
+        },
+        {
+          "type": "p",
+          "text": "Rede de cuidado precisa de comunicação responsável, consentimento e contrarreferência quando pertinente. A pessoa não deveria ser obrigada a traduzir sozinha cada pedaço do caso.",
+          "review": "Conferência de fontes em 17/10/2026: CFP/CREPOP 2021 diferencia finalidade psicossocial no CRAS de psicoterapia e o Código de Ética limita compartilhamento às informações necessárias, com sigilo. CFESS 2011 e Lei 8.662 delimitam Serviço Social. Tabela mantida como síntese; fonte exata e limites adicionados. A decisão editorial/clínica da adaptação permanece com o responsável."
+        },
+        {
+          "type": "quote",
+          "text": "Quando uma profissão é usada para tapar o buraco da outra, isso não é interdisciplinaridade. É precarização.",
+          "attribution": "Gabriel Batista — texto da edição original"
+        }
+      ]
+    },
+    {
+      "id": "tempo-tecnico",
+      "title": "O trabalho que sustenta a sessão",
+      "pages": [
+        9
+      ],
+      "blocks": [
+        {
+          "type": "quote",
+          "text": "O paciente vê a sessão. Nem sempre vê o trabalho que sustenta a sessão.",
+          "attribution": "Gabriel Batista — texto da edição original"
+        },
+        {
+          "type": "p",
+          "text": "Correção de instrumentos, integração de dados, registro, elaboração de documentos, consulta à literatura, planejamento e comunicação em rede também consomem tempo técnico."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Atendimento — o exemplo visual do original usa 50 minutos.",
+            "Registro e organização.",
+            "Correção e análise.",
+            "Integração e hipótese.",
+            "Documentação e devolutiva."
+          ],
+          "review": "Conferência de fontes em 17/10/2026: O trabalho documental e a integração vão além do encontro. Cinquenta minutos continuam exemplo, não regra. A ficha do Senado em 17/10 registra PL 1.214/2019 aguardando despacho. Data atualizada e projeto separado de direito vigente. A decisão editorial/clínica da adaptação permanece com o responsável."
+        },
+        {
+          "type": "p",
+          "text": "A jornada não é apenas um debate corporativo. Ela conversa com qualidade do trabalho, produção documental, desgaste emocional e tempo técnico invisível."
+        },
+        {
+          "type": "p",
+          "text": "Na consulta de 17 de outubro de 2026, a ficha do Senado registra o PL 1.214/2019 em tramitação, aguardando despacho. A proposta de até 30 horas semanais não deve ser apresentada como um direito nacional criado por esse projeto.",
+          "review": "Conferência de fontes em 17/10/2026: O trabalho documental e a integração vão além do encontro. Cinquenta minutos continuam exemplo, não regra. A ficha do Senado em 17/10 registra PL 1.214/2019 aguardando despacho. Data atualizada e projeto separado de direito vigente. A decisão editorial/clínica da adaptação permanece com o responsável."
+        }
+      ]
+    },
+    {
+      "id": "perguntas-profissoes",
+      "title": "Perguntas para revisar seu mapa das profissões",
+      "pages": [
+        10,
+        11
+      ],
+      "blocks": [
+        {
+          "type": "p",
+          "text": "Quanto do seu conceito de Psicologia ainda vem do senso comum? Marque a alternativa que melhor representa sua resposta. O objetivo não é “dar nota” em ninguém. É descobrir quais fronteiras profissionais você ainda pode querer pesquisar."
+        },
+        {
+          "type": "exercise",
+          "text": "Leia cada situação como um convite à pesquisa e ao diálogo. Não há placar ou classificação do visitante.",
+          "items": [
+            "1. Se um paciente relata queda de libido após iniciar antidepressivo, o psicólogo deve: A) ignorar porque é assunto médico; B) investigar impacto e encaminhar ao prescritor quando necessário; C) orientar redução da dose.",
+            "2. Uma avaliação psicológica usa testes. Então o diagnóstico vem do teste? A) Sim; B) Não. O instrumento é uma fonte integrada a outras informações.",
+            "3. No SUAS, psicólogo e assistente social podem executar qualquer função um do outro? A) Sim, porque ambos são equipe técnica; B) Não. Há ações comuns e competências próprias.",
+            "4. Encaminhar à UBS significa que o psicólogo “não deu conta”? A) Sim; B) Não. Pode significar que reconheceu uma hipótese que exige outra avaliação.",
+            "5. Quem pode ser a primeira porta de entrada para sofrimento mental? A) Só o psiquiatra; B) Só o psicólogo; C) Depende do caso: Psicologia, Medicina/APS ou outros pontos da rede podem iniciar o cuidado.",
+            "6. Um neuropsicólogo encontra prejuízo importante de memória. Isso sozinho fecha um diagnóstico? A) Sim; B) Não. É preciso integrar história, funcionalidade, outros dados e, quando indicado, avaliação médica.",
+            "7. Psicólogo precisa saber alguma coisa sobre psicofármacos? A) Não, porque não prescreve; B) Sim, para compreender efeitos psicológicos/comportamentais e trabalhar em rede sem ultrapassar seu escopo.",
+            "8. “Biopsicossocial” significa dividir a pessoa entre três profissões? A) Sim; B) Não. Cada profissão precisa considerar o todo a partir de sua competência."
+          ],
+          "review": "Conferência de fontes em 17/10/2026: As oito situações são educativas e não têm validade psicométrica alegada. Foram acrescentados comentários por questão para que o leitor aprenda o fundamento das alternativas. Placar e faixas permanecem retirados; adaptação aguarda decisão editorial. A decisão editorial/clínica da adaptação permanece com o responsável."
+        },
+        {
+          "type": "note",
+          "text": "Comentário das situações: 1 — B, acolher e discutir com o prescritor, sem orientar ajuste de dose; 2 — B, integrar fontes; 3 — B, respeitar competências; 4 — B, encaminhar pode qualificar o cuidado; 5 — C, a porta de entrada depende da necessidade e da organização da rede; 6 — B, integrar dados e contexto; 7 — B, compreender e colaborar dentro do escopo; 8 — B, considerar as dimensões da pessoa sem dividi-la entre profissões. São explicações educativas, sem pontuação, certificado ou avaliação de saúde do visitante."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Qual é a hipótese neste momento?",
+            "Que outras possibilidades foram consideradas?",
+            "Há algo clínico que vale investigar?",
+            "Os profissionais que me atendem precisam conversar entre si?"
+          ]
+        },
+        {
+          "type": "p",
+          "text": "Participar do próprio cuidado não é se autodiagnosticar. É poder perguntar."
+        }
+      ]
+    },
+    {
+      "id": "futuro",
+      "title": "O que vem pela frente",
+      "pages": [
+        12
+      ],
+      "blocks": [
+        {
+          "type": "p",
+          "text": "A Psicologia precisa crescer sem ficar irreconhecível. Mais espaço profissional exige mais clareza pública sobre ciência, avaliação, diagnóstico, trabalho em rede, limites éticos e responsabilidade social."
+        },
+        {
+          "type": "table",
+          "columns": [
+            "Eixo",
+            "Proposta editorial"
+          ],
+          "rows": [
+            [
+              "Ciência pública",
+              "Comunicar evidências sem virar jargão nem conteúdo raso."
+            ],
+            [
+              "Identidade profissional",
+              "Mostrar que Psicologia não se resume à psicoterapia."
+            ],
+            [
+              "Avaliação",
+              "Valorizar instrumentos e raciocínio clínico sem transformar teste em fetiche."
+            ],
+            [
+              "Rede",
+              "Melhorar comunicação entre Psicologia, Medicina, Serviço Social e demais áreas."
+            ],
+            [
+              "Trabalho",
+              "Tornar visível o tempo técnico, condições de exercício e debate das 30 horas."
+            ]
+          ]
+        },
+        {
+          "type": "quote",
+          "text": "O corpo não termina onde começa a mente. A mente não termina onde começa a sociedade. E nenhuma profissão precisa diminuir a outra para enxergar melhor um ser humano.",
+          "attribution": "Gabriel Batista — texto da edição original"
+        },
+        {
+          "type": "note",
+          "text": "Conteúdo educativo para compreender profissões e formular perguntas sobre o cuidado. Casos e situações não permitem diagnóstico individual; decisões de avaliação e tratamento dependem do contexto de cada pessoa."
+        }
+      ]
+    }
+  ],
+  "references": [
+    {
+      "label": "BRASIL. Lei nº 4.119, de 27 de agosto de 1962. Regulamentação da profissão de psicólogo.",
+      "verification": "verified",
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/1950-1969/l4119.htm",
+      "note": "Consulta documental em 17/10/2026: art. 13, §1º: métodos e técnicas para diagnóstico psicológico, orientação e seleção; §2º: colaboração com outras ciências. Não valida cada exemplo clínico."
+    },
+    {
+      "label": "BRASIL. Lei nº 8.662, de 7 de junho de 1993. Profissão de assistente social.",
+      "verification": "verified",
+      "url": "https://www.planalto.gov.br/ccivil_03/leis/l8662.htm",
+      "note": "Consulta documental em 17/10/2026: arts. 4º–5º delimitam competências e atribuições; quadro editorial é síntese, não substitui a lei."
+    },
+    {
+      "label": "CONSELHO NACIONAL DE SAÚDE. Resolução nº 287, de 8 de outubro de 1998. Categorias profissionais de saúde.",
+      "verification": "verified",
+      "url": "https://www.gov.br/conselho-nacional-de-saude/pt-br/atos-normativos/resolucoes/1998/resolucao-no-287.pdf",
+      "note": "Consulta documental em 17/10/2026: PDF oficial de duas páginas inclui Psicologia e Serviço Social. Substitui a remissão menos precisa à Resolução 218/1997 do original."
+    },
+    {
+      "label": "CONSELHO NACIONAL DE EDUCAÇÃO. Resolução CNE/CES nº 1, de 11 de outubro de 2023. DCNs de Psicologia. DOU, 23 out. 2023, seção 1, p. 55.",
+      "verification": "verified",
+      "url": "https://pesquisa.in.gov.br/imprensa/servlet/INPDFViewer?captchafield=firstAccess&data=23%2F10%2F2023&jornal=515&pagina=55",
+      "note": "Consulta documental em 17/10/2026: publicação oficial indexada: art. 2º, I–II exige fundamento científico e diversidade teórico-metodológica. A abertura do visualizador falhou; o trecho focal foi conferido no texto oficial indexado, não em cópia de site particular."
+    },
+    {
+      "label": "CONSELHO FEDERAL DE PSICOLOGIA. Resolução nº 6/2019 comentada: documentos escritos.",
+      "verification": "verified",
+      "url": "https://site.cfp.org.br/wp-content/uploads/2019/09/Resolu%C3%A7%C3%A3o-CFP-n-06-2019-comentada.pdf",
+      "note": "Consulta documental em 17/10/2026: arts. 5º–6º: fundamentação científica e contexto. Art. 10, §6º,V faculta classificações diagnósticas quando justificadamente necessárias; o comentário distingue descrição do estado psicológico de diagnóstico nosológico. Conferência focal de documentação, sem aprovação dos casos desta edição."
+    },
+    {
+      "label": "CONSELHO FEDERAL DE PSICOLOGIA. Neuropsicologia: ciência e profissão. Brasília: CFP, 2023.",
+      "verification": "verified",
+      "url": "https://site.cfp.org.br/publicacao/manual-neuropsicologia-ciencia-e-profissao/",
+      "note": "Consulta documental em 17/10/2026: página editorial do CFP identifica reconhecimento em 2004 e Resolução 23/2022; manual usado para delimitar campo de avaliação/intervenção, sem comprovar título individual."
+    },
+    {
+      "label": "CONSELHO FEDERAL DE PSICOLOGIA. Referências técnicas para atuação de psicólogas(os) no CRAS/SUAS. 3. ed. Brasília: CFP, 2021.",
+      "verification": "verified",
+      "url": "https://crepop.cfp.org.br/wp-content/uploads/sites/34/2022/10/028-Crepop-Referencias-Tecnicas-para-atuacao-de-psicologasos-no-CRAS-SUAS.pdf",
+      "note": "Consulta documental em 17/10/2026: pp. 133–135 diferenciam escuta/intervenção psicossocial de psicoterapia no CRAS e articulam rede. Limite específico de CRAS preservado."
+    },
+    {
+      "label": "MINISTÉRIO DA SAÚDE. Clínica ampliada, equipe de referência e projeto terapêutico singular. 2. ed. Brasília: MS, 2008.",
+      "verification": "verified",
+      "url": "https://bvsms.saude.gov.br/bvs/publicacoes/clinica_ampliada_equipe_projeto_2ed.pdf",
+      "note": "Consulta documental em 17/10/2026: pp. 27–40: equipe de referência, corresponsabilidade e projeto compartilhado. Substitui título genérico Ações interprofissionais na Atenção Primária à Saúde; não é protocolo farmacológico atual."
+    },
+    {
+      "label": "AMERICAN PSYCHOLOGICAL ASSOCIATION. Guidelines for Psychologists’ Involvement in Pharmacological Issues. Aprovado em agosto de 2025.",
+      "verification": "verified",
+      "url": "https://www.apa.org/about/policy/guidelines-pharmacological-issues.pdf",
+      "note": "Consulta documental em 17/10/2026: PDF/página institucional diferenciam papéis de informação, colaboração e prescrição segundo competência e legislação dos EUA. Não confere autorização no Brasil."
+    },
+    {
+      "label": "NEW MEXICO BOARD OF PSYCHOLOGIST EXAMINERS. Steps for a conditional prescribing psychologist to apply for an unrestricted license. 2026.",
+      "verification": "verified",
+      "url": "https://www.rld.nm.gov/wp-content/uploads/2026/05/Steps-for-Unrestricted-Prescribing-Psychologist-License-and-Forms.pdf",
+      "note": "Consulta documental em 17/10/2026: checklist oficial: certificado condicional, dois anos de supervisão, registros e revisão de pares. Exemplo do Novo México, sem inventariar todas as jurisdições americanas; substitui Updates 2026 genérico."
+    },
+    {
+      "label": "CFESS. Parâmetros para atuação de assistentes sociais na Política de Assistência Social. Brasília: CFESS, 2011.",
+      "verification": "verified",
+      "url": "https://www.cfess.org.br/arquivos/Cartilha_CFESS_Final_Grafica.pdf",
+      "note": "Consulta documental em 17/10/2026: documento específico recuperado; competências setoriais e atuação interdisciplinar. Substitui a categoria genérica Parâmetros e legislação profissional."
+    },
+    {
+      "label": "BRASIL. Senado Federal. PL 1.214/2019: duração do trabalho do psicólogo.",
+      "verification": "verified",
+      "url": "https://www25.senado.leg.br/web/atividade/materias/-/materia/175233",
+      "note": "Consulta documental em 17/10/2026: ficha registra em tramitação/aguardando despacho, último estado 20/07/2026. Situação de projeto, não lei."
+    },
+    {
+      "label": "BRASIL. Lei nº 12.842, de 10 de julho de 2013. Exercício da Medicina.",
+      "verification": "verified",
+      "url": "https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2013/lei/l12842.htm",
+      "note": "Consulta documental em 17/10/2026: arts. 2º–3º: diagnóstico/tratamento e colaboração; art. 4º,§7º resguarda outras profissões. Não se atribui ao diagnóstico nosológico uma exclusividade geral vetada na lei. Substitui CFM/legislação médica genérico."
+    },
+    {
+      "label": "CONSELHO FEDERAL DE PSICOLOGIA. Registro de especialista.",
+      "verification": "verified",
+      "url": "https://site.cfp.org.br/servicos/titulo-de-especialista/",
+      "note": "Consulta documental em 17/10/2026: página atual: registro regulado pela Resolução 23/2022 não é condição obrigatória para exercício profissional; especialidade é diferente de comprovação de título de uma pessoa."
+    },
+    {
+      "label": "CONSELHO FEDERAL DE PSICOLOGIA. SATEPSI: perguntas frequentes sobre avaliação psicológica.",
+      "verification": "verified",
+      "url": "https://satepsi.cfp.org.br/faq.cfm",
+      "note": "Consulta documental em 17/10/2026: fontes fundamentais e complementares da Resolução 31/2022; testes, entrevistas e observação integram um processo. Sem reproduzir instrumento ou item."
+    },
+    {
+      "label": "CONSELHO FEDERAL DE PSICOLOGIA. Código de Ética Profissional do Psicólogo. Resolução 10/2005.",
+      "verification": "verified",
+      "url": "https://site.cfp.org.br/wp-content/uploads/2012/07/codigo_etica.pdf",
+      "note": "Consulta documental em 17/10/2026: art. 1º, b: capacitação; arts. 6º, b e 9º–12: informações necessárias, sigilo e trabalho em equipe, com exceções éticas/legais; consentimento não elimina dever de sigilo."
+    },
+    {
+      "label": "NICE. Depression in adults: treatment and management. NG222. Recomendações 1.2.6–1.2.7.2022.",
+      "verification": "verified",
+      "url": "https://www.nice.org.uk/guidance/ng222/chapter/Recommendations",
+      "note": "Consulta documental em 17/10/2026: texto primário indexado da diretriz: avaliação abrangente, duração/curso, funcionamento, saúde física, contexto e uso de substâncias/medicamentos. Abertura direta 403; não foram importadas recomendações terapêuticas do Reino Unido."
+    },
+    {
+      "label": "NHS. Antidepressants: side effects.",
+      "verification": "verified",
+      "url": "https://www.nhs.uk/medicines/antidepressants/",
+      "note": "Consulta documental em 17/10/2026: página pública oficial confirma possíveis efeitos em sono, apetite e função sexual e orienta discutir dificuldades com o prescritor. Não permite atribuir um sintoma individual a um fármaco."
+    }
+  ],
+  "reviewNotes": [
+    "Fonte integral de 12 páginas, arquivo e SHA256 preservados; conferência documental da adaptação em 17/10/2026com respostas abaixo.",
+    "Texto e curadoria de Gabriel Alves Batista: confirmação do titular de 17/10/2026 preservada.",
+    "Leis, DCN, documentos profissionais, escopo de Neuropsicologia, integração da avaliação e colaboração foram conferidos nas fontes identificadas; não se atribui registro de especialista a uma pessoa por inferência.",
+    "Entradas genéricas substituídas por APA 2025, regulador do Novo México, Lei 12.842/2013, CFESS 2011 e MS 2008. Jurisdição americana não autoriza prescrição no Brasil.",
+    "Oito questões mantidas sem escores; comentários educativos acrescentados. Caso, situações e parágrafos clínicos não são diagnóstico do visitante.",
+    "Decisões humanas restantes: aprovar tom editorial, adaptação das questões, redação clínica e publicação. Nenhuma dessas aprovações foi presumida."
+  ],
+  "reviewResponses": [
+    {
+      "note": "Fonte prioritária lida integralmente: Tabloid Premium v 4, 12 páginas. Edição original: setembro de 2026, São Paulo. Migração em 16/10/2026 não constitui revisão clínica.",
+      "response": "Leitura integral e rastreabilidade do PDF são registros da migração; a pesquisa desta rodada é separada e não equivale à aprovação clínica.",
+      "action": "Mantidos arquivo, hash, páginas e estado de rascunho.",
+      "status": "resolved",
+      "sources": []
+    },
+    {
+      "note": "A capa declara conteúdo autoral de Gabriel Batista. Em 17/10/2026, o titular confirmou a assinatura desta adaptação HTML: Texto e curadoria de Gabriel Alves Batista.",
+      "response": "O titular confirmou texto e curadoria de Gabriel Alves Batista em 17/10/2026; não há pendência de crédito da adaptação.",
+      "action": "Crédito confirmado preservado sem alterar o PDF.",
+      "status": "resolved",
+      "sources": []
+    },
+    {
+      "note": "Preservados os argumentos, o caso ilustrativo, as comparações entre profissões, o trabalho técnico e as oito questões do quiz. Removidos apenas os placares e rótulos de pontuação; a alteração precisa de aprovação editorial.",
+      "response": "Caso, quadros e oito situações permanecem. Acrescentados comentários explicativos; não há escores ou classificação do visitante.",
+      "action": "Decidir editorialmente a adaptação sem pontuação.",
+      "status": "editorial-decision",
+      "sources": [
+        {
+          "label": "CFP/SATEPSI",
+          "url": "https://satepsi.cfp.org.br/faq.cfm"
+        }
+      ]
+    },
+    {
+      "note": "Texto de duas colunas e quadros foi reorganizado para leitura linear, sem transportar sobreposições e ordem textual defeituosa do PDF.",
+      "response": "Ordem HTML linear e quadros acessíveis preservam o conteúdo e páginas do original.",
+      "action": "Nenhuma mudança de diagramação ou exclusão de capítulo nesta pesquisa.",
+      "status": "resolved",
+      "sources": []
+    },
+    {
+      "note": "As referências genéricas do original precisam de identificação completa e verificação; especialmente APA 2026 prescribing updates e CFM/legislação médica.",
+      "response": "APA 2025, regulador do Novo México, Lei 12842/2013, CFESS 2011 e MS 2008 substituem entradas genéricas.",
+      "action": "Todas as entradas replace dos dois artigos foram substituídas por documento preciso.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "APA: Diretrizes farmacológicas 2025",
+          "url": "https://www.apa.org/about/policy/guidelines-pharmacological-issues.pdf"
+        },
+        {
+          "label": "Novo México: Certificação de prescrição 2026",
+          "url": "https://www.rld.nm.gov/wp-content/uploads/2026/05/Steps-for-Unrestricted-Prescribing-Psychologist-License-and-Forms.pdf"
+        },
+        {
+          "label": "Lei 12.842/2013",
+          "url": "https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2013/lei/l12842.htm"
+        },
+        {
+          "label": "CFESS: Parâmetros na assistência social 2011",
+          "url": "https://www.cfess.org.br/arquivos/Cartilha_CFESS_Final_Grafica.pdf"
+        },
+        {
+          "label": "MS: Clínica ampliada e PTS 2008",
+          "url": "https://bvsms.saude.gov.br/bvs/publicacoes/clinica_ampliada_equipe_projeto_2ed.pdf"
+        }
+      ]
+    },
+    {
+      "note": "O PL 1214/2019 foi consultado no Senado em 16/10/2026: permanece em tramitação, aguardando despacho. A referência exclusiva à Câmara no original foi atualizada e registrada no respectivo bloco.",
+      "response": "Senado consultado em 17/10: PL 1214/2019 em tramitação/aguardando despacho.",
+      "action": "Texto e referência temporal atualizados.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "pl 1214",
+          "url": "https://www25.senado.leg.br/web/atividade/materias/-/materia/175233"
+        }
+      ]
+    },
+    {
+      "note": "As imagens de apoio são descritas no original como recortes de Relações em Pauta usados nesta prova de diagramação. Não foram importadas como fotografias clínicas ou evidência.",
+      "response": "Recortes de outra editoria não comprovam contexto clínico nem direito de republicação de retratos.",
+      "action": "Não foram importados como evidência ou foto clínica.",
+      "status": "resolved",
+      "sources": []
+    },
+    {
+      "note": "Não disponibilizar PDF original nem publicar o artigo antes da aprovação editorial e clínica pertinente.",
+      "response": "A pesquisa responde pendências de fontes; a aprovação editorial/clínica é decisão do responsável.",
+      "action": "draft: true e reviewed: false mantidos; nenhuma publicação.",
+      "status": "editorial-decision",
+      "sources": []
+    },
+    {
+      "note": "por-que-esta-edicao (páginas 1,2) — bloco 5: Conferir a norma profissional e a fonte primária específica antes da aprovação editorial. O artigo permanece rascunho; a presença da afirmação no original não equivale à validação.",
+      "response": "Lei 4.119/1962 confirma a regulamentação e o diagnóstico psicológico; a enumeração de campos é uma apresentação educativa, sem ampliar credenciais pessoais.",
+      "action": "Texto e referência legal conferidos.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "lei 4119",
+          "url": "https://www.planalto.gov.br/ccivil_03/leis/1950-1969/l4119.htm"
+        }
+      ]
+    },
+    {
+      "note": "psicologia-ciencia (páginas 3) — bloco 5: Conferir a norma profissional e a fonte primária específica antes da aprovação editorial. O artigo permanece rascunho; a presença da afirmação no original não equivale à validação.",
+      "response": "A DCN 2023 exige construção científica e pluralidade teórico-metodológica. A provocação contra a Filosofia foi reescrita positivamente, preservando a explicação de métodos e incerteza.",
+      "action": "Redação ajustada; decisão de tom pode ser revista pelo autor.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "DCN de Psicologia/DOU 2023",
+          "url": "https://pesquisa.in.gov.br/imprensa/servlet/INPDFViewer?captchafield=firstAccess&data=23%2F10%2F2023&jornal=515&pagina=55"
+        }
+      ]
+    },
+    {
+      "note": "biopsicossocial (páginas 4) — bloco 2: Revisão clínica e de escopo profissional pendente. Preservado como conteúdo educativo do original, sem diagnóstico individual ou orientação de prescrição.; bloco 5: Revisão clínica e de escopo profissional pendente. Preservado como conteúdo educativo do original, sem diagnóstico individual ou orientação de prescrição.; bloco 6: Conferir a norma profissional e a fonte primária específica antes da aprovação editorial. O artigo permanece rascunho; a presença da afirmação no original não equivale à validação.",
+      "response": "O caso continua explicitamente ilustrativo. NICE 1.2.6–1.2.7 sustenta avaliação contextual com saúde física, sono, funcionamento e medicamentos; as leis profissionais sustentam o quadro de contribuições, sem repartir a pessoa entre categorias.",
+      "action": "Mantidos exemplo e encaminhamento individual; não há bateria universal ou diagnóstico.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "NICE: NG222",
+          "url": "https://www.nice.org.uk/guidance/ng222/chapter/Recommendations"
+        },
+        {
+          "label": "lei 4119",
+          "url": "https://www.planalto.gov.br/ccivil_03/leis/1950-1969/l4119.htm"
+        },
+        {
+          "label": "lei 8662",
+          "url": "https://www.planalto.gov.br/ccivil_03/leis/l8662.htm"
+        },
+        {
+          "label": "Lei 12.842/2013",
+          "url": "https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2013/lei/l12842.htm"
+        }
+      ]
+    },
+    {
+      "note": "profissoes (páginas 5) — bloco 2: Conferir a norma profissional e a fonte primária específica antes da aprovação editorial. O artigo permanece rascunho; a presença da afirmação no original não equivale à validação. Precisar a expressão “especialização reconhecida” sem presumir título registrado de pessoa específica.",
+      "response": "CFP diferencia campo de Neuropsicologia, registro de especialista e competência técnica. “Especialização reconhecida” foi substituída para evitar afirmar que o registro é requisito universal ou comprovar título individual.",
+      "action": "Quadro precisado e Psiquiatria descrita como avaliação e tratamento médico.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "CFP: Registro de especialista",
+          "url": "https://site.cfp.org.br/servicos/titulo-de-especialista/"
+        },
+        {
+          "label": "CFP: Manual de Neuropsicologia",
+          "url": "https://site.cfp.org.br/publicacao/manual-neuropsicologia-ciencia-e-profissao/"
+        },
+        {
+          "label": "Lei 12.842/2013",
+          "url": "https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2013/lei/l12842.htm"
+        }
+      ]
+    },
+    {
+      "note": "diagnostico-neuropsicologia (páginas 6) — bloco 2: Revisão clínica e de escopo profissional pendente. Preservado como conteúdo educativo do original, sem diagnóstico individual ou orientação de prescrição.; bloco 3: Conferir a norma profissional e a fonte primária específica antes da aprovação editorial. O artigo permanece rascunho; a presença da afirmação no original não equivale à validação.; bloco 5: Revisão clínica e de escopo profissional pendente. Preservado como conteúdo educativo do original, sem diagnóstico individual ou orientação de prescrição.; bloco 6: Revisão clínica e de escopo profissional pendente. Preservado como conteúdo educativo do original, sem diagnóstico individual ou orientação de prescrição.",
+      "response": "Lei 4.119/1962 e SATEPSI sustentam diagnóstico psicológico e integração de fontes; a Lei 12.842 preserva competências das outras profissões. Foram retirados exemplos soltos de grandiosidade/necessidade de atenção que favoreciam rotulação.",
+      "action": "Preservados raciocínio, história e funcionalidade; um teste ou comportamento isolado não decide o caso.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "lei 4119",
+          "url": "https://www.planalto.gov.br/ccivil_03/leis/1950-1969/l4119.htm"
+        },
+        {
+          "label": "CFP/SATEPSI",
+          "url": "https://satepsi.cfp.org.br/faq.cfm"
+        },
+        {
+          "label": "Lei 12.842/2013",
+          "url": "https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2013/lei/l12842.htm"
+        }
+      ]
+    },
+    {
+      "note": "psicofarmacos (páginas 7) — bloco 2: Revisão clínica e de escopo profissional pendente. Preservado como conteúdo educativo do original, sem diagnóstico individual ou orientação de prescrição.; bloco 3: Revisão clínica e de escopo profissional pendente. Preservado como conteúdo educativo do original, sem diagnóstico individual ou orientação de prescrição.; bloco 4: Conferir a norma profissional e a fonte primária específica antes da aprovação editorial. O artigo permanece rascunho; a presença da afirmação no original não equivale à validação. O trecho se refere aos Estados Unidos. Identificar jurisdições e fonte exata atual antes da aprovação; não se aplica como autorização no Brasil.",
+      "response": "APA 2025 foi identificada e o Novo México documenta uma jurisdição específica. NHS sustenta os exemplos de possíveis efeitos. Essas fontes não autorizam prescrição no Brasil nem orientam dose.",
+      "action": "Referências genéricas substituídas; colaboração e decisões do prescritor separadas.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "APA: Diretrizes farmacológicas 2025",
+          "url": "https://www.apa.org/about/policy/guidelines-pharmacological-issues.pdf"
+        },
+        {
+          "label": "Novo México: Certificação de prescrição 2026",
+          "url": "https://www.rld.nm.gov/wp-content/uploads/2026/05/Steps-for-Unrestricted-Prescribing-Psychologist-License-and-Forms.pdf"
+        },
+        {
+          "label": "NHS: Antidepressants",
+          "url": "https://www.nhs.uk/medicines/antidepressants/"
+        }
+      ]
+    },
+    {
+      "note": "sus-suas-rede (páginas 8) — bloco 2: Conferir a norma profissional e a fonte primária específica antes da aprovação editorial. O artigo permanece rascunho; a presença da afirmação no original não equivale à validação.; bloco 4: Conferir a norma profissional e a fonte primária específica antes da aprovação editorial. O artigo permanece rascunho; a presença da afirmação no original não equivale à validação.; bloco 5: Revisão clínica e de escopo profissional pendente. Preservado como conteúdo educativo do original, sem diagnóstico individual ou orientação de prescrição.",
+      "response": "CFP/CREPOP 2021 diferencia finalidade psicossocial no CRAS de psicoterapia e o Código de Ética limita compartilhamento às informações necessárias, com sigilo. CFESS 2011 e Lei 8.662 delimitam Serviço Social.",
+      "action": "Tabela mantida como síntese; fonte exata e limites adicionados.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "CFP/CREPOP: CRAS/SUAS 2021",
+          "url": "https://crepop.cfp.org.br/wp-content/uploads/sites/34/2022/10/028-Crepop-Referencias-Tecnicas-para-atuacao-de-psicologasos-no-CRAS-SUAS.pdf"
+        },
+        {
+          "label": "CFESS: Parâmetros na assistência social 2011",
+          "url": "https://www.cfess.org.br/arquivos/Cartilha_CFESS_Final_Grafica.pdf"
+        },
+        {
+          "label": "lei 8662",
+          "url": "https://www.planalto.gov.br/ccivil_03/leis/l8662.htm"
+        },
+        {
+          "label": "CFP: Código de Ética",
+          "url": "https://site.cfp.org.br/wp-content/uploads/2012/07/codigo_etica.pdf"
+        }
+      ]
+    },
+    {
+      "note": "tempo-tecnico (páginas 9) — bloco 3: A duração de 50 minutos é exemplo do diagrama original, não regra universal de atendimento.; bloco 5: Atualização em relação ao PDF: referência à Câmara substituída pela ficha do Senado, matéria 175233, aberta em 16/10/2026; situação exibida: aguardando despacho. A aprovação editorial da atualização permanece pendente.",
+      "response": "O trabalho documental e a integração vão além do encontro. Cinquenta minutos continuam exemplo, não regra. A ficha do Senado em 17/10 registra PL 1.214/2019 aguardando despacho.",
+      "action": "Data atualizada e projeto separado de direito vigente.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "CFP 6/2019",
+          "url": "https://site.cfp.org.br/wp-content/uploads/2019/09/Resolu%C3%A7%C3%A3o-CFP-n-06-2019-comentada.pdf"
+        },
+        {
+          "label": "pl 1214",
+          "url": "https://www25.senado.leg.br/web/atividade/materias/-/materia/175233"
+        }
+      ]
+    },
+    {
+      "note": "perguntas-profissoes (páginas 10,11) — bloco 2: Perguntas e alternativas preservadas das páginas 10–11. Retiradas a regra de pontos e as faixas 0–5/6–10/11–13/14–16, sem alegar validação de conhecimento ou competência. Confirmar redação clínica e alternativas na revisão editorial.",
+      "response": "As oito situações são educativas e não têm validade psicométrica alegada. Foram acrescentados comentários por questão para que o leitor aprenda o fundamento das alternativas.",
+      "action": "Placar e faixas permanecem retirados; adaptação aguarda decisão editorial.",
+      "status": "editorial-decision",
+      "sources": [
+        {
+          "label": "CFP/SATEPSI",
+          "url": "https://satepsi.cfp.org.br/faq.cfm"
+        },
+        {
+          "label": "CFP: Código de Ética",
+          "url": "https://site.cfp.org.br/wp-content/uploads/2012/07/codigo_etica.pdf"
+        },
+        {
+          "label": "CFP/CREPOP: CRAS/SUAS 2021",
+          "url": "https://crepop.cfp.org.br/wp-content/uploads/sites/34/2022/10/028-Crepop-Referencias-Tecnicas-para-atuacao-de-psicologasos-no-CRAS-SUAS.pdf"
+        }
+      ]
+    }
+  ],
+  "researchReviewedAt": "2026-10-17",
+  "seoTitle": "O que faz um psicólogo? Ciência e atuação",
+  "mediaAuthorization": {
+    "confirmedByHolder": true,
+    "confirmedAt": "2026-10-17",
+    "scope": "Fotos de conteúdo próprio com autorização consensual para divulgar o trabalho das equipes, conforme confirmação direta do titular nesta conversa."
+  }
+}

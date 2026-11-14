@@ -1,0 +1,109 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-20T04:01:49-03:00",
+  "generator": "scripts/generate-editorial-pdfs.py",
+  "status": "preview",
+  "clinicalApproval": false,
+  "paper": "A4",
+  "palette": [
+    "#F3EFE6",
+    "#082440",
+    "#A16850",
+    "#DCCBBC",
+    "#292D32"
+  ],
+  "embeddedFonts": {
+    "Serif": "georgia.ttf",
+    "SerifBold": "georgiab.ttf",
+    "SerifItalic": "georgiai.ttf",
+    "Sans": "arial.ttf",
+    "SansBold": "arialbd.ttf",
+    "SansItalic": "ariali.ttf"
+  },
+  "photographySha256": "c47becc26414c32300a9c4480ad1c4f0a1ecee6244fdafc20bdd7ac321a187aa",
+  "pressSha256": "bf9b83ac936d55b9f9702063c41996fc16ff8766d42efc180daee433b4f7eb1d",
+  "pressAssets": {
+    "agencia-brasil-solidao.png": "0e6cad281bd14579682bcf44458383df1ada157bc58a2247a47e96093f043b50",
+    "agencia-brasil-autismo.png": "e8f92f9d36491467725c0719b9eff449e909724140d5c218cf7c2f3fbaf5af5c",
+    "cfp-atuacao-psicologia.png": "7da13add8dbd1d448cf50f6f08b14084384bbe97b76aa3d976436a0fbe3c537d",
+    "cfp-analise-comportamento.png": "ddbe691724bfc8c186477ee4b150e1f3c30490132b4cbc165533997250e6e5f0",
+    "ministerio-saude-pesquisa.png": "eae5dce3d5492f56fa4e5983fda55a91a5882bec0807c4d80aa9c77f9c2803bf",
+    "smads-rede-socioassistencial.png": "5cc72694c39c86025e98eb85e0a050fd6d82ddd644e7ed2117ca2aabac9cdf62"
+  },
+  "photographyAssets": {
+    "src/assets/editorial-images/relacoes-reciprocidade.jpg": "6e79c2ba02e80ebd776912ed3a0c8e3fd319c7c70ac3673f6a7d6f7e77084d22",
+    "src/assets/editorial-images/relacoes-reciprocidade-cotidiano.jpg": "254e7b5eae412f167286326ff57d642cbd45779b47a53592453f3506d9f197a8",
+    "src/assets/editorial-images/neurodivergencia-comunicacao.jpg": "38c0696e7567d2d3b30c13eeb85abafef272da98592d0d1c65f9026c12c61fc3",
+    "src/assets/editorial-images/neurodivergencia-comunicacao-avaliacao.jpg": "0646b8879845bc979dbee12d16b3379f0ef650ce0837507a9799fb4038c9e415",
+    "src/assets/editorial-images/neurodivergencia-comunicacao-contexto.jpg": "94347acc888a2b75284c5581c759ff79f18858a613652925ef4eec04ea149bf3",
+    "src/assets/editorial-images/o-que-faz-um-psicologo.jpg": "976091e4ebd636e055cfe84bcdc8eb706004e4d37b1cc764a8b6b03cebdb97e5",
+    "src/assets/editorial-images/o-que-faz-um-psicologo-trabalho.jpg": "5e164bf4402276c8fb60530554644b2b60ec058c93cb4c32006b8de73c4d9f64",
+    "src/assets/editorial-images/analise-do-comportamento.jpg": "cd4236ba5a3ba71d4341024c929b7050a9654e38c49e7738fbe574099c1646cb",
+    "src/assets/editorial-images/escuta-atencao-e-relacoes.jpg": "15e648565894e4025f95c47aa103264ace9adc0aa1e3f304bcba25c399b7560a",
+    "src/assets/editorial-images/quem-cuida-de-quem-cuida.jpg": "523f188a6d6c94b7a68837588ee2fe689c2fbd07c91f646ea304ffb8718966ee",
+    "src/assets/editorial-images/quem-cuida-de-quem-cuida-atendimento.jpg": "1a15b02e70aca1d2eec062290ce24e48e9f22182b6f37ce4b0c4fe3e59b94ef9"
+  },
+  "sourcePolicy": "Same article JSON and photography map as HTML; original PDFs retained separately. No internal audit notes rendered.",
+  "editions": [
+    {
+      "slug": "relacoes-reciprocidade",
+      "source": "src/data/editorial/relacoes-reciprocidade.json",
+      "sourceSha256": "f52316616d00458215e2016dd464518049f134c7273307eb87d6843f9ac59d54",
+      "file": "src/assets/editorial-pdfs/relacoes-reciprocidade.pdf",
+      "pdfSha256": "7a37e2d084d73ab93e1b9b5c9e8d2865c394d0e60521ed562c4efa33dd044eb5",
+      "pages": 17,
+      "selectableCharacters": 23989,
+      "url": "/psicologia-em-pauta/edicoes/relacoes-reciprocidade.pdf"
+    },
+    {
+      "slug": "neurodivergencia-comunicacao",
+      "source": "src/data/editorial/neurodivergencia-comunicacao.json",
+      "sourceSha256": "e4a3c7fe68715cafbaf2bc0ab131dd52952c4e4b992bd6056f80f36ec5602a6e",
+      "file": "src/assets/editorial-pdfs/neurodivergencia-comunicacao.pdf",
+      "pdfSha256": "c3291a4fec4309a81a7ff8239b5bd1608f8598a99d6cde4fdae48f36c66ee186",
+      "pages": 17,
+      "selectableCharacters": 23052,
+      "url": "/psicologia-em-pauta/edicoes/neurodivergencia-comunicacao.pdf"
+    },
+    {
+      "slug": "o-que-faz-um-psicologo",
+      "source": "src/data/editorial/o-que-faz-um-psicologo.json",
+      "sourceSha256": "e8eff39c5be345114febb7614373a0e9f0afa82d76f4f79b7b040a64a9b2702d",
+      "file": "src/assets/editorial-pdfs/o-que-faz-um-psicologo.pdf",
+      "pdfSha256": "e78897e8c76e7e0a0d95305102f30cc08df0e8717f4b4c9ec1b5544db957cc1e",
+      "pages": 16,
+      "selectableCharacters": 21698,
+      "url": "/psicologia-em-pauta/edicoes/o-que-faz-um-psicologo.pdf"
+    },
+    {
+      "slug": "analise-do-comportamento",
+      "source": "src/data/editorial/analise-do-comportamento.json",
+      "sourceSha256": "79d1238aa9f6428d24e7f8eb6f3b68b9a6fe263680a8ea6c29a2269a6e31bfde",
+      "file": "src/assets/editorial-pdfs/analise-do-comportamento.pdf",
+      "pdfSha256": "5809dcd8802b6e23e3de4cc93eb88b43e0ecd4474f4be7d4c99bd543f71c472b",
+      "pages": 11,
+      "selectableCharacters": 17323,
+      "url": "/psicologia-em-pauta/edicoes/analise-do-comportamento.pdf"
+    },
+    {
+      "slug": "escuta-atencao-e-relacoes",
+      "source": "src/data/editorial/escuta-atencao-e-relacoes.json",
+      "sourceSha256": "c97af2d2823c9e89aa5f7a64d0205c4c9e9ed8f11e7a367cc1b8f7e07f8ef343",
+      "file": "src/assets/editorial-pdfs/escuta-atencao-e-relacoes.pdf",
+      "pdfSha256": "12d9e94be506c1115ec9a3e16cc26640f76769c25a01593de86cb8e7b3d7fba0",
+      "pages": 22,
+      "selectableCharacters": 30211,
+      "url": "/psicologia-em-pauta/edicoes/escuta-atencao-e-relacoes.pdf"
+    },
+    {
+      "slug": "quem-cuida-de-quem-cuida",
+      "source": "src/data/editorial/quem-cuida-de-quem-cuida.json",
+      "sourceSha256": "c013c8f37102e7e086c2aa13a3e59b3dec357f919fc2642cbc01c383f0bd904f",
+      "file": "src/assets/editorial-pdfs/quem-cuida-de-quem-cuida.pdf",
+      "pdfSha256": "bc032b11619ba0431a06598d0d846b74589dd9a7dfa86a09ef356faf1cabb275",
+      "pages": 22,
+      "selectableCharacters": 40288,
+      "url": "/psicologia-em-pauta/edicoes/quem-cuida-de-quem-cuida.pdf"
+    }
+  ]
+}

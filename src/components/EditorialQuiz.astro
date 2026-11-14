@@ -1,0 +1,73 @@
+---
+import { editorialQuizForArticle } from '../data/editorial-quizzes';
+import '../styles/editorial-quiz.css';
+interface Props { articleSlug: string }
+const { articleSlug } = Astro.props;
+const quiz = editorialQuizForArticle(articleSlug);
+const payload = quiz ? JSON.stringify(quiz).replace(/</g, '\\u003c') : '';
+const regions = ['AC','AL','AP','AM','BA','CE','DF','ES','GO','MA','MT','MS','MG','PA','PB','PR','PE','PI','RJ','RN','RS','RO','RR','SC','SP','SE','TO'];
+---
+{quiz && <section id="reflexao-educativa" class="ed-quiz" data-ed-quiz aria-labelledby="ed-quiz-title">
+  <script type="application/json" data-quiz-config set:html={payload} />
+  <div class="ed-quiz-topline"><span>PAUSA PARA REFLETIR</span><button type="button" class="ed-quiz-return" data-quiz-return>Voltar à revista ↗</button></div>
+  <h2 id="ed-quiz-title" tabindex="-1">{quiz.title}</h2>
+  <p class="ed-quiz-intro">{quiz.introduction}</p>
+  <p class="ed-quiz-scope">{quiz.scoring?.disclaimer ?? 'Exercício autoral educativo. Não é um instrumento psicológico validado, teste de personalidade ou diagnóstico. Sem pontuação clínica.'}</p>
+  <p class="ed-quiz-local" data-quiz-storage>Suas escolhas ficam neste navegador durante a sessão e não são enviadas à NEXO. Você pode apagá-las a qualquer momento.</p>
+  <noscript><p>Ative JavaScript para responder neste navegador. Você também pode usar as perguntas da edição como reflexão, sem registrar respostas.</p></noscript>
+  <div data-quiz-interactive hidden>
+    <fieldset class="ed-quiz-context"><legend>Como deseja usar esta reflexão?</legend><label><input type="radio" name="quiz-context" value="personal" data-quiz-context checked /> Para mim</label><label><input type="radio" name="quiz-context" value="company" data-quiz-context /> Para pensar o contexto de uma empresa</label><p>Esta escolha registra o contexto da reflexão. As perguntas, somas e faixas autorais são as mesmas. Não identifica uma empresa nem avalia pessoas para contratação ou trabalho.</p></fieldset>
+    <form data-quiz-form novalidate>
+      <div class="ed-quiz-progress"><label for="ed-quiz-progress">Seu percurso <span data-quiz-progress-label></span></label><progress id="ed-quiz-progress" max={quiz.questions.length} value="0"></progress></div>
+      {quiz.questions.map((question, index) => <fieldset data-quiz-step data-question-id={question.id} hidden={index !== 0}>
+        <legend><span class="ed-quiz-question-number">{String(index + 1).padStart(2, '0')} / {String(quiz.questions.length).padStart(2, '0')}</span>{question.prompt}</legend>
+        <p id={`quiz-help-${question.id}`} class="ed-quiz-help">{question.help}{question.kind === 'multiple' ? ` Selecione de ${question.minimum ?? 1} a ${question.maximum ?? question.options.length} opções.` : ' Escolha uma opção.'}</p>
+        <div class:list={['ed-quiz-options', { 'is-frequency': question.kind === 'frequency' }]}>
+          {question.options.map(option => <label class="ed-quiz-option"><input type={question.kind === 'multiple' ? 'checkbox' : 'radio'} name={`quiz-${question.id}`} value={option.id} aria-describedby={`quiz-help-${question.id}`} /><span>{option.label}{quiz.scoring && <small class="ed-quiz-option-points">{option.points} {option.points === 1 ? 'ponto' : 'pontos'}</small>}</span></label>)}
+        </div>
+      </fieldset>)}
+      <p class="ed-quiz-error" data-quiz-error role="alert" hidden></p>
+      <div class="ed-quiz-navigation"><button type="button" data-quiz-back class="ed-quiz-button" disabled>← Anterior</button><button type="submit" data-quiz-next class="ed-quiz-button ed-quiz-button-primary">Próxima →</button></div>
+    </form>
+    <section data-quiz-result class="ed-quiz-result" aria-labelledby="ed-quiz-result-title" hidden>
+      <p class="ed-quiz-kicker">SUA DEVOLUTIVA EDUCATIVA</p><h3 id="ed-quiz-result-title" tabindex="-1">{quiz.resultTitle}</h3>
+      <p data-quiz-result-introduction>{quiz.resultIntroduction}</p><div data-quiz-themes></div><div data-quiz-score hidden></div><p>{quiz.resultClosing}</p>
+      <div class="ed-quiz-result-actions"><button type="button" data-quiz-copy class="ed-quiz-button">Copiar devolutiva</button><button type="button" data-quiz-save class="ed-quiz-button">Salvar em texto (.txt)</button><button type="button" data-quiz-edit class="ed-quiz-button">Rever escolhas</button></div>
+      <section class="ed-quiz-sharing" data-quiz-sharing aria-labelledby="ed-quiz-sharing-title">
+        <h4 id="ed-quiz-sharing-title">Gostaria de compartilhar sua reflexão conosco?</h4>
+        <p>A leitura e sua devolutiva continuam disponíveis em qualquer escolha. Só haverá compartilhamento se o serviço estiver disponível e você confirmar o consentimento.</p>
+        <div class="ed-quiz-share-options"><button type="button" class="ed-quiz-button" data-quiz-share-yes>Sim, desejo compartilhar</button><button type="button" class="ed-quiz-button" data-quiz-share-no>Não, obrigado. Prefiro continuar lendo</button></div>
+        <div data-quiz-share-demo class="ed-quiz-share-demo" hidden>
+          <p class="ed-quiz-demo-notice" data-quiz-share-availability role="status">O compartilhamento está desativado nesta demonstração. Os campos opcionais não são salvos nem enviados.</p>
+          <button type="button" class="ed-quiz-button" data-quiz-share-check>Verificar disponibilidade</button>
+          <div data-quiz-share-ready hidden>
+          <div class="ed-quiz-share-fields">
+            <label>Como gostaria de ser identificado? <span>Pseudônimo ou apelido (opcional)</span><input type="text" data-quiz-pseudonym maxlength="40" autocomplete="off" placeholder="Leitor anônimo" /></label>
+            <label>Faixa etária <span>(opcional)</span><select data-quiz-age><option value="">Prefiro não informar</option><option value="under18">Até 17 anos</option><option>18–24</option><option>25–34</option><option>35–44</option><option>45–54</option><option>55+</option></select></label>
+            <label>UF <span>(opcional)</span><select data-quiz-uf><option value="">Prefiro não informar</option>{regions.map(region => <option>{region}</option>)}</select></label>
+          </div>
+          <p data-quiz-minor class="ed-quiz-demo-notice" role="status" hidden>O envio para menores de 18 anos está bloqueado. Você pode continuar o exercício e a leitura sem compartilhar dados.</p>
+          <div class="ed-quiz-consent">
+            <label><input type="checkbox" data-quiz-adult disabled /><span>Confirmo que tenho 18 anos ou mais.</span></label>
+            <label><input type="checkbox" data-quiz-consent disabled /><span>Autorizo especificamente compartilhar minha devolutiva educativa, que pode revelar aspectos pessoais e sensíveis, e os dados opcionais que informei com Gabriel Alves Batista / NEXO, em nexoneuropro@gmail.com. A finalidade é compreender temas de interesse e reflexões dos leitores, sem diagnóstico, avaliação de trabalhadores, publicidade direcionada ou divulgação individual. A retenção máxima é de 90 dias. Posso revogar o consentimento ou pedir exclusão pelo mesmo e-mail, usando o identificador recebido após a confirmação. Li as condições de privacidade.</span></label>
+            <a href="/psicologia-em-pauta/privacidade/" target="_blank" rel="noopener">Ler a política de privacidade (nova aba)</a>
+          </div>
+          <button type="button" class="ed-quiz-button" data-quiz-share-submit disabled>Compartilhamento indisponível</button>
+          </div>
+          <p data-quiz-share-status class="ed-quiz-demo-notice" role="status" tabindex="-1" hidden></p>
+        </div>
+        <p data-quiz-share-declined class="ed-quiz-demo-notice" tabindex="-1" hidden>Tudo certo. Nada foi enviado e você pode continuar a leitura.</p>
+      </section>
+    </section>
+    <div class="ed-quiz-footer"><p>{quiz.author}</p><button type="button" class="ed-quiz-clear" data-quiz-clear>Apagar escolhas e recomeçar</button></div>
+    <details class="ed-quiz-method"><summary>Como a devolutiva é produzida?</summary>
+      {quiz.scoring ? <><p>{quiz.scoring.criteria}</p><p>{quiz.scoring.disclaimer}</p>
+        {quiz.scoring.groups.map(group => <section class="ed-quiz-method-group"><h4>{group.title}</h4><p>{group.questionIds.length} itens. Soma possível: {group.min}–{group.max} pontos. Cada faixa abaixo é uma orientação do texto autoral.</p><ul>{group.bands.map(band => <li><strong>{band.min}–{band.max}: {band.title}.</strong> {band.text}</li>)}</ul></section>)}
+        {quiz.source && <p>Fonte: {quiz.source.label}, páginas {quiz.source.pages.join(', ')}. Autoria: Gabriel Alves Batista.</p>}
+      </> : <p>Cada opção corresponde a um comentário e uma pergunta de reflexão previamente escritos. O resultado reúne os comentários dos temas escolhidos. Você pode mudar as escolhas e comparar as possibilidades. Este exercício autoral não foi validado como instrumento psicológico.</p>}
+      <ul>{quiz.references.map(reference => <li><a href={reference.url}>{reference.label}</a></li>)}</ul>
+    </details>
+    <p class="ed-quiz-status" data-quiz-status aria-live="polite" aria-atomic="true"></p>
+  </div>
+</section>}
+<script>import '../scripts/editorial-quiz';</script>

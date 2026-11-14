@@ -1,0 +1,52 @@
+---
+import '../styles/momento-clinical.css';
+---
+<div class="mc-shell" data-momento-followup>
+  <aside class="mc-path" aria-label="Etapas"><p class="mc-kicker">NEXO · ACOMPANHAMENTO</p>
+    <h2>Seu caminho.<br/><em>No seu ritmo.</em></h2>
+    <p>O profissional convidou você para aprofundar um aspecto da sua experiência. A escolha de responder é sua.</p>
+    <ol><li>Convite individual</li><li>Informações e consentimento</li><li>Respostas</li><li>Revisão e envio</li></ol>
+    <a href="/conhecendo-meu-momento/">Conheça a NEXO ↗</a>
+  </aside>
+  <div class="mc-paper">
+    <section data-f-stage="access">
+      <p class="mc-kicker">ACESSO PESSOAL</p><h2 tabindex="-1">Recebeu um convite complementar?</h2>
+      <p>Informe o código entregue pelo profissional. Não digite seu nome ou informações de saúde no campo do código.</p>
+      <label class="mc-field" for="f-code">Código pessoal<input id="f-code" type="text" maxlength="40" autocomplete="off" spellcheck="false" autocapitalize="characters" /></label>
+      <p class="mc-caption">O código não é colocado na URL. Seu profissional combina como compartilhá-lo.</p>
+      <div class="mc-actions"><button class="mc-button mc-primary" type="button" data-f-action="redeem">Verificar meu convite</button></div>
+      <p id="f-availability" role="status">Verificando disponibilidade.</p>
+    </section>
+    <section data-f-stage="consent" hidden>
+      <p class="mc-kicker">ANTES DE RESPONDER</p><h2>Você decide participar.</h2>
+      <p id="f-instrument-intro"></p>
+      <p>Este instrumento é utilizado para apoiar a conversa com o profissional. Suas respostas não estabelecem diagnóstico isoladamente. Você pode pular perguntas ou encerrar sem concluir.</p>
+      <details><summary>Finalidade, privacidade e resultados</summary>
+        <p>Este convite é para acompanhamento clínico e não representa autorização de participação em pesquisa. As informações serão acessíveis somente na área profissional protegida da NEXO e vinculadas ao acolhimento anterior, com proteção e descarte conforme o prazo informado na <a href="/conhecendo-meu-momento/privacidade/" target="_blank" rel="noopener noreferrer">política de privacidade</a>, sem ampliar automaticamente esse prazo.</p>
+        <p>O profissional revisará os resultados e conversará com você. Esta página não mostra escores, não faz diagnóstico e não é monitorada em tempo real. Você pode solicitar acesso, correção ou exclusão pelos canais informados na política de privacidade.</p>
+      </details>
+      <label class="mc-confirm"><input type="checkbox" id="f-adult"/><span>Confirmo que tenho 18 anos ou mais.</span></label>
+      <label class="mc-confirm"><input type="checkbox" id="f-accept"/><span>Entendi a finalidade, a voluntariedade e o uso clínico das respostas e concordo em responder a este instrumento.</span></label>
+      <div class="mc-actions"><button class="mc-button mc-primary" type="button" data-f-action="start">Continuar por minha escolha</button><button class="mc-button" type="button" data-f-action="end">Encerrar sem responder</button></div>
+    </section>
+    <section data-f-stage="questions" hidden>
+      <p class="mc-kicker" id="f-progress"></p><h2 id="f-name"></h2><p id="f-intro"></p>
+      <fieldset><legend id="f-question"></legend><div id="f-options"></div></fieldset>
+      <div class="mc-actions"><button type="button" class="mc-button" data-f-action="previous">Voltar</button><button type="button" class="mc-button mc-primary" data-f-action="next">Continuar</button><button type="button" class="mc-button" data-f-action="end">Encerrar sem enviar</button></div>
+    </section>
+    <section data-f-stage="review" hidden>
+      <p class="mc-kicker">REVISÃO</p><h2>Confira antes de enviar.</h2>
+      <p id="f-review"></p>
+      <p>Respostas que você escolheu não fornecer permanecem sem resposta. Não são tratadas como zero. Após o envio, o profissional discutirá as informações no encontro combinado.</p>
+      <div class="mc-actions"><button type="button" class="mc-button" data-f-action="edit">Revisar minhas respostas</button><button type="button" class="mc-button mc-primary" data-f-action="submit">Confirmar envio</button><button type="button" class="mc-button" data-f-action="end">Encerrar sem enviar</button></div>
+    </section>
+    <section data-f-stage="done" hidden>
+      <p class="mc-kicker">RECEBIDO</p><h2>Seu momento continua sendo seu.</h2>
+      <p>Suas respostas foram recebidas e ficarão disponíveis para revisão do profissional, que conversará com você conforme o combinado. Obrigado por compartilhar no seu ritmo.</p>
+      <p>A página não é acompanhada em tempo real. Em uma urgência, procure atendimento imediato ou o SAMU 192. Para apoio emocional, ligue 188 (CVV).</p>
+    </section>
+    <p id="f-error" class="mc-error" role="alert"></p><p id="f-status" class="mc-status" role="status" aria-live="polite"></p>
+    <p class="mc-caption">NEXO · Ciência. Escuta. Contexto. Em emergência: SAMU 192. Apoio emocional: CVV 188.</p>
+  </div>
+</div>
+<script>import '../scripts/momento-followup';</script>

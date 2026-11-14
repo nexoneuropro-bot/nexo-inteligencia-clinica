@@ -1,0 +1,25 @@
+---
+import type {EditorialArticle} from '../data/editorial';
+interface Props {article:EditorialArticle}
+const {article}=Astro.props;
+const responses=article.reviewResponses||[];
+const labels={'resolved':'Conferido e respondido','editorial-decision':'Decisão editorial ou clínica','pending-source':'Fonte ainda pendente'};
+const date=article.researchReviewedAt&&new Intl.DateTimeFormat('pt-BR',{timeZone:'UTC'}).format(new Date(`${article.researchReviewedAt}T12:00:00Z`));
+---
+{responses.length>0&&<section class="ed-review-responses" id="respostas-de-revisao" aria-labelledby="ed-review-response-title" data-review-responses={responses.length}>
+ <span class="ed-chapter-number">PESQUISA E CONFERÊNCIA DE FONTES</span>
+ <h2 id="ed-review-response-title">Respostas às notas de revisão.</h2>
+ <p>{responses.length} respostas registradas{date&&` em ${date}`}. Cada uma apresenta a questão, a resposta e o tratamento aplicado ao artigo. A conferência de fontes não atribui aprovação clínica.</p>
+ <ol class="ed-response-list">{responses.map((item,index)=><li data-review-response={item.status}>
+  <details open={index===0}>
+   <summary><span>Nota {String(index+1).padStart(2,'0')}</span><strong>{labels[item.status]}</strong></summary>
+   <div class="ed-response-body">
+    <h3>Questão de revisão</h3><p class="ed-response-original">{item.note}</p>
+    <h3>Resposta e evidência</h3><p>{item.response}</p>
+    <h3>Tratamento no artigo</h3><p>{item.action}</p>
+    {item.sources&&item.sources.length>0&&<nav aria-label={`Fontes da nota ${index+1}`}><ul>{item.sources.map(source=><li><a href={source.url} target="_blank" rel="noopener noreferrer">{source.label} ↗</a></li>)}</ul></nav>}
+   </div>
+  </details>
+ </li>)}</ol>
+ <a class="ed-reading-link" href="#revisao-do-artigo">Origem e decisões para aprovação ↓</a>
+</section>}

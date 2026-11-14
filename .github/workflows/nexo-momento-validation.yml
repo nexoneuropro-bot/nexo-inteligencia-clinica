@@ -1,0 +1,98 @@
+name: Validar NEXO Primeira Escuta
+
+on:
+  pull_request:
+    branches: [feat/experiencia-imersiva]
+    paths:
+      - 'src/components/MomentoClinical.astro'
+      - 'src/components/MeuMomento.astro'
+      - 'src/components/MomentoSyntheticPanel.astro'
+      - 'src/layouts/MomentoLayout.astro'
+      - 'src/lib/momento-demo-pilot.ts'
+      - 'src/data/momento-synthetic-case.ts'
+      - 'src/data/momento-clarifications.ts'
+      - 'src/data/momento-reflections.ts'
+      - 'src/scripts/momento-on-device-voice.ts'
+      - 'src/pages/conhecendo-meu-momento/**'
+      - 'astro.config.mjs'
+      - 'src/scripts/meu-momento.ts'
+      - 'src/scripts/momento-synthetic-panel.ts'
+      - 'src/styles/meu-momento.css'
+      - 'src/styles/momento-synthetic-panel.css'
+      - 'src/data/momento-instruments.ts'
+      - 'src/lib/momento-professional-cues.ts'
+      - 'src/lib/momento-professional-report.ts'
+      - 'src/lib/momento-clinical-interview-guide.ts'
+      - 'src/scripts/momento-clinical-guide-view.ts'
+      - 'src/lib/momento-instrument-catalog.ts'
+      - 'src/scripts/momento-instrument-catalog-view.ts'
+      - 'scripts/test-momento-instrument-catalog.mjs'
+      - 'scripts/test-momento-clinical-guide.mjs'
+      - 'src/scripts/momento-report-view.ts'
+      - 'src/styles/momento-clinical.css'
+      - 'src/components/MomentoProfessional.astro'
+      - 'src/scripts/momento-clinical.ts'
+      - 'src/scripts/momento-professional.ts'
+      - 'functions/_lib/momento-clinical.js'
+      - 'scripts/test-momento-*.mjs'
+      - '.github/workflows/nexo-momento-validation.yml'
+  push:
+    branches: [feat/experiencia-imersiva]
+    paths:
+      - '.github/workflows/nexo-momento-validation.yml'
+      - 'src/scripts/momento-clinical.ts'
+      - 'src/scripts/momento-on-device-voice.ts'
+      - 'src/components/MomentoClinical.astro'
+      - 'astro.config.mjs'
+      - 'src/layouts/MomentoLayout.astro'
+      - 'src/components/MeuMomento.astro'
+      - 'src/components/MomentoSyntheticPanel.astro'
+      - 'src/lib/momento-demo-pilot.ts'
+      - 'src/data/momento-synthetic-case.ts'
+      - 'src/scripts/meu-momento.ts'
+      - 'src/scripts/momento-synthetic-panel.ts'
+      - 'src/styles/meu-momento.css'
+      - 'src/styles/momento-synthetic-panel.css'
+      - 'src/pages/conhecendo-meu-momento/**'
+      - 'scripts/test-momento-*.mjs'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.25.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm check
+      - run: pnpm build
+      - run: pnpm verify
+      - run: node --test scripts/test-nexo-contact-support.mjs
+      - name: Conferir HTML e cabeçalhos estáticos do acolhimento
+        run: |
+          node --input-type=module <<'JS'
+          import {readFileSync} from 'node:fs';
+          import assert from 'node:assert/strict';
+          const html=readFileSync('dist/conhecendo-meu-momento/responder/index.html','utf8');
+          const headers=readFileSync('dist/_headers','utf8');
+          for(const marker of ['mc-choice-title','mc-reflection-text','mc-journey','mc-reflection-options']){
+            assert.ok(html.includes(marker),marker);
+          }
+          assert.ok(headers.includes('microphone=()'));
+          assert.ok(headers.includes('microphone=(self)'));
+          assert.ok(headers.includes('on-device-speech-recognition=(self)'));
+          console.log('Novo acolhimento e permissão restrita presentes nos arquivos gerados.');
+          JS
+
+      - name: Testes sintéticos clínicos
+        run: node --experimental-strip-types --experimental-sqlite --test scripts/test-momento-*.mjs

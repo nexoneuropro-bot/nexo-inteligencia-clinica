@@ -1,0 +1,152 @@
+import {buildIntegratedReport,type ReportPoint,type ReportAxis,type ReportDomain,type ReportInstrument} from '../lib/momento-professional-report';
+import {reflectionQuestions,reflectionChoices,reflectionTopics} from '../data/momento-reflections';
+import {appendClinicalInterviewGuide} from './momento-clinical-guide-view';
+import {appendInstrumentDecisionSupport} from './momento-instrument-recommendation-view';
+
+function element<K extends keyof HTMLElementTagNameMap>(tag:K,className?:string):HTMLElementTagNameMap[K]{
+ const node=document.createElement(tag);if(className)node.className=className;return node;
+}
+function text(tag:'p'|'h3'|'h4'|'h5'|'span'|'li'|'strong',content:string,className?:string):HTMLElement{
+ const el=element(tag,className);el.textContent=content;return el;
+}
+function section(parent:HTMLElement,id:string,kicker:string,title:string):HTMLElement{
+ const sec=element('section','mc-report-section');
+ sec.id=id;sec.append(text('p',kicker,'mc-report-kicker'),text('h3',title,'mc-report-heading'));
+ parent.append(sec);return sec;
+}
+function lines(parent:HTMLElement,items:readonly string[],empty='Ainda não informado'){
+ if(!items.length){parent.append(text('p',empty,'mc-report-quiet'));return;}
+ const ul=element('ul','mc-report-evidence');for(const entry of items)ul.append(text('li',entry));parent.append(ul);
+}
+function point(parent:HTMLElement,item:ReportPoint){
+ const article=element('article','mc-report-point');
+ article.append(text('h4',item.title));
+ const small=element('div');small.append(text('p','EVIDÊNCIAS REGISTRADAS','mc-report-mini'));lines(small,item.evidence);article.append(small);
+ article.append(text('p',item.interpretation));
+ article.append(text('p','Pergunta para a entrevista','mc-report-mini'));
+ article.append(text('p',item.investigate));
+ article.append(text('p','Limite: '+item.limitation,'mc-report-quiet'));
+ parent.append(article);
+}
+function axis(parent:HTMLElement,item:ReportAxis){
+ const card=element('article','mc-report-axis');
+ card.append(text('h4',item.name),text('p','REGISTRADO','mc-report-mini'));lines(card,item.facts,'Sem dados suficientes neste eixo.');
+ card.append(text('p','A investigar','mc-report-mini'),text('p',item.gaps,'mc-report-quiet'));parent.append(card);
+}
+function domain(parent:HTMLElement,item:ReportDomain){
+ const card=element('article','mc-report-domain');
+ card.append(text('h4',item.name),text('p','DADOS DISPONÍVEIS','mc-report-mini'));lines(card,item.evidence);
+ card.append(text('p','Informações que faltam','mc-report-mini'),text('p',item.missing),text('p',item.why,'mc-report-quiet'));parent.append(card);
+}
+function instrument(parent:HTMLElement,item:ReportInstrument){
+ const li=element('article','mc-report-tool');
+ li.append(text('h4',item.construct),text('p',item.rationale),text('p',item.decision,'mc-report-quiet'));
+ parent.append(li);
+}
+function infoLink(parent:HTMLElement,title:string,url:string){
+ const a=element('a','mc-report-source');a.textContent=title+' ↗';a.href=url;a.target='_blank';a.rel='noopener noreferrer';parent.append(a);
+}
+export function appendIntegratedProfessionalReport(panel:HTMLElement,record:Record<string,unknown>){
+ const report=buildIntegratedReport(record);
+ const root=element('div','mc-report');
+ root.setAttribute('aria-label','Síntese integrada para investigação profissional');
+ root.append(text('p','NEXO · INTELIGÊNCIA CLÍNICA','mc-report-kicker'),text('h3','Síntese integrada para a entrevista','mc-report-title'),text('p',report.intro,'mc-report-lead'));
+ const person=(record.profile&&typeof record.profile==='object'&&'nickname'in record.profile&&typeof (record.profile as {nickname?:unknown}).nickname==='string')?(record.profile as {nickname:string}).nickname:'Participante sem identificação informada';
+ root.append(text('p','Participante: '+person,'mc-report-person'));
+ appendClinicalInterviewGuide(root,record);
+ const results=record.results&&typeof record.results==='object'?record.results as Record<string,unknown>:{};
+ const impact=record.impact&&typeof record.impact==='object'?record.impact as Record<string,unknown>:{};
+ const overview=element('div','mc-report-scores');
+ for(const [key,short,limit] of [['phq9','PHQ-9',27],['gad7','GAD-7',21]] as const){
+   const info=results[key]&&typeof results[key]==='object'?results[key] as Record<string,unknown>:{};
+   const score=typeof info.score==='number'?info.score:null;
+   const complete=info.complete===true;
+   const card=element('div','mc-report-score');
+   card.append(text('p',short,'mc-report-mini'),text('strong',complete&&score!==null?`${score}/${limit}`:'Incompleto','mc-report-big'),
+    text('p',complete&&typeof info.band==='string'?'Intensidade de sintomas: '+info.band:'Sem total calculado','mc-report-quiet'));
+   const functional=impact[key];
+   card.append(text('p',typeof functional==='number'? 'Impacto referido: '+(['nenhuma','alguma','muita','extrema'][functional]??'não especificado')+' dificuldade':'Impacto não informado','mc-report-small'));
+   overview.append(card);
+ }
+ root.append(overview);
+ const chart=element('div','mc-report-chart');
+ chart.append(text('h4','Distribuição de respostas por item'),text('p','0 a 3 por item. Barras mostram frequência declarada, não proporção diagnóstica.','mc-report-quiet'));
+ for(const [key,short] of [['phq9','PHQ-9'],['gad7','GAD-7']] as const){
+   const answers=Array.isArray(record[key])?record[key] as unknown[]:[];
+   const group=element('div','mc-report-bar-group');group.append(text('h5',short,'mc-report-mini'));
+   answers.forEach((v,i)=>{
+     const row=element('div','mc-report-bar-row');
+     row.append(text('span','Item '+(i+1)));
+     const track=element('div','mc-report-bar-track'),fill=element('span','mc-report-bar-fill');
+     fill.style.width=typeof v==='number'&&Number.isInteger(v)&&v>=0&&v<=3?`${v*100/3}%`:'0%';
+     track.append(fill);row.append(track,text('span',typeof v==='number'?String(v):'–'));group.append(row);
+   });
+   chart.append(group);
+ }
+ root.append(chart);
+ const reflectionData=record.reflectionAnswers&&typeof record.reflectionAnswers==='object'&&!Array.isArray(record.reflectionAnswers)?record.reflectionAnswers as Record<string,unknown>:{};
+ const context=record.context&&typeof record.context==='object'?record.context as Record<string,unknown>:{};
+ const mode=record.reflectionMode==='extended'?'Conversa aprofundada':'Conversa breve ou versão anterior';
+ const narrative=section(root,'pro-report-narrative','ACOLHIMENTO · RELATO LIVRE','O que a pessoa escolheu compartilhar');
+ narrative.append(text('p','Percurso: '+mode+'. '+(context.accompaniment==='with-professional'?'Preenchimento declarado como acompanhado pelo profissional.':context.accompaniment==='alone'?'Preenchimento declarado como realizado individualmente.':'Modalidade de preenchimento não informada.'),'mc-report-quiet'));
+ if(record.reflectionMode==='extended'){
+  for(const item of reflectionQuestions){
+   const box=element('article','mc-report-tool');
+   box.append(text('h4',item.title));
+   const entry=reflectionData[item.id]&&typeof reflectionData[item.id]==='object'?reflectionData[item.id] as Record<string,unknown>:{};
+   const choice=reflectionChoices.find(option=>option.id===entry.status);
+   const status=choice?.label??'Tema não apresentado ou sem escolha registrada';
+   box.append(text('p','Registro da pessoa: '+status,'mc-report-mini'));
+   if(entry.status==='answered'&&typeof entry.text==='string')box.append(text('p',entry.text,'mc-report-quotation'));
+   if(entry.status==='later')box.append(text('p','Perguntar se a pessoa deseja conversar sobre esse tema na sessão, sem exigir explicações.','mc-report-quiet'));
+   if(entry.status==='prefer-not')box.append(text('p','A pessoa optou por não compartilhar. Não sugerir causa ou pressão para responder.','mc-report-quiet'));
+   narrative.append(box);
+  }
+ }else narrative.append(text('p','Nenhuma pergunta narrativa adicional foi solicitada neste percurso.','mc-report-quiet'));
+ const topics=Array.isArray(record.reflectionTopics)?record.reflectionTopics:[];
+ if(record.reflectionMode==='extended'&&topics.length){
+  const selected=reflectionTopics.filter(topic=>topics.includes(topic.id));
+  const card=element('article','mc-report-tool');
+  card.append(text('h4','Assuntos que a pessoa escolheu considerar na sessão'));
+  const list=element('ul','mc-report-evidence');
+  selected.forEach(topic=>list.append(text('li',topic.label)));
+  card.append(list,text('p','A seleção de um assunto não define identidade, crença, orientação ou mecanismo psicológico. Perguntar se a pessoa deseja abordá-lo agora.','mc-report-quiet'));
+  narrative.append(card);
+ }
+ narrative.append(text('p','As narrativas são autorrelatos, não resultados psicométricos. O NEXO não infere função do comportamento, trauma ou comportamentos clinicamente relevantes (CRB) da FAP por meio destas respostas. A relação terapêutica e as contingências observadas no encontro exigem avaliação humana.','mc-report-quiet'));
+ const notice=element('div','mc-report-notice');
+ notice.append(text('strong','Documento preparatório reservado ao profissional.'),text('p','Não é laudo, parecer diagnóstico, previsão de risco nem devolutiva ao participante. Todas as inferências dependem de avaliação humana.'));
+ root.append(notice);
+ const summary=section(root,'pro-report-integration','01 · LEITURA CRUZADA','O que merece atenção no conjunto');
+ if(!report.highlights.length)summary.append(text('p','Não foram identificadas associações adicionais pelas regras descritivas. A entrevista permanece necessária.'));
+ else report.highlights.forEach(item=>point(summary,item));
+ const abc=section(root,'pro-report-functional','02 · ANÁLISE FUNCIONAL EXPLORATÓRIA','A situação, a resposta e o que ainda não sabemos');
+ const flow=element('div','mc-report-abc');
+ for(const [key,value] of [['A · Situação referida',report.functional.antecedent],['B · Resposta autorrelatada',report.functional.response],['C · Observação ou tema para conversar',report.functional.subsequent]]){const card=element('div','mc-report-abc-cell');card.append(text('h4',key),text('p',value));flow.append(card);}
+ abc.append(flow,text('p',report.functional.boundary,'mc-report-quiet'),text('p','Investigar: '+report.functional.question));
+ const bps=section(root,'pro-report-axes','03 · MATRIZ BIOPSICOSSOCIAL','O contexto também é dado clínico');
+ const grid=element('div','mc-report-grid');report.axes.forEach(item=>axis(grid,item));bps.append(grid);
+ const differential=section(root,'pro-report-differential','04 · HIPÓTESES DE INVESTIGAÇÃO','Domínios clínicos que pedem mais informações');
+ differential.append(text('p','Referência de organização: DSM-5-TR e avaliação diferencial. Os domínios abaixo não representam transtornos detectados ou hipóteses diagnósticas confirmadas.','mc-report-quiet'));
+ if(report.domains.length)report.domains.forEach(item=>domain(differential,item));else differential.append(text('p','Sem sinais suficientes para priorizar domínios a partir deste percurso. A avaliação clínica define o próximo foco.'));
+ root.append(appendInstrumentDecisionSupport(root,record));
+ const methods=section(root,'pro-report-methods','06 · PROCEDIMENTOS POSSÍVEIS','Como aprofundar sem transformar a entrevista em uma prova');
+ report.instruments.forEach(item=>instrument(methods,item));
+ methods.append(text('p','Nenhuma sugestão equivale a indicação de teste ou afirmação de parecer favorável. Se houver escolha de teste psicológico, verificar versão, público, normas e modalidade de aplicação no SATEPSI vigente.','mc-report-quiet'));
+ const gaps=section(root,'pro-report-gaps','07 · LACUNAS E LIMITES','O que o formulário não permite concluir');lines(gaps,report.unanswered);
+ const completion=section(root,'pro-report-context','08 · PARTICIPAÇÃO E CONTINUIDADE','Condições a considerar no encontro');lines(completion,report.context);
+ const notes=section(root,'pro-report-notes','09 · REVISÃO DO PROFISSIONAL','Observações e prioridades para a devolutiva');
+ notes.append(text('p','Espaço de trabalho local desta tela. Não é salvo no banco NEXO, não é enviado automaticamente e não substitui registro em prontuário.','mc-report-quiet'));
+ const id='pro-clinical-review-notes';
+ const field=element('textarea','mc-report-textarea');field.id=id;field.rows=6;field.maxLength=3000;field.placeholder='Evidências verificadas, perguntas selecionadas, hipóteses descartadas, condições para devolutiva...';
+ const label=element('label','mc-report-label');label.htmlFor=id;label.textContent='Anotações do profissional, ainda não persistidas';notes.append(label,field);
+ notes.append(text('p','Responsabilidade clínica: interpretação e devolutiva realizadas pelo profissional habilitado, após diálogo com a pessoa.','mc-report-quiet'));
+ const sources=section(root,'pro-report-sources','10 · FONTES E DIRETRIZES','Referências para consulta');
+ infoLink(sources,'DSM-5-TR (referência editorial da APA)','https://www.psychiatry.org/psychiatrists/practice/dsm');
+ infoLink(sources,'SATEPSI · consulta atualizada de testes','https://satepsi.cfp.org.br/');
+ infoLink(sources,'CFP · orientação sobre aplicação informatizada/remota','https://site.cfp.org.br/cfp-orienta-psicologas-sobre-o-uso-de-testes-psicologicos-nas-modalidades-informatizada-e-online/');
+ sources.append(text('p',report.closing,'mc-report-quiet'));
+ const divider=element('hr','mc-report-divider');root.append(divider);
+ panel.prepend(root);
+ return root;
+}

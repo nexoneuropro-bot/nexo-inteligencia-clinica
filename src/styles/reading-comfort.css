@@ -1,0 +1,105 @@
+/* Readable text is part of the experience, including references and mobile controls. */
+body.is-experience .ex-header nav a{font-size:13px;letter-spacing:.035em}
+body.is-experience .ex-header nav{gap:25px}
+body.is-experience .ex-intro-subtitle{font-size:15px;line-height:1.7;letter-spacing:0;max-width:43ch}
+body.is-experience .ex-intro-actions>a{font-size:14px}
+body.is-experience .ex-intro-actions{gap:22px;flex-wrap:wrap}
+body.is-experience .ex-pointer-note{font-size:12px}
+body.is-experience .ex-x-lens>p{font-size:13px;line-height:1.7}
+body.is-experience .ex-x-lens>.ex-eyebrow{font-size:10px}
+body.is-experience .ex-x-lens{width:250px}
+body.is-experience .ex-floating-word small{font-size:12px}
+body.is-experience .ex-bio{height:auto;min-height:0}
+body.is-experience .ex-bio .ex-frame{position:relative;height:auto;min-height:100svh;overflow:visible}
+body.is-experience .ex-bio-copy{position:relative;top:auto;left:auto;width:42%;max-width:500px;margin-left:9.5vw;padding:125px 0 100px}
+body.is-experience .ex-bio-copy>p{font-size:17px;line-height:1.75;max-width:43ch}
+body.is-experience .ex-bio-select{gap:15px;justify-content:space-between}
+body.is-experience .ex-bio-select button{font-size:14px;flex:1;line-height:1.5;text-align:left}
+body.is-experience .ex-bio-select button>span{font-size:12px}
+body.is-experience .ex-dimension-detail p{font-size:16px;line-height:1.75}
+body.is-experience .ex-dimension-detail p:last-child{font-size:15px}
+body.is-experience .ex-underlined{font-size:14px}
+body.is-experience .ex-ideas-heading p{font-size:15px}
+body.is-experience .ex-map-caption{font-size:12px;color:#bfcecd}
+body.is-experience .ex-knowledge-node>small{font-size:12px}
+body.is-experience .ex-next-cluster{font-size:14px}
+body.is-experience .ex-path-gate p{font-size:16px;line-height:1.7}
+body.is-experience .ex-paths-caption{font-size:14px}
+body.is-experience .ex-entry-copy>p{font-size:17px;line-height:1.8}
+body.is-experience .ex-entry-back{font-size:14px}
+body.is-experience .care-pathways .cp-introduction>p{font-size:17px;line-height:1.8}
+body.is-experience .care-pathways .cp-context>p:not(.cp-question){font-size:17px;line-height:1.8}
+body.is-experience .care-pathways .cp-source{font-size:14px;color:#c4d2cd;line-height:1.75}
+body.is-experience .care-pathways .cp-source>span:first-child{font-size:12px;color:#b1c7c6}
+body.is-experience .care-pathways .cp-service-link{font-size:15px}
+body.is-experience .care-pathways .cp-eyebrow{font-size:12px;letter-spacing:.08em}
+body.is-experience .care-pathways .cp-node-hint{font-size:12px;line-height:1.6;color:#bdd0ca}
+body.is-experience .care-pathways .cp-node-number{font-size:11px}
+body.is-experience .care-pathways .cp-map-coordinate{font-size:10px}
+body.is-experience .care-pathways .cp-map-invitation{font-size:13px}
+body.is-experience .professional-encounter .pe-introduction>p{font-size:17px;line-height:1.8}
+body.is-experience .professional-encounter .pe-context-summary{font-size:17px;line-height:1.8}
+body.is-experience .professional-encounter .pe-context li{font-size:16px;line-height:1.7}
+body.is-experience .professional-encounter .pe-source{font-size:14px;color:#c9d7d2}
+body.is-experience .professional-encounter .pe-source>span:first-child{font-size:12px;color:#b9cbc7}
+body.is-experience .professional-encounter .pe-topic{font-size:14px}
+body.is-experience .professional-encounter .pe-topic-number{font-size:11px}
+body.is-experience .professional-encounter .pe-eyebrow{font-size:12px}
+body.is-experience .professional-encounter .pe-guidance{font-size:14px;color:#bdcfcb}
+body.is-experience .professional-encounter .pe-person-field,body.is-experience .professional-encounter .pe-person-license{font-size:12px;line-height:1.6}
+body.is-experience .professional-encounter .pe-team-link,body.is-experience .professional-encounter .pe-service-link{font-size:15px}
+body.is-experience .spatial-content .page-article p,body.is-experience .spatial-content .page-article li{font-size:17px;line-height:1.8}
+body.is-experience .spatial-content .page-toc a{font-size:14px;line-height:1.7}
+body.is-experience .spatial-content .page-toc .overline{font-size:12px}
+body.is-experience .ap-intro-copy>p{font-size:17px;line-height:1.75;max-width:45ch}
+body.is-experience .ap-intro-copy .ap-history-introduction{font-size:15px;margin-top:18px;color:#bdcecc}
+body.is-experience .ap-clinical-shortcut{display:inline-block;margin-top:20px;font-size:15px;border-bottom:1px solid #c7b18a77;padding-bottom:6px;color:#ead4b7}
+body.is-experience .ap-traverse{font-size:15px;margin-top:20px}
+body.is-experience .ap-era-copy>p{font-size:16px;line-height:1.75}
+body.is-experience .ap-context-trigger{font-size:14px}
+body.is-experience .ap-context>p{font-size:17px;line-height:1.8}
+body.is-experience .ap-context>small{font-size:13px;line-height:1.7}
+body.is-experience .ap-source{font-size:14px}
+body.is-experience .ex-footer p,body.is-experience .ex-footer nav a{font-size:14px}
+body.is-experience .ex-footer-note{font-size:12px}
+body.is-experience .knowledge-panel{width:min(470px,calc(100vw - 40px));padding:42px 30px 30px}
+body.is-experience .knowledge-panel>p:not(.knowledge-question){font-size:17px;line-height:1.8}
+body.is-experience .knowledge-discipline,body.is-experience .knowledge-caption,body.is-experience .knowledge-panel blockquote cite{font-size:13px;line-height:1.75;color:#b9ccca}
+body.is-experience .knowledge-panel>a{font-size:14px;line-height:1.75}
+body.is-experience .knowledge-panel>.ex-eyebrow{font-size:11px;padding-right:38px}
+body.is-experience .knowledge-close{width:44px;height:44px;top:5px;right:8px}
+body.is-experience .ap-era-quote cite,body.is-experience .ap-context cite,body.is-experience .ap-context-discipline{font-size:13px;line-height:1.75;color:#bfd0cc}
+body.is-experience .ap-era-quote>a,body.is-experience .ap-context a{font-size:14px;line-height:1.75}
+body.is-experience .ap-context-close{font-size:14px;min-height:44px}
+body.is-experience .ap-context .ex-eyebrow{font-size:11px}
+@media(max-width:1100px){body.is-experience .ex-header nav{gap:16px}body.is-experience .ex-header nav a{font-size:12px}}
+@media(max-width:760px){
+ body.is-experience .ex-header nav a{font-size:16px}
+ body.is-experience .ex-intro-title{bottom:20%;width:calc(100% - 58px)}
+ body.is-experience .ex-intro-subtitle{font-size:15px;max-width:33ch}
+ body.is-experience .ex-intro-actions{gap:14px;margin-top:22px}
+ body.is-experience .ex-intro-actions>a{font-size:13px}
+ body.is-experience .ex-x-lens{display:none}
+ body.is-experience .ex-bio-copy{width:auto;max-width:470px;margin:0 29px;padding:120px 0 85px}
+ body.is-experience .ex-bio-labels{display:none}
+ body.is-experience .ex-bio-select{gap:13px}
+ body.is-experience .ex-bio-select button{font-size:13px}
+ body.is-experience .ex-map-caption{font-size:11px;bottom:6%;width:78%}
+ body.is-experience .ex-next-cluster{font-size:13px;bottom:19%}
+ body.is-experience .ex-thought-ribbon{bottom:13%}
+ body.is-experience .ex-knowledge-node>small{font-size:11px}
+ body.is-experience .ex-path-gate p{font-size:16px}
+ body.is-experience .care-pathways .cp-return{font-size:14px}
+ body.is-experience .professional-encounter .pe-topics{gap:12px}
+ body.is-experience .professional-encounter .pe-topic{font-size:13px;min-height:96px}
+ body.is-experience .professional-encounter .pe-person-name{font-size:24px}
+ body.is-experience .ap-intro{min-height:1100px}
+ body.is-experience .ap-intro-copy>p{font-size:17px}
+ body.is-experience .ap-era-copy>p{font-size:16px;max-width:35ch}
+ body.is-experience .ap-era-frame{min-height:1060px}
+ body.is-experience .ap-era{min-height:1520px}
+ body.is-experience .ap-thought{bottom:17%;}
+ body.is-experience .ap-thought p{font-size:26px}
+ body.is-experience .ap-next-era{bottom:11%;font-size:13px}
+ body.is-experience .ap-context-trigger{font-size:14px;min-height:44px}
+}

@@ -1,0 +1,19 @@
+---
+interface Props {theme:string;label:string;compact?:boolean}
+const {theme,label,compact=false}=Astro.props;
+const colors:Record<string,string>={relations:'#d8b48d',neuro:'#b0c7bd',profession:'#c9d4d3',behavior:'#d6ac82',listening:'#9fc5c8',care:'#c1b799'};
+const color=colors[theme]||'#d8b48d';
+---
+<div class:list={['ed-artwork',`ed-art-${theme}`,{'ed-art-compact':compact}]} role="img" aria-label={label}>
+ <svg viewBox="0 0 600 600" aria-hidden="true" fill="none">
+  <g class="ed-art-orbits" stroke={color}>
+   {Array.from({length:13},(_,i)=><ellipse cx="300" cy="300" rx={105+i*9} ry={215-i*7} transform={`rotate(${i*13} 300 300)`} opacity={i%3===0?.6:.16}/>)}
+  </g>
+  {theme==='relations'&&<g stroke={color}><circle cx="300" cy="300" r="24" fill="#0b2635"/>{[0,1,2,3,4,5].map(i=>{const x=300+Math.cos(i*Math.PI/3)*180,y=300+Math.sin(i*Math.PI/3)*180;return <><path d={`M300 300L${x} ${y}`} opacity=".55"/><circle cx={x} cy={y} r={i%2===0?13:8} fill={color}/></>})}</g>}
+  {theme==='behavior'&&<g stroke={color} stroke-width="2"><path d="M180 300H420M300 180V420" opacity=".3"/>{[160,300,440].map((x,i)=><><circle cx={x} cy="300" r="37" fill="#0b2635"/><text x={x} y="310" text-anchor="middle" fill={color} stroke="none" font-size="31" font-family="Georgia,serif">{['A','R','C'][i]}</text></>)}</g>}
+  {theme==='listening'&&<g stroke={color} stroke-linecap="round">{Array.from({length:23},(_,i)=>{const height=30+Math.abs(Math.sin(i*.41))*150;return <path d={`M${130+i*15} ${300-height/2}V${300+height/2}`} stroke-width={i%3===0?3:1} opacity={.3+(i%4)*.15}/>})}</g>}
+  {theme==='care'&&<g stroke={color}><path d="M160 390L300 160L440 390Z" opacity=".55"/><path d="M160 390H440"/><circle cx="300" cy="160" r="20" fill="#0b2635"/><circle cx="160" cy="390" r="20" fill="#0b2635"/><circle cx="440" cy="390" r="20" fill="#0b2635"/><circle cx="300" cy="300" r="43" fill="#0b2635"/><text x="300" y="309" text-anchor="middle" fill={color} stroke="none" font-size="27" font-family="Georgia,serif">cuidar</text></g>}
+  <g fill={color}>{Array.from({length:30},(_,i)=><circle cx={45+(i*137)%510} cy={40+(i*83)%520} r={i%5===0?2.4:1} opacity={.2+(i%3)*.2}/>)}</g>
+ </svg>
+ <span class="ed-art-coordinate" aria-hidden="true">CONTEXTO ↔ RELAÇÕES ↔ COMPREENSÃO</span>
+</div>

@@ -1,0 +1,311 @@
+{
+  "authorization": {
+    "record": "docs/AUTORIZACAO-EDITORIAL-IMAGENS.md",
+    "confirmedAt": "2026-10-17",
+    "scope": "Confirmação direta do titular: fotos de conteúdo próprio, com autorização consensual para divulgar o trabalho das equipes.",
+    "license": "Autorização direta do titular registrada; nenhuma licença de terceiros presumida."
+  },
+  "assets": {
+    "relacoes-reciprocidade": {
+      "file": "src/assets/editorial-images/relacoes-reciprocidade.jpg",
+      "url": "/psicologia-em-pauta/imagens/relacoes-reciprocidade.jpg",
+      "width": 485,
+      "height": 330,
+      "alt": "Duas pessoas dividem tarefas em uma cozinha.",
+      "caption": "Cooperação em uma cena do cotidiano.",
+      "credit": "Acervo editorial próprio · imagem ilustrativa",
+      "kind": "editorial",
+      "objectPosition": "50% 45%",
+      "source": {
+        "file": "Psicologia_em_Pauta_Tabloid_Premium_v4.pdf",
+        "sha256": "3568e5554f4d5686be87c0dbc292fb908a5d62c43bb1799f21041b041a412411",
+        "page": 6,
+        "imageKey": "/FormXob.e3032f0b868ed18480ae7f053e369ad5",
+        "imageIndex": 1,
+        "crop": [
+          30,
+          35,
+          515,
+          365
+        ]
+      },
+      "sha256": "6e79c2ba02e80ebd776912ed3a0c8e3fd319c7c70ac3673f6a7d6f7e77084d22"
+    },
+    "relacoes-reciprocidade-cotidiano": {
+      "file": "src/assets/editorial-images/relacoes-reciprocidade-cotidiano.jpg",
+      "url": "/psicologia-em-pauta/imagens/relacoes-reciprocidade-cotidiano.jpg",
+      "width": 485,
+      "height": 330,
+      "alt": "Duas pessoas cozinham juntas, uma delas acompanha informações em um tablet.",
+      "caption": "Disponibilidade, tarefas e convivência no cotidiano.",
+      "credit": "Acervo editorial próprio · imagem ilustrativa",
+      "kind": "editorial",
+      "objectPosition": "50% 45%",
+      "source": {
+        "file": "Psicologia_em_Pauta_Tabloid_Premium_v4.pdf",
+        "sha256": "3568e5554f4d5686be87c0dbc292fb908a5d62c43bb1799f21041b041a412411",
+        "page": 6,
+        "imageKey": "/FormXob.e3032f0b868ed18480ae7f053e369ad5",
+        "imageIndex": 1,
+        "crop": [
+          30,
+          375,
+          515,
+          705
+        ]
+      },
+      "sha256": "254e7b5eae412f167286326ff57d642cbd45779b47a53592453f3506d9f197a8"
+    },
+    "neurodivergencia-comunicacao": {
+      "file": "src/assets/editorial-images/neurodivergencia-comunicacao.jpg",
+      "url": "/psicologia-em-pauta/imagens/neurodivergencia-comunicacao.jpg",
+      "width": 524,
+      "height": 594,
+      "alt": "Duas pessoas conversam em um sofá; uma gesticula e a outra acompanha.",
+      "caption": "Comunicar também envolve contexto e atenção.",
+      "credit": "Acervo editorial próprio · imagem ilustrativa",
+      "kind": "editorial",
+      "objectPosition": "50% 38%",
+      "source": {
+        "file": "psicologia_em_pauta_premium_v2.pdf",
+        "sha256": "d526a282fc4369753e70b302fbc2ad442e71476af5dfbe9cae7b13317e2ae4f5",
+        "page": 1,
+        "imageKey": "/FormXob.8f557a8df6593daa7721c0f863ea584b",
+        "imageIndex": 0
+      },
+      "sha256": "38c0696e7567d2d3b30c13eeb85abafef272da98592d0d1c65f9026c12c61fc3"
+    },
+    "neurodivergencia-comunicacao-avaliacao": {
+      "file": "src/assets/editorial-images/neurodivergencia-comunicacao-avaliacao.jpg",
+      "url": "/psicologia-em-pauta/imagens/neurodivergencia-comunicacao-avaliacao.jpg",
+      "width": 651,
+      "height": 420,
+      "alt": "Uma pessoa faz anotações enquanto conversa com outra, vista de costas.",
+      "caption": "Uma conversa é parte de uma investigação mais ampla.",
+      "credit": "Acervo editorial próprio · imagem ilustrativa",
+      "kind": "editorial",
+      "objectPosition": "50% 48%",
+      "source": {
+        "file": "psicologia_em_pauta_premium_v2.pdf",
+        "sha256": "d526a282fc4369753e70b302fbc2ad442e71476af5dfbe9cae7b13317e2ae4f5",
+        "page": 5,
+        "imageKey": "/FormXob.87bdb67ec4bc4d57f12a1409bc30667c",
+        "imageIndex": 0
+      },
+      "sha256": "0646b8879845bc979dbee12d16b3379f0ef650ce0837507a9799fb4038c9e415"
+    },
+    "neurodivergencia-comunicacao-contexto": {
+      "file": "src/assets/editorial-images/neurodivergencia-comunicacao-contexto.jpg",
+      "url": "/psicologia-em-pauta/imagens/neurodivergencia-comunicacao-contexto.jpg",
+      "width": 417,
+      "height": 595,
+      "alt": "Uma pessoa leva as mãos às laterais da cabeça em um ambiente público.",
+      "caption": "Reconhecer desconforto não é presumir sua causa.",
+      "credit": "Acervo editorial próprio · imagem ilustrativa",
+      "kind": "editorial",
+      "objectPosition": "50% 35%",
+      "source": {
+        "file": "psicologia_em_pauta_premium_v2.pdf",
+        "sha256": "d526a282fc4369753e70b302fbc2ad442e71476af5dfbe9cae7b13317e2ae4f5",
+        "page": 10,
+        "imageKey": "/FormXob.3c244183424424ed0fc04dafab9559f8",
+        "imageIndex": 0
+      },
+      "sha256": "94347acc888a2b75284c5581c759ff79f18858a613652925ef4eec04ea149bf3"
+    },
+    "o-que-faz-um-psicologo": {
+      "file": "src/assets/editorial-images/o-que-faz-um-psicologo.jpg",
+      "url": "/psicologia-em-pauta/imagens/o-que-faz-um-psicologo.jpg",
+      "width": 445,
+      "height": 315,
+      "alt": "Duas pessoas sentadas frente a frente durante uma conversa.",
+      "caption": "O encontro humano faz parte de um campo amplo de conhecimento.",
+      "credit": "Acervo editorial próprio · imagem ilustrativa",
+      "kind": "editorial",
+      "objectPosition": "50% 42%",
+      "source": {
+        "file": "Psicologia_em_Pauta_Tabloid_Premium_v4.pdf",
+        "sha256": "3568e5554f4d5686be87c0dbc292fb908a5d62c43bb1799f21041b041a412411",
+        "page": 1,
+        "imageKey": "/FormXob.aeffd7002962c07bc1d71bfa56365ca1",
+        "imageIndex": 0,
+        "crop": [
+          0,
+          0,
+          445,
+          315
+        ]
+      },
+      "sha256": "976091e4ebd636e055cfe84bcdc8eb706004e4d37b1cc764a8b6b03cebdb97e5"
+    },
+    "o-que-faz-um-psicologo-trabalho": {
+      "file": "src/assets/editorial-images/o-que-faz-um-psicologo-trabalho.jpg",
+      "url": "/psicologia-em-pauta/imagens/o-que-faz-um-psicologo-trabalho.jpg",
+      "width": 485,
+      "height": 290,
+      "alt": "Duas pessoas conversam diante de um computador portátil e anotações.",
+      "caption": "O trabalho também acontece na preparação e no diálogo.",
+      "credit": "Acervo editorial próprio · imagem ilustrativa",
+      "kind": "editorial",
+      "objectPosition": "50% 48%",
+      "source": {
+        "file": "Psicologia_em_Pauta_Tabloid_Premium_v4.pdf",
+        "sha256": "3568e5554f4d5686be87c0dbc292fb908a5d62c43bb1799f21041b041a412411",
+        "page": 6,
+        "imageKey": "/FormXob.e3032f0b868ed18480ae7f053e369ad5",
+        "imageIndex": 1,
+        "crop": [
+          30,
+          720,
+          515,
+          1010
+        ]
+      },
+      "sha256": "5e164bf4402276c8fb60530554644b2b60ec058c93cb4c32006b8de73c4d9f64"
+    },
+    "analise-do-comportamento": {
+      "file": "src/assets/editorial-images/analise-do-comportamento.jpg",
+      "url": "/psicologia-em-pauta/imagens/analise-do-comportamento.jpg",
+      "width": 900,
+      "height": 900,
+      "alt": "Retrato de Gabriel Alves Batista, autor e curador da edição.",
+      "caption": "Gabriel Alves Batista, autor e curador.",
+      "credit": "Acervo do autor",
+      "kind": "author",
+      "objectPosition": "50% 30%",
+      "source": {
+        "file": "Psicologia_em_Pauta_Analise_do_Comportamento.pdf",
+        "sha256": "1f3eca20c50046dced189b6885ea2574aa49d4de90ec275a04b6061dc7084f52",
+        "page": 1,
+        "imageKey": "/i1fb38f27a845f52cb1b845615fdb9d141",
+        "imageIndex": 1
+      },
+      "sha256": "cd4236ba5a3ba71d4341024c929b7050a9654e38c49e7738fbe574099c1646cb"
+    },
+    "escuta-atencao-e-relacoes": {
+      "file": "src/assets/editorial-images/escuta-atencao-e-relacoes.jpg",
+      "url": "/psicologia-em-pauta/imagens/escuta-atencao-e-relacoes.jpg",
+      "width": 651,
+      "height": 577,
+      "alt": "Duas pessoas conversam junto a um balcão em um ambiente de serviço.",
+      "caption": "A atenção também aparece nos encontros cotidianos.",
+      "credit": "Acervo editorial próprio · imagem ilustrativa",
+      "kind": "editorial",
+      "objectPosition": "50% 43%",
+      "source": {
+        "file": "psicologia_em_pauta_premium_v2.pdf",
+        "sha256": "d526a282fc4369753e70b302fbc2ad442e71476af5dfbe9cae7b13317e2ae4f5",
+        "page": 13,
+        "imageKey": "/FormXob.dfeac270ef35b71593262233b64372e1",
+        "imageIndex": 1
+      },
+      "sha256": "15e648565894e4025f95c47aa103264ace9adc0aa1e3f304bcba25c399b7560a"
+    },
+    "quem-cuida-de-quem-cuida": {
+      "file": "src/assets/editorial-images/quem-cuida-de-quem-cuida.jpg",
+      "url": "/psicologia-em-pauta/imagens/quem-cuida-de-quem-cuida.jpg",
+      "width": 1536,
+      "height": 990,
+      "alt": "Registro de uma equipe reunida em um ambiente de serviço público.",
+      "caption": "Registro de equipe multiprofissional em contexto de serviço público.",
+      "credit": "Acervo do autor",
+      "kind": "documentary",
+      "objectPosition": "50% 45%",
+      "source": {
+        "file": "Psicologia_em_Pauta_Quem_Cuida_de_Quem_Cuida_2026.pdf",
+        "sha256": "98c39c1300f38de1936f38f1b89197c030f517e4346342c2819d1d58c831f1b8",
+        "page": 6,
+        "imageKey": "/Im135",
+        "imageIndex": 1
+      },
+      "sha256": "523f188a6d6c94b7a68837588ee2fe689c2fbd07c91f646ea304ffb8718966ee"
+    },
+    "quem-cuida-de-quem-cuida-atendimento": {
+      "file": "src/assets/editorial-images/quem-cuida-de-quem-cuida-atendimento.jpg",
+      "url": "/psicologia-em-pauta/imagens/quem-cuida-de-quem-cuida-atendimento.jpg",
+      "width": 1536,
+      "height": 990,
+      "alt": "Profissionais e uma pessoa sentada em torno de uma mesa durante atendimento em serviço.",
+      "caption": "Registro de atendimento em serviço e trabalho articulado entre profissionais.",
+      "credit": "Acervo do autor",
+      "kind": "documentary",
+      "objectPosition": "50% 48%",
+      "source": {
+        "file": "Psicologia_em_Pauta_Quem_Cuida_de_Quem_Cuida_2026.pdf",
+        "sha256": "98c39c1300f38de1936f38f1b89197c030f517e4346342c2819d1d58c831f1b8",
+        "page": 5,
+        "imageKey": "/Im128",
+        "imageIndex": 0
+      },
+      "sha256": "1a15b02e70aca1d2eec062290ce24e48e9f22182b6f37ce4b0c4fe3e59b94ef9"
+    }
+  },
+  "editions": {
+    "relacoes-reciprocidade": {
+      "cover": "relacoes-reciprocidade",
+      "chapters": [
+        {
+          "sectionId": "expectativa-e-capacidade",
+          "assetId": "relacoes-reciprocidade-cotidiano"
+        }
+      ],
+      "notes": [
+        "A REV05 contém apenas retrato do autor e mapas gráficos. Cenas de cotidiano foram selecionadas do acervo visual da edição Tabloid v4, sem migrar seu texto nem apresentá-las como registros de pacientes ou equipe."
+      ]
+    },
+    "neurodivergencia-comunicacao": {
+      "cover": "neurodivergencia-comunicacao",
+      "chapters": [
+        {
+          "sectionId": "avaliacao-responsavel",
+          "assetId": "neurodivergencia-comunicacao-avaliacao"
+        },
+        {
+          "sectionId": "sensorialidade-e-acolhimento",
+          "assetId": "neurodivergencia-comunicacao-contexto"
+        }
+      ],
+      "notes": [
+        "Imagens ilustrativas da edição de origem. Não identificam diagnóstico, paciente, profissional ou equipe NEXO."
+      ]
+    },
+    "o-que-faz-um-psicologo": {
+      "cover": "o-que-faz-um-psicologo",
+      "chapters": [
+        {
+          "sectionId": "tempo-tecnico",
+          "assetId": "o-que-faz-um-psicologo-trabalho"
+        }
+      ],
+      "notes": [
+        "Fotografias individuais recortadas das faixas editoriais do PDF. Os recortes excluem outras cenas e textos incorporados; não alteram rostos ou conteúdo das fotografias."
+      ]
+    },
+    "analise-do-comportamento": {
+      "cover": "analise-do-comportamento",
+      "chapters": [],
+      "notes": [
+        "O original contém apenas o retrato fotográfico do autor. A capa o identifica como autor; não se inventa uma fotografia temática. A figura de Skinner é ilustração editorial e não fotografia histórica."
+      ]
+    },
+    "escuta-atencao-e-relacoes": {
+      "cover": "escuta-atencao-e-relacoes",
+      "chapters": [],
+      "notes": [
+        "A cena de conversa é do acervo visual premium_v2, página 13, e foi selecionada para esta edição sem atribuir identidades. O recorte raster residual da página 9 do original Escuta tem texto/tabela incrustados e baixa resolução e foi excluído. Retratos editoriais dos pensadores não são fotografias históricas."
+      ]
+    },
+    "quem-cuida-de-quem-cuida": {
+      "cover": "quem-cuida-de-quem-cuida",
+      "chapters": [
+        {
+          "sectionId": "reportagem-visual",
+          "assetId": "quem-cuida-de-quem-cuida-atendimento"
+        }
+      ],
+      "notes": [
+        "Fotos documentais das páginas 5–6, preservadas com as legendas de origem e crédito Acervo do autor. A capa usa a foto da equipe; o capítulo usa outro registro, de atendimento."
+      ]
+    }
+  }
+}

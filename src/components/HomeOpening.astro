@@ -1,0 +1,39 @@
+---
+import '../styles/home-opening.css';
+---
+<section class="home-opening" id="home-opening" data-home-opening data-state="choices" aria-labelledby="home-opening-title">
+  <div class="home-opening-scene" aria-hidden="true">
+    <canvas class="home-opening-canvas" data-opening-canvas></canvas>
+    <div class="home-opening-vignette"></div>
+    <div class="home-opening-grain"></div>
+  </div>
+  <div class="home-opening-controls">
+    <button type="button" data-opening-pause aria-pressed="false" hidden>Pausar</button>
+    <button type="button" data-opening-skip hidden>Pular abertura <span aria-hidden="true">↗</span></button>
+    <button type="button" data-opening-replay-inline hidden>Rever abertura <span aria-hidden="true">↻</span></button>
+  </div>
+  <div class="home-opening-inner">
+    <img class="home-opening-brand" src="/brand/logo-nexo-horizontal-sobre-dark.svg" width="1440" height="400" alt="NEXO Inteligência Clínica" fetchpriority="high"/>
+    <div class="home-opening-paths" data-opening-paths>
+      <h2 id="home-opening-title">O que você procura hoje?</h2>
+      <div class="home-opening-choices">
+        <a class="home-opening-choice" href="/para-voce/" data-opening-choice>
+          <h3>Para mim<span>.</span></h3>
+          <p>Quero me compreender melhor, fazer terapia ou avaliar atenção e memória.</p>
+          <span class="home-opening-detail">Psicoterapia breve · Avaliação neuropsicológica</span>
+          <span class="home-opening-arrow" aria-hidden="true">↗</span>
+        </a>
+        <a class="home-opening-choice" href="/para-sua-empresa/" data-opening-choice>
+          <h3>Para minha empresa<span>.</span></h3>
+          <p>Quero apoio com a NR-1, avaliar riscos psicossociais e desenvolver minha equipe.</p>
+          <span class="home-opening-detail">Saúde mental no trabalho · Seleção · Treinamento</span>
+          <span class="home-opening-arrow" aria-hidden="true">↗</span>
+        </a>
+      </div>
+      <a class="home-opening-explore" href="#experience-intro" data-opening-explore>Explorar a NEXO <span aria-hidden="true">↓</span></a>
+    </div>
+  </div>
+  <p class="home-opening-status" data-opening-status role="status" aria-live="polite"></p>
+</section>
+<div class="home-opening-launcher"><button type="button" data-opening-replay hidden>Rever abertura <span aria-hidden="true">↻</span></button></div>
+<script>import '../scripts/home-opening';</script>

@@ -1,0 +1,27 @@
+---
+interface Props { slug:string; pdfUrl:string; }
+const {slug,pdfUrl}=Astro.props;
+---
+<div class="ed-reader-toolbar ed-reader-controls" data-ed-reader-controls>
+ <a href="/psicologia-em-pauta/" class="ed-reader-brand">Psicologia em Pauta</a>
+ <div class="ed-reader-modes" role="group" aria-label="Formato de leitura">
+  <button type="button" data-ed-mode-btn="magazine" aria-pressed="false" aria-controls={`revista-${slug}`}>Folhear revista</button>
+  <button type="button" data-ed-mode-btn="continuous" aria-pressed="true" aria-controls="leitura-continua">Leitura contínua</button>
+ </div>
+ <details class="ed-reading-settings" data-ed-settings>
+  <summary>Configurar leitura <span aria-hidden="true">Aa</span></summary>
+  <div class="ed-settings-panel">
+   <p class="ed-settings-title">Do seu jeito, no seu ritmo.</p>
+   <div class="ed-font-controls" role="group" aria-label="Tamanho do texto"><span>Texto</span><button type="button" data-ed-font="decrease" aria-label="Diminuir texto">A−</button><output data-ed-font-output aria-live="polite">18 px</output><button type="button" data-ed-font="increase" aria-label="Aumentar texto">A+</button></div>
+   <label for="ed-reading-theme">Fundo da leitura</label><select id="ed-reading-theme" data-ed-theme><option value="ivory">Marfim editorial</option><option value="sand">Areia suave</option><option value="night">Noturno</option></select>
+   <label for="ed-reading-width">Largura do texto contínuo</label><select id="ed-reading-width" data-ed-width><option value="comfortable">Confortável</option><option value="wide">Ampla</option></select>
+   <label for="ed-reading-spacing">Espaço entre linhas</label><select id="ed-reading-spacing" data-ed-leading><option value="1.85">Confortável</option><option value="1.65">Compacto</option><option value="2">Ampliado</option></select>
+   <button type="button" class="ed-reset-settings" data-ed-reset>Restaurar padrão</button>
+   <p class="ed-settings-note">As escolhas ficam apenas nesta sessão do navegador.</p>
+  </div>
+ </details>
+ <a class="ed-toolbar-pdf" href={pdfUrl} download>Baixar edição PDF <span aria-hidden="true">↓</span></a>
+ <button type="button" data-ed-share class="ed-share-reading">Compartilhar leitura ↗</button><span class="ed-share-status" data-ed-share-status role="status" aria-live="polite"></span>
+ <p class="ed-continuous-count" aria-hidden="true"><span data-ed-current>01</span> / <slot name="chapters"/></p>
+ <div class="ed-reading-progress" aria-hidden="true"><span data-ed-progress></span></div>
+</div>

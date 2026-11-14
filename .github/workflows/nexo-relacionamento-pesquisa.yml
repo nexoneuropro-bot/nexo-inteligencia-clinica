@@ -1,0 +1,39 @@
+name: Validar pesquisa NEXO · Relacionamento aberto
+on:
+  push:
+    branches: [feat/nexo-pesquisa-relacionamento-aberto-20261112, feat/nexo-rcle-revisao-etica-20261112, feat/nexo-perfil-opcional-simples-20261112]
+  pull_request:
+    branches: [feat/nexo-piloto-seguro-20261112, feat/experiencia-imersiva]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  build-and-synthetic-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 13
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.25.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm check
+      - run: pnpm build
+      - run: node --experimental-strip-types --experimental-sqlite --test scripts/test-relationship-research.mjs
+      - name: Conferir rota pública e política local de microfone
+        run: |
+          node --input-type=module <<'JS'
+          import assert from 'node:assert/strict';
+          import {readFileSync} from 'node:fs';
+          const html=readFileSync('dist/pesquisa/relacionamento-aberto/index.html','utf8');
+          const headers=readFileSync('dist/_headers','utf8');
+          assert.ok(html.includes('or-survey'));
+          assert.ok(html.includes('or-answer'));
+          assert.ok(headers.includes('/pesquisa/relacionamento-aberto'));
+          assert.ok(headers.includes('on-device-speech-recognition=(self)'));
+          console.log('Rota, formulário e permissão restrita conferidos.');
+          JS

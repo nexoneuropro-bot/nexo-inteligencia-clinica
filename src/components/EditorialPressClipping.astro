@@ -1,0 +1,22 @@
+---
+import type { ImageMetadata } from 'astro';
+import { editorialPressForArticle } from '../data/editorial-press';
+import '../styles/editorial-press.css';
+interface Props { slug: string }
+const { slug } = Astro.props;
+const source = editorialPressForArticle(slug);
+const captures = import.meta.glob<{default: ImageMetadata}>('../assets/editorial-clippings/*.png', {eager:true});
+const capture = source ? captures[`../assets/editorial-clippings/${source.image}`]?.default : undefined;
+---
+{source && capture && <section class="ed-news-feature" data-editorial-press={slug} aria-label="O tema na vida pública">
+ <span class="ed-eyebrow">O TEMA NA VIDA PÚBLICA</span><h2>{source.heading}</h2>
+ <p class="ed-news-context">{source.context}</p>
+ <figure class="ed-press-clipping">
+  <p class="ed-press-source">{source.kind} · {source.vehicle} · {source.date}</p>
+  <a class="ed-press-capture" href={source.url} target="_blank" rel="noopener noreferrer" aria-label={`Consultar a publicação original: ${source.title}`}><img src={capture.src} width={source.width} height={source.height} alt={`Captura da manchete no site de ${source.vehicle}: ${source.title}`} loading="lazy"/></a>
+  <figcaption>{source.author} · {source.vehicle}. Recorte da página original consultada em {source.capturedAt}.</figcaption>
+  <a href={source.url} target="_blank" rel="noopener noreferrer">Ler a publicação original ↗</a>
+ </figure>
+ <div class="ed-news-reading"><div><h3>Para ler com contexto.</h3><p>{source.limit}</p></div><aside><span class="ed-eyebrow">UMA PERGUNTA PARA VOCÊ</span><p>{source.question}</p></aside></div>
+ <p class="ed-news-note">O recorte aproxima o tema do debate público. A fundamentação científica desta edição está nas fontes e referências.</p>
+</section>}

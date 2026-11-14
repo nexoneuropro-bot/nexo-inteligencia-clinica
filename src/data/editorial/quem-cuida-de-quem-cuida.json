@@ -1,0 +1,1222 @@
+{
+  "slug": "quem-cuida-de-quem-cuida",
+  "title": "Quem cuida de quem cuida?",
+  "subtitle": "Psicologia, SUS, SUAS e terceiro setor: identidade profissional, financiamento e condições de trabalho em São Paulo",
+  "description": "Artigo de opinião e reportagem documental sobre Psicologia, financiamento e saúde das equipes no SUS, SUAS e terceiro setor, com evidências e limites de interpretação.",
+  "category": "Trabalho, políticas públicas e terceiro setor",
+  "theme": "care",
+  "draft": true,
+  "reviewed": false,
+  "migratedAt": "2026-10-16",
+  "source": {
+    "file": "01_EDICOES_PRIORITARIAS/Psicologia_em_Pauta_Quem_Cuida_de_Quem_Cuida_2026.pdf",
+    "totalPages": 18,
+    "sha256": "98c39c1300f38de1936f38f1b89197c030f517e4346342c2819d1d58c831f1b8"
+  },
+  "credit": {
+    "name": "Gabriel Batista",
+    "label": "Assinatura editorial do PDF: Psicólogo e Neuropsicólogo | CRP 06/176184",
+    "sourcePages": [
+      1,
+      18
+    ],
+    "authorshipConfirmedBySource": false
+  },
+  "adaptationCredit": {
+    "name": "Gabriel Alves Batista",
+    "label": "Texto e curadoria",
+    "confirmedByHolder": true,
+    "confirmedAt": "2026-10-17"
+  },
+  "sections": [
+    {
+      "id": "como-ler",
+      "title": "Um editorial crítico, mas verificável",
+      "pages": [
+        1,
+        2
+      ],
+      "blocks": [
+        {
+          "type": "p",
+          "text": "Psicologia, SUS, SUAS e terceiro setor: identidade profissional, financiamento, precarização e caminhos para qualificar o cuidado em São Paulo."
+        },
+        {
+          "type": "quote",
+          "text": "O crachá muda. A política pública muda. A finalidade institucional muda. A Psicologia não desaparece.",
+          "attribution": "Gabriel Batista — texto da edição original"
+        },
+        {
+          "type": "p",
+          "text": "Se uma política pública existe para proteger pessoas, a precarização de quem realiza esse cuidado pode ser tratada como simples problema administrativo?"
+        },
+        {
+          "type": "p",
+          "text": "Este documento combina linguagem jornalística, apreciação crítica e revisão documental. Seu objetivo não é produzir uma auditoria de uma organização específica, nem afirmar que toda parceria com o terceiro setor resulte em precarização. A pergunta é estrutural: quais condições de financiamento, gestão do trabalho, reconhecimento profissional e proteção psicossocial ajudam ou atrapalham a qualidade do cuidado prestado por psicólogas e psicólogos nas políticas públicas?"
+        },
+        {
+          "type": "p",
+          "text": "A edição de origem adota margens acadêmicas, sistema autor-data e referências organizadas em padrão ABNT, preservando uma diagramação editorial para facilitar a leitura. Segundo a metodologia declarada naquele documento, dados municipais foram confrontados com normas de São Paulo e argumentos sobre trabalho e saúde foram apoiados por documentos do Conselho Federal de Psicologia e por estudos revisados por pares. Essa descrição registra o procedimento informado na edição original; a conferência das fontes desta adaptação está identificada caso a caso."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Explicar por que a Psicologia permanece uma profissão técnica, inclusive quando atua no SUAS e em OSCs.",
+            "Mostrar como a rede socioassistencial paulistana depende de parcerias com OSCs e como o financiamento alcança o item recursos humanos.",
+            "Documentar, com limites metodológicos explícitos, evidências sobre precarização, assédio, insegurança laboral e saúde mental dos trabalhadores do SUAS.",
+            "Propor critérios de qualidade para poder público, OSCs, lideranças, recrutadores e para a própria categoria profissional."
+          ]
+        },
+        {
+          "type": "note",
+          "text": "Comparar orçamentos do SUS e do SUAS ajuda a visualizar escala, mas não demonstra, sozinho, “maior valorização” de uma política. Saúde inclui hospitais, medicamentos, exames, urgência e infraestrutura de alto custo. Nesta edição, a comparação é tratada como contexto, não como causalidade."
+        },
+        {
+          "type": "p",
+          "text": "Fatos documentais aparecem acompanhados de fonte e data. Inferências são apresentadas como leitura crítica. Propostas aparecem em seções próprias. Quando um estudo tem amostra pequena, município específico ou dados antigos, isso é indicado. Essa separação é deliberada: crítica política ganha força quando não precisa exagerar a evidência."
+        },
+        {
+          "type": "note",
+          "text": "A edição de origem tem corte documental de 26 de agosto de 2026. Esta adaptação recebeu conferência de fontes em 17 de outubro de 2026; números municipais preservam o período informado nas respectivas publicações. Conferência documental não equivale à aprovação editorial ou clínica da adaptação."
+        }
+      ]
+    },
+    {
+      "id": "identidade",
+      "title": "Psicologia é saúde e compreende o humano em contexto",
+      "pages": [
+        3
+      ],
+      "blocks": [
+        {
+          "type": "p",
+          "text": "A Resolução nº 287/1998 do Conselho Nacional de Saúde relaciona a Psicologia entre as categorias profissionais de saúde de nível superior (BRASIL, 1998). Isso é relevante para corrigir uma distorção frequente no mercado: a experiência de um psicólogo no SUAS não deixa de ser experiência psicológica apenas porque ocorreu fora de um equipamento sanitário.",
+          "review": "Conferência de fontes em 17/10/2026: CNS 287 inclui Psicologia; CFP/CREPOP 2021 delimita o CRAS; a Mostra documenta debates e relatos. Isso sustenta identidade profissional em políticas distintas, sem converter o SUAS em consultório. Fontes exatas e limite do relatório incorporados. A decisão editorial/clínica da adaptação permanece com o responsável."
+        },
+        {
+          "type": "p",
+          "text": "Ao mesmo tempo, a atuação no SUAS não autoriza transformar assistência social em consultório. O foco institucional é a proteção social, a garantia de direitos, a autonomia, os vínculos, o território e o enfrentamento das vulnerabilidades. O ponto crítico está entre dois excessos: “clinificar” o social ou, no extremo contrário, reduzir o psicólogo a um técnico genérico de nível superior.",
+          "review": "Conferência de fontes em 17/10/2026: CNS 287 inclui Psicologia; CFP/CREPOP 2021 delimita o CRAS; a Mostra documenta debates e relatos. Isso sustenta identidade profissional em políticas distintas, sem converter o SUAS em consultório. Fontes exatas e limite do relatório incorporados. A decisão editorial/clínica da adaptação permanece com o responsável."
+        },
+        {
+          "type": "note",
+          "text": "Interdisciplinaridade não é indiferenciação. Profissões diferentes precisam colaborar sem apagar seus núcleos de formação, seus limites éticos e as competências específicas que justificam a presença de cada uma na equipe."
+        },
+        {
+          "type": "p",
+          "text": "O relatório da III Mostra Nacional de Práticas em Psicologia no SUAS documenta debates sobre reconhecimento da profissão, formação, condições de trabalho e educação permanente. É um registro de evento e de relatos de participantes, não um levantamento representativo de todos os profissionais do SUAS (CFP, 2025).",
+          "review": "Conferência de fontes em 17/10/2026: CNS 287 inclui Psicologia; CFP/CREPOP 2021 delimita o CRAS; a Mostra documenta debates e relatos. Isso sustenta identidade profissional em políticas distintas, sem converter o SUAS em consultório. Fontes exatas e limite do relatório incorporados. A decisão editorial/clínica da adaptação permanece com o responsável."
+        },
+        {
+          "type": "p",
+          "text": "Esse diagnóstico não deve alimentar uma disputa corporativa com o Serviço Social. A questão é outra: uma equipe multiprofissional só é verdadeiramente interdisciplinar quando consegue somar perspectivas sem transformar todas as formações em uma mesma função indistinta."
+        },
+        {
+          "type": "quote",
+          "text": "O melhor recrutamento não pergunta apenas “onde você trabalhou?”. Pergunta “o que você aprendeu a fazer, com que complexidade e com quais responsabilidades?”",
+          "attribution": "Gabriel Batista — texto da edição original"
+        }
+      ]
+    },
+    {
+      "id": "pia-pts",
+      "title": "PIA e PTS: instrumentos distintos, competências em diálogo",
+      "pages": [
+        4
+      ],
+      "blocks": [
+        {
+          "type": "p",
+          "text": "O Plano Individual de Atendimento (PIA) tem usos definidos pelas normas de cada serviço. Como exemplo delimitado, a Nota Técnica SMADS nº1/2026, do SAICA — Trajetória de Rua e na Rua, organiza objetivos, ações, metas, prazos e responsabilidades com participação da criança ou adolescente, família e rede quando pertinente. Esse modelo não deve ser generalizado automaticamente a todas as modalidades do SUAS.",
+          "review": "Conferência de fontes em 17/10/2026: A Nota Técnica 1/2026foi confirmada como SAICA específico. Para PTS geral foi recuperada a edição MS 2008, pp. 40–42, além do exemplo atual sobre TEA. PIA delimitado à modalidade e síntese comparativa precisada. A decisão editorial/clínica da adaptação permanece com o responsável."
+        },
+        {
+          "type": "p",
+          "text": "Na saúde, a publicação do Ministério da Saúde Clínica ampliada, equipe de referência e projeto terapêutico singular descreve o PTS como uma construção interdisciplinar: compreender a situação, negociar objetivos, repartir responsabilidades e reavaliar o cuidado. A página atual do Ministério sobre autismo exemplifica esse planejamento compartilhado com a pessoa e sua família; não é uma definição exclusiva para TEA.",
+          "review": "Conferência de fontes em 17/10/2026: A Nota Técnica 1/2026foi confirmada como SAICA específico. Para PTS geral foi recuperada a edição MS 2008, pp. 40–42, além do exemplo atual sobre TEA. PIA delimitado à modalidade e síntese comparativa precisada. A decisão editorial/clínica da adaptação permanece com o responsável."
+        },
+        {
+          "type": "table",
+          "columns": [
+            "Eixo",
+            "PIA no SUAS",
+            "PTS na saúde"
+          ],
+          "rows": [
+            [
+              "Finalidade institucional",
+              "Proteção social, direitos, autonomia, vínculos, território.",
+              "Cuidado em saúde, funcionalidade, autonomia, clínica ampliada."
+            ],
+            [
+              "Construção",
+              "Equipe de referência + usuário/família + rede, conforme o serviço.",
+              "Equipe de saúde + pessoa/família + pontos da rede de atenção."
+            ],
+            [
+              "Plano",
+              "Objetivos, ações, metas, prazos, responsabilidades.",
+              "Necessidades, objetivos de cuidado, responsabilidades e reavaliação."
+            ],
+            [
+              "O que não são",
+              "Não é diagnóstico clínico disfarçado.",
+              "Não é formulário fixo nem plano exclusivamente médico."
+            ],
+            [
+              "Competências transversais",
+              "Escuta, observação, formulação contextual, documentação, articulação de rede, monitoramento.",
+              "Escuta, avaliação, formulação clínica ampliada, documentação, articulação de rede, monitoramento."
+            ]
+          ],
+          "review": "Conferência de fontes em 17/10/2026: A Nota Técnica 1/2026foi confirmada como SAICA específico. Para PTS geral foi recuperada a edição MS 2008, pp. 40–42, além do exemplo atual sobre TEA. PIA delimitado à modalidade e síntese comparativa precisada. A decisão editorial/clínica da adaptação permanece com o responsável."
+        },
+        {
+          "type": "note",
+          "text": "Quadro: síntese editorial da Nota Técnica SMADS 1/2026, específica de um SAICA, e do Ministério da Saúde (2008), pp. 40–42. A tabela compara finalidades e processos, sem declarar equivalência entre PIA e PTS."
+        },
+        {
+          "type": "p",
+          "text": "A existência de instrumentos distintos mostra justamente por que não é necessário escolher entre “Psicologia da saúde” e “Psicologia de humanas”. A mesma formação pode contribuir em políticas diferentes, desde que seu método seja ajustado à finalidade institucional, às normas do serviço e aos limites éticos da profissão."
+        }
+      ]
+    },
+    {
+      "id": "reportagem-visual",
+      "title": "A política pública acontece onde as pessoas estão",
+      "pages": [
+        5,
+        6
+      ],
+      "blocks": [
+        {
+          "type": "p",
+          "text": "As fotografias têm função jornalística, não de prova estatística: lembrar que rede, matriciamento, acolhimento e trabalho multiprofissional são atividades concretas, realizadas por equipes em ambientes reais. A identidade profissional se constrói também nesse cotidiano."
+        },
+        {
+          "type": "note",
+          "text": "Registros de atendimento e de equipe multiprofissional em contexto de serviço público. Fotografias do acervo do autor, presentes nas páginas 5–6 da edição de origem.",
+          "review": "Fotografias incorporadas a partir do acervo original após autorização direta do titular, registrada em docs/AUTORIZACAO-EDITORIAL-IMAGENS.md. Proveniência e legenda preservadas no manifesto fotográfico. As imagens documentam o contexto de trabalho; não constituem prova estatística."
+        },
+        {
+          "type": "p",
+          "text": "Uma fotografia não substitui uma pesquisa. Mas ela pode revelar o que as categorias abstratas escondem: política pública é feita por trabalhadores, relações, equipamentos, documentação, supervisão, decisões e condições materiais de trabalho."
+        }
+      ]
+    },
+    {
+      "id": "rede-paulistana",
+      "title": "São Paulo em números: uma rede fortemente parceirizada",
+      "pages": [
+        7
+      ],
+      "blocks": [
+        {
+          "type": "p",
+          "text": "Em notícia de 6 de julho de 2026, a SMADS descreveu 1.387 serviços conveniados, 338 OSCs parceiras e mais de 246 mil vagas na rede parceirizada. Separadamente, informou que a rede direta de referência — CRAS, CREAS e Centros POP — realizou mais de 223 mil atendimentos e alcançou 187 mil pessoas no primeiro semestre. Vagas, atendimentos e pessoas são indicadores distintos, não parcelas para uma soma.",
+          "review": "Conferência de fontes em 17/10/2026: Balanço SMADS de 6/7/2026confirma os cinco indicadores, com dois universos: rede parceirizada e rede direta de referência. Não são totais somáveis nem contagem de outubro. Denominadores e período corrigidos no texto e quadro. A decisão editorial/clínica da adaptação permanece com o responsável."
+        },
+        {
+          "type": "table",
+          "columns": [
+            "Indicador",
+            "Valor e período original"
+          ],
+          "rows": [
+            [
+              "OSCs parceiras",
+              "338 — primeiro semestre de 2026"
+            ],
+            [
+              "Serviços conveniados",
+              "1.387 — primeiro semestre de 2026"
+            ],
+            [
+              "Vagas ofertadas",
+              "Mais de 246 mil — primeiro semestre de 2026"
+            ],
+            [
+              "Atendimentos da rede direta de referência",
+              "Mais de 223 mil — primeiro semestre de 2026"
+            ],
+            [
+              "Pessoas alcançadas pela rede direta de referência",
+              "187 mil — primeiro semestre de 2026"
+            ]
+          ],
+          "review": "Conferência de fontes em 17/10/2026: Balanço SMADS de 6/7/2026confirma os cinco indicadores, com dois universos: rede parceirizada e rede direta de referência. Não são totais somáveis nem contagem de outubro. Denominadores e período corrigidos no texto e quadro. A decisão editorial/clínica da adaptação permanece com o responsável."
+        },
+        {
+          "type": "p",
+          "text": "Esses números mudam a pergunta. OSC não é periferia administrativa da política: em São Paulo, é parte central da infraestrutura que sustenta a oferta socioassistencial. Por isso, qualidade da parceria, gestão do trabalho e saúde das equipes não podem ser tratadas como assuntos internos sem relação com o resultado público."
+        },
+        {
+          "type": "p",
+          "text": "Há OSCs com longa trajetória técnica, equipes qualificadas e serviços complexos. Também há organizações que operam sob forte restrição financeira ou enfrentam problemas de governança. Uma análise responsável precisa rejeitar dois atalhos: demonizar toda organização parceira ou presumir que o poder público deixa de ser responsável pela qualidade do serviço quando assina um termo de colaboração."
+        },
+        {
+          "type": "quote",
+          "text": "Se a rede depende de centenas de OSCs, qual é o sistema de qualidade que acompanha não apenas metas de atendimento e prestação de contas, mas também rotatividade, vacâncias, formação de lideranças, saúde do trabalhador e segurança psicossocial?",
+          "attribution": "Gabriel Batista — texto da edição original"
+        }
+      ]
+    },
+    {
+      "id": "financiamento",
+      "title": "O repasse não chega ao trabalhador em linha reta",
+      "pages": [
+        8
+      ],
+      "blocks": [
+        {
+          "type": "p",
+          "text": "A Instrução Normativa SMADS nº 2/2024 mostra que o repasse mensal é estruturado por custos diretos e indiretos. Entre os custos diretos estão remuneração de recursos humanos, encargos sociais e trabalhistas, despesas impostas por lei ou convenções coletivas e fundo provisionado. A norma também determina que a remuneração conste no Plano de Trabalho, observe piso profissional e convenções aplicáveis, seja compatível com o mercado e respeite a planilha referencial do serviço (SÃO PAULO, 2024).",
+          "review": "Conferência de fontes em 17/10/2026: IN 2/2024 arts. 102–103/149 confirma composição de RH. Portaria 46 é de 30/3, apesar da URL; Portaria 128 amplia prazo para 180 dias ou encerramento, primeiro evento. Data, períodos e condições precisados; não se infere subfinanciamento de toda OSC. A decisão editorial/clínica da adaptação permanece com o responsável."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Orçamento público.",
+            "SMADS / Fundo Municipal de Assistência Social.",
+            "Termo de colaboração.",
+            "Organização da Sociedade Civil.",
+            "Recursos humanos e operação."
+          ]
+        },
+        {
+          "type": "p",
+          "text": "Fonte: Fluxo simplificado para fins didáticos. A execução real contém regras de planejamento, prestação de contas, remanejamentos e controles específicos. Isso explica por que um salário baixo não pode ser atribuído automaticamente a uma única causa. Pode haver decisão inadequada da organização, parâmetro insuficiente da parceria, convenção coletiva aplicável, desenho de carreira inexistente, combinação desses fatores ou outras variáveis. A investigação responsável começa pela planilha de custos e pelas regras da tipologia, não pela acusação pronta."
+        },
+        {
+          "type": "p",
+          "text": "A Portaria SMADS nº46 é datada de 30 de março de 2026, embora seu endereço eletrônico mencione 3 de abril. Ela autorizou recomposição excepcional de RH para outubro de 2024 a setembro de 2025 e disciplinou saldos para outubro a dezembro de 2025. A Portaria 128, de 30 de julho de 2026, alterou sua redação, inclusive o prazo de utilização: até 180 dias do recebimento ou o encerramento da parceria, o que ocorrer primeiro. A aplicação depende das condições e dos anexos da norma.",
+          "review": "Conferência de fontes em 17/10/2026: IN 2/2024 arts. 102–103/149 confirma composição de RH. Portaria 46 é de 30/3, apesar da URL; Portaria 128 amplia prazo para 180 dias ou encerramento, primeiro evento. Data, períodos e condições precisados; não se infere subfinanciamento de toda OSC. A decisão editorial/clínica da adaptação permanece com o responsável."
+        },
+        {
+          "type": "note",
+          "text": "Houve necessidade administrativa concreta de recompor despesas de recursos humanos nas parcerias. Isso sustenta a existência de pressão financeira sobre esse componente do custeio. Não permite concluir, sozinho, que toda OSC esteja subfinanciada ou que toda remuneração seja inadequada."
+        }
+      ]
+    },
+    {
+      "id": "orcamento",
+      "title": "Saúde e assistência: como ler diferenças de escala",
+      "pages": [
+        9
+      ],
+      "blocks": [
+        {
+          "type": "p",
+          "text": "Em maio de 2026, a Secretaria Municipal da Saúde informava orçamento atualizado de aproximadamente R$ 24,60 bilhões. A SMADS informava orçamento atualizado de aproximadamente R$ 2,94 bilhões, dos quais cerca de R$ 2,57 bilhões estavam no Fundo Municipal de Assistência Social (SÃO PAULO, 2026e; 2026f).",
+          "review": "Conferência de fontes em 17/10/2026: Páginas municipais confirmam dotações atualizadas de maio: R$ 24,60 bi (saúde), R$ 2,94 bi (SMADS), R$ 2,57 bi (FMAS). Não são despesas pagas. A menção a grupo COMAS sem referência específica foi retirada. Valores preservados com período; comparação não prova valorização/causalidade. A decisão editorial/clínica da adaptação permanece com o responsável."
+        },
+        {
+          "type": "table",
+          "columns": [
+            "Orçamento atualizado informado em maio de 2026",
+            "Valor aproximado"
+          ],
+          "rows": [
+            [
+              "Secretaria Municipal da Saúde",
+              "R$ 24,60 bilhões"
+            ],
+            [
+              "SMADS",
+              "R$ 2,94 bilhões"
+            ],
+            [
+              "Fundo Municipal de Assistência Social",
+              "R$ 2,57 bilhões"
+            ]
+          ],
+          "review": "Conferência de fontes em 17/10/2026: Páginas municipais confirmam dotações atualizadas de maio: R$ 24,60 bi (saúde), R$ 2,94 bi (SMADS), R$ 2,57 bi (FMAS). Não são despesas pagas. A menção a grupo COMAS sem referência específica foi retirada. Valores preservados com período; comparação não prova valorização/causalidade. A decisão editorial/clínica da adaptação permanece com o responsável."
+        },
+        {
+          "type": "note",
+          "text": "Os valores são dotações atualizadas, não despesas já pagas, e se referem a políticas com composições e finalidades diferentes. A comparação, sozinha, não demonstra desvalorização, eficiência ou insuficiência da assistência social. É um contexto de escala que precisa ser combinado com demanda, custos, metas e execução."
+        },
+        {
+          "type": "p",
+          "text": "A discussão relevante para esta edição é: o valor disponível para assistência social consegue acompanhar a complexidade da rede, os reajustes de pessoal, a expansão de demandas e a qualificação das equipes? Responder exige analisar planilhas de custos e execução, e não apenas comparar o tamanho dos dois orçamentos."
+        },
+        {
+          "type": "p",
+          "text": "A pergunta que os números não respondem sozinhos:"
+        },
+        {
+          "type": "quote",
+          "text": "Quanto custa manter uma equipe estável, treinada, supervisionada e protegida contra riscos psicossociais? Sem responder a isso, eficiência pode virar apenas sinônimo de fazer mais com uma equipe cada vez mais cansada.",
+          "attribution": "Gabriel Batista — texto da edição original"
+        }
+      ]
+    },
+    {
+      "id": "pesquisa",
+      "title": "O que a pesquisa encontra sobre condições de trabalho",
+      "pages": [
+        10
+      ],
+      "blocks": [
+        {
+          "type": "p",
+          "text": "Sales e Maciel(2019) analisaram questionários online de 1.100 psicólogos de todas as regiões do Brasil, encontrando dificuldades de remuneração, carga de trabalho e preparação para o contexto socioassistencial. A presença de participantes de várias regiões amplia o alcance geográfico, mas não transforma essa amostra em retrato representativo de toda a categoria em 2026.",
+          "review": "Conferência de fontes em 17/10/2026: Quatro estudos identificados. Sales: n 1.100 online; Brandolt: n 12/RS 2013–2017; Pauli: n 6/RS 2010–2015; Amorim:17 publicações, quatro eixos, volume 2024/Epub 2025. Para Amorim conferiu-se resumo primário, sem alegar leitura integral. Amostras, períodos e limites registrados; nenhuma taxa nacional foi inferida. A decisão editorial/clínica da adaptação permanece com o responsável."
+        },
+        {
+          "type": "p",
+          "text": "Em estudo qualitativo com 12 psicólogas(os) que haviam trabalhado em serviços socioassistenciais terceirizados de um município do interior do Rio Grande do Sul, Brandolt et al. (2021) encontraram precarização atravessando seleção, contratos, carga horária, função, remuneração, educação permanente e encerramento dos vínculos, além de relações baseadas em medo e intimidação. A amostra é pequena e local, portanto deve ser lida como evidência qualitativa, não como estimativa nacional.",
+          "review": "Conferência de fontes em 17/10/2026: Quatro estudos identificados. Sales: n 1.100 online; Brandolt: n 12/RS 2013–2017; Pauli: n 6/RS 2010–2015; Amorim:17 publicações, quatro eixos, volume 2024/Epub 2025. Para Amorim conferiu-se resumo primário, sem alegar leitura integral. Amostras, períodos e limites registrados; nenhuma taxa nacional foi inferida. A decisão editorial/clínica da adaptação permanece com o responsável."
+        },
+        {
+          "type": "p",
+          "text": "Pauli, Traesel e Siqueira (2019), ao entrevistar seis psicólogos temporários com experiência em CREAS, descreveram desgaste, frustrações, adoecimento, falta de valorização da gestão e insegurança quanto à renovação de contrato. Novamente, é um estudo local e qualitativo, útil para compreender mecanismos e experiências, não para medir prevalência.",
+          "review": "Conferência de fontes em 17/10/2026: Quatro estudos identificados. Sales: n 1.100 online; Brandolt: n 12/RS 2013–2017; Pauli: n 6/RS 2010–2015; Amorim:17 publicações, quatro eixos, volume 2024/Epub 2025. Para Amorim conferiu-se resumo primário, sem alegar leitura integral. Amostras, períodos e limites registrados; nenhuma taxa nacional foi inferida. A decisão editorial/clínica da adaptação permanece com o responsável."
+        },
+        {
+          "type": "p",
+          "text": "Amorim e Dalla Vecchia publicaram, no volume 29(2024) de Estudos de Psicologia (Natal), uma revisão crítica com 17 publicações e quatro eixos: características adoecedoras do trabalho, precarização, sofrimento e estratégias de enfrentamento. O registro do periódico informa publicação eletrônica em 10 de novembro de 2025. É uma síntese heterogênea da literatura, sem estimativa única de prevalência nem demonstração de que toda OSC tenha as mesmas condições.",
+          "review": "Conferência de fontes em 17/10/2026: Quatro estudos identificados. Sales: n 1.100 online; Brandolt: n 12/RS 2013–2017; Pauli: n 6/RS 2010–2015; Amorim:17 publicações, quatro eixos, volume 2024/Epub 2025. Para Amorim conferiu-se resumo primário, sem alegar leitura integral. Amostras, períodos e limites registrados; nenhuma taxa nacional foi inferida. A decisão editorial/clínica da adaptação permanece com o responsável."
+        },
+        {
+          "type": "table",
+          "columns": [
+            "Fonte",
+            "Desenho",
+            "Contribuição",
+            "Limite"
+          ],
+          "rows": [
+            [
+              "Sales e Maciel, 2019",
+              "Survey, n = 1.100",
+              "Panorama nacional de condições e identidade.",
+              "Questionário online; alcance geográfico não garante representatividade; período anterior a 2026."
+            ],
+            [
+              "Brandolt et al., 2021",
+              "Qualitativo, n = 12",
+              "Terceirização, medo, contrato e remuneração.",
+              "Um município; serviços entre 2013–2017; não mede prevalência nacional."
+            ],
+            [
+              "Pauli et al., 2019",
+              "Qualitativo, n = 6",
+              "Desgaste, adoecimento e insegurança.",
+              "Seis participantes, um município; vínculos entre 2010–2015."
+            ],
+            [
+              "Amorim e Dalla Vecchia, 2024",
+              "Revisão, 17 estudos",
+              "Síntese de sofrimento e precarização no SUAS.",
+              "Estudos heterogêneos; volume 2024, publicação eletrônica 2025; sem prevalência única."
+            ]
+          ],
+          "review": "Conferência de fontes em 17/10/2026: Quatro estudos identificados. Sales: n 1.100 online; Brandolt: n 12/RS 2013–2017; Pauli: n 6/RS 2010–2015; Amorim:17 publicações, quatro eixos, volume 2024/Epub 2025. Para Amorim conferiu-se resumo primário, sem alegar leitura integral. Amostras, períodos e limites registrados; nenhuma taxa nacional foi inferida. A decisão editorial/clínica da adaptação permanece com o responsável."
+        }
+      ]
+    },
+    {
+      "id": "saude-trabalhador",
+      "title": "Assédio, prevenção e saúde de quem cuida",
+      "pages": [
+        11
+      ],
+      "blocks": [
+        {
+          "type": "p",
+          "text": "O relatório da III Mostra Nacional de Práticas em Psicologia no SUAS, publicado pelo CFP em 2025, reúne relatos e debates sobre precarização, assédio moral, equipes reduzidas, salários incompatíveis com responsabilidades técnicas, carga horária, infraestrutura inadequada e ausência de educação permanente. O documento também ressalta que instituições devem promover saúde, dignidade e segurança no trabalho (CFP, 2025).",
+          "review": "Conferência de fontes em 17/10/2026: relatório da Mostra, pp.20–22 impressas (PDF23–25), documenta debates e relatos sobre condições de trabalho e assédio. É registro de evento, não estimativa representativa de prevalência."
+        },
+        {
+          "type": "p",
+          "text": "No campo regulatório, a NR-1 passou a incluir expressamente fatores de risco psicossociais relacionados ao trabalho no gerenciamento de riscos ocupacionais. A nova redação do capítulo 1.5 entrou em vigor em 26 de maio de 2026, e materiais oficiais citam sobrecarga e assédio entre exemplos de fatores relacionados à organização do trabalho (BRASIL, 2026a).",
+          "review": "Conferência de fontes em 17/10/2026: portal e manual do MTE confirmam redação do capítulo1.5 desde26/05/2026 e inclusão expressa dos fatores de risco psicossociais relacionados ao trabalho. Norma e alcance de decisão judicial posterior são verificações distintas."
+        },
+        {
+          "type": "p",
+          "text": "Vigência normativa, prevenção e aplicação de sanções são questões relacionadas, mas distintas. A discussão sobre a NR-1 também chegou ao STF na ADPF 1316. Para uma decisão fiscal ou jurídica, é necessário consultar as decisões vigentes no processo. O debate judicial não torna assédio, sobrecarga ou gestão inadequada irrelevantes para a prevenção.",
+          "review": "Conferência de fontes em 17/10/2026: MTE confirma texto desde 26/5/2026e riscos ligados à organização. ADPF 1316 foi identificada, mas decisões atuais não puderam ser lidas; notícias acessadas falharam. Não é possível confirmar nesta rodada o regime atual de sanções. Retirada apresentação do prazo histórico como estado atual; permanece pendência específica sobre decisões do STF. A decisão editorial/clínica da adaptação permanece com o responsável."
+        },
+        {
+          "type": "p",
+          "text": "Uma organização pode defender direitos humanos em seu projeto institucional e ainda reproduzir relações autoritárias dentro da equipe. Pode oferecer acolhimento ao território e produzir medo nos trabalhadores. Pode promover saúde mental para usuários e tratar sofrimento ocupacional como fraqueza individual. É justamente por isso que valores institucionais precisam ser traduzidos em processos de gestão verificáveis."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Lideranças precisam ser treinadas em feedback, gestão de conflitos, distribuição de carga, prevenção ao assédio e limites da autoridade administrativa.",
+            "Equipes expostas a alta complexidade precisam de supervisão técnica e espaços de elaboração do trabalho, não apenas palestras eventuais.",
+            "Canais de denúncia precisam ter proteção contra retaliação, fluxo definido, rastreabilidade e devolutiva.",
+            "Rotatividade, afastamentos, vacâncias e clima de equipe devem ser tratados como indicadores de qualidade do serviço."
+          ],
+          "review": "Recomendações propositivas do autor, preservadas como agenda de qualidade e prevenção. Não se afirma que esse conjunto seja lista exaustiva de obrigações legais universais."
+        }
+      ]
+    },
+    {
+      "id": "salario-jornada",
+      "title": "Salário, jornada e proteção: distinguir proposta e direito",
+      "pages": [
+        12
+      ],
+      "blocks": [
+        {
+          "type": "p",
+          "text": "O texto inicial do PL 1.551/2026 propõe piso de R$ 4.500 mensais para até 30 horas semanais. Em 17 de outubro de 2026, a ficha da Câmara registra a proposta aguardando designação de relator na Comissão de Saúde, com o PL 2.805/2026apensado. Trata-se de proposta legislativa; o valor não pode ser anunciado como piso nacional criado por esse projeto.",
+          "review": "Conferência de fontes em 17/10/2026: PL 1551: texto inicial confirma R$ 4.500/até 30 h como proposta; Câmara aguarda relator. PL 1214: Senado aguarda despacho. Lei 12.317 aplica 30 h ao Serviço Social. CCT 2025–26 valores corretos, mas vigência terminou 31/8/2026. Separados proposta, lei de outra profissão e referência coletiva histórica. Não há afirmação sobre piso atual nem ausência de toda lei nacional. A decisão editorial/clínica da adaptação permanece com o responsável."
+        },
+        {
+          "type": "p",
+          "text": "Na mesma consulta, o PL 1.214/2019 permanecia em tramitação no Senado, aguardando despacho, propondo duração de até 30 horas semanais. A situação desses projetos não substitui a análise da legislação e dos instrumentos coletivos aplicáveis a cada vínculo.",
+          "review": "Conferência de fontes em 17/10/2026: PL 1551: texto inicial confirma R$ 4.500/até 30 h como proposta; Câmara aguarda relator. PL 1214: Senado aguarda despacho. Lei 12.317 aplica 30 h ao Serviço Social. CCT 2025–26 valores corretos, mas vigência terminou 31/8/2026. Separados proposta, lei de outra profissão e referência coletiva histórica. Não há afirmação sobre piso atual nem ausência de toda lei nacional. A decisão editorial/clínica da adaptação permanece com o responsável."
+        },
+        {
+          "type": "p",
+          "text": "Para comparação institucional, assistentes sociais possuem jornada legal de 30 horas desde a Lei nº 12.317/2010. A comparação não pretende opor categorias: mostra que profissionais que frequentemente trabalham lado a lado no SUAS podem estar submetidos a proteções legais diferentes (BRASIL, 2010).",
+          "review": "Conferência de fontes em 17/10/2026: PL 1551: texto inicial confirma R$ 4.500/até 30 h como proposta; Câmara aguarda relator. PL 1214: Senado aguarda despacho. Lei 12.317 aplica 30 h ao Serviço Social. CCT 2025–26 valores corretos, mas vigência terminou 31/8/2026. Separados proposta, lei de outra profissão e referência coletiva histórica. Não há afirmação sobre piso atual nem ausência de toda lei nacional. A decisão editorial/clínica da adaptação permanece com o responsável."
+        },
+        {
+          "type": "p",
+          "text": "Como referência histórica de negociação no setor saúde paulista, a CCT SinPsi-SP/SindHosp 2025–2026fixou R$ 4.338,84 desde setembro de 2025 e R$ 4.423,05 desde dezembro daquele ano. A cláusula 48 delimitou a vigência de 1º de setembro de 2025 a 31 de agosto de 2026. Os valores não são apresentados aqui como piso atual de outubro, nem como piso nacional ou regra transferível a todos os contratos socioassistenciais. Para contratação ou cálculo atual, é preciso identificar a base de representação, o vínculo e o instrumento vigente.",
+          "review": "Conferência de fontes em 17/10/2026: PL 1551: texto inicial confirma R$ 4.500/até 30 h como proposta; Câmara aguarda relator. PL 1214: Senado aguarda despacho. Lei 12.317 aplica 30 h ao Serviço Social. CCT 2025–26 valores corretos, mas vigência terminou 31/8/2026. Separados proposta, lei de outra profissão e referência coletiva histórica. Não há afirmação sobre piso atual nem ausência de toda lei nacional. A decisão editorial/clínica da adaptação permanece com o responsável."
+        },
+        {
+          "type": "note",
+          "text": "Exemplo documental histórico: CCT SinPsi-SP/SindHosp 2025–2026, cláusulas 3ª, 6ª e 48. O instrumento consultado permite jornada inferior com proporcionalidade mediante contrato escrito; não institui jornada nacional de 30 horas para a Psicologia. Projetos de lei e pauta de negociação não são normas vigentes."
+        },
+        {
+          "type": "p",
+          "text": "Salário é necessário, mas não suficiente. Remuneração digna não corrige sozinha sobrecarga, assédio, falta de supervisão, equipe incompleta ou ausência de carreira. Precarização é um fenômeno multidimensional."
+        }
+      ]
+    },
+    {
+      "id": "recrutamento",
+      "title": "Quando o setor de origem apaga competências",
+      "pages": [
+        13
+      ],
+      "blocks": [
+        {
+          "type": "p",
+          "text": "Experiência setorial importa. Uma vaga hospitalar pode exigir conhecimento de rotinas hospitalares; um CAPS exige familiaridade com RAPS; um CRAS ou CREAS exige domínio da política socioassistencial. O problema surge quando o setor de origem substitui a análise das competências desenvolvidas."
+        },
+        {
+          "type": "p",
+          "text": "Um psicólogo que trabalhou no SUAS pode ter desenvolvido competências avançadas em violência, deficiência, vínculos, trabalho com famílias, grupos, crise, autonomia, articulação intersetorial, documentação técnica e leitura de fatores sociais associados ao sofrimento. Essas competências não tornam o profissional automaticamente preparado para qualquer vaga na saúde, mas tampouco desaparecem na mudança de política pública."
+        },
+        {
+          "type": "table",
+          "columns": [
+            "Competência",
+            "Pergunta de seleção baseada em evidência"
+          ],
+          "rows": [
+            [
+              "Formulação de caso",
+              "Consegue integrar história, comportamento, contexto, riscos e recursos sem reduzir a pessoa a uma etiqueta?"
+            ],
+            [
+              "Trabalho em rede",
+              "Articula saúde, assistência, educação, justiça e território com clareza de responsabilidades?"
+            ],
+            [
+              "Documentação",
+              "Produz registros e relatórios tecnicamente adequados, objetivos e éticos?"
+            ],
+            [
+              "Interdisciplinaridade",
+              "Consegue sustentar sua contribuição psicológica sem invadir atribuições de outras profissões?"
+            ],
+            [
+              "Gestão de risco",
+              "Reconhece situações que exigem escalonamento, encaminhamento ou proteção imediata?"
+            ],
+            [
+              "Aprendizagem setorial",
+              "Demonstra capacidade de aprender protocolos e fluxos do novo serviço?"
+            ]
+          ]
+        },
+        {
+          "type": "note",
+          "text": "Contratar por competência não significa ignorar experiência específica. Significa evitar que “setor de origem” funcione como atalho para presumir o que o candidato sabe ou não sabe fazer."
+        }
+      ]
+    },
+    {
+      "id": "agenda-qualidade",
+      "title": "Dez mudanças possíveis para qualificar serviços e proteger equipes",
+      "pages": [
+        14
+      ],
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "1. Financiamento previsível Revisar planilhas de custo e mecanismos de reajuste com foco explícito em RH, encargos e retenção de profissionais.",
+            "2. Transparência remuneratória Publicar parâmetros de composição de RH por tipologia e tornar mais legível o que é custo do serviço, salário, encargos e fundo provisionado.",
+            "3. Formação obrigatória de lideranças Capacitar gerentes e coordenadores em gestão de pessoas, comunicação, conflitos, ética, assédio e riscos psicossociais.",
+            "4. Supervisão técnica Prever espaços regulares de supervisão e educação permanente para equipes expostas a alta complexidade.",
+            "5. Canal protegido de denúncia Criar fluxo independente, prazo de resposta, proteção contra retaliação e governança de casos de assédio.",
+            "6. Indicadores de gente Monitorar rotatividade, vacância, afastamentos, horas extras, tempo de permanência, acidentes e sinais de sobrecarga.",
+            "7. Fiscalização de qualidade do trabalho Incluir condições de trabalho e estabilidade de equipe na avaliação da parceria, não apenas execução financeira e volume de atendimentos.",
+            "8. Identidade profissional clara Definir atribuições de psicólogo, serviço social e demais categorias de modo complementar, evitando “técnico genérico” como solução para qualquer demanda.",
+            "9. Recrutamento por competências Avaliar competências transferíveis entre SUS, SUAS e terceiro setor, sem dispensar formação para especificidades do novo equipamento.",
+            "10. Participação dos trabalhadores Criar mecanismos regulares para que as equipes influenciem melhorias de processo, formação e prevenção de riscos."
+          ],
+          "review": "Conferência de fontes em 17/10/2026: As dez medidas são uma agenda editorial do autor, não lista exaustiva de obrigações vigentes. Conteúdo integral preservado; decisão editorial sobre tom permanece. A decisão editorial/clínica da adaptação permanece com o responsável."
+        },
+        {
+          "type": "p",
+          "text": "Não se trata de acrescentar burocracia ornamental. Trata-se de reconhecer que gestão do trabalho é parte da tecnologia de cuidado. Uma equipe adoecida, instável ou amedrontada não é um problema “de RH” separado da qualidade assistencial."
+        }
+      ]
+    },
+    {
+      "id": "quadro-evidencias",
+      "title": "O que a edição consegue sustentar e até onde",
+      "pages": [
+        15
+      ],
+      "blocks": [
+        {
+          "type": "table",
+          "columns": [
+            "Afirmação",
+            "Base documental do original",
+            "Limite de interpretação"
+          ],
+          "rows": [
+            [
+              "Psicologia é reconhecida como profissão de saúde.",
+              "Resolução CNS nº 287/1998.",
+              "PDF oficial conferido; reconhecimento de saúde não torna toda atuação psicológica uma atividade sanitária."
+            ],
+            [
+              "A rede socioassistencial paulistana depende fortemente de OSCs.",
+              "338 OSCs e 1.387 serviços conveniados no balanço do primeiro semestre de 2026.",
+              "Balanço publicado em 6/7/2026; rede parceirizada diferente dos indicadores de atendimento da rede direta."
+            ],
+            [
+              "RH é componente estruturado do custeio das parcerias.",
+              "IN nº 02/SMADS/2024 e Portarias nº 46/2026e nº 128/2026.",
+              "Arts. 102–103 e 149 da IN 2/2024 e portarias conferidos; regra de custeio não comprova insuficiência individual."
+            ],
+            [
+              "Há evidências de precarização e sofrimento no trabalho do SUAS.",
+              "CFP 2025, estudos de 2019 e 2021, revisão de 2024.",
+              "Amostras/desenhos/períodos diferentes; relatos e resultados não medem prevalência de todo o SUAS."
+            ],
+            [
+              "Riscos psicossociais ganharam centralidade regulatória.",
+              "NR-1 atualizada e materiais oficiais do MTE; decisão do STF citada na edição.",
+              "Vigência normativa e relevância preventiva verificadas no MTE; estado atual das sanções judiciais não foi confirmado."
+            ],
+            [
+              "Psicologia ainda busca piso e jornada nacional.",
+              "PL nº 1.551/2026e PL nº 1.214/2019 em tramitação.",
+              "Fichas e texto inicial conferidos em 17/10/2026; projetos em tramitação, sem criar direito por si."
+            ]
+          ],
+          "review": "Conferência de fontes em 17/10/2026: A matriz foi atualizada junto com o corpo: fontes de dados/métodos conferidas, projetos em tramitação e sanções judiciais atuais sem confirmação. Células não repetem pendências já solucionadas nem escondem a do STF. A decisão editorial/clínica da adaptação permanece com o responsável."
+        },
+        {
+          "type": "p",
+          "text": "O objetivo de uma apreciação crítica não é transformar correlação em prova ou opinião em estatística. É organizar evidências suficientes para formular perguntas melhores. Neste caso, as fontes permitem sustentar que identidade profissional, financiamento, gestão do trabalho e saúde ocupacional são dimensões inseparáveis da qualidade da proteção social."
+        }
+      ]
+    },
+    {
+      "id": "conclusao",
+      "title": "Quem cuida de quem cuida?",
+      "pages": [
+        16
+      ],
+      "blocks": [
+        {
+          "type": "p",
+          "text": "A resposta não pode ser apenas “o próprio profissional”. Autocuidado não corrige subfinanciamento. Resiliência não substitui equipe suficiente. Uma palestra não corrige assédio. Supervisão não compensa indefinidamente uma organização do trabalho adoecedora. E vocação não é política salarial."
+        },
+        {
+          "type": "p",
+          "text": "Também seria simplista responsabilizar apenas as OSCs. Em uma rede baseada em termos de colaboração, poder público e organização parceira compartilham responsabilidades diferentes, mas conectadas. O município define parâmetros, regula, financia e fiscaliza. A OSC administra, contrata, lidera e executa. O trabalhador materializa a política na relação cotidiana com o usuário."
+        },
+        {
+          "type": "p",
+          "text": "A Psicologia precisa fazer sua parte. Defender identidade profissional não significa transformar o SUAS em extensão da clínica, disputar território com o Serviço Social ou reivindicar privilégio. Significa conseguir explicar o que a formação psicológica acrescenta à proteção social e sustentar essa contribuição com método, ética e trabalho interdisciplinar. O sujeito é biopsicossocial antes de qualquer organograma."
+        },
+        {
+          "type": "p",
+          "text": "Não deixa de ter corpo quando entra no SUAS. Não deixa de ter história social quando entra no SUS. Não abandona vínculos, cognição, comportamento, cultura, renda ou território na porta de nenhum equipamento. As políticas precisam de fronteiras administrativas; o cuidado precisa de pontes técnicas."
+        },
+        {
+          "type": "p",
+          "text": "Talvez o próximo passo para amadurecer a relação entre Estado, terceiro setor e Psicologia seja mudar a pergunta. Não apenas quantos profissionais conseguimos colocar na ponta, mas que condições oferecemos para que profissionais qualificados desejem permanecer nela, aprender nela e cuidar bem durante anos."
+        },
+        {
+          "type": "note",
+          "text": "Uma política pública que depende de trabalhadores qualificados precisa tratar o trabalho como parte do cuidado. Valorizar a Psicologia no SUAS não é afastá-la das Humanidades nem transformá-la em clínica: é reconhecer a capacidade de compreender pessoas em contextos complexos, com responsabilidade técnica e em diálogo com outras profissões."
+        }
+      ]
+    },
+    {
+      "id": "nota-etica",
+      "title": "Nota editorial, ética e recorte documental",
+      "pages": [
+        18
+      ],
+      "blocks": [
+        {
+          "type": "p",
+          "text": "Esta é uma apreciação crítica e educativa. Não substitui parecer jurídico, auditoria de parceria, fiscalização trabalhista ou análise individual de condições de trabalho. Não atribui irregularidades a nenhuma OSC específica. A fonte tem corte em 26 de agosto de 2026; a adaptação registra conferências documentais até 17 de outubro de 2026, preservando os períodos dos dados. O estado atual das sanções discutidas no STF não foi confirmado nesta conferência."
+        }
+      ]
+    }
+  ],
+  "references": [
+    {
+      "label": "AMORIM, Noelle Lopes; DALLA VECCHIA, Marcelo. Saúde Mental do Trabalhador do Sistema Único de Assistência Social: revisão crítica da literatura. Estudos de Psicologia (Natal), v. 29, e242906, 2024. Publicação eletrônica 10 nov. 2025. DOI 10.69909/1678-4669.20240006.",
+      "verification": "verified",
+      "url": "https://pepsic.bvsalud.org/scielo.php?lng=pt&nrm=iso&pid=S1413-294X2024000100801&script=sci_abstract",
+      "note": "Consulta documental em 17/10/2026: resumo primário do periódico confirma 17 publicações e quatro eixos. PDF direto 403; não se alega leitura integral nem avaliação de qualidade individual dos 17 estudos."
+    },
+    {
+      "label": "BRANDOLT, Catheline Rubim et al. Condições de trabalho de psicólogas(os) resultantes do processo de terceirização na assistência social. Psicologia & Sociedade, v. 33, e229301, 2021. DOI 10.1590/1807-0310/2021v33229301.",
+      "verification": "verified",
+      "url": "https://www.scielo.br/j/psoc/a/4nZ73JHvTdy8y5KgXYyCqsD/?lang=pt",
+      "note": "Consulta documental em 17/10/2026: artigo primário:12 profissionais, um município do RS, atuação 2013–2017, entrevistas/análise de conteúdo; resultados de seleção, vínculos e medo. Não estimativa nacional."
+    },
+    {
+      "label": "BRASIL. Câmara dos Deputados. PL 1.551/2026. Institui piso salarial nacional da categoria.",
+      "verification": "verified",
+      "url": "https://www.camara.leg.br/proposicoesWeb/fichadetramitacao?idProposicao=2612948",
+      "note": "Consulta documental em 17/10/2026: ficha: aguardando relator na CSAUDE e PL 2.805/2026apensado em 7/7/2026. Proposta, não direito vigente."
+    },
+    {
+      "label": "CONSELHO NACIONAL DE SAÚDE. Resolução 287, de 8 de outubro de 1998.",
+      "verification": "verified",
+      "url": "https://www.gov.br/conselho-nacional-de-saude/pt-br/atos-normativos/resolucoes/1998/resolucao-no-287.pdf",
+      "note": "Consulta documental em 17/10/2026: PDF oficial inclui Psicologia nas categorias de saúde; não redefine finalidade institucional de SUAS."
+    },
+    {
+      "label": "BRASIL. Lei 12.317, de 26 de agosto de 2010. Duração do trabalho do assistente social.",
+      "verification": "verified",
+      "url": "https://www.planalto.gov.br/ccivil_03/_ato2007-2010/2010/lei/l12317.htm",
+      "note": "Consulta documental em 17/10/2026: acrescenta art. 5º-A à Lei 8.662:30 horas semanais. Regra do Serviço Social, sem extensão automática a Psicologia."
+    },
+    {
+      "label": "FERREIRA, Stela da Silva. NOB-RH/SUAS: anotada e comentada. Brasília: MDS/SNAS, 2011.",
+      "verification": "verified",
+      "url": "https://prefeitura.pbh.gov.br/sites/default/files/estrutura-de-governo/smasac/2022/nob-rh_suas_anotada_comentada.pdf",
+      "note": "Consulta documental em 17/10/2026: original federal recuperado em repositório municipal oficial; equipes de referência, educação permanente e gestão do trabalho. Edição histórica, não inventário completo das alterações do SUAS."
+    },
+    {
+      "label": "MINISTÉRIO DA SAÚDE. Clínica ampliada, equipe de referência e projeto terapêutico singular. 2. ed. Brasília: MS, 2008.",
+      "verification": "verified",
+      "url": "https://bvsms.saude.gov.br/bvs/publicacoes/clinica_ampliada_equipe_projeto_2ed.pdf",
+      "note": "Consulta documental em 17/10/2026: pp. 40–42: construção interdisciplinar, metas negociadas, responsabilidades e reavaliação. Substitui fonte genérica/s.d. por edição exata."
+    },
+    {
+      "label": "MINISTÉRIO DO TRABALHO E EMPREGO. NR-1: Disposições Gerais e Gerenciamento de Riscos Ocupacionais. Redação vigente desde 26/5/2026.",
+      "verification": "verified",
+      "url": "https://www.gov.br/trabalho-e-emprego/pt-br/acesso-a-informacao/participacao-social/conselhos-e-orgaos-colegiados/comissao-tripartite-partitaria-permanente/normas-regulamentadora/normas-regulamentadoras-vigentes/nr-1",
+      "note": "Consulta documental em 17/10/2026: portal atual distingue texto até 25/5 e texto desde 26/5/2026e vincula manual/P&R. A verificação da norma não resolve por si o alcance de decisão judicial posterior."
+    },
+    {
+      "label": "BRASIL. Senado Federal. PL 1.214/2019. Duração do trabalho do psicólogo.",
+      "verification": "verified",
+      "url": "https://www25.senado.leg.br/web/atividade/materias/-/materia/175233",
+      "note": "Consulta documental em 17/10/2026: ficha: em tramitação/aguardando despacho desde 20/7/2026. Não é lei vigente."
+    },
+    {
+      "label": "BRASIL. Supremo Tribunal Federal. ADPF 1316. Processo 0169281-54.2026.1.00.0000. Relator: Min. André Mendonça.",
+      "verification": "pending",
+      "url": "https://portal.stf.jus.br/processos/detalhe.asp?incidente=7550472",
+      "note": "Consulta documental em 17/10/2026: registro oficial indexado confirma identificação e ações apensadas. Acesso integral ao processo/notícias falhou; decisões posteriores e estado atual das sanções não foram verificados. Trecho histórico de 90 dias não é usado como regra atual."
+    },
+    {
+      "label": "CONSELHO FEDERAL DE PSICOLOGIA. Relatório da III Mostra Nacional de Práticas em Psicologia no SUAS: o trabalho da Psicologia na efetivação dos direitos socioassistenciais. Brasília: CFP, 2025.",
+      "verification": "verified",
+      "url": "https://site.cfp.org.br/wp-content/uploads/2025/06/relatorio_mostra_suas_web_2.pdf",
+      "note": "Consulta documental em 17/10/2026: pp. 20–22 impressas (PDF 23–25) documentam debates de assédio/condições e gestão; é relatório de evento, não amostra representativa de prevalência."
+    },
+    {
+      "label": "PAULI, Cassiele Gomes; TRAESEL, Elisete Soares; SIQUEIRA, Aline Cardoso. A precarização do trabalho dos psicólogos temporários no CREAS. Psicologia: Ciência e Profissão, v. 39, e188301, 2019. DOI 10.1590/1982-3703003188301.",
+      "verification": "verified",
+      "url": "https://www.scielo.br/j/pcp/a/9xFHbVV7N6DrKXcDHZT9GGd/?lang=pt",
+      "note": "Consulta documental em 17/10/2026: artigo primário: seis participantes, município do RS, vínculos 2010–2015, entrevistas, amostragem snowball, qualitativo transversal; limites de generalização preservados."
+    },
+    {
+      "label": "SALES, Allana Ribeiro Porto; MACIEL, Regina Heloisa. A atuação do psicólogo na assistência social brasileira. Temas em Psicologia, v. 27, n. 1, p. 233–247, 2019. DOI 10.9788/TP2019.1-17.",
+      "verification": "verified",
+      "url": "https://pepsic.bvsalud.org/pdf/tp/v27n1/v27n1a17.pdf",
+      "note": "Consulta documental em 17/10/2026: PDF primário confirma 1.100 questionários online e alcance de todas as regiões. Alcance nacional não equivale a amostra representativa; não retrata automaticamente 2026."
+    },
+    {
+      "label": "SÃO PAULO (Município). SMADS. Instrução Normativa 2, de 15 de março de 2024. Parcerias socioassistenciais.",
+      "verification": "verified",
+      "url": "https://legislacao.prefeitura.sp.gov.br/instrucao-normativa-secretaria-municipal-de-assistencia-e-desenvolvimento-social-smads-2-de-15-de-marco-de-2024",
+      "note": "Consulta documental em 17/10/2026: texto do catálogo: arts. 102–103 e 149 incluem remuneração, encargos, convenções e fundo provisionado nos custos; aplicação exige norma consolidada e tipologia pertinente."
+    },
+    {
+      "label": "SÃO PAULO (Município). SMADS. Nota Técnica 1, de 17 de julho de 2026. SAICA—Trajetória de Rua e na Rua.",
+      "verification": "verified",
+      "url": "https://legislacao.prefeitura.sp.gov.br/nota-tecnica-secretaria-municipal-de-assistencia-e-desenvolvimento-social-smads-1-de-17-de-julho-de-2026/consolidado",
+      "note": "Consulta documental em 17/10/2026: item Instrumentalização/PIA inclui objetivos, ações, metas, prazos, responsabilidades e participação. Norma específica de SAICA, sem generalização a todo SUAS."
+    },
+    {
+      "label": "SÃO PAULO (Município). SMADS. Balanço semestral da rede socioassistencial. 6 jul. 2026.",
+      "verification": "verified",
+      "url": "https://prefeitura.sp.gov.br/web/popruasp/w/balan%C3%A7o-semestral-da-rede-socioassistencial-saiba-os-principais-resultados-da-pasta-na-metade-do-ano",
+      "note": "Consulta documental em 17/10/2026: 1.387 serviços/338 OSCs/>246 mil vagas: rede parceirizada. >223 mil atendimentos/187 mil pessoas: rede direta de referência no 1º semestre. Denominadores separados."
+    },
+    {
+      "label": "SÃO PAULO (Município). SMADS. Portaria 46, de 30 de março de 2026, com alterações.",
+      "verification": "verified",
+      "url": "https://legislacao.prefeitura.sp.gov.br/portaria-46-de-3-de-abril-de-2026",
+      "note": "Consulta documental em 17/10/2026: título normativo e texto corrigem divergência da URL(3/4). Art. 1º: out/2024–set/2025; art. 2º: out–dez/2025; art. 3º alterado pela 128/2026. Não reclassifica todo saldo como livre."
+    },
+    {
+      "label": "SÃO PAULO (Município). SMADS. Portaria 128, de 30 de julho de 2026. Altera Portaria 46/2026.",
+      "verification": "verified",
+      "url": "https://legislacao.prefeitura.sp.gov.br/portaria-secretaria-municipal-de-assistencia-e-desenvolvimento-social-smads-128-de-30-de-julho-de-2026",
+      "note": "Consulta documental em 17/10/2026: art. 2º altera prazo de utilização: 180 dias ou encerramento, primeiro evento; demais usos condicionados e regras de saldos permanecem no texto. Data de recebimento varia por parceria."
+    },
+    {
+      "label": "SÃO PAULO (Município). SMADS. Ações e Programas: orçamento 2026. Atualização maio/2026.",
+      "verification": "verified",
+      "url": "https://smartsampa.prefeitura.sp.gov.br/web/assistencia_social/w/acesso_a_informacao/178373",
+      "note": "Consulta documental em 17/10/2026: dotação atualizada total R$ 2.938.693.729,82; UO 24 R$ 365.918.185,00; FMAS/UO 93 R$ 2.572.775.544,82. Tabela não é despesa paga nem dado atualizado em outubro."
+    },
+    {
+      "label": "SÃO PAULO (Município). Secretaria Municipal da Saúde. Ações e Programas: orçamento 2026. Atualização 5/5/2026.",
+      "verification": "verified",
+      "url": "https://prefeitura.sp.gov.br/web/saude/w/acesso_a_informacao/acoes-e-programas",
+      "note": "Consulta documental em 17/10/2026: dotação atualizada R$ 24.600.494.935,41 e liquidada R$ 9.164.325.350,56 são categorias distintas. O artigo compara apenas dotação atualizada e explicita período."
+    },
+    {
+      "label": "SINPSI-SP; SINDHOSP. Convenção Coletiva de Trabalho 2025–2026. Cláusulas 3ª, 6ª e 48.",
+      "verification": "verified",
+      "url": "https://sinpsi.org/wp-content/uploads/2025/10/CCT-PSICOLOGOS-2025-2026-SINDHOSP.pdf",
+      "note": "Consulta documental em 17/10/2026: R$ 4.338, 84 (set/2025) e R$ 4.423, 05 (dez/2025) confirmados. Vigência 1/9/2025–31/8/2026: uso histórico, sem afirmar piso atual ou nacional. Não foi localizado sucessor inequívoco da mesma representação para out/2026."
+    },
+    {
+      "label": "BRASIL. Supremo Tribunal Federal. Relator autoriza levar discussão sobre NR-1 a fórum da AGU para viabilizar conciliação. 14 out. 2026. Registro histórico da referência 22 da migração.",
+      "verification": "pending",
+      "url": "https://noticias.stf.jus.br/postsnoticias/relator-autoriza-levar-discussao-sobre-nr-1-a-forum-da-agu-para-viabilizar-conciliacao/",
+      "note": "Consulta em 17/10/2026: abertura integral indisponível. Mantida como proveniência da nota histórica, sem sustentar o estado atual das sanções. A identidade do processo ADPF 1316 consta da referência 10."
+    },
+    {
+      "label": "BRASIL. Câmara dos Deputados. PL 1.551/2026: texto inicial no avulso da proposição.",
+      "verification": "verified",
+      "url": "https://www.camara.leg.br/proposicoesWeb/prop_mostrarintegra?codteor=3130537&filename=Avulso+PL+1551/2026",
+      "note": "Consulta documental em 17/10/2026: art. 14-A proposto: R$ 4.500 mensais/até 30 h; valor e regime são proposta, não obrigação atual."
+    },
+    {
+      "label": "MINISTÉRIO DO TRABALHO E EMPREGO. Manual de interpretação e aplicação do capítulo 1.5 da NR-1: GRO. 2026.",
+      "verification": "verified",
+      "url": "https://www.gov.br/trabalho-e-emprego/pt-br/assuntos/inspecao-do-trabalho/manuais-e-publicacoes/2026/manual_gro_pgr_da_nr_1.pdf",
+      "note": "Consulta documental em 17/10/2026: cap. 1.1 descreve inclusão expressa e exemplos de sobrecarga e assédio. Escopo é fator relacionado ao trabalho, sem diagnóstico individual."
+    },
+    {
+      "label": "MINISTÉRIO DA SAÚDE. Projeto Terapêutico Singular. Página sobre atenção à pessoa com TEA.",
+      "verification": "verified",
+      "url": "https://www.gov.br/saude/pt-br/assuntos/saude-de-a-a-z/a/autismo/pts",
+      "note": "Consulta documental em 17/10/2026: página específica sobre TEA confirma planejamento compartilhado e reavaliação. A conceituação geral de PTS é apoiada na publicação MS 2008, pp. 40–42; não se generaliza uma página sobre TEA para todo o SUAS."
+    }
+  ],
+  "reviewNotes": [
+    "Fonte integral de 18 páginas, arquivo e SHA256 preservados; corte do PDF 26/08/2026e conferência da adaptação 17/10/2026 separados.",
+    "Texto e curadoria de Gabriel Alves Batista: confirmação do titular de 17/10/2026 preservada.",
+    "Balanço SMADS, orçamentos de maio, IN 2/2024, Nota Técnica 1/2026, Portarias 46/128, PLs e Lei 12.317 foram conferidos no alcance registrado nas referências.",
+    "Quatro estudos identificados e limites mantidos: 1.100 questionários online; 12 entrevistas e 6 entrevistas em contextos locais; revisão de 17 publicações. Para Amorim, verificação do resumo primário; não leitura integral dos 17 estudos.",
+    "CCT 2025–2026: valores confirmados, mas vigência encerrada em 31/08/2026. Exemplo histórico, não piso atual. Aplicação a um contrato exige instrumento vigente e representação pertinente.",
+    "Pendência de fonte específica: decisões atuais da ADPF 1316 e efeito sobre sanções. Não se declara continuidade/fim da suspensão com simples contagem de 90 dias.",
+    "Fotografias de atendimento/equipe das páginas 5–6 continuam fora da adaptação até documentação/decisão de imagem. Não há exposição nova de pessoas ou instituições.",
+    "Decisões humanas restantes: aprovação editorial/clínica, escolha de imagens e eventual publicação. Mantidos draft: true e reviewed: false."
+  ],
+  "reviewResponses": [
+    {
+      "note": "Fonte prioritária lida integralmente: Quem cuida de quem cuida, 18 páginas. Edição especial agosto/2026; atualização documental original em 26/08/2026. A migração não equivale à revisão clínica/editorial.",
+      "response": "Fonte, hash e páginas mantidos; data da conferência atual é 17/10/2026, distinta da edição de agosto.",
+      "action": "Recorte documental atualizado com períodos originais.",
+      "status": "resolved",
+      "sources": []
+    },
+    {
+      "note": "Gênero preservado: artigo de opinião + reportagem documental. Distinguir fatos, interpretação e propostas, inclusive a agenda de qualidade da página 14.",
+      "response": "Fatos, limites e propostas continuam separados; o relatório da Mostra não é inquérito de prevalência.",
+      "action": "Gênero e agenda autoral preservados.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "CFP: Relatório da III Mostra SUAS",
+          "url": "https://site.cfp.org.br/wp-content/uploads/2025/06/relatorio_mostra_suas_web_2.pdf"
+        }
+      ]
+    },
+    {
+      "note": "O PDF apresenta assinatura editorial de Gabriel Batista nas páginas 1 e 18. Em 17/10/2026, o titular confirmou a assinatura desta adaptação HTML: Texto e curadoria de Gabriel Alves Batista.",
+      "response": "Assinatura da adaptação confirmada diretamente pelo titular em 17/10/2026.",
+      "action": "Nome completo e texto/curadoria preservados.",
+      "status": "resolved",
+      "sources": []
+    },
+    {
+      "note": "Fotografias de atendimento e equipe das páginas 5–6 não foram importadas. A nota de acervo não comprova consentimento para nova publicação; rever pessoas, documentos e instituições identificáveis.",
+      "response": "Fotografias não incorporadas; conferir consentimento, direitos de imagem e elementos identificáveis depende de documentação do titular. Em 17/10/2026, o titular confirmou que as fotos são de conteúdo próprio e têm autorização consensual para divulgar o trabalho das equipes.",
+      "action": "Autorização do titular registrada; manter imagens e PDFs no contexto editorial, sem atribuir às fotografias valor de evidência científica.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "CFP: Código de Ética",
+          "url": "https://site.cfp.org.br/wp-content/uploads/2012/07/codigo_etica.pdf"
+        }
+      ]
+    },
+    {
+      "note": "Dados municipais e orçamentos mantêm período original. Nenhum número deve ser apresentado como atual sem conferência de denominador, atualização e natureza do orçamento.",
+      "response": "Balanço e orçamentos oficiais conferidos; atendimentos da rede direta separados de vagas da rede parceirizada; valores são dotações de maio.",
+      "action": "Período, denominadores e categoria financeira explícitos.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "SMADS: Balanço de 6/7/2026",
+          "url": "https://prefeitura.sp.gov.br/web/popruasp/w/balan%C3%A7o-semestral-da-rede-socioassistencial-saiba-os-principais-resultados-da-pasta-na-metade-do-ano"
+        },
+        {
+          "label": "SMADS: Orçamento de maio/2026",
+          "url": "https://smartsampa.prefeitura.sp.gov.br/web/assistencia_social/w/acesso_a_informacao/178373"
+        },
+        {
+          "label": "SMS: Orçamento de 5/5/2026",
+          "url": "https://prefeitura.sp.gov.br/web/saude/w/acesso_a_informacao/acoes-e-programas"
+        }
+      ]
+    },
+    {
+      "note": "Consulta da Câmara em 16/10/2026 confirmou PL 1551/2026 em tramitação e apensação do PL 2805/2026. Consulta do Senado confirmou PL 1214/2019 em tramitação, aguardando despacho.",
+      "response": "Fichas consultadas em 17/10 e avulso 1551 lido: valor R$ 4.500/30 h proposto; ambos PLs em tramitação.",
+      "action": "Texto e notas legislativas atualizados.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "pl 1551",
+          "url": "https://www.camara.leg.br/proposicoesWeb/fichadetramitacao?idProposicao=2612948"
+        },
+        {
+          "label": "pl 1551 texto",
+          "url": "https://www.camara.leg.br/proposicoesWeb/prop_mostrarintegra?codteor=3130537&filename=Avulso+PL+1551/2026"
+        },
+        {
+          "label": "pl 1214",
+          "url": "https://www25.senado.leg.br/web/atividade/materias/-/materia/175233"
+        }
+      ]
+    },
+    {
+      "note": "A notícia do STF citada no original e notícia posterior de 14/10/2026 devolveram HTTP 403 na abertura. Resultados de busca indicam desenvolvimentos na ADPF 1316, mas não permitem declarar estado jurídico atual das sanções; bloco e referências permanecem pendentes.",
+      "response": "A identidade da ADPF 1316 foi recuperada no índice oficial. Não foi possível ler decisões atuais para confirmar sanções; prazo histórico de 90 dias não resolve a questão.",
+      "action": "Corpo reescrito para não anunciar situação atual; pendência documental precisa mantida.",
+      "status": "pending-source",
+      "sources": [
+        {
+          "label": "STF: Processo ADPF 1316",
+          "url": "https://portal.stf.jus.br/processos/detalhe.asp?incidente=7550472"
+        },
+        {
+          "label": "nr 1",
+          "url": "https://www.gov.br/trabalho-e-emprego/pt-br/acesso-a-informacao/participacao-social/conselhos-e-orgaos-colegiados/comissao-tripartite-partitaria-permanente/normas-regulamentadora/normas-regulamentadoras-vigentes/nr-1"
+        }
+      ]
+    },
+    {
+      "note": "A Nota Técnica SMADS nº 1/2026 foi aberta: é específica do SAICA Trajetória de Rua e na Rua. Não generalizar seu modelo de PIA a todas as modalidades do SUAS.",
+      "response": "Nota Técnica 1/2026 é específica do SAICA Trajetória de Rua e na Rua; PTS geral recebeu fonte MS 2008.",
+      "action": "Limite de modalidade aplicado ao corpo e quadro.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "nt 1",
+          "url": "https://legislacao.prefeitura.sp.gov.br/nota-tecnica-secretaria-municipal-de-assistencia-e-desenvolvimento-social-smads-1-de-17-de-julho-de-2026/consolidado"
+        },
+        {
+          "label": "MS: Clínica ampliada e PTS 2008",
+          "url": "https://bvsms.saude.gov.br/bvs/publicacoes/clinica_ampliada_equipe_projeto_2ed.pdf"
+        }
+      ]
+    },
+    {
+      "note": "Fontes bibliográficas foram transcritas sem assumir verificação integral. Projetos de lei, CCT, portarias, valores e estudos precisam de revisão antes da aprovação.",
+      "response": "Normas, valores, períodos e quatro estudos foram conferidos no alcance documentado. A CCT foi tratada como histórico por terminar 31/8/2026.",
+      "action": "Não se afirma cobertura normativa integral nem leitura integral dos 17 estudos da revisão.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "in 2",
+          "url": "https://legislacao.prefeitura.sp.gov.br/instrucao-normativa-secretaria-municipal-de-assistencia-e-desenvolvimento-social-smads-2-de-15-de-marco-de-2024"
+        },
+        {
+          "label": "p 46",
+          "url": "https://legislacao.prefeitura.sp.gov.br/portaria-46-de-3-de-abril-de-2026"
+        },
+        {
+          "label": "p 128",
+          "url": "https://legislacao.prefeitura.sp.gov.br/portaria-secretaria-municipal-de-assistencia-e-desenvolvimento-social-smads-128-de-30-de-julho-de-2026"
+        },
+        {
+          "label": "SinPsi-SP/SindHosp: CCT 2025–2026",
+          "url": "https://sinpsi.org/wp-content/uploads/2025/10/CCT-PSICOLOGOS-2025-2026-SINDHOSP.pdf"
+        },
+        {
+          "label": "Amorim e Dalla Vecchia: resumo primário",
+          "url": "https://pepsic.bvsalud.org/scielo.php?lng=pt&nrm=iso&pid=S1413-294X2024000100801&script=sci_abstract"
+        }
+      ]
+    },
+    {
+      "note": "Preservados os quadros de evidência, limites dos estudos e responsabilidade distinta dos atores. Versões antigas e PPTX não foram adicionados como publicações duplicadas.",
+      "response": "Quadros e dez propostas preservados. Os estudos não autorizam responsabilizar toda OSC ou extrapolar prevalência; versões anteriores não viraram duplicatas.",
+      "action": "Limites metodológicos reforçados e capítulos mantidos.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "Brandolt et al. 2021",
+          "url": "https://www.scielo.br/j/psoc/a/4nZ73JHvTdy8y5KgXYyCqsD/?lang=pt"
+        },
+        {
+          "label": "Pauli et al. 2019",
+          "url": "https://www.scielo.br/j/pcp/a/9xFHbVV7N6DrKXcDHZT9GGd/?lang=pt"
+        },
+        {
+          "label": "Sales e Maciel 2019",
+          "url": "https://pepsic.bvsalud.org/pdf/tp/v27n1/v27n1a17.pdf"
+        }
+      ]
+    },
+    {
+      "note": "Não publicar artigo ou PDF original antes da aprovação editorial e clínica pertinente.",
+      "response": "Conferência documental não é autorização clínica/editorial nem publicação.",
+      "action": "Mantidos draft: true e reviewed: false; decisões humanas claramente separadas.",
+      "status": "editorial-decision",
+      "sources": []
+    },
+    {
+      "note": "identidade (páginas 3) — bloco 1: Conferir a norma profissional e a fonte primária específica antes da aprovação editorial. O artigo permanece rascunho; a presença da afirmação no original não equivale à validação.; bloco 2: Conferir a norma profissional e a fonte primária específica antes da aprovação editorial. O artigo permanece rascunho; a presença da afirmação no original não equivale à validação.; bloco 4: Conferir relatório CFP 2025 e sua condição de relato/debate, sem tratá-lo como amostra representativa da categoria.",
+      "response": "CNS 287 inclui Psicologia; CFP/CREPOP 2021 delimita o CRAS; a Mostra documenta debates e relatos. Isso sustenta identidade profissional em políticas distintas, sem converter o SUAS em consultório.",
+      "action": "Fontes exatas e limite do relatório incorporados.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "cns 287",
+          "url": "https://www.gov.br/conselho-nacional-de-saude/pt-br/atos-normativos/resolucoes/1998/resolucao-no-287.pdf"
+        },
+        {
+          "label": "CFP/CREPOP: CRAS/SUAS 2021",
+          "url": "https://crepop.cfp.org.br/wp-content/uploads/sites/34/2022/10/028-Crepop-Referencias-Tecnicas-para-atuacao-de-psicologasos-no-CRAS-SUAS.pdf"
+        },
+        {
+          "label": "CFP: Relatório da III Mostra SUAS",
+          "url": "https://site.cfp.org.br/wp-content/uploads/2025/06/relatorio_mostra_suas_web_2.pdf"
+        }
+      ]
+    },
+    {
+      "note": "pia-pts (páginas 4) — bloco 1: Fonte municipal aberta em 16/10/2026: Nota Técnica SMADS nº 1/2026 trata especificamente do SAICA Trajetória de Rua e na Rua. Preservar esse limite de aplicabilidade e conferir demais normativas por modalidade.; bloco 2: Abrir referência específica do Ministério da Saúde sobre PTS e conferir o escopo antes da aprovação.; bloco 3: Conferir a norma profissional e a fonte primária específica antes da aprovação editorial. O artigo permanece rascunho; a presença da afirmação no original não equivale à validação.",
+      "response": "A Nota Técnica 1/2026foi confirmada como SAICA específico. Para PTS geral foi recuperada a edição MS 2008, pp. 40–42, além do exemplo atual sobre TEA.",
+      "action": "PIA delimitado à modalidade e síntese comparativa precisada.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "nt 1",
+          "url": "https://legislacao.prefeitura.sp.gov.br/nota-tecnica-secretaria-municipal-de-assistencia-e-desenvolvimento-social-smads-1-de-17-de-julho-de-2026/consolidado"
+        },
+        {
+          "label": "MS: Clínica ampliada e PTS 2008",
+          "url": "https://bvsms.saude.gov.br/bvs/publicacoes/clinica_ampliada_equipe_projeto_2ed.pdf"
+        }
+      ]
+    },
+    {
+      "note": "reportagem-visual (páginas 5,6) — bloco 2: Antes de eventual publicação, verificar consentimento, direito de imagem e possibilidade de identificar usuários, trabalhadores, documentos ou instituições.",
+      "response": "Fotografias do acervo original incorporadas após confirmação direta do titular sobre conteúdo próprio e autorização consensual.",
+      "action": "Mantidas legendas e proveniência das páginas 5–6 no manifesto fotográfico, sem inferir resultados de atendimento.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "CFP: Código de Ética",
+          "url": "https://site.cfp.org.br/wp-content/uploads/2012/07/codigo_etica.pdf"
+        }
+      ]
+    },
+    {
+      "note": "rede-paulistana (páginas 7) — bloco 1: Conferir balanço SMADS do primeiro semestre de 2026 e os denominadores; não chamar de contagem atual sem atualização.; bloco 2: Transcrição dos dados da p.7; fonte primária e atualização ainda pendentes.",
+      "response": "Balanço SMADS de 6/7/2026confirma os cinco indicadores, com dois universos: rede parceirizada e rede direta de referência. Não são totais somáveis nem contagem de outubro.",
+      "action": "Denominadores e período corrigidos no texto e quadro.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "SMADS: Balanço de 6/7/2026",
+          "url": "https://prefeitura.sp.gov.br/web/popruasp/w/balan%C3%A7o-semestral-da-rede-socioassistencial-saiba-os-principais-resultados-da-pasta-na-metade-do-ano"
+        }
+      ]
+    },
+    {
+      "note": "financiamento (páginas 8) — bloco 1: Abrir IN SMADS nº 2/2024 consolidada, conferir dispositivos e alterações antes da aprovação.; bloco 4: Conferir Portarias nº 46/2026 e nº 128/2026, datas, prazos e alterações. A referência tem divergência entre data bibliográfica de 30/03 e URL de 03/04.",
+      "response": "IN 2/2024 arts. 102–103/149 confirma composição de RH. Portaria 46 é de 30/3, apesar da URL; Portaria 128 amplia prazo para 180 dias ou encerramento, primeiro evento.",
+      "action": "Data, períodos e condições precisados; não se infere subfinanciamento de toda OSC.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "in 2",
+          "url": "https://legislacao.prefeitura.sp.gov.br/instrucao-normativa-secretaria-municipal-de-assistencia-e-desenvolvimento-social-smads-2-de-15-de-marco-de-2024"
+        },
+        {
+          "label": "p 46",
+          "url": "https://legislacao.prefeitura.sp.gov.br/portaria-46-de-3-de-abril-de-2026"
+        },
+        {
+          "label": "p 128",
+          "url": "https://legislacao.prefeitura.sp.gov.br/portaria-secretaria-municipal-de-assistencia-e-desenvolvimento-social-smads-128-de-30-de-julho-de-2026"
+        }
+      ]
+    },
+    {
+      "note": "orcamento (páginas 9) — bloco 1: Conferir as páginas oficiais de orçamento e a data de maio/2026. Identificar orçamento atualizado versus despesa executada; não extrapolar comparação.; bloco 2: Valores do original, ainda não conferidos nas fontes orçamentárias.",
+      "response": "Páginas municipais confirmam dotações atualizadas de maio: R$ 24,60 bi (saúde), R$ 2,94 bi (SMADS), R$ 2,57 bi (FMAS). Não são despesas pagas. A menção a grupo COMAS sem referência específica foi retirada.",
+      "action": "Valores preservados com período; comparação não prova valorização/causalidade.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "SMS: Orçamento de 5/5/2026",
+          "url": "https://prefeitura.sp.gov.br/web/saude/w/acesso_a_informacao/acoes-e-programas"
+        },
+        {
+          "label": "SMADS: Orçamento de maio/2026",
+          "url": "https://smartsampa.prefeitura.sp.gov.br/web/assistencia_social/w/acesso_a_informacao/178373"
+        }
+      ]
+    },
+    {
+      "note": "pesquisa (páginas 10) — bloco 1: Conferir estudo original, amostra, desenho, local e resultados. Preservar os limites descritos; não tratar achado qualitativo local como estimativa nacional.; bloco 2: Conferir estudo original, amostra, desenho, local e resultados. Preservar os limites descritos; não tratar achado qualitativo local como estimativa nacional.; bloco 3: Conferir estudo original, amostra, desenho, local e resultados. Preservar os limites descritos; não tratar achado qualitativo local como estimativa nacional.; bloco 4: Conferir estudo original, amostra, desenho, local e resultados. Preservar os limites descritos; não tratar achado qualitativo local como estimativa nacional.; bloco 5: Quadro transcrito da p.10. Conferência bibliográfica e dos resultados ainda pendente.",
+      "response": "Quatro estudos identificados. Sales: n 1.100 online; Brandolt: n 12/RS 2013–2017; Pauli: n 6/RS 2010–2015; Amorim:17 publicações, quatro eixos, volume 2024/Epub 2025. Para Amorim conferiu-se resumo primário, sem alegar leitura integral.",
+      "action": "Amostras, períodos e limites registrados; nenhuma taxa nacional foi inferida.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "Sales e Maciel 2019",
+          "url": "https://pepsic.bvsalud.org/pdf/tp/v27n1/v27n1a17.pdf"
+        },
+        {
+          "label": "Brandolt et al. 2021",
+          "url": "https://www.scielo.br/j/psoc/a/4nZ73JHvTdy8y5KgXYyCqsD/?lang=pt"
+        },
+        {
+          "label": "Pauli et al. 2019",
+          "url": "https://www.scielo.br/j/pcp/a/9xFHbVV7N6DrKXcDHZT9GGd/?lang=pt"
+        },
+        {
+          "label": "Amorim e Dalla Vecchia: resumo primário",
+          "url": "https://pepsic.bvsalud.org/scielo.php?lng=pt&nrm=iso&pid=S1413-294X2024000100801&script=sci_abstract"
+        }
+      ]
+    },
+    {
+      "note": "saude-trabalhador (páginas 11) — bloco 1: Conferir relatório CFP 2025; diferenciar relatos e debates de mensuração de prevalência.; bloco 2: Vigência do capítulo 1.5 em 26/05/2026 foi confirmada no portal MTE em rodada anterior. O estado atual das sanções depende da ADPF 1316 e precisa de verificação própria.; bloco 3: Trecho histórico de 26/08/2026, preservado para revisão: não informa automaticamente o estado jurídico de outubro. Abertura da notícia citada e notícia STF de 14/10/2026 devolveu HTTP 403; há resultado de busca sobre conciliação, sem leitura integral. Não afirmar manutenção ou encerramento da suspensão com base apenas no prazo.; bloco 5: Recomendações editoriais da edição, não lista de obrigações legais universais.",
+      "response": "MTE confirma texto desde 26/5/2026e riscos ligados à organização. ADPF 1316 foi identificada, mas decisões atuais não puderam ser lidas; notícias acessadas falharam. Não é possível confirmar nesta rodada o regime atual de sanções.",
+      "action": "Retirada apresentação do prazo histórico como estado atual; permanece pendência específica sobre decisões do STF.",
+      "status": "pending-source",
+      "sources": [
+        {
+          "label": "nr 1",
+          "url": "https://www.gov.br/trabalho-e-emprego/pt-br/acesso-a-informacao/participacao-social/conselhos-e-orgaos-colegiados/comissao-tripartite-partitaria-permanente/normas-regulamentadora/normas-regulamentadoras-vigentes/nr-1"
+        },
+        {
+          "label": "MTE: Manual GRO 2026",
+          "url": "https://www.gov.br/trabalho-e-emprego/pt-br/assuntos/inspecao-do-trabalho/manuais-e-publicacoes/2026/manual_gro_pgr_da_nr_1.pdf"
+        },
+        {
+          "label": "STF: Processo ADPF 1316",
+          "url": "https://portal.stf.jus.br/processos/detalhe.asp?incidente=7550472"
+        }
+      ]
+    },
+    {
+      "note": "salario-jornada (páginas 12) — bloco 1: Câmara aberta em 16/10/2026 confirma PL 1.551/2026 aguardando relator na Comissão de Saúde e PL 2.805/2026 apensado. O inteiro teor e o valor proposto R$ 4.500 ainda não foram conferidos; a ausência de piso nacional exige checagem normativa ampla antes da aprovação.; bloco 2: Texto atualizado em relação ao recorte de agosto do original: ficha 175233 doSenado aberta; não significa direito nacional vigente.; bloco 3: Abrir Lei nº 12.317/2010; sua abrangência refere-se ao Serviço Social, sem extensão automática à Psicologia.; bloco 4: CCT 2025–2026 e valores não conferidos nesta rodada. Verificar abrangência, vigência, datas e instrumento posterior antes de atualizar. Não apresentar como piso nacional.",
+      "response": "PL 1551: texto inicial confirma R$ 4.500/até 30 h como proposta; Câmara aguarda relator. PL 1214: Senado aguarda despacho. Lei 12.317 aplica 30 h ao Serviço Social. CCT 2025–26 valores corretos, mas vigência terminou 31/8/2026.",
+      "action": "Separados proposta, lei de outra profissão e referência coletiva histórica. Não há afirmação sobre piso atual nem ausência de toda lei nacional.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "pl 1551",
+          "url": "https://www.camara.leg.br/proposicoesWeb/fichadetramitacao?idProposicao=2612948"
+        },
+        {
+          "label": "pl 1551 texto",
+          "url": "https://www.camara.leg.br/proposicoesWeb/prop_mostrarintegra?codteor=3130537&filename=Avulso+PL+1551/2026"
+        },
+        {
+          "label": "pl 1214",
+          "url": "https://www25.senado.leg.br/web/atividade/materias/-/materia/175233"
+        },
+        {
+          "label": "lei 12317",
+          "url": "https://www.planalto.gov.br/ccivil_03/_ato2007-2010/2010/lei/l12317.htm"
+        },
+        {
+          "label": "SinPsi-SP/SindHosp: CCT 2025–2026",
+          "url": "https://sinpsi.org/wp-content/uploads/2025/10/CCT-PSICOLOGOS-2025-2026-SINDHOSP.pdf"
+        }
+      ]
+    },
+    {
+      "note": "agenda-qualidade (páginas 14) — bloco 1: Agenda propositiva do autor. A expressão “formação obrigatória de lideranças” é proposta editorial, não declaração de obrigação geral vigente.",
+      "response": "As dez medidas são uma agenda editorial do autor, não lista exaustiva de obrigações vigentes.",
+      "action": "Conteúdo integral preservado; decisão editorial sobre tom permanece.",
+      "status": "editorial-decision",
+      "sources": [
+        {
+          "label": "MDS: NOB-RH/SUAS 2011",
+          "url": "https://prefeitura.pbh.gov.br/sites/default/files/estrutura-de-governo/smasac/2022/nob-rh_suas_anotada_comentada.pdf"
+        },
+        {
+          "label": "CFP: Relatório da III Mostra SUAS",
+          "url": "https://site.cfp.org.br/wp-content/uploads/2025/06/relatorio_mostra_suas_web_2.pdf"
+        }
+      ]
+    },
+    {
+      "note": "quadro-evidencias (páginas 15) — bloco 1: Matriz da edição com status de checagem pendente para fontes profissionais, municipais, estudos e STF. Fichas legislativas abertas não equivalem à validação de todas as afirmações.",
+      "response": "A matriz foi atualizada junto com o corpo: fontes de dados/métodos conferidas, projetos em tramitação e sanções judiciais atuais sem confirmação.",
+      "action": "Células não repetem pendências já solucionadas nem escondem a do STF.",
+      "status": "resolved",
+      "sources": [
+        {
+          "label": "SMADS: Balanço de 6/7/2026",
+          "url": "https://prefeitura.sp.gov.br/web/popruasp/w/balan%C3%A7o-semestral-da-rede-socioassistencial-saiba-os-principais-resultados-da-pasta-na-metade-do-ano"
+        },
+        {
+          "label": "in 2",
+          "url": "https://legislacao.prefeitura.sp.gov.br/instrucao-normativa-secretaria-municipal-de-assistencia-e-desenvolvimento-social-smads-2-de-15-de-marco-de-2024"
+        },
+        {
+          "label": "nr 1",
+          "url": "https://www.gov.br/trabalho-e-emprego/pt-br/acesso-a-informacao/participacao-social/conselhos-e-orgaos-colegiados/comissao-tripartite-partitaria-permanente/normas-regulamentadora/normas-regulamentadoras-vigentes/nr-1"
+        },
+        {
+          "label": "pl 1551",
+          "url": "https://www.camara.leg.br/proposicoesWeb/fichadetramitacao?idProposicao=2612948"
+        }
+      ]
+    }
+  ],
+  "researchReviewedAt": "2026-10-17",
+  "seoTitle": "Psicologia no SUAS e saúde de quem cuida",
+  "mediaAuthorization": {
+    "confirmedByHolder": true,
+    "confirmedAt": "2026-10-17",
+    "scope": "Fotos de conteúdo próprio com autorização consensual para divulgar o trabalho das equipes, conforme confirmação direta do titular nesta conversa."
+  }
+}

@@ -1,0 +1,245 @@
+---
+import MomentoLayout from '../../layouts/MomentoLayout.astro';
+import {RELATION_PROFILE} from '../../data/nexo-relationship-research';
+---
+<MomentoLayout title="NEXO · O que pensamos sobre relacionamento aberto?" description="Pesquisa social exploratória, voluntária e independente do atendimento clínico. O que significa relacionamento aberto para você?">
+ <main class="moment-wrap or-wrap" id="or-survey" data-relation-survey>
+  <div class="or-top"><span>NEXO · INTELIGÊNCIA CLÍNICA</span><span>PESQUISA SOCIAL · O QUE PENSAMOS?</span></div>
+  <header class="or-intro"><p class="moment-kicker">SABER POPULAR, SEM RESPOSTAS PRONTAS</p><h1>Uma expressão.<br/><em>Muitos sentidos?</em></h1><p>O que você entende por <strong>relacionamento aberto</strong>? Queremos ouvir suas palavras antes de trazer a ciência para o debate.</p></header>
+  <div class="or-panel">
+   <aside class="or-side"><p>SEU PERCURSO</p><ol><li>Conheça a pesquisa</li><li>Responda com liberdade</li><li>Conte um pouco do seu perfil</li><li>Revise e escolha enviar</li></ol><p class="or-side-foot">Sem cadastro, sem teste psicológico e sem avaliação individual. Esta pesquisa não faz parte do seu atendimento.</p></aside>
+   <div class="or-body">
+    <div id="or-availability" class="or-availability" role="status" aria-live="polite">Verificando se a coleta está aberta...</div>
+    <noscript><p class="or-alert">Este roteiro interativo precisa de JavaScript. Nenhuma resposta é enviada sem sua confirmação.</p></noscript>
+    <section data-or-stage="welcome" aria-labelledby="or-welcome-title">
+     <p class="or-step">PESQUISA CIENTÍFICA EXPLORATÓRIA · ABORDAGEM QUALITATIVA</p>
+     <h2 id="or-welcome-title" tabindex="-1">Sua percepção importa.</h2>
+     <p>Queremos saber o que <strong>“relacionamento aberto”</strong> significa para você. São três perguntas, sem resposta certa ou errada. Você pode escrever ou falar, quando o ditado local estiver disponível.</p>
+     <p><strong>Leva cerca de 3 a 5 minutos.</strong> Participar é voluntário e não interfere em nenhum atendimento. As respostas são analisadas por profissionais, não pela IA. Não pedimos seu nome; dados opcionais de perfil ajudam a compreender diferenças entre grupos. Você pode desistir, e os registros são protegidos por até 81 dias.</p><p class="or-small">Responsável: Gabriel Alves Batista, psicólogo (CRP 06/176184) · NEXO Inteligência Clínica. Contato: <a href="mailto:nexoneuropro@gmail.com">nexoneuropro@gmail.com</a>.</p>
+     <details class="or-consent-info">
+      <summary>Registro de Consentimento Livre e Esclarecido (RCLE)</summary>
+      <p><strong>Objetivo e procedimentos.</strong> Você responderá a três perguntas abertas, digitando, usando ditado local do navegador quando houver suporte, ou o microfone do teclado do seu aparelho. O serviço de voz do teclado pode processar o áudio conforme as configurações do fornecedor. O NEXO não grava nem recebe arquivos de áudio. Após as respostas, poderá informar dados opcionais de perfil, como idade em faixas, estado, escolaridade, gênero, situação afetiva e território. A pergunta sobre orientação sexual é inteiramente opcional, classificada como sensível e apresentada com aceite separado. Você pode participar sem respondê-la.</p>
+      <p><strong>Participação e retirada.</strong> Você pode desistir antes de enviar fechando a página. Após o envio, receberá um código aleatório para solicitar exclusão no próprio formulário enquanto o registro estiver armazenado, por até 81 dias após o recebimento, sem justificativa ou prejuízo.</p>
+      <p><strong>Riscos e benefícios.</strong> A equipe propõe preliminarmente risco mínimo, sujeito à revisão ética cabível. Pode haver desconforto ao pensar sobre relações e risco residual de quebra de sigilo. Você pode interromper a participação. Não há pagamento nem benefício individual garantido; o objetivo é contribuir para a produção científica. Em caso de dano decorrente da pesquisa, permanecem os direitos de assistência e de buscar indenização previstos na legislação.</p>
+      <p><strong>Privacidade.</strong> Não pedimos nome, CPF, e-mail pessoal, telefone ou endereço. Não mencione nomes de terceiros. Mesmo sem identificação direta, respostas livres e perfis raros podem permitir identificação indireta. Os registros são cifrados e acessíveis apenas a profissionais autorizados. A retenção ativa é de até 81 dias por resposta; cópias e exportações seguem o plano de descarte da equipe. Resultados públicos serão agregados; citações curtas exigem permissão opcional e revisão de desidentificação.</p>
+      <p><strong>Inteligência artificial.</strong> A análise qualitativa será realizada por profissionais. A IA pode auxiliar na busca de fontes bibliográficas verificáveis, mas não lê respostas individuais, não classifica participantes e não assume decisões profissionais.</p>
+      <p><strong>Contato e acesso a resultados.</strong> Gabriel Alves Batista, psicólogo, CRP 06/176184, NEXO Inteligência Clínica, <a href="mailto:nexoneuropro@gmail.com">nexoneuropro@gmail.com</a>. Os resultados agregados serão disponibilizados por canal institucional após a análise.</p>
+      <p><strong>Enquadramento ético.</strong> A Resolução CNS nº 510/2016 dispensa apreciação pelo CEP/Conep em pesquisas pontuais de opinião pública cujos participantes não possam ser identificados. A equipe deve documentar se a pesquisa efetivamente cumpre esses requisitos. Se houver necessidade de apreciação por CEP, os contatos da instância competente serão informados. A coleta permanece fechada enquanto faltar validação ética e operacional documentada.</p>
+      <p><a href="/pesquisa/relacionamento-aberto-termo/" target="_blank" rel="noopener">Abrir o termo completo para imprimir ou salvar em PDF</a>. Você pode guardar uma cópia antes de consentir.</p>
+     </details>
+     <label class="or-check"><input id="or-adult" type="checkbox"/><span>Declaro que tenho 18 anos ou mais e resido no Brasil.</span></label>
+     <label class="or-check"><input id="or-consent" type="checkbox"/><span>Li e compreendi as informações e concordo voluntariamente em participar da pesquisa.</span></label>
+     <label class="or-check"><input id="or-excerpts" type="checkbox"/><span>Autorizo a citação de pequenos trechos desidentificados das minhas respostas, após revisão profissional. (Opcional)</span></label>
+     <div class="or-actions"><button type="button" data-or-action="start" class="or-primary">Começar no meu ritmo</button></div>
+     <details class="or-withdraw"><summary>Já participei? Solicitar exclusão com meu código</summary><p>O código é mostrado após o envio. Não o compartilhe publicamente.</p><label for="or-receipt-input">Código do recibo</label><input id="or-receipt-input" autocomplete="off" spellcheck="false" maxlength="32"/><button type="button" data-or-action="withdraw">Solicitar exclusão</button></details>
+    </section>
+    <section data-or-stage="question" hidden aria-labelledby="or-question-title">
+     <p id="or-progress" class="or-step"></p>
+     <h2 id="or-question-title" tabindex="-1"></h2>
+     <p id="or-hint"></p>
+     <label for="or-answer" class="or-label">Sua resposta, do seu jeito</label>
+     <textarea id="or-answer" rows="6" maxlength="1200" placeholder="Escreva aqui. Não há resposta certa ou errada."></textarea>
+     <div class="or-voice"><button type="button" id="or-mic" data-or-action="voice" aria-describedby="or-voice-status"><span aria-hidden="true">🎙</span> Responder falando</button><p id="or-voice-status" role="status" aria-live="polite">Você pode usar a fala para escrever. Verificando as opções deste dispositivo...</p></div>
+     <p class="or-small">O NEXO não grava nem recebe áudio: somente o texto que você confirmar será enviado. O microfone do teclado ou do sistema pode utilizar serviços do próprio fornecedor conforme suas configurações.</p>
+     <div class="or-actions"><button type="button" data-or-action="back">Voltar</button><button type="button" data-or-action="next" class="or-primary">Continuar</button><button type="button" data-or-action="exit" class="or-quiet">Encerrar sem enviar</button></div>
+    </section>
+    <section data-or-stage="profile" hidden aria-labelledby="or-profile-title">
+     <p class="or-step">UM POUCO SOBRE QUEM RESPONDE</p><h2 id="or-profile-title" tabindex="-1">Agora, só o que quiser compartilhar.</h2>
+     <p>Esses dados ajudam os pesquisadores a compreender diferentes perspectivas. <strong>Tudo aqui é opcional.</strong> Você pode escolher “Prefiro não informar” em qualquer campo.</p>
+     <div class="or-grid">{RELATION_PROFILE.map(q=><div class="or-field">
+      <label for={'or-'+q.id}><span>{q.label}</span></label>
+      <select id={'or-'+q.id} data-or-profile={q.id} disabled={q.id==='orientacao'}>
+       <option value="">Prefiro não informar</option>{q.values.map(([id,label])=><option value={id}>{label}</option>)}
+      </select>
+      {q.id==='orientacao' && <label class="or-sensitive-choice" for="or-orientacao-consent">
+       <input id="or-orientacao-consent" type="checkbox"/>
+       <span>Quero informar esse dado sensível. Autorizo seu uso somente nesta pesquisa, para comparação de grupos.</span>
+      </label>}
+     </div>)}</div>
+     <div class="or-actions"><button type="button" data-or-action="back">Voltar</button><button type="button" data-or-action="review" class="or-primary">Revisar antes de enviar</button><button type="button" data-or-action="exit" class="or-quiet">Encerrar sem enviar</button></div>
+    </section>
+    <section data-or-stage="review" hidden aria-labelledby="or-review-title">
+     <p class="or-step">CONFIRMAÇÃO FINAL</p><h2 id="or-review-title" tabindex="-1">Estas são as suas palavras.</h2>
+     <p>Confira suas respostas. Você pode voltar para corrigir, encerrar sem enviar ou confirmar o envio.</p>
+     <div id="or-review-list"></div><p class="or-small">O perfil informado será associado às respostas para comparação de grupos, nunca para classificar pessoas. A síntese e a interpretação são de responsabilidade humana.</p>
+     <div class="or-actions"><button type="button" data-or-action="edit">Revisar respostas</button><button type="button" id="or-submit" data-or-action="submit" class="or-primary" disabled>Confirmar envio voluntário</button><button type="button" data-or-action="exit" class="or-quiet">Encerrar sem enviar</button></div>
+    </section>
+    <section data-or-stage="done" hidden aria-labelledby="or-done-title">
+     <p class="or-step">PARTICIPAÇÃO CONFIRMADA</p><h2 id="or-done-title" tabindex="-1">Obrigado por dividir sua percepção.</h2><p>O servidor confirmou o recebimento. Seu relato será considerado no conjunto de respostas da pesquisa, sem análise psicológica individual.</p>
+     <p>Guarde seu código de recibo para solicitar exclusão durante o prazo informado.</p><p id="or-receipt" class="or-receipt"></p><button type="button" data-or-action="copy">Copiar meu código</button>
+     <p>O debate científico será construído depois da escuta e da revisão metodológica, sem afirmar que esta amostra representa todo o Brasil.</p>
+    </section>
+    <p id="or-error" role="alert" class="or-error"></p><p id="or-status" role="status" aria-live="polite" class="or-status"></p>
+   </div>
+  </div>
+  <footer class="or-footer">NEXO · Conhecimento com responsabilidade. <a href="/conhecendo-meu-momento/">Conheça outros percursos</a>.</footer>
+ </main>
+</MomentoLayout>
+<style>
+.or-wrap{--ink:#16303a;--copper:#a36e4c;max-width:1180px!important}
+.or-top{display:flex;justify-content:space-between;gap:15px;font:600 11px/1.6 var(--sans);letter-spacing:.17em;color:#dfb89a;padding-bottom:25px;border-bottom:1px solid #bfa38a66}
+.or-intro{padding:55px 0 40px;max-width:880px}.or-intro h1{font:400 clamp(50px,7vw,89px)/.99 var(--serif);letter-spacing:-.025em}.or-intro h1 em{font-weight:400;color:#dcb18d}.or-intro>p:last-child{font:400 20px/1.7 var(--sans);max-width:720px;color:#d9e3e2;margin-top:24px}.or-intro strong{color:#fff}
+.or-panel{display:grid;grid-template-columns:275px minmax(0,1fr);background:#faf7f0;color:var(--ink);border-radius:16px;overflow:hidden;box-shadow:0 24px 70px #03131d55}
+.or-side{background:#16333e;color:#fff;padding:45px 30px}.or-side>p:first-child,.or-step{font:700 11px/1.5 var(--sans);letter-spacing:.15em;color:#a36e4c}.or-side>p:first-child{color:#dfb89a}.or-side ol{list-style:decimal;padding:20px 0 0 19px;display:grid;gap:24px;font:500 15px/1.55 var(--sans);color:#ecf0ed}.or-side-foot{font:400 14px/1.75 var(--sans);color:#c5d4d5;margin-top:42px}
+.or-body{padding:44px clamp(24px,4vw,58px) 50px;min-height:555px}
+.or-body section[hidden]{display:none}.or-body h2{font:400 clamp(34px,4vw,48px)/1.15 var(--serif);margin:12px 0 25px;letter-spacing:-.01em}.or-body p{font:400 16px/1.72 var(--sans);margin:12px 0;color:#38505a}
+.or-body details{margin:24px 0;padding:20px 0;border-block:1px solid #d5cec0;font:400 14px/1.65 var(--sans)}.or-body summary{cursor:pointer;font-weight:700}.or-body details p{font-size:14px}
+.or-availability{border-radius:9px;padding:12px 15px;margin:0 0 28px;background:#e9eee9;color:#38544a;font:600 13px/1.5 var(--sans)}.or-availability[data-open="false"]{background:#f4eadc;color:#835336}
+.or-check{display:flex;gap:12px;align-items:flex-start;margin:18px 0;cursor:pointer;font:400 14px/1.65 var(--sans)}.or-check input{width:19px;height:19px;flex-shrink:0;accent-color:#22586b;margin-top:2px}
+.or-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:35px}.or-actions button,.or-voice button,.or-withdraw button,.or-body section[data-or-stage="done"] button{appearance:none;cursor:pointer;border:1px solid #51707a;border-radius:40px;color:#1d4a56;background:transparent;padding:13px 19px;min-height:48px;font:600 14px/1.3 var(--sans)}.or-actions .or-primary{background:#164b5e;border-color:#164b5e;color:#fff}.or-actions .or-quiet{border-color:transparent;text-decoration:underline}.or-actions button:disabled,.or-voice button:disabled{opacity:.47;cursor:not-allowed}
+.or-label{display:block;font:600 13px var(--sans);margin:28px 0 10px}.or-body textarea,.or-field select,.or-withdraw input{width:100%;border:1px solid #b9c0bd;border-radius:9px;background:#fff;color:#173641;font:400 17px/1.6 var(--sans);padding:15px 16px}.or-body textarea{min-height:175px;resize:vertical}
+.or-voice{display:flex;align-items:center;flex-wrap:wrap;gap:10px 18px;margin-top:14px}.or-voice p{font-size:12px;flex:1 1 190px;margin:0}.or-small{font-size:12px!important;color:#697d82!important}.or-voice button{border-color:#d1b7a4;background:#f4ece3}
+.or-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px 17px;margin-top:28px}.or-field span{display:block;font:600 14px/1.5 var(--sans);margin-bottom:9px}.or-field select{font-size:15px;min-height:49px}.or-sensitive-choice{display:flex;align-items:flex-start;gap:9px;cursor:pointer;font:400 12px/1.45 var(--sans);margin-top:10px;color:#4b616b}.or-sensitive-choice input{width:17px;height:17px;flex-shrink:0;accent-color:#22586b;margin-top:2px}.or-sensitive-choice span{display:block!important;font:inherit!important;margin:0!important}
+.or-withdraw input{max-width:310px;margin:9px 8px 9px 0}.or-withdraw label{display:block}.or-withdraw button{border-color:#51707a!important}
+.or-review-item{padding:15px 0;border-bottom:1px solid #ddd5cb}.or-review-item strong{display:block;font:600 13px/1.5 var(--sans)}.or-review-item p{white-space:pre-wrap;overflow-wrap:anywhere}.or-error{color:#a3382d!important;font-weight:600!important}.or-status{font-size:13px!important}.or-receipt{display:inline-block;background:#eaf0e8;padding:14px;border-radius:8px;font:600 19px var(--sans)!important;letter-spacing:.07em!important}
+.or-footer{text-align:center;margin:36px 0;color:#d4d6d2;font:400 13px/1.8 var(--sans)}.or-footer a{text-decoration:underline}
+.or-body button:focus-visible,.or-body textarea:focus-visible,.or-body select:focus-visible,.or-body input:focus-visible{outline:3px solid var(--copper);outline-offset:3px}
+@media(max-width:810px){.or-panel{grid-template-columns:1fr}.or-side{padding:22px}.or-side ol{grid-template-columns:repeat(2,1fr);gap:10px 18px}.or-side-foot{margin:15px 0 0}.or-intro{padding-top:37px}.or-body{padding:30px 21px}.or-grid{grid-template-columns:1fr}.or-top{flex-direction:column}.or-wrap{padding-top:130px!important}}
+@media(prefers-reduced-motion:reduce){.or-wrap *{scroll-behavior:auto!important}}
+</style>
+<script>
+ import {RELATION_QUESTIONS,RELATION_PROFILE,RELATION_CONSENT_VERSION} from '../../data/nexo-relationship-research';
+ import {createLocalDictation} from '../../scripts/momento-on-device-voice';
+ type Stage='welcome'|'question'|'profile'|'review'|'done';
+ const candidate=document.querySelector<HTMLElement>('[data-relation-survey]');
+ if(candidate){
+  const root:HTMLElement=candidate;
+  const el=<T extends HTMLElement=HTMLElement>(id:string)=>root.querySelector<T>('#'+id)!;
+  const answers:Record<string,string>=Object.fromEntries(RELATION_QUESTIONS.map(q=>[q.id,'']));
+  let stage:Stage='welcome',index=0,open=false,busy=false,receipt='';
+  const dictation=createLocalDictation({onTranscript:value=>{
+   const area=el<HTMLTextAreaElement>('or-answer');
+   area.value=(area.value.trim()+' '+value).trim();area.focus();el('or-voice-status').textContent='Transcrição adicionada. Revise o texto antes de seguir.';
+  },onMessage:s=>{el('or-voice-status').textContent=s;},onFinish:()=>{
+   const mic=el<HTMLButtonElement>('or-mic');mic.textContent='🎙 Responder falando';
+  }});
+  const stages=root.querySelectorAll<HTMLElement>('[data-or-stage]');
+  const fail=(s:string)=>{el('or-error').textContent=s;};
+  const note=(s:string)=>{el('or-status').textContent=s;};
+  function show(next:Stage){
+   dictation.stop();stage=next;stages.forEach(x=>{x.hidden=x.dataset.orStage!==next;});
+   fail('');el('or-status').textContent='';root.querySelector<HTMLElement>('[data-or-stage="'+next+'"] h2')?.focus({preventScroll:true});
+  }
+  function save(){if(stage==='question')answers[RELATION_QUESTIONS[index].id]=el<HTMLTextAreaElement>('or-answer').value.trim();}
+  function question(){
+   const q=RELATION_QUESTIONS[index];el('or-progress').textContent='PERGUNTA '+(index+1)+' DE '+RELATION_QUESTIONS.length;
+   el('or-question-title').textContent=q.label;el('or-hint').textContent=q.hint;
+   el<HTMLTextAreaElement>('or-answer').value=answers[q.id];show('question');
+  }
+  function reset(){
+   dictation.stop();for(const key of Object.keys(answers))answers[key]='';
+   root.querySelectorAll<HTMLSelectElement>('[data-or-profile]').forEach(x=>x.value='');
+   el<HTMLInputElement>('or-orientacao-consent').checked=false;el<HTMLSelectElement>('or-orientacao').disabled=true;
+   el<HTMLInputElement>('or-consent').checked=false;el<HTMLInputElement>('or-adult').checked=false;
+   el<HTMLInputElement>('or-excerpts').checked=false;el<HTMLTextAreaElement>('or-answer').value='';el('or-review-list').replaceChildren();el('or-receipt').textContent='';index=0;receipt='';show('welcome');
+  }
+  async function api(path:string,body?:unknown){
+   const response=await fetch('/api/pesquisa-relacionamento/'+path,{method:body===undefined?'GET':'POST',
+    headers:body===undefined?{}:{'content-type':'application/json'},
+    body:body===undefined?undefined:JSON.stringify(body),cache:'no-store',credentials:'same-origin',referrerPolicy:'no-referrer'});
+   const data=await response.json().catch(()=>({})) as Record<string,unknown>;
+   if(!response.ok)throw Error(response.status===429?'rate':response.status===404?'closed':'offline');
+   return data;
+  }
+  const message=(err:unknown)=>err instanceof Error&&err.message==='rate'?'Muitas tentativas em pouco tempo. Tente novamente mais tarde.':err instanceof Error&&err.message==='closed'?'A coleta está fechada. Nenhuma resposta foi enviada.':'Não houve confirmação do servidor. Nenhum envio será presumido.';
+  async function availability(){
+   try{const data=await api('status');open=data.open===true;
+    el('or-availability').dataset.open=String(open);
+    el('or-availability').textContent=open?'Pesquisa aberta para participação voluntária.':'Modo de prévia: o roteiro pode ser testado, mas o envio está desativado.';
+   }catch{open=false;el('or-availability').dataset.open='false';el('or-availability').textContent='O servidor de coleta ainda não está disponível. Você pode conhecer o roteiro, sem enviar dados.';}
+   el<HTMLButtonElement>('or-submit').disabled=!open;
+  }
+  function voiceInstructions(){
+   const ua=navigator.userAgent;
+   if(/Android/i.test(ua))return 'Toque no campo de resposta e use o microfone do teclado Samsung ou Gboard.';
+   if(/iPad|iPhone|iPod/i.test(ua))return 'Toque no campo e use o microfone do teclado do iPhone ou iPad.';
+   if(/Windows/i.test(ua))return 'Clique no campo de resposta e pressione Windows + H para ditar.';
+   if(/Macintosh|Mac OS X/i.test(ua))return 'Clique no campo e use o atalho de Ditado configurado nos Ajustes do macOS.';
+   return 'Toque ou clique no campo e procure o ditado do teclado ou do sistema operacional.';
+  }
+  function voiceFallback(){
+   const area=el<HTMLTextAreaElement>('or-answer');
+   area.focus();
+   el('or-voice-status').textContent=voiceInstructions()+' O texto poderá ser revisado antes de enviar.';
+  }
+  async function localVoice(){
+   const supported=await dictation.check();
+   const mic=el<HTMLButtonElement>('or-mic');
+   // O botão sempre permite um caminho de resposta por voz, mesmo sem Web Speech local.
+   mic.disabled=false;
+   mic.textContent=supported?'🎙 Responder falando':dictation.canInstall?'🎙 Ativar ditado local':'🎙 Usar microfone do teclado';
+   el('or-voice-status').textContent=supported?
+    'Ditado local disponível no navegador. Toque para começar.':
+    dictation.canInstall?
+    'O pacote de português pode ser instalado neste navegador. Toque para ativar, sem enviar áudio ao NEXO.':
+    voiceInstructions();
+  }
+  void availability();void localVoice();
+  root.addEventListener('change',event=>{
+   const target=event.target;
+   if(target instanceof HTMLInputElement&&target.id==='or-orientacao-consent'){
+    const select=el<HTMLSelectElement>('or-orientacao');
+    select.disabled=!target.checked;
+    if(!target.checked)select.value='';
+   }
+  });
+  root.addEventListener('click',async event=>{
+   const target=event.target;if(!(target instanceof Element))return;
+   const button=target.closest<HTMLButtonElement>('button[data-or-action]');if(!button||busy)return;
+   const action=button.dataset.orAction;
+   if(action==='start'){
+    if(!el<HTMLInputElement>('or-adult').checked||!el<HTMLInputElement>('or-consent').checked){fail('Confirme sua idade e sua decisão de participar para continuar.');return;}
+    question();
+   }else if(action==='next'){
+    save();if(index<RELATION_QUESTIONS.length-1){index++;question();}else show('profile');
+   }else if(action==='back'){
+    if(stage==='question'){save();if(index>0){index--;question();}else show('welcome');}
+    else if(stage==='profile'){index=RELATION_QUESTIONS.length-1;question();}
+   }else if(action==='review'){
+    const area=el('or-review-list');area.replaceChildren();
+    for(const q of RELATION_QUESTIONS){const box=document.createElement('div');box.className='or-review-item';const strong=document.createElement('strong');strong.textContent=q.label;const p=document.createElement('p');p.textContent=answers[q.id]||'Sem resposta';box.append(strong,p);area.append(box);}
+    show('review');el<HTMLButtonElement>('or-submit').disabled=!open;
+   }else if(action==='edit'){index=0;question();}
+   else if(action==='exit'){reset();note('Participação encerrada sem enviar informações.');}
+   else if(action==='voice'){
+    if(dictation.active){dictation.stop();await localVoice();return;}
+    if(dictation.canInstall){
+     button.disabled=true;
+     const installed=await dictation.install();
+     button.disabled=false;
+     if(!installed){
+      voiceFallback();
+      button.textContent='🎙 Usar microfone do teclado';
+      return;
+     }
+     await localVoice();
+    }
+    const ok=dictation.start();
+    if(ok){
+     el('or-voice-status').textContent='Ouvindo apenas no dispositivo. Fale normalmente.';
+     button.textContent='Parar ditado';
+    }else{
+     voiceFallback();
+     button.textContent='🎙 Usar microfone do teclado';
+    }
+   }else if(action==='submit'){
+    if(!open){fail('A coleta ainda não está aberta. Nenhum dado foi enviado.');return;}
+    if(!Object.values(answers).some(x=>x.trim())){fail('Para participar, responda ao menos uma das três perguntas abertas.');return;}
+    busy=true;button.disabled=true;
+    try{
+     const profile=Object.fromEntries(RELATION_PROFILE.map(q=>[q.id,el<HTMLSelectElement>('or-'+q.id).value||null]));
+     const data=await api('submit',{consent:{adult:true,accepted:true,excerpts:el<HTMLInputElement>('or-excerpts').checked,orientation:el<HTMLInputElement>('or-orientacao-consent').checked,version:RELATION_CONSENT_VERSION},payload:{answers,profile}});
+     if(data.saved!==true||typeof data.receipt!=='string')throw Error('offline');
+     receipt=data.receipt;for(const key of Object.keys(answers))answers[key]='';el('or-receipt').textContent=receipt;show('done');
+    }catch(err){fail(message(err));button.disabled=false;}finally{busy=false;}
+   }else if(action==='copy'){
+    if(!receipt)return;try{await navigator.clipboard.writeText(receipt);note('Código copiado. Guarde em lugar privado.');}catch{note('Selecione e copie o código exibido.');}
+   }else if(action==='withdraw'){
+    const input=el<HTMLInputElement>('or-receipt-input'),code=input.value.trim();if(!code){fail('Informe o código do recibo.');return;}
+    busy=true;try{const data=await api('withdraw',{receipt:code});if(data.processed!==true)throw Error('offline');input.value='';note('Solicitação processada. Por privacidade, não confirmamos a existência do código.');}
+    catch(err){fail(message(err));}finally{busy=false;}
+   }
+  });
+  window.addEventListener('pagehide',()=>dictation.stop(),{once:true});
+ }
+</script>

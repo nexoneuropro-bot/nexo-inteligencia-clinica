@@ -1,0 +1,58 @@
+name: NEXO · auditoria SEO em dois ambientes (sem publicar)
+
+on:
+  pull_request:
+    branches: [feat/experiencia-imersiva]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verificar-seo:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Preparar pnpm
+        run: |
+          corepack enable
+          corepack prepare pnpm@11.25.0 --activate
+      - name: Instalar dependencias reproduziveis
+        run: pnpm install --frozen-lockfile
+      - name: Conferir tipos Astro
+        run: pnpm check
+      - name: Compilar e verificar PREVIA sem indexacao
+        env:
+          PUBLIC_INDEXABLE: 'false'
+          PUBLIC_SITE_URL: https://nexo-previa-20261014.pages.dev
+          PUBLIC_EDITORIAL_PREVIEW: 'false'
+          PUBLIC_EDITORIAL_SHARED_PREVIEW: 'false'
+        run: |
+          pnpm build
+          pnpm verify
+          SEO_AUDIT_MODE=preview node scripts/seo-release-audit.mjs
+      - name: Compilar e verificar PRODUCAO simulada
+        env:
+          PUBLIC_INDEXABLE: 'true'
+          PUBLIC_SITE_URL: https://nexoneuro.com
+          PUBLIC_EDITORIAL_PREVIEW: 'false'
+          PUBLIC_EDITORIAL_SHARED_PREVIEW: 'false'
+        run: |
+          pnpm build
+          pnpm verify
+          SEO_AUDIT_MODE=production node scripts/seo-release-audit.mjs
+
+      - name: Compilar e verificar PRODUCAO SELETIVA com editoria em previa
+        env:
+          PUBLIC_INDEXABLE: 'true'
+          PUBLIC_SITE_URL: https://nexoneuro.com
+          PUBLIC_EDITORIAL_PREVIEW: 'false'
+          PUBLIC_EDITORIAL_SHARED_PREVIEW: 'true'
+        run: |
+          pnpm build
+          pnpm verify
+          SEO_AUDIT_MODE=mixed node scripts/seo-release-audit.mjs

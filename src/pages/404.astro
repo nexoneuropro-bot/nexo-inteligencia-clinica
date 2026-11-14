@@ -1,4 +1,11 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import JourneyEntry from '../components/JourneyEntry.astro';
+import '../styles/approach.css';
 ---
-<Layout title="Página não encontrada" description="Encontre seu caminho na NEXO Inteligência Clínica."><section class="page-hero"><div class="content-width"><span class="overline">404 / UM CAMINHO PARA REDESCOBRIR</span><h1>Vamos encontrar<br/>outro caminho?</h1><p class="page-intro">Esta página não está disponível. A NEXO tem outras perguntas para explorar.</p><a href="/" class="button button-copper" style="margin-top:30px">Voltar para o início ↗</a></div></section></Layout>
+<Layout title="Página não encontrada" description="Encontre seu caminho na NEXO Inteligência Clínica." experience>
+  <div class="spatial-page" data-compact-page data-reading-scene="contact">
+    <JourneyEntry type="personal" title="Vamos encontrar outro caminho?" eyebrow="404 / UM CAMINHO PARA REDESCOBRIR" intro="Este endereço não está disponível. Você pode voltar ao início ou encontrar uma leitura para continuar a explorar a NEXO." reading human={false}/>
+    <section class="spatial-content" id="conteudo-da-jornada"><div class="content-width page-body page-article"><h2>A conversa continua.</h2><p>Escolha um caminho para seguir.</p><div class="contact-choices"><a href="/" class="button button-copper">Voltar para o início ↗</a><a href="/psicologia-em-pauta/" class="button">Ler Psicologia em Pauta ↗</a></div></div></section>
+  </div>
+</Layout>
