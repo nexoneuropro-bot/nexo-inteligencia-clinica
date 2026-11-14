@@ -27,10 +27,10 @@ for(const file of htmlFiles){
   if(hash&&target.endsWith('.html'))check(new RegExp(`id=["']${hash}["']`).test(fs.readFileSync(target,'utf8')),`${name}: âncora inexistente ${link}`);
  }
 }
-const routes=['','para-voce','psicoterapia','avaliacao-neuropsicologica','integracao-psiquiatrica','para-sua-empresa','riscos-psicossociais-nr1','nossa-abordagem','profissionais','psicologia-em-pauta','contato','politica-de-privacidade'];
+const routes=['','para-voce','psicoterapia','psicoterapia-breve','avaliacao-neuropsicologica','integracao-psiquiatrica','para-sua-empresa','riscos-psicossociais-nr1','nossa-abordagem','profissionais','psicologia-em-pauta','contato','politica-de-privacidade'];
 routes.forEach(route=>check(fs.existsSync(path.join(root,route,'index.html')),`Rota ausente: /${route}/`));
 const sitemap=fs.readFileSync(path.join(root,'sitemap.xml'),'utf8');
-check((sitemap.match(/<loc>/g)||[]).length===(production?12:0),'Sitemap incompatível com indexação');
+check((sitemap.match(/<loc>/g)||[]).length===(production?routes.length:0),'Sitemap incompatível com indexação');
 check(fs.readFileSync(path.join(root,'robots.txt'),'utf8').includes('Allow: /'),'Robots deve permitir ler noindex');
 const headers=fs.readFileSync(path.join(root,'_headers'),'utf8');check(production?!headers.includes('noindex'):headers.includes('noindex'),'X-Robots-Tag');
 const assets=files.filter(f=>/\.(js|css)$/.test(f)).map(f=>({file:path.relative(root,f),bytes:fs.statSync(f).size,gzip:gzipSync(fs.readFileSync(f)).length}));
