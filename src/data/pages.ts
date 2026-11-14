@@ -604,7 +604,7 @@ export const pages: ContentPage[] = [
   {
     slug: 'contato',
     title: 'Uma conversa para esclarecer o próximo passo.',
-    description: 'Fale com a NEXO sobre atendimento psicológico ou consultoria organizacional: NR-1, recrutamento, treinamento, lideranças e clima. WhatsApp e telefone.',
+    description: 'Fale com a NEXO sobre psicoterapia, avaliação neuropsicológica e consultoria empresarial em NR-1. WhatsApp, telefone e e-mail profissional.',
     eyebrow: 'Vamos conversar',
     intro: 'Tem dúvidas sobre atendimento ou sobre uma situação da sua empresa? Você não precisa saber o nome do serviço. Comece pedindo informações sobre possibilidades, disponibilidade e condições.',
     sections: [
@@ -625,7 +625,7 @@ export const pages: ContentPage[] = [
       {
         title: 'Canais e privacidade.',
         body: [
-          'Telefone e WhatsApp: +55 (11) 5444-4366.',
+          'Telefone e WhatsApp: +55 (11) 5444-4366. E-mail institucional: contato@nexoneuro.com.',
           'Use o primeiro contato para informações gerais. Evite enviar diagnósticos, receitas, exames, documentos de pacientes ou outros dados sensíveis antes de combinar o canal e as condições de acolhimento.',
           'Os botões abrem o WhatsApp com uma mensagem editável. O envio depende da sua ação. O primeiro contato serve para esclarecer informações e próximos passos; não equivale a atendimento, avaliação ou contratação de um projeto.',
         ],
@@ -661,6 +661,7 @@ export const pages: ContentPage[] = [
         body: [
           'Os links de contato são acionados pelo visitante. Ao escolher o WhatsApp, você acessa um serviço externo, sujeito aos seus próprios termos e práticas de privacidade. A mensagem inicial pode ser editada e só é enviada por sua ação.',
           'Ao enviar uma mensagem, você compartilha informações no canal escolhido, incluindo o conteúdo da conversa e os dados que o serviço disponibiliza ao destinatário. Para pedir informações, basta indicar sua dúvida ou o serviço que procura.',
+          'O endereço contato@nexoneuro.com utiliza encaminhamento de e-mails da Cloudflare para a caixa administrativa da NEXO. Use esse canal apenas para dúvidas gerais; não envie informações clínicas ou documentos de saúde por e-mail comum.',
           'Para preservar sua privacidade, use o primeiro contato para informações gerais. O compartilhamento de informações de saúde deve ocorrer em condições de acolhimento e sigilo adequadamente combinadas.',
           'As referências de leitura também podem levar a sites de outras organizações. Ao seguir esses links, consulte as informações de privacidade do respectivo serviço.',
         ],
